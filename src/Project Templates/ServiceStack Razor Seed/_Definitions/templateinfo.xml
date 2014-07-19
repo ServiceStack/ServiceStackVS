@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TemplateInfo>
+<TemplateInfo Path="CSharp\Web">
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
     <add key="ServiceStack.CSharp.RazorSeed." value="$safeprojectname$"/>
     <!--<add key="ServiceStack.CSharp.RazorSeed." value="$slnname$"/>-->
+    <!--targetFramework="4.0"-->
+    <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>
+    <!--<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>-->
+    <add key="&lt;TargetFrameworkVersion>v4.0&lt;/TargetFrameworkVersion>" value="&lt;TargetFrameworkVersion>v$targetframeworkversion$&lt;/TargetFrameworkVersion>"/>
   </Replacements>
 </TemplateInfo>

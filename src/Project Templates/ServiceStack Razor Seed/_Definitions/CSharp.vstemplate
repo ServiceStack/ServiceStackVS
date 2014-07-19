@@ -9,6 +9,7 @@
     <DefaultName>ServiceStackRazor</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
+    <SortOrder>2000</SortOrder>
   </TemplateData>
   <TemplateContent>
     <ProjectCollection>

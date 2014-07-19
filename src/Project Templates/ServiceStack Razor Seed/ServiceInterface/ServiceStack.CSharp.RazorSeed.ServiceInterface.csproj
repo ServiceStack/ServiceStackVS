@@ -64,7 +64,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ServiceStack.CSharp.RazorSeed.ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj">
       <Project>{7e8af6be-3f12-4ced-86dd-ec8b924de1ab}</Project>
-      <Name>ServiceStack.CSharp.RazorSeed.ServiceModel</Name>
+      <Name>ServiceStack.CSharp.RazorSeed..ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
