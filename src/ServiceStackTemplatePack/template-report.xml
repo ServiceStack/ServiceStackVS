@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TemplateReport>
+  <ItemTemplates />
+  <ProjectTemplates>
+    <ProjectTemplate Path="ProjectTemplates\ServiceStack Razor Seed\Definitions\CSharp.vstemplate" Name="ServiceStack ASPNET Host with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
+  </ProjectTemplates>
+  <Snippets />
+</TemplateReport>
