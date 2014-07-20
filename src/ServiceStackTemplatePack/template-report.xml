@@ -3,6 +3,9 @@
   <ItemTemplates />
   <ProjectTemplates>
     <ProjectTemplate Path="ProjectTemplates\ServiceStack Razor Seed\Definitions\CSharp.vstemplate" Name="ServiceStack ASPNET Host with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" Name="ServiceStack with empty ASP.NET host" Description="ServiceStack with empty ASP.NET host" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_Definitions\_project.vstemplate.xml" Name="ServiceStack with empty self-host" Description="ServiceStack with empty self-host" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.MVC\_Definitions\_project.vstemplate.xml" Name="ServiceStack with MVC" Description="ServiceStack with MVC" ProjectType="CSharp" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />
 </TemplateReport>

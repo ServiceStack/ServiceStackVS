@@ -37,22 +37,22 @@
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Client">
-      <HintPath>..\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -76,11 +76,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj">
+    <ProjectReference Include="..\ServiceStack.CSharp.RazorSeed.ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj">
       <Project>{6112fbbf-cf5c-46ac-a526-5cd3a79fa200}</Project>
       <Name>ServiceStack.CSharp.RazorSeed.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj">
+    <ProjectReference Include="..\ServiceStack.CSharp.RazorSeed.ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj">
       <Project>{7e8af6be-3f12-4ced-86dd-ec8b924de1ab}</Project>
       <Name>ServiceStack.CSharp.RazorSeed.ServiceModel</Name>
     </ProjectReference>

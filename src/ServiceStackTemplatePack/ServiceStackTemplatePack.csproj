@@ -203,9 +203,13 @@
     </Content>
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\ServiceModel\__PreviewImage.png" />
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\ServiceModel\__TemplateIcon.png" />
+    <Content Include="ProjectTemplates\ServiceStack Razor Seed\Test\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\Test\ServiceStack.CSharp.RazorSeed.Test.csproj" />
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\Definitions\CSharp.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\Definitions\templateinfo.xml" />
+    <Content Include="ProjectTemplates\ServiceStack Razor Seed\Test\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ProjectTemplates\ServiceStack Razor Seed\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Client.dll" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Client.xml" />

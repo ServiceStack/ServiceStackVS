@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using ServiceStack;
 using ServiceStack.Testing;
+using ServiceStack.CSharp.RazorSeed.ServiceInterface;
 
-namespace ServiceStack.CSharp.RazorSeed.Test
+namespace $safeprojectname$
 {
     [TestFixture]
     public class UnitTests
