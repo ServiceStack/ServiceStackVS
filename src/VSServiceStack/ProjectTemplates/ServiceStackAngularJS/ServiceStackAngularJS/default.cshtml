@@ -1,0 +1,34 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "ServiceStack with AngularJS";
+}
+<h1>
+    @ViewBag.Title
+</h1>
+<script>
+    var app = angular.module('helloApp', []);
+
+    app.controller('helloCtrl', ['$scope', '$http',
+        function ($scope, $http) {
+            $scope.$watch('name', function () {
+                if ($scope.name) {
+                    $http.get('/hello/' + $scope.name)
+                        .success(function (response) {
+                            $scope.helloResult = response.Result;
+                            console.log(response.Result);
+                        });
+                }
+            });
+        }
+    ]);
+</script>
+<div ng-app="helloApp">
+    <h2>Hello World Service</h2>
+    <div ng-controller="helloCtrl">
+        <div>
+            <label for="Name">Name</label>
+            <input class="form-control input-sm" ng-model="name" id="Name" type="text" placeholder="Type you name">
+            <span ng-bind="helloResult" ng-show="name"></span>
+        </div>
+    </div>
+</div>

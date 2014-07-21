@@ -16,18 +16,7 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.RazorSeed.csproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="AppHost.cs">AppHost.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax">Global.asax</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax.cs">Global.asax.cs</ProjectItem>
-      <Folder Name="Properties" TargetFolderName="Properties">
-        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
-      </Folder>
-	  <Folder Name="Views" TargetFolderName="Views">
-        <ProjectItem ReplaceParameters="true" TargetFileName="Hello.cshtml">Hello.cshtml</ProjectItem>
-      </Folder>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Web.config">Web.config</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Debug.config">Web.Debug.config</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Release.config">Web.Release.config</ProjectItem>
+
     </Project>
   </TemplateContent>
   <WizardExtension>

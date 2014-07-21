@@ -2,7 +2,8 @@
 <TemplateReport>
   <ItemTemplates />
   <ProjectTemplates>
-    <ProjectTemplate Path="ProjectTemplates\ServiceStack Razor Seed\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStackAngularJS\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with AngularJS" Description="A project to kickstart your ServiceStack ASPNET with Razor and AngularJS application." ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStackASPNETRazor\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" Name="ServiceStack ASP.NET Empty" Description="ServiceStack with empty ASP.NET host" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.MVC\_Definitions\_project.vstemplate.xml" Name="ServiceStack ASP.NET MVC5" Description="ServiceStack ASP.NET MVC5" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_Definitions\_project.vstemplate.xml" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
