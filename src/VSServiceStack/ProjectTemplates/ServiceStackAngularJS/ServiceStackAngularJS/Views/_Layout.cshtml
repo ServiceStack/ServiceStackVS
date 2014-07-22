@@ -23,7 +23,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/scripts/bootstrap.min.js"></script>
         <script src="/scripts/angular.js"></script>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,10 +42,8 @@
             </div>
         </div>
         <div class="container">
-            <div class="panel panel panel-default">
-                <div class="panel-title">@ViewBag.Title</div>
-                <div class="panel-body">@RenderBody()</div>
-            </div>
+            <h1>@ViewBag.Title</h1>
+            @RenderBody()
         </div>
     </body>
 </html>

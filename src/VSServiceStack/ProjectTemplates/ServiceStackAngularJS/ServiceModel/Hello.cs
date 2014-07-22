@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ServiceStack;
 
-namespace ServiceStack.CSharp.AngularJS.ServiceModel
+namespace $safeprojectname$
 {
     [Route("/hello/{Name}")]
     public class Hello : IReturn<HelloResponse>

@@ -1,6 +1,6 @@
 ﻿@inherits ViewPage
 @{
-    ViewBag.Title = "ServiceStack with AngularJS";
+    ViewBag.Title = "Hello World Service";
 }
 <script>
     var app = angular.module('helloApp', []);
@@ -20,11 +20,10 @@
     ]);
 </script>
 <div ng-app="helloApp">
-    <h2>Hello World Service</h2>
     <div ng-controller="helloCtrl">
         <div>
             <label for="Name">Name</label>
-            <input class="form-control input-sm" ng-model="name" id="Name" type="text" placeholder="Type you name">
+            <input class="form-control input-sm" ng-model="name" id="Name" type="text" placeholder="Type your name">
             <span ng-bind="helloResult" ng-show="name"></span>
         </div>
     </div>

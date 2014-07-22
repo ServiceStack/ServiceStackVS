@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Funq;
-using ServiceStack.CSharp.AngularJS.ServiceInterface;
+using $saferootprojectname$.ServiceInterface;
 using ServiceStack.Razor;
 using ServiceStack;
 
-namespace ServiceStack.CSharp.AngularJS
+namespace $safeprojectname$
 {
     public class AppHost : AppHostBase
     {

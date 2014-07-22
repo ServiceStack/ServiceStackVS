@@ -1,0 +1,25 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "Hello World Service";
+}
+<div>
+    <div>
+        <label for="Name">Name</label>
+        <input class="form-control input-sm" ng-model="name" id="Name" type="text" placeholder="Type you name">
+        <span id="helloResult"></span>
+    </div>
+</div>
+<script>
+    $('#Name').keyup(function () {
+        var name = $('#Name').val();
+        if (name) {
+            $.getJSON('/hello/' + name)
+                .success(function (response) {
+                    $('#helloResult').html(response.Result);
+                });
+        } else {
+            $('#helloResult').html('');
+        }
+    });
+</script>
+

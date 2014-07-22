@@ -134,13 +134,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceStack.CSharp.AngularJS.ServiceInterface\ServiceStack.CSharp.AngularJS.ServiceInterface.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
       <Project>{582dfb0f-f84d-4e43-9bca-2a5a86600b7a}</Project>
-      <Name>ServiceStack.CSharp.AngularJS.ServiceInterface</Name>
+      <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceStack.CSharp.AngularJS.ServiceModel\ServiceStack.CSharp.AngularJS.ServiceModel.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
       <Project>{08bef328-ab7d-48d3-800d-48acc75c7914}</Project>
-      <Name>ServiceStack.CSharp.AngularJS.ServiceModel</Name>
+      <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

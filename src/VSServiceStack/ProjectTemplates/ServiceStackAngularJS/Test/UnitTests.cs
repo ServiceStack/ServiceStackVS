@@ -5,7 +5,7 @@ using ServiceStack;
 using ServiceStack.Testing;
 using ServiceStack.CSharp.AngularJS.ServiceInterface;
 
-namespace ServiceStack.CSharp.AngularJS.Test
+namespace $saferootprojectname$
 {
     [TestFixture]
     public class UnitTests

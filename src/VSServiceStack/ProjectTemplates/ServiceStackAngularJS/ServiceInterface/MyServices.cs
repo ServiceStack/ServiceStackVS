@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ServiceStack;
-using ServiceStack.CSharp.AngularJS.ServiceModel;
+using $saferootprojectname$.ServiceModel;
 
-namespace ServiceStack.CSharp.AngularJS.ServiceInterface
+namespace $safeprojectname$
 {
     public class MyServices : Service
     {
