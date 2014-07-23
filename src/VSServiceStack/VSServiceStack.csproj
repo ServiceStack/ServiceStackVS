@@ -1,47 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>12.0</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{F0A8DCB5-C70B-4B3C-8771-EE08B45EDAE3}</ProjectGuid>
+    <ProjectGuid>{05410BD6-C9BC-45DA-B0AA-B73047BCCF14}</ProjectGuid>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VSServiceStack</RootNamespace>
+    <RootNamespace>ServiceStack.VSServiceStack</RootNamespace>
     <AssemblyName>VSServiceStack</AssemblyName>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <GeneratePkgDefFile>false</GeneratePkgDefFile>
-    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
-    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
-    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
-    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
-    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,11 +36,127 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Label="TemplateBuilder">
-    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0">
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0">
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop" />
+    <Reference Include="Microsoft.VisualStudio.Shell.12.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TemplateBuilder">
+      <HintPath>..\packages\TemplateBuilder.1.0.3.52-beta\lib\TemplateBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="EnvDTE">
+      <Guid>{80CC9F66-E7D8-4DDD-85B6-D9E6CD0E93E2}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="EnvDTE100">
+      <Guid>{26AD1324-4B7C-44BC-84F8-B86AED45729F}</Guid>
+      <VersionMajor>10</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="EnvDTE80">
+      <Guid>{1A31287A-4D7D-413E-8E32-3B374931BD89}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="EnvDTE90">
+      <Guid>{2CE2370E-D744-4936-A090-3FFFE667B0E1}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.VisualStudio.CommandBars">
+      <Guid>{1CBA492E-7263-47BB-87FE-639000619B15}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddServiceStackReference.xaml.cs">
+      <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Guids.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Program.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\BundleConfig.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\FilterConfig.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\IdentityConfig.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\RouteConfig.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\Startup.Auth.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Controllers\AccountController.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Controllers\HomeController.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\AccountViewModels.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\IdentityModels.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceInterface\UserService.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceModel\UserDetailsRequest.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Startup.cs" />
     <Compile Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\MyServices.cs" />
     <Compile Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\Hello.cs" />
@@ -86,40 +179,6 @@
     <Compile Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackASPNETRazor\Test\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackASPNETRazor\Test\UnitTests.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Program.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\BundleConfig.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\FilterConfig.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\IdentityConfig.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\RouteConfig.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Start\Startup.Auth.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Controllers\AccountController.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Controllers\HomeController.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\AccountViewModels.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\IdentityModels.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceInterface\UserService.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceModel\UserDetailsRequest.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Startup.cs" />
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\MyServices.cs" />
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\Hello.cs" />
@@ -131,52 +190,38 @@
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\Test\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ServiceStackBootstrap\Test\UnitTests.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="VSServiceStackPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PkgCmdID.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\default.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\Hello.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\_Layout.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Debug.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Release.config" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\Test\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\default.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\Hello.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\_Layout.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Debug.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Release.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\packages.config" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\Test\packages.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.AspNetHost.dll.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.EmptyAspNetHost.dll.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\Nancy.CSharp.SelfHost.csprojResolveAssemblyReference.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\Nancy.CSharp.SelfHostWithRazor.csprojResolveAssemblyReference.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.AspNetHost.csprojResolveAssemblyReference.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.EmptyAspNetHost.csprojResolveAssemblyReference.cache" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\packages.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.Release.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\App.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.CSharp.EmptySelfHost.exe.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\ServiceStack.CSharp.EmptySelfHost.csprojResolveAssemblyReference.cache" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\packages.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.CSharp.MVC.dll.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\fonts\glyphicons-halflings-regular.ttf" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.MVC\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\ServiceStack.CSharp.MVC.csprojResolveAssemblyReference.cache" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\packages.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\Scripts\jquery-1.10.2.min.map" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\Views\Account\ConfirmEmail.cshtml" />
@@ -204,11 +249,46 @@
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\Web.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.MVC\Web.Release.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\default.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\fonts\glyphicons-halflings-regular.eot" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-route.min.js.map" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular.min.js.map" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\jquery-1.9.0.min.map" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\Hello.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\_Layout.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Debug.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Release.config" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\Test\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\repositories.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.4.0.23\ServiceStack.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Client.4.0.23\ServiceStack.Client.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Common.4.0.23\ServiceStack.Common.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\ServiceStack.Interfaces.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\ServiceStack.OrmLite.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\content\web.config.transform" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\ServiceStack.Razor.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Text.4.0.23\ServiceStack.Text.4.0.23.nupkg" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\default.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\Hello.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\_Layout.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Debug.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Release.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\Test\packages.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\default.cshtml" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\packages.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-route.min.js.map" />
@@ -220,188 +300,52 @@
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Web.Release.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\Test\packages.config" />
     <None Include="Properties\template-builder.props" />
+    <None Include="ServiceStackReferenceTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceStackReferenceTemplate.txt</LastGenOutput>
+    </None>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <VSCTCompile Include="VSServiceStack.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+    </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\Definitions\CSharp.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\logo.png" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\_preprocess.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Global.asax" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\MyTemplate.vstemplate">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\ServiceStackAngularJS.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\Test\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\Test\ServiceStackAngularJS.Test.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\Test\_preprocess.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackAngularJS\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\logo.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Global.asax" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\icon.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\MyTemplate.vstemplate">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\ServiceStack.CSharp.RazorSeed.csproj">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\ServiceStack.CSharp.RazorSeed.csproj.user" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\__PreviewImage.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\__TemplateIcon.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\__PreviewImage.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\__TemplateIcon.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\_preprocess.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\__PreviewImage.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\__TemplateIcon.png" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Test\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Test\ServiceStack.CSharp.RazorSeed.Test.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Definitions\CSharp.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Definitions\templateinfo.xml" />
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Test\_preprocess.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Client.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Client.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Common.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Common.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.AspNetHost.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.AspNetHost.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.EmptyAspNetHost.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.CSharp.EmptyAspNetHost.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Interfaces.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Interfaces.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Text.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.Text.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\bin\ServiceStack.xml" />
+    <Resource Include="Resources\logoAddReference.bmp" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Global.asax" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\icon.png" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.AspNetHost.csproj.FileListAbsolute.txt" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.AspNetHost.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.AspNetHost.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.EmptyAspNetHost.csproj.FileListAbsolute.txt" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.EmptyAspNetHost.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\ServiceStack.CSharp.EmptyAspNetHost.pdb" />
+    <Resource Include="ServiceStackReferenceTemplate.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceStackReferenceTemplate.tt</DependentUpon>
+    </Resource>
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\icon.png" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\ServiceStack.CSharp.EmptyAspNetHost.csproj" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\ServiceStack.CSharp.EmptyAspNetHost.csproj.user" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Client.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Client.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Common.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Common.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.CSharp.EmptySelfHost.exe" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.CSharp.EmptySelfHost.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Interfaces.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Interfaces.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Text.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.Text.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Debug\ServiceStack.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\icon.png" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\ServiceStack.CSharp.EmptySelfHost.csproj.FileListAbsolute.txt" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\ServiceStack.CSharp.EmptySelfHost.exe" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\ServiceStack.CSharp.EmptySelfHost.pdb" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\icon.png" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceStack.CSharp.EmptySelfHost.csproj" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceStack.CSharp.EmptySelfHost.csproj.user" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_Definitions\_project.vstemplate.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Antlr3.Runtime.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Antlr3.Runtime.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\EntityFramework.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\EntityFramework.SqlServer.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\EntityFramework.SqlServer.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\EntityFramework.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.Core.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.AspNet.Identity.Owin.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Host.SystemWeb.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Cookies.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Facebook.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Google.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Google.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.OAuth.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.Twitter.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.Security.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Owin.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Newtonsoft.Json.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Newtonsoft.Json.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\Owin.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Client.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Client.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Common.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Common.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.CSharp.MVC.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.CSharp.MVC.pdb" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Interfaces.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Interfaces.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Mvc.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Mvc.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Text.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.Text.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\ServiceStack.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Helpers.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Helpers.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Mvc.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Mvc.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Optimization.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Optimization.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Razor.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.Razor.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\System.Web.WebPages.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\bin\WebGrease.dll" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_Definitions\_project.vstemplate.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Content\bootstrap.css" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Content\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Content\Site.css" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\favicon.ico" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.MVC\favicon.ico" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Global.asax" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\icon.png" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\ServiceStack.CSharp.MVC.csproj.FileListAbsolute.txt" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\ServiceStack.CSharp.MVC.dll" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.MVC\icon.png" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Project_Readme.html" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Scripts\bootstrap.js" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Scripts\bootstrap.min.js" />
@@ -418,24 +362,97 @@
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Scripts\respond.min.js" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\Scripts\_references.js" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceStack.CSharp.MVC.csproj" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceStack.CSharp.MVC.csproj.user" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\_Definitions\_project.vstemplate.xml" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.MVC\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.MVC\_Definitions\_project.vstemplate.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.MVC\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\logo.png" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Content\bootstrap-theme.css" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Content\bootstrap-theme.min.css" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Content\bootstrap.css" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Content\bootstrap.min.css" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Global.asax" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\icon.png" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-mocks.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-route.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-route.min.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular.min.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\bootstrap.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\bootstrap.min.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\jquery-1.9.0.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\jquery-1.9.0.min.js" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\ServiceStackAngularJS.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackAngularJS\Test\ServiceStackAngularJS.Test.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackAngularJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\Definitions\templateinfo.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\logo.png" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\lib\net40\ServiceStack.OrmLite.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\lib\net40\ServiceStack.OrmLite.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net40\ServiceStack.Razor.dll" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net40\System.Web.Razor.Unofficial.dll" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\ServiceStack.Razor.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\ServiceStack.Razor.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\System.Web.Razor.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\System.Web.Razor.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.xml" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Global.asax" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\icon.png" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\ServiceStack.CSharp.RazorSeed.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\__PreviewImage.png" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\__TemplateIcon.png" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\__PreviewImage.png" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceInterface\__TemplateIcon.png" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\__PreviewImage.png" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\__TemplateIcon.png" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStackASPNETRazor\Test\ServiceStack.CSharp.RazorSeed.Test.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\Definitions\CSharp.vstemplate" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\logo.png" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\logo.png" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\ServiceStackBootstrap.ServiceInterface.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceInterface\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\ServiceStackBootstrap.ServiceModel.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Content\bootstrap-theme.css" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Content\bootstrap-theme.min.css" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Content\bootstrap.css" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Content\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Global.asax" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\icon.png" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\icon.png" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-mocks.js" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-route.js" />
@@ -448,45 +465,34 @@
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\jquery-1.9.0.js" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\jquery-1.9.0.min.js" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\ServiceStackBootstrap.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\Test\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\Test\ServiceStackBootstrap.Test.csproj" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\Test\_preprocess.xml" />
-    <Content Include="ProjectTemplates\ServiceStackBootstrap\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStackBootstrap\_preprocess.xml" />
+    <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="TemplateBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TemplateBuilder.1.0.3.52-beta\lib\TemplateBuilder.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\obj\Debug\TempPE\" />
-    <Folder Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\bin\Release\" />
-    <Folder Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\obj\Debug\TempPE\" />
     <Folder Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Data\" />
-    <Folder Include="ProjectTemplates\ServiceStack.CSharp.MVC\obj\Debug\TempPE\" />
     <Folder Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\Types\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AddServiceStackReference.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <PropertyGroup>
+    <UseCodebase>true</UseCodebase>
+  </PropertyGroup>
+  <PropertyGroup Label="TemplateBuilder">
+    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(TemplateBuilderTargets)" Condition="Exists('$(TemplateBuilderTargets)')" Label="TemplateBuilder" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
