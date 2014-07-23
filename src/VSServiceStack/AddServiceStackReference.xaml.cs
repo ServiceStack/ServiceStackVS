@@ -15,13 +15,20 @@ using System.Windows.Shapes;
 namespace ServiceStack.VSServiceStack
 {
     /// <summary>
-    /// Interaction logic for AddServiceStackReference.xaml
+    /// Interaction logic for AddServiceStackReferencexaml.xaml
     /// </summary>
     public partial class AddServiceStackReference : Window
     {
+        public bool OkPressed { get; set; }
         public AddServiceStackReference()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            OkPressed = true;
+            Close();
         }
     }
 }

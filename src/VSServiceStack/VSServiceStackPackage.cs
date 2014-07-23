@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
-using System.Windows;
+using System.Windows.Forms;
+using EnvDTE;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.Win32;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using ServiceStack.Text;
+using ServiceStack.VSServiceStack.Types;
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+using MessageBox = System.Windows.MessageBox;
+using Thread = System.Threading.Thread;
 
 namespace ServiceStack.VSServiceStack
 {
@@ -86,7 +93,38 @@ namespace ServiceStack.VSServiceStack
             int result;
             var dialog = new AddServiceStackReference();
             dialog.ShowDialog();
-            MessageBox.Show(dialog.UrlTextBox.Text);
+            if (!dialog.OkPressed)
+            {
+                return;
+            }
+            string serverUrl = dialog.UrlTextBox.Text;
+            Uri validatedUri;
+            bool isValidUri = Uri.TryCreate(serverUrl, UriKind.Absolute, out validatedUri) && validatedUri.Scheme == Uri.UriSchemeHttp;
+            if (isValidUri)
+            {
+                var dtoCode = DownloadCSharpDtos(validatedUri.AbsoluteUri + "types/csharp");
+                var metadata = new System.Net.WebClient().DownloadString(validatedUri + "types/metadata?format=json");
+                var metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadata);
+                if (metaDataDto.Operations.Count == 0)
+                {
+                    throw new Exception("Invalid metadata from server");
+                }
+                var fileName = metaDataDto.Operations[0].Request.Name + ".cs";
+                var project = GetSelectedProject();
+                string projectPath = project.Properties.Item("FullPath").Value.ToString();
+                string fullPath = Path.Combine(projectPath, fileName);
+                using (var streamWriter = File.CreateText(fullPath))
+                {
+                    streamWriter.Write(dtoCode);
+                    streamWriter.Flush();
+                }
+                project.ProjectItems.AddFromFile(fullPath);
+            }
+            else
+            {
+                MessageBox.Show("Invalid url provided, please provide a valid http url");
+            }
+            
             //Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
             //           0,
             //           ref clsid,
@@ -99,6 +137,101 @@ namespace ServiceStack.VSServiceStack
             //           OLEMSGICON.OLEMSGICON_INFO,
             //           0,        // false
             //           out result));
+        }
+
+        /// <summary>
+        /// Gets the selected project.
+        /// From http://uisurumadushanka89.blogspot.com.au/2013/04/visual-studio-extensibility-get-active.html
+        /// </summary>
+        /// <returns></returns>
+        public Project GetSelectedProject()
+        {
+            IntPtr hierarchyPointer, selectionContainerPointer;
+            Object selectedObject = null;
+            IVsMultiItemSelect multiItemSelect;
+            uint projectItemId;
+
+            IVsMonitorSelection monitorSelection =
+                    (IVsMonitorSelection)Package.GetGlobalService(
+                    typeof(SVsShellMonitorSelection));
+
+            monitorSelection.GetCurrentSelection(out hierarchyPointer,
+                                                 out projectItemId,
+                                                 out multiItemSelect,
+                                                 out selectionContainerPointer);
+
+            IVsHierarchy selectedHierarchy = null;
+            try
+            {
+                selectedHierarchy = Marshal.GetTypedObjectForIUnknown(
+                                                     hierarchyPointer,
+                                                     typeof(IVsHierarchy)) as IVsHierarchy;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            if (selectedHierarchy != null)
+            {
+                ErrorHandler.ThrowOnFailure(selectedHierarchy.GetProperty(
+                                                  projectItemId,
+                                                  (int)__VSHPROPID.VSHPROPID_ExtObject,
+                                                  out selectedObject));
+            }
+
+            Project selectedProject = selectedObject as Project;
+
+            return selectedProject;
+        }
+
+        public static bool IsSingleProjectItemSelection(out IVsHierarchy hierarchy, out uint itemid)
+        {
+            hierarchy = null;
+            itemid = VSConstants.VSITEMID_NIL;
+            int hr = VSConstants.S_OK;
+            var monitorSelection = Package.GetGlobalService(typeof(SVsShellMonitorSelection)) as IVsMonitorSelection;
+            var solution = Package.GetGlobalService(typeof(SVsSolution)) as IVsSolution;
+            if (monitorSelection == null || solution == null)
+            {
+                return false;
+            }
+            IVsMultiItemSelect multiItemSelect = null;
+            IntPtr hierarchyPtr = IntPtr.Zero;
+            IntPtr selectionContainerPtr = IntPtr.Zero;
+            try
+            {
+                hr = monitorSelection.GetCurrentSelection(out hierarchyPtr, out itemid, out multiItemSelect, out selectionContainerPtr);
+                if (ErrorHandler.Failed(hr) || hierarchyPtr == IntPtr.Zero || itemid == VSConstants.VSITEMID_NIL)
+                {
+                    // there is no selection
+                    return false;
+                }
+                // multiple items are selected
+                if (multiItemSelect != null) return false;
+                // there is a hierarchy root node selected, thus it is not a single item inside a project
+                if (itemid == VSConstants.VSITEMID_ROOT) return false;
+                hierarchy = Marshal.GetObjectForIUnknown(hierarchyPtr) as IVsHierarchy;
+                if (hierarchy == null) return false;
+                Guid guidProjectID = Guid.Empty;
+                if (ErrorHandler.Failed(solution.GetGuidOfProject(hierarchy, out guidProjectID)))
+                {
+                    return false; // hierarchy is not a project inside the Solution if it does not have a ProjectID Guid
+                }
+                // if we got this far then there is a single project item selected
+                return true;
+            }
+            finally
+            {
+                if (selectionContainerPtr != IntPtr.Zero)
+                {
+                    Marshal.Release(selectionContainerPtr);
+                }
+                if (hierarchyPtr != IntPtr.Zero)
+                {
+                    Marshal.Release(hierarchyPtr);
+                }
+            }
         }
 
         public static string DownloadCSharpDtos(string baseUrl)

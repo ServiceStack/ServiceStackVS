@@ -1,11 +1,14 @@
 ﻿<Window x:Class="ServiceStack.VSServiceStack.AddServiceStackReference"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add ServiceStack Reference" Height="145" Width="300">
+        Title="Add ServiceStack Reference" Height="145" Width="300"
+        Icon="Resources/servicestacklogo.ico">
     <Grid>
-        <Label Content="ServiceStack server URL" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="UrlTextBox"  HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Content="OK" HorizontalAlignment="Left" Height="36" Margin="10,71,0,0" VerticalAlignment="Top" Width="272"/>
+        <Grid HorizontalAlignment="Left" Height="98" VerticalAlignment="Top" Width="272" Margin="10,7,0,0">
+            <Button Content="OK" HorizontalAlignment="Left" Height="30" Margin="0,58.92,0,0" VerticalAlignment="Top" Width="262" Click="ButtonBase_OnClick"/>
+            <Label Content="ServiceStack Server Url&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25.92" RenderTransformOrigin="0.484,0.617" FontWeight="Bold" FontSize="13.333"/>
+            <TextBox Name="UrlTextBox" HorizontalAlignment="Left" Height="23" Margin="0,30.92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" ToolTip="Please provide base server address, eg http://localhost:8080"/>
+        </Grid>
 
     </Grid>
 </Window>
