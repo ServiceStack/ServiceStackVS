@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VSServiceStack.csproj">
-      <Project>{05410BD6-C9BC-45DA-B0AA-B73047BCCF14}</Project>
+      <Project>{05410bd6-c9bc-45da-b0aa-b73047bccf14}</Project>
       <Name>VSServiceStack</Name>
     </ProjectReference>
   </ItemGroup>

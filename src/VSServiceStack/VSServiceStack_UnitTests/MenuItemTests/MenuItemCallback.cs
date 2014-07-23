@@ -18,7 +18,7 @@ using Microsoft.VsSDK.UnitTestLibrary;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Shell;
-using ServiceStack.VSServiceStack;
+using VSServiceStack;
 
 namespace VSServiceStack_UnitTests.MenuItemTests
 {
@@ -43,7 +43,7 @@ namespace VSServiceStack_UnitTests.MenuItemTests
             Assert.AreEqual(0, package.SetSite(serviceProvider), "SetSite did not return S_OK");
 
             //Verify that the menu command can be found
-            CommandID menuCommandID = new CommandID(ServiceStack.VSServiceStack.GuidList.guidVSServiceStackCmdSet, (int)ServiceStack.VSServiceStack.PkgCmdIDList.cmdidServiceStackReference);
+            CommandID menuCommandID = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
             System.Reflection.MethodInfo info = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.IsNotNull(info);
             OleMenuCommandService mcs = info.Invoke(package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;

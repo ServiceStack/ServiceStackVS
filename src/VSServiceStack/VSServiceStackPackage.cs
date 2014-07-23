@@ -13,12 +13,12 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using ServiceStack.Text;
-using ServiceStack.VSServiceStack.Types;
+using VSServiceStack.Types;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using MessageBox = System.Windows.MessageBox;
 using Thread = System.Threading.Thread;
 
-namespace ServiceStack.VSServiceStack
+namespace VSServiceStack
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -87,10 +87,6 @@ namespace ServiceStack.VSServiceStack
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            // Show a Message Box to prove we were here
-            IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-            Guid clsid = Guid.Empty;
-            int result;
             var dialog = new AddServiceStackReference();
             dialog.ShowDialog();
             if (!dialog.OkPressed)

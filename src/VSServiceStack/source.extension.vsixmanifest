@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="1.0" Language="en-US" Publisher="ServiceStack" />
-    <DisplayName>VSServiceStack</DisplayName>
+    <DisplayName>Visual Studio ServiceStack Extension</DisplayName>
     <Description>Templates and tools for use with the ServiceStack framework.</Description>
     <Icon>logo.png</Icon>
     <PreviewImage>logo.png</PreviewImage>
@@ -20,5 +20,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="TemplateBuilder.dll" AssemblyName="TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Output\ItemTemplates"/>
     <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
   </Assets>
 </PackageManifest>

@@ -1,4 +1,4 @@
-﻿<Window x:Class="ServiceStack.VSServiceStack.AddServiceStackReference"
+﻿<Window x:Class="VSServiceStack.AddServiceStackReference"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add ServiceStack Reference" Height="145" Width="300"
