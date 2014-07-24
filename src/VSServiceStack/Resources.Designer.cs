@@ -22,7 +22,7 @@ namespace VSServiceStack {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace VSServiceStack {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VSServiceStack.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,37 @@ namespace VSServiceStack {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;false&quot; language=&quot;C#&quot; #&gt;
+        ///&lt;#@ output extension=&quot;.cs&quot; #&gt;
+        ///&lt;#= DownloadCSharpDtos(&quot;$serviceurl$types/csharp&quot;) #&gt;
+        ///&lt;#+
+        ///public class CodegenOptions 
+        ///{
+        ///	bool? MakePartial;
+        ///	bool? MakeVirtual;
+        ///	bool? MakeDataContractsExtensible;
+        ///	bool? InitializeCollections;
+        ///	bool? AddReturnMarker;
+        ///	bool? AddDescriptionAsComments;
+        ///	bool? AddDataContractAttributes;
+        ///	bool? AddDataAnnotationAttributes;
+        ///	bool? AddIndexesToDataMembers;
+        ///	bool? AddResponseStatus;
+        ///	int? AddImplicitVers [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string ServiceModelTemplate {
+            get {
+                return ResourceManager.GetString("ServiceModelTemplate", resourceCulture);
             }
         }
     }

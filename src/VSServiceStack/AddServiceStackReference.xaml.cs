@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,16 +20,47 @@ namespace VSServiceStack
     /// </summary>
     public partial class AddServiceStackReference : Window
     {
-        public bool OkPressed { get; set; }
-        public AddServiceStackReference()
+        public bool AddReferenceSucceeded { get; set; }
+        private string suggestedFileName;
+
+        private Func<string,bool> DownloadDtoFunc;
+        public AddServiceStackReference(Func<string, bool> downloadDtoFunc,string fileName)
         {
+            suggestedFileName = fileName;
+            DownloadDtoFunc = downloadDtoFunc;
             InitializeComponent();
+            FileNameTextBox.Text = suggestedFileName;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            OkPressed = true;
-            Close();
+            Dispatcher.InvokeAsync(() =>
+            {
+                ReferenceProgressBar.Visibility = Visibility.Visible;
+                ErrorMessageBox.Visibility = Visibility.Hidden;
+                ErrorMessage.Text = "";
+                try
+                {
+                    bool urlIsValid = DownloadDtoFunc(UrlTextBox.Text);
+                    if (urlIsValid)
+                    {
+                        AddReferenceSucceeded = true;
+                        Close();
+                    }
+                }
+                catch (WebException webException)
+                {
+                    ErrorMessageBox.Visibility = Visibility.Visible;
+                    ErrorMessage.Text = "Failed to generated client types, server responded with '" +
+                                        webException.Message + "'.";
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessageBox.Visibility = Visibility.Visible;
+                    ErrorMessage.Text = "Failed to generate client types - " + ex.Message;
+                }
+                ReferenceProgressBar.Visibility = Visibility.Hidden;
+            });
         }
     }
 }

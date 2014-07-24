@@ -2,16 +2,21 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.Internal.VisualStudio.PlatformUI;
+using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.Win32;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using NuGet.VisualStudio;
+using ServiceStack;
 using ServiceStack.Text;
 using VSServiceStack.Types;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
@@ -87,147 +92,92 @@ namespace VSServiceStack
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            var dialog = new AddServiceStackReference();
+            var t4TemplateBase = Resources.ServiceModelTemplate;
+            string templateCode = null;
+            var project = VSIXUtils.GetSelectedProject();
+            string projectPath = project.Properties.Item("FullPath").Value.ToString();
+            int fileNameNumber = 1;
+            //Find a version of the default name that doesn't already exist, 
+            //mimicing VS default file name behaviour.
+            while (File.Exists(Path.Combine(projectPath, "ServiceReference" + fileNameNumber + ".tt")))
+            {
+                fileNameNumber++;
+            }
+            var dialog = new AddServiceStackReference(url => TryResolveServiceStackTemplate(url, t4TemplateBase, out templateCode), 
+                "ServiceReference" + fileNameNumber);
             dialog.ShowDialog();
-            if (!dialog.OkPressed)
+            if (!dialog.AddReferenceSucceeded)
             {
                 return;
             }
-            string serverUrl = dialog.UrlTextBox.Text;
+
+            CreateAndAddTemplateToProject(dialog, templateCode);
+        }
+
+        private void CreateAndAddTemplateToProject(AddServiceStackReference dialog, string templateCode)
+        {
+            var fileName = dialog.FileNameTextBox.Text + ".tt";
+            var project = VSIXUtils.GetSelectedProject();
+            string projectPath = project.Properties.Item("FullPath").Value.ToString();
+            string fullPath = Path.Combine(projectPath, fileName);
+            using (var streamWriter = File.CreateText(fullPath))
+            {
+                streamWriter.Write(templateCode);
+                streamWriter.Flush();
+            }
+            var t4TemplateProjectItem = project.ProjectItems.AddFromFile(fullPath);
+            t4TemplateProjectItem.Open(EnvDTE.Constants.vsViewKindCode);
+            t4TemplateProjectItem.Save();
+            project.ProjectItems.AddFromFile(fullPath.Replace(".tt", ".cs"));
+            project.Save();
+
+            //Once the generated code has been added, we need to ensure that  
+            //the required ServiceStack.Interfaces package is installed.
+            var componentModel = (IComponentModel)GetService(typeof(SComponentModel));
+            var installer = componentModel.GetService<IVsPackageInstaller>();
+            var installerServices = componentModel.GetService<IVsPackageInstallerServices>();
+            var installedPackages = installerServices.GetInstalledPackages(project);
+           
+            //TODO check project references incase ServiceStack.Interfaces is references a local copy
+
+            //Check if existing nuget reference exists
+            if (installedPackages.FirstOrDefault(x => x.Id == "ServiceStack.Interfaces") == null)
+            {
+                installer.InstallPackage("https://www.nuget.org/api/v2/",
+                         project,
+                         "ServiceStack.Interfaces",
+                         version: (string)null,
+                         ignoreDependencies: false); 
+                project.Save();
+            }
+        }
+
+        private static bool TryResolveServiceStackTemplate(string url, string t4TemplateBase, out string templateCode)
+        {
+            string serverUrl = url;
+            templateCode = t4TemplateBase.Replace("$serviceurl$", serverUrl);
             Uri validatedUri;
-            bool isValidUri = Uri.TryCreate(serverUrl, UriKind.Absolute, out validatedUri) && validatedUri.Scheme == Uri.UriSchemeHttp;
+            bool isValidUri = Uri.TryCreate(serverUrl, UriKind.Absolute, out validatedUri) &&
+                              validatedUri.Scheme == Uri.UriSchemeHttp;
             if (isValidUri)
             {
-                var dtoCode = DownloadCSharpDtos(validatedUri.AbsoluteUri + "types/csharp");
                 var metadata = new System.Net.WebClient().DownloadString(validatedUri + "types/metadata?format=json");
-                var metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadata);
+                MetadataTypes metaDataDto = null;
+                try
+                {
+                    metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadata);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed deserializing metadata from server", ex);
+                }
                 if (metaDataDto.Operations.Count == 0)
                 {
-                    throw new Exception("Invalid metadata from server");
+                    throw new Exception("Invalid or empty metadata from server");
                 }
-                var fileName = metaDataDto.Operations[0].Request.Name + ".cs";
-                var project = GetSelectedProject();
-                string projectPath = project.Properties.Item("FullPath").Value.ToString();
-                string fullPath = Path.Combine(projectPath, fileName);
-                using (var streamWriter = File.CreateText(fullPath))
-                {
-                    streamWriter.Write(dtoCode);
-                    streamWriter.Flush();
-                }
-                project.ProjectItems.AddFromFile(fullPath);
-            }
-            else
-            {
-                MessageBox.Show("Invalid url provided, please provide a valid http url");
-            }
-            
-            //Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-            //           0,
-            //           ref clsid,
-            //           "VSServiceStack",
-            //           string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.ToString()),
-            //           string.Empty,
-            //           0,
-            //           OLEMSGBUTTON.OLEMSGBUTTON_OK,
-            //           OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-            //           OLEMSGICON.OLEMSGICON_INFO,
-            //           0,        // false
-            //           out result));
-        }
-
-        /// <summary>
-        /// Gets the selected project.
-        /// From http://uisurumadushanka89.blogspot.com.au/2013/04/visual-studio-extensibility-get-active.html
-        /// </summary>
-        /// <returns></returns>
-        public Project GetSelectedProject()
-        {
-            IntPtr hierarchyPointer, selectionContainerPointer;
-            Object selectedObject = null;
-            IVsMultiItemSelect multiItemSelect;
-            uint projectItemId;
-
-            IVsMonitorSelection monitorSelection =
-                    (IVsMonitorSelection)Package.GetGlobalService(
-                    typeof(SVsShellMonitorSelection));
-
-            monitorSelection.GetCurrentSelection(out hierarchyPointer,
-                                                 out projectItemId,
-                                                 out multiItemSelect,
-                                                 out selectionContainerPointer);
-
-            IVsHierarchy selectedHierarchy = null;
-            try
-            {
-                selectedHierarchy = Marshal.GetTypedObjectForIUnknown(
-                                                     hierarchyPointer,
-                                                     typeof(IVsHierarchy)) as IVsHierarchy;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            if (selectedHierarchy != null)
-            {
-                ErrorHandler.ThrowOnFailure(selectedHierarchy.GetProperty(
-                                                  projectItemId,
-                                                  (int)__VSHPROPID.VSHPROPID_ExtObject,
-                                                  out selectedObject));
-            }
-
-            Project selectedProject = selectedObject as Project;
-
-            return selectedProject;
-        }
-
-        public static bool IsSingleProjectItemSelection(out IVsHierarchy hierarchy, out uint itemid)
-        {
-            hierarchy = null;
-            itemid = VSConstants.VSITEMID_NIL;
-            int hr = VSConstants.S_OK;
-            var monitorSelection = Package.GetGlobalService(typeof(SVsShellMonitorSelection)) as IVsMonitorSelection;
-            var solution = Package.GetGlobalService(typeof(SVsSolution)) as IVsSolution;
-            if (monitorSelection == null || solution == null)
-            {
-                return false;
-            }
-            IVsMultiItemSelect multiItemSelect = null;
-            IntPtr hierarchyPtr = IntPtr.Zero;
-            IntPtr selectionContainerPtr = IntPtr.Zero;
-            try
-            {
-                hr = monitorSelection.GetCurrentSelection(out hierarchyPtr, out itemid, out multiItemSelect, out selectionContainerPtr);
-                if (ErrorHandler.Failed(hr) || hierarchyPtr == IntPtr.Zero || itemid == VSConstants.VSITEMID_NIL)
-                {
-                    // there is no selection
-                    return false;
-                }
-                // multiple items are selected
-                if (multiItemSelect != null) return false;
-                // there is a hierarchy root node selected, thus it is not a single item inside a project
-                if (itemid == VSConstants.VSITEMID_ROOT) return false;
-                hierarchy = Marshal.GetObjectForIUnknown(hierarchyPtr) as IVsHierarchy;
-                if (hierarchy == null) return false;
-                Guid guidProjectID = Guid.Empty;
-                if (ErrorHandler.Failed(solution.GetGuidOfProject(hierarchy, out guidProjectID)))
-                {
-                    return false; // hierarchy is not a project inside the Solution if it does not have a ProjectID Guid
-                }
-                // if we got this far then there is a single project item selected
                 return true;
             }
-            finally
-            {
-                if (selectionContainerPtr != IntPtr.Zero)
-                {
-                    Marshal.Release(selectionContainerPtr);
-                }
-                if (hierarchyPtr != IntPtr.Zero)
-                {
-                    Marshal.Release(hierarchyPtr);
-                }
-            }
+            return false;
         }
 
         public static string DownloadCSharpDtos(string baseUrl)
