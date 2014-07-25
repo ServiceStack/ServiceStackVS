@@ -31,37 +31,52 @@ namespace VSServiceStack
             DownloadDtoFunc = downloadDtoFunc;
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
+            this.KeyUp += ListenForShortCutKeys;
+        }
+
+        private void ListenForShortCutKeys(object sender, KeyEventArgs keyEventArgs)
+        {
+            if (keyEventArgs.Key == Key.Enter)
+            {
+                Dispatcher.InvokeAsync(CreateServiceReference);
+            }
+            if (keyEventArgs.Key == Key.Escape)
+            {
+                Close();
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher.InvokeAsync(CreateServiceReference);
+        }
+
+        private void CreateServiceReference()
+        {
+            ReferenceProgressBar.Visibility = Visibility.Visible;
+            ErrorMessageBox.Visibility = Visibility.Hidden;
+            ErrorMessage.Text = "";
+            try
             {
-                ReferenceProgressBar.Visibility = Visibility.Visible;
-                ErrorMessageBox.Visibility = Visibility.Hidden;
-                ErrorMessage.Text = "";
-                try
+                bool urlIsValid = DownloadDtoFunc(UrlTextBox.Text);
+                if (urlIsValid)
                 {
-                    bool urlIsValid = DownloadDtoFunc(UrlTextBox.Text);
-                    if (urlIsValid)
-                    {
-                        AddReferenceSucceeded = true;
-                        Close();
-                    }
+                    AddReferenceSucceeded = true;
+                    Close();
                 }
-                catch (WebException webException)
-                {
-                    ErrorMessageBox.Visibility = Visibility.Visible;
-                    ErrorMessage.Text = "Failed to generated client types, server responded with '" +
-                                        webException.Message + "'.";
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessageBox.Visibility = Visibility.Visible;
-                    ErrorMessage.Text = "Failed to generate client types - " + ex.Message;
-                }
-                ReferenceProgressBar.Visibility = Visibility.Hidden;
-            });
+            }
+            catch (WebException webException)
+            {
+                ErrorMessageBox.Visibility = Visibility.Visible;
+                ErrorMessage.Text = "Failed to generated client types, server responded with '" +
+                                    webException.Message + "'.";
+            }
+            catch (Exception ex)
+            {
+                ErrorMessageBox.Visibility = Visibility.Visible;
+                ErrorMessage.Text = "Failed to generate client types - " + ex.Message;
+            }
+            ReferenceProgressBar.Visibility = Visibility.Hidden;
         }
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
