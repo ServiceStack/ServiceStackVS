@@ -44,6 +44,7 @@ namespace VSServiceStack
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     public sealed class VSServiceStackPackage : Package
     {
         /// <summary>
@@ -79,14 +80,37 @@ namespace VSServiceStack
             {
                 // Create the command for the menu item.
                 CommandID projContextServiceStackReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
-                var projContextServiceStackReferenceCommand = new OleMenuCommand(MenuItemCallback, projContextServiceStackReferenceCommandId);
-                //menuItem.BeforeQueryStatus += delegate(object sender, EventArgs args)
-                //{
-                    
-                //};
+                var projContextServiceStackReferenceCommand = new OleMenuCommand(MenuItemCallback ,projContextServiceStackReferenceCommandId);
+                projContextServiceStackReferenceCommand.BeforeQueryStatus += BeforeQueryStatusForProjectAddMenuItem;
                 mcs.AddCommand(projContextServiceStackReferenceCommand);
             }
         }
+
+        private void BeforeQueryStatusForProjectAddMenuItem(object sender, EventArgs eventArgs)
+        {
+            OleMenuCommand command = (OleMenuCommand)sender;
+            var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
+            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            uint contextCookie;
+            int pfActive;
+            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            var ready = result == VSConstants.S_OK && pfActive > 0;
+            Project project = VSIXUtils.GetSelectedProject();
+
+            command.Enabled =
+                //Not busy building
+                ready &&
+                project != null &&
+                project.Kind != null &&
+                //Project is not unloaded
+                !string.Equals(project.Kind, "{67294A52-A4F0-11D2-AA88-00C04F688DDE}",
+                    StringComparison.InvariantCultureIgnoreCase) &&
+                //Project is Csharp project
+                string.Equals(project.Kind, "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}",
+                    StringComparison.InvariantCultureIgnoreCase);
+        }
+
         #endregion
 
         /// <summary>
@@ -169,8 +193,8 @@ namespace VSServiceStack
                               validatedUri.Scheme == Uri.UriSchemeHttp;
             if (isValidUri)
             {
-                var metadata = new System.Net.WebClient().DownloadString(validatedUri + "types/metadata?format=json");
-                MetadataTypes metaDataDto = null;
+                var metadata = new WebClient().DownloadString(validatedUri + "types/metadata?format=json");
+                MetadataTypes metaDataDto;
                 try
                 {
                     metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadata);
@@ -203,7 +227,7 @@ namespace VSServiceStack
             }
             var qs = sb.ToString();
             if (qs.Length > 0) baseUrl += "?" + qs;
-            return new System.Net.WebClient().DownloadString(baseUrl);
+            return new WebClient().DownloadString(baseUrl);
         }
 
     }

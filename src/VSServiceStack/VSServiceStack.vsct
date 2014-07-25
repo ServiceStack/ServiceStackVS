@@ -66,6 +66,7 @@
         <Icon guid="guidImages" id="bmpSSAdd" />
         <Strings>
           <ButtonText>Add ServiceStack Reference...</ButtonText>
+        <CommandName>cmdidServiceStackReference</CommandName>
         </Strings>
       </Button>
 
