@@ -9,9 +9,9 @@
             <TextBox x:Name="FileNameTextBox" HorizontalAlignment="Left" Height="23" Margin="0,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Text="ServiceReference1"/>
 
             <Label Content="ServiceStack Server Url" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontWeight="Bold" FontSize="13.333" Margin="0,59,0,0"/>
-            <TextBox x:Name="UrlTextBox" HorizontalAlignment="Left" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" ToolTip="Please provide base server address, eg http://localhost:8080"/>
+            <TextBox x:Name="UrlTextBox" HorizontalAlignment="Left" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" TextChanged="UrlTextBox_OnTextChanged"  ToolTip="Please provide base server address, eg http://localhost:8080"/>
 
-            <Button Content="OK" HorizontalAlignment="Left" Height="30" Margin="0,118,0,0" VerticalAlignment="Top" Width="262" Click="ButtonBase_OnClick"/>
+            <Button Name="OkBtn" Content="OK" HorizontalAlignment="Left" Height="30" Margin="0,118,0,0" VerticalAlignment="Top" Width="262" Click="ButtonBase_OnClick" IsEnabled="False"/>
             <ProgressBar Name="ReferenceProgressBar" Margin="0,155,10,10" IsIndeterminate="True" Value="0" Height="20" Visibility="Hidden"/>
             <ScrollViewer Margin="0,153,10,10" Name="ErrorMessageBox" Visibility="Hidden">
                 <TextBlock Name="ErrorMessage" Foreground="Red" Text="Test" TextWrapping="Wrap"></TextBlock>

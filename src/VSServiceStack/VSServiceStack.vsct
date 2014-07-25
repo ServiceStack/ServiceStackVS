@@ -61,11 +61,11 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
 
-      <Button guid="guidVSServiceStackCmdSet" id="cmdidServiceStackReference" priority="0x0100" type="Button">
+      <Button guid="guidVSServiceStackCmdSet" id="cmdidServiceStackReference" priority="0xE100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
         <Icon guid="guidImages" id="bmpSSAdd" />
         <Strings>
-          <ButtonText>Add ServiceStack Reference</ButtonText>
+          <ButtonText>Add ServiceStack Reference...</ButtonText>
         </Strings>
       </Button>
 
@@ -85,10 +85,12 @@
     </Bitmaps>
  
   </Commands>
-
-
-
-
+  <!--Added menu item to the context menu of 'References' within a project, needs addition items to bind click event-->
+  <!--<CommandPlacements>
+    <CommandPlacement guid="guidVSServiceStackCmdSet" id="cmdidServiceStackReference" priority="0xE100">
+      <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_REFROOT_ADD"/>
+    </CommandPlacement>
+  </CommandPlacements>-->
 
   <Symbols>
     <!-- This is the package guid. -->

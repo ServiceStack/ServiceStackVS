@@ -78,9 +78,13 @@ namespace VSServiceStack
             if ( null != mcs )
             {
                 // Create the command for the menu item.
-                CommandID menuCommandID = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
-                MenuCommand menuItem = new MenuCommand(MenuItemCallback, menuCommandID );
-                mcs.AddCommand( menuItem );
+                CommandID projContextServiceStackReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
+                var projContextServiceStackReferenceCommand = new OleMenuCommand(MenuItemCallback, projContextServiceStackReferenceCommandId);
+                //menuItem.BeforeQueryStatus += delegate(object sender, EventArgs args)
+                //{
+                    
+                //};
+                mcs.AddCommand(projContextServiceStackReferenceCommand);
             }
         }
         #endregion
@@ -138,15 +142,14 @@ namespace VSServiceStack
             var installerServices = componentModel.GetService<IVsPackageInstallerServices>();
             var installedPackages = installerServices.GetInstalledPackages(project);
            
-            //TODO check project references incase ServiceStack.Interfaces is references a local copy
-
+            //TODO check project references incase ServiceStack.Interfaces is referenced via local file.
             //Check if existing nuget reference exists
             if (installedPackages.FirstOrDefault(x => x.Id == "ServiceStack.Interfaces") == null)
             {
                 installer.InstallPackage("https://www.nuget.org/api/v2/",
                          project,
                          "ServiceStack.Interfaces",
-                         version: (string)null,
+                         version: (string)null, //Latest version of ServiceStack.Interfaces
                          ignoreDependencies: false); 
                 project.Save();
             }
@@ -155,6 +158,11 @@ namespace VSServiceStack
         private static bool TryResolveServiceStackTemplate(string url, string t4TemplateBase, out string templateCode)
         {
             string serverUrl = url;
+            //Appends trailing forward slash to url if missing
+            if (!serverUrl.EndsWith("/"))
+            {
+                serverUrl = serverUrl + "/";
+            }
             templateCode = t4TemplateBase.Replace("$serviceurl$", serverUrl);
             Uri validatedUri;
             bool isValidUri = Uri.TryCreate(serverUrl, UriKind.Absolute, out validatedUri) &&

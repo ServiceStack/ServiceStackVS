@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -61,6 +62,19 @@ namespace VSServiceStack
                 }
                 ReferenceProgressBar.Visibility = Visibility.Hidden;
             });
+        }
+
+        private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (UrlTextBox.Text.StartsWith("http://", true, CultureInfo.InvariantCulture) ||
+                UrlTextBox.Text.StartsWith("https://", true, CultureInfo.InvariantCulture))
+            {
+                OkBtn.IsEnabled = true;
+            }
+            else
+            {
+                OkBtn.IsEnabled = false;
+            }
         }
     }
 }
