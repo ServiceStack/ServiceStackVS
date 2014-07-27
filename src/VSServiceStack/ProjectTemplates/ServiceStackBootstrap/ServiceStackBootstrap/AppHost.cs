@@ -29,8 +29,10 @@ namespace $safeprojectname$
         public override void Configure(Container container)
         {
             //Config examples
-            //this.AddPlugin(new PostmanFeature());
-            //this.AddPlugin(new CorsFeature());
+            //this.Plugins.Add(new PostmanFeature());
+            //this.Plugins.Add(new CorsFeature());
+            
+            this.Plugins.Add(new RazorFormat());
         }
     }
 }
