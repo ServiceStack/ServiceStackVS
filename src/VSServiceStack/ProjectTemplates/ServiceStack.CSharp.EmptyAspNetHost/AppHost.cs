@@ -8,10 +8,9 @@ namespace ServiceStack.CSharp.EmptyAspNetHost
         /// <summary>
         /// Default constructor.
         /// Base constructor requires a name and assembly to locate web service classes. 
-        /// Below defaults to same assembly as web host.
         /// </summary>
         public AppHost()
-            : base("Service name", typeof(AppHost).Assembly)
+            : base("$safeprojectname$", typeof(MyServices).Assembly)
         {
 
         }
@@ -26,6 +25,24 @@ namespace ServiceStack.CSharp.EmptyAspNetHost
             //Config examples
             //this.AddPlugin(new PostmanFeature());
             //this.AddPlugin(new CorsFeature());
+        }
+    }
+
+    public class Hello
+    {
+        public string Name { get; set; }
+    }
+
+    public class HelloResponse
+    {
+        public string Result { get; set; }
+    }
+
+    public class MyServices : Service
+    {
+        public object Any(Hello request)
+        {
+            return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
         }
     }
 }

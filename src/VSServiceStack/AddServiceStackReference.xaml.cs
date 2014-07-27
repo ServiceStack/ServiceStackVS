@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -31,10 +33,19 @@ namespace VSServiceStack
             DownloadDtoFunc = downloadDtoFunc;
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
-            this.KeyUp += ListenForShortCutKeys;
+            this.KeyUp += ListenForShortcutKeys;
+            System.Drawing.Bitmap bmp = SystemIcons.Information.ToBitmap();
+            MemoryStream ms = new MemoryStream();
+            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+            InformationIcon.Source = bi;
         }
 
-        private void ListenForShortCutKeys(object sender, KeyEventArgs keyEventArgs)
+        private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
         {
             if (keyEventArgs.Key == Key.Enter)
             {
@@ -84,12 +95,17 @@ namespace VSServiceStack
             if (UrlTextBox.Text.StartsWith("http://", true, CultureInfo.InvariantCulture) ||
                 UrlTextBox.Text.StartsWith("https://", true, CultureInfo.InvariantCulture))
             {
-                OkBtn.IsEnabled = true;
+                OkButton.IsEnabled = true;
             }
             else
             {
-                OkBtn.IsEnabled = false;
+                OkButton.IsEnabled = false;
             }
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

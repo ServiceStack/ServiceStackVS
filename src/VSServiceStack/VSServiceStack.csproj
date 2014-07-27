@@ -163,8 +163,8 @@
     <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\AccountViewModels.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Models\IdentityModels.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceInterface\UserService.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceModel\UserDetailsRequest.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\ServiceModel\Hello.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.CSharp.MVC\Startup.cs" />
     <Compile Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\MyServices.cs" />
     <Compile Include="ProjectTemplates\ServiceStackAngularJS\ServiceInterface\Properties\AssemblyInfo.cs" />
@@ -311,10 +311,6 @@
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Web.Release.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\Test\packages.config" />
     <None Include="Properties\template-builder.props" />
-    <None Include="ServiceStackReferenceTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ServiceStackReferenceTemplate.txt</LastGenOutput>
-    </None>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -331,23 +327,23 @@
     <None Include="Resources\Images.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logo-280.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="Resources\ServiceModelTemplate.txt" />
+    <Resource Include="Resources\favicon.ico" />
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\ServiceModelTemplate.txt" />
     <Resource Include="Resources\servicestacklogo.ico" />
     <Resource Include="Resources\logoAddReference.bmp" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Global.asax" />
-    <Resource Include="ServiceStackReferenceTemplate.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ServiceStackReferenceTemplate.tt</DependentUpon>
-    </Resource>
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\icon.png" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\ServiceStack.CSharp.EmptyAspNetHost.csproj" />
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" />
@@ -491,6 +487,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ProjectTemplates\ServiceStack.CSharp.MVC\App_Data\" />
+    <Folder Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ServiceStackASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ServiceStackBootstrap\ServiceModel\Types\" />
   </ItemGroup>

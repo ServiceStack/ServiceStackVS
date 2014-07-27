@@ -1,21 +1,27 @@
 ﻿<Window x:Class="VSServiceStack.AddServiceStackReference"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add ServiceStack Reference"  Height="260" Width="295"
-        Icon="Resources/servicestacklogo.ico">
+        Title="Add ServiceStack Reference"  Height="260" Width="748"
+        Icon="Resources/favicon.ico" ResizeMode="NoResize"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Grid Margin="0,0,0,0">
-        <Grid HorizontalAlignment="Left" Width="272" Margin="10,10,0,10">
-            <Label Content="File name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontWeight="Bold" FontSize="13.333"/>
-            <TextBox x:Name="FileNameTextBox" HorizontalAlignment="Left" Height="23" Margin="0,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Text="ServiceReference1"/>
+        <Grid HorizontalAlignment="Left" Width="722" Margin="10,10,0,10">
+            <TextBlock HorizontalAlignment="Right" Height="44" Margin="0,10,10,0" TextWrapping="Wrap" Text="To generate the DTO Service Model types for a specific ServiceStack instance, enter the Base Uri for the remote ServiceStack Server and click OK." VerticalAlignment="Top" Width="650"/>
+            <Image Name="InformationIcon" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="32"/>
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontSize="13.333" Margin="0,110,0,0"/>
+            <TextBox x:Name="FileNameTextBox" Height="24" Margin="0,140,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ServiceReference1"/>
 
-            <Label Content="ServiceStack Server Url" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontWeight="Bold" FontSize="13.333" Margin="0,59,0,0"/>
-            <TextBox x:Name="UrlTextBox" HorizontalAlignment="Left" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" TextChanged="UrlTextBox_OnTextChanged"  ToolTip="Please provide base server address, eg http://localhost:8080"/>
+            <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontSize="13.333" Margin="0,59,0,0"/>
+            <TextBox x:Name="UrlTextBox" Height="23" Margin="0,90,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="UrlTextBox_OnTextChanged"  ToolTip="Please provide base server address, eg http://localhost:8080"/>
 
-            <Button Name="OkBtn" Content="OK" HorizontalAlignment="Left" Height="30" Margin="0,118,0,0" VerticalAlignment="Top" Width="262" Click="ButtonBase_OnClick" IsEnabled="False"/>
-            <ProgressBar Name="ReferenceProgressBar" Margin="0,155,10,10" IsIndeterminate="True" Value="0" Height="20" Visibility="Hidden"/>
-            <ScrollViewer Margin="0,153,10,10" Name="ErrorMessageBox" Visibility="Hidden">
-                <TextBlock Name="ErrorMessage" Foreground="Red" Text="Test" TextWrapping="Wrap"></TextBlock>
+            <ProgressBar Name="ReferenceProgressBar" Margin="0,172,220,10" IsIndeterminate="True" Value="0" Visibility="Hidden"/>
+            <ScrollViewer Margin="0,172,220,10" Name="ErrorMessageBox" Visibility="Hidden">
+                <TextBlock Name="ErrorMessage" Foreground="Red" Text="" TextWrapping="Wrap" Width="485"></TextBlock>
             </ScrollViewer>
+
+            <Button Name="OkButton" Content="OK" Height="30" Margin="507,172,0,0" VerticalAlignment="Top" Click="ButtonBase_OnClick" IsEnabled="False" HorizontalAlignment="Left" Width="100"/>
+            <Button x:Name="CancelButton" Content="Cancel" Height="30" Margin="612,172,0,0" VerticalAlignment="Top" Click="CancelButton_OnClick" HorizontalAlignment="Left" Width="100"/>
+
         </Grid>
     </Grid>
 </Window>
