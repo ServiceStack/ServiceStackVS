@@ -68,6 +68,10 @@
       <Project>{3ADA98B6-22EF-40B2-8D28-F8B21D90A719}</Project>
       <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
+      <Project>{3B964640-9CA0-4868-A11B-8924C02A99CB}</Project>
+      <Name>$saferootprojectname$.ServiceModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using ServiceStack;
 using ServiceStack.Testing;
-using ServiceStack.CSharp.AngularJS.ServiceInterface;
+using $saferootprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceInterface;
 
-namespace $saferootprojectname$
+namespace $safeprojectname$
 {
     [TestFixture]
     public class UnitTests
@@ -37,7 +37,7 @@ namespace $saferootprojectname$
 
             var response = (HelloResponse)service.Any(new Hello { Name = "World" });
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World"));
+            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
         }
     }
 }

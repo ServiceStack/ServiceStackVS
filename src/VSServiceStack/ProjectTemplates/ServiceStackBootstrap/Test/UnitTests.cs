@@ -2,7 +2,8 @@
 using NUnit.Framework;
 using ServiceStack;
 using ServiceStack.Testing;
-using ServiceStack.CSharp.Bootstrap.ServiceInterface;
+using $saferootprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceInterface;
 
 namespace $safeprojectname$
 {
@@ -36,7 +37,7 @@ namespace $safeprojectname$
 
             var response = (HelloResponse)service.Any(new Hello { Name = "World" });
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World"));
+            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
         }
     }
 }
