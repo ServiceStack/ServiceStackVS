@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VSServiceStack.Types
+namespace ServiceStackVS.Types
 {
     public class MetadataTypesConfig
     {

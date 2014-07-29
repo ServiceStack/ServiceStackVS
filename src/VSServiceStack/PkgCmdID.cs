@@ -2,7 +2,7 @@
 // MUST match PkgCmdID.h
 using System;
 
-namespace VSServiceStack
+namespace ServiceStackVS
 {
     static class PkgCmdIDList
     {

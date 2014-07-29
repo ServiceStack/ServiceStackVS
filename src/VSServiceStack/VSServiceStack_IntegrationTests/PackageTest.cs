@@ -49,7 +49,7 @@ namespace VSServiceStack_IntegrationTests
 
                 //Validate package load
                 IVsPackage package;
-                Guid packageGuid = new Guid(VSServiceStack.GuidList.guidVSServiceStackPkgString);
+                Guid packageGuid = new Guid(ServiceStackVS.GuidList.guidServiceStackVSPkgString);
                 Assert.IsTrue(0 == shellService.LoadPackage(ref packageGuid, out package));
                 Assert.IsNotNull(package, "Package failed to load");
 

@@ -1,14 +1,10 @@
-﻿using System;
+﻿using System.ComponentModel.Design;
 using System.Globalization;
-using System.ComponentModel.Design;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VsSDK.IntegrationTestLibrary;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
 
-namespace VSServiceStack_IntegrationTests
+namespace ServiceStackVS_IntegrationTests
 {
     [TestClass()]
     public class MenuItemTest
@@ -42,10 +38,10 @@ namespace VSServiceStack_IntegrationTests
         {
             UIThreadInvoker.Invoke((ThreadInvoker)delegate()
             {
-                CommandID menuItemCmd = new CommandID(VSServiceStack.GuidList.guidVSServiceStackCmdSet, (int)VSServiceStack.PkgCmdIDList.cmdidServiceStackReference);
+                CommandID menuItemCmd = new CommandID(ServiceStackVS.GuidList.guidVSServiceStackCmdSet, (int)ServiceStackVS.PkgCmdIDList.cmdidServiceStackReference);
 
                 // Create the DialogBoxListener Thread.
-                string expectedDialogBoxText = string.Format(CultureInfo.CurrentCulture, "{0}\n\nInside {1}.MenuItemCallback()", "VSServiceStack", "ServiceStack.VSServiceStack.VSServiceStackPackage");
+                string expectedDialogBoxText = string.Format(CultureInfo.CurrentCulture, "{0}\n\nInside {1}.MenuItemCallback()", "ServiceStackVS", "ServiceStack.ServiceStackVS.ServiceStackVSPackage");
                 DialogBoxPurger purger = new DialogBoxPurger(NativeMethods.IDOK, expectedDialogBoxText);
 
                 try

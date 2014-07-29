@@ -18,7 +18,7 @@ using Microsoft.VsSDK.UnitTestLibrary;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Shell;
-using VSServiceStack;
+using ServiceStackVS;
 
 namespace VSServiceStack_UnitTests.MenuItemTests
 {
@@ -33,7 +33,7 @@ namespace VSServiceStack_UnitTests.MenuItemTests
         public void InitializeMenuCommand()
         {
             // Create the package
-            IVsPackage package = new VSServiceStackPackage() as IVsPackage;
+            IVsPackage package = new ServiceStackVSPackage() as IVsPackage;
             Assert.IsNotNull(package, "The object does not implement IVsPackage");
 
             // Create a basic service provider
@@ -54,7 +54,7 @@ namespace VSServiceStack_UnitTests.MenuItemTests
         public void MenuItemCallback()
         {
             // Create the package
-            IVsPackage package = new VSServiceStackPackage() as IVsPackage;
+            IVsPackage package = new ServiceStackVSPackage() as IVsPackage;
             Assert.IsNotNull(package, "The object does not implement IVsPackage");
 
             // Create a basic service provider

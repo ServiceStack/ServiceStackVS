@@ -1,6 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".cs" #>
-<#= DownloadCSharpDtos("$serviceurl$types/csharp") #>
+<#= DownloadCSharpDtos("$serviceurl$") #>
 <#+
 public class CodegenOptions 
 {

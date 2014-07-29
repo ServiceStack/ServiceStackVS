@@ -10,7 +10,7 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace VSServiceStack
+namespace ServiceStackVS
 {
     public static class VSIXUtils
     {

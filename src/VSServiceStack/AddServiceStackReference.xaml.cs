@@ -15,8 +15,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Color = System.Windows.Media.Color;
 
-namespace VSServiceStack
+namespace ServiceStackVS
 {
     /// <summary>
     /// Interaction logic for AddServiceStackReferencexaml.xaml
@@ -34,15 +35,6 @@ namespace VSServiceStack
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
             this.KeyUp += ListenForShortcutKeys;
-            System.Drawing.Bitmap bmp = SystemIcons.Information.ToBitmap();
-            MemoryStream ms = new MemoryStream();
-            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
-            InformationIcon.Source = bi;
         }
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
@@ -60,12 +52,15 @@ namespace VSServiceStack
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Dispatcher.InvokeAsync(CreateServiceReference);
+
+            Validation.ClearInvalid(UrlTextBox.GetBindingExpression(TextBox.TextProperty));
         }
 
         private void CreateServiceReference()
         {
             ReferenceProgressBar.Visibility = Visibility.Visible;
             ErrorMessageBox.Visibility = Visibility.Hidden;
+            UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Transparent);
             ErrorMessage.Text = "";
             try
             {
@@ -81,11 +76,13 @@ namespace VSServiceStack
                 ErrorMessageBox.Visibility = Visibility.Visible;
                 ErrorMessage.Text = "Failed to generated client types, server responded with '" +
                                     webException.Message + "'.";
+                UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
             }
             catch (Exception ex)
             {
                 ErrorMessageBox.Visibility = Visibility.Visible;
                 ErrorMessage.Text = "Failed to generate client types - " + ex.Message;
+                UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
             }
             ReferenceProgressBar.Visibility = Visibility.Hidden;
         }
@@ -106,6 +103,14 @@ namespace VSServiceStack
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+    }
+
+    public class DTOGenerationValidator : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return new ValidationResult(false,"");
         }
     }
 }

@@ -16,7 +16,7 @@ using System.Reflection;
 using Microsoft.VsSDK.UnitTestLibrary;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VSServiceStack;
+using ServiceStackVS;
 
 namespace VSServiceStack_UnitTests
 {
@@ -26,13 +26,13 @@ namespace VSServiceStack_UnitTests
         [TestMethod()]
         public void CreateInstance()
         {
-            VSServiceStackPackage package = new VSServiceStackPackage();
+            ServiceStackVSPackage package = new ServiceStackVSPackage();
         }
 
         [TestMethod()]
         public void IsIVsPackage()
         {
-            VSServiceStackPackage package = new VSServiceStackPackage();
+            ServiceStackVSPackage package = new ServiceStackVSPackage();
             Assert.IsNotNull(package as IVsPackage, "The object does not implement IVsPackage");
         }
 
@@ -40,7 +40,7 @@ namespace VSServiceStack_UnitTests
         public void SetSite()
         {
             // Create the package
-            IVsPackage package = new VSServiceStackPackage() as IVsPackage;
+            IVsPackage package = new ServiceStackVSPackage() as IVsPackage;
             Assert.IsNotNull(package, "The object does not implement IVsPackage");
 
             // Create a basic service provider

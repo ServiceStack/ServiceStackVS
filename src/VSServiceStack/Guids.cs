@@ -2,7 +2,7 @@
 // MUST match guids.h
 using System;
 
-namespace VSServiceStack
+namespace ServiceStackVS
 {
     static class GuidList
     {
