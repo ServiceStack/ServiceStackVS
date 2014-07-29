@@ -83,7 +83,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.png" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="default.cshtml" />

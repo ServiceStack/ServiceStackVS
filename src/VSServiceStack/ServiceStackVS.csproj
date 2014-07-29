@@ -146,9 +146,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Program.cs" />
-    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\Program.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\UnitTest1.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.MVC5\MVC5\AppHost.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.MVC5\MVC5\App_Start\BundleConfig.cs" />
     <Compile Include="ProjectTemplates\ServiceStack.MVC5\MVC5\App_Start\FilterConfig.cs" />
@@ -235,8 +241,12 @@
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Web.Release.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\App.config" />
-    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\packages.config" />
+    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\App.config" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\MyTemplate.vstemplate" />
+    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\packages.config" />
+    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\packages.config" />
     <None Include="ProjectTemplates\ServiceStack.MVC5\MVC5\fonts\glyphicons-halflings-regular.eot" />
     <Resource Include="ProjectTemplates\ServiceStack.MVC5\MVC5\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="ProjectTemplates\ServiceStack.MVC5\MVC5\fonts\glyphicons-halflings-regular.woff" />
@@ -346,6 +356,16 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="Resources\favicon.ico" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceInterface\ServiceStack.CSharp.MVC.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\ServiceStack.CSharp.MVC.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Test\ServiceStack.CSharp.MVC.Test.csproj" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ServiceStack.MVC5\logo.png" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\Content\bootstrap.css" />
@@ -354,7 +374,6 @@
     <Resource Include="ProjectTemplates\ServiceStack.MVC5\MVC5\favicon.ico" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\Global.asax" />
-    <Resource Include="ProjectTemplates\ServiceStack.MVC5\MVC5\icon.png" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\Project_Readme.html" />
     <Content Include="ProjectTemplates\ServiceStack.MVC5\MVC5\Scripts\bootstrap.js" />
@@ -395,9 +414,9 @@
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\ServiceStack.CSharp.EmptyAspNetHost.csproj" />
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" />
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_preprocess.xml" />
-    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\icon.png" />
-    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceStack.CSharp.EmptySelfHost.csproj" />
-    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_Definitions\_project.vstemplate.xml" />
+    <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\logo.png" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\ServiceStack.CSharp.EmptySelfHost.csproj" />
+    <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ServiceStackAngularJS\logo.png" />
@@ -417,7 +436,6 @@
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Content\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Global.asax" />
-    <Resource Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\icon.png" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-mocks.js" />
     <Content Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular-route.js" />
@@ -459,7 +477,6 @@
     <Content Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll" />
     <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.xml" />
     <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Global.asax" />
-    <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\icon.png" />
     <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\ServiceStack.CSharp.RazorSeed.csproj" />
     <Resource Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\_preprocess.xml" />
@@ -499,7 +516,6 @@
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Content\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Global.asax" />
-    <Resource Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\icon.png" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-mocks.js" />
     <Content Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-route.js" />
@@ -524,6 +540,7 @@
     <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ServiceStack.MVC5\MVC5\App_Data\" />
     <Folder Include="ProjectTemplates\ServiceStack.MVC5\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ServiceStackAngularJS\ServiceModel\Types\" />
@@ -542,7 +559,7 @@
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
-  <PropertyGroup Label="TemplateBuilder">
+    <PropertyGroup Label="TemplateBuilder">
     <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,10 @@
 ﻿using Funq;
 using ServiceStack;
+using $safeprojectname$.ServiceInterface;
 
-namespace ServiceStack.CSharp.EmptySelfHost
+namespace $safeprojectname$
 {
-    public class AppHost : AppHostBase
+    public class AppHost : AppSelfHostBase
     {
         /// <summary>
         /// Default constructor.
@@ -25,24 +26,6 @@ namespace ServiceStack.CSharp.EmptySelfHost
             //Config examples
             //this.AddPlugin(new PostmanFeature());
             //this.AddPlugin(new CorsFeature());
-        }
-    }
-
-    public class Hello
-    {
-        public string Name { get; set; }
-    }
-
-    public class HelloResponse
-    {
-        public string Result { get; set; }
-    }
-
-    public class MyServices : Service
-    {
-        public object Any(Hello request)
-        {
-            return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
         }
     }
 }
