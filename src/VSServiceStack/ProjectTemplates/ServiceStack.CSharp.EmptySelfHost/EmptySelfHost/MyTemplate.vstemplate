@@ -17,7 +17,7 @@
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="ServiceStack.CSharp.EmptySelfHost.csproj" File="ServiceStack.CSharp.EmptySelfHost.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.EmptySelfHost.csproj" ReplaceParameters="true">
     </Project>
   </TemplateContent>
 </VSTemplate>

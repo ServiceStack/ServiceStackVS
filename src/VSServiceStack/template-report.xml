@@ -6,7 +6,7 @@
     <ProjectTemplate Path="ProjectTemplates\ServiceStackAngularJS\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with AngularJS" Description="A project to kickstart your ServiceStack ASPNET with Razor and AngularJS application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStackBootstrap\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with Bootstrap" Description="A project to kickstart your ServiceStack ASPNET with Razor and Bootstrap application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStackASPNETRazor\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\_Definitions\_project.vstemplate.xml" Name="ServiceStack ASP.NET Empty" Description="ServiceStack with empty ASP.NET host" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET Empty" Description="ServiceStack ASP.NET Empty" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\Definitions\CSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />

@@ -15,7 +15,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.MVC.ServiceInterface.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.ServiceInterface.csproj" ReplaceParameters="true">
 
     </Project>
   </TemplateContent>

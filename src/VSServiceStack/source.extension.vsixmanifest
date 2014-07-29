@@ -6,6 +6,7 @@
     <Description>Templates and tools for use with the ServiceStack framework.</Description>
     <Icon>logo.png</Icon>
     <PreviewImage>logo-280.png</PreviewImage>
+    <Tags>ServiceStack, Service Stack</Tags>
   </Metadata>
 
   <Installation InstalledByMsi="false">
