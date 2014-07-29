@@ -16,7 +16,7 @@
       <ProjectTemplateLink ProjectName="$safeprojectname$">RazorSeed\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceModel">ServiceModel\MyTemplate.vstemplate</ProjectTemplateLink>
 	    <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceInterface">ServiceInterface\MyTemplate.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="$safeprojectname$.Test">Test\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Tests">Test\MyTemplate.vstemplate</ProjectTemplateLink>
     </ProjectCollection>
     <CustomParameters>
       <CustomParameter Name="$slnname$" Value="$safeprojectname$Orig"/>
