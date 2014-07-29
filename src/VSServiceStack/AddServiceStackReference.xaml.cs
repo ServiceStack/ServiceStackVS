@@ -52,8 +52,6 @@ namespace ServiceStackVS
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Dispatcher.InvokeAsync(CreateServiceReference);
-
-            Validation.ClearInvalid(UrlTextBox.GetBindingExpression(TextBox.TextProperty));
         }
 
         private void CreateServiceReference()
