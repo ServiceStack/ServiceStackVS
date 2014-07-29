@@ -12,7 +12,6 @@
                     $http.get('/hello/' + $scope.name)
                         .success(function (response) {
                             $scope.helloResult = response.Result;
-                            console.log(response.Result);
                         });
                 }
             });
@@ -22,9 +21,8 @@
 <div ng-app="helloApp">
     <div ng-controller="helloCtrl">
         <div>
-            <label for="Name">Name</label>
-            <input class="form-control input-sm" ng-model="name" id="Name" type="text" placeholder="Type your name">
-            <span ng-bind="helloResult" ng-show="name"></span>
+            <input class="form-control input-lg" ng-model="name" id="Name" type="text" placeholder="Type your name">
+            <p ng-bind="helloResult" style="margin-top: 15px;font-size: large" ng-show="name"></p>
         </div>
     </div>
 </div>
