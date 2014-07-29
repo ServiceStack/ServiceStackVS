@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack ASP.NET MVC5</Name>
     <Description>A project to kickstart your ServiceStack ASPNET MVC5 application.</Description>
-    <DefaultName>ServiceStackMVC5</DefaultName>
+    <DefaultName>MvcWebApplication</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>

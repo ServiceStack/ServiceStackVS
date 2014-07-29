@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack ASP.NET Empty</Name>
     <Description>ServiceStack ASP.NET Empty</Description>
-    <DefaultName>ServiceStackASPNETEmpty</DefaultName>
+    <DefaultName>WebApplication</DefaultName>
 
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
