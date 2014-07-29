@@ -1,9 +1,7 @@
-SideWaffle
+ServiceStackVS
 ==========
 
-SideWaffle Templates for ServiceStack. 
-
-Templates within this project are intended to be merged with the SideWaffle extension project, however can be installed separately via the ServiceStackTemplatePack project in this repository. Simply build the project, and run the resultant VSIX to install.
+ServiceStackVS is a Visual Studio extension to be used along side the ServiceStack framework.
 
 This project requires the Visual Studio 2013 SDK to build the extension.
 
