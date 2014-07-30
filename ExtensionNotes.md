@@ -5,7 +5,7 @@ ServiceStackVS is a Visual Studio extension to be used along side the ServiceSta
 
 Installation
 ------------
-ServiceStackVS is packaged as a VSIX and is available the Visual Studio Gallery or from this repository.
+ServiceStackVS is packaged as a VSIX and is available the Visual Studio Gallery or [from this repository](https://github.com/ServiceStack/ServiceStackVS/raw/master/src/ServiceStackVS.vsix).
 
 ServiceStackVS does support **Visual Studio 2012**, however it does **require the installation of the [following patch](http://www.microsoft.com/en-au/download/details.aspx?id=40764)** as well as IE10 or above. If you are using Visual Studio 2013, this is not required.
 

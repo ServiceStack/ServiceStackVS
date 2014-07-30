@@ -1,8 +1,15 @@
-﻿@inherits ViewPage
+﻿@using $safeprojectname$.ServiceModel
+@inherits ViewPage
 
 @{
     ViewBag.Title = "ServiceStack with Razor";
 }
-<h1>
-    @ViewBag.Title
-</h1>
+
+<h2>Hello World Service</h2>
+
+<form action="@(new Hello().ToPostUrl())">
+    <div>
+        <input class="form-control input-lg" name="Name" type="text" placeholder="Type your name">
+        <button>Submit</button>
+    </div>
+</form>

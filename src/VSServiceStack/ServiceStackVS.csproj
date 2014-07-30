@@ -312,7 +312,7 @@
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\angular.min.js.map" />
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\scripts\jquery-1.9.0.min.map" />
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\Hello.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\_Layout.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Views\Shared\_Layout.cshtml" />
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.config" />
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStackAngularJS\ServiceStackAngularJS\Web.Release.config" />
@@ -329,7 +329,7 @@
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\default.cshtml" />
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\packages.config" />
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\Hello.cshtml" />
-    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\_Layout.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Views\Shared\_Layout.cshtml" />
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.config" />
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStackASPNETRazor\RazorSeed\Web.Release.config" />
@@ -346,7 +346,8 @@
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular-route.min.js.map" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\angular.min.js.map" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\scripts\jquery-1.9.0.min.map" />
-    <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Views\_Layout.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Views\Hello.cshtml" />
+    <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Views\Shared\_Layout.cshtml" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Web.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Web.Debug.config" />
     <None Include="ProjectTemplates\ServiceStackBootstrap\ServiceStackBootstrap\Web.Release.config" />
