@@ -251,6 +251,10 @@
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Test\packages.config" />
     <None Include="ProjectTemplates\ServiceStack.CSharp.EmptySelfHost\EmptySelfHost\App.config" />
+    <Content Include="license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\EmptyAspNetHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\ServiceStack.CSharp.EmptyAspNetHost\EmptyAspNetHost\MyTemplate.vstemplate" />
