@@ -7,7 +7,15 @@ Installation
 ------------
 ServiceStackVS is packaged as a VSIX and is available the Visual Studio Gallery or from this repository.
 
-ServiceStackVS supports **Visual Studio 2012**, however it does **require the installation of the [following patch](http://www.microsoft.com/en-au/download/details.aspx?id=40764)** as well as IE10 or above.
+ServiceStackVS does support **Visual Studio 2012**, however it does **require the installation of the [following patch](http://www.microsoft.com/en-au/download/details.aspx?id=40764)** as well as IE10 or above. If you are using Visual Studio 2013, this is not required.
+
+This extension has a dependency on NuGet 2.0 or higher.
+
+NuGet 2.0-2.6 Users
+-------------------
+NuGet users that haven't updated recently will need to "Enable NuGet Package Restore" on the solution context menu. This will enable NuGet dependencies to be included on build.
+
+![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/enable_package_restore.png)
 
 Templates
 ---------
