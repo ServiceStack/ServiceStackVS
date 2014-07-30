@@ -124,13 +124,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
+    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
       <Project>{3ADA98B6-22EF-40B2-8D28-F8B21D90A719}</Project>
-      <Name>$saferootprojectname$.ServiceInterface</Name>
+      <Name>$safeprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
+    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
       <Project>{3B964640-9CA0-4868-A11B-8924C02A99CB}</Project>
-      <Name>$saferootprojectname$.ServiceModel</Name>
+      <Name>$safeprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

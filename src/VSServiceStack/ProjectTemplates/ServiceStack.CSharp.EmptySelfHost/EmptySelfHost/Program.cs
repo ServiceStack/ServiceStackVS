@@ -11,6 +11,7 @@ namespace $safeprojectname$
         static void Main(string[] args)
         {
             new AppHost().Init().Start("http://*:8088/api/");
+            Console.WriteLine("ServiceStack SelfHost listening at http://localhost:8088/api");
             Console.ReadLine();
         }
     }

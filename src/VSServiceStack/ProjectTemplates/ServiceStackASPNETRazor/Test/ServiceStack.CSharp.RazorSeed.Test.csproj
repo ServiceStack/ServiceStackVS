@@ -64,13 +64,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceStack.CSharp.RazorSeed.ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
       <Project>{6112fbbf-cf5c-46ac-a526-5cd3a79fa200}</Project>
-      <Name>ServiceStack.CSharp.RazorSeed.ServiceInterface</Name>
+      <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceStack.CSharp.RazorSeed.ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
       <Project>{7e8af6be-3f12-4ced-86dd-ec8b924de1ab}</Project>
-      <Name>ServiceStack.CSharp.RazorSeed.ServiceModel</Name>
+      <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

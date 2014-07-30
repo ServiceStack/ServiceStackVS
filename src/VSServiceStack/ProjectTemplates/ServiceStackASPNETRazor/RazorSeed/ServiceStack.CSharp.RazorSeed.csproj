@@ -106,13 +106,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\ServiceStack.CSharp.RazorSeed.ServiceInterface.csproj">
+    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
       <Project>{6112fbbf-cf5c-46ac-a526-5cd3a79fa200}</Project>
-      <Name>ServiceStack.CSharp.RazorSeed.ServiceInterface</Name>
+      <Name>$safeprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\$safeprojectname$.ServiceModel\ServiceStack.CSharp.RazorSeed.ServiceModel.csproj">
+    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
       <Project>{7e8af6be-3f12-4ced-86dd-ec8b924de1ab}</Project>
-      <Name>ServiceStack.CSharp.RazorSeed.ServiceModel</Name>
+      <Name>$safeprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

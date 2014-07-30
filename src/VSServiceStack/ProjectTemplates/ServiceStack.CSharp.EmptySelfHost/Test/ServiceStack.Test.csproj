@@ -73,13 +73,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
       <Project>{130DED02-5984-487C-93DD-0D264EED140E}</Project>
-      <Name>$safeprojectname$.ServiceInterface</Name>
+      <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
       <Project>{8D6DE92C-637E-4433-9810-98D7FBCEA6BA}</Project>
-      <Name>$safeprojectname$.ServiceModel</Name>
+      <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
