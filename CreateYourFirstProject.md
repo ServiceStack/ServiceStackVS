@@ -8,7 +8,9 @@ To make this process as quick and as simple as we can, we first need to take a f
 
 First we want to install ServiceStackVS Visual Studio extension. The easiest way to do this is to look for it from within Visual Studio. 
 
-<img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png" width="30%" align="left" hspace="10"><img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png" width="70%" align="right" hspace="10>
+<img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png" width="30%" align="left" hspace="10">
+
+<img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png" width="70%" align="left" hspace="10>
 
 ## Step 1: Selecting a template ##
 Once the ServiceStackVS extension is installed, you will have new project templates available when creating a new project. For this example, let's choose ServiceStack ASP.NET Empty to get started.
