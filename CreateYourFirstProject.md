@@ -29,7 +29,7 @@ Press F5 and run your project!
 
 ## Troubleshooting ##
 
-If continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed. Without this enabled, Visual Studio will not pull down the ServiceStack dependencies and successfully build the project.
+If you are continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed. Without this enabled, Visual Studio will not pull down the ServiceStack dependencies and successfully build the project.
 
 ## How does it work? ##
 
