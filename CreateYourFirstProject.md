@@ -1,9 +1,9 @@
-Create your first project
-=========================
+# Creating your first project #
 
-This is a walkthrough of getting your first web service up and running whilst having a look at the how some of the different components work. 
 
-## Step 0: Preparing your enviornment ##
+This is a quick walkthrough of getting your first web service up and running whilst having a look at the how some of the different components work. 
+
+# Step 0: Preparing your enviornment #
 To make this process as quick and as simple as we can, we first need to take a few steps to make sure we have all the right tools.
 
 First we want to install ServiceStackVS Visual Studio extension. The easiest way to do this is to look for it from within Visual Studio. 
@@ -12,7 +12,20 @@ First we want to install ServiceStackVS Visual Studio extension. The easiest way
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)
 
-## Step 1: Selecting a template ##
+#### Download ServiceStackVS Manually
+
+ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+
+[![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+
+#### VS.NET 2012 Prerequisites
+
+  - VS.NET 2012 Users must install the [Microsoft Visual Studio Shell Redistributable](http://www.microsoft.com/en-au/download/details.aspx?id=40764)
+  - It's also highly recommended to [Update to the latest NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). 
+
+> Alternatively if continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed.
+
+# Step 1: Selecting a template
 Once the ServiceStackVS extension is installed, you will have new project templates available when creating a new project. For this example, let's choose ServiceStack ASP.NET Empty to get started.
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/new_project_aspnet_empty.png)
@@ -21,17 +34,15 @@ Once you've created your application from the template, you should have 4 projec
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/empty_project_solution.png)
 
-## Step 2: Run your project ##
+# Step 2: Run your project
 
 Press F5 and run your project!
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/empty_project_run.png)
 
-## Troubleshooting ##
+> If you are continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed. Without this enabled, Visual Studio will not pull down the ServiceStack dependencies and successfully build the project.
 
-If you are continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed. Without this enabled, Visual Studio will not pull down the ServiceStack dependencies and successfully build the project.
-
-## How does it work? ##
+# How does it work?
 
 Now that you're new project is running, let's have a look at what we have. The template comes with a single web service route which comes from the request DTO (Data Transfer Object) which is located in the WebApplication1.ServiceModel project under `Hello.cs` file.
 
@@ -66,11 +77,11 @@ If we go back to the solution and find the WebApplication1.ServiceInterface and 
 
 If we look at the code above, there are a few things to note. The name of the method `Any` means the server will run this method for any of the valid HTTP Verbs. Service methods are where you control what returns from your service.
 
-## Testing ##
+### Testing
 
 The project templates from the ServiceStackVS extension also include a Tests project. The project structure and addition of the Tests project is there to encourage a pattern that will scale to larger applications whilst maintaining a easy to understand and testable application.
 
-## SOAP Troubleshooting
+#### SOAP Troubleshooting
 If you happen to generate requests from the wsdls with a tool like soapUI you may end up with an incorrectly generated request like this:
 ```xml
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:typ="http://schemas.servicestack.net/types">
@@ -105,7 +116,8 @@ Rebuild and regenerate the request from the updated wsdl. You should get a corre
 
 The [EmailContacts solution](https://github.com/ServiceStack/EmailContacts/) is a new guidance available that walks through the recommended setup and physical layout structure of typical medium-sized ServiceStack projects, including complete documentation of how to create the solution from scratch, whilst explaining all the ServiceStack features it makes use of along the way.
 
-# Community Resources
+
+## Community Resources
 
   - [How to build web services in MS.Net using ServiceStack](http://kborra.wordpress.com/2014/07/29/how-to-build-web-services-in-ms-net-using-service-stack/) by [@kishoreborra](http://kborra.wordpress.com/about/)
   - [Creating a Web API using ServiceStack](http://blogs.askcts.com/2014/05/15/getting-started-with-servicestack-part-3/) by [Lydon Bergin](http://blogs.askcts.com/)
