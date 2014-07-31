@@ -8,9 +8,9 @@ To make this process as quick and as simple as we can, we first need to take a f
 
 First we want to install ServiceStackVS Visual Studio extension. The easiest way to do this is to look for it from within Visual Studio. 
 
-<img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png" width="30%" align="left" hspace="10">
+![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png)
 
-<img src="https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png" width="70%" align="left" hspace="10>
+![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)
 
 ## Step 1: Selecting a template ##
 Once the ServiceStackVS extension is installed, you will have new project templates available when creating a new project. For this example, let's choose ServiceStack ASP.NET Empty to get started.
@@ -33,7 +33,7 @@ If continuing to use an older version of the **NuGet Package Manager** you will 
 
 ## How does it work? ##
 
-Now that you're new project is running, let's have a look at what we have. The template comes with a single web service route which comes from the request DTO (Data Transfer Object).
+Now that you're new project is running, let's have a look at what we have. The template comes with a single web service route which comes from the request DTO (Data Transfer Object) which is located in the WebApplication1.ServiceModel project under `Hello.cs` file.
 
     [Route("/hello/{Name}")]
     public class Hello : IReturn<HelloResponse>
@@ -48,12 +48,27 @@ Now that you're new project is running, let's have a look at what we have. The t
 
 The `Route` attribute is specifying what path `/hello/{Name}` where `{Name}` binds it's value to the public string property of 'Name'.
 
-Let's access the HelloWorld service you created in your browser, so write the following URL in your address bar:
+Let's access the route to see what comes back. Go to the following URL in your address bar, where <root_path> is your server address.
 
-`GET http://<root_path>/hello/YourName` 
-eg http://mono.servicestack.net/ServiceStack.Hello/servicestack/hello/Max.
+`http://<root_path>/hello/world`
 
-As you can see after clicking on this link, ServiceStack also contains a HTML response format, which makes the XML/Json (...) output human-readable. To change the return format to Json, simply add `?format=json` to the end of the URL. You'll learn more about formats, endpoints (URLs, etc) when you continue reading the documentation.
+You will see a snapshot of the Result in a HTML response format. To change the return format to Json, simply add `?format=json` to the end of the URL. You'll learn more about formats, endpoints (URLs, etc) when you continue reading the documentation.
+
+If we go back to the solution and find the WebApplication1.ServiceInterface and open the `MyServices.cs` file, we can have a look at the code that is responding to the browser, giving us the `Result` back.
+
+    public class MyServices : Service
+    {
+        public object Any(Hello request)
+        {
+            return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
+        }
+    }
+
+If we look at the code above, there are a few things to note. The name of the method `Any` means the server will run this method for any of the valid HTTP Verbs. Service methods are where you control what returns from your service.
+
+## Testing ##
+
+The project templates from the ServiceStackVS extension also include a Tests project. The project structure and addition of the Tests project is there to encourage a pattern that will scale to larger applications whilst maintaining a easy to understand and testable application.
 
 ## SOAP Troubleshooting
 If you happen to generate requests from the wsdls with a tool like soapUI you may end up with an incorrectly generated request like this:
