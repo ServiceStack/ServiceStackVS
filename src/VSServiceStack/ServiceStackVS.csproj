@@ -161,21 +161,17 @@
     <Compile Include="ProjectTemplates\EmptySelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\EmptySelfHost\Test\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\EmptySelfHost\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\AppHost.cs" />
+    <Compile Include="ProjectTemplates\MVC5\MVC5\AppHost.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\BundleConfig.cs" />
     <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\FilterConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\IdentityConfig.cs" />
     <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\RouteConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\Startup.Auth.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Controllers\AccountController.cs" />
     <Compile Include="ProjectTemplates\MVC5\MVC5\Controllers\HomeController.cs" />
     <Compile Include="ProjectTemplates\MVC5\MVC5\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Models\AccountViewModels.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Models\IdentityModels.cs" />
     <Compile Include="ProjectTemplates\MVC5\MVC5\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Startup.cs" />
     <Compile Include="ProjectTemplates\MVC5\ServiceInterface\MyServices.cs" />
     <Compile Include="ProjectTemplates\MVC5\ServiceInterface\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\MVC5\ServiceModel\Hello.cs" />
@@ -277,26 +273,13 @@
     <None Include="ProjectTemplates\MVC5\MVC5\fonts\glyphicons-halflings-regular.woff" />
     <None Include="ProjectTemplates\MVC5\MVC5\packages.config" />
     <None Include="ProjectTemplates\MVC5\MVC5\Scripts\jquery-1.10.2.min.map" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ConfirmEmail.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ExternalLoginConfirmation.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ExternalLoginFailure.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ForgotPassword.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\Login.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\Manage.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\Register.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ResetPassword.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\ResetPasswordConfirmation.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\_ChangePasswordPartial.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\_RemoveAccountPartial.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Account\_SetPasswordPartial.cshtml" />
     <None Include="ProjectTemplates\MVC5\MVC5\Views\Home\About.cshtml" />
     <None Include="ProjectTemplates\MVC5\MVC5\Views\Home\Contact.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Home\Index.cshtml" />
+    <None Include="ProjectTemplates\MVC5\MVC5\Views\Home\Index.cshtml">
+      <SubType>Code</SubType>
+    </None>
     <None Include="ProjectTemplates\MVC5\MVC5\Views\Shared\Error.cshtml" />
     <None Include="ProjectTemplates\MVC5\MVC5\Views\Shared\_Layout.cshtml" />
-    <None Include="ProjectTemplates\MVC5\MVC5\Views\Shared\_LoginPartial.cshtml" />
     <None Include="ProjectTemplates\MVC5\MVC5\Views\Web.config" />
     <None Include="ProjectTemplates\MVC5\MVC5\Views\_ViewStart.cshtml" />
     <None Include="ProjectTemplates\MVC5\MVC5\Web.config" />
@@ -418,7 +401,9 @@
     <Content Include="ProjectTemplates\MVC5\MVC5\Scripts\respond.js" />
     <Content Include="ProjectTemplates\MVC5\MVC5\Scripts\respond.min.js" />
     <Content Include="ProjectTemplates\MVC5\MVC5\Scripts\_references.js" />
-    <Content Include="ProjectTemplates\MVC5\MVC5\ServiceStack.CSharp.MVC.csproj" />
+    <Content Include="ProjectTemplates\MVC5\MVC5\ServiceStack.CSharp.Mvc.csproj">
+      <SubType>Designer</SubType>
+    </Content>
     <Resource Include="ProjectTemplates\MVC5\MVC5\_preprocess.xml">
       <SubType>Designer</SubType>
     </Resource>
@@ -574,6 +559,7 @@
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptySelfHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\MVC5\MVC5\App_Data\" />
+    <Folder Include="ProjectTemplates\MVC5\MVC5\Models\" />
     <Folder Include="ProjectTemplates\MVC5\ServiceModel\Types\" />
   </ItemGroup>
   <ItemGroup>
