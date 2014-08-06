@@ -43,3 +43,16 @@
         <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
     </li>
 </ol>
+<div class="row">
+    <div class="col-lg-5">
+        <hr />
+        <h2>ServiceStack Hello World</h2>
+
+        <form action="/api@(new Hello().ToPostUrl())">
+            <div class="form-group">
+                <input class="form-control input-lg" id="Name" name="Name" type="text" placeholder="Type your name" value="World">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
