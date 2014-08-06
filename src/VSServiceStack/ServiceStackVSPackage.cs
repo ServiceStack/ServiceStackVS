@@ -60,7 +60,28 @@ namespace ServiceStackVS
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
 
+        private IComponentModel componentModel;
+        public IComponentModel ComponentModel
+        {
+            get { return componentModel ?? (componentModel = (IComponentModel)GetService(typeof(SComponentModel))); }
+        }
 
+        private IVsPackageInstaller packageInstaller;
+        public IVsPackageInstaller PackageInstaller
+        {
+            get { return packageInstaller ?? (packageInstaller = ComponentModel.GetService<IVsPackageInstaller>()); }
+        }
+
+        private IVsPackageInstallerServices pkgInstallerServices;
+
+        public IVsPackageInstallerServices PackageInstallerServices
+        {
+            get
+            {
+                return pkgInstallerServices ??
+                       (pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>());
+            }
+        }
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
@@ -157,25 +178,29 @@ namespace ServiceStackVS
             t4TemplateProjectItem.Open(EnvDTE.Constants.vsViewKindCode);
             t4TemplateProjectItem.Save();
             project.ProjectItems.AddFromFile(fullPath.Replace(".tt", ".cs"));
-            project.Save();
 
+            AddNuGetDependencyIfMissing(project, "ServiceStack.Client");
+            AddNuGetDependencyIfMissing(project, "ServiceStack.Text");
+            project.Save();
+        }
+
+        private void AddNuGetDependencyIfMissing(Project project,string packageId)
+        {
             //Once the generated code has been added, we need to ensure that  
             //the required ServiceStack.Interfaces package is installed.
-            var componentModel = (IComponentModel)GetService(typeof(SComponentModel));
-            var installer = componentModel.GetService<IVsPackageInstaller>();
-            var installerServices = componentModel.GetService<IVsPackageInstallerServices>();
-            var installedPackages = installerServices.GetInstalledPackages(project);
-           
+            var installedPackages = PackageInstallerServices.GetInstalledPackages(project);
+
             //TODO check project references incase ServiceStack.Interfaces is referenced via local file.
+            //VS has different ways to check different types of projects for refs, need to find method to check all.
+
             //Check if existing nuget reference exists
-            if (installedPackages.FirstOrDefault(x => x.Id == "ServiceStack.Interfaces") == null)
+            if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
             {
-                installer.InstallPackage("https://www.nuget.org/api/v2/",
+                PackageInstaller.InstallPackage("https://www.nuget.org/api/v2/",
                          project,
-                         "ServiceStack.Interfaces",
-                         version: (string)null, //Latest version of ServiceStack.Interfaces
-                         ignoreDependencies: false); 
-                project.Save();
+                         packageId,
+                         version: (string)null, //Latest version of packageId
+                         ignoreDependencies: false);
             }
         }
 

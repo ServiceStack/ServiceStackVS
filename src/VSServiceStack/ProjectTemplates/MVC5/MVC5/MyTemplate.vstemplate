@@ -7,7 +7,7 @@
     </ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>ServiceStackMVC5</DefaultName>
+    <DefaultName>ServiceStackMVC5Empty</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -15,7 +15,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.MVC.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.Mvc.csproj" ReplaceParameters="true">
       
     </Project>
   </TemplateContent>
