@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Funq;
 using ServiceStack;
+using ServiceStack.Mvc;
 using $safeprojectname$.ServiceInterface;
 
 
@@ -37,6 +38,9 @@ namespace $safeprojectname$
             //Config examples
             //this.AddPlugin(new PostmanFeature());
             //this.AddPlugin(new CorsFeature());
+
+            //Set MVC to use the same Funq IOC as ServiceStack
+            ControllerBuilder.Current.SetControllerFactory(new FunqControllerFactory(container));
         }
     }
 }

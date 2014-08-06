@@ -52,6 +52,9 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.24\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Mvc">
+      <HintPath>..\..\packages\ServiceStack.Mvc.4.0.24\lib\net40\ServiceStack.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.24\lib\net40\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
