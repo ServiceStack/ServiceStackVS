@@ -7,8 +7,7 @@ using System.Web.Mvc;
 using Funq;
 using ServiceStack;
 using ServiceStack.Mvc;
-using Microsoft.AspNet.Identity.EntityFramework;
-using ServiceStack.CSharp.MVC.ServiceInterface;
+using $safeprojectname$.ServiceInterface;
 
 
 namespace $safeprojectname$

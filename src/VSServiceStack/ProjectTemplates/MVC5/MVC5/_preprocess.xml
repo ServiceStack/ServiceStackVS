@@ -6,7 +6,7 @@
   -->
   <TemplateInfo Path="CSharp\ServiceStack\MVC5"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj;*.fsproj;*.vbproj;*.jpg;*.png;*.ico;_preprocess.xml;_project.vstemplate.xml">
-    <add key="ServiceStack.CSharp.MVC" value="$saferootprojectname$"/>
+    <add key="ServiceStack.CSharp.Mvc" value="$saferootprojectname$"/>
     <!--targetFramework="4.0"-->
     <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>
     <!--<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>-->

@@ -3,6 +3,8 @@ ServiceStackVS
 
 ServiceStackVS is a Visual Studio extension to be used along side the ServiceStack framework.
 
+![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vs-templates.png)
+
 Getting Started with ServiceStackVS Templates
 ---------------------------------------------
 
