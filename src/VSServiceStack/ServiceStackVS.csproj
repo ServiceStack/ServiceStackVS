@@ -441,7 +441,6 @@
     <Resource Include="ProjectTemplates\MVC4\MVC4\Images\orderedList9.png" />
     <Content Include="ProjectTemplates\MVC4\MVC4\MVC4.csproj" />
     <Content Include="ProjectTemplates\MVC4\MVC4\MyTemplate.vstemplate" />
-    <Resource Include="ProjectTemplates\MVC4\MVC4\README.txt" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Scripts\jquery-1.8.2.js" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Scripts\jquery-1.8.2.min.js" />
