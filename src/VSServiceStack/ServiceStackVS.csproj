@@ -331,7 +331,6 @@
     <None Include="ProjectTemplates\MVC5\MVC5\Web.Release.config" />
     <None Include="ProjectTemplates\MVC5\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\MVC5\ServiceModel\packages.config" />
-    <None Include="ProjectTemplates\MVC5\Test\packages.config" />
     <None Include="ProjectTemplates\AngularJS\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\AngularJS\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\default.cshtml" />
