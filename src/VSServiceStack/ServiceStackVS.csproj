@@ -287,7 +287,45 @@
     <None Include="ProjectTemplates\EmptySelfHost\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\EmptySelfHost\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\EmptySelfHost\Test\packages.config" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\logo.png" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\Definitions\FSharp.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\MyServices.fs" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\ServiceModel\Hello.fs" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\ServiceModel\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\ServiceModel\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\Tests\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\Tests\UnitTest1.fs" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\Tests\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\AppHost.fs" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Global.asax" />
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Global.asax.fs" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\readme.txt" />
+    <Resource Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Content\themes.zip" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\ServiceInterface.fsproj" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceModel\ServiceModel.fsproj" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\Tests\app.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\Tests\Tests.fsproj" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\Tests\packages.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\EmptyAspNet.fsproj" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\packages.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Debug.config" />
+    <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Release.config" />
     <None Include="ProjectTemplates\MVC4\MVC4\packages.config" />
     <None Include="ProjectTemplates\MVC4\MVC4\Views\Account\ExternalLoginConfirmation.cshtml" />
     <None Include="ProjectTemplates\MVC4\MVC4\Views\Account\ExternalLoginFailure.cshtml" />
@@ -612,7 +650,9 @@
     <Content Include="ProjectTemplates\Bootstrap\ServiceModel\ServiceStackBootstrap.ServiceModel.csproj">
       <SubType>Designer</SubType>
     </Content>
-    <Resource Include="ProjectTemplates\Bootstrap\ServiceModel\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\Bootstrap\ServiceModel\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
     <Content Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Content\bootstrap-theme.css" />
     <Content Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Content\bootstrap-theme.min.css" />
     <Content Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Content\bootstrap.css" />
