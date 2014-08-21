@@ -313,6 +313,24 @@
       <SubType>Designer</SubType>
     </Resource>
     <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\Definitions\FSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\logo.png" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\AppHost.fs" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\Program.fs" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\FSharpSelfHost\ServiceInterface\MyServices.fs" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\ServiceInterface\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\ServiceModel\Hello.fs" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\ServiceModel\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\Tests\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpSelfHost\Tests\UnitTest1.fs" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\Tests\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\FSharpSelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Content\themes.zip" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\ServiceInterface.fsproj" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\ServiceInterface\packages.config" />
@@ -326,6 +344,16 @@
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.config" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Debug.config" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Release.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\App.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\EmptySelfHost.fsproj" />
+    <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\packages.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\ServiceInterface\ServiceInterface.fsproj" />
+    <None Include="ProjectTemplates\FSharpSelfHost\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\ServiceModel\ServiceModel.fsproj" />
+    <None Include="ProjectTemplates\FSharpSelfHost\Tests\app.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\Tests\packages.config" />
+    <None Include="ProjectTemplates\FSharpSelfHost\Tests\Tests.fsproj" />
     <None Include="ProjectTemplates\MVC4\MVC4\packages.config" />
     <None Include="ProjectTemplates\MVC4\MVC4\Views\Account\ExternalLoginConfirmation.cshtml" />
     <None Include="ProjectTemplates\MVC4\MVC4\Views\Account\ExternalLoginFailure.cshtml" />

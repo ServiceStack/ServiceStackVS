@@ -10,6 +10,7 @@
     <ProjectTemplate Path="ProjectTemplates\EmptyAspNetHost\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET Empty" Description="ServiceStack ASP.NET Empty" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\EmptySelfHost\Definitions\CSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\FSharpEmptyAspNet\Definitions\FSharp.vstemplate" Name="ServiceStack ASP.NET Empty" Description="ServiceStack ASP.NET Empty" ProjectType="FSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\FSharpSelfHost\Definitions\FSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="FSharp" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />
 </TemplateReport>
