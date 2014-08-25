@@ -6,6 +6,7 @@ open ServiceStack
 type HelloResponse = 
     { Result : string }
 
+[<Route("/hello")>]
 [<Route("/hello/{name}")>]
 type Hello() = 
     interface IReturn<HelloResponse>

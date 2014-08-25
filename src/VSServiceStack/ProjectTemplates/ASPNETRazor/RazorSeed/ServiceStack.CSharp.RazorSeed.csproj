@@ -58,6 +58,12 @@
     <Reference Include="ServiceStack.Razor">
       <HintPath>..\..\packages\ServiceStack.Razor.4.0.30\lib\net45\ServiceStack.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\packages\ServiceStack.Redis.4.0.30\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Server">
+      <HintPath>..\..\packages\ServiceStack.Server.4.0.30\lib\net40\ServiceStack.Server.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\packages\ServiceStack.Text.4.0.30\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>

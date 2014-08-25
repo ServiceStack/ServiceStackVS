@@ -348,6 +348,24 @@
       <SubType>Designer</SubType>
     </Resource>
     <Content Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpRazor\Definitions\FSharp.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpRazor\FSharpRazor\AppHost.fs" />
+    <Content Include="ProjectTemplates\FSharpRazor\FSharpRazor\Global.asax" />
+    <Content Include="ProjectTemplates\FSharpRazor\FSharpRazor\Global.asax.fs" />
+    <Content Include="ProjectTemplates\FSharpRazor\FSharpRazor\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpRazor\FSharpRazor\readme.txt" />
+    <Resource Include="ProjectTemplates\FSharpRazor\FSharpRazor\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\FSharpRazor\logo.png" />
+    <Content Include="ProjectTemplates\FSharpRazor\ServiceInterface\MyServices.fs" />
+    <Content Include="ProjectTemplates\FSharpRazor\ServiceInterface\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpRazor\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\FSharpRazor\ServiceModel\Hello.fs" />
+    <Content Include="ProjectTemplates\FSharpRazor\ServiceModel\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\FSharpRazor\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\FSharpRazor\Tests\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\FSharpRazor\Tests\UnitTest1.fs" />
+    <Resource Include="ProjectTemplates\FSharpRazor\Tests\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\FSharpRazor\_preprocess.xml" />
     <Content Include="ProjectTemplates\FSharpSelfHost\Definitions\FSharp.vstemplate" />
     <Resource Include="ProjectTemplates\FSharpSelfHost\logo.png" />
     <Content Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\AppHost.fs" />
@@ -400,6 +418,21 @@
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.config" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Debug.config" />
     <None Include="ProjectTemplates\FSharpEmptyAspNet\FSharpEmptyAsp\Web.Release.config" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\default.cshtml" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\FSharpRazor.fsproj" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\packages.config" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\Views\Hello.cshtml" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\Views\Shared\_Layout.cshtml" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\Web.config" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\Web.Debug.config" />
+    <None Include="ProjectTemplates\FSharpRazor\FSharpRazor\Web.Release.config" />
+    <None Include="ProjectTemplates\FSharpRazor\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\FSharpRazor\ServiceInterface\ServiceInterface.fsproj" />
+    <None Include="ProjectTemplates\FSharpRazor\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\FSharpRazor\ServiceModel\ServiceModel.fsproj" />
+    <None Include="ProjectTemplates\FSharpRazor\Tests\app.config" />
+    <None Include="ProjectTemplates\FSharpRazor\Tests\packages.config" />
+    <None Include="ProjectTemplates\FSharpRazor\Tests\Tests.fsproj" />
     <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\App.config" />
     <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\EmptySelfHost.fsproj" />
     <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\packages.config" />
@@ -773,7 +806,6 @@
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptySelfHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\FSharpBootstrap\" />
-    <Folder Include="ProjectTemplates\FSharpRazor\" />
     <Folder Include="ProjectTemplates\MVC4\MVC4\App_Data\" />
     <Folder Include="ProjectTemplates\MVC4\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\MVC5\MVC5\App_Data\" />
