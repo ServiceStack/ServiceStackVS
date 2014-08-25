@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack ASP.NET with Razor</Name>
     <Description>A project to kickstart your ServiceStack ASPNET with Razor application.</Description>
-    <DefaultName>RazorWebApplication</DefaultName>
+    <DefaultName>RazorWebApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>

@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack ASP.NET with AngularJS</Name>
     <Description>A project to kickstart your ServiceStack ASPNET with Razor and AngularJS application.</Description>
-    <DefaultName>AngularJSWebApplication</DefaultName>
+    <DefaultName>AngularJSWebApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>

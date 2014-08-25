@@ -13,8 +13,4 @@
             //this.Plugins.Add(new CorsFeature())
             ignore()
         static member Start() = 
-            let apphost = new AppHost()
-            apphost.Init() |> ignore
-            
-            
-
+            new AppHost() |> (fun x -> x.Init()) |> ignore

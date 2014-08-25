@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack Self Host Empty</Name>
     <Description>ServiceStack Self Host Empty</Description>
-    <DefaultName>WebApplication</DefaultName>
+    <DefaultName>SelfHost</DefaultName>
 
     <ProjectType>FSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
