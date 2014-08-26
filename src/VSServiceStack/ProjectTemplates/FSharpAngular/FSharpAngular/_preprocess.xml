@@ -4,7 +4,7 @@
   You can specify the path where this should show up in the
   Add New Project / Add New Item dialog by setting the value below
   -->
-  <TemplateInfo Path="FSharp\ServiceStack\EmptyAspNet"/>
+  <TemplateInfo Path="FSharp\ServiceStack\Angular"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj;*.fsproj;*.vbproj;*.jpg;*.png;*.ico;_preprocess.xml;_project.vstemplate.xml">
     <add key="ServiceStack.FSharp.Angular" value="$saferootprojectname$"/>
     <!--targetFramework="4.0"-->

@@ -11,5 +11,3 @@
             //this.Plugins.Add(new PostmanFeature())
             //this.Plugins.Add(new CorsFeature())
             ignore()
-        static member Start() = 
-            new AppHost() |> (fun x -> x.Init()) |> ignore
