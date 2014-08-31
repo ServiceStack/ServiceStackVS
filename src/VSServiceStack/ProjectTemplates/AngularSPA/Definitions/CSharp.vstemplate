@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>ServiceStack ASP.NET with AngularJS</Name>
-    <Description>A project to kickstart your ServiceStack ASPNET with Razor and AngularJS application.</Description>
-    <DefaultName>AngularJSWebApp</DefaultName>
+    <Name>ServiceStack ASP.NET with Angular SPA</Name>
+    <Description>ServiceStack ASP.NET with Angular SPA</Description>
+    <DefaultName>AngularSPAApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
@@ -15,7 +15,7 @@
   </TemplateData>
   <TemplateContent>
     <ProjectCollection>
-      <ProjectTemplateLink ProjectName="$safeprojectname$">ServiceStackAngularJS\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$">AngularSPA\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceModel">ServiceModel\MyTemplate.vstemplate</ProjectTemplateLink>
 	    <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceInterface">ServiceInterface\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Tests">Test\MyTemplate.vstemplate</ProjectTemplateLink>

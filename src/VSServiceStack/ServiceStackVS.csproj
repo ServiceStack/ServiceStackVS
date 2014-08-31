@@ -146,6 +146,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\Test\UnitTests.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\AppHost.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -270,6 +276,9 @@
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Release.config" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\Test\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.Debug.config" />
@@ -289,12 +298,26 @@
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\hello\hello.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial1.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial2.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Scripts\_references.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\karma.conf.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\unit\controllerSpec.js" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\_preprocess.xml" />
+    <Content Include="ProjectTemplates\AngularSPA\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\AngularSPA\logo.png" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\AngularSPA\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\Test\ServiceStackAngularJS.Test.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\AngularSPA\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\MyTemplate.vstemplate" />
@@ -875,6 +898,7 @@
   <ItemGroup>
     <Folder Include="ProjectTemplates\AngularJS\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\img\" />
+    <Folder Include="ProjectTemplates\AngularSPA\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\Bootstrap\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
