@@ -141,6 +141,11 @@
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\AppHost.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +263,13 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\start-karma.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Release.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.Debug.config" />
@@ -270,6 +282,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\AngularSPA.csproj" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\css\app.css" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gruntfile.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\hello\hello.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial1.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial2.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Scripts\_references.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\karma.conf.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\unit\controllerSpec.js" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\MyTemplate.vstemplate" />
@@ -849,6 +874,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ProjectTemplates\AngularJS\ServiceModel\Types\" />
+    <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\img\" />
     <Folder Include="ProjectTemplates\ASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\Bootstrap\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
