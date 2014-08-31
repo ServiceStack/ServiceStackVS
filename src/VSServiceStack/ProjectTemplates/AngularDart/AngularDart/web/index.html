@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html ng-app>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HelloWorld</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="packages/web_components/platform.js"></script>
+        <script src="packages/web_components/dart_support.js"></script>
+        <script type="application/dart" src="main.dart"></script>
+        <script src="packages/browser/dart.js"></script>
+    </head>
+    <body hello-controller>
+        Name: <input type="text" ng-model="ctrl.helloName">
+        <hello-servicestack hello-name="ctrl.helloName"
+                            server-url="'/api/'"></hello-servicestack>
+    </body>
+</html>

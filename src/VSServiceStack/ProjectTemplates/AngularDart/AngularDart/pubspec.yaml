@@ -1,0 +1,7 @@
+name: hello_servicestack
+version: 0.0.1
+description: A sample web application
+dependencies:
+  angular: 0.13.0
+transformers:
+- angular

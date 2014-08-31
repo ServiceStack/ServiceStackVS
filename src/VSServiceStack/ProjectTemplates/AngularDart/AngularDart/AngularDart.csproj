@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4389B305-B381-4B50-B1A8-BBB5259A0524}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ServiceStack">
+      <HintPath>..\..\packages\ServiceStack.4.0.30\lib\net40\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Client">
+      <HintPath>..\..\packages\ServiceStack.Client.4.0.30\lib\net40\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\packages\ServiceStack.Common.4.0.30\lib\net40\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.30\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite">
+      <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.30\lib\net40\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Razor">
+      <HintPath>..\..\packages\ServiceStack.Razor.4.0.30\lib\net45\ServiceStack.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\packages\ServiceStack.Redis.4.0.30\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Server">
+      <HintPath>..\..\packages\ServiceStack.Server.4.0.30\lib\net40\ServiceStack.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.4.0.30\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
+      <Project>{801a0f89-d5f6-49a6-bcea-6624388c98a4}</Project>
+      <Name>$safeprojectname$.ServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
+      <Project>{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}</Project>
+      <Name>$safeprojectname$.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\components\hello_servicestack_component.html" />
+    <Content Include="packages.config" />
+    <Content Include="web\index.html" />
+    <Content Include="web\main.dart.js" />
+    <Content Include="web\packages\angular\css\angular.css" />
+    <Content Include="web\packages\angular\css\PaxHeader\angular.css" />
+    <Content Include="web\packages\browser\dart.js" />
+    <Content Include="web\packages\browser\interop.js" />
+    <Content Include="web\packages\hello_servicestack\components\hello_servicestack_component.html" />
+    <Content Include="web\packages\intl\src\data\dates\README.txt" />
+    <Content Include="web\packages\web_components\dart_support.js" />
+    <Content Include="web\packages\web_components\platform.concat.js" />
+    <Content Include="web\packages\web_components\platform.js" />
+    <Content Include="web\styles.css" />
+    <Content Include="lib\components\hello_servicestack_component.dart" />
+    <Content Include="lib\hello_servicestack.dart" />
+    <Content Include="lib\models\hello_response.dart" />
+    <Content Include="lib\services\hello_servicestack_service.dart" />
+    <Content Include="pubspec.lock" />
+    <Content Include="pubspec.yaml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="web\main.dart" />
+    <Content Include="web\packages\analyzer\analyzer.dart" />
+    <Content Include="web\packages\analyzer\formatter.dart" />
+    <Content Include="web\packages\analyzer\index\index.dart" />
+    <Content Include="web\packages\analyzer\index\index_store.dart" />
+    <Content Include="web\packages\analyzer\options.dart" />
+    <Content Include="web\packages\analyzer\search\search_engine.dart" />
+    <Content Include="web\packages\analyzer\src\analyzer_impl.dart" />
+    <Content Include="web\packages\analyzer\src\error.dart" />
+    <Content Include="web\packages\analyzer\src\error_formatter.dart" />
+    <Content Include="web\packages\analyzer\src\generated\ast.dart" />
+    <Content Include="web\packages\analyzer\src\generated\constant.dart" />
+    <Content Include="web\packages\analyzer\src\generated\element.dart" />
+    <Content Include="web\packages\analyzer\src\generated\engine.dart" />
+    <Content Include="web\packages\analyzer\src\generated\error.dart" />
+    <Content Include="web\packages\analyzer\src\generated\html.dart" />
+    <Content Include="web\packages\analyzer\src\generated\instrumentation.dart" />
+    <Content Include="web\packages\analyzer\src\generated\interner.dart" />
+    <Content Include="web\packages\analyzer\src\generated\java_core.dart" />
+    <Content Include="web\packages\analyzer\src\generated\java_engine.dart" />
+    <Content Include="web\packages\analyzer\src\generated\java_engine_io.dart" />
+    <Content Include="web\packages\analyzer\src\generated\java_io.dart" />
+    <Content Include="web\packages\analyzer\src\generated\java_junit.dart" />
+    <Content Include="web\packages\analyzer\src\generated\parser.dart" />
+    <Content Include="web\packages\analyzer\src\generated\resolver.dart" />
+    <Content Include="web\packages\analyzer\src\generated\scanner.dart" />
+    <Content Include="web\packages\analyzer\src\generated\sdk.dart" />
+    <Content Include="web\packages\analyzer\src\generated\sdk_io.dart" />
+    <Content Include="web\packages\analyzer\src\generated\source.dart" />
+    <Content Include="web\packages\analyzer\src\generated\source_io.dart" />
+    <Content Include="web\packages\analyzer\src\generated\testing\ast_factory.dart" />
+    <Content Include="web\packages\analyzer\src\generated\testing\element_factory.dart" />
+    <Content Include="web\packages\analyzer\src\generated\testing\token_factory.dart" />
+    <Content Include="web\packages\analyzer\src\generated\utilities_collection.dart" />
+    <Content Include="web\packages\analyzer\src\generated\utilities_dart.dart" />
+    <Content Include="web\packages\analyzer\src\generated\utilities_general.dart" />
+    <Content Include="web\packages\analyzer\src\index\index_contributor.dart" />
+    <Content Include="web\packages\analyzer\src\index\local_index.dart" />
+    <Content Include="web\packages\analyzer\src\index\store\codec.dart" />
+    <Content Include="web\packages\analyzer\src\index\store\collection.dart" />
+    <Content Include="web\packages\analyzer\src\index\store\memory_node_manager.dart" />
+    <Content Include="web\packages\analyzer\src\index\store\separate_file_manager.dart" />
+    <Content Include="web\packages\analyzer\src\index\store\split_store.dart" />
+    <Content Include="web\packages\analyzer\src\search\search_engine.dart" />
+    <Content Include="web\packages\analyzer\src\services\formatter_impl.dart" />
+    <Content Include="web\packages\analyzer\src\services\runtime\coverage\coverage_impl.dart" />
+    <Content Include="web\packages\analyzer\src\services\runtime\coverage\coverage_lib.dart" />
+    <Content Include="web\packages\analyzer\src\services\runtime\coverage\models.dart" />
+    <Content Include="web\packages\analyzer\src\services\runtime\coverage\utils.dart" />
+    <Content Include="web\packages\analyzer\src\services\runtime\log.dart" />
+    <Content Include="web\packages\analyzer\src\services\writer.dart" />
+    <Content Include="web\packages\analyzer\src\string_source.dart" />
+    <Content Include="web\packages\angular\angular.dart" />
+    <Content Include="web\packages\angular\animate\animations.dart" />
+    <Content Include="web\packages\angular\animate\animation_loop.dart" />
+    <Content Include="web\packages\angular\animate\animation_optimizer.dart" />
+    <Content Include="web\packages\angular\animate\css_animate.dart" />
+    <Content Include="web\packages\angular\animate\css_animation.dart" />
+    <Content Include="web\packages\angular\animate\module.dart" />
+    <Content Include="web\packages\angular\animate\ng_animate.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\animations.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\animation_loop.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\animation_optimizer.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\css_animate.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\css_animation.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\animate\PaxHeader\ng_animate.dart" />
+    <Content Include="web\packages\angular\application.dart" />
+    <Content Include="web\packages\angular\application_factory.dart" />
+    <Content Include="web\packages\angular\application_factory_static.dart" />
+    <Content Include="web\packages\angular\cache\cache.dart" />
+    <Content Include="web\packages\angular\cache\cache_register.dart" />
+    <Content Include="web\packages\angular\cache\js_cache_register.dart" />
+    <Content Include="web\packages\angular\cache\module.dart" />
+    <Content Include="web\packages\angular\cache\PaxHeader\cache.dart" />
+    <Content Include="web\packages\angular\cache\PaxHeader\cache_register.dart" />
+    <Content Include="web\packages\angular\cache\PaxHeader\js_cache_register.dart" />
+    <Content Include="web\packages\angular\cache\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\change_detection\ast.dart" />
+    <Content Include="web\packages\angular\change_detection\ast_parser.dart" />
+    <Content Include="web\packages\angular\change_detection\change_detection.dart" />
+    <Content Include="web\packages\angular\change_detection\dirty_checking_change_detector.dart" />
+    <Content Include="web\packages\angular\change_detection\dirty_checking_change_detector_dynamic.dart" />
+    <Content Include="web\packages\angular\change_detection\dirty_checking_change_detector_static.dart" />
+    <Content Include="web\packages\angular\change_detection\linked_list.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\ast.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\ast_parser.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\change_detection.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\dirty_checking_change_detector.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\dirty_checking_change_detector_dynamic.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\dirty_checking_change_detector_static.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\linked_list.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\prototype_map.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\watch_group.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\watch_group_dynamic.dart" />
+    <Content Include="web\packages\angular\change_detection\PaxHeader\watch_group_static.dart" />
+    <Content Include="web\packages\angular\change_detection\prototype_map.dart" />
+    <Content Include="web\packages\angular\change_detection\watch_group.dart" />
+    <Content Include="web\packages\angular\change_detection\watch_group_dynamic.dart" />
+    <Content Include="web\packages\angular\change_detection\watch_group_static.dart" />
+    <Content Include="web\packages\angular\core\annotation.dart" />
+    <Content Include="web\packages\angular\core\annotation_src.dart" />
+    <Content Include="web\packages\angular\core\exception_handler.dart" />
+    <Content Include="web\packages\angular\core\formatter.dart" />
+    <Content Include="web\packages\angular\core\interpolate.dart" />
+    <Content Include="web\packages\angular\core\module.dart" />
+    <Content Include="web\packages\angular\core\module_internal.dart" />
+    <Content Include="web\packages\angular\core\parser\characters.dart" />
+    <Content Include="web\packages\angular\core\parser\dynamic_parser.dart" />
+    <Content Include="web\packages\angular\core\parser\dynamic_parser_impl.dart" />
+    <Content Include="web\packages\angular\core\parser\eval.dart" />
+    <Content Include="web\packages\angular\core\parser\eval_access.dart" />
+    <Content Include="web\packages\angular\core\parser\eval_calls.dart" />
+    <Content Include="web\packages\angular\core\parser\lexer.dart" />
+    <Content Include="web\packages\angular\core\parser\parser.dart" />
+    <Content Include="web\packages\angular\core\parser\parser_dynamic.dart" />
+    <Content Include="web\packages\angular\core\parser\parser_static.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\characters.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\dynamic_parser.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\dynamic_parser_impl.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\eval.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\eval_access.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\eval_calls.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\lexer.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\parser.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\parser_dynamic.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\parser_static.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\static_parser.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\syntax.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\tokens.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\unparser.dart" />
+    <Content Include="web\packages\angular\core\parser\PaxHeader\utils.dart" />
+    <Content Include="web\packages\angular\core\parser\static_parser.dart" />
+    <Content Include="web\packages\angular\core\parser\syntax.dart" />
+    <Content Include="web\packages\angular\core\parser\tokens.dart" />
+    <Content Include="web\packages\angular\core\parser\unparser.dart" />
+    <Content Include="web\packages\angular\core\parser\utils.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\annotation.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\annotation_src.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\exception_handler.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\formatter.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\interpolate.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\module_internal.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\registry.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\registry_dynamic.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\registry_static.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\scope.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\static_keys.dart" />
+    <Content Include="web\packages\angular\core\PaxHeader\zone.dart" />
+    <Content Include="web\packages\angular\core\registry.dart" />
+    <Content Include="web\packages\angular\core\registry_dynamic.dart" />
+    <Content Include="web\packages\angular\core\registry_static.dart" />
+    <Content Include="web\packages\angular\core\scope.dart" />
+    <Content Include="web\packages\angular\core\static_keys.dart" />
+    <Content Include="web\packages\angular\core\zone.dart" />
+    <Content Include="web\packages\angular\core_dom\animation.dart" />
+    <Content Include="web\packages\angular\core_dom\common.dart" />
+    <Content Include="web\packages\angular\core_dom\compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\compiler_config.dart" />
+    <Content Include="web\packages\angular\core_dom\cookies.dart" />
+    <Content Include="web\packages\angular\core_dom\directive.dart" />
+    <Content Include="web\packages\angular\core_dom\directive_injector.dart" />
+    <Content Include="web\packages\angular\core_dom\directive_map.dart" />
+    <Content Include="web\packages\angular\core_dom\dom_util.dart" />
+    <Content Include="web\packages\angular\core_dom\element_binder.dart" />
+    <Content Include="web\packages\angular\core_dom\element_binder_builder.dart" />
+    <Content Include="web\packages\angular\core_dom\event_handler.dart" />
+    <Content Include="web\packages\angular\core_dom\http.dart" />
+    <Content Include="web\packages\angular\core_dom\module_internal.dart" />
+    <Content Include="web\packages\angular\core_dom\mustache.dart" />
+    <Content Include="web\packages\angular\core_dom\ng_element.dart" />
+    <Content Include="web\packages\angular\core_dom\node_cursor.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\animation.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\common.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\compiler_config.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\cookies.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\directive.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\directive_injector.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\directive_map.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\dom_util.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\element_binder.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\element_binder_builder.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\event_handler.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\http.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\module_internal.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\mustache.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\ng_element.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\node_cursor.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\selector.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\shadowless_shadow_root.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\shadow_dom_component_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\static_keys.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\tagging_compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\tagging_view_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\template_cache.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\transcluding_component_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\tree_sanitizer.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\view.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\view_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\walking_compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\PaxHeader\web_platform.dart" />
+    <Content Include="web\packages\angular\core_dom\selector.dart" />
+    <Content Include="web\packages\angular\core_dom\shadowless_shadow_root.dart" />
+    <Content Include="web\packages\angular\core_dom\shadow_dom_component_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\static_keys.dart" />
+    <Content Include="web\packages\angular\core_dom\tagging_compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\tagging_view_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\template_cache.dart" />
+    <Content Include="web\packages\angular\core_dom\transcluding_component_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\tree_sanitizer.dart" />
+    <Content Include="web\packages\angular\core_dom\view.dart" />
+    <Content Include="web\packages\angular\core_dom\view_factory.dart" />
+    <Content Include="web\packages\angular\core_dom\walking_compiler.dart" />
+    <Content Include="web\packages\angular\core_dom\web_platform.dart" />
+    <Content Include="web\packages\angular\directive\a_href.dart" />
+    <Content Include="web\packages\angular\directive\module.dart" />
+    <Content Include="web\packages\angular\directive\ng_base_css.dart" />
+    <Content Include="web\packages\angular\directive\ng_bind.dart" />
+    <Content Include="web\packages\angular\directive\ng_bind_html.dart" />
+    <Content Include="web\packages\angular\directive\ng_bind_template.dart" />
+    <Content Include="web\packages\angular\directive\ng_class.dart" />
+    <Content Include="web\packages\angular\directive\ng_cloak.dart" />
+    <Content Include="web\packages\angular\directive\ng_control.dart" />
+    <Content Include="web\packages\angular\directive\ng_events.dart" />
+    <Content Include="web\packages\angular\directive\ng_form.dart" />
+    <Content Include="web\packages\angular\directive\ng_if.dart" />
+    <Content Include="web\packages\angular\directive\ng_include.dart" />
+    <Content Include="web\packages\angular\directive\ng_model.dart" />
+    <Content Include="web\packages\angular\directive\ng_model_options.dart" />
+    <Content Include="web\packages\angular\directive\ng_model_select.dart" />
+    <Content Include="web\packages\angular\directive\ng_model_validators.dart" />
+    <Content Include="web\packages\angular\directive\ng_non_bindable.dart" />
+    <Content Include="web\packages\angular\directive\ng_pluralize.dart" />
+    <Content Include="web\packages\angular\directive\ng_repeat.dart" />
+    <Content Include="web\packages\angular\directive\ng_show_hide.dart" />
+    <Content Include="web\packages\angular\directive\ng_src_boolean.dart" />
+    <Content Include="web\packages\angular\directive\ng_style.dart" />
+    <Content Include="web\packages\angular\directive\ng_switch.dart" />
+    <Content Include="web\packages\angular\directive\ng_template.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\a_href.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_base_css.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_bind.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_bind_html.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_bind_template.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_class.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_cloak.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_control.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_events.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_form.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_if.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_include.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_model.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_model_options.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_model_select.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_model_validators.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_non_bindable.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_pluralize.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_repeat.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_show_hide.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_src_boolean.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_style.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_switch.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\ng_template.dart" />
+    <Content Include="web\packages\angular\directive\PaxHeader\static_keys.dart" />
+    <Content Include="web\packages\angular\directive\static_keys.dart" />
+    <Content Include="web\packages\angular\di\module.dart" />
+    <Content Include="web\packages\angular\di\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\formatter\arrayify.dart" />
+    <Content Include="web\packages\angular\formatter\currency.dart" />
+    <Content Include="web\packages\angular\formatter\date.dart" />
+    <Content Include="web\packages\angular\formatter\filter.dart" />
+    <Content Include="web\packages\angular\formatter\json.dart" />
+    <Content Include="web\packages\angular\formatter\limit_to.dart" />
+    <Content Include="web\packages\angular\formatter\lowercase.dart" />
+    <Content Include="web\packages\angular\formatter\module.dart" />
+    <Content Include="web\packages\angular\formatter\module_internal.dart" />
+    <Content Include="web\packages\angular\formatter\number.dart" />
+    <Content Include="web\packages\angular\formatter\order_by.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\arrayify.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\currency.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\date.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\filter.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\json.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\limit_to.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\lowercase.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\module_internal.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\number.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\order_by.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\stringify.dart" />
+    <Content Include="web\packages\angular\formatter\PaxHeader\uppercase.dart" />
+    <Content Include="web\packages\angular\formatter\stringify.dart" />
+    <Content Include="web\packages\angular\formatter\uppercase.dart" />
+    <Content Include="web\packages\angular\introspection.dart" />
+    <Content Include="web\packages\angular\introspection_js.dart" />
+    <Content Include="web\packages\angular\mock\debug.dart" />
+    <Content Include="web\packages\angular\mock\exception_handler.dart" />
+    <Content Include="web\packages\angular\mock\http_backend.dart" />
+    <Content Include="web\packages\angular\mock\log.dart" />
+    <Content Include="web\packages\angular\mock\mock_platform.dart" />
+    <Content Include="web\packages\angular\mock\mock_window.dart" />
+    <Content Include="web\packages\angular\mock\module.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\debug.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\exception_handler.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\http_backend.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\log.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\mock_platform.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\mock_window.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\probe.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\static_keys.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\test_bed.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\test_injection.dart" />
+    <Content Include="web\packages\angular\mock\PaxHeader\zone.dart" />
+    <Content Include="web\packages\angular\mock\probe.dart" />
+    <Content Include="web\packages\angular\mock\static_keys.dart" />
+    <Content Include="web\packages\angular\mock\test_bed.dart" />
+    <Content Include="web\packages\angular\mock\test_injection.dart" />
+    <Content Include="web\packages\angular\mock\zone.dart" />
+    <Content Include="web\packages\angular\PaxHeader\angular.dart" />
+    <Content Include="web\packages\angular\PaxHeader\application.dart" />
+    <Content Include="web\packages\angular\PaxHeader\application_factory.dart" />
+    <Content Include="web\packages\angular\PaxHeader\application_factory_static.dart" />
+    <Content Include="web\packages\angular\PaxHeader\introspection.dart" />
+    <Content Include="web\packages\angular\PaxHeader\introspection_js.dart" />
+    <Content Include="web\packages\angular\PaxHeader\transformer.dart" />
+    <Content Include="web\packages\angular\PaxHeader\utils.dart" />
+    <Content Include="web\packages\angular\perf\dev_tools_timeline.dart" />
+    <Content Include="web\packages\angular\perf\module.dart" />
+    <Content Include="web\packages\angular\perf\PaxHeader\dev_tools_timeline.dart" />
+    <Content Include="web\packages\angular\perf\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\playback\PaxHeader\playback_data.dart" />
+    <Content Include="web\packages\angular\playback\PaxHeader\playback_http.dart" />
+    <Content Include="web\packages\angular\playback\playback_data.dart" />
+    <Content Include="web\packages\angular\playback\playback_http.dart" />
+    <Content Include="web\packages\angular\routing\module.dart" />
+    <Content Include="web\packages\angular\routing\ng_bind_route.dart" />
+    <Content Include="web\packages\angular\routing\ng_view.dart" />
+    <Content Include="web\packages\angular\routing\PaxHeader\module.dart" />
+    <Content Include="web\packages\angular\routing\PaxHeader\ng_bind_route.dart" />
+    <Content Include="web\packages\angular\routing\PaxHeader\ng_view.dart" />
+    <Content Include="web\packages\angular\routing\PaxHeader\routing.dart" />
+    <Content Include="web\packages\angular\routing\PaxHeader\static_keys.dart" />
+    <Content Include="web\packages\angular\routing\routing.dart" />
+    <Content Include="web\packages\angular\routing\static_keys.dart" />
+    <Content Include="web\packages\angular\tools\common.dart" />
+    <Content Include="web\packages\angular\tools\expression_extractor.dart" />
+    <Content Include="web\packages\angular\tools\html_extractor.dart" />
+    <Content Include="web\packages\angular\tools\io.dart" />
+    <Content Include="web\packages\angular\tools\io_impl.dart" />
+    <Content Include="web\packages\angular\tools\parser_getter_setter\generator.dart" />
+    <Content Include="web\packages\angular\tools\parser_getter_setter\PaxHeader\generator.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\common.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\expression_extractor.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\html_extractor.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\io.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\io_impl.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\selector.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\source_crawler.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\source_crawler_impl.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\source_metadata_extractor.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\template_cache_annotation.dart" />
+    <Content Include="web\packages\angular\tools\PaxHeader\template_cache_generator.dart" />
+    <Content Include="web\packages\angular\tools\selector.dart" />
+    <Content Include="web\packages\angular\tools\source_crawler.dart" />
+    <Content Include="web\packages\angular\tools\source_crawler_impl.dart" />
+    <Content Include="web\packages\angular\tools\source_metadata_extractor.dart" />
+    <Content Include="web\packages\angular\tools\symbol_inspector\PaxHeader\symbol_inspector.dart" />
+    <Content Include="web\packages\angular\tools\symbol_inspector\symbol_inspector.dart" />
+    <Content Include="web\packages\angular\tools\template_cache_annotation.dart" />
+    <Content Include="web\packages\angular\tools\template_cache_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\expression_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\html_dart_references_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\metadata_extractor.dart" />
+    <Content Include="web\packages\angular\tools\transformer\metadata_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\options.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\expression_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\html_dart_references_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\metadata_extractor.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\metadata_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\options.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\referenced_uris.dart" />
+    <Content Include="web\packages\angular\tools\transformer\PaxHeader\static_angular_generator.dart" />
+    <Content Include="web\packages\angular\tools\transformer\referenced_uris.dart" />
+    <Content Include="web\packages\angular\tools\transformer\static_angular_generator.dart" />
+    <Content Include="web\packages\angular\transformer.dart" />
+    <Content Include="web\packages\angular\utils.dart" />
+    <Content Include="web\packages\args\args.dart" />
+    <Content Include="web\packages\args\src\options.dart" />
+    <Content Include="web\packages\args\src\parser.dart" />
+    <Content Include="web\packages\args\src\usage.dart" />
+    <Content Include="web\packages\barback\barback.dart" />
+    <Content Include="web\packages\barback\src\asset.dart" />
+    <Content Include="web\packages\barback\src\asset_cascade.dart" />
+    <Content Include="web\packages\barback\src\asset_forwarder.dart" />
+    <Content Include="web\packages\barback\src\asset_id.dart" />
+    <Content Include="web\packages\barback\src\asset_node.dart" />
+    <Content Include="web\packages\barback\src\asset_node_set.dart" />
+    <Content Include="web\packages\barback\src\asset_set.dart" />
+    <Content Include="web\packages\barback\src\barback.dart" />
+    <Content Include="web\packages\barback\src\barback_settings.dart" />
+    <Content Include="web\packages\barback\src\base_transform.dart" />
+    <Content Include="web\packages\barback\src\build_result.dart" />
+    <Content Include="web\packages\barback\src\cancelable_future.dart" />
+    <Content Include="web\packages\barback\src\declaring_transform.dart" />
+    <Content Include="web\packages\barback\src\declaring_transformer.dart" />
+    <Content Include="web\packages\barback\src\errors.dart" />
+    <Content Include="web\packages\barback\src\file_pool.dart" />
+    <Content Include="web\packages\barback\src\group_runner.dart" />
+    <Content Include="web\packages\barback\src\internal_asset.dart" />
+    <Content Include="web\packages\barback\src\lazy_transformer.dart" />
+    <Content Include="web\packages\barback\src\log.dart" />
+    <Content Include="web\packages\barback\src\multiset.dart" />
+    <Content Include="web\packages\barback\src\package_graph.dart" />
+    <Content Include="web\packages\barback\src\package_provider.dart" />
+    <Content Include="web\packages\barback\src\phase.dart" />
+    <Content Include="web\packages\barback\src\phase_forwarder.dart" />
+    <Content Include="web\packages\barback\src\phase_input.dart" />
+    <Content Include="web\packages\barback\src\phase_output.dart" />
+    <Content Include="web\packages\barback\src\pool.dart" />
+    <Content Include="web\packages\barback\src\serialize.dart" />
+    <Content Include="web\packages\barback\src\stream_pool.dart" />
+    <Content Include="web\packages\barback\src\stream_replayer.dart" />
+    <Content Include="web\packages\barback\src\transform.dart" />
+    <Content Include="web\packages\barback\src\transformer.dart" />
+    <Content Include="web\packages\barback\src\transformer_group.dart" />
+    <Content Include="web\packages\barback\src\transform_logger.dart" />
+    <Content Include="web\packages\barback\src\transform_node.dart" />
+    <Content Include="web\packages\barback\src\utils.dart" />
+    <Content Include="web\packages\code_transformers\assets.dart" />
+    <Content Include="web\packages\code_transformers\resolver.dart" />
+    <Content Include="web\packages\code_transformers\src\dart_sdk.dart" />
+    <Content Include="web\packages\code_transformers\src\entry_point.dart" />
+    <Content Include="web\packages\code_transformers\src\resolver.dart" />
+    <Content Include="web\packages\code_transformers\src\resolvers.dart" />
+    <Content Include="web\packages\code_transformers\src\resolver_impl.dart" />
+    <Content Include="web\packages\code_transformers\src\test_harness.dart" />
+    <Content Include="web\packages\code_transformers\tests.dart" />
+    <Content Include="web\packages\collection\algorithms.dart" />
+    <Content Include="web\packages\collection\collection.dart" />
+    <Content Include="web\packages\collection\equality.dart" />
+    <Content Include="web\packages\collection\iterable_zip.dart" />
+    <Content Include="web\packages\collection\priority_queue.dart" />
+    <Content Include="web\packages\collection\src\canonicalized_map.dart" />
+    <Content Include="web\packages\collection\src\unmodifiable_wrappers.dart" />
+    <Content Include="web\packages\collection\src\utils.dart" />
+    <Content Include="web\packages\collection\wrappers.dart" />
+    <Content Include="web\packages\di\annotations.dart" />
+    <Content Include="web\packages\di\check_bind_args.dart" />
+    <Content Include="web\packages\di\di.dart" />
+    <Content Include="web\packages\di\dynamic_injector.dart" />
+    <Content Include="web\packages\di\generator.dart" />
+    <Content Include="web\packages\di\key.dart" />
+    <Content Include="web\packages\di\module_transformer.dart" />
+    <Content Include="web\packages\di\src\errors.dart" />
+    <Content Include="web\packages\di\src\injector.dart" />
+    <Content Include="web\packages\di\src\mirrors.dart" />
+    <Content Include="web\packages\di\src\module.dart" />
+    <Content Include="web\packages\di\src\reflector.dart" />
+    <Content Include="web\packages\di\src\reflector_dynamic.dart" />
+    <Content Include="web\packages\di\src\reflector_null.dart" />
+    <Content Include="web\packages\di\src\reflector_static.dart" />
+    <Content Include="web\packages\di\transformer.dart" />
+    <Content Include="web\packages\di\transformer\injector_generator.dart" />
+    <Content Include="web\packages\di\transformer\options.dart" />
+    <Content Include="web\packages\di\type_literal.dart" />
+    <Content Include="web\packages\hello_servicestack\components\hello_servicestack_component.dart" />
+    <Content Include="web\packages\hello_servicestack\hello_servicestack.dart" />
+    <Content Include="web\packages\hello_servicestack\models\hello_response.dart" />
+    <Content Include="web\packages\hello_servicestack\services\hello_servicestack_service.dart" />
+    <Content Include="web\packages\html5lib\dom.dart" />
+    <Content Include="web\packages\html5lib\dom_parsing.dart" />
+    <Content Include="web\packages\html5lib\parser.dart" />
+    <Content Include="web\packages\html5lib\parser_console.dart" />
+    <Content Include="web\packages\html5lib\src\char_encodings.dart" />
+    <Content Include="web\packages\html5lib\src\constants.dart" />
+    <Content Include="web\packages\html5lib\src\encoding_parser.dart" />
+    <Content Include="web\packages\html5lib\src\inputstream.dart" />
+    <Content Include="web\packages\html5lib\src\list_proxy.dart" />
+    <Content Include="web\packages\html5lib\src\token.dart" />
+    <Content Include="web\packages\html5lib\src\tokenizer.dart" />
+    <Content Include="web\packages\html5lib\src\treebuilder.dart" />
+    <Content Include="web\packages\html5lib\src\utils.dart" />
+    <Content Include="web\packages\intl\bidi_formatter.dart" />
+    <Content Include="web\packages\intl\bidi_utils.dart" />
+    <Content Include="web\packages\intl\date_format.dart" />
+    <Content Include="web\packages\intl\date_symbols.dart" />
+    <Content Include="web\packages\intl\date_symbol_data_file.dart" />
+    <Content Include="web\packages\intl\date_symbol_data_http_request.dart" />
+    <Content Include="web\packages\intl\date_symbol_data_local.dart" />
+    <Content Include="web\packages\intl\date_time_patterns.dart" />
+    <Content Include="web\packages\intl\extract_messages.dart" />
+    <Content Include="web\packages\intl\generate_localized.dart" />
+    <Content Include="web\packages\intl\intl.dart" />
+    <Content Include="web\packages\intl\intl_browser.dart" />
+    <Content Include="web\packages\intl\intl_standalone.dart" />
+    <Content Include="web\packages\intl\message_lookup_by_library.dart" />
+    <Content Include="web\packages\intl\number_format.dart" />
+    <Content Include="web\packages\intl\number_symbols.dart" />
+    <Content Include="web\packages\intl\number_symbols_data.dart" />
+    <Content Include="web\packages\intl\src\data\dates\localeList.dart" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\af.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\am.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ar.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\bg.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\bn.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ca.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\cs.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\da.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\de.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\de_AT.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\de_CH.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\el.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_AU.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_GB.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_IE.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_IN.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_ISO.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_SG.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_US.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\en_ZA.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\es.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\es_419.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\et.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\eu.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\fa.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\fi.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\fil.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\fr.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\fr_CA.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\gl.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\gsw.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\gu.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\he.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\hi.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\hr.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\hu.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\id.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\in.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\is.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\it.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\iw.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ja.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\kn.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ko.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ln.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\lt.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\lv.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ml.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\mr.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ms.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\mt.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\nl.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\no.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\or.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\pl.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\pt.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\pt_BR.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\pt_PT.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ro.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ru.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sk.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sl.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sq.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sr.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sv.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\sw.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ta.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\te.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\th.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\tl.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\tr.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\uk.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\ur.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\vi.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\zh.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\zh_CN.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\zh_HK.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\zh_TW.json" />
+    <Content Include="web\packages\intl\src\data\dates\patterns\zu.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\af.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\am.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ar.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\bg.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\bn.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ca.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\cs.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\da.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\de.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\de_AT.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\de_CH.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\el.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_AU.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_GB.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_IE.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_IN.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_ISO.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_SG.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_US.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\en_ZA.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\es.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\es_419.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\et.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\eu.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\fa.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\fi.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\fil.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\fr.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\fr_CA.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\gl.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\gsw.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\gu.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\he.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\hi.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\hr.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\hu.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\id.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\in.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\is.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\it.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\iw.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ja.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\kn.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ko.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ln.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\lt.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\lv.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ml.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\mr.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ms.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\mt.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\nl.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\no.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\or.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\pl.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\pt.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\pt_BR.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\pt_PT.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ro.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ru.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sk.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sl.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sq.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sr.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sv.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\sw.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ta.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\te.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\th.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\tl.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\tr.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\uk.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\ur.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\vi.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\zh.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\zh_CN.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\zh_HK.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\zh_TW.json" />
+    <Content Include="web\packages\intl\src\data\dates\symbols\zu.json" />
+    <Content Include="web\packages\intl\src\date_format_field.dart" />
+    <Content Include="web\packages\intl\src\date_format_helpers.dart" />
+    <Content Include="web\packages\intl\src\date_format_internal.dart" />
+    <Content Include="web\packages\intl\src\file_data_reader.dart" />
+    <Content Include="web\packages\intl\src\http_request_data_reader.dart" />
+    <Content Include="web\packages\intl\src\intl_helpers.dart" />
+    <Content Include="web\packages\intl\src\intl_message.dart" />
+    <Content Include="web\packages\intl\src\lazy_locale_data.dart" />
+    <Content Include="web\packages\logging\logging.dart" />
+    <Content Include="web\packages\meta\meta.dart" />
+    <Content Include="web\packages\path\path.dart" />
+    <Content Include="web\packages\path\src\characters.dart" />
+    <Content Include="web\packages\path\src\context.dart" />
+    <Content Include="web\packages\path\src\internal_style.dart" />
+    <Content Include="web\packages\path\src\parsed_path.dart" />
+    <Content Include="web\packages\path\src\path_exception.dart" />
+    <Content Include="web\packages\path\src\style.dart" />
+    <Content Include="web\packages\path\src\style\posix.dart" />
+    <Content Include="web\packages\path\src\style\url.dart" />
+    <Content Include="web\packages\path\src\style\windows.dart" />
+    <Content Include="web\packages\path\src\utils.dart" />
+    <Content Include="web\packages\perf_api\console_impl.dart" />
+    <Content Include="web\packages\perf_api\perf_api.dart" />
+    <Content Include="web\packages\route_hierarchical\click_handler.dart" />
+    <Content Include="web\packages\route_hierarchical\client.dart" />
+    <Content Include="web\packages\route_hierarchical\link_matcher.dart" />
+    <Content Include="web\packages\route_hierarchical\route_handle.dart" />
+    <Content Include="web\packages\route_hierarchical\src\utils.dart" />
+    <Content Include="web\packages\route_hierarchical\url_matcher.dart" />
+    <Content Include="web\packages\route_hierarchical\url_pattern.dart" />
+    <Content Include="web\packages\route_hierarchical\url_template.dart" />
+    <Content Include="web\packages\source_maps\builder.dart" />
+    <Content Include="web\packages\source_maps\parser.dart" />
+    <Content Include="web\packages\source_maps\printer.dart" />
+    <Content Include="web\packages\source_maps\refactor.dart" />
+    <Content Include="web\packages\source_maps\source_maps.dart" />
+    <Content Include="web\packages\source_maps\span.dart" />
+    <Content Include="web\packages\source_maps\src\span_wrapper.dart" />
+    <Content Include="web\packages\source_maps\src\utils.dart" />
+    <Content Include="web\packages\source_maps\src\vlq.dart" />
+    <Content Include="web\packages\source_span\source_span.dart" />
+    <Content Include="web\packages\source_span\src\colors.dart" />
+    <Content Include="web\packages\source_span\src\file.dart" />
+    <Content Include="web\packages\source_span\src\location.dart" />
+    <Content Include="web\packages\source_span\src\span.dart" />
+    <Content Include="web\packages\source_span\src\span_exception.dart" />
+    <Content Include="web\packages\source_span\src\span_mixin.dart" />
+    <Content Include="web\packages\source_span\src\utils.dart" />
+    <Content Include="web\packages\stack_trace\src\chain.dart" />
+    <Content Include="web\packages\stack_trace\src\frame.dart" />
+    <Content Include="web\packages\stack_trace\src\lazy_trace.dart" />
+    <Content Include="web\packages\stack_trace\src\stack_zone_specification.dart" />
+    <Content Include="web\packages\stack_trace\src\trace.dart" />
+    <Content Include="web\packages\stack_trace\src\utils.dart" />
+    <Content Include="web\packages\stack_trace\src\vm_trace.dart" />
+    <Content Include="web\packages\stack_trace\stack_trace.dart" />
+    <Content Include="web\packages\typed_mock\typed_mock.dart" />
+    <Content Include="web\packages\utf\src\constants.dart" />
+    <Content Include="web\packages\utf\src\list_range.dart" />
+    <Content Include="web\packages\utf\src\utf\utf16.dart" />
+    <Content Include="web\packages\utf\src\utf\utf32.dart" />
+    <Content Include="web\packages\utf\src\utf\utf8.dart" />
+    <Content Include="web\packages\utf\src\utf\utf_stream.dart" />
+    <Content Include="web\packages\utf\src\utf_16_code_unit_decoder.dart" />
+    <Content Include="web\packages\utf\src\util.dart" />
+    <Content Include="web\packages\utf\utf.dart" />
+    <Content Include="web\packages\web_components\build.log" />
+    <Content Include="web\packages\web_components\platform.concat.js.map" />
+    <Content Include="web\packages\web_components\platform.js.map" />
+    <Content Include="web\packages\web_components\polyfill.dart" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppHost.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>31681</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:18789/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
