@@ -52,6 +52,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0">
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.12.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
@@ -68,6 +69,7 @@
       <HintPath>..\packages\ServiceStack.Text.Signed.4.0.23\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -75,6 +77,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TemplateBuilder">
       <HintPath>..\packages\TemplateBuilder.1.0.3.52-beta\lib\TemplateBuilder.dll</HintPath>
     </Reference>
@@ -141,6 +144,7 @@
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="NugetPackageTemplateWizard.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -269,6 +273,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\bower.cmd" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\git.cmd" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\node.cmd" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config" />
@@ -917,6 +924,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.Wizards\ServiceStackVS.Wizards.csproj">
+      <Project>{f15d55c1-633a-4344-84e5-ce9c95988507}</Project>
+      <Name>ServiceStackVS.Wizards</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

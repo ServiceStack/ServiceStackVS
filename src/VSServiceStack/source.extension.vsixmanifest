@@ -26,5 +26,6 @@
     <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Output\ItemTemplates"/>
     <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.Wizards" Path="|ServiceStackVS.Wizards|" AssemblyName="|ServiceStackVS.Wizards;AssemblyName|" />
   </Assets>
 </PackageManifest>

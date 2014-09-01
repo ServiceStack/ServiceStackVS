@@ -94,6 +94,8 @@ namespace ServiceStackVS
         protected override void Initialize()
         {
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
+            packageInstaller = ComponentModel.GetService<IVsPackageInstaller>();
+            pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>();
             base.Initialize();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
