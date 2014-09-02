@@ -14,16 +14,12 @@ type UnitTests ()=
     //Register dependencies
     let configContainer (c: Container)=
         ignore()
-
-    //Action<Container> from unit
-    let configureContainer = new System.Action<Container>(configContainer)
     
     [<TestFixtureSetUp>]
     member x.Init ()=
         appHost <- new BasicAppHost(typeof<MyServices>.Assembly)
-        appHost.ConfigureContainer <- configureContainer
+        appHost.ConfigureContainer <- (fun c -> configContainer(c))
         appHost.Init() |> ignore
-        ignore()
 
     [<TestFixtureTearDown>]
     member x.CleanUp ()=

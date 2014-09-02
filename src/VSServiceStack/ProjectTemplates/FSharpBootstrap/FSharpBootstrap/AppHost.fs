@@ -10,10 +10,6 @@
         inherit AppHostBase("$safeprojectname$", typeof<MyServices>.Assembly)
         override this.Configure container =
             //Add plugins
-            //this.Plugins.Add(new PostmanFeature())
             //this.Plugins.Add(new CorsFeature())
+            this.Plugins.Add(new PostmanFeature())
             this.Plugins.Add(new RazorFormat())
-            ignore()
-        static member Start() = 
-            let appHost = new AppHost()
-            appHost.Init() |> ignore

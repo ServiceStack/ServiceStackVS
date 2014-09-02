@@ -10,4 +10,4 @@ type HelloResponse =
 [<Route("/hello/{name}")>]
 type Hello() = 
     interface IReturn<HelloResponse>
-    member val Name = "" with get, set
+    member val Name : string = null with get, set

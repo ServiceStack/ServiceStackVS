@@ -8,9 +8,8 @@ module Main =
         [<EntryPoint>]
         let main argv = 
             let appHost = new AppHost()
-            appHost.Init() |> ignore
-            appHost.Start("http://*:8088/") |> ignore
-            "ServiceStack SelfHost listening at http://localhost:8088 ".Print() |> ignore
+            appHost.Init().Start("http://*:8088/") |> ignore
+            "ServiceStack SelfHost listening at http://localhost:8088 ".Print()
             Process.Start("http://localhost:8088/") |> ignore
             Console.ReadLine() |> ignore
             0
