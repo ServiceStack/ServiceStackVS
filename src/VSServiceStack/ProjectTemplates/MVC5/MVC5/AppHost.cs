@@ -36,8 +36,8 @@ namespace $safeprojectname$
                 HandlerFactoryPath = "api",
             });
             //Config examples
-            //this.AddPlugin(new PostmanFeature());
-            //this.AddPlugin(new CorsFeature());
+            //this.Plugins.Add(new PostmanFeature());
+            //this.Plugins.Add(new CorsFeature());
 
             //Set MVC to use the same Funq IOC as ServiceStack
             ControllerBuilder.Current.SetControllerFactory(new FunqControllerFactory(container));
