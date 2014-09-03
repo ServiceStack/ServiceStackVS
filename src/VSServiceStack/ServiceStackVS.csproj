@@ -273,12 +273,11 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\bower.cmd" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\git.cmd" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\.bin\node.cmd" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\start-karma.bat" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
@@ -298,14 +297,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\AngularSPA.csproj" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\AngularSPA.csproj">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\css\app.css" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gruntfile.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gulpfile.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
-    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\MyTemplate.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\hello\hello.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial1.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial2.html" />

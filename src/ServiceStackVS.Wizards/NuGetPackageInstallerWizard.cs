@@ -56,7 +56,7 @@ namespace ServiceStackVS.Wizards
         {
             foreach (var packageFromWizard in PackagesToLoad)
             {
-                AddNuGetDependencyIfMissing(project, packageFromWizard.Id);
+                AddNuGetDependencyIfMissing(project, packageFromWizard.Id,packageFromWizard.Version);
             }
         }
 
@@ -80,22 +80,17 @@ namespace ServiceStackVS.Wizards
             
         }
 
-        private void AddNuGetDependencyIfMissing(Project project, string packageId)
+        private void AddNuGetDependencyIfMissing(Project project, string packageId, string version = null)
         {
-            //Once the generated code has been added, we need to ensure that  
-            //the required ServiceStack.Interfaces package is installed.
             var installedPackages = PackageServices.GetInstalledPackages(project);
-
-            //TODO check project references incase ServiceStack.Interfaces is referenced via local file.
-            //VS has different ways to check different types of projects for refs, need to find method to check all.
-
+            version = string.IsNullOrEmpty(version) || version == "latest" ? null : version; //if empty or latest, set to null
             //Check if existing nuget reference exists
             if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
             {
                 Installer.InstallPackage("https://www.nuget.org/api/v2/",
                          project,
                          packageId,
-                         version: (string)null, //Latest version of packageId
+                         version: version, //Null is latest version of packageId
                          ignoreDependencies: false);
             }
         }

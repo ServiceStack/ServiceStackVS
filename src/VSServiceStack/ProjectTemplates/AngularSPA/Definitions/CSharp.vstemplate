@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>ServiceStack ASP.NET with Angular SPA</Name>
-    <Description>ServiceStack ASP.NET with Angular SPA</Description>
-    <DefaultName>AngularSPAApp</DefaultName>
+    <Name>ServiceStack AngularJS Single Page App (Beta)</Name>
+    <Description>ServiceStack AngularJS Single Page App (Beta). This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application.</Description>
+    <DefaultName>AngularSpaApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
