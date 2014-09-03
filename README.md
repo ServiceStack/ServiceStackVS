@@ -37,6 +37,8 @@ As part of VS.NET's new efforts to support Grunt/Gulp.js, the [Task Runner Explo
 
 This template will take longer create due to installing Node related projects locally for your application to use. First build will also take some time due to NPM and Bower dependencies. Any feedback or bug reports would be welcome, as this will be improved and updated over time.
 
+![Angular Single Page Application Demo](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-demo.gif)
+
 
 Getting Started with ServiceStackVS Templates
 ---------------------------------------------
