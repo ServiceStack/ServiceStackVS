@@ -28,7 +28,7 @@ New in ServiceStackVS **1.0.3** are multiple F# Templates:
 
 These F# templates follow the same recommended multi-project structure used in the C# templates. There's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects in different single project configurations.
 
-### ServiceStack F# Demo with Freebase API
+### F# ASP.NET with Freebase API Demo
 
 Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code taking advantage of ServiceStack's built-in data formats:
 
