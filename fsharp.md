@@ -1,6 +1,6 @@
 # ServiceStackVS F# #
 
-## F# Templates
+## F# VS.NET ServiceStack Templates
 
 New in [ServiceStackVS](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7) are a number of different F# Project Templates:
 
