@@ -6,9 +6,9 @@ New in [ServiceStackVS](https://github.com/ServiceStack/ServiceStack/wiki/HTML5R
 
 ![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
 
-These F# templates follow the same recommended multi-project structure used in the C# templates. In addition, there's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects containing different single project configurations.
+These F# templates follow the same recommended multi-project layout used in the C# templates. In addition, there's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects containing different single project configurations.
 
-### F# Template Freebase Demo
+### F# ASP.NET with Freebase API Demo
 
 Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code working with ServiceStack's data formats:
 
