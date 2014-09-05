@@ -34,6 +34,8 @@ Below is an example of creating a service that serves data from Freebase, showin
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
 
+[About the F# Freebase Demo](https://github.com/ServiceStack/ServiceStackVS/blob/master/fsharp.md#f-aspnet-with-freebase-api-demo).
+
 # Getting Started
 
 ### Download ServiceStackVS
