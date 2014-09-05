@@ -5,6 +5,20 @@ ServiceStackVS is a Visual Studio extension to be used along side the ServiceSta
 
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vs-templates.png)
 
+## 1.0.3 Release ##
+New for ServiceStackVS in 1.0.3 update are **5 F# templates** using the same multi-project structure used in the C# templates.
+
+![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
+
+The 5 F# templates reflect their C# counter parts in the ServiceStackVS extension. There is also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension which also shows off ServiceStack (V3 and V4) using F# in various configurations. These templates are great single project templates, where as our new F# templates follow our recommended multi-project structure showing the F# equivilent of some of the existing C# templates.
+
+##### Demo #####
+Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code working with ServiceStack's data formats.
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
+
+
+
 Getting Started with ServiceStackVS Templates
 ---------------------------------------------
 
