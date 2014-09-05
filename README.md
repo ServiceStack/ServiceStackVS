@@ -27,7 +27,7 @@ Another new addition is a more experimental template that includes some great to
 - Gulp
 - Karma
 
->Since this template installs all the required dependencies to make it easy for developers to try out and use, **it does take longer** than other templates to create. Also the **first build will pull down the required JS dependencies** from NPM and Bower, this will **also take time** depending on the speed of your internet connection.
+>Since this template installs all the required dependencies to make it easy for developers to try out and use, **it does take longer** than other templates to create. Also the **first build will pull down the required JS dependencies** from NPM and Bower, this will **also take time** depending on the speed of your internet connection. If you don't have Node.js, Grunt/Gulp installed locally, you also must **create the template running Visual Studio as an Administrator**
 
 This template is the first iteration of a new effort that follows VS.NET's development of their new Grunt/Gulp.js support. Although it's still early, we believe this represents the future direction of more advanced Single Page web application development. We will continue to improve ServiceStackVS and follow VS.NET's progress.
 
@@ -35,7 +35,9 @@ As part of VS.NET's new efforts to support Grunt/Gulp.js, the [Task Runner Explo
 
 ![Task Runner Explorer with ServiceStack Angular Single Page App template](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/task-runner-explorer.png)
 
-This template will take longer create due to installing Node related projects locally for your application to use. First build will also take some time due to NPM and Bower dependencies. Any feedback or bug reports would be welcome, as this will be improved and updated over time.
+This template will take longer create due to installing Node related projects locally for your application to use. First build will also take some time due to NPM and Bower dependencies. If you don't have Node.js/Grunt/Gulp installed globally, it will also required creating the template whilst running **Visual Studio as Administrator**. For more information, see instructions here.
+
+Any feedback or bug reports would be welcome, as this will be improved and updated over time.
 
 ![Angular Single Page Application Demo](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-demo.gif)
 

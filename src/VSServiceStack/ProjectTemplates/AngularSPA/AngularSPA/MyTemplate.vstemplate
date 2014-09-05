@@ -28,7 +28,7 @@
     <FullClassName>ServiceStackVS.Wizards.NuGetPackageInstallerWizard</FullClassName>
   </WizardExtension>
   <WizardData>
-    <packages>
+    <packages promptUser="true" promptMessage="Would you like Node.JS and other dependencies installed locally to the new project?">
       <package id="Node.js" version="0.10.26.1" targetFramework="net45" />
       <package id="NoGit" version="0.0.8" targetFramework="net45" />
       <package id="Npm.js" version="1.3.15.4" targetFramework="net45" />

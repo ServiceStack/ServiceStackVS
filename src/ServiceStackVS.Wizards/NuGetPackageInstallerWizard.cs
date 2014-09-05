@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
+using DialogResult = Microsoft.Internal.VisualStudio.PlatformUI.DialogResult;
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.Wizards
 {
@@ -27,7 +31,9 @@ namespace ServiceStackVS.Wizards
             public string Version { get; set; }
         }
 
-        private List<PackageFromWizard> PackagesToLoad { get; set; }
+        private List<PackageFromWizard> PackagesToLoad = new List<PackageFromWizard>();
+
+        private bool NpmInstalled;
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
@@ -44,16 +50,51 @@ namespace ServiceStackVS.Wizards
 
                 string wizardData = replacementsDictionary["$wizarddata$"];
                 XElement element = XElement.Parse(wizardData);
-                var packages =
-                    element.Descendants()
-                        .Select(x => new PackageFromWizard { Id = x.Attribute("id").Value, Version = x.Attribute("version").Value });
+                bool promptUser = element.HasAttributes && element.Attribute("promptUser") != null &&
+                                  element.Attribute("promptUser").Value == "true";
+                if (promptUser)
+                {
+                    var dialogResult = MessageBox.Show("Do you want to install Node.JS and related dependencies locally?", "Node.JS Depedencies", MessageBoxButtons.YesNo);
+                    if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        NpmInstalled = true;
+                        var user = WindowsIdentity.GetCurrent();
+                        if (user == null)
+                        {
+                            throw new Exception("Error creating template, no valid user identity");
+                        }
+                        // Get the built-in administrator account.
+                        var sid = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid,
+                            null);
 
-                PackagesToLoad = new List<PackageFromWizard>(packages);
+                        // Compare to the current user.
+                        bool isBuiltInAdmin = (user.User == sid);
+                        if (!isBuiltInAdmin)
+                        {
+                            MessageBox.Show(
+                                "Warning: This template requires the ability to set VS properties, without the correct permissions these will not persist. Run as Administrator to ensure these settings persist.",
+                                "Template requires administrator rights", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        var packages =
+                            element.Descendants()
+                                .Select(
+                                    x =>
+                                        new PackageFromWizard
+                                        {
+                                            Id = x.Attribute("id").Value,
+                                            Version = x.Attribute("version").Value
+                                        });
+
+                        PackagesToLoad = new List<PackageFromWizard>(packages);
+                    }
+                }
+                
             }
         }
 
         public void ProjectFinishedGenerating(Project project)
         {
+            string foo = project.Globals["SSNpmInstalled"] = NpmInstalled.ToString();
             foreach (var packageFromWizard in PackagesToLoad)
             {
                 AddNuGetDependencyIfMissing(project, packageFromWizard.Id,packageFromWizard.Version);
