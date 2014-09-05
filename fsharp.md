@@ -49,3 +49,9 @@ member this.Get(request : Games)=
 ```
 
 This demo shows off the advantages that come from ServiceStack's design and focus on simplicity as well as F#'s concise and readable syntax.
+
+### Download ServiceStackVS
+
+ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+
+[![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
