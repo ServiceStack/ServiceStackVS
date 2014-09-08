@@ -12,9 +12,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../Scripts/lib/angular/angular.js',
-      '../Scripts/lib/angular-route/angular-route.js',
-      '../Scripts/lib/angular-mocks/angular-mocks.js',
+      '../bower_components/angular/angular.js',
+      '../bower_components/angular-route/angular-route.js',
+      '../bower_components/angular-mocks/angular-mocks.js',
       '../js/**/*.js',
       'unit/**/*.js'
     ],

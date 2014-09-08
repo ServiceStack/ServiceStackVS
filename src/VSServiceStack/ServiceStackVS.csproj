@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="NugetPackageTemplateWizard.cs" />
+    <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -251,6 +252,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="SolutionEvents.cs" />
     <Compile Include="Types\MetadataTypes.cs" />
     <Compile Include="VSIXUtils.cs" />
     <Compile Include="ServiceStackVSPackage.cs" />

@@ -13,7 +13,6 @@ using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
-using DialogResult = Microsoft.Internal.VisualStudio.PlatformUI.DialogResult;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.Wizards

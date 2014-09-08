@@ -9,8 +9,10 @@ using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell.Events;
 using Microsoft.Win32;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -20,6 +22,7 @@ using NuGet.VisualStudio;
 using ServiceStack;
 using ServiceStack.Text;
 using ServiceStackVS.Types;
+using ServiceStackVS.Wizards;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using MessageBox = System.Windows.MessageBox;
 using Thread = System.Threading.Thread;
@@ -83,6 +86,17 @@ namespace ServiceStackVS
             }
         }
 
+        private SolutionEventsListener solutionEventsListener;
+        private OutputWindowWriter _outputWindow;
+
+        private DocumentEvents _documentEvents;
+        private ProjectItemsEvents _projectItemEvents;
+
+        private DTE _dte;
+
+        private bool _npmInstallRunning = false;
+        private bool _bowerInstallRunning = false;
+
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
         #region Package Members
@@ -98,6 +112,8 @@ namespace ServiceStackVS
             pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>();
             base.Initialize();
 
+            _outputWindow = new OutputWindowWriter(this, GuidList.guidServiceStackVSOutputWindowPane, "ServiceStackVS");
+
             // Add our command handlers for menu (commands must exist in the .vsct file)
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if ( null != mcs )
@@ -107,6 +123,44 @@ namespace ServiceStackVS
                 var projContextServiceStackReferenceCommand = new OleMenuCommand(MenuItemCallback ,projContextServiceStackReferenceCommandId);
                 projContextServiceStackReferenceCommand.BeforeQueryStatus += BeforeQueryStatusForProjectAddMenuItem;
                 mcs.AddCommand(projContextServiceStackReferenceCommand);
+            }
+
+            solutionEventsListener = new SolutionEventsListener();
+            solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
+
+        }
+
+        private void SolutionLoaded()
+        {
+            _dte = (DTE)GetService(typeof(DTE));
+            if (_dte == null)
+            {
+                Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
+                return;
+            }
+
+            var events = _dte.Events as Events2;
+            if (events == null)
+            {
+                Debug.WriteLine("Unable to get the Events2.");
+                return;
+            }
+
+            _documentEvents = events.get_DocumentEvents();
+            _documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+        }
+
+        private void DocumentEventsOnDocumentSaved(Document document)
+        {
+            if (document.Name.ToLowerInvariant() == "package.json")
+            {
+                if (_npmInstallRunning == false)
+                {
+                    NpmUtils.RunInstall(document.Path, 
+                        (sender, args) => _outputWindow.WriteLine(args.Data), 
+                        (sender, args) => _outputWindow.WriteLine(args.Data)
+                    );
+                }
             }
         }
 
