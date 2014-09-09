@@ -29,9 +29,10 @@
   </WizardExtension>
   <WizardData>
     <NodeJSRequirements requiresNpm="true">
-      <package id="grunt-cli" />
-      <package id="gulp" />
-      <package id="bower" />
+      <npm-package id="grunt-cli" />
+      <npm-package id="grunt" />
+      <npm-package id="gulp" />
+      <npm-package id="bower" />
     </NodeJSRequirements>
   </WizardData>
 </VSTemplate>

@@ -156,7 +156,7 @@ namespace ServiceStackVS
             {
                 if (_npmInstallRunning == false)
                 {
-                    NpmUtils.RunInstall(document.Path, 
+                    NodePackageUtils.RunNpmInstall(document.Path, 
                         (sender, args) => _outputWindow.WriteLine(args.Data), 
                         (sender, args) => _outputWindow.WriteLine(args.Data)
                     );

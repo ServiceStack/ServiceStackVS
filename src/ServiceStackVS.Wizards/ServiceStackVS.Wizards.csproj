@@ -94,7 +94,7 @@
     <Compile Include="NodeJSRequiredForm.Designer.cs">
       <DependentUpon>NodeJSRequiredForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NpmUtils.cs" />
+    <Compile Include="NodePackageUtils.cs" />
     <Compile Include="NuGetPackageInstallerWizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

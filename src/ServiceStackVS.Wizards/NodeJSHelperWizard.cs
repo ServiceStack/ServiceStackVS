@@ -23,6 +23,9 @@ namespace ServiceStackVS.Wizards
         [Import]
         internal IVsPackageInstallerServices PackageServices { get; set; }
 
+        private List<NpmPackage> npmPackages;
+        //private List<BowerPackage> bowerPackages; 
+
         /// <summary>
         /// Parses XML from WizardData and installs required npm packages
         /// </summary>
@@ -51,7 +54,7 @@ namespace ServiceStackVS.Wizards
                         container.ComposeParts(this);
                     }
                 }
-                if (!NpmUtils.HasNodeInPath())
+                if (!NodePackageUtils.HasNodeInPath())
                 {
                     NodeJSRequiredForm form = new NodeJSRequiredForm();
                     form.ShowDialog();
@@ -60,18 +63,33 @@ namespace ServiceStackVS.Wizards
 
                 string wizardData = replacementsDictionary["$wizarddata$"];
                 XElement element = XElement.Parse(wizardData);
-                var packages = element.Descendants().Where(x => x.Name.LocalName == "package").Select(x => new {Id = x.Attribute("id").Value});
-                foreach (var package in packages)
+
+                npmPackages =
+                    element.Descendants()
+                        .Where(x => x.Name.LocalName == "npm-package")
+                        .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
+                        .ToList();
+
+                //Not needed
+                //bowerPackages =
+                //    element.Descendants()
+                //        .Where(x => x.Name.LocalName == "bower-package")
+                //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
+                //        .ToList();
+                
+                //Template required globally installed packages, eg bower to enable bower install
+                foreach (var package in npmPackages)
                 {
-                    var packageId = package.Id;
-                    NpmUtils.InstallPackage(packageId); //Installs package if missing
+                    package.InstallGlobally(); //Installs global npm package if missing
                 }
             }
         }
 
         public void ProjectFinishedGenerating(Project project)
         {
-            NpmUtils.RunInstall(project.FullName.Substring(0,project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal)));
+            NodePackageUtils.RunNpmInstall(project.FullName.Substring(0,project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal)));
+
+            NodePackageUtils.RunBowerInstall(project.FullName.Substring(0, project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal)));
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
