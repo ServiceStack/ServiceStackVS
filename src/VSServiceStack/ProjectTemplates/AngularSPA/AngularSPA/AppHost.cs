@@ -16,7 +16,7 @@ namespace $safeprojectname$
         /// Base constructor requires a name and assembly to locate web service classes. 
         /// </summary>
         public AppHost()
-            : base("AngularJSWebApp2", typeof(MyServices).Assembly)
+            : base("$safeprojectname$", typeof(MyServices).Assembly)
         {
 
         }

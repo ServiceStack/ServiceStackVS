@@ -87,13 +87,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodeJSHelperWizard.cs" />
-    <Compile Include="NodeJSRequiredForm.cs">
+    <Compile Include="NodeJsPackageWizard.cs" />
+    <Compile Include="NodeJsRequiredForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NodeJSRequiredForm.Designer.cs">
-      <DependentUpon>NodeJSRequiredForm.cs</DependentUpon>
+    <Compile Include="NodeJsRequiredForm.Designer.cs">
+      <DependentUpon>NodeJsRequiredForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NodeJsRequiredWizard.cs" />
     <Compile Include="NodePackageUtils.cs" />
     <Compile Include="NuGetPackageInstallerWizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,8 +109,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NodeJSRequiredForm.resx">
-      <DependentUpon>NodeJSRequiredForm.cs</DependentUpon>
+    <EmbeddedResource Include="NodeJsRequiredForm.resx">
+      <DependentUpon>NodeJsRequiredForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

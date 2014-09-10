@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.Threading;
 using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
@@ -97,6 +98,11 @@ namespace ServiceStackVS
         private bool _npmInstallRunning = false;
         private bool _bowerInstallRunning = false;
 
+        private static object npmStartingLock = new object();
+        private static object npmRunningLock = new object();
+        private static object bowerStartingLock = new object();
+        private static object bowerRunningLock = new object();
+
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
         #region Package Members
@@ -154,12 +160,66 @@ namespace ServiceStackVS
         {
             if (document.Name.ToLowerInvariant() == "package.json")
             {
-                if (_npmInstallRunning == false)
+                lock (npmStartingLock)
                 {
-                    NodePackageUtils.RunNpmInstall(document.Path, 
-                        (sender, args) => _outputWindow.WriteLine(args.Data), 
-                        (sender, args) => _outputWindow.WriteLine(args.Data)
-                    );
+                    if (!_npmInstallRunning)
+                    {
+                        System.Threading.Tasks.Task.Run(() =>
+                        {
+                            try
+                            {
+                                NodePackageUtils.RunNpmInstall(document.Path,
+                                (sender, args) => _outputWindow.WriteLine(args.Data),
+                                (sender, args) => _outputWindow.WriteLine(args.Data)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                _outputWindow.WriteLine(e.Message);
+                            }
+                            
+                            lock (npmRunningLock)
+                            {
+                                _npmInstallRunning = false;
+                            }
+                        });
+                        lock (npmRunningLock)
+                        {
+                            _npmInstallRunning = true;
+                        }
+                    }
+                }
+            }
+            if (document.Name.ToLowerInvariant() == "bower.json")
+            {
+                lock (bowerStartingLock)
+                {
+                    if (!_bowerInstallRunning)
+                    {
+                        System.Threading.Tasks.Task.Run(() =>
+                        {
+                            try
+                            {
+                                NodePackageUtils.RunBowerInstall(document.Path,
+                                (sender, args) => _outputWindow.WriteLine(args.Data),
+                                (sender, args) => _outputWindow.WriteLine(args.Data)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                _outputWindow.WriteLine(e.Message);
+                            }
+                            
+                            lock (bowerRunningLock)
+                            {
+                                _bowerInstallRunning = false;
+                            }
+                        });
+                        lock (bowerRunningLock)
+                        {
+                            _bowerInstallRunning = true;
+                        }
+                    }
                 }
             }
         }

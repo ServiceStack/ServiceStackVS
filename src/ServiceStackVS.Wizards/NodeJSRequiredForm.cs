@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ServiceStackVS.Wizards
 {
-    public partial class NodeJSRequiredForm : Form
+    public partial class NodeJsRequiredForm : Form
     {
-        public NodeJSRequiredForm()
+        public NodeJsRequiredForm()
         {
             InitializeComponent();
         }
@@ -21,7 +21,6 @@ namespace ServiceStackVS.Wizards
         private void nodeInstall_Click(object sender, EventArgs e)
         {
             Process.Start("http://nodejs.org/");
-            this.Close();
         }
     }
 }

@@ -4,3 +4,4 @@
 /// <reference path="~/bower_components/angular/angular.js" />
 /// <reference path="~/bower_components/angular-route/angular-route.js" />
 /// <reference path="~/node_modules/karma-jasmine/lib/jasmine.js" />
+/// <reference path="~/node_modules/gulp/index.js"/>

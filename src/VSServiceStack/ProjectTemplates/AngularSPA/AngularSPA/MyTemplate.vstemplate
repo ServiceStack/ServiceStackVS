@@ -25,14 +25,14 @@
   </WizardExtension>
   <WizardExtension>
     <Assembly>ServiceStackVS.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.Wizards.NodeJSHelperWizard</FullClassName>
+    <FullClassName>ServiceStackVS.Wizards.NodeJsPackageWizard</FullClassName>
   </WizardExtension>
   <WizardData>
-    <NodeJSRequirements requiresNpm="true">
+    <NodeJs>
       <npm-package id="grunt-cli" />
       <npm-package id="grunt" />
       <npm-package id="gulp" />
       <npm-package id="bower" />
-    </NodeJSRequirements>
+    </NodeJs>
   </WizardData>
 </VSTemplate>

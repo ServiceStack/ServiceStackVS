@@ -80,22 +80,55 @@ namespace ServiceStackVS.Wizards
 
         public static bool HasNodeInPath()
         {
-            return CommandUtils.HasExecutableOnPath("node --help", "http://nodejs.org");
+            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
+            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("node") != null;
+            if (execFoundOnPath)
+            {
+                return true;
+            }
+            bool canRun = CommandUtils.HasExecutableOnPath("node --help", "http://nodejs.org/");
+            return canRun;
         }
 
         public static bool HasNpmInPath()
         {
-            return CommandUtils.HasExecutableOnPath("npm", "Usage: npm <command>");
+            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
+            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("npm") != null;
+            if (execFoundOnPath)
+            {
+                return true;
+            }
+            bool canRun = CommandUtils.HasExecutableOnPath("npm", "Usage: npm <command>");
+            return canRun;
         }
 
         public static bool HasBowerInPath()
         {
-            return CommandUtils.HasExecutableOnPath("bower", "bower help <command>");
+            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
+            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("bower") != null;
+            if (execFoundOnPath)
+            {
+                return true;
+            }
+            bool canRun = CommandUtils.HasExecutableOnPath("bower", "bower help <command>");
+            return canRun;
         }
 
         public static bool HasGruntInPath()
         {
-            return CommandUtils.HasExecutableOnPath("grunt", "grunt command line interface");
+            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
+            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("grunt") != null;
+            if (execFoundOnPath)
+            {
+                return true;
+            }
+            bool canRun = CommandUtils.HasExecutableOnPath("grunt", "grunt command line interface");
+            return canRun;
+        }
+
+        public static bool HasGulpInPath()
+        {
+            return CommandUtils.GetFullPathToCommand("gulp") != null;
         }
 
         public static List<string> GetGloballyInstalledNpmPackages(bool ignoreCache = false)
@@ -105,6 +138,11 @@ namespace ServiceStackVS.Wizards
                 string cmdOutput = CommandUtils.StartCommand("npm ls -g");
                 List<string> allLines = new List<string>(cmdOutput.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
                 allLines.RemoveAt(0); //First line, contains command
+                //If fresh new installation, no packages installed globally
+                if (allLines[0].Contains("(empty)"))
+                {
+                    return new List<string>();
+                }
                 //Parsing tree structure due to problems with --depth not working and json format being 
                 //just key/value pairing, instead of array, doesn't map to properties very well.
                 var packagesWithVersion =
@@ -124,6 +162,10 @@ namespace ServiceStackVS.Wizards
             string cmdOutput = CommandUtils.StartCommand("npm ls");
             List<string> allLines = new List<string>(cmdOutput.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
             allLines.RemoveAt(0); //First line, contains command
+            if (allLines[0].Contains("(empty)"))
+            {
+                return new List<string>();
+            }
             //Parsing tree structure due to problems with --depth not working and json format being 
             //just key/value pairing, instead of array, doesn't map to properties very well.
             var packagesWithVersion =
@@ -241,19 +283,26 @@ namespace ServiceStackVS.Wizards
             return eventData;
         }
 
+        private static List<string> supportedCommandExtensions = new List<string>(
+            new[] 
+                {".cmd",".exe"}
+            );
+
         public static string GetFullPathToCommand(string command)
         {
-            string commandFile = command.Substring(0, command.IndexOf(" ", System.StringComparison.Ordinal)) + ".cmd";
-            var enviromentPath = System.Environment.GetEnvironmentVariable("PATH");
-            var paths = enviromentPath.Split(';');
-            var exePath = paths.Select(x => Path.Combine(x, commandFile)).FirstOrDefault(File.Exists);
-            if (exePath == null)
+            string execPath = null;
+            foreach (string currentExtension in supportedCommandExtensions)
             {
-                commandFile = command.Substring(0, command.IndexOf(" ", System.StringComparison.Ordinal)) + ".exe";
-                exePath = paths.Select(x => Path.Combine(x, commandFile)).FirstOrDefault(File.Exists);
+                int firstSpaceIndex = command.IndexOf(" ", System.StringComparison.Ordinal);
+                bool containsArgs = firstSpaceIndex > 0;
+                string commandFile = command.Substring(0, containsArgs ? firstSpaceIndex : command.Length) + currentExtension;
+                var enviromentPath = System.Environment.GetEnvironmentVariable("PATH");
+                var paths = enviromentPath.Split(';');
+                execPath = paths.Select(x => Path.Combine(x, commandFile)).FirstOrDefault(File.Exists);
+                if (execPath != null)
+                    break;
             }
-
-            return exePath;
+            return execPath;
         }
 
         public static bool HasExecutableOnPath(string commandName, string expectedOutput)
