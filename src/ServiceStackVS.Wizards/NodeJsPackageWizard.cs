@@ -76,8 +76,30 @@ namespace ServiceStackVS.Wizards
         {
             string projectPath = project.FullName.Substring(0,
                 project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal));
-            System.Threading.Tasks.Task.Run(() => NodePackageUtils.RunBowerInstall(projectPath)).Wait();
-            System.Threading.Tasks.Task.Run(() => NodePackageUtils.RunNpmInstall(projectPath));
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    NodePackageUtils.RunBowerInstall(projectPath);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Bower install failed: " + exception.Message);
+                }
+                
+            }).Wait();
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    NodePackageUtils.RunNpmInstall(projectPath);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("NPM install failed: " + exception.Message);
+                    
+                }
+            });
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)

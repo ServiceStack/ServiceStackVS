@@ -276,6 +276,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\build-Release.bat" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config">
       <SubType>Designer</SubType>

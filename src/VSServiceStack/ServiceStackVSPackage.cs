@@ -158,7 +158,10 @@ namespace ServiceStackVS
 
         private void DocumentEventsOnDocumentSaved(Document document)
         {
-            if (document.Name.ToLowerInvariant() == "package.json")
+            string projectFile = document.ProjectItem.ContainingProject.FullName;
+            string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal));
+            //If package.json and is at the root of the project
+            if (document.Name.ToLowerInvariant() == "package.json" && document.Path == path)
             {
                 lock (npmStartingLock)
                 {
@@ -169,9 +172,9 @@ namespace ServiceStackVS
                             try
                             {
                                 NodePackageUtils.RunNpmInstall(document.Path,
-                                (sender, args) => _outputWindow.WriteLine(args.Data),
-                                (sender, args) => _outputWindow.WriteLine(args.Data)
-                                );
+                                    (sender, args) => _outputWindow.WriteLine(args.Data),
+                                    (sender, args) => _outputWindow.WriteLine(args.Data)
+                                    );
                             }
                             catch (Exception e)
                             {
@@ -190,7 +193,8 @@ namespace ServiceStackVS
                     }
                 }
             }
-            if (document.Name.ToLowerInvariant() == "bower.json")
+            //If bower.json and is at the root of the project
+            if (document.Name.ToLowerInvariant() == "bower.json" && document.Path == path)
             {
                 lock (bowerStartingLock)
                 {

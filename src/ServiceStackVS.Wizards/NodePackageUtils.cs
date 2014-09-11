@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ServiceStackVS.Wizards
 {
@@ -65,6 +66,7 @@ namespace ServiceStackVS.Wizards
 
         public static void RunNpmInstall(string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
         {
+            CommandUtils.StartCommand("npm cache clear", workingDirectory);
             CommandUtils.StartCommand("npm install", workingDirectory, output, error);
         }
 
@@ -268,17 +270,41 @@ namespace ServiceStackVS.Wizards
                     error(sender, args);
                 errorOutput.AppendLine(args.Data);
             };
+            bool timedOut = true;
+            nodeCmdProcess.Exited += (sender, args) =>
+            {
+                timedOut = false;
+            };
             nodeCmdProcess.BeginOutputReadLine();
             nodeCmdProcess.BeginErrorReadLine();
             //45 second timeout
-            nodeCmdProcess.WaitForExit(45000);
+            nodeCmdProcess.WaitForExit(60000);
             eventData = cmdOutput.ToString();
+            
             string errorData = errorOutput.ToString();
-            if (nodeCmdProcess.ExitCode != 0)
+            try
             {
-                throw new ProcessException("External process '" + nodeCmdProcess.StartInfo.FileName + " " +
-                                           nodeCmdProcess.StartInfo.Arguments + "' with error data: " + errorData);
+                if (nodeCmdProcess.ExitCode != 0)
+                {
+                    throw new ProcessException("External process '" + nodeCmdProcess.StartInfo.FileName + " " +
+                                               nodeCmdProcess.StartInfo.Arguments + "' with error data: " + errorData);
+                }
             }
+            catch (ProcessException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                if (timedOut)
+                {
+                    nodeCmdProcess.Kill();
+                    throw new TimeoutException("A command has timed out. " + command +
+                                    "Please check your internet connection and/or proxy settings before trying again.");
+                }
+                throw;
+            }
+            
             nodeCmdProcess.Dispose();
             return eventData;
         }

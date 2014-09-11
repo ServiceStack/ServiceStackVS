@@ -10,14 +10,21 @@
         <title>ServiceStack with AngularJS SPA</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-        <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-        <link rel="stylesheet" href="css/app.css"/>
+        <!--build:css lib/css/bootstrap.min.css-->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- endbuild -->
+        <!--build:css css/style.min.css-->
+        <link rel="stylesheet" href="css/app.css" />
+        <!-- endbuild -->
+        <!-- build:js lib/js/jquery.min.js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <!-- endbuild -->
+        <!-- build:js lib/js/bootstrap.min.js -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <!-- endbuild -->
+        <!-- build:js lib/js/modernizr.min.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
     </head>
     <body>
         <div class="navbar navbar-inverse" role="navigation">
@@ -40,15 +47,14 @@
                 </div><!--/.nav-collapse -->
             </div>
         </div>
-
-        <!-- In production use:
-            <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-            -->
-        
         <div ng-view></div>
+        <!-- build:js lib/js/angular.min.js -->
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endbuild -->
+        <!-- build:js js/app.min.js -->
         <script src="js/app.js"></script>
         <script src="js/hello/controllers.js"></script>
+        <!-- endbuild -->
     </body>
 </html>
