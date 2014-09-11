@@ -159,7 +159,7 @@ namespace ServiceStackVS
         private void DocumentEventsOnDocumentSaved(Document document)
         {
             string projectFile = document.ProjectItem.ContainingProject.FullName;
-            string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal));
+            string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
             //If package.json and is at the root of the project
             if (document.Name.ToLowerInvariant() == "package.json" && document.Path == path)
             {
