@@ -1,7 +1,9 @@
 ServiceStackVS
-==========
+==============
 
-ServiceStackVS is a Visual Studio extension to be used along side the ServiceStack framework.
+ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
+
+### C# Templates
 
 ## 1.0.3 Release ##
 New for ServiceStackVS in 1.0.3 update are **5 F# templates** and a *beta* version of a new **AngularJS Single Page App template** which includes the use of **NPM**, **Bower**, **Grunt**, **Gulp** and **Karma**. This template is designed to work along side Microsoft's new **[Task Runner Explorer](http://www.hanselman.com/blog/IntroducingGulpGruntBowerAndNpmSupportForVisualStudio.aspx)** extension.
@@ -42,8 +44,36 @@ Any feedback or bug reports would be welcome, as this will be improved and updat
 ![Angular Single Page Application Demo](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-demo.gif)
 
 
-Getting Started with ServiceStackVS Templates
----------------------------------------------
+The C# Project templates included in this extension:
+
+- ServiceStack ASP.NET Empty
+- ServiceStack ASP.NET MVC4 & MVC5
+- ServiceStack ASP.NET with AngularJS
+- ServiceStack ASP.NET with Bootstrap
+- ServiceStack ASp.NET with Razor
+- ServiceStack Self Host Empty
+
+These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
+
+![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/servicestackvs-templates.gif)
+
+## F# Templates
+
+New in ServiceStackVS **1.0.3** are multiple F# Templates:
+
+![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
+
+These F# templates follow the same recommended multi-project structure used in the C# templates. There's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects in different single project configurations.
+
+### F# ASP.NET with Freebase API Demo
+
+Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code taking advantage of ServiceStack's built-in data formats:
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
+
+[About the F# Freebase Demo](https://github.com/ServiceStack/ServiceStackVS/blob/master/fsharp.md#f-aspnet-with-freebase-api-demo).
+
+# Getting Started
 
 ### Download ServiceStackVS
 
@@ -58,28 +88,7 @@ ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from th
 
 > Alternatively if continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed.
 
-### Feedback
-
-We hope **ServiceStackVS** helps make ServiceStack developers more productive than ever and we'll look at continue improving it with new features in future. [Suggestions and feedback are welcome](http://servicestack.uservoice.com/forums/176786-feature-requests).  
-
-Templates
----------
-
-Project templates included in the extension:
-
-- ServiceStack ASP.NET Empty
-- ServiceStack ASP.NET MVC5
-- ServiceStack ASP.NET with AngularJS
-- ServiceStack ASP.NET with Bootstrap
-- ServiceStack ASp.NET with Razor
-- ServiceStack Self Host Empty
-
-These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
-
-![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/servicestackvs-templates.gif)
-
-Projects
---------
+## Projects
 
 Starting a new ServiceStack ASP.NET with AngularJS application will give you 4 new projects.
 
@@ -100,13 +109,19 @@ The Host project has dependencies on the Service Model and Service Inteface proj
 
 The Unit Testing project, also as a dependency on these projects as it tests them in isolation of the main Host project. In the template, we are using the BasicAppHost to mock the AppHost we are using in the Host project. The example unit test is using NUit to setup and run the tests.
 
-The Demo
---------
+### ServiceStack with Angular JS Demo
 
-The simple HelloWorld angular application that is provided in the template calls the `/hello/{Name}` route and displays the result in the `<p>` below. 
+The simple HelloWorld AngularJS application that is provided in the template calls the `/hello/{Name}` route and displays the result in the `<p>` below. 
 
 ![](https://github.com/ServiceStack/ServiceStackVS/raw/master/Images/angularjs_hello_app.png)
 
-Build
------
+## Build
+
 This project requires the Visual Studio 2013 SDK to build the extension.
+
+------
+
+### Feedback
+
+We hope **ServiceStackVS** helps make ServiceStack developers more productive than ever and we'll look at continue improving it with new features in future. [Suggestions and feedback are welcome](http://servicestack.uservoice.com/forums/176786-feature-requests).  
+
