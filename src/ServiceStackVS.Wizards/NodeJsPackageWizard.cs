@@ -92,6 +92,7 @@ namespace ServiceStackVS.Wizards
             {
                 try
                 {
+                    NodePackageUtils.NpmClearCache(projectPath);
                     NodePackageUtils.RunNpmInstall(projectPath);
                 }
                 catch (Exception exception)

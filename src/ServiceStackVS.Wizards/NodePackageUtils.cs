@@ -64,9 +64,13 @@ namespace ServiceStackVS.Wizards
             }
         }
 
-        public static void RunNpmInstall(string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
+        public static void NpmClearCache(string workingDirectory = null)
         {
             CommandUtils.StartCommand("npm cache clear", workingDirectory);
+        }
+
+        public static void RunNpmInstall(string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
+        {
             CommandUtils.StartCommand("npm install", workingDirectory, output, error);
         }
 
