@@ -25,63 +25,63 @@ namespace ServiceStackVS.Wizards
     {
         private static List<string> npmPackageCache;
 
-        public static void InstallGlobally(this NpmPackage package, bool forceReinstall = false)
+        public static void InstallGlobally(this NpmPackage package, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallNpmPackageGlobally(package.Id, forceReinstall);
+            InstallNpmPackageGlobally(package.Id, forceReinstall, timeoutSeconds);
         }
 
-        public static void Install(this NpmPackage package, string workingDirectory, bool forceReinstall = false)
+        public static void Install(this NpmPackage package, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallNpmPackage(package.Id, workingDirectory);
+            InstallNpmPackage(package.Id, workingDirectory, forceReinstall, timeoutSeconds);
         }
 
-        public static void Install(this BowerPackage package, string workingDirectory, bool forceReinstall = false)
+        public static void Install(this BowerPackage package, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallBowerPackage(package.Id,workingDirectory);
+            InstallBowerPackage(package.Id, workingDirectory, forceReinstall, timeoutSeconds);
         }
 
-        public static void InstallNpmPackageGlobally(string packageId, bool forceReinstall = false)
+        public static void InstallNpmPackageGlobally(string packageId, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasNpmPackageInstalledGlobally(packageId) || forceReinstall)
             {
-                CommandUtils.StartCommand("npm install -g " + packageId);
+                CommandUtils.StartCommand("npm install -g " + packageId, null, null, null, timeoutSeconds);
             }
         }
 
-        public static void InstallNpmPackage(string packageId, string workingDirectory, bool forceReinstall = false)
+        public static void InstallNpmPackage(string packageId, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasNpmPackageInstalled(packageId, workingDirectory) || forceReinstall)
             {
-                CommandUtils.StartCommand("npm install " + packageId,workingDirectory);
+                CommandUtils.StartCommand("npm install " + packageId, workingDirectory, null, null, timeoutSeconds);
             }
         }
 
-        public static void InstallBowerPackage(string packageId, string workingDirectory, bool forceReinstall = false)
+        public static void InstallBowerPackage(string packageId, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasBowerPackageInstalled(packageId,workingDirectory) || forceReinstall)
             {
-                CommandUtils.StartCommand("bower install " + packageId, workingDirectory);
+                CommandUtils.StartCommand("bower install " + packageId, workingDirectory, null, null, timeoutSeconds);
             }
         }
 
-        public static void NpmClearCache(string workingDirectory = null)
+        public static void NpmClearCache(string workingDirectory = null, int timeoutSeconds = 60)
         {
             CommandUtils.StartCommand("npm cache clear", workingDirectory);
         }
 
-        public static void RunNpmInstall(string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
+        public static void RunNpmInstall(string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, int timeoutSeconds = 60)
         {
-            CommandUtils.StartCommand("npm install", workingDirectory, output, error);
+            CommandUtils.StartCommand("npm install", workingDirectory, output, error, timeoutSeconds);
         }
 
-        public static void RunBowerInstall(string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
+        public static void RunBowerInstall(string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, int timeoutSeconds = 60)
         {
             if (string.IsNullOrEmpty(workingDirectory))
             {
                 throw new Exception("Bower working directory null or empty");
             }
 
-            CommandUtils.StartCommand("bower install", workingDirectory, output, error);
+            CommandUtils.StartCommand("bower install", workingDirectory, output, error, timeoutSeconds);
         }
 
         public static bool HasNodeInPath()
@@ -240,7 +240,12 @@ namespace ServiceStackVS.Wizards
     public class CommandUtils
     {
         private static bool processPathInit = false;
-        public static string StartCommand(string command, string workingDirectory = null, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null)
+        public static string StartCommand(
+            string command, 
+            string workingDirectory = null, 
+            Action<object, DataReceivedEventArgs> output = null, 
+            Action<object, DataReceivedEventArgs> error = null,
+            int timeoutSeconds = 60)
         {
             var nodeCmdProcess = new Process();
             string fullPath = GetFullPathToCommand(command);
@@ -281,8 +286,7 @@ namespace ServiceStackVS.Wizards
             };
             nodeCmdProcess.BeginOutputReadLine();
             nodeCmdProcess.BeginErrorReadLine();
-            //45 second timeout
-            nodeCmdProcess.WaitForExit(60000);
+            nodeCmdProcess.WaitForExit(timeoutSeconds * 1000);
             eventData = cmdOutput.ToString();
             
             string errorData = errorOutput.ToString();
@@ -335,14 +339,23 @@ namespace ServiceStackVS.Wizards
             return execPath;
         }
 
-        public static bool HasExecutableOnPath(string commandName, string expectedOutput)
+        public static bool HasExecutableOnPath(string commandName, string expectedOutput, bool supressExceptions = true)
         {
             bool hasExecutableOnPath = false;
-            string eventData = StartCommand(commandName);
-            if (eventData.Contains(expectedOutput))
+            try
             {
-                hasExecutableOnPath = true;
+                string eventData = StartCommand(commandName);
+                if (eventData.Contains(expectedOutput))
+                {
+                    hasExecutableOnPath = true;
+                }
             }
+            catch (Exception)
+            {
+                if (supressExceptions) return false;
+                throw;
+            }
+            
             return hasExecutableOnPath;
         }
     }

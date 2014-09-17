@@ -63,12 +63,49 @@ namespace ServiceStackVS.Wizards
                 //        .Where(x => x.Name.LocalName == "bower-package")
                 //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
                 //        .ToList();
-                
-                //Template required globally installed packages, eg bower to enable bower install
-                foreach (var package in npmPackages)
+
+                try
                 {
-                    package.InstallGlobally(); //Installs global npm package if missing
+                    //Template required globally installed packages, eg bower to enable bower install
+                    foreach (var package in npmPackages)
+                    {
+                        package.InstallGlobally(); //Installs global npm package if missing
+                    }
                 }
+                catch (ProcessException pe)
+                {
+                    MessageBox.Show("An error has occurred during a NPM package installation - " + pe.Message, 
+                        "An error has occurred during a NPM package installation.", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Error, 
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly, 
+                        false);
+                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+                }
+                catch (TimeoutException te)
+                {
+                    MessageBox.Show("An NPM install has timed out - " + te.Message,
+                        "An error has occurred during a NPM package installation.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly,
+                        false);
+                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("An error has occurred during a NPM package installation." + e.Message,
+                        "An error has occurred during a NPM package installation.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly,
+                        false);
+                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+                }
+                
             }
         }
 
@@ -84,7 +121,14 @@ namespace ServiceStackVS.Wizards
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show("Bower install failed: " + exception.Message);
+                    MessageBox.Show("Bower install failed: " + exception.Message,
+                        "An error has occurred during a Bower install.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly,
+                        false);
+                    
                 }
                 
             }).Wait();
@@ -97,7 +141,13 @@ namespace ServiceStackVS.Wizards
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show("NPM install failed: " + exception.Message);
+                    MessageBox.Show("NPM install failed: " + exception.Message,
+                        "An error has occurred during an NPM install.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly,
+                        false);
                     
                 }
             });
