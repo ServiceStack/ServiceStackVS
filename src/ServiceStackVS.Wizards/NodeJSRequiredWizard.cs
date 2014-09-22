@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
@@ -18,11 +19,16 @@ namespace ServiceStackVS.Wizards
         {
             if (runKind == WizardRunKind.AsMultiProject)
             {
-                if (!NodePackageUtils.HasNodeInPath())
+                if (CommandUtils.GetFullPathToCommand("node") == null)
                 {
-                    NodeJsRequiredForm form = new NodeJsRequiredForm();
+                    var form = new NodeJSInstallationPrompt();
                     form.ShowDialog();
-                    throw new WizardBackoutException("NodeJS installation required");
+                    if (!form.NodeFoundOnPath)
+                    {
+                        //Advise to restart VS and backout?
+                        throw new WizardBackoutException("NodeJS installation required");
+                    }
+                    
                 }
             }
         }

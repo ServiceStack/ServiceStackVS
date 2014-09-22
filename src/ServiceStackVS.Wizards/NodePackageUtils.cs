@@ -287,9 +287,16 @@ namespace ServiceStackVS.Wizards
             nodeCmdProcess.BeginOutputReadLine();
             nodeCmdProcess.BeginErrorReadLine();
             nodeCmdProcess.WaitForExit(timeoutSeconds * 1000);
-            eventData = cmdOutput.ToString();
-            
-            string errorData = errorOutput.ToString();
+            string errorData;
+            lock (cmdOutput)
+            {
+                eventData = cmdOutput.ToString();
+            }
+            lock (errorOutput)
+            {
+                errorData = errorOutput.ToString();
+            }
+
             try
             {
                 if (nodeCmdProcess.ExitCode != 0)

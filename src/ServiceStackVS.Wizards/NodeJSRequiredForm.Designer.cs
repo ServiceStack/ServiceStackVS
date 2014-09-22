@@ -29,23 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NodeJsRequiredForm));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.installedItems = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 60);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(505, 57);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.nodeInstall_Click);
             // 
             // label1
             // 
@@ -57,27 +44,37 @@
             this.label1.Text = "This template requires NodeJS installed, click install below to download NodeJS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // installedItems
+            // 
+            this.installedItems.FormattingEnabled = true;
+            this.installedItems.Items.AddRange(new object[] {
+            "Grunt Installed...",
+            "Gulp Installed...",
+            "Bower Installed..."});
+            this.installedItems.Location = new System.Drawing.Point(17, 60);
+            this.installedItems.Name = "installedItems";
+            this.installedItems.Size = new System.Drawing.Size(488, 49);
+            this.installedItems.TabIndex = 3;
+            // 
             // NodeJsRequiredForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 117);
+            this.ClientSize = new System.Drawing.Size(524, 230);
+            this.Controls.Add(this.installedItems);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(521, 155);
             this.Name = "NodeJsRequiredForm";
             this.Text = "NodeJS Installation Required";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckedListBox installedItems;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
+using ServiceStackVS.Wizards.Annotations;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.Wizards
@@ -19,6 +21,12 @@ namespace ServiceStackVS.Wizards
     public class NodeJsPackageWizard : IWizard
     {
         private List<NpmPackage> npmPackages;
+
+        private delegate void NpmPackageHandler(object sender, PackageInstallEventArgs eventArgs);
+        private event NpmPackageHandler UpdateProgress;
+
+        private NodeJsRequiredForm installationDialog;
+
         //private List<BowerPackage> bowerPackages; 
 
         /// <summary>
@@ -39,73 +47,80 @@ namespace ServiceStackVS.Wizards
         /// <param name="customParams"></param>
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
+            string wizardData = replacementsDictionary["$wizarddata$"];
+            XElement element = XElement.Parse(wizardData);
+
+            npmPackages =
+                element.Descendants()
+                    .Where(x => x.Name.LocalName == "npm-package")
+                    .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
+                    .ToList();
+            //Not needed
+            //bowerPackages =
+            //    element.Descendants()
+            //        .Where(x => x.Name.LocalName == "bower-package")
+            //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
+            //        .ToList();
             if (runKind == WizardRunKind.AsNewProject)
             {
-                if (!NodePackageUtils.HasNodeInPath())
+                using (installationDialog = new NodeJsRequiredForm())
                 {
-                    NodeJsRequiredForm form = new NodeJsRequiredForm();
-                    form.ShowDialog();
-                    throw new WizardBackoutException("NodeJS installation required");
-                }
-
-                string wizardData = replacementsDictionary["$wizarddata$"];
-                XElement element = XElement.Parse(wizardData);
-
-                npmPackages =
-                    element.Descendants()
-                        .Where(x => x.Name.LocalName == "npm-package")
-                        .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
-                        .ToList();
-
-                //Not needed
-                //bowerPackages =
-                //    element.Descendants()
-                //        .Where(x => x.Name.LocalName == "bower-package")
-                //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
-                //        .ToList();
-
-                try
-                {
-                    //Template required globally installed packages, eg bower to enable bower install
-                    foreach (var package in npmPackages)
+                    UpdateProgress += installationDialog.UpdateProgress;
+                    System.Threading.Tasks.Task.Run(() => StartRequiredPackageInstallations());
+                    var result = installationDialog.ShowDialog();
+                    if (!installationDialog.RequirementsMet)
                     {
-                        package.InstallGlobally(); //Installs global npm package if missing
+                        throw new WizardBackoutException();
                     }
                 }
-                catch (ProcessException pe)
+            }
+        }
+
+        private void StartRequiredPackageInstallations()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000); //HACK Dialog not yet created, no method in form to override to fire.
+                //Template required globally installed packages, eg bower to enable bower install
+                foreach (var package in npmPackages)
                 {
-                    MessageBox.Show("An error has occurred during a NPM package installation - " + pe.Message, 
-                        "An error has occurred during a NPM package installation.", 
-                        MessageBoxButtons.OK, 
-                        MessageBoxIcon.Error, 
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly, 
-                        false);
-                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+                    UpdateProgress.Invoke(this, new PackageInstallEventArgs { Package = package});
+                    package.InstallGlobally(); //Installs global npm package if missing
+                    UpdateProgress.Invoke(this, new PackageInstallEventArgs { Package = package, InstallationComplete = true});
                 }
-                catch (TimeoutException te)
-                {
-                    MessageBox.Show("An NPM install has timed out - " + te.Message,
-                        "An error has occurred during a NPM package installation.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly,
-                        false);
-                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("An error has occurred during a NPM package installation." + e.Message,
-                        "An error has occurred during a NPM package installation.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly,
-                        false);
-                    throw new WizardBackoutException("An error has occurred during a NPM package installation.");
-                }
-                
+            }
+            catch (ProcessException pe)
+            {
+                MessageBox.Show("An error has occurred during a NPM package installation - " + pe.Message,
+                    "An error has occurred during a NPM package installation.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+                throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+            }
+            catch (TimeoutException te)
+            {
+                MessageBox.Show("An NPM install has timed out - " + te.Message,
+                    "An error has occurred during a NPM package installation.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+                throw new WizardBackoutException("An error has occurred during a NPM package installation.");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("An error has occurred during a NPM package installation." + e.Message,
+                    "An error has occurred during a NPM package installation.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+                throw new WizardBackoutException("An error has occurred during a NPM package installation.");
             }
         }
 
@@ -117,6 +132,12 @@ namespace ServiceStackVS.Wizards
             {
                 try
                 {
+                    if (!NodePackageUtils.HasBowerInPath())
+                    {
+                        string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                        string npmFolder = Path.Combine(appDataFolder, "npm");
+                        Environment.SetEnvironmentVariable("PATH",Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                    }
                     NodePackageUtils.RunBowerInstall(projectPath);
                 }
                 catch (Exception exception)
@@ -172,5 +193,11 @@ namespace ServiceStackVS.Wizards
         {
 
         }
+    }
+
+    public class PackageInstallEventArgs : EventArgs
+    {
+        public NpmPackage Package { get; set; }
+        public bool InstallationComplete { get; set; }
     }
 }
