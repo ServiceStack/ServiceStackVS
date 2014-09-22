@@ -5,12 +5,14 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
 using ServiceStackVS.Wizards.Annotations;
@@ -20,12 +22,32 @@ namespace ServiceStackVS.Wizards
 {
     public class NodeJsPackageWizard : IWizard
     {
+        private const string OutputWindowGuid = "{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}";
+        private const string ServiceStackVSPackageCmdSetGuid = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private List<NpmPackage> npmPackages;
 
         private delegate void NpmPackageHandler(object sender, PackageInstallEventArgs eventArgs);
         private event NpmPackageHandler UpdateProgress;
 
         private NodeJsRequiredForm installationDialog;
+
+        uint progressRef = 0;
+
+        private DTE _dte;
+
+        private IVsStatusbar bar;
+        private IVsStatusbar StatusBar
+        {
+            get
+            {
+                if (bar == null)
+                {
+                    bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar;
+                }
+
+                return bar;
+            }
+        }
 
         //private List<BowerPackage> bowerPackages; 
 
@@ -47,6 +69,7 @@ namespace ServiceStackVS.Wizards
         /// <param name="customParams"></param>
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
+            _dte = (DTE)automationObject;
             string wizardData = replacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse(wizardData);
 
@@ -55,38 +78,48 @@ namespace ServiceStackVS.Wizards
                     .Where(x => x.Name.LocalName == "npm-package")
                     .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
                     .ToList();
+
+            if (!NodePackageUtils.HasBowerInPath())
+            {
+                UpdateStatusMessage("Installing bower...");
+                NodePackageUtils.InstallNpmPackageGlobally("bower");
+            }
             //Not needed
             //bowerPackages =
             //    element.Descendants()
             //        .Where(x => x.Name.LocalName == "bower-package")
             //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
             //        .ToList();
-            if (runKind == WizardRunKind.AsNewProject)
-            {
-                using (installationDialog = new NodeJsRequiredForm())
-                {
-                    UpdateProgress += installationDialog.UpdateProgress;
-                    System.Threading.Tasks.Task.Run(() => StartRequiredPackageInstallations());
-                    var result = installationDialog.ShowDialog();
-                    if (!installationDialog.RequirementsMet)
-                    {
-                        throw new WizardBackoutException();
-                    }
-                }
-            }
         }
 
-        private void StartRequiredPackageInstallations()
+        private void StartRequiredPackageInstallations(OutputWindowWriter outputWindowWriter)
         {
             try
             {
-                System.Threading.Thread.Sleep(1000); //HACK Dialog not yet created, no method in form to override to fire.
-                //Template required globally installed packages, eg bower to enable bower install
-                foreach (var package in npmPackages)
+                // Initialize the progress bar.
+                StatusBar.Progress(ref progressRef, 1, "", 0, 0);
+                for (int index = 0; index < npmPackages.Count; index++)
                 {
-                    UpdateProgress.Invoke(this, new PackageInstallEventArgs { Package = package});
-                    package.InstallGlobally(); //Installs global npm package if missing
-                    UpdateProgress.Invoke(this, new PackageInstallEventArgs { Package = package, InstallationComplete = true});
+                    var package = npmPackages[index];
+                    UpdateStatusMessage("Installing required NPM package '" + package.Id + "'...");
+                    package.InstallGlobally(
+                        (sender, args) =>
+                        {
+                            if (!string.IsNullOrEmpty(args.Data))
+                            {
+                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                outputWindowWriter.WriteLine(s); 
+                            }
+                        },
+                        (sender, args) =>
+                        {
+                            if (!string.IsNullOrEmpty(args.Data))
+                            {
+                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                outputWindowWriter.WriteLine(s); 
+                            }
+                        }); //Installs global npm package if missing
+                    StatusBar.Progress(ref progressRef, 1, "", Convert.ToUInt32(index), Convert.ToUInt32(npmPackages.Count));
                 }
             }
             catch (ProcessException pe)
@@ -124,41 +157,82 @@ namespace ServiceStackVS.Wizards
             }
         }
 
+        private void UpdateStatusMessage(string message)
+        {
+            int frozen = 1;
+            int retries = 0;
+            while (frozen != 0 && retries < 10)
+            {
+                retries++;
+                StatusBar.IsFrozen(out frozen);
+                if (frozen == 0)
+                {
+                    StatusBar.SetText(message);
+                }
+                System.Threading.Thread.Sleep(10);
+            }
+        }
+
         public void ProjectFinishedGenerating(Project project)
         {
+            //
+            var outputWindowPane = _dte.Windows.Item(OutputWindowGuid); //Output window pane
+            var _outputWindow = new OutputWindowWriter(ServiceStackVSPackageCmdSetGuid, "ServiceStackVS");
+            outputWindowPane.Visible = true;
             string projectPath = project.FullName.Substring(0,
                 project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal));
-            System.Threading.Tasks.Task.Run(() =>
+
+            try
             {
-                try
+                if (!NodePackageUtils.HasBowerInPath())
                 {
-                    if (!NodePackageUtils.HasBowerInPath())
-                    {
-                        string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                        string npmFolder = Path.Combine(appDataFolder, "npm");
-                        Environment.SetEnvironmentVariable("PATH",Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
-                    }
-                    NodePackageUtils.RunBowerInstall(projectPath);
+                    string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    string npmFolder = Path.Combine(appDataFolder, "npm");
+                    Environment.SetEnvironmentVariable("PATH",Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
                 }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("Bower install failed: " + exception.Message,
-                        "An error has occurred during a Bower install.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly,
-                        false);
+                UpdateStatusMessage("Downloading bower depedencies...");
+                NodePackageUtils.RunBowerInstall(projectPath);                  
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Bower install failed: " + exception.Message,
+                    "An error has occurred during a Bower install.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
                     
-                }
-                
-            }).Wait();
+            }
+
             System.Threading.Tasks.Task.Run(() =>
             {
                 try
                 {
+                    StartRequiredPackageInstallations(_outputWindow);
+                    UpdateStatusMessage("Clearing NPM cache...");
                     NodePackageUtils.NpmClearCache(projectPath);
-                    NodePackageUtils.RunNpmInstall(projectPath);
+                    UpdateStatusMessage("Running NPM install...");
+                    NodePackageUtils.RunNpmInstall(projectPath,
+                        (sender, args) =>
+                        {
+                            if (!string.IsNullOrEmpty(args.Data))
+                            {
+                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                _outputWindow.WriteLine(s); 
+                            }
+                        },
+                    (sender, args) =>
+                    {
+                        if (!string.IsNullOrEmpty(args.Data))
+                        {
+                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            _outputWindow.WriteLine(s);
+                        }
+                    });
+                    _outputWindow.WriteLine("NPM Install complete");
+                    UpdateStatusMessage("Ready.");
+                    StatusBar.Clear();
                 }
                 catch (Exception exception)
                 {

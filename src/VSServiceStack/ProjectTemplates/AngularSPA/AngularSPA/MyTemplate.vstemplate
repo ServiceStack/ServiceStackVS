@@ -32,7 +32,6 @@
       <npm-package id="grunt-cli" />
       <npm-package id="grunt" />
       <npm-package id="gulp" />
-      <npm-package id="bower" />
     </NodeJs>
   </WizardData>
 </VSTemplate>

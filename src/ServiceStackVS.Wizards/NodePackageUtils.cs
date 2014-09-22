@@ -25,42 +25,42 @@ namespace ServiceStackVS.Wizards
     {
         private static List<string> npmPackageCache;
 
-        public static void InstallGlobally(this NpmPackage package, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void InstallGlobally(this NpmPackage package, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallNpmPackageGlobally(package.Id, forceReinstall, timeoutSeconds);
+            InstallNpmPackageGlobally(package.Id, output, error, forceReinstall, timeoutSeconds);
         }
 
-        public static void Install(this NpmPackage package, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void Install(this NpmPackage package, string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallNpmPackage(package.Id, workingDirectory, forceReinstall, timeoutSeconds);
+            InstallNpmPackage(package.Id, workingDirectory,output,error, forceReinstall, timeoutSeconds);
         }
 
-        public static void Install(this BowerPackage package, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void Install(this BowerPackage package, string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            InstallBowerPackage(package.Id, workingDirectory, forceReinstall, timeoutSeconds);
+            InstallBowerPackage(package.Id, workingDirectory,output,error, forceReinstall, timeoutSeconds);
         }
 
-        public static void InstallNpmPackageGlobally(string packageId, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void InstallNpmPackageGlobally(string packageId,Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasNpmPackageInstalledGlobally(packageId) || forceReinstall)
             {
-                CommandUtils.StartCommand("npm install -g " + packageId, null, null, null, timeoutSeconds);
+                CommandUtils.StartCommand("npm install -g " + packageId, null, output, error, timeoutSeconds);
             }
         }
 
-        public static void InstallNpmPackage(string packageId, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void InstallNpmPackage(string packageId, string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasNpmPackageInstalled(packageId, workingDirectory) || forceReinstall)
             {
-                CommandUtils.StartCommand("npm install " + packageId, workingDirectory, null, null, timeoutSeconds);
+                CommandUtils.StartCommand("npm install " + packageId, workingDirectory, output, error, timeoutSeconds);
             }
         }
 
-        public static void InstallBowerPackage(string packageId, string workingDirectory, bool forceReinstall = false, int timeoutSeconds = 60)
+        public static void InstallBowerPackage(string packageId, string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
             if (!HasBowerPackageInstalled(packageId,workingDirectory) || forceReinstall)
             {
-                CommandUtils.StartCommand("bower install " + packageId, workingDirectory, null, null, timeoutSeconds);
+                CommandUtils.StartCommand("bower install " + packageId, workingDirectory, output, error, timeoutSeconds);
             }
         }
 
@@ -253,11 +253,7 @@ namespace ServiceStackVS.Wizards
             nodeCmdProcess.StartInfo.RedirectStandardOutput = true;
             nodeCmdProcess.StartInfo.RedirectStandardError = true;
             nodeCmdProcess.StartInfo.UseShellExecute = false;
-#if DEBUG
-            nodeCmdProcess.StartInfo.CreateNoWindow = false;
-#else
             nodeCmdProcess.StartInfo.CreateNoWindow = true;
-#endif
             nodeCmdProcess.StartInfo.FileName = "cmd.exe";
             nodeCmdProcess.StartInfo.WorkingDirectory = workingDirectory ?? "";
             string eventData = "";
