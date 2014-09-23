@@ -19,7 +19,7 @@ namespace ServiceStackVS.Wizards
         {
             if (runKind == WizardRunKind.AsMultiProject)
             {
-                if (CommandUtils.GetFullPathToCommand("node") == null)
+                if (!NodePackageUtils.TryRegisterNpmFromDefaultLocation())
                 {
                     var form = new NodeJSInstallationPrompt();
                     form.ShowDialog();

@@ -96,6 +96,7 @@
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\hello\controllers.js" />
+    <Content Include="js\navigation\controllers.js" />
     <Content Include="partials\hello\hello.html" />
     <Content Include="Scripts\_references.js" />
     <Content Include="partials\partial1.html" />

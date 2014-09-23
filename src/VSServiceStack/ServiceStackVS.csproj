@@ -310,6 +310,7 @@
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\navigation\controllers.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\MyTemplate.vstemplate">
       <SubType>Designer</SubType>
     </Content>

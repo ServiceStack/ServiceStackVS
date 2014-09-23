@@ -9,25 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace ServiceStackVS.Wizards
 {
     public partial class NodeJSInstallationPrompt : Form
     {
         public bool NodeFoundOnPath;
-
         public NodeJSInstallationPrompt()
         {
             InitializeComponent();
-        }
-
-        private void NodeJSInstallationPrompt_Enter(object sender, EventArgs e)
-        {
-            NodeFoundOnPath = CheckForInstallation();
-            if (NodeFoundOnPath)
-            {
-                this.Close(); 
-            }
         }
 
         private bool CheckForInstallation()
@@ -79,14 +70,22 @@ namespace ServiceStackVS.Wizards
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Process.Start("http://nodejs.org/");
-
-            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnContinue_Click(object sender, EventArgs e)
         {
             NodeFoundOnPath = CheckForInstallation();
-            if (NodeFoundOnPath)
+            if (!NodeFoundOnPath)
+            {
+                MessageBox.Show(@"Unable to detect NodeJS installation. Please restart Visual Studio and try again.",
+                    @"Unable to detect NodeJS installation.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+            }
+            else
             {
                 this.Close();
             }

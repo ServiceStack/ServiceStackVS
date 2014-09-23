@@ -27,7 +27,7 @@
         <!-- endbuild -->
     </head>
     <body>
-        <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar navbar-inverse" role="navigation" ng-controller="navigationCtrl">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,21 +40,22 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#/view1">View1</a></li>
-                        <li><a href="#/view2">View2</a></li>
+                        <li ng-class="{ active: IsRouteActive('/')}"><a href="#/">Home</a></li>
+                        <li ng-class="{ active: IsRouteActive('/view1')}"><a href="#/view1">View1</a></li>
+                        <li ng-class="{ active: IsRouteActive('/view2')}"><a href="#/view2">View2</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </div>
-        <div ng-view></div>
+        <div class="container" ng-view></div>
         <!-- build:js lib/js/angular.min.js -->
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <!-- endbuild -->
         <!-- build:js js/app.min.js -->
-        <script src="js/app.js"></script>
         <script src="js/hello/controllers.js"></script>
+        <script src="js/navigation/controllers.js"></script>
+        <script src="js/app.js"></script>
         <!-- endbuild -->
     </body>
 </html>

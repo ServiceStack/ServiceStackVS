@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using EnvDTE;
@@ -103,6 +104,9 @@ namespace ServiceStackVS
         private static object bowerStartingLock = new object();
         private static object bowerRunningLock = new object();
 
+        private bool hasBowerInstalled = false;
+        private bool hasNpmInstalled = false;
+
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
         #region Package Members
@@ -160,69 +164,118 @@ namespace ServiceStackVS
         {
             string projectFile = document.ProjectItem.ContainingProject.FullName;
             string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+            hasNpmInstalled = hasNpmInstalled ? hasNpmInstalled : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
+            hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
+            string settingsFilePath = Path.Combine(path, "servicestackvs.settings");
+            if (settingsFilePath.FileExists())
+            {
+                //TODO bring in ServiceStack just for TextFileSettings?
+            }
+            
             //If package.json and is at the root of the project
             if (document.Name.ToLowerInvariant() == "package.json" && document.Path == path)
             {
-                lock (npmStartingLock)
+                if (!(bool) hasNpmInstalled)
                 {
-                    if (!_npmInstallRunning)
-                    {
-                        System.Threading.Tasks.Task.Run(() =>
-                        {
-                            try
-                            {
-                                NodePackageUtils.RunNpmInstall(document.Path,
-                                    (sender, args) => _outputWindow.WriteLine(args.Data),
-                                    (sender, args) => _outputWindow.WriteLine(args.Data)
-                                    );
-                            }
-                            catch (Exception e)
-                            {
-                                _outputWindow.WriteLine(e.Message);
-                            }
-                            
-                            lock (npmRunningLock)
-                            {
-                                _npmInstallRunning = false;
-                            }
-                        });
-                        lock (npmRunningLock)
-                        {
-                            _npmInstallRunning = true;
-                        }
-                    }
+                    _outputWindow.Show();
+                    _outputWindow.WriteLine("NodeJS Installation not detected. Visit http://nodejs.org/ to download.");
+                    return;
                 }
+                TryRunNpmInstall(document);
             }
             //If bower.json and is at the root of the project
             if (document.Name.ToLowerInvariant() == "bower.json" && document.Path == path)
             {
-                lock (bowerStartingLock)
+                if (!(bool)hasBowerInstalled)
                 {
-                    if (!_bowerInstallRunning)
+                    _outputWindow.Show();
+                    _outputWindow.WriteLine("Bower Installation not detected. Run npm install bower -g to install if NodeJS/NPM already installed.");
+                    return;
+                }
+                TryRunBowerInstall(document);
+            }
+        }
+
+        private void TryRunBowerInstall(Document document)
+        {
+            lock (bowerStartingLock)
+            {
+                if (!_bowerInstallRunning)
+                {
+                    _outputWindow.Show();
+                    _outputWindow.WriteLine("--- Bower install started ---");
+                    System.Threading.Tasks.Task.Run(() =>
                     {
-                        System.Threading.Tasks.Task.Run(() =>
+                        try
                         {
-                            try
-                            {
-                                NodePackageUtils.RunBowerInstall(document.Path,
+                            NodePackageUtils.RunBowerInstall(document.Path,
                                 (sender, args) => _outputWindow.WriteLine(args.Data),
                                 (sender, args) => _outputWindow.WriteLine(args.Data)
                                 );
-                            }
-                            catch (Exception e)
-                            {
-                                _outputWindow.WriteLine(e.Message);
-                            }
-                            
-                            lock (bowerRunningLock)
-                            {
-                                _bowerInstallRunning = false;
-                            }
-                        });
+                        }
+                        catch (Exception e)
+                        {
+                            _outputWindow.WriteLine(e.Message);
+                        }
+
                         lock (bowerRunningLock)
                         {
-                            _bowerInstallRunning = true;
+                            _bowerInstallRunning = false;
                         }
+                        _outputWindow.WriteLine("--- Bower install complete ---");
+                    });
+                    lock (bowerRunningLock)
+                    {
+                        _bowerInstallRunning = true;
+                    }
+                }
+            }
+        }
+
+        private void TryRunNpmInstall(Document document)
+        {
+            lock (npmStartingLock)
+            {
+                if (!_npmInstallRunning)
+                {
+                    _outputWindow.Show();
+                    _outputWindow.WriteLine("--- NPM install started ---");
+                    System.Threading.Tasks.Task.Run(() =>
+                    {
+                        try
+                        {
+                            NodePackageUtils.RunNpmInstall(document.Path,
+                                (sender, args) =>
+                                {
+                                    if (!string.IsNullOrEmpty(args.Data))
+                                    {
+                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                        _outputWindow.WriteLine(s);
+                                    }
+                                },
+                                (sender, args) =>
+                                {
+                                    if (!string.IsNullOrEmpty(args.Data))
+                                    {
+                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                        _outputWindow.WriteLine(s);
+                                    }
+                                });
+                        }
+                        catch (Exception e)
+                        {
+                            _outputWindow.WriteLine(e.Message);
+                        }
+
+                        lock (npmRunningLock)
+                        {
+                            _npmInstallRunning = false;
+                        }
+                        _outputWindow.WriteLine("--- NPM install complete ---");
+                    });
+                    lock (npmRunningLock)
+                    {
+                        _npmInstallRunning = true;
                     }
                 }
             }

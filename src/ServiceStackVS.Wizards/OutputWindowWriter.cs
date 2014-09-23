@@ -27,6 +27,11 @@ namespace ServiceStackVS.Wizards
             }
         }
 
+        public void Show()
+        {
+            _outputWindowPane.Activate();
+        }
+
         public OutputWindowWriter(string outputWindowPaneGuid, string outputWindowPaneName)
         {
             var outputWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;

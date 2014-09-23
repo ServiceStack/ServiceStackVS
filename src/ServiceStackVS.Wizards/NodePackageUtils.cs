@@ -234,6 +234,45 @@ namespace ServiceStackVS.Wizards
             }
             return result;
         }
+
+        public static bool TryRegisterNpmFromDefaultLocation()
+        {
+            bool hasNpmOnPath = HasNpmInPath();
+            if (hasNpmOnPath)
+            {
+                return true;
+            }
+                
+            string systemPath = System.Environment.GetEnvironmentVariable("SystemRoot");
+            bool x86Path;
+            bool x64Path;
+            string path = "";
+            if (systemPath != null)
+            {
+                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", System.StringComparison.Ordinal) + 1);
+                x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\nodejs"));
+                x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\nodejs"));
+                if (x86Path)
+                {
+                    path = Path.Combine(systemDrive, "Program Files (x86)\\nodejs");
+                }
+
+                if (x64Path)
+                {
+                    path = Path.Combine(systemDrive, "Program Files\\nodejs");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path,"node.exe")))
+            {
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path + ";" + Path.Combine(path, "node_modules\\npm\\bin"));
+                string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string npmFolder = Path.Combine(appDataFolder, "npm");
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                return true;
+            }
+            return false;
+        }
     }
 
 

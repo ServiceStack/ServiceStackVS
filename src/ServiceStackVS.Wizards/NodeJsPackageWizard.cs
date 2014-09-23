@@ -98,6 +98,7 @@ namespace ServiceStackVS.Wizards
             {
                 // Initialize the progress bar.
                 StatusBar.Progress(ref progressRef, 1, "", 0, 0);
+                outputWindowWriter.Show();
                 for (int index = 0; index < npmPackages.Count; index++)
                 {
                     var package = npmPackages[index];
@@ -181,35 +182,53 @@ namespace ServiceStackVS.Wizards
             outputWindowPane.Visible = true;
             string projectPath = project.FullName.Substring(0,
                 project.FullName.LastIndexOf("\\", System.StringComparison.Ordinal));
-
-            try
+            System.Threading.Tasks.Task.Run(() =>
             {
-                if (!NodePackageUtils.HasBowerInPath())
+                StartRequiredPackageInstallations(_outputWindow);
+                try
                 {
-                    string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    string npmFolder = Path.Combine(appDataFolder, "npm");
-                    Environment.SetEnvironmentVariable("PATH",Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                    if (!NodePackageUtils.HasBowerInPath())
+                    {
+                        string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                        string npmFolder = Path.Combine(appDataFolder, "npm");
+                        Environment.SetEnvironmentVariable("PATH",
+                            Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                    }
+                    UpdateStatusMessage("Downloading bower depedencies...");
+                    NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
+                    {
+                        if (!string.IsNullOrEmpty(args.Data))
+                        {
+                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            _outputWindow.WriteLine(s);
+                        }
+                    }, (sender, args) =>
+                    {
+                        if (!string.IsNullOrEmpty(args.Data))
+                        {
+                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            _outputWindow.WriteLine(s);
+                        }
+                    });
                 }
-                UpdateStatusMessage("Downloading bower depedencies...");
-                NodePackageUtils.RunBowerInstall(projectPath);                  
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Bower install failed: " + exception.Message,
-                    "An error has occurred during a Bower install.",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly,
-                    false);
-                    
-            }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Bower install failed: " + exception.Message,
+                        "An error has occurred during a Bower install.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly,
+                        false);
 
+                }
+            }).Wait();
+
+            UpdateStatusMessage("Downloading NPM depedencies...");
             System.Threading.Tasks.Task.Run(() =>
             {
                 try
                 {
-                    StartRequiredPackageInstallations(_outputWindow);
                     UpdateStatusMessage("Clearing NPM cache...");
                     NodePackageUtils.NpmClearCache(projectPath);
                     UpdateStatusMessage("Running NPM install...");
@@ -231,7 +250,7 @@ namespace ServiceStackVS.Wizards
                         }
                     });
                     _outputWindow.WriteLine("NPM Install complete");
-                    UpdateStatusMessage("Ready.");
+                    UpdateStatusMessage("Ready");
                     StatusBar.Clear();
                 }
                 catch (Exception exception)

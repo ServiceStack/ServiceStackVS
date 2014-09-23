@@ -4,7 +4,8 @@
 // Declare app level module which depends on filters, and services
 angular.module('helloApp', [
   'ngRoute',
-  'helloApp.controllers'
+  'helloApp.controllers',
+  'navigation.controllers'
 ]).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', { templateUrl: 'partials/hello/hello.html', controller: 'helloCtrl' });
