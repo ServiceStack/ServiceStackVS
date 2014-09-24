@@ -167,14 +167,30 @@ namespace ServiceStackVS
             hasNpmInstalled = hasNpmInstalled ? hasNpmInstalled : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
             hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
             string settingsFilePath = Path.Combine(path, "servicestackvs.settings");
+            bool npmInstallDisabled = false;
+            bool bowerInstallDisabled = false;
             if (settingsFilePath.FileExists())
             {
-                //TODO bring in ServiceStack just for TextFileSettings?
+                var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
+                string disableNpmInstallOnSave = "";
+                string disableBowerInstallOnSave = "";
+                if (settings.TryGetValue("DisableNpmInstallOnSave", out disableNpmInstallOnSave))
+                {
+                    npmInstallDisabled = disableNpmInstallOnSave.EqualsIgnoreCase("true");
+                }
+
+                if (settings.TryGetValue("DisableBowerInstallOnSave", out disableBowerInstallOnSave))
+                {
+                    bowerInstallDisabled = disableBowerInstallOnSave.EqualsIgnoreCase("true");
+                }
             }
             
             //If package.json and is at the root of the project
             if (document.Name.ToLowerInvariant() == "package.json" && document.Path == path)
             {
+                if (npmInstallDisabled)
+                    return;
+
                 if (!(bool) hasNpmInstalled)
                 {
                     _outputWindow.Show();
@@ -186,6 +202,9 @@ namespace ServiceStackVS
             //If bower.json and is at the root of the project
             if (document.Name.ToLowerInvariant() == "bower.json" && document.Path == path)
             {
+                if (bowerInstallDisabled)
+                    return;
+
                 if (!(bool)hasBowerInstalled)
                 {
                     _outputWindow.Show();
