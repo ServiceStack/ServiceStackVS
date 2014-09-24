@@ -166,7 +166,7 @@ namespace ServiceStackVS
             string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
             hasNpmInstalled = hasNpmInstalled ? hasNpmInstalled : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
             hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
-            string settingsFilePath = Path.Combine(path, "servicestackvs.settings");
+            string settingsFilePath = Path.Combine(path, "servicestack.vsconfig");
             bool npmInstallDisabled = false;
             bool bowerInstallDisabled = false;
             if (settingsFilePath.FileExists())
