@@ -33,11 +33,15 @@ As front-ends are getting more complicated, tools like Grunt and Gulp help to ma
 
 ![Build app using Gulp](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-build-app-demo.gif)
 
+The resultant wwwroot folder has all the required files to run your application.
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-wwwroot-output.png)
+
 Also included is an example task with the use of grunt-msdeploy that can be used to configure an msdeploy task to deploy your application from the Task Runner Explorer.
 
 
 ### Minification ###
-As a part of the ‘build_Release’ Gulp task, minification of JS and CSS files is performed and references are replaced. This is due to HTML comments around included JS and CSS source. 
+As a part of the ‘build_Release’ Gulp task, minification of JS and CSS is performed and references are replaced. This is due to HTML comments around included JS and CSS source. 
 
     <!-- build:js js/app.min.js -->
     <script src="js/hello/controllers.js"></script>
