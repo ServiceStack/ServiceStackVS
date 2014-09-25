@@ -73,6 +73,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\VSServiceStack\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -94,12 +97,6 @@
       <DependentUpon>NodeJSInstallationPrompt.cs</DependentUpon>
     </Compile>
     <Compile Include="NodeJsPackageWizard.cs" />
-    <Compile Include="NodeJsRequiredForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NodeJsRequiredForm.Designer.cs">
-      <DependentUpon>NodeJsRequiredForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="NodeJsRequiredWizard.cs" />
     <Compile Include="NodePackageUtils.cs" />
     <Compile Include="NuGetPackageInstallerWizard.cs" />
@@ -119,9 +116,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NodeJSInstallationPrompt.resx">
       <DependentUpon>NodeJSInstallationPrompt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NodeJsRequiredForm.resx">
-      <DependentUpon>NodeJsRequiredForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

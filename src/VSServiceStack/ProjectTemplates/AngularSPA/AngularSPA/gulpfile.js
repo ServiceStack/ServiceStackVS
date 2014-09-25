@@ -57,6 +57,11 @@ gulp.task('-build_Release_copy_partials', function () {
         .pipe(gulp.dest(partialsDest));
 });
 
+gulp.task('-build_Release_copy_fonts', function () {
+    return gulp.src('./bower_components/bootstrap/dist/fonts/*.*')
+        .pipe(gulp.dest(webRoot + 'lib/fonts/'));
+});
+
 gulp.task('-build_Release_html', function () {
     var assets = useref.assets();
 

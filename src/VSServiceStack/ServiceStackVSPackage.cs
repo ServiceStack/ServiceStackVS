@@ -186,7 +186,7 @@ namespace ServiceStackVS
             }
             
             //If package.json and is at the root of the project
-            if (document.Name.ToLowerInvariant() == "package.json" && document.Path == path)
+            if (document.Name.EqualsIgnoreCase("package.json") && document.Path.EqualsIgnoreCase(path))
             {
                 if (npmInstallDisabled)
                     return;
@@ -200,7 +200,7 @@ namespace ServiceStackVS
                 TryRunNpmInstall(document);
             }
             //If bower.json and is at the root of the project
-            if (document.Name.ToLowerInvariant() == "bower.json" && document.Path == path)
+            if (document.Name.EqualsIgnoreCase("bower.json") && document.Path.EqualsIgnoreCase(path))
             {
                 if (bowerInstallDisabled)
                     return;

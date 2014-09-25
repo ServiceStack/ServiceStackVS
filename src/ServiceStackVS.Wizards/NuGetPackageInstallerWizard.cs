@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
+using ServiceStack;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.Wizards
@@ -50,7 +51,7 @@ namespace ServiceStackVS.Wizards
                 string wizardData = replacementsDictionary["$wizarddata$"];
                 XElement element = XElement.Parse(wizardData);
                 bool promptUser = element.HasAttributes && element.Attribute("promptUser") != null &&
-                                  element.Attribute("promptUser").Value == "true";
+                                  element.Attribute("promptUser").Value.EqualsIgnoreCase("true");
                 if (promptUser)
                 {
                     var dialogResult = MessageBox.Show("Do you want to install Node.JS and related dependencies locally?", "Node.JS Depedencies", MessageBoxButtons.YesNo);
@@ -93,7 +94,6 @@ namespace ServiceStackVS.Wizards
 
         public void ProjectFinishedGenerating(Project project)
         {
-            string foo = project.Globals["SSNpmInstalled"] = NpmInstalled.ToString();
             foreach (var packageFromWizard in PackagesToLoad)
             {
                 AddNuGetDependencyIfMissing(project, packageFromWizard.Id,packageFromWizard.Version);

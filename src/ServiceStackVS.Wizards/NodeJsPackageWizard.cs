@@ -15,6 +15,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet.VisualStudio;
+using ServiceStack;
 using ServiceStackVS.Wizards.Annotations;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
@@ -25,11 +26,6 @@ namespace ServiceStackVS.Wizards
         private const string OutputWindowGuid = "{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}";
         private const string ServiceStackVSPackageCmdSetGuid = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private List<NpmPackage> npmPackages;
-
-        private delegate void NpmPackageHandler(object sender, PackageInstallEventArgs eventArgs);
-        private event NpmPackageHandler UpdateProgress;
-
-        private NodeJsRequiredForm installationDialog;
 
         uint progressRef = 0;
 
@@ -72,10 +68,9 @@ namespace ServiceStackVS.Wizards
             _dte = (DTE)automationObject;
             string wizardData = replacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse(wizardData);
-
             npmPackages =
                 element.Descendants()
-                    .Where(x => x.Name.LocalName == "npm-package")
+                    .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
                     .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
                     .ToList();
 
@@ -87,7 +82,7 @@ namespace ServiceStackVS.Wizards
             //Not needed
             //bowerPackages =
             //    element.Descendants()
-            //        .Where(x => x.Name.LocalName == "bower-package")
+            //        .Where(x => x.Name.LocalName.EqualsIgnoreCase("bower-package"))
             //        .Select(x => new BowerPackage {Id = x.Attribute("id").Value})
             //        .ToList();
         }
