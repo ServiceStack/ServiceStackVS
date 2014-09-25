@@ -194,7 +194,7 @@ namespace ServiceStackVS
                 if (!(bool) hasNpmInstalled)
                 {
                     _outputWindow.Show();
-                    _outputWindow.WriteLine("NodeJS Installation not detected. Visit http://nodejs.org/ to download.");
+                    _outputWindow.WriteLine("Node.js Installation not detected. Visit http://nodejs.org/ to download.");
                     return;
                 }
                 TryRunNpmInstall(document);
@@ -208,7 +208,7 @@ namespace ServiceStackVS
                 if (!(bool)hasBowerInstalled)
                 {
                     _outputWindow.Show();
-                    _outputWindow.WriteLine("Bower Installation not detected. Run npm install bower -g to install if NodeJS/NPM already installed.");
+                    _outputWindow.WriteLine("Bower Installation not detected. Run npm install bower -g to install if Node.js/NPM already installed.");
                     return;
                 }
                 TryRunBowerInstall(document);

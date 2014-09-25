@@ -43,7 +43,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(510, 48);
             this.label2.TabIndex = 6;
-            this.label2.Text = "This template requires NodeJS installed, click install below to download NodeJS";
+            this.label2.Text = "This template requires Node.js installed, click install below to download Node.js" +
+    "";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
@@ -87,8 +88,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(550, 233);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(550, 233);
             this.Name = "NodeJSInstallationPrompt";
-            this.Text = "NodeJS Installation Required";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "Node.js Installation Required";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

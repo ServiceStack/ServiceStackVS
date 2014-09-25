@@ -77,8 +77,8 @@ namespace ServiceStackVS.Wizards
             NodeFoundOnPath = CheckForInstallation();
             if (!NodeFoundOnPath)
             {
-                MessageBox.Show(@"Unable to detect NodeJS installation. Please restart Visual Studio and try again.",
-                    @"Unable to detect NodeJS installation.",
+                MessageBox.Show(@"Unable to detect Node.js installation. Please restart Visual Studio and try again.",
+                    @"Unable to detect Node.js installation.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,

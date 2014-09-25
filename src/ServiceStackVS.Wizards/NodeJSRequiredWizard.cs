@@ -26,7 +26,7 @@ namespace ServiceStackVS.Wizards
                     if (!form.NodeFoundOnPath)
                     {
                         //Advise to restart VS and backout?
-                        throw new WizardBackoutException("NodeJS installation required");
+                        throw new WizardBackoutException("Node.js installation required");
                     }
                     
                 }
