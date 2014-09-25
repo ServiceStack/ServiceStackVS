@@ -24,8 +24,10 @@ To help add and install Bower and NPM dependencies, ServiceStackVS watches bower
 
 A great extension to help find names and versions of these dependencies is the [Package Intellisense extension](http://visualstudiogallery.msdn.microsoft.com/65748cdb-4087-497e-a394-2e3449c8e61e).
 
-### Debugging ###
+### Debugging and Intellisense ###
 Development iterations follow along with Visual Studio’s normal pattern when used with the built in IIS Express as it hosts the local development folder, so vendor provided JS/CSS are directly referenced from the bower_components folder.
+
+Included in the template is the _references.js that enables CSS/JS intellisense for all the included Bower components and NPM components. It is included in the default location of Scripts/_references.js so that it should work by default when creating a new application.
 
 ### Building the front-end with Gulp and Grunt ###
 As front-ends are getting more complicated, tools like Grunt and Gulp help to manage some of this complexity. Included in the template is a ‘build_Release’ Gulp task. This task does a number of things to get a release version of your application's front end built and copied to your ‘wwwroot’ folder. Once completed, the ‘wwwroot’ folder will contain a Release version of your application ready for deployment.
