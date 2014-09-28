@@ -315,7 +315,8 @@ namespace ServiceStackVS
                 string lineWithBaseUrl = fSharpCodeAllLines.FirstOrDefault(x => x.StartsWithIgnoreCase("BaseUrl: "));
                 if (lineWithBaseUrl == null)
                 {
-                    throw new Exception("Unable to read URL from DTO file.");
+                    _outputWindow.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
+                    return;
                 }
                 string baseUrl =
                     lineWithBaseUrl.Substring(lineWithBaseUrl.IndexOf(" ", System.StringComparison.Ordinal)).Trim();
