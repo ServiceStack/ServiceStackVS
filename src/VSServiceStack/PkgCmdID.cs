@@ -8,6 +8,7 @@ namespace ServiceStackVS
     {
         public const uint cmdidServiceStackReference =              0x100;
         public const uint cmdidFSharpAddServiceStackReference =     0x0200;
+        public const uint cmdidFSharpUpdateServiceStackReference = 0x0300;
 
     };
 }

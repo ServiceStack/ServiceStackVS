@@ -127,6 +127,11 @@ namespace ServiceStackVS
                 var fSharpProjectContextOleMenuCommand = new OleMenuCommand(FSharpAddReferenceCallback, fSharpProjContextAddReferenceCommandId);
                 fSharpProjectContextOleMenuCommand.BeforeQueryStatus += FSharpQueryAndAddMenuItem;
                 mcs.AddCommand(fSharpProjectContextOleMenuCommand);
+
+                CommandID fSharpProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpUpdateServiceStackReference);
+                var fSharpProjectContextUpdateOleMenuCommand = new OleMenuCommand(FSharpUpdateReferenceCallback, fSharpProjContextUpdateReferenceCommandId);
+                fSharpProjectContextUpdateOleMenuCommand.BeforeQueryStatus += FSharpQueryAndAddUpdateMenuItem;
+                mcs.AddCommand(fSharpProjectContextUpdateOleMenuCommand);
             }
 
             solutionEventsListener = new SolutionEventsListener();
@@ -210,6 +215,34 @@ namespace ServiceStackVS
                     StringComparison.InvariantCultureIgnoreCase);
         }
 
+        private void FSharpQueryAndAddUpdateMenuItem(object sender, EventArgs eventArgs)
+        {
+            OleMenuCommand command = (OleMenuCommand)sender;
+            var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
+            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            uint contextCookie;
+            int pfActive;
+            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            var ready = result == VSConstants.S_OK && pfActive > 0;
+            ProjectItem projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+
+            var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
+            bool selectedFSharpDto = selectedFiles.Any((item) => item.Name.ToLowerInvariant().EndsWith(".dto.fs"));
+
+            command.Enabled = ready && selectedFSharpDto &&
+                              projectItem.Kind != null &&
+                //Project is not unloaded
+                              !string.Equals(projectItem.ContainingProject.Kind, "{67294A52-A4F0-11D2-AA88-00C04F688DDE}",
+                                  StringComparison.InvariantCultureIgnoreCase);
+            command.Visible = 
+                selectedFSharpDto &&
+                projectItem.Kind != null &&
+                //Project is FSharp project
+                string.Equals(projectItem.ContainingProject.Kind, "{F2A71F9B-5D33-465A-A702-920D77279786}",
+                    StringComparison.InvariantCultureIgnoreCase);
+        }
+
         #endregion
 
         /// <summary>
@@ -265,6 +298,37 @@ namespace ServiceStackVS
             }
             string templateCode = dialog.CodeTemplate;
             CreateAndAddTemplateToProject(dialog.FileNameTextBox.Text + ".dto.fs", templateCode);
+        }
+
+        private void FSharpUpdateReferenceCallback(object sender, EventArgs e)
+        {
+            var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+            _outputWindow.Show();
+            _outputWindow.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
+            string projectItemPath = projectItem.Properties.Item("FullPath").Value.ToString();
+            var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
+            bool selectedFSharpDto = selectedFiles.Any((item) => item.Name.ToLowerInvariant().EndsWith(".dto.fs"));
+            if (selectedFSharpDto)
+            {
+                string filePath = projectItemPath;
+                var fSharpCodeAllLines = File.ReadAllLines(filePath).ToList();
+                string lineWithBaseUrl = fSharpCodeAllLines.FirstOrDefault(x => x.StartsWithIgnoreCase("BaseUrl: "));
+                if (lineWithBaseUrl == null)
+                {
+                    throw new Exception("Unable to read URL from DTO file.");
+                }
+                string baseUrl =
+                    lineWithBaseUrl.Substring(lineWithBaseUrl.IndexOf(" ", System.StringComparison.Ordinal)).Trim();
+                string appendFSharpPath = "types/fsharp";
+                string fSharpUrl = baseUrl.EndsWith("/") ? baseUrl + appendFSharpPath : baseUrl + "/" + appendFSharpPath;
+                string updatedCode = new WebClient().DownloadString(fSharpUrl);
+                using (var streamWriter = File.CreateText(filePath))
+                {
+                    streamWriter.Write(updatedCode);
+                    streamWriter.Flush();
+                }
+                _outputWindow.WriteLine("--- Update ServiceStack Reference Complete ---");
+            }
         }
 
         private void CreateAndAddTemplateToProject(string fileName, string templateCode)
