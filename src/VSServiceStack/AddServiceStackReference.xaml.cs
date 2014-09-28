@@ -15,6 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ServiceStack.Text;
+using ServiceStackVS.Types;
 using Color = System.Windows.Media.Color;
 
 namespace ServiceStackVS
@@ -25,16 +27,50 @@ namespace ServiceStackVS
     public partial class AddServiceStackReference : Window
     {
         public bool AddReferenceSucceeded { get; set; }
+        public string CodeTemplate { get; set; }
         private string suggestedFileName;
+        private string codeTemplateBase;
+        private string codeProviderName;
 
-        private Func<string,bool> DownloadDtoFunc;
-        public AddServiceStackReference(Func<string, bool> downloadDtoFunc,string fileName)
+        public enum ServiceStackCodeProvider
+        {
+            CSharp,
+            FSharp
+        }
+
+        public AddServiceStackReference(string fileName)
         {
             suggestedFileName = fileName;
-            DownloadDtoFunc = downloadDtoFunc;
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
             this.KeyUp += ListenForShortcutKeys;
+        }
+
+        public void UseCSharpProvider(string t4TemplateBase)
+        {
+            codeTemplateBase = t4TemplateBase;
+            codeProviderName = "csharp";
+        }
+
+        public void UseFSharpProvider()
+        {
+            codeProviderName = "fsharp";
+        }
+
+        private ServiceStackCodeProvider codeProvider
+        {
+            get
+            {
+                switch (codeProviderName)
+                {
+                    case "csharp":
+                        return ServiceStackCodeProvider.CSharp;
+                    case "fsharp":
+                        return ServiceStackCodeProvider.FSharp;
+                    default:
+                        return ServiceStackCodeProvider.CSharp;
+                }
+            }
         }
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
@@ -62,7 +98,17 @@ namespace ServiceStackVS
             ErrorMessage.Text = "";
             try
             {
-                bool urlIsValid = DownloadDtoFunc(UrlTextBox.Text);
+                string serverUrl = CreateUrl(UrlTextBox.Text);
+                bool urlIsValid = ValidateUrl(serverUrl);
+                if (codeProvider == ServiceStackCodeProvider.CSharp)
+                {
+                    CodeTemplate = codeTemplateBase.Replace("$serviceurl$", serverUrl); 
+                }
+                if (codeProvider == ServiceStackCodeProvider.FSharp)
+                {
+                    CodeTemplate = new WebClient().DownloadString(serverUrl);
+                }
+                
                 if (urlIsValid)
                 {
                     AddReferenceSucceeded = true;
@@ -101,6 +147,46 @@ namespace ServiceStackVS
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private string CreateUrl(string url)
+        {
+            string serverUrl = url;
+            //Remove any trailing forward slash to url
+            if (serverUrl.EndsWith("/"))
+            {
+                serverUrl = serverUrl.Substring(0, serverUrl.Length - 1);
+            }
+            //Accept full types/csharp as input
+            serverUrl = serverUrl.EndsWith("/types/" + codeProviderName) ? serverUrl : serverUrl + "/types/" + codeProviderName;
+            return serverUrl;
+        }
+
+        private bool ValidateUrl(string url)
+        {
+            Uri validatedUri;
+            bool isValidUri = Uri.TryCreate(url, UriKind.Absolute, out validatedUri) &&
+                              validatedUri.Scheme == Uri.UriSchemeHttp;
+            if (isValidUri)
+            {
+                string metadataJsonUrl = validatedUri.ToString().Replace("/" + codeProviderName, "/metadata") + "?format=json";
+                string metadataResponse = new WebClient().DownloadString(metadataJsonUrl);
+                MetadataTypes metaDataDto;
+                try
+                {
+                    metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadataResponse);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed deserializing metadata from server", ex);
+                }
+                if (metaDataDto.Operations.Count == 0)
+                {
+                    throw new Exception("Invalid or empty metadata from server");
+                }
+                return true;
+            }
+            return false;
         }
     }
 

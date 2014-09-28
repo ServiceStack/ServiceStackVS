@@ -144,6 +144,7 @@
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="VsixDocumentExtensions.cs" />
     <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
@@ -253,6 +254,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SolutionEvents.cs" />
     <Compile Include="Types\MetadataTypes.cs" />
+    <Compile Include="VsixProjectExtensions.cs" />
     <Compile Include="VSIXUtils.cs" />
     <Compile Include="ServiceStackVSPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -658,6 +660,7 @@
   <ItemGroup>
     <VSCTCompile Include="VSServiceStack.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

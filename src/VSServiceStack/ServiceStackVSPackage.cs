@@ -96,17 +96,6 @@ namespace ServiceStackVS
 
         private DTE _dte;
 
-        private bool _npmInstallRunning = false;
-        private bool _bowerInstallRunning = false;
-
-        private static object npmStartingLock = new object();
-        private static object npmRunningLock = new object();
-        private static object bowerStartingLock = new object();
-        private static object bowerRunningLock = new object();
-
-        private bool hasBowerInstalled = false;
-        private bool hasNpmInstalled = false;
-
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
         #region Package Members
@@ -129,15 +118,19 @@ namespace ServiceStackVS
             if ( null != mcs )
             {
                 // Create the command for the menu item.
-                CommandID projContextServiceStackReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
-                var projContextServiceStackReferenceCommand = new OleMenuCommand(MenuItemCallback ,projContextServiceStackReferenceCommandId);
-                projContextServiceStackReferenceCommand.BeforeQueryStatus += BeforeQueryStatusForProjectAddMenuItem;
-                mcs.AddCommand(projContextServiceStackReferenceCommand);
+                CommandID cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidServiceStackReference);
+                var cSharpProjectContextOleMenuCommand = new OleMenuCommand(CSharpAddReferenceCallback ,cSharpProjContextAddReferenceCommandId);
+                cSharpProjectContextOleMenuCommand.BeforeQueryStatus += CSharpQueryAndAddMenuItem;
+                mcs.AddCommand(cSharpProjectContextOleMenuCommand);
+
+                CommandID fSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpAddServiceStackReference);
+                var fSharpProjectContextOleMenuCommand = new OleMenuCommand(FSharpAddReferenceCallback, fSharpProjContextAddReferenceCommandId);
+                fSharpProjectContextOleMenuCommand.BeforeQueryStatus += FSharpQueryAndAddMenuItem;
+                mcs.AddCommand(fSharpProjectContextOleMenuCommand);
             }
 
             solutionEventsListener = new SolutionEventsListener();
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
-
         }
 
         private void SolutionLoaded()
@@ -160,147 +153,7 @@ namespace ServiceStackVS
             _documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
         }
 
-        private void DocumentEventsOnDocumentSaved(Document document)
-        {
-            string projectFile = document.ProjectItem.ContainingProject.FullName;
-            string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
-            hasNpmInstalled = hasNpmInstalled ? hasNpmInstalled : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
-            hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
-            string settingsFilePath = Path.Combine(path, "servicestack.vsconfig");
-            bool npmInstallDisabled = false;
-            bool bowerInstallDisabled = false;
-            if (settingsFilePath.FileExists())
-            {
-                var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
-                string disableNpmInstallOnSave = "";
-                string disableBowerInstallOnSave = "";
-                if (settings.TryGetValue("DisableNpmInstallOnSave", out disableNpmInstallOnSave))
-                {
-                    npmInstallDisabled = disableNpmInstallOnSave.EqualsIgnoreCase("true");
-                }
-
-                if (settings.TryGetValue("DisableBowerInstallOnSave", out disableBowerInstallOnSave))
-                {
-                    bowerInstallDisabled = disableBowerInstallOnSave.EqualsIgnoreCase("true");
-                }
-            }
-            
-            //If package.json and is at the root of the project
-            if (document.Name.EqualsIgnoreCase("package.json") && document.Path.EqualsIgnoreCase(path))
-            {
-                if (npmInstallDisabled)
-                    return;
-
-                if (!(bool) hasNpmInstalled)
-                {
-                    _outputWindow.Show();
-                    _outputWindow.WriteLine("Node.js Installation not detected. Visit http://nodejs.org/ to download.");
-                    return;
-                }
-                TryRunNpmInstall(document);
-            }
-            //If bower.json and is at the root of the project
-            if (document.Name.EqualsIgnoreCase("bower.json") && document.Path.EqualsIgnoreCase(path))
-            {
-                if (bowerInstallDisabled)
-                    return;
-
-                if (!(bool)hasBowerInstalled)
-                {
-                    _outputWindow.Show();
-                    _outputWindow.WriteLine("Bower Installation not detected. Run npm install bower -g to install if Node.js/NPM already installed.");
-                    return;
-                }
-                TryRunBowerInstall(document);
-            }
-        }
-
-        private void TryRunBowerInstall(Document document)
-        {
-            lock (bowerStartingLock)
-            {
-                if (!_bowerInstallRunning)
-                {
-                    _outputWindow.Show();
-                    _outputWindow.WriteLine("--- Bower install started ---");
-                    System.Threading.Tasks.Task.Run(() =>
-                    {
-                        try
-                        {
-                            NodePackageUtils.RunBowerInstall(document.Path,
-                                (sender, args) => _outputWindow.WriteLine(args.Data),
-                                (sender, args) => _outputWindow.WriteLine(args.Data)
-                                );
-                        }
-                        catch (Exception e)
-                        {
-                            _outputWindow.WriteLine(e.Message);
-                        }
-
-                        lock (bowerRunningLock)
-                        {
-                            _bowerInstallRunning = false;
-                        }
-                        _outputWindow.WriteLine("--- Bower install complete ---");
-                    });
-                    lock (bowerRunningLock)
-                    {
-                        _bowerInstallRunning = true;
-                    }
-                }
-            }
-        }
-
-        private void TryRunNpmInstall(Document document)
-        {
-            lock (npmStartingLock)
-            {
-                if (!_npmInstallRunning)
-                {
-                    _outputWindow.Show();
-                    _outputWindow.WriteLine("--- NPM install started ---");
-                    System.Threading.Tasks.Task.Run(() =>
-                    {
-                        try
-                        {
-                            NodePackageUtils.RunNpmInstall(document.Path,
-                                (sender, args) =>
-                                {
-                                    if (!string.IsNullOrEmpty(args.Data))
-                                    {
-                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                        _outputWindow.WriteLine(s);
-                                    }
-                                },
-                                (sender, args) =>
-                                {
-                                    if (!string.IsNullOrEmpty(args.Data))
-                                    {
-                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                        _outputWindow.WriteLine(s);
-                                    }
-                                });
-                        }
-                        catch (Exception e)
-                        {
-                            _outputWindow.WriteLine(e.Message);
-                        }
-
-                        lock (npmRunningLock)
-                        {
-                            _npmInstallRunning = false;
-                        }
-                        _outputWindow.WriteLine("--- NPM install complete ---");
-                    });
-                    lock (npmRunningLock)
-                    {
-                        _npmInstallRunning = true;
-                    }
-                }
-            }
-        }
-
-        private void BeforeQueryStatusForProjectAddMenuItem(object sender, EventArgs eventArgs)
+        private void CSharpQueryAndAddMenuItem(object sender, EventArgs eventArgs)
         {
             OleMenuCommand command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
@@ -311,6 +164,12 @@ namespace ServiceStackVS
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
             Project project = VSIXUtils.GetSelectedProject();
+
+            command.Visible = 
+                project != null &&
+                project.Kind != null && 
+                string.Equals(project.Kind, "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}",
+                    StringComparison.InvariantCultureIgnoreCase);
 
             command.Enabled =
                 //Not busy building
@@ -325,6 +184,32 @@ namespace ServiceStackVS
                     StringComparison.InvariantCultureIgnoreCase);
         }
 
+        private void FSharpQueryAndAddMenuItem(object sender, EventArgs eventArgs)
+        {
+            OleMenuCommand command = (OleMenuCommand)sender;
+            var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
+            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            uint contextCookie;
+            int pfActive;
+            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            var ready = result == VSConstants.S_OK && pfActive > 0;
+            Project project = VSIXUtils.GetSelectedProject();
+
+            command.Enabled = ready &&
+                              project != null &&
+                              project.Kind != null &&
+                //Project is not unloaded
+                              !string.Equals(project.Kind, "{67294A52-A4F0-11D2-AA88-00C04F688DDE}",
+                                  StringComparison.InvariantCultureIgnoreCase);
+            command.Visible =
+                 project != null &&
+                project.Kind != null &&
+                //Project is FSharp project
+                string.Equals(project.Kind, "{F2A71F9B-5D33-465A-A702-920D77279786}",
+                    StringComparison.InvariantCultureIgnoreCase);
+        }
+
         #endregion
 
         /// <summary>
@@ -332,10 +217,9 @@ namespace ServiceStackVS
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void MenuItemCallback(object sender, EventArgs e)
+        private void CSharpAddReferenceCallback(object sender, EventArgs e)
         {
             var t4TemplateBase = Resources.ServiceModelTemplate;
-            string templateCode = null;
             var project = VSIXUtils.GetSelectedProject();
             string projectPath = project.Properties.Item("FullPath").Value.ToString();
             int fileNameNumber = 1;
@@ -345,15 +229,42 @@ namespace ServiceStackVS
             {
                 fileNameNumber++;
             }
-            var dialog = new AddServiceStackReference(url => TryResolveServiceStackTemplate(url, t4TemplateBase, out templateCode), 
-                "ServiceReference" + fileNameNumber);
+            var dialog = new AddServiceStackReference("ServiceReference" + fileNameNumber);
+            dialog.UseCSharpProvider(t4TemplateBase);
             dialog.ShowDialog();
             if (!dialog.AddReferenceSucceeded)
             {
                 return;
             }
-
+            string templateCode = dialog.CodeTemplate;
             CreateAndAddTemplateToProject(dialog.FileNameTextBox.Text + ".tt", templateCode);
+        }
+
+        /// <summary>
+        /// This function is the callback used to execute a command when the a menu item is clicked.
+        /// See the Initialize method to see how the menu item is associated to this function using
+        /// the OleMenuCommandService service and the MenuCommand class.
+        /// </summary>
+        private void FSharpAddReferenceCallback(object sender, EventArgs e)
+        {
+            var project = VSIXUtils.GetSelectedProject();
+            string projectPath = project.Properties.Item("FullPath").Value.ToString();
+            int fileNameNumber = 1;
+            //Find a version of the default name that doesn't already exist, 
+            //mimicing VS default file name behaviour.
+            while (File.Exists(Path.Combine(projectPath, "ServiceReference" + fileNameNumber + ".dto.fs")))
+            {
+                fileNameNumber++;
+            }
+            var dialog = new AddServiceStackReference("ServiceReference" + fileNameNumber);
+            dialog.UseFSharpProvider();
+            dialog.ShowDialog();
+            if (!dialog.AddReferenceSucceeded)
+            {
+                return;
+            }
+            string templateCode = dialog.CodeTemplate;
+            CreateAndAddTemplateToProject(dialog.FileNameTextBox.Text + ".dto.fs", templateCode);
         }
 
         private void CreateAndAddTemplateToProject(string fileName, string templateCode)
@@ -369,7 +280,6 @@ namespace ServiceStackVS
             var t4TemplateProjectItem = project.ProjectItems.AddFromFile(fullPath);
             t4TemplateProjectItem.Open(EnvDTE.Constants.vsViewKindCode);
             t4TemplateProjectItem.Save();
-            project.ProjectItems.AddFromFile(fullPath.Replace(".tt", ".cs"));
 
             AddNuGetDependencyIfMissing(project, "ServiceStack.Client");
             AddNuGetDependencyIfMissing(project, "ServiceStack.Text");
@@ -396,40 +306,13 @@ namespace ServiceStackVS
             }
         }
 
-        private bool TryResolveServiceStackTemplate(string url, string t4TemplateBase, out string templateCode)
+        private void DocumentEventsOnDocumentSaved(Document document)
         {
-            string serverUrl = url;
-            //Remove any trailing forward slash to url
-            if (serverUrl.EndsWith("/"))
-            {
-                serverUrl = serverUrl.Substring(0, serverUrl.Length - 1);
-            }
-            //Accept full types/csharp as input
-            serverUrl = serverUrl.EndsWith("/types/csharp") ? serverUrl : serverUrl + "/types/csharp";
-            templateCode = t4TemplateBase.Replace("$serviceurl$", serverUrl);
-            Uri validatedUri;
-            bool isValidUri = Uri.TryCreate(serverUrl, UriKind.Absolute, out validatedUri) &&
-                              validatedUri.Scheme == Uri.UriSchemeHttp;
-            if (isValidUri)
-            {
-                string metadataJsonUrl = validatedUri.ToString().Replace("/csharp", "/metadata") + "?format=json";
-                string metadataResponse = new WebClient().DownloadString(metadataJsonUrl);
-                MetadataTypes metaDataDto;
-                try
-                {
-                    metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadataResponse);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Failed deserializing metadata from server", ex);
-                }
-                if (metaDataDto.Operations.Count == 0)
-                {
-                    throw new Exception("Invalid or empty metadata from server");
-                }
-                return true;
-            }
-            return false;
+            //Check if document is package.json and not disabled by settings
+            document.HandleNpmPackageUpdate(_outputWindow);
+          
+            //Check if document is bower.json and not disabled by settings
+            document.HandleBowerPackageUpdate(_outputWindow);
         }
     }
 }

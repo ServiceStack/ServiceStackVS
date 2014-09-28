@@ -1,0 +1,203 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using EnvDTE;
+using ServiceStack;
+using ServiceStackVS.Wizards;
+
+namespace ServiceStackVS
+{
+    public static class VsixDocumentExtensions
+    {
+        private static bool _npmInstallRunning = false;
+        private static bool _bowerInstallRunning = false;
+
+        private static object npmStartingLock = new object();
+        private static object npmRunningLock = new object();
+        private static object bowerStartingLock = new object();
+        private static object bowerRunningLock = new object();
+
+        private static bool hasBowerInstalled = false;
+        private static bool hasNpmInstalled;
+
+        public static void HandleNpmPackageUpdate(this Document document, OutputWindowWriter windowWriter)
+        {
+            string path = document.GetProjectPath();
+
+            //If package.json and is at the root of the project
+            if (document.Name.EqualsIgnoreCase("package.json") && document.Path.EqualsIgnoreCase(path))
+            {
+                if (document.IsNpmUpdateDisable())
+                {
+                    return;
+                }
+
+                hasNpmInstalled = hasNpmInstalled ? hasNpmInstalled : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
+
+                if (!hasNpmInstalled)
+                {
+                    windowWriter.Show();
+                    windowWriter.WriteLine("Node.js Installation not detected. Visit http://nodejs.org/ to download.");
+                    return;
+                }
+                document.TryRunNpmInstall(windowWriter);
+            }
+        }
+
+        public static void HandleBowerPackageUpdate(this Document document, OutputWindowWriter windowWriter)
+        {
+            string path = document.GetProjectPath();
+
+            //If bower.json and is at the root of the project
+            if (document.Name.EqualsIgnoreCase("bower.json") && document.Path.EqualsIgnoreCase(path))
+            {
+                if (document.IsBowerUpdateDisabled())
+                {
+                    return;
+                }
+
+                hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
+
+                if (!hasBowerInstalled)
+                {
+                    windowWriter.Show();
+                    windowWriter.WriteLine("Bower Installation not detected. Run npm install bower -g to install if Node.js/NPM already installed.");
+                    return;
+                }
+                document.TryBowerInstall(windowWriter);
+            }
+        }
+
+        public static bool IsNpmUpdateDisable(this Document document)
+        {
+            string path = document.GetProjectPath();
+            string settingsFilePath = Path.Combine(path, "servicestack.vsconfig");
+            bool npmInstallDisabled = false;
+            if (settingsFilePath.FileExists())
+            {
+                var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
+                string disableNpmInstallOnSave = "";
+                if (settings.TryGetValue("DisableNpmInstallOnSave", out disableNpmInstallOnSave))
+                {
+                    npmInstallDisabled = disableNpmInstallOnSave.EqualsIgnoreCase("true");
+                }
+
+            }
+            return npmInstallDisabled;
+        }
+
+        public static bool IsBowerUpdateDisabled(this Document document)
+        {
+            string path = document.GetProjectPath();
+            string settingsFilePath = Path.Combine(path, "servicestack.vsconfig");
+            bool bowerInstallDisabled = false;
+            if (settingsFilePath.FileExists())
+            {
+                var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
+                string disableBowerInstallOnSave = "";
+                if (settings.TryGetValue("DisableBowerInstallOnSave", out disableBowerInstallOnSave))
+                {
+                    bowerInstallDisabled = disableBowerInstallOnSave.EqualsIgnoreCase("true");
+                }
+
+            }
+            return bowerInstallDisabled;
+        }
+
+        private static string GetProjectPath(this Document document)
+        {
+            string projectFile = document.ProjectItem.ContainingProject.FullName;
+            string path = projectFile.Substring(0, projectFile.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+            return path;
+        }
+
+        private static void TryRunNpmInstall(this Document document, OutputWindowWriter windowWriter)
+        {
+            lock (npmStartingLock)
+            {
+                if (!_npmInstallRunning)
+                {
+                    windowWriter.Show();
+                    windowWriter.WriteLine("--- NPM install started ---");
+                    System.Threading.Tasks.Task.Run(() =>
+                    {
+                        try
+                        {
+                            NodePackageUtils.RunNpmInstall(document.Path,
+                                (sender, args) =>
+                                {
+                                    if (!string.IsNullOrEmpty(args.Data))
+                                    {
+                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                        windowWriter.WriteLine(s);
+                                    }
+                                },
+                                (sender, args) =>
+                                {
+                                    if (!string.IsNullOrEmpty(args.Data))
+                                    {
+                                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                        windowWriter.WriteLine(s);
+                                    }
+                                });
+                        }
+                        catch (Exception e)
+                        {
+                            windowWriter.WriteLine(e.Message);
+                        }
+
+                        lock (npmRunningLock)
+                        {
+                            _npmInstallRunning = false;
+                        }
+                        windowWriter.WriteLine("--- NPM install complete ---");
+                    });
+                    lock (npmRunningLock)
+                    {
+                        _npmInstallRunning = true;
+                    }
+                }
+            }
+        }
+
+        private static void TryBowerInstall(this Document document, OutputWindowWriter windowWriter)
+        {
+            lock (bowerStartingLock)
+            {
+                if (!_bowerInstallRunning)
+                {
+                    windowWriter.Show();
+                    windowWriter.WriteLine("--- Bower install started ---");
+                    System.Threading.Tasks.Task.Run(() =>
+                    {
+                        try
+                        {
+                            NodePackageUtils.RunBowerInstall(document.Path,
+                                (sender, args) => windowWriter.WriteLine(args.Data),
+                                (sender, args) => windowWriter.WriteLine(args.Data)
+                                );
+                        }
+                        catch (Exception e)
+                        {
+                            windowWriter.WriteLine(e.Message);
+                        }
+
+                        lock (bowerRunningLock)
+                        {
+                            _bowerInstallRunning = false;
+                        }
+                        windowWriter.WriteLine("--- Bower install complete ---");
+                    });
+                    lock (bowerRunningLock)
+                    {
+                        _bowerInstallRunning = true;
+                    }
+                }
+            }
+        }
+    }
+}
