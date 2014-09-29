@@ -60,7 +60,7 @@ namespace ServiceStackVS
                     return;
                 }
 
-                hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerInPath();
+                hasBowerInstalled = hasBowerInstalled ? hasBowerInstalled : NodePackageUtils.HasBowerOnPath();
 
                 if (!hasBowerInstalled)
                 {

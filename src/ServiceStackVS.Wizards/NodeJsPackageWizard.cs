@@ -74,7 +74,7 @@ namespace ServiceStackVS.Wizards
                     .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
                     .ToList();
 
-            if (!NodePackageUtils.HasBowerInPath())
+            if (!NodePackageUtils.HasBowerOnPath())
             {
                 UpdateStatusMessage("Installing bower...");
                 NodePackageUtils.InstallNpmPackageGlobally("bower");
@@ -182,7 +182,7 @@ namespace ServiceStackVS.Wizards
                 StartRequiredPackageInstallations(_outputWindow);
                 try
                 {
-                    if (!NodePackageUtils.HasBowerInPath())
+                    if (!NodePackageUtils.HasBowerOnPath())
                     {
                         string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                         string npmFolder = Path.Combine(appDataFolder, "npm");

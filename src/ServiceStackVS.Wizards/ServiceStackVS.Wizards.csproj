@@ -90,6 +90,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GitBashInstallationPrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GitBashInstallationPrompt.Designer.cs">
+      <DependentUpon>GitBashInstallationPrompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GitRequiredWizard.cs" />
     <Compile Include="NodeJSInstallationPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +121,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GitBashInstallationPrompt.resx">
+      <DependentUpon>GitBashInstallationPrompt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NodeJSInstallationPrompt.resx">
       <DependentUpon>NodeJSInstallationPrompt.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\nodejs-install.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Git-Logo-2Color.png" />
+    <None Include="Resources\gitlogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -87,7 +87,7 @@ namespace ServiceStackVS.Wizards
         public static bool HasNodeInPath()
         {
             //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
-            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("node") != null;
+            bool execFoundOnPath = CommandUtils.HasExecutableOnPath("node");
             if (execFoundOnPath)
             {
                 return true;
@@ -96,10 +96,16 @@ namespace ServiceStackVS.Wizards
             return canRun;
         }
 
-        public static bool HasNpmInPath()
+
+        public static bool HasGitOnPath()
         {
-            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
-            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("npm") != null;
+            return CommandUtils.GetFullPathToCommand("git") != null;
+        }
+
+        public static bool HasNpmOnPath()
+        {
+            //If user has not restarted visual studio since node install, this will still return false even though npm is accessible from command-line
+            bool execFoundOnPath = CommandUtils.HasExecutableOnPath("npm");
             if (execFoundOnPath)
             {
                 return true;
@@ -108,10 +114,10 @@ namespace ServiceStackVS.Wizards
             return canRun;
         }
 
-        public static bool HasBowerInPath()
+        public static bool HasBowerOnPath()
         {
-            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
-            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("bower") != null;
+            //If user has not restarted visual studio since node install, this will still return false even though bower is accessible from command-line
+            bool execFoundOnPath = CommandUtils.HasExecutableOnPath("bower");
             if (execFoundOnPath)
             {
                 return true;
@@ -120,10 +126,10 @@ namespace ServiceStackVS.Wizards
             return canRun;
         }
 
-        public static bool HasGruntInPath()
+        public static bool HasGruntOnPath()
         {
-            //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
-            bool execFoundOnPath = CommandUtils.GetFullPathToCommand("grunt") != null;
+            //If user has not restarted visual studio since node install, this will still return false even though grunt is accessible from command-line
+            bool execFoundOnPath = CommandUtils.HasExecutableOnPath("grunt");
             if (execFoundOnPath)
             {
                 return true;
@@ -132,9 +138,9 @@ namespace ServiceStackVS.Wizards
             return canRun;
         }
 
-        public static bool HasGulpInPath()
+        public static bool HasGulpOnPath()
         {
-            return CommandUtils.GetFullPathToCommand("gulp") != null;
+            return CommandUtils.HasExecutableOnPath("gulp");
         }
 
         public static List<string> GetGloballyInstalledNpmPackages(bool ignoreCache = false)
@@ -237,7 +243,7 @@ namespace ServiceStackVS.Wizards
 
         public static bool TryRegisterNpmFromDefaultLocation()
         {
-            bool hasNpmOnPath = HasNpmInPath();
+            bool hasNpmOnPath = HasNpmOnPath();
             if (hasNpmOnPath)
             {
                 return true;
@@ -272,7 +278,7 @@ namespace ServiceStackVS.Wizards
                 return true;
             }
             return false;
-        }
+        } 
     }
 
 
@@ -399,6 +405,47 @@ namespace ServiceStackVS.Wizards
             }
             
             return hasExecutableOnPath;
+        }
+
+        public static bool HasExecutableOnPath(string commandName)
+        {
+            return GetFullPathToCommand(commandName) != null;
+        }
+
+        public static bool TryRegisterAppFromProgramFiles(string pfRelativePath, string commandName, string commandExtension = ".exe")
+        {
+            bool hasExecutableOnPath = HasExecutableOnPath(commandName);
+            if (hasExecutableOnPath)
+            {
+                return true;
+            }
+
+            string systemPath = System.Environment.GetEnvironmentVariable("SystemRoot");
+            bool x86Path;
+            bool x64Path;
+            string path = "";
+            if (systemPath != null)
+            {
+                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", System.StringComparison.Ordinal) + 1);
+                x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\" + pfRelativePath));
+                x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\" + pfRelativePath));
+                if (x86Path)
+                {
+                    path = Path.Combine(systemDrive, "Program Files (x86)\\" + pfRelativePath);
+                }
+
+                if (x64Path)
+                {
+                    path = Path.Combine(systemDrive, "Program Files\\" + pfRelativePath);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path, commandName + commandExtension)))
+            {
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path, EnvironmentVariableTarget.User);
+                return true;
+            }
+            return false;
         }
     }
 
