@@ -271,10 +271,10 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path,"node.exe")))
             {
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path + ";" + Path.Combine(path, "node_modules\\npm\\bin"));
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path + ";" + Path.Combine(path, "node_modules\\npm\\bin"),EnvironmentVariableTarget.User);
                 string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string npmFolder = Path.Combine(appDataFolder, "npm");
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder,EnvironmentVariableTarget.User);
                 return true;
             }
             return false;

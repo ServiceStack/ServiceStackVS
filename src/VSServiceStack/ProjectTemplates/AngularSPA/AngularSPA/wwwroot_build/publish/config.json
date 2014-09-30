@@ -1,6 +1,6 @@
 {
 	"iisApp": "$safeprojectname$",
-	"serverAddress": "deploy-server.company.com",
-	"userName": "Administrator",
-	"password" : "{YourPassword}"
+	"serverAddress": "deploy-server.example.com",
+	"userName": "{WebDeployUserName}",
+	"password" : "{WebDeployPassword}"
 }
