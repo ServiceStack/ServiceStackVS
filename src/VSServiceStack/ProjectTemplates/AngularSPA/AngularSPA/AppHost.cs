@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using Funq;
 using $safeprojectname$.ServiceInterface;
 using ServiceStack;
+using ServiceStack.Configuration;
 
 namespace $safeprojectname$
 {
@@ -18,7 +20,10 @@ namespace $safeprojectname$
         public AppHost()
             : base("$safeprojectname$", typeof(MyServices).Assembly)
         {
-
+            var customSettings = new FileInfo(@"~/appsettings.txt".MapHostAbsolutePath());
+            AppSettings = customSettings.Exists
+                ? (IAppSettings)new TextFileSettings(customSettings.FullName)
+                : new AppSettings();
         }
 
         /// <summary>
@@ -31,6 +36,11 @@ namespace $safeprojectname$
             //Config examples
             //this.Plugins.Add(new PostmanFeature());
             //this.Plugins.Add(new CorsFeature());
+
+            SetConfig( new HostConfig
+            {
+                DebugMode = AppSettings.Get("DebugMode",false)
+            });
         }
     }
 }

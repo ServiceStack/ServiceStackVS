@@ -116,7 +116,9 @@ DocProject/Help/Html2
 DocProject/Help/html
 
 # Click-Once directory
-publish/
+## Removed publish/ to enable AngularJS SPA template and config.json
+#publish/
+
 
 # Publish Web Output
 *.[Pp]ublish.xml

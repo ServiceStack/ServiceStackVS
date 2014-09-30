@@ -61,11 +61,6 @@ namespace ServiceStackVS.Wizards
             return false;
         }
 
-        private void logoBox_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://git-scm.com/downloads");
-        }
-
         private void btnContinue_Click(object sender, EventArgs e)
         {
             GitFoundOnPath = CheckForInstallation();
@@ -83,6 +78,11 @@ namespace ServiceStackVS.Wizards
             {
                 this.Close();
             }
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://git-scm.com/downloads");
         } 
     }
 }

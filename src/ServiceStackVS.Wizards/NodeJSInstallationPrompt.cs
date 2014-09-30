@@ -67,11 +67,6 @@ namespace ServiceStackVS.Wizards
             return false;
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://nodejs.org/");
-        }
-
         private void btnContinue_Click(object sender, EventArgs e)
         {
             NodeFoundOnPath = CheckForInstallation();
@@ -89,6 +84,11 @@ namespace ServiceStackVS.Wizards
             {
                 this.Close();
             }
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://nodejs.org/");
         }
     }
 }

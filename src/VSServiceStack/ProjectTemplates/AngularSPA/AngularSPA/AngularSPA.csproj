@@ -92,7 +92,6 @@
   <ItemGroup>
     <Content Include="css\app.css" />
     <Content Include="gruntfile.js" />
-    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\hello\controllers.js" />
@@ -107,8 +106,14 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="start-karma.bat" />
-    <Content Include="build-Release.bat" />
+    <Folder Include="wwwroot\" />
+    <Content Include="wwwroot_build\README.txt" />
+    <Content Include="wwwroot_build\01-run-tests.bat" />
+    <Content Include="wwwroot_build\02-package-server.bat" />
+    <Content Include="wwwroot_build\03-package-client.bat" />
+    <Content Include="wwwroot_build\04-deploy-app.bat" />
+    <Content Include="wwwroot_build\deploy\appsettings.txt" />
+    <Content Include="wwwroot_build\publish\config.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

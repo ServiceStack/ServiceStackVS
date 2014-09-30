@@ -136,11 +136,7 @@
     <Resource Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\nodejs-install.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Git-Logo-2Color.png" />
-    <None Include="Resources\gitlogo.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

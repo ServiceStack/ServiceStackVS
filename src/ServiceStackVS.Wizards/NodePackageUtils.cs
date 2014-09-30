@@ -284,7 +284,6 @@ namespace ServiceStackVS.Wizards
 
     public class CommandUtils
     {
-        private static bool processPathInit = false;
         public static string StartCommand(
             string command, 
             string workingDirectory = null, 

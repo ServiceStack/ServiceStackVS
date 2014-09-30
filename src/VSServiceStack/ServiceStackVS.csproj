@@ -277,15 +277,18 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\build-Release.bat" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\start-karma.bat" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Release.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\01-run-tests.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\02-package-server.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\03-package-client.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\04-deploy-app.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\publish\config.json" />
     <None Include="ProjectTemplates\AngularSPA\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\AngularSPA\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\AngularSPA\Test\packages.config" />
@@ -307,7 +310,6 @@
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\css\app.css" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gruntfile.js" />
-    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gulpfile.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
@@ -322,6 +324,8 @@
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\karma.conf.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\unit\controllerSpec.js" />
     <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\deploy\appsettings.txt" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\README.txt" />
     <Content Include="ProjectTemplates\AngularSPA\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\AngularSPA\logo.png" />
     <Content Include="ProjectTemplates\AngularSPA\ServiceInterface\MyTemplate.vstemplate" />
@@ -915,6 +919,7 @@
   <ItemGroup>
     <Folder Include="ProjectTemplates\AngularJS\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\img\" />
+    <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot\" />
     <Folder Include="ProjectTemplates\AngularSPA\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\Bootstrap\ServiceModel\Types\" />

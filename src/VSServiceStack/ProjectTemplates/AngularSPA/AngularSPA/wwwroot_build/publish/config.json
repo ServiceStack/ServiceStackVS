@@ -1,0 +1,6 @@
+{
+	"iisApp": "$safeprojectname$",
+	"serverAddress": "deploy-server.company.com",
+	"userName": "Administrator",
+	"password" : "{YourPassword}"
+}
