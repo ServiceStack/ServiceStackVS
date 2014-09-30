@@ -55,7 +55,7 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path))
             {
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path,EnvironmentVariableTarget.User);
+                path.AddToPathEnvironmentVariable();
                 return true;
             }
             return false;

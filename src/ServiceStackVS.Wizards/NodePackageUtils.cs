@@ -271,14 +271,28 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path,"node.exe")))
             {
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path + ";" + Path.Combine(path, "node_modules\\npm\\bin"),EnvironmentVariableTarget.User);
+                Path.Combine(path, "node_modules\\npm\\bin").AddToPathEnvironmentVariable();
                 string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string npmFolder = Path.Combine(appDataFolder, "npm");
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder,EnvironmentVariableTarget.User);
+                npmFolder.AddToPathEnvironmentVariable();
                 return true;
             }
             return false;
-        } 
+        }
+
+        public static void AddToPathEnvironmentVariable(this string pathValue)
+        {
+            var processPathValue = Environment.GetEnvironmentVariable("PATH");
+            var userValue = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
+            if (userValue != null && !userValue.Contains(pathValue))
+            {
+                if (processPathValue != null && !processPathValue.Contains(pathValue))
+                {
+                    Environment.SetEnvironmentVariable("PATH", processPathValue + ";" + pathValue);
+                }
+                Environment.SetEnvironmentVariable("PATH",userValue + ";" + pathValue,EnvironmentVariableTarget.User);
+            }
+        }
     }
 
 
@@ -377,8 +391,8 @@ namespace ServiceStackVS.Wizards
                 int firstSpaceIndex = command.IndexOf(" ", System.StringComparison.Ordinal);
                 bool containsArgs = firstSpaceIndex > 0;
                 string commandFile = command.Substring(0, containsArgs ? firstSpaceIndex : command.Length) + currentExtension;
-                var enviromentPath = System.Environment.GetEnvironmentVariable("PATH");
-                var paths = enviromentPath.Split(';');
+                var processEnvironmentPath = System.Environment.GetEnvironmentVariable("PATH");
+                var paths = processEnvironmentPath.Split(';');
                 execPath = paths.Select(x => Path.Combine(x, commandFile)).FirstOrDefault(File.Exists);
                 if (execPath != null)
                     break;
@@ -441,7 +455,7 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path, commandName + commandExtension)))
             {
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path, EnvironmentVariableTarget.User);
+                path.AddToPathEnvironmentVariable();
                 return true;
             }
             return false;

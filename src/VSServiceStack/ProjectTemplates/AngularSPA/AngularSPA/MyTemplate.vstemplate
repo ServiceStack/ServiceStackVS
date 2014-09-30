@@ -30,8 +30,8 @@
   <WizardData>
     <NodeJs>
       <npm-package id="grunt-cli" />
-      <npm-package id="grunt" />
       <npm-package id="gulp" />
+      <npm-package id="karma-cli" />
     </NodeJs>
   </WizardData>
 </VSTemplate>

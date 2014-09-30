@@ -61,7 +61,7 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path))
             {
-                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + path + ";" + Path.Combine(path, "node_modules\\npm\\bin"));
+                path.AddToPathEnvironmentVariable();
                 return true;
             }
             return false;

@@ -186,8 +186,7 @@ namespace ServiceStackVS.Wizards
                     {
                         string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                         string npmFolder = Path.Combine(appDataFolder, "npm");
-                        Environment.SetEnvironmentVariable("PATH",
-                            Environment.GetEnvironmentVariable("PATH") + ";" + npmFolder);
+                        npmFolder.AddToPathEnvironmentVariable();
                     }
                     UpdateStatusMessage("Downloading bower depedencies...");
                     NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
