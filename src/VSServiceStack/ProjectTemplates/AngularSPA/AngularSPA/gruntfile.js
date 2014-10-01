@@ -1,4 +1,9 @@
-﻿'use strict';
+﻿/// <reference path="~/node_modules/grunt/lib/grunt.js" />
+/// <reference path="~/node_modules/grunt/lib/util/task.js"/>
+/// <reference path="~/node_modules/gulp/index.js"/>
+/// <reference path="~/node_modules/requirejs/require.js"/>
+
+'use strict';
 
 module.exports = function (grunt) {
     var path = require('path');
@@ -25,6 +30,28 @@ module.exports = function (grunt) {
                 singleRun: true,
                 browsers: ['PhantomJS'],
                 logLevel: 'ERROR'
+            }
+        },
+        msbuild: {
+            release: {
+                src: ['$safeprojectname$.csproj'],
+                options: {
+                    projectConfiguration: 'Release',
+                    targets: ['Clean', 'Rebuild'],
+                    stdout: true,
+                    version: 4.0,
+                    maxCpuCount: 4,
+                    buildParameters: {
+                        WarningLevel: 2
+                    },
+                    verbosity: 'quiet'
+                }
+            }
+        },
+        nugetrestore: {
+            restore: {
+                src: 'packages.config',
+                dest: '../../packages/'
             }
         },
         msdeploy: {
@@ -126,9 +153,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-msdeploy');
     grunt.loadNpmTasks('grunt-gulp');
+    grunt.loadNpmTasks('grunt-msbuild');
+    grunt.loadNpmTasks('grunt-nuget');
 
     grunt.registerTask('01-run-tests', ['karma']);
     grunt.registerTask('02-package-server', [
+        'nugetrestore',
+        'msbuild:release',
         'gulp:wwwroot-clean-dlls',
         'gulp:wwwroot-copy-bin',
         'gulp:wwwroot-copy-webconfig',

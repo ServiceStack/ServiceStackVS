@@ -271,9 +271,10 @@ namespace ServiceStackVS.Wizards
 
             if (!string.IsNullOrEmpty(path) && File.Exists(Path.Combine(path,"node.exe")))
             {
-                Path.Combine(path, "node_modules\\npm\\bin").AddToPathEnvironmentVariable();
                 string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string npmFolder = Path.Combine(appDataFolder, "npm");
+                path.AddToPathEnvironmentVariable();
+                Path.Combine(path, "node_modules\\npm\\bin").AddToPathEnvironmentVariable();
                 npmFolder.AddToPathEnvironmentVariable();
                 return true;
             }
@@ -286,11 +287,11 @@ namespace ServiceStackVS.Wizards
             var userValue = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
             if (userValue != null && !userValue.Contains(pathValue))
             {
-                if (processPathValue != null && !processPathValue.Contains(pathValue))
-                {
-                    Environment.SetEnvironmentVariable("PATH", processPathValue + ";" + pathValue);
-                }
                 Environment.SetEnvironmentVariable("PATH",userValue + ";" + pathValue,EnvironmentVariableTarget.User);
+            }
+            if (processPathValue != null && !processPathValue.Contains(pathValue))
+            {
+                Environment.SetEnvironmentVariable("PATH", processPathValue + ";" + pathValue);
             }
         }
     }

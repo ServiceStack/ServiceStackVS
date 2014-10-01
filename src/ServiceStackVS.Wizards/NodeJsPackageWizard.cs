@@ -74,11 +74,15 @@ namespace ServiceStackVS.Wizards
                     .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
                     .ToList();
 
-            if (!NodePackageUtils.HasBowerOnPath())
+            if (NodePackageUtils.TryRegisterNpmFromDefaultLocation())
             {
-                UpdateStatusMessage("Installing bower...");
-                NodePackageUtils.InstallNpmPackageGlobally("bower");
+                if (!NodePackageUtils.HasBowerOnPath())
+                {
+                    UpdateStatusMessage("Installing bower...");
+                    NodePackageUtils.InstallNpmPackageGlobally("bower");
+                }
             }
+            
             //Not needed
             //bowerPackages =
             //    element.Descendants()
