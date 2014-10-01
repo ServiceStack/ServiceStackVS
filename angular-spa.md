@@ -119,7 +119,7 @@ To give developers a starting point for deployment, we have included the use of 
 
 If you are using **Github's default Visual Studio ignore, this file will not be included in source control** due to the default rule of publish/ to be ignored. You should check your Git ignore rules before committing any potentially sensitive information into source control.
 
-This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Grunt or just Visual Studio publish, see 'Quick WebDeploy with AWS'.
+This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Grunt or just Visual Studio publish, see '[WebDeploy with AWS](https://github.com/ServiceStack/ServiceStack/wiki/WebDeploy-with-AWS#deploy-using-grunt)'.
 
 ##### Main project structure #####
     -css
