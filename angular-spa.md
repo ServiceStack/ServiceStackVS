@@ -9,11 +9,11 @@ This template is the first iteration of a new effort that follows VS.NET's devel
 ### Requirements ###
 This template relies on having [Node.js installed](http://nodejs.org/). If you try to use this template without Node.js installed (ie, node.exe not found on the local machines PATH), you will be prompted to install it.
 
-Once downloaded and installed, click continue to create your project. If any of the NPM depedencies are not installed globally, the template will install the required NPM packages as well as download the Bower depdendencies for the template. 
+Once downloaded and installed, click continue to create your project. If any of the NPM dependencies are not installed globally, the template will install the required NPM packages as well as download the Bower dependencies for the template. 
 
 Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.org/package/bower) and select the second option to enable Git to be available from the command prompt. This is required due to commands run by Bower to install dependencies from Git repositories.
 
-As soon as your project is open, all the required front-end dependencies will be ready to go. Local NPM depdendecies to run Karma, Grunt and Gulp will download asyncronously and you'll be able to see the progress inside the ServiceStackVS output window in Visual Studio.
+As soon as your project is open, all the required front-end dependencies will be ready to go. Local NPM dependencies to run Karma, Grunt and Gulp will download asynchronously and you'll be able to see the progress inside the ServiceStackVS output window in Visual Studio.
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/npm-install-on-create.png)
 
@@ -42,7 +42,7 @@ This folder is where your application is **packaged to ready to be deployed**. I
 ![wwwroot folder output](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-wwwroot-output.png)
 
 ##### 01-run-tests #####
-This task runs your tests configured in the karma.conf.js file. The template by default runs the tests once using PhantomJS as the browser. If you want to have Karma running and watching your files as you code, this can be changed by switching the 'singleRun' flag in the Grunt configuration.
+This task runs your tests configured in the karma.conf.js file. The template by default runs the tests once using PhantomJS as the browser. If you want to have Karma running and watching your files as you code, this can be changed by switching the `singleRun` flag in the Grunt configuration.
 
     karma: {
             unit: {
@@ -56,14 +56,14 @@ This task runs your tests configured in the karma.conf.js file. The template by 
 ![Running Karma tests via TRX](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/01-run-tests.png)
 
 ##### 02-package-server ######
-To keep the packaging of your server self contained within Grunt, this task performs the following tasks to get all the required server components staged in the `wwwroot` folder.
+To keep the packaging of your server self-contained within Grunt, this task performs the following tasks to get all the required server components staged in the `wwwroot` folder.
 
 - Restore NuGet packages
 - Release build
 - Clean server files in wwwroot folder
 - Copy server required files
 
-One of these server files included in an appsettings.txt. This can be used for overriding any application settings from the web.config and read them in using ServiceStacks `AppSettings` property in the AppHost.
+One of these server files included, is the `appsettings.txt`. This can be used for overriding any application settings from the `web.config` and read them in using ServiceStacks `AppSettings` property in the `AppHost`.
 
     SetConfig(new HostConfig
             {
@@ -81,10 +81,10 @@ The text file itself contains just a DebugMode setting as an example.
 
     DebugMode false
 
-This file is located in the `wwwroot_build/deploy` folder by default which is copied as a part of the `02-package-server` task.
+The appsettings.txt file is located in the `wwwroot_build/deploy` folder by default which is copied as a part of the `02-package-server` task.
 
 ##### 03-package-client #####
-This task is also separated out to allow updating, and if required deployment, to just the client side resources. It clean's the client side related files in the wwwroot folder, bundles and copies the new resources. The bundling searches for assets in the index.html file and follows build comments to minify and replace references. This enables simple use of debug JS files whilst still having control how our resources minify.
+This task is also separated out to allow updating, and if required deployment, to just the client side resources. It cleans the client side related files in the wwwroot folder, bundles and copies the new resources. The bundling searches for assets in the index.html file and follows build comments to minify and replace references. This enables simple use of debug JS files whilst still having control how our resources minify.
 
         <!-- build:js lib/js/angular.min.js -->
         <script src="bower_components/angular/angular.js"></script>
@@ -107,45 +107,45 @@ Vendor resources from bower are also minified here to keep deployment simple and
 To give developers a starting point for deployment, we have included the use of a grunt-msdeploy task that can deploy to an IIS server with Web deploy. Config for the deployment, eg the IIS Server address, application name, username and password is located in the `wwwroot/publish/config.js`. 
 
     {
-	    "iisApp": "YourAppName",
-	    "serverAddress": "deploy-server.example.com",
-	    "userName": "{WebDeployUserName}",
-	    "password" : "{WebDeployPassword}"
+        "iisApp": "YourAppName",
+        "serverAddress": "deploy-server.example.com",
+        "userName": "{WebDeployUserName}",
+        "password" : "{WebDeployPassword}"
     }
 
-If you are using **Github's default Visual Studio ignore, this file will not included in source control** due to the default rule of publish/ to be ignored. You should check your Git ignore rules before committing any potentially sensitive information into source control.
+If you are using **Github's default Visual Studio ignore, this file will not be included in source control** due to the default rule of publish/ to be ignored. You should check your Git ignore rules before committing any potentially sensitive information into source control.
 
 This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Grunt or just Visual Studio publish, see 'Quick WebDeploy with AWS'.
 
 ##### Main project structure #####
     -css
-		Application specific CSS files
+        Application specific CSS files
     -img
-		Image resources
-	-js
-		Application JS
-	-partials
-		AngularJS templates
-	-Scripts
-		Only here to enable intellisense for CSS and JS libraries by default
-	-tests
-		Karma config
-		-unit
-			Karma spec files
-	-wwwroot
-		Output directory
-	-wwwroot_build
-		Grunt shortcuts, build and deploy files
-	AppHost.cs
-	bower.json
-	Global.asax
-	gruntfile.js
-	index.html
-	package.json
-	packages.config
-	web.config
+        Image resources
+    -js
+        Application JS
+    -partials
+        AngularJS templates
+    -Scripts
+        Only here to enable intellisense for CSS and JS libraries by default
+    -tests
+        Karma config
+        -unit
+            Karma spec files
+    -wwwroot
+        Output directory
+    -wwwroot_build
+        Grunt shortcuts, build and deploy files
+    AppHost.cs
+    bower.json
+    Global.asax
+    gruntfile.js
+    index.html
+    package.json
+    packages.config
+    web.config
 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows. The AngularJS side is largely influenced by various incarnations of the angular-seed project whilst still be contained within a VS project.
 
 ### Feedback ###
-This template is trying to give a good starting point for developing a single page application within Visual Studio. Please raise any issues or suggestions in the issues list.
+The AngularJS App template is trying to give a good starting point for developing a single page application within Visual Studio. Please raise any issues or suggestions in the issues list.
