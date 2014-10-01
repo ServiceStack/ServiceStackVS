@@ -13,6 +13,8 @@ Once downloaded and installed, click continue to create your project. If any of 
 
 Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.org/package/bower) and select the second option to enable Git to be available from the command prompt. This is required due to commands run by Bower to install dependencies from Git repositories.
 
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/git-setup.png)
+
 As soon as your project is open, all the required front-end dependencies will be ready to go. Local NPM dependencies to run Karma, Grunt and Gulp will download asynchronously and you'll be able to see the progress inside the ServiceStackVS output window in Visual Studio.
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/npm-install-on-create.png)
