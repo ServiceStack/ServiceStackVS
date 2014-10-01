@@ -36,6 +36,8 @@ As front-ends are getting more complicated, tools like Grunt and Gulp help to fi
 
 ![Building with TRX](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-build-app-demo_2.gif)
 
+Although the template doesn't include a Gulpfile.js, it does use Gulp via a grunt package called 'grunt-gulp'. This done to take advantage of Gulp packages whilst keeping all tasks within one file.
+
 ##### The 'wwwroot' folder ######
 This folder is where your application is **packaged to ready to be deployed**. It contains the result of the 'package' Grunt tasks which take care of things like minification and updating the associated references. It also contains all the required server components like the 'bin', Global.asax and web.config. 
 
