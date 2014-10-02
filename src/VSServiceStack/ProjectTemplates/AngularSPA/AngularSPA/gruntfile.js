@@ -151,7 +151,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-msdeploy');
+    grunt.loadNpmTasks('ssvs-utils');
     grunt.loadNpmTasks('grunt-gulp');
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
