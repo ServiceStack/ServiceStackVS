@@ -52,6 +52,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0">
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.12.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
@@ -68,6 +69,7 @@
       <HintPath>..\packages\ServiceStack.Text.Signed.4.0.23\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -75,6 +77,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TemplateBuilder">
       <HintPath>..\packages\TemplateBuilder.1.0.3.52-beta\lib\TemplateBuilder.dll</HintPath>
     </Reference>
@@ -141,6 +144,19 @@
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="VsixDocumentExtensions.cs" />
+    <Compile Include="OutputWindowWriter.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\AngularSPA\Test\UnitTests.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\AppHost.cs" />
     <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,7 +252,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="SolutionEvents.cs" />
     <Compile Include="Types\MetadataTypes.cs" />
+    <Compile Include="VsixProjectExtensions.cs" />
     <Compile Include="VSIXUtils.cs" />
     <Compile Include="ServiceStackVSPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +276,22 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\bower.json" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\package.json" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Release.config" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\01-run-tests.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\02-package-server.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\03-package-client.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\04-deploy-app.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\publish\config.json" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\AngularSPA\Test\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Web.Debug.config" />
@@ -270,6 +304,40 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\AngularSPA.csproj">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\css\app.css" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gruntfile.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\navigation\controllers.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\MyTemplate.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\hello\hello.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial1.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\partial2.html" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Scripts\_references.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\karma.conf.js" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\tests\unit\controllerSpec.js" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\deploy\appsettings.txt" />
+    <Resource Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\README.txt" />
+    <Content Include="ProjectTemplates\AngularSPA\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\AngularSPA\logo.png" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\AngularSPA\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\Test\ServiceStackAngularJS.Test.csproj" />
+    <Resource Include="ProjectTemplates\AngularSPA\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\AngularSPA\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\MyTemplate.vstemplate" />
@@ -596,6 +664,7 @@
   <ItemGroup>
     <VSCTCompile Include="VSServiceStack.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
@@ -849,6 +918,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ProjectTemplates\AngularJS\ServiceModel\Types\" />
+    <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\img\" />
+    <Folder Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot\" />
+    <Folder Include="ProjectTemplates\AngularSPA\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\ASPNETRazor\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\Bootstrap\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
@@ -867,6 +939,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.Wizards\ServiceStackVS.Wizards.csproj">
+      <Project>{f15d55c1-633a-4344-84e5-ce9c95988507}</Project>
+      <Name>ServiceStackVS.Wizards</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

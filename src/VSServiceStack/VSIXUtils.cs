@@ -70,6 +70,11 @@ namespace ServiceStackVS
         /// <returns></returns>
         public static Project GetSelectedProject()
         {
+            return GetSelectObject<Project>();
+        }
+
+        public static T GetSelectObject<T>() where T : class
+        {
             IntPtr hierarchyPointer, selectionContainerPointer;
             Object selectedObject = null;
             IVsMultiItemSelect multiItemSelect;
@@ -104,9 +109,7 @@ namespace ServiceStackVS
                                                   out selectedObject));
             }
 
-            Project selectedProject = selectedObject as Project;
-
-            return selectedProject;
+            return selectedObject as T;
         }
     }
 }

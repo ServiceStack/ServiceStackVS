@@ -45,6 +45,9 @@
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
       
+      <Group guid="guidVSServiceStackCmdSet" id="MyFSharpUpdateGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
 
 
     </Groups>
@@ -64,13 +67,33 @@
       <Button guid="guidVSServiceStackCmdSet" id="cmdidServiceStackReference" priority="0xE100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
         <Icon guid="guidImages" id="bmpSSAdd" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
           <ButtonText>Add ServiceStack Reference...</ButtonText>
         <CommandName>cmdidServiceStackReference</CommandName>
         </Strings>
       </Button>
-
-
+      <Button guid="guidVSServiceStackCmdSet" id="cmdidFSharpAddServiceStackReference" priority="0xE100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
+        <Icon guid="guidImages" id="bmpSSAdd" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Add ServiceStack Reference...</ButtonText>
+          <CommandName>cmdidFSharpAddServiceStackReference</CommandName>
+        </Strings>
+      </Button>
+      <Button guid="guidVSServiceStackCmdSet" id="cmdidFSharpUpdateServiceStackReference" priority="0x0100" type="Button">
+        <Parent guid="guidVSServiceStackCmdSet" id="MyFSharpUpdateGroup" />
+        <Icon guid="guidImages" id="bmpSSAdd" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Update ServiceStack Reference...</ButtonText>
+          <CommandName>cmdidFSharpUpdateServiceStackReference</CommandName>
+        </Strings>
+      </Button>
 
     </Buttons>
    
@@ -102,8 +125,12 @@
 
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="cmdidServiceStackReference" value="0x0100" />
+      <IDSymbol name="MyDynamicMenuGroup" value="0x1040" />
+      <IDSymbol name="cmdidFSharpAddServiceStackReference" value="0x0200" />
+      <IDSymbol name="MyFSharpUpdateGroup" value="0x1030"/>
+      <IDSymbol name="cmdidFSharpUpdateServiceStackReference" value="0x0300" />
     </GuidSymbol>
-
+    
     <GuidSymbol name="guidImages" value="{ea18a0da-43af-4f6e-a6e7-83277552cba7}" >
       <IDSymbol name="bmpSSAdd" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
