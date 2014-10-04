@@ -27,18 +27,19 @@ namespace ServiceStackVS.Wizards
         private const string ServiceStackVSPackageCmdSetGuid = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private List<NpmPackage> npmPackages;
 
-        uint progressRef = 0;
+        private uint progressRef = 0;
 
         private DTE _dte;
 
         private IVsStatusbar bar;
+
         private IVsStatusbar StatusBar
         {
             get
             {
                 if (bar == null)
                 {
-                    bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar;
+                    bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar;
                 }
 
                 return bar;
@@ -63,15 +64,16 @@ namespace ServiceStackVS.Wizards
         /// <param name="replacementsDictionary"></param>
         /// <param name="runKind"></param>
         /// <param name="customParams"></param>
-        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
+        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary,
+            WizardRunKind runKind, object[] customParams)
         {
-            _dte = (DTE)automationObject;
+            _dte = (DTE) automationObject;
             string wizardData = replacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse(wizardData);
             npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
-                    .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
+                    .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
                     .ToList();
 
             if (NodePackageUtils.TryRegisterNpmFromDefaultLocation())
@@ -82,7 +84,7 @@ namespace ServiceStackVS.Wizards
                     NodePackageUtils.InstallNpmPackageGlobally("bower");
                 }
             }
-            
+
             //Not needed
             //bowerPackages =
             //    element.Descendants()
@@ -108,7 +110,7 @@ namespace ServiceStackVS.Wizards
                             if (!string.IsNullOrEmpty(args.Data))
                             {
                                 string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                outputWindowWriter.WriteLine(s); 
+                                outputWindowWriter.WriteLine(s);
                             }
                         },
                         (sender, args) =>
@@ -116,10 +118,11 @@ namespace ServiceStackVS.Wizards
                             if (!string.IsNullOrEmpty(args.Data))
                             {
                                 string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                outputWindowWriter.WriteLine(s); 
+                                outputWindowWriter.WriteLine(s);
                             }
                         }); //Installs global npm package if missing
-                    StatusBar.Progress(ref progressRef, 1, "", Convert.ToUInt32(index), Convert.ToUInt32(npmPackages.Count));
+                    StatusBar.Progress(ref progressRef, 1, "", Convert.ToUInt32(index),
+                        Convert.ToUInt32(npmPackages.Count));
                 }
             }
             catch (ProcessException pe)
@@ -218,7 +221,6 @@ namespace ServiceStackVS.Wizards
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.DefaultDesktopOnly,
                         false);
-
                 }
             }).Wait();
 
@@ -236,17 +238,17 @@ namespace ServiceStackVS.Wizards
                             if (!string.IsNullOrEmpty(args.Data))
                             {
                                 string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                _outputWindow.WriteLine(s); 
+                                _outputWindow.WriteLine(s);
                             }
                         },
-                    (sender, args) =>
-                    {
-                        if (!string.IsNullOrEmpty(args.Data))
+                        (sender, args) =>
                         {
-                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                            _outputWindow.WriteLine(s);
-                        }
-                    });
+                            if (!string.IsNullOrEmpty(args.Data))
+                            {
+                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                _outputWindow.WriteLine(s);
+                            }
+                        }, 600);
                     _outputWindow.WriteLine("NPM Install complete");
                     UpdateStatusMessage("Ready");
                     StatusBar.Clear();
@@ -260,14 +262,12 @@ namespace ServiceStackVS.Wizards
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.DefaultDesktopOnly,
                         false);
-                    
                 }
             });
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
-
         }
 
         public bool ShouldAddProjectItem(string filePath)
@@ -277,12 +277,10 @@ namespace ServiceStackVS.Wizards
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
-
         }
 
         public void RunFinished()
         {
-
         }
     }
 
