@@ -255,13 +255,8 @@ namespace ServiceStackVS.Wizards
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show("NPM install failed: " + exception.Message,
-                        "An error has occurred during an NPM install.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly,
-                        false);
+                    _outputWindow.WriteLine("An error has occurred during an NPM install");
+                    _outputWindow.WriteLine("NPM install failed: " + exception.Message);
                 }
             });
         }
