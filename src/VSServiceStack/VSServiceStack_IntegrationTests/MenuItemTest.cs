@@ -38,7 +38,7 @@ namespace ServiceStackVS_IntegrationTests
         {
             UIThreadInvoker.Invoke((ThreadInvoker)delegate()
             {
-                CommandID menuItemCmd = new CommandID(ServiceStackVS.GuidList.guidVSServiceStackCmdSet, (int)ServiceStackVS.PkgCmdIDList.cmdidServiceStackReference);
+                CommandID menuItemCmd = new CommandID(ServiceStackVS.GuidList.guidVSServiceStackCmdSet, (int)ServiceStackVS.PkgCmdIDList.cmdidCSharpAddServiceStackReference);
 
                 // Create the DialogBoxListener Thread.
                 string expectedDialogBoxText = string.Format(CultureInfo.CurrentCulture, "{0}\n\nInside {1}.MenuItemCallback()", "ServiceStackVS", "ServiceStack.ServiceStackVS.ServiceStackVSPackage");

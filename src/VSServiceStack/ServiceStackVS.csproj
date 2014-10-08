@@ -144,6 +144,7 @@
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="NativeTypeHandler.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
     <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
