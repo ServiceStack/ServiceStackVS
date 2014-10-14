@@ -39,6 +39,7 @@ namespace $safeprojectname$
 
             SetConfig( new HostConfig
             {
+                HandlerFactoryPath = "api",
                 DebugMode = AppSettings.Get("DebugMode",false)
             });
         }
