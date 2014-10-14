@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ServiceStack;
 using ServiceStack.Text;
 using ServiceStackVS.Types;
 using Color = System.Windows.Media.Color;
@@ -29,48 +30,15 @@ namespace ServiceStackVS
         public bool AddReferenceSucceeded { get; set; }
         public string CodeTemplate { get; set; }
         private string suggestedFileName;
-        private string codeTemplateBase;
-        private string codeProviderName;
+        private INativeTypesHandler typesHandler;
 
-        public enum ServiceStackCodeProvider
-        {
-            CSharp,
-            FSharp
-        }
-
-        public AddServiceStackReference(string fileName)
+        public AddServiceStackReference(string fileName, INativeTypesHandler nativeTypesHandler)
         {
             suggestedFileName = fileName;
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
             this.KeyUp += ListenForShortcutKeys;
-        }
-
-        public void UseCSharpProvider(string t4TemplateBase)
-        {
-            codeTemplateBase = t4TemplateBase;
-            codeProviderName = "csharp";
-        }
-
-        public void UseFSharpProvider()
-        {
-            codeProviderName = "fsharp";
-        }
-
-        private ServiceStackCodeProvider codeProvider
-        {
-            get
-            {
-                switch (codeProviderName)
-                {
-                    case "csharp":
-                        return ServiceStackCodeProvider.CSharp;
-                    case "fsharp":
-                        return ServiceStackCodeProvider.FSharp;
-                    default:
-                        return ServiceStackCodeProvider.CSharp;
-                }
-            }
+            typesHandler = nativeTypesHandler;
         }
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
@@ -100,15 +68,11 @@ namespace ServiceStackVS
             {
                 string serverUrl = CreateUrl(UrlTextBox.Text);
                 bool urlIsValid = ValidateUrl(serverUrl);
-                if (codeProvider == ServiceStackCodeProvider.CSharp)
-                {
-                    CodeTemplate = codeTemplateBase.Replace("$serviceurl$", serverUrl); 
-                }
-                if (codeProvider == ServiceStackCodeProvider.FSharp)
-                {
-                    CodeTemplate = new WebClient().DownloadString(serverUrl);
-                }
-                
+                var uri = new Uri(serverUrl);
+                string scheme = uri.Scheme;
+                string host = uri.Host;
+
+                CodeTemplate = typesHandler.GetUpdatedCode("{0}://{1}".Fmt(scheme, host), null);
                 if (urlIsValid)
                 {
                     AddReferenceSucceeded = true;
@@ -133,8 +97,7 @@ namespace ServiceStackVS
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (UrlTextBox.Text.StartsWith("http://", true, CultureInfo.InvariantCulture) ||
-                UrlTextBox.Text.StartsWith("https://", true, CultureInfo.InvariantCulture))
+            if (!string.IsNullOrEmpty(UrlTextBox.Text.Trim()))
             {
                 OkButton.IsEnabled = true;
             }
@@ -151,14 +114,19 @@ namespace ServiceStackVS
 
         private string CreateUrl(string url)
         {
-            string serverUrl = url;
-            //Remove any trailing forward slash to url
-            if (serverUrl.EndsWith("/"))
+            string serverUrl = url.WithTrailingSlash();
+            //Ensure http/https present
+            serverUrl =
+                (serverUrl.ToLower().StartsWith("http://") || serverUrl.ToLower().StartsWith("https://"))
+                    ? serverUrl
+                    : "http://" + serverUrl;
+            var uri = new Uri(serverUrl);
+            string path = uri.PathAndQuery.Contains("?") ? uri.PathAndQuery.SplitOnFirst("?")[0] : uri.PathAndQuery;
+            if (!path.EndsWith("types/" + typesHandler.TypesLanguage.ToString() + "/"))
             {
-                serverUrl = serverUrl.Substring(0, serverUrl.Length - 1);
+                serverUrl += "types/" + typesHandler.TypesLanguage.ToString() + "/";
             }
-            //Accept full types/csharp as input
-            serverUrl = serverUrl.EndsWith("/types/" + codeProviderName) ? serverUrl : serverUrl + "/types/" + codeProviderName;
+  
             return serverUrl;
         }
 
@@ -169,7 +137,7 @@ namespace ServiceStackVS
                               validatedUri.Scheme == Uri.UriSchemeHttp;
             if (isValidUri)
             {
-                string metadataJsonUrl = validatedUri.ToString().Replace("/" + codeProviderName, "/metadata") + "?format=json";
+                string metadataJsonUrl = validatedUri.ToString().ToLower().Replace("/" + typesHandler.TypesLanguage.ToString().ToLower(), "/metadata") + "?format=json";
                 string metadataResponse = new WebClient().DownloadString(metadataJsonUrl);
                 MetadataTypes metaDataDto;
                 try

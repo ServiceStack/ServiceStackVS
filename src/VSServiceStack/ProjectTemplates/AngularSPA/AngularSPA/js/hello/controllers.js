@@ -4,7 +4,7 @@ app.controller('helloCtrl', ['$scope', '$http',
         function ($scope, $http) {
             $scope.$watch('name', function () {
                 if ($scope.name) {
-                    $http.get('/hello/' + $scope.name)
+                    $http.get('/api/hello/' + $scope.name)
                         .success(function (response) {
                             $scope.helloResult = response.Result;
                         });

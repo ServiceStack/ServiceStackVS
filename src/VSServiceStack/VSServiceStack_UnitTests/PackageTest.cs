@@ -36,21 +36,5 @@ namespace VSServiceStack_UnitTests
             Assert.IsNotNull(package as IVsPackage, "The object does not implement IVsPackage");
         }
 
-        [TestMethod()]
-        public void SetSite()
-        {
-            // Create the package
-            IVsPackage package = new ServiceStackVSPackage() as IVsPackage;
-            Assert.IsNotNull(package, "The object does not implement IVsPackage");
-
-            // Create a basic service provider
-            OleServiceProvider serviceProvider = OleServiceProvider.CreateOleServiceProviderWithBasicServices();
-
-            // Site the package
-            Assert.AreEqual(0, package.SetSite(serviceProvider), "SetSite did not return S_OK");
-
-            // Unsite the package
-            Assert.AreEqual(0, package.SetSite(null), "SetSite(null) did not return S_OK");
-        }
     }
 }

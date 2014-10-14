@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using EnvDTE;
 using ServiceStack;
+using ServiceStack.Text;
 using ServiceStackVS.Wizards;
 
 namespace ServiceStackVS
@@ -70,6 +71,70 @@ namespace ServiceStackVS
                 }
                 document.TryBowerInstall(windowWriter);
             }
+        }
+
+        public static void HandleCSharpDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
+        {
+            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
+            INativeTypesHandler typesHandler = new CSharpNativeTypesHandler();
+
+            if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension))
+            {
+                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+            }
+        }
+
+        public static void HandleFSharpDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
+        {
+            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
+            INativeTypesHandler typesHandler = new FSharpNativeTypesHandler();
+
+            if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension) || document.Name.EndsWithIgnoreCase(".dto.fs"))
+            {
+                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+            }
+        }
+
+        public static void HandleVbNetDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
+        {
+            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
+            INativeTypesHandler typesHandler = new VbNetNativeTypesHandler();
+
+            if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension))
+            {
+                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+            }
+        }
+
+        private static void HandleDtoUpdate(string fullPath,INativeTypesHandler typesHandler, OutputWindowWriter outputWindowWriter)
+        {
+            outputWindowWriter.WriteLine(
+                    "--- Updating ServiceStack Reference '" +
+                    fullPath.Substring(fullPath.LastIndexOf("\\", System.StringComparison.Ordinal)) +
+                    "' ---");
+            var existingGeneratedCode = File.ReadAllLines(fullPath).Join(Environment.NewLine);
+            string baseUrl = "";
+            if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
+            {
+                outputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unabled to find BaseUrl");
+                return;
+            }
+            try
+            {
+                var options = typesHandler.ParseComments(existingGeneratedCode);
+                string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
+                using (var streamWriter = File.CreateText(fullPath))
+                {
+                    streamWriter.Write(updatedCode);
+                    streamWriter.Flush();
+                }
+            }
+            catch (Exception e)
+            {
+                outputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + e.Message);
+            }
+            
+            outputWindowWriter.WriteLine("--- Update ServiceStack Reference Complete ---");
         }
 
         public static bool IsNpmUpdateDisable(this Document document)

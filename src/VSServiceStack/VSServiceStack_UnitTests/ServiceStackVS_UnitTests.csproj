@@ -51,6 +51,10 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="Microsoft.VSSDK.UnitTestLibrary" />
     <Reference Include="Microsoft.VSSDK.TestHostFramework" />
+    <Reference Include="NuGet.VisualStudio">
+      <HintPath>..\..\packages\NuGet.VisualStudio.2.8.2\lib\net40\NuGet.VisualStudio.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -68,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServiceStackVS.csproj">
