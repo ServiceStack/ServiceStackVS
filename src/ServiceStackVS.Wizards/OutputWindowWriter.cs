@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
@@ -43,6 +44,15 @@ namespace ServiceStackVS.Wizards
             {
                 outputWindow.CreatePane(ref paneGuid, outputWindowPaneName, 1, 0);
                 outputWindow.GetPane(ref paneGuid, out _outputWindowPane);
+            }
+        }
+
+        public void ShowOutputPane(DTE dte)
+        {
+            var outputWindow = dte.Windows.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");
+            if (outputWindow != null)
+            {
+                outputWindow.Visible = true;
             }
         }
 

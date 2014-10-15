@@ -426,7 +426,7 @@ namespace ServiceStackVS
                 return;
             }
             string templateCode = dialog.CodeTemplate;
-            CreateAndAddTemplateToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode);
+            AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode);
         }
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
@@ -463,7 +463,7 @@ namespace ServiceStackVS
             }
         }
 
-        private void CreateAndAddTemplateToProject(string fileName, string templateCode)
+        private void AddNewDtoFileToProject(string fileName, string templateCode)
         {
             var project = VSIXUtils.GetSelectedProject();
             string projectPath = project.Properties.Item("FullPath").Value.ToString();
@@ -473,10 +473,9 @@ namespace ServiceStackVS
                 streamWriter.Write(templateCode);
                 streamWriter.Flush();
             }
-            var t4TemplateProjectItem = project.ProjectItems.AddFromFile(fullPath);
-            t4TemplateProjectItem.Open(EnvDTE.Constants.vsViewKindCode);
-            t4TemplateProjectItem.Save();
-
+            var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
+            newDtoFile.Open(EnvDTE.Constants.vsViewKindCode);
+            newDtoFile.Save();
             AddNuGetDependencyIfMissing(project, "ServiceStack.Client");
             AddNuGetDependencyIfMissing(project, "ServiceStack.Text");
             project.Save();

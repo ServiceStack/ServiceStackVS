@@ -75,42 +75,39 @@ namespace ServiceStackVS
 
         public static void HandleCSharpDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
         {
-            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
             INativeTypesHandler typesHandler = new CSharpNativeTypesHandler();
-
             if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension))
             {
-                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+                HandleDtoUpdate(document, typesHandler, outputWindowWriter);
             }
         }
 
         public static void HandleFSharpDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
         {
-            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
             INativeTypesHandler typesHandler = new FSharpNativeTypesHandler();
-
             if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension) || document.Name.EndsWithIgnoreCase(".dto.fs"))
             {
-                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+                HandleDtoUpdate(document, typesHandler, outputWindowWriter);
             }
         }
 
         public static void HandleVbNetDtoUpdate(this Document document, OutputWindowWriter outputWindowWriter)
         {
-            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
             INativeTypesHandler typesHandler = new VbNetNativeTypesHandler();
-
             if (document.Name.EndsWithIgnoreCase(typesHandler.CodeFileExtension))
             {
-                HandleDtoUpdate(fullPath, typesHandler, outputWindowWriter);
+                HandleDtoUpdate(document, typesHandler, outputWindowWriter);
             }
         }
 
-        private static void HandleDtoUpdate(string fullPath,INativeTypesHandler typesHandler, OutputWindowWriter outputWindowWriter)
+        private static void HandleDtoUpdate(Document document,INativeTypesHandler typesHandler, OutputWindowWriter outputWindowWriter)
         {
+            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
+            outputWindowWriter.ShowOutputPane(document.DTE);
+            outputWindowWriter.Show();
             outputWindowWriter.WriteLine(
                     "--- Updating ServiceStack Reference '" +
-                    fullPath.Substring(fullPath.LastIndexOf("\\", System.StringComparison.Ordinal)) +
+                    fullPath.Substring(fullPath.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) +
                     "' ---");
             var existingGeneratedCode = File.ReadAllLines(fullPath).Join(Environment.NewLine);
             string baseUrl = "";
@@ -123,11 +120,21 @@ namespace ServiceStackVS
             {
                 var options = typesHandler.ParseComments(existingGeneratedCode);
                 string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
+
+                //Can't work out another way that ensures UI is updated.
+                //Overwriting the file inconsistently prompts the user that file has changed.
+                //Sometimes old code persists even though file has changed.
+                document.Close();
                 using (var streamWriter = File.CreateText(fullPath))
                 {
                     streamWriter.Write(updatedCode);
                     streamWriter.Flush();
                 }
+                //HACK to ensure new file is loaded
+                Task.Run(() =>
+                {
+                    document.DTE.ItemOperations.OpenFile(fullPath);
+                });
             }
             catch (Exception e)
             {
