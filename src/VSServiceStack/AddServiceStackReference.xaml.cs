@@ -68,11 +68,9 @@ namespace ServiceStackVS
             {
                 string serverUrl = CreateUrl(UrlTextBox.Text);
                 bool urlIsValid = ValidateUrl(serverUrl);
-                var uri = new Uri(serverUrl);
-                string scheme = uri.Scheme;
-                string host = uri.Host;
-
-                CodeTemplate = typesHandler.GetUpdatedCode("{0}://{1}".Fmt(scheme, host), null);
+                var webRequest = WebRequest.Create(serverUrl);
+                string result = webRequest.GetResponse().ReadToEnd();
+                CodeTemplate = result;
                 if (urlIsValid)
                 {
                     AddReferenceSucceeded = true;
