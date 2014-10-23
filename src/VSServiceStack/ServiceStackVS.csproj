@@ -654,6 +654,7 @@
     <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Web.Debug.config" />
     <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Web.Release.config" />
     <None Include="ProjectTemplates\Bootstrap\Test\packages.config" />
+    <None Include="ProjectTemplates\MVC5\Test\packages.config" />
     <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
