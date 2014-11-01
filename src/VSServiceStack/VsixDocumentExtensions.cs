@@ -249,9 +249,16 @@ namespace ServiceStackVS
                         try
                         {
                             NodePackageUtils.RunBowerInstall(document.Path,
-                                (sender, args) => windowWriter.WriteLine(args.Data),
-                                (sender, args) => windowWriter.WriteLine(args.Data)
-                                );
+                                (sender, args) =>
+                                {
+                                    string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                    windowWriter.WriteLine(s);
+                                },
+                                (sender, args) =>
+                                {
+                                    string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                    windowWriter.WriteLine(s);
+                                });
                         }
                         catch (Exception e)
                         {
