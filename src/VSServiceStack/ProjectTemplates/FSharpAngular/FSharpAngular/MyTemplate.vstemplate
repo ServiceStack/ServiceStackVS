@@ -1,9 +1,9 @@
-﻿<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>ServiceStack ASP.NET with AngularJS</Name>
     <Description>ServiceStack ASP.NET with AngularJS</Description>
     <DefaultName>$safeprojectname$</DefaultName>
-
     <ProjectType>FSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
@@ -12,12 +12,27 @@
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <Icon>..\logo.png</Icon>
-
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.fsproj" File="FSharpAngular.fsproj" ReplaceParameters="true">
-    </Project>
+    <Project TargetFileName="$safeprojectname$.fsproj" File="FSharpAngular.fsproj" ReplaceParameters="true"></Project>
   </TemplateContent>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.Wizards.NuGetPackageInstallerWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages>
+      <package id="ServiceStack" version="latest" />
+      <package id="ServiceStack.Client" version="latest" />
+      <package id="ServiceStack.Common" version="latest" />
+      <package id="ServiceStack.Interfaces" version="latest" />
+      <package id="ServiceStack.OrmLite" version="latest" />
+      <package id="ServiceStack.Razor" version="latest" />
+      <package id="ServiceStack.Redis" version="latest" />
+      <package id="ServiceStack.Server" version="latest" />
+      <package id="ServiceStack.Text" version="latest" />
+    </packages>
+  </WizardData>
 </VSTemplate>

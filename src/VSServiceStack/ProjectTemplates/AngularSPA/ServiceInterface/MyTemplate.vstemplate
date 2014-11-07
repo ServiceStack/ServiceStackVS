@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>ServiceStackAngularJS</Name>
     <Description>ServiceStackAngularJS</Description>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>
-    </ProjectSubType>
+    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>$safeprojectname$</DefaultName>
@@ -16,14 +16,30 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStackAngularJS.ServiceInterface.csproj" ReplaceParameters="true">
-        <ProjectItem ReplaceParameters="true" TargetFileName="MyServices.cs">MyServices.cs</ProjectItem>
-        <Folder Name="Properties" TargetFolderName="Properties">
-          <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
-        </Folder>
-      </Project>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MyServices.cs">MyServices.cs</ProjectItem>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+    </Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
     <FullClassName>TemplateBuilder.ChildWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.Wizards.NuGetPackageInstallerWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages>
+      <package id="ServiceStack" version="latest" />
+      <package id="ServiceStack.Client" version="latest" />
+      <package id="ServiceStack.Common" version="latest" />
+      <package id="ServiceStack.Interfaces" version="latest" />
+      <package id="ServiceStack.OrmLite" version="latest" />
+      <package id="ServiceStack.Redis" version="latest" />
+      <package id="ServiceStack.Server" version="latest" />
+      <package id="ServiceStack.Text" version="latest" />
+    </packages>
+  </WizardData>
 </VSTemplate>

@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>AngularJS App (beta)</Name>
     <Description>AngularJS App (beta)</Description>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>
-    </ProjectSubType>
+    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>AngularJSApp</DefaultName>
@@ -15,9 +15,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="AngularSPA.csproj" ReplaceParameters="true">
-      
-    </Project>
+    <Project TargetFileName="$safeprojectname$.csproj" File="AngularSPA.csproj" ReplaceParameters="true"></Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
@@ -33,5 +31,18 @@
       <npm-package id="gulp" />
       <npm-package id="karma-cli" />
     </NodeJs>
+  </WizardData>
+  <WizardData>
+    <packages>
+      <package id="ServiceStack" version="latest" />
+      <package id="ServiceStack.Client" version="latest" />
+      <package id="ServiceStack.Common" version="latest" />
+      <package id="ServiceStack.Interfaces" version="latest" />
+      <package id="ServiceStack.OrmLite" version="latest" />
+      <package id="ServiceStack.Razor" version="latest" />
+      <package id="ServiceStack.Redis" version="latest" />
+      <package id="ServiceStack.Server" version="latest" />
+      <package id="ServiceStack.Text" version="latest" />
+    </packages>
   </WizardData>
 </VSTemplate>
