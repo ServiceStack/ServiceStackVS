@@ -25,6 +25,10 @@
     <Assembly>ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NPMInstallerWizard.NodeJsPackageWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <NuGetPackages>
       <package id="ServiceStack" version="latest" />
@@ -43,8 +47,4 @@
       <npm-package id="karma-cli" />
     </NodeJS>
   </WizardData>
-  <WizardExtension>
-    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
-  </WizardExtension>
 </VSTemplate>
