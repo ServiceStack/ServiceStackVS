@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.Shell;
 using NuGet.VisualStudio;
 using ServiceStack;
 using ServiceStack.Text;
+using ServiceStackVS.NPMInstallerWizard;
 using ServiceStackVS.Types;
 using ServiceStackVS.Wizards;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;

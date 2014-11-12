@@ -4,10 +4,6 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
@@ -18,7 +14,7 @@ using NuGet.VisualStudio;
 using ServiceStack;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
-namespace ServiceStackVS.Wizards
+namespace ServiceStackVS.NuGetInstallerWizard
 {
     public class NuGetPackageInstallerWizard : IWizard
     {
@@ -27,7 +23,6 @@ namespace ServiceStackVS.Wizards
         [Import]
         internal IVsPackageInstallerServices PackageServices { get; set; }
 
-        private static Dictionary<string, string> cachedLatestPackageVersions = new Dictionary<string, string>();
         private static bool nugetOnline = false;
 
         private const string OutputWindowGuid = "{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}";
@@ -55,10 +50,10 @@ namespace ServiceStackVS.Wizards
                 }
 
                 string wizardData = replacementsDictionary["$wizarddata$"];
-                XElement element = XElement.Parse(wizardData);
+                XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
 
                 var packages =
-                    element.Descendants()
+                    element.Descendants().Where(x => x.Name.LocalName.EqualsIgnoreCase("package"))
                         .Select(
                             x =>
                                 new PackageFromWizard
@@ -77,7 +72,6 @@ namespace ServiceStackVS.Wizards
             var outputWindowPane = project.DTE.Windows.Item(OutputWindowGuid); //Output window pane
             var outputWindow = new OutputWindowWriter(ServiceStackVSPackageCmdSetGuid, "ServiceStackVS");
             
-
             foreach (var packageFromWizard in PackagesToLoad)
             {
                 try
@@ -138,16 +132,6 @@ namespace ServiceStackVS.Wizards
             string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
             bool cacheExists = Directory.Exists(cachePath);
             bool useLatest = string.IsNullOrEmpty(version) || version == "latest";
-            if (cacheExists && cachedLatestPackageVersions.ContainsKey(packageId))
-            {
-                Installer.InstallPackage(
-                    cachePath,
-                    project,
-                    packageId,
-                    version: useLatest ? null : cachedLatestPackageVersions[packageId], //Null is latest version of packageId
-                    ignoreDependencies: false);
-                return true;
-            }
 
             List<IPackage> latestNugetPackages;
             IPackageRepository nugetV2Repository = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2"); ;
@@ -198,7 +182,6 @@ namespace ServiceStackVS.Wizards
 
         private void InstallPackageFromLocalCache(Project project, string packageId, string cachePath, string version)
         {
-            cachedLatestPackageVersions.Add(packageId, version);
             Installer.InstallPackage(
                 cachePath,
                 project,

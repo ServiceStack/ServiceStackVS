@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EnvDTE;
 using ServiceStack;
 using ServiceStack.Text;
+using ServiceStackVS.NPMInstallerWizard;
 using ServiceStackVS.Wizards;
 
 namespace ServiceStackVS

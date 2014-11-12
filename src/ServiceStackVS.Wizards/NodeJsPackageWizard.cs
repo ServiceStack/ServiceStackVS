@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
-using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
-using NuGet.VisualStudio;
 using ServiceStack;
-using ServiceStackVS.Wizards.Annotations;
-using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+using ServiceStackVS.Wizards;
 
-namespace ServiceStackVS.Wizards
+namespace ServiceStackVS.NPMInstallerWizard
 {
     public class NodeJsPackageWizard : IWizard
     {
@@ -69,7 +62,9 @@ namespace ServiceStackVS.Wizards
         {
             _dte = (DTE) automationObject;
             string wizardData = replacementsDictionary["$wizarddata$"];
-            XElement element = XElement.Parse(wizardData);
+            //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
+            //Problem is that only 
+            XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
             npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))

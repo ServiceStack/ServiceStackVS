@@ -19,8 +19,8 @@
     <Project TargetFileName="$safeprojectname$.fsproj" File="FSharpRazor.fsproj" ReplaceParameters="true"></Project>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>ServiceStackVS.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.Wizards.NuGetPackageInstallerWizard</FullClassName>
+    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
   </WizardExtension>
   <WizardData>
     <packages>
