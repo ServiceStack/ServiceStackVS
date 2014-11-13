@@ -2,6 +2,41 @@ ServiceStackVS
 ==============
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
+
+## 1.0.5 Release
+
+### [New VB.NET Add ServiceStack Reference!](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
+
+This release also adds [Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Add-ServiceStack-Reference) 
+support for the last remaining major .NET language with the new first-class support for 
+[VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)! 
+
+### Simplified UX for all languages
+
+Our first iteration of **Add ServiceStack Reference** for C# used a **T4 Template** to make it easy for clients to view and modify all 
+Customization options available and to be able to auto-generate the Server DTO's by modifying and saving (or re-running) the T4 template. 
+
+As F# projects didn't support T4 Templates, when we added support for 
+[F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference) 
+we had to skip the T4 template and add the server-generated DTO's source file directly to the project. 
+
+By skipping the T4 Template we pleasantly discovered we ended up with a nicer, simplified and more user-friendly UX, with less moving parts for 
+the default use case of generating client DTO's based on the 
+[Default Server Configuration](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference#change-default-server-configuration).
+
+#### Improving Single Generated Source File Story
+
+We've since decided to embrace and provide a better development experience around a single source file approach and use it consistently in all 
+C#, F# and VB.NET projects - now resulting simpler **Add ServiceStack Reference** UX for all client projects.
+
+#### Update ServiceStack Reference Context Menu Item
+
+With the latest **ServiceStackVS** you can now update the Server DTO's in all projects by clicking on `Update ServiceStack Reference` 
+on the context-menu, e.g:
+
+![Update ServiceStack Reference](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/updateref-vbnet.gif)
+
+
 ## 1.0.4 Release 
 
 New to ServiceStackVS in 1.0.4 is the Add/Update ServiceStack Reference for F# and a new AngularJS App template.
