@@ -93,8 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NuGetPackageInstallerWizard.cs" />
+    <Compile Include="NuGetWizardDataPackage.cs" />
     <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WizardDataExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

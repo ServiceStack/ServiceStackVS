@@ -4,6 +4,7 @@
     "description": "$safeprojectname$",
     "main": "tests/karma.conf.js",
     "author": "",
+    "private": true,
     "license": "",
     "repository": { },
   "devDependencies": {

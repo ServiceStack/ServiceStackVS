@@ -8,11 +8,12 @@ namespace ServiceStackVS.NuGetInstallerWizard
     public class OutputWindowWriter
     {
         private IVsOutputWindowPane _outputWindowPane;
-
+        private readonly string outputWindowPaneGuid;
 
         public OutputWindowWriter(System.IServiceProvider serviceProvider, string outputWindowPaneGuid, string outputWindowPaneName)
         {
             var outputWindow = serviceProvider.GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            this.outputWindowPaneGuid = outputWindowPaneGuid;
             if (outputWindow == null) throw new Exception("Unable to create an output pane.");
 
             var paneGuid = new Guid(outputWindowPaneGuid);
@@ -45,7 +46,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         public void ShowOutputPane(DTE dte)
         {
-            var outputWindow = dte.Windows.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");
+            var outputWindow = dte.Windows.Item(outputWindowPaneGuid);
             if (outputWindow != null)
             {
                 outputWindow.Visible = true;

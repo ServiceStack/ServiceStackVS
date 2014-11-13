@@ -227,6 +227,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                     UpdateStatusMessage("Clearing NPM cache...");
                     NodePackageUtils.NpmClearCache(projectPath);
                     UpdateStatusMessage("Running NPM install...");
+                    _outputWindow.WriteLine("--- NPM install started ---");
                     NodePackageUtils.RunNpmInstall(projectPath,
                         (sender, args) =>
                         {
@@ -244,7 +245,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                                 _outputWindow.WriteLine(s);
                             }
                         }, 600);
-                    _outputWindow.WriteLine("NPM Install complete");
+                    _outputWindow.WriteLine("--- NPM install complete ---");
                     UpdateStatusMessage("Ready");
                     StatusBar.Clear();
                 }
