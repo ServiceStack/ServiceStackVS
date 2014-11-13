@@ -79,7 +79,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\VSServiceStack\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\ServiceStackVS\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

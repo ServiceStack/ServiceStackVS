@@ -175,3 +175,5 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 *.DotSettings
+
+!src/ServiceStackVS/ServiceStack.Text.dll
