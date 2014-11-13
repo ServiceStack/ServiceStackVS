@@ -90,12 +90,20 @@ namespace ServiceStackVS
         }
 
         private SolutionEventsListener solutionEventsListener;
-        private OutputWindowWriter _outputWindow;
 
-        private DocumentEvents _documentEvents;
-        private ProjectItemsEvents _projectItemEvents;
+        private OutputWindowWriter serviceStackOutputWindowWriter;
+        private OutputWindowWriter OutputWindowWriter
+        {
+            get
+            {
+                return serviceStackOutputWindowWriter ??
+                    (serviceStackOutputWindowWriter = new OutputWindowWriter(GuidList.guidServiceStackVSOutputWindowPane, "ServiceStackVS"));
+            }
+        }
 
-        private DTE _dte;
+        private DocumentEvents documentEvents;
+
+        private DTE dte;
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
@@ -112,44 +120,41 @@ namespace ServiceStackVS
             pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>();
             base.Initialize();
 
-            _outputWindow = new OutputWindowWriter(this, GuidList.guidServiceStackVSOutputWindowPane, "ServiceStackVS");
-
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if ( null != mcs )
             {
                 // Create the command for the menu item.
-                CommandID cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpAddServiceStackReference);
+                var cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpAddServiceStackReference);
                 var cSharpProjectAddReferenceMenuCommand = new OleMenuCommand(CSharpAddReferenceCallback ,cSharpProjContextAddReferenceCommandId);
                 cSharpProjectAddReferenceMenuCommand.BeforeQueryStatus += CSharpQueryAddMenuItem;
                 mcs.AddCommand(cSharpProjectAddReferenceMenuCommand);
 
-                CommandID cSharpProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpUpdateServiceStackReference);
+                var cSharpProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpUpdateServiceStackReference);
                 var cSharpProjectUpdateReferenceMenuCommand = new OleMenuCommand(CSharpUpdateReferenceCallback,
                     cSharpProjContextUpdateReferenceCommandId);
                 cSharpProjectUpdateReferenceMenuCommand.BeforeQueryStatus += CSharpQueryUpdateMenuItem;
                 mcs.AddCommand(cSharpProjectUpdateReferenceMenuCommand);
 
-                CommandID fSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpAddServiceStackReference);
+                var fSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpAddServiceStackReference);
                 var fSharpProjectContextOleMenuCommand = new OleMenuCommand(FSharpAddReferenceCallback, fSharpProjContextAddReferenceCommandId);
                 fSharpProjectContextOleMenuCommand.BeforeQueryStatus += FSharpQueryAddMenuItem;
                 mcs.AddCommand(fSharpProjectContextOleMenuCommand);
 
-                CommandID fSharpProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpUpdateServiceStackReference);
+                var fSharpProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpUpdateServiceStackReference);
                 var fSharpProjectContextUpdateOleMenuCommand = new OleMenuCommand(FSharpUpdateReferenceCallback, fSharpProjContextUpdateReferenceCommandId);
                 fSharpProjectContextUpdateOleMenuCommand.BeforeQueryStatus += FSharpQueryUpdateMenuItem;
                 mcs.AddCommand(fSharpProjectContextUpdateOleMenuCommand);
 
-                CommandID vbNetProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidVbNetAddServiceStackReference);
+                var vbNetProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidVbNetAddServiceStackReference);
                 var vbNetProjectContextOleMenuCommand = new OleMenuCommand(VbNetAddReferenceCallback, vbNetProjContextAddReferenceCommandId);
                 vbNetProjectContextOleMenuCommand.BeforeQueryStatus += VbNetQueryAddMenuItem;
                 mcs.AddCommand(vbNetProjectContextOleMenuCommand);
 
-                CommandID vbNetProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidVbNetUpdateServiceStackReference);
+                var vbNetProjContextUpdateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidVbNetUpdateServiceStackReference);
                 var vbNetProjectContextUpdateOleMenuCommand = new OleMenuCommand(VbNetUpdateReferenceCallback, vbNetProjContextUpdateReferenceCommandId);
                 vbNetProjectContextUpdateOleMenuCommand.BeforeQueryStatus += VbNetQueryUpdateMenuItem;
                 mcs.AddCommand(vbNetProjectContextUpdateOleMenuCommand);
-
             }
 
             solutionEventsListener = new SolutionEventsListener();
@@ -158,29 +163,29 @@ namespace ServiceStackVS
 
         private void SolutionLoaded()
         {
-            _dte = (DTE)GetService(typeof(DTE));
-            if (_dte == null)
+            dte = (DTE)GetService(typeof(DTE));
+            if (dte == null)
             {
                 Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
                 return;
             }
 
-            var events = _dte.Events as Events2;
+            var events = dte.Events as Events2;
             if (events == null)
             {
                 Debug.WriteLine("Unable to get the Events2.");
                 return;
             }
 
-            _documentEvents = events.get_DocumentEvents();
-            _documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+            documentEvents = events.get_DocumentEvents();
+            documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
         }
 
         private void CSharpQueryAddMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
@@ -207,21 +212,21 @@ namespace ServiceStackVS
 
         private void CSharpQueryUpdateMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var typesHandler = new CSharpNativeTypesHandler();
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             //Not busy building
             var ready = result == VSConstants.S_OK && pfActive > 0;
-            ProjectItem projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+            var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
 
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
             bool dtoSelected = selectedFiles.Any(
-                (item) =>
+                item =>
                     item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
             bool visible = projectItem.ContainingProject != null &&
                            projectItem.ContainingProject.Kind != null &&
@@ -241,9 +246,9 @@ namespace ServiceStackVS
 
         private void FSharpQueryAddMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
@@ -268,21 +273,21 @@ namespace ServiceStackVS
 
         private void FSharpQueryUpdateMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var typesHandlers = new FSharpNativeTypesHandler();
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
-            ProjectItem projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+            var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
 
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
             //Alternate file extension for FSharp due to initial extension version looking for '.dto.fs', default is now '.dtos.*'
             bool dtoSelected = selectedFiles.Any(
-                (item) =>
+                item =>
                     item.Name.ToLowerInvariant().EndsWith(typesHandlers.CodeFileExtension) ||
                     item.Name.ToLowerInvariant().EndsWith(".dto.fs"));
             bool visible = projectItem.ContainingProject != null &&
@@ -301,15 +306,15 @@ namespace ServiceStackVS
 
         private void VbNetQueryAddMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
-            Project project = VSIXUtils.GetSelectedProject();
+            var project = VSIXUtils.GetSelectedProject();
 
             bool visible = project != null &&
                            project.Kind != null &&
@@ -328,20 +333,20 @@ namespace ServiceStackVS
 
         private void VbNetQueryUpdateMenuItem(object sender, EventArgs eventArgs)
         {
-            OleMenuCommand command = (OleMenuCommand)sender;
+            var command = (OleMenuCommand)sender;
             var typesHandler = new VbNetNativeTypesHandler();
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            Guid guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
-            ProjectItem projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+            var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
 
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
             bool dtoSelected =
-                selectedFiles.Any((item) => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
+                selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
             bool visible = projectItem.ContainingProject != null &&
                            projectItem.ContainingProject.Kind != null &&
                            //Project is not unloaded
@@ -432,20 +437,21 @@ namespace ServiceStackVS
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
         {
-            _outputWindow.Show();
-            _outputWindow.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
+            OutputWindowWriter.Show();
+            OutputWindowWriter.ShowOutputPane(dte);
+            OutputWindowWriter.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
             string projectItemPath = projectItem.Properties.Item("FullPath").Value.ToString();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
-            bool selectedFSharpDto = selectedFiles.Any((item) => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
+            bool selectedFSharpDto = selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
             if (selectedFSharpDto)
             {
                 string filePath = projectItemPath;
                 var existingGeneratedCode = File.ReadAllLines(filePath).Join(Environment.NewLine);
 
-                string baseUrl = "";
+                string baseUrl;
                 if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
                 {
-                    _outputWindow.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
+                    OutputWindowWriter.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
                     return;
                 }
 
@@ -456,11 +462,11 @@ namespace ServiceStackVS
                     streamWriter.Write(updatedCode);
                     streamWriter.Flush();
                 }
-                _outputWindow.WriteLine("--- Update ServiceStack Reference Complete ---");
+                OutputWindowWriter.WriteLine("--- Update ServiceStack Reference Complete ---");
             }
             else
             {
-                _outputWindow.WriteLine("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
+                OutputWindowWriter.WriteLine("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
             }
         }
 
@@ -505,16 +511,16 @@ namespace ServiceStackVS
         private void DocumentEventsOnDocumentSaved(Document document)
         {
             //Check if document is package.json and not disabled by settings
-            document.HandleNpmPackageUpdate(_outputWindow);
+            document.HandleNpmPackageUpdate(OutputWindowWriter);
           
             //Check if document is bower.json and not disabled by settings
-            document.HandleBowerPackageUpdate(_outputWindow);
+            document.HandleBowerPackageUpdate(OutputWindowWriter);
 
-            document.HandleCSharpDtoUpdate(_outputWindow);
+            document.HandleCSharpDtoUpdate(OutputWindowWriter);
 
-            document.HandleFSharpDtoUpdate(_outputWindow);
+            document.HandleFSharpDtoUpdate(OutputWindowWriter);
 
-            document.HandleVbNetDtoUpdate(_outputWindow);
+            document.HandleVbNetDtoUpdate(OutputWindowWriter);
         }
     }
 }
