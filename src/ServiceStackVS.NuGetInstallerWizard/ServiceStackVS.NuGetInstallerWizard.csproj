@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NuGetPackageInstallerMultiProjectWizard.cs" />
     <Compile Include="NuGetPackageInstallerWizard.cs" />
     <Compile Include="NuGetWizardDataPackage.cs" />
     <Compile Include="OutputWindowWriter.cs" />

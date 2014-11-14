@@ -27,7 +27,7 @@
       <package id="ServiceStack" version="latest" />
       <package id="ServiceStack.Client" version="latest" />
       <package id="ServiceStack.Common" version="latest" />
-      <package id="ServiceStack.Interfaces" version="latest" />
+      <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
       <package id="ServiceStack.OrmLite" version="latest" />
       <package id="ServiceStack.Razor" version="latest" />
       <package id="ServiceStack.Redis" version="latest" />

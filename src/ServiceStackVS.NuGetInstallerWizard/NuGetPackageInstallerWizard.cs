@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet;
 using NuGet.VisualStudio;
+using ServiceStack;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.NuGetInstallerWizard
@@ -21,6 +22,31 @@ namespace ServiceStackVS.NuGetInstallerWizard
         internal IVsPackageInstaller Installer { get; set; }
         [Import]
         internal IVsPackageInstallerServices PackageServices { get; set; }
+
+        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+
+        private IPackageRepository nuGetPackageRepository;
+        private IPackageRepository NuGetPackageRepository
+        {
+            get
+            {
+                return nuGetPackageRepository ??
+                       (nuGetPackageRepository =
+                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+            }
+        }
+
+        private IPackageRepository _cachedRepository;
+        private IPackageRepository CachedRepository
+        {
+            get
+            {
+                string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
+                return _cachedRepository ??
+                       (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
+            }
+        }
 
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private OutputWindowWriter serviceStackOutputWindowWriter;
@@ -33,25 +59,39 @@ namespace ServiceStackVS.NuGetInstallerWizard
             }
         }
 
+        private NuGetWizardDataPackage rootPackage;
+
         private List<NuGetWizardDataPackage> packagesToLoad = new List<NuGetWizardDataPackage>();
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            if (runKind == WizardRunKind.AsNewProject)
+            if (runKind != WizardRunKind.AsNewProject) return;
+            
+            using (var serviceProvider = new ServiceProvider((IServiceProvider) automationObject))
             {
-                using (var serviceProvider = new ServiceProvider((IServiceProvider) automationObject))
+                var componentModel = (IComponentModel) serviceProvider.GetService(typeof (SComponentModel));
+                using (var container = new CompositionContainer(componentModel.DefaultExportProvider))
                 {
-                    var componentModel = (IComponentModel) serviceProvider.GetService(typeof (SComponentModel));
-                    using (var container = new CompositionContainer(componentModel.DefaultExportProvider))
-                    {
-                        container.ComposeParts(this);
-                    }
+                    container.ComposeParts(this);
                 }
-
-                string wizardData = replacementsDictionary["$wizarddata$"];
-                XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-                packagesToLoad = element.ExtractNuGetPackages();
             }
+
+            string wizardData = replacementsDictionary["$wizarddata$"];
+            XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
+            packagesToLoad = element.ExtractNuGetPackages();
+            rootPackage = NuGetPackageInstallerMultiProjectWizard.RootNuGetPackage;
+
+            if (!UseParentProjectRootPackage() && element.HasRootPackage())
+            {
+                rootPackage = element.GetRootPackage();
+                rootPackage.Version = GetLatestVersionOfPackage(rootPackage.Id);
+            }
+        }
+
+        private bool UseParentProjectRootPackage()
+        {
+            return rootPackage != null &&
+                   !(string.IsNullOrEmpty(rootPackage.Version) || rootPackage.Version.EqualsIgnoreCase("latest"));
         }
 
         public void ProjectFinishedGenerating(Project project)
@@ -96,6 +136,11 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         private void AddNuGetDependencyIfMissing(Project project, string packageId, string version = null)
         {
+            if (rootPackage != null)
+            {
+                version = rootPackage.Version;
+            }
+
             if (TryInstallPackageFromCache(project, packageId, version)) return;
 
             var installedPackages = PackageServices.GetInstalledPackages(project);
@@ -117,22 +162,26 @@ namespace ServiceStackVS.NuGetInstallerWizard
             string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
             bool cacheExists = Directory.Exists(cachePath);
             bool useLatest = string.IsNullOrEmpty(version) || version == "latest";
+            var latestCachePackage = CachedRepository.FindPackagesById(packageId)
+                    .OrderByDescending(x => x.Version.ToString())
+                    .FirstOrDefault(x => useLatest && x.IsLatestVersion || x.Version.ToString() == version);
+            if (!useLatest && latestCachePackage != null)
+            {
+                InstallPackageFromLocalCache(project, packageId, cachePath, version);
+                return true;
+            }
 
             List<IPackage> latestNugetPackages;
-            IPackageRepository nugetV2Repository = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            IPackageRepository cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath);
+            
             try
             {
-                latestNugetPackages = nugetV2Repository.FindPackagesById(packageId).ToList();
+                latestNugetPackages = NuGetPackageRepository.FindPackagesById(packageId).ToList();
             }
             catch (Exception)
             {
                 //Nuget down or no connection
                 //Try and revert to latest cached packages
                 OutputWindowWriter.WriteLine("--- WARNING: Unable to contact NuGet servers. Attempting to use local cache ---");
-                var latestCachePackage = cachedRepository.FindPackagesById(packageId)
-                    .OrderByDescending(x => x.Version.ToString())
-                    .FirstOrDefault(x => useLatest && x.IsLatestVersion || x.Version.ToString() == version);
                 if (latestCachePackage == null)
                 {
                     OutputWindowWriter.WriteLine("--- ERROR: Unable to install ServiceStack from NuGet or local cache ---");
@@ -147,9 +196,6 @@ namespace ServiceStackVS.NuGetInstallerWizard
             {
                 var latestNugetPackage =
                     latestNugetPackages.FirstOrDefault(x => useLatest && x.IsLatestVersion || x.Version.ToString() == version);
-                List<IPackage> latestCachePackages = cachedRepository.FindPackagesById(packageId).ToList();
-                var latestCachePackage =
-                    latestCachePackages.FirstOrDefault(x => useLatest && x.IsLatestVersion || x.Version.ToString() == version);
                 bool useCache = latestCachePackage != null &&
                                 latestNugetPackage != null &&
                                 latestNugetPackage.Version == latestCachePackage.Version;
@@ -170,14 +216,34 @@ namespace ServiceStackVS.NuGetInstallerWizard
             return false;
         }
 
+        private string GetLatestVersionOfPackage(string packageId)
+        {
+            var package = NuGetPackageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
+            return package.Version.ToString();
+        }
+
         private void InstallPackageFromLocalCache(Project project, string packageId, string cachePath, string version)
         {
-            Installer.InstallPackage(
+            try
+            {
+                Installer.InstallPackage(
                 cachePath,
                 project,
                 packageId,
                 version,
                 ignoreDependencies: false);
+            }
+            catch (Exception)
+            {
+                //Fall back to NuGet, local cache might not have required dependency
+                Installer.InstallPackage(
+                nugetV2Url,
+                project,
+                packageId,
+                version,
+                ignoreDependencies: false);
+            }
+            
         }
     }  
 }
