@@ -40,7 +40,8 @@ namespace $safeprojectname$
             SetConfig( new HostConfig
             {
                 HandlerFactoryPath = "api",
-                DebugMode = AppSettings.Get("DebugMode",false)
+                DebugMode = AppSettings.Get("DebugMode",false),
+                AllowFileExtensions = {"jsx"}
             });
         }
     }

@@ -15,7 +15,6 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "karma-junit-reporter": "^0.2.2",
     "grunt-karma": "~0.8.3",
-    "gulp-jsdoc": "0.1.4",
     "grunt-gulp":"~0.1.0",
     "grunt": "~0.4.5",
     "ssvs-utils": "~0.1.1",
@@ -30,7 +29,6 @@
     "gulp-minify-css": "~0.3.8",
     "gulp-useref": "~1.0.1",
     "gulp-newer": "~0.3.0",
-    "gulp-react":  "~2.0.0",
-    "requirejs":  "~2.1.15"
+    "gulp-react":  "~2.0.0"
   }
 }

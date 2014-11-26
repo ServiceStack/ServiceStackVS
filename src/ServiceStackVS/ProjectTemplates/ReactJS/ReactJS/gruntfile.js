@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         },
         msbuild: {
             release: {
-                src: ['$safeprojectname$.csproj'],
+                src: ['ReactJSApp2.csproj'],
                 options: {
                     projectConfiguration: 'Release',
                     targets: ['Clean', 'Rebuild'],
@@ -136,12 +136,15 @@ module.exports = function (grunt) {
             },
             'wwwroot-bundle': function () {
                 var assets = useref.assets();
-
+                var checkIfJsx = function (file) {
+                    return file.relative.indexOf('.jsx.js') !== -1;
+                }
                 return gulp.src('index.html')
                     .pipe(assets)
-                    .pipe(gulpif('*.js', uglify()))
+                    .pipe(gulpif('*.jsx.js', react()))
+                    .pipe(gulpif(checkIfJsx, uglify()))
                     .pipe(gulpif('*.css', minifyCss()))
-                    .pipe(gulpif('*.jsx', react()))
+
                     .pipe(assets.restore())
                     .pipe(useref())
                     .pipe(gulp.dest(webRoot));
