@@ -3,30 +3,30 @@ var HelloWorld = React.createClass({
 	handleHello: function(e) {
 		e.preventDefault();
 		var yourName = this.refs.yourName.getDOMNode().value.trim();
+		var self = this;
 		$.ajax({
 			url: 'hello/' + yourName,
 			dataType: 'json',
 			type: 'GET',
-			success: function (response) {
-				this.setState({yourName: response.Result});
+			success: function(response) {
+				self.setState({ yourName: response.Result });
 			}
-		})
+		});
 	},
 	getInitialState: function () {
 		return {yourName: ''};
 	},
 	render: function() {
-		var text = this.state.yourName;
 		return (
 			<div>
-				<input type="text" placeholder="Your name" ref="yourName"
+				<input type="text" placeholder="Your name" ref="yourName" className="form-control"
 						onChange={this.handleHello} />
-				<h3>{text}</h3>
+				<h3>{this.state.yourName}</h3>
 			</div>
 		);
-	}
+}
 });
-React.renderComponent(
+React.render(
 		<HelloWorld />,
 		document.getElementById('demo')
 );

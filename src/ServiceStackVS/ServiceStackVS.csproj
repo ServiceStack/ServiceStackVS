@@ -1012,7 +1012,7 @@
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
-    <PropertyGroup Label="TemplateBuilder">
+  <PropertyGroup Label="TemplateBuilder">
     <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

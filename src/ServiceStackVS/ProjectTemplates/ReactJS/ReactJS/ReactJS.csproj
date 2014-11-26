@@ -93,7 +93,7 @@
     <Content Include="css\app.css" />
     <Content Include="gruntfile.js" />
     <Content Include="index.html" />
-    <Content Include="js\app.js" />
+    <Content Include="js\components\hello.jsx" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\karma.conf.js" />
     <Content Include="packages.config">
