@@ -1,0 +1,19 @@
+{
+  "name": "ReactTemplate",
+  "version": "0.0.0",
+  "authors": [
+    "Darren Reid <layoric@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.1"
+  }
+}

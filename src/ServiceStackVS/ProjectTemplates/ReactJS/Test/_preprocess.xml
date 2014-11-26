@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Preprocess>
+  <TemplateInfo Path="CSharp\ServiceStack\Test"/>
+  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
+    <add key="ServiceStack.CSharp.AngularJS" value="$saferootprojectname$"/>
+  </Replacements>
+</Preprocess>

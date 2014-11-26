@@ -145,6 +145,17 @@
     </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="NativeTypeHandler.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ReactJS\ReactJS\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJS\Test\UnitTests.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
     <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
@@ -549,7 +560,9 @@
     <None Include="ProjectTemplates\FSharpRazor\ServiceInterface\ServiceInterface.fsproj" />
     <None Include="ProjectTemplates\FSharpRazor\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\FSharpRazor\ServiceModel\ServiceModel.fsproj" />
-    <None Include="ProjectTemplates\FSharpRazor\Tests\app.config" />
+    <None Include="ProjectTemplates\FSharpRazor\Tests\app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ProjectTemplates\FSharpRazor\Tests\packages.config" />
     <None Include="ProjectTemplates\FSharpRazor\Tests\Tests.fsproj" />
     <None Include="ProjectTemplates\FSharpSelfHost\EmptySelfHost\App.config" />
@@ -657,6 +670,21 @@
     <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Web.Release.config" />
     <None Include="ProjectTemplates\Bootstrap\Test\packages.config" />
     <None Include="ProjectTemplates\MVC5\Test\packages.config" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\bower.json" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\js\components\hello.jsx" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\package.json" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\packages.config" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\Web.config" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\Web.Debug.config" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\Web.Release.config" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\01-run-tests.bat" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\02-package-server.bat" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\03-package-client.bat" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\04-deploy-app.bat" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\publish\config.json" />
+    <None Include="ProjectTemplates\ReactJS\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\ReactJS\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\ReactJS\Test\packages.config" />
     <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
@@ -783,6 +811,29 @@
     <Content Include="ProjectTemplates\MVC5\Test\ServiceStack.CSharp.MVC.Test.csproj" />
     <Resource Include="ProjectTemplates\MVC5\_preprocess.xml" />
     <Resource Include="ProjectTemplates\MVC5\Test\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJS\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\ReactJS\logo.png" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\css\app.css" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\Global.asax" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\gruntfile.js" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\index.html" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\ReactJS.csproj" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\Scripts\_references.js" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\tests\karma.conf.js" />
+    <Resource Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\deploy\appsettings.txt" />
+    <Resource Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\README.txt" />
+    <Resource Include="ProjectTemplates\ReactJS\ReactJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJS\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJS\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\ReactJS\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJS\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJS\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\ReactJS\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJS\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJS\Test\ServiceStackAngularJS.Test.csproj" />
+    <Resource Include="ProjectTemplates\ReactJS\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ReactJS\_preprocess.xml" />
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -961,7 +1012,7 @@
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
-  <PropertyGroup Label="TemplateBuilder">
+    <PropertyGroup Label="TemplateBuilder">
     <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
