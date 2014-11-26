@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         },
         msbuild: {
             release: {
-                src: ['ReactJSApp2.csproj'],
+                src: ['$safeprojectname$.csproj'],
                 options: {
                     projectConfiguration: 'Release',
                     targets: ['Clean', 'Rebuild'],
