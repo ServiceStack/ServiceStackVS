@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ServiceStack;
 using ServiceStack.Text;
+using ServiceStackVS.FileHandlers;
 using ServiceStackVS.Types;
 using Color = System.Windows.Media.Color;
 
@@ -30,7 +31,7 @@ namespace ServiceStackVS
         public bool AddReferenceSucceeded { get; set; }
         public string CodeTemplate { get; set; }
         private string suggestedFileName;
-        private INativeTypesHandler typesHandler;
+        private readonly INativeTypesHandler typesHandler;
 
         public AddServiceStackReference(string fileName, INativeTypesHandler nativeTypesHandler)
         {
@@ -120,12 +121,12 @@ namespace ServiceStackVS
                     : "http://" + serverUrl;
             var uri = new Uri(serverUrl);
             string path = uri.PathAndQuery.Contains("?") ? uri.PathAndQuery.SplitOnFirst("?")[0] : uri.PathAndQuery;
-            if (!path.EndsWith("types/" + typesHandler.TypesLanguage.ToString() + "/"))
+            if (!path.EndsWith(typesHandler.RelativeTypesUrl + "/"))
             {
-                serverUrl += "types/" + typesHandler.TypesLanguage.ToString() + "/";
+                serverUrl += typesHandler.RelativeTypesUrl + "/";
             }
-  
-            return serverUrl;
+
+            return serverUrl.ToParentPath();
         }
 
         private bool ValidateUrl(string url)
@@ -135,7 +136,7 @@ namespace ServiceStackVS
                               validatedUri.Scheme == Uri.UriSchemeHttp;
             if (isValidUri)
             {
-                string metadataJsonUrl = validatedUri.ToString().ToLower().Replace("/" + typesHandler.TypesLanguage.ToString().ToLower(), "/metadata") + "?format=json";
+                string metadataJsonUrl = validatedUri.ToString().ToLower().Replace("/" + typesHandler.RelativeTypesUrl.ToLowerInvariant(), "/types/metadata") + "?format=json";
                 string metadataResponse = new WebClient().DownloadString(metadataJsonUrl);
                 MetadataTypes metaDataDto;
                 try
@@ -153,14 +154,6 @@ namespace ServiceStackVS
                 return true;
             }
             return false;
-        }
-    }
-
-    public class DTOGenerationValidator : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return new ValidationResult(false,"");
         }
     }
 }

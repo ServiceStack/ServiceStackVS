@@ -143,6 +143,13 @@
     <Compile Include="AddServiceStackReference.xaml.cs">
       <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileHandlers\CommentParsingUtils.cs" />
+    <Compile Include="FileHandlers\CSharpNativeTypesHandler.cs" />
+    <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
+    <Compile Include="FileHandlers\FSharpNativeTypesHandler.cs" />
+    <Compile Include="FileHandlers\INativeTypesHandler.cs" />
+    <Compile Include="FileHandlers\TypeScriptNativeTypesHandler.cs" />
+    <Compile Include="FileHandlers\VbNetNativeTypesHandler.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="NativeTypeHandler.cs" />
     <Compile Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />

@@ -74,16 +74,6 @@
         <CommandName>cmdidCSharpAddServiceStackReference</CommandName>
         </Strings>
       </Button>
-      <Button guid="guidVSServiceStackCmdSet" id="cmdidCSharpUpdateServiceStackReference" priority="0x0100" type="Button">
-        <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackMenuGroup" />
-        <Icon guid="guidImages" id="bmpSSAdd" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <Strings>
-          <ButtonText>Update ServiceStack Reference</ButtonText>
-          <CommandName>cmdidCSharpUpdateServiceStackReference</CommandName>
-        </Strings>
-      </Button>
       <Button guid="guidVSServiceStackCmdSet" id="cmdidFSharpAddServiceStackReference" priority="0xE100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
         <Icon guid="guidImages" id="bmpSSAdd" />
@@ -92,16 +82,6 @@
         <Strings>
           <ButtonText>Add ServiceStack Reference...</ButtonText>
           <CommandName>cmdidFSharpAddServiceStackReference</CommandName>
-        </Strings>
-      </Button>
-      <Button guid="guidVSServiceStackCmdSet" id="cmdidFSharpUpdateServiceStackReference" priority="0x0100" type="Button">
-        <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackMenuGroup" />
-        <Icon guid="guidImages" id="bmpSSAdd" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <Strings>
-          <ButtonText>Update ServiceStack Reference</ButtonText>
-          <CommandName>cmdidFSharpUpdateServiceStackReference</CommandName>
         </Strings>
       </Button>
       <Button guid="guidVSServiceStackCmdSet" id="cmdidVbNetAddServiceStackReference" priority="0xE100" type="Button">
@@ -114,14 +94,24 @@
           <CommandName>cmdidVbNetAddServiceStackReference</CommandName>
         </Strings>
       </Button>
-      <Button guid="guidVSServiceStackCmdSet" id="cmdidVbNetUpdateServiceStackReference" priority="0x0100" type="Button">
+      <Button guid="guidVSServiceStackCmdSet" id="cmdidTypeScriptAddServiceStackReference" priority="0xE100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
+        <Icon guid="guidImages" id="bmpSSAdd" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Add TypeScript ServiceStack Reference...</ButtonText>
+          <CommandName>cmdidTypeScriptAddServiceStackReference</CommandName>
+        </Strings>
+      </Button>
+      <Button guid="guidVSServiceStackCmdSet" id="cmdidUpdateServiceStackReference" priority="0x0100" type="Button">
         <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackMenuGroup" />
         <Icon guid="guidImages" id="bmpSSAdd" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
           <ButtonText>Update ServiceStack Reference</ButtonText>
-          <CommandName>cmdidVbNetUpdateServiceStackReference</CommandName>
+          <CommandName>cmdidUpdateServiceStackReference</CommandName>
         </Strings>
       </Button>
 
@@ -154,13 +144,11 @@
     <GuidSymbol name="guidVSServiceStackCmdSet" value="{a5be67cb-5ac4-4a73-bc8b-7b8dc4556aee}">
 
       <IDSymbol name="cmdidCSharpAddServiceStackReference" value="0x0100" />
-      <IDSymbol name="cmdidCSharpUpdateServiceStackReference" value="0x0200"/>
-
       <IDSymbol name="cmdidFSharpAddServiceStackReference" value="0x0101" />
-      <IDSymbol name="cmdidFSharpUpdateServiceStackReference" value="0x0201" />
-
       <IDSymbol name="cmdidVbNetAddServiceStackReference" value="0x0102"/>
-      <IDSymbol name="cmdidVbNetUpdateServiceStackReference" value="0x0202"/>
+      <IDSymbol name="cmdidTypeScriptAddServiceStackReference" value="0x0103"/>
+
+      <IDSymbol name="cmdidUpdateServiceStackReference" value="0x0200"/>
       
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="MyDynamicMenuGroup" value="0x1040" />
