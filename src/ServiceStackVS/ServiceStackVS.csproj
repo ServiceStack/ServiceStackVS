@@ -148,6 +148,7 @@
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
     <Compile Include="FileHandlers\FSharpNativeTypesHandler.cs" />
     <Compile Include="FileHandlers\INativeTypesHandler.cs" />
+    <Compile Include="FileHandlers\ItemAddedHandlers.cs" />
     <Compile Include="FileHandlers\TypeScriptNativeTypesHandler.cs" />
     <Compile Include="FileHandlers\VbNetNativeTypesHandler.cs" />
     <Compile Include="Guids.cs" />

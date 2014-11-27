@@ -111,6 +111,7 @@ namespace ServiceStackVS
         }
 
         private DocumentEvents documentEvents;
+        private ProjectItemsEvents projectItemsEvents;
 
         private DTE dte;
 
@@ -182,7 +183,14 @@ namespace ServiceStackVS
             }
 
             documentEvents = events.get_DocumentEvents();
+            projectItemsEvents = events.ProjectItemsEvents;
+            projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
             documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+        }
+
+        private void ProjectItemsEventsOnItemAdded(ProjectItem projectItem)
+        {
+            
         }
 
         private void CSharpQueryAddMenuItem(object sender, EventArgs eventArgs)
