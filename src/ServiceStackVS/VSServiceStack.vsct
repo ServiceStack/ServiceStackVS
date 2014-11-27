@@ -95,12 +95,12 @@
         </Strings>
       </Button>
       <Button guid="guidVSServiceStackCmdSet" id="cmdidTypeScriptAddServiceStackReference" priority="0xE100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD" />
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD_REFERENCES" />
         <Icon guid="guidImages" id="bmpSSAdd" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
-          <ButtonText>Add TypeScript ServiceStack Reference...</ButtonText>
+          <ButtonText>Add TypeScript Reference...</ButtonText>
           <CommandName>cmdidTypeScriptAddServiceStackReference</CommandName>
         </Strings>
       </Button>
