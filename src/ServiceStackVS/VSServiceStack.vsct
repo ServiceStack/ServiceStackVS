@@ -104,7 +104,7 @@
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
-          <ButtonText>Add TypeScript Reference...</ButtonText>
+          <ButtonText>TypeScript Reference...</ButtonText>
           <CommandName>cmdidTypeScriptAddServiceStackReference</CommandName>
         </Strings>
       </Button>

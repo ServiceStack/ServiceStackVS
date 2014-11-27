@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TemplateReport>
-  <ItemTemplates />
+  <ItemTemplates>
+    <ItemTemplate Path="ItemTemplates\NativeTypes\TypeScript\Definitions\CSharp.vstemplate" Name="TypeScript" Description="TypeScript reference from a ServiceStack server." ProjectType="CSharp" ProjectSubType="" />
+    <ItemTemplate Path="ItemTemplates\NativeTypes\TypeScript\Definitions\FSharp.vstemplate" Name="TypeScript" Description="Long description here" ProjectType="FSharp" ProjectSubType="" />
+    <ItemTemplate Path="ItemTemplates\NativeTypes\TypeScript\Definitions\VB.vstemplate" Name="TypeScript" Description="Long description here" ProjectType="VisualBasic" ProjectSubType="" />
+  </ItemTemplates>
   <ProjectTemplates>
     <ProjectTemplate Path="ProjectTemplates\AngularSPA\Definitions\CSharp.vstemplate" Name="AngularJS App (beta)" Description="AngularJS App (beta). This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ReactJS\Definitions\CSharp.vstemplate" Name="ReactJS App (beta)" Description="ReactJS App (beta). This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your ReactJS application." ProjectType="CSharp" ProjectSubType="" />

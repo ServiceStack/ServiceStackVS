@@ -293,6 +293,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ItemTemplates\NativeTypes\TypeScript\Definitions\CSharp.vstemplate" />
+    <Content Include="ItemTemplates\NativeTypes\TypeScript\Definitions\FSharp.vstemplate" />
+    <Content Include="ItemTemplates\NativeTypes\TypeScript\Definitions\VB.vstemplate" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -320,6 +323,7 @@
     <None Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\EmptyAspNetHost\Test\packages.config" />
     <None Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\App.config" />
+    <Resource Include="ItemTemplates\NativeTypes\TypeScript\_preprocess.xml" />
     <Content Include="license.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -1016,6 +1020,9 @@
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ItemTemplates\NativeTypes\TypeScript\template.ts" />
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
