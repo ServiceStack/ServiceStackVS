@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceStackVS.FileHandlers;
+using ServiceStackVS.NativeTypes.Handlers;
 
 namespace ServiceStackVS_UnitTests
 {

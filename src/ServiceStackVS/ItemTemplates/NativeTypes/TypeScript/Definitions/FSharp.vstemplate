@@ -2,16 +2,17 @@
   <TemplateData>
     <ProjectType>FSharp</ProjectType>
 
-    <DefaultName>TypeScript.txt</DefaultName>
-    <Name>TypeScript</Name>
-    <Description>Long description here</Description>
-    <Icon>icon.png</Icon>
+    <DefaultName>TypeScriptReference</DefaultName>
+    <Name>TypeScript Reference</Name>
+    <Description>TypeScript reference from a ServiceStack server.</Description>
+    <Icon>..\..\..\..\..\logo.png</Icon>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
   <TemplateContent>
     <References />
-     
-    <ProjectItem ReplaceParameters="true">readme.txt</ProjectItem>
-    
+
+    <ProjectItem ReplaceParameters="true">template.ts</ProjectItem>
+
   </TemplateContent>
+  <!--//TODO IWizard hooking for extra menu to add TypeScript Reference.-->
 </VSTemplate>

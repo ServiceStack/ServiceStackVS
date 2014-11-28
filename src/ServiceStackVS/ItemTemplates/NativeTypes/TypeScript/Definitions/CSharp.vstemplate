@@ -14,5 +14,11 @@
     <ProjectItem ReplaceParameters="true">template.ts</ProjectItem>
     
   </TemplateContent>
-  <!--//TODO IWizard hooking for extra menu to add TypeScript Reference.-->
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NativeTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.NativeTypes.NativeTypesWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <NativeType>typescript</NativeType>
+  </WizardData>
 </VSTemplate>

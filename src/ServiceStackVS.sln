@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS", "ServiceStackVS\ServiceStackVS.csproj", "{05410BD6-C9BC-45DA-B0AA-B73047BCCF14}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NPMInstallerWizard", "ServiceStackVS.NPMInstallerWizard\ServiceStackVS.NPMInstallerWizard.csproj", "{F15D55C1-633A-4344-84E5-CE9C95988507}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NuGetInstallerWizard", "ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj", "{7344DA1C-9297-49FD-BE37-568A3C4AB544}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypes", "ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj", "{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

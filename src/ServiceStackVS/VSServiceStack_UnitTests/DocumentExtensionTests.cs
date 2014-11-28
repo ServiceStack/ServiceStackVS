@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceStackVS.FileHandlers;
 using ServiceStackVS;
+using ServiceStackVS.NativeTypes.Handlers;
 
 namespace ServiceStackVS_UnitTests
 {

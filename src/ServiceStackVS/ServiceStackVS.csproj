@@ -140,19 +140,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddServiceStackReference.xaml.cs">
-      <DependentUpon>AddServiceStackReference.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FileHandlers\CommentParsingUtils.cs" />
-    <Compile Include="FileHandlers\CSharpNativeTypesHandler.cs" />
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
-    <Compile Include="FileHandlers\FSharpNativeTypesHandler.cs" />
-    <Compile Include="FileHandlers\INativeTypesHandler.cs" />
-    <Compile Include="FileHandlers\ItemAddedHandlers.cs" />
-    <Compile Include="FileHandlers\TypeScriptNativeTypesHandler.cs" />
-    <Compile Include="FileHandlers\VbNetNativeTypesHandler.cs" />
     <Compile Include="Guids.cs" />
-    <Compile Include="NativeTypeHandler.cs" />
     <Compile Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
     <Compile Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,7 +154,6 @@
     <Compile Include="ProjectTemplates\ReactJS\Test\Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTemplates\ReactJS\Test\UnitTests.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
-    <Compile Include="OutputWindowWriter.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -273,7 +261,6 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SolutionEvents.cs" />
-    <Compile Include="Types\MetadataTypes.cs" />
     <Compile Include="VsixProjectExtensions.cs" />
     <Compile Include="VSIXUtils.cs" />
     <Compile Include="ServiceStackVSPackage.cs" />
@@ -1002,12 +989,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AddServiceStackReference.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
+      <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
+      <Name>ServiceStackVS.NativeTypes</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj">
       <Project>{7344da1c-9297-49fd-be37-568a3c4ab544}</Project>
       <Name>ServiceStackVS.NuGetInstallerWizard</Name>

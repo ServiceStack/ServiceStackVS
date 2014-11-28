@@ -28,5 +28,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NPMInstallerWizard" Path="|ServiceStackVS.NPMInstallerWizard|" AssemblyName="|ServiceStackVS.NPMInstallerWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NuGetInstallerWizard" Path="|ServiceStackVS.NuGetInstallerWizard|" AssemblyName="|ServiceStackVS.NuGetInstallerWizard;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
   </Assets>
 </PackageManifest>

@@ -9,6 +9,7 @@ using EnvDTE;
 using ServiceStack;
 using ServiceStack.Text;
 using ServiceStackVS.FileHandlers;
+using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NPMInstallerWizard;
 using ServiceStackVS.Wizards;
 
