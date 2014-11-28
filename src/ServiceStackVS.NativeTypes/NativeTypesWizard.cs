@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Documents;
 using System.Xml.Linq;
 using EnvDTE;
@@ -21,6 +23,8 @@ namespace ServiceStackVS.NativeTypes
             {"typescript",new TypeScriptNativeTypesHandler()}
         };
         string userProviderItemName;
+        private string finalUserProvidedName;
+        private string finalProjectItemName;
 
         private INativeTypesHandler currentNativeTypesHandle;
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
@@ -42,6 +46,15 @@ namespace ServiceStackVS.NativeTypes
                     throw new WizardBackoutException("Unable to find associated INativeTypesHandler from '" + nativeTypeName + "'");
                 }
                 currentNativeTypesHandle = typesHandler;
+
+                var dialog = new AddServiceStackReference(userProviderItemName, currentNativeTypesHandle);
+                dialog.ShowDialog();
+                if (!dialog.AddReferenceSucceeded)
+                {
+                    throw new WizardBackoutException("Cancelled");
+                }
+                finalUserProvidedName = dialog.FileNameTextBox.Text;
+                replacementsDictionary.Add("$basereferenceurl$", dialog.ServerUrl.Replace(typesHandler.RelativeTypesUrl,string.Empty));
             }
             else
             {
@@ -56,39 +69,20 @@ namespace ServiceStackVS.NativeTypes
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
-            if (!projectItem.Name.EndsWith(currentNativeTypesHandle.CodeFileExtension))
+            string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
+            
+            if (!finalUserProvidedName.EndsWith(currentNativeTypesHandle.CodeFileExtension))
             {
-                int fileNameNumber = 1;
-                string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
-                //Find a version of the default name that doesn't already exist, 
-                //mimicing VS default file name behaviour.
-                while (File.Exists(Path.Combine(projectPath,
-                    userProviderItemName + fileNameNumber + currentNativeTypesHandle.CodeFileExtension)))
-                {
-                    fileNameNumber++;
-                }
-                string suggestedFileName = userProviderItemName + fileNameNumber;
-                var dialog = new AddServiceStackReference(suggestedFileName, currentNativeTypesHandle);
-                dialog.ShowDialog();
-                if (!dialog.AddReferenceSucceeded)
-                {
-                    return;
-                }
-                string templateCode = dialog.CodeTemplate;
-                projectItem.Remove();
-                string finalFileName = dialog.FileNameTextBox.Text + currentNativeTypesHandle.CodeFileExtension;
-                string fullPath = Path.Combine(projectPath, finalFileName);
-                using (var streamWriter = File.CreateText(fullPath))
-                {
-                    streamWriter.Write(templateCode);
-                    streamWriter.Flush();
-                }
-                var project = projectItem.ContainingProject;
-                var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
-                newDtoFile.Open(EnvDteConstants.vsViewKindCode);
-                newDtoFile.Save();
-                project.Save();
+                finalProjectItemName = MakeUniqueIfExists(Path.Combine(projectPath,
+                           finalUserProvidedName + currentNativeTypesHandle.CodeFileExtension)).Name;
             }
+            else
+            {
+                finalProjectItemName = MakeUniqueIfExists(Path.Combine(projectPath,
+                                    finalUserProvidedName)).Name;
+            }
+            projectItem.Name = finalProjectItemName;
+            projectItem.ContainingProject.Save();
         }
 
         public bool ShouldAddProjectItem(string filePath)
@@ -98,12 +92,53 @@ namespace ServiceStackVS.NativeTypes
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
-            
+            projectItem.ContainingProject.Save();
+            string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
+            string fullItemPath = Path.Combine(projectPath, finalProjectItemName);
+            var existingGeneratedCode = File.ReadAllLines(fullItemPath).Join(Environment.NewLine);
+
+            string baseUrl;
+            if (!currentNativeTypesHandle.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
+            {
+                throw new WizardBackoutException("Failed to read from template base url");
+            }
+            string updatedCode = currentNativeTypesHandle.GetUpdatedCode(baseUrl, null);
+            using (var streamWriter = File.CreateText(fullItemPath))
+            {
+                streamWriter.Write(updatedCode);
+                streamWriter.Flush();
+            }
+            projectItem.Open();
+            projectItem.Save();
         }
 
         public void RunFinished()
         {
             
+        }
+
+        /// <summary>
+        /// http://stackoverflow.com/a/1078016/670151
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public FileInfo MakeUniqueIfExists(string path)
+        {
+            string dir = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileName(path).SplitOnFirst('.')[0];
+            string fileExt = "." + Path.GetFileName(path).SplitOnFirst('.')[1];
+
+            if (!File.Exists(path))
+            {
+                return new FileInfo(path);
+            }
+            for (int i = 1; ; ++i)
+            {
+                if (!File.Exists(path))
+                    return new FileInfo(path);
+
+                path = Path.Combine(dir, fileName + i + fileExt);
+            }
         }
     }
 }

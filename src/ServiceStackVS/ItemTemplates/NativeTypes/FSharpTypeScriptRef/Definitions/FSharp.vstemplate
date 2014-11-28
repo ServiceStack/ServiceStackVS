@@ -1,0 +1,23 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <ProjectType>FSharp</ProjectType>
+
+    <DefaultName>TypeScriptReference</DefaultName>
+    <Name>TypeScript Reference</Name>
+    <Description>TypeScript reference from a ServiceStack server.</Description>
+    <Icon>logo.png</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+
+    <ProjectItem ReplaceParameters="true">template.ts</ProjectItem>
+
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NativeTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.NativeTypes.NativeTypesWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <NativeType>typescript</NativeType>
+  </WizardData>
+</VSTemplate>

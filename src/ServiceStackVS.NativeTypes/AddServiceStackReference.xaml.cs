@@ -30,6 +30,7 @@ namespace ServiceStackVS
     {
         public bool AddReferenceSucceeded { get; set; }
         public string CodeTemplate { get; set; }
+        public string ServerUrl { get; private set; }
         private string suggestedFileName;
         private readonly INativeTypesHandler typesHandler;
 
@@ -38,7 +39,7 @@ namespace ServiceStackVS
             suggestedFileName = fileName;
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
-            this.KeyUp += ListenForShortcutKeys;
+            this.KeyDown += ListenForShortcutKeys;
             typesHandler = nativeTypesHandler;
         }
 
@@ -68,6 +69,7 @@ namespace ServiceStackVS
             try
             {
                 string serverUrl = CreateUrl(UrlTextBox.Text);
+                ServerUrl = serverUrl;
                 bool urlIsValid = ValidateUrl(serverUrl);
                 var webRequest = WebRequest.Create(serverUrl);
                 string result = webRequest.GetResponse().ReadToEnd();
