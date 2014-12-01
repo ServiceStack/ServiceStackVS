@@ -57,5 +57,12 @@ namespace ServiceStackVS.NativeTypes.Handlers
         {
             get { return validProjectGuids; }
         }
+
+        private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" };
+
+        public List<string> RequiredNuGetPackages
+        {
+            get { return requiredNuGetPackages; }
+        }
     }
 }

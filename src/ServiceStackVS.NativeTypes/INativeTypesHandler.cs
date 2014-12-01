@@ -11,7 +11,8 @@ namespace ServiceStackVS.NativeTypes
         string CodeFileExtension { get; }
         string RelativeTypesUrl { get; }
         bool IsHandledFileType(string fileName);
-        List<string> ValidVsProjectTypeGuids { get; } 
+        List<string> ValidVsProjectTypeGuids { get; }
+        List<string> RequiredNuGetPackages { get; } 
     }
 
     public enum NativeTypesLanguage

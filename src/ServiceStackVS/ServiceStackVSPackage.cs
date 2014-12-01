@@ -140,12 +140,6 @@ namespace ServiceStackVS
                 cSharpProjectAddReferenceMenuCommand.BeforeQueryStatus += CSharpQueryAddMenuItem;
                 mcs.AddCommand(cSharpProjectAddReferenceMenuCommand);
 
-                var updateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidUpdateServiceStackReference);
-                var updateReferenceMenuCommand = new OleMenuCommand(UpdateReferenceCallback,
-                    updateReferenceCommandId);
-                updateReferenceMenuCommand.BeforeQueryStatus += QueryUpdateMenuItem;
-                mcs.AddCommand(updateReferenceMenuCommand);
-
                 var fSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpAddServiceStackReference);
                 var fSharpProjectContextOleMenuCommand = new OleMenuCommand(FSharpAddReferenceCallback, fSharpProjContextAddReferenceCommandId);
                 fSharpProjectContextOleMenuCommand.BeforeQueryStatus += FSharpQueryAddMenuItem;
@@ -160,6 +154,12 @@ namespace ServiceStackVS
                 var typeScriptProjectContextOleMenuCommand = new OleMenuCommand(TypeScriptAddReferenceCallback, typeScriptProjContextAddReferenceCommandId);
                 typeScriptProjectContextOleMenuCommand.BeforeQueryStatus += TypeScriptQueryAddMenuItem;
                 mcs.AddCommand(typeScriptProjectContextOleMenuCommand);
+
+                var updateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidUpdateServiceStackReference);
+                var updateReferenceMenuCommand = new OleMenuCommand(UpdateReferenceCallback,
+                    updateReferenceCommandId);
+                updateReferenceMenuCommand.BeforeQueryStatus += QueryUpdateMenuItem;
+                mcs.AddCommand(updateReferenceMenuCommand);
             }
 
             solutionEventsListener = new SolutionEventsListener();
@@ -350,18 +350,6 @@ namespace ServiceStackVS
 
         #endregion
 
-        /// <summary>
-        /// This function is the callback used to execute a command when the a menu item is clicked.
-        /// See the Initialize method to see how the menu item is associated to this function using
-        /// the OleMenuCommandService service and the MenuCommand class.
-        /// </summary>
-        private void CSharpAddReferenceCallback(object sender, EventArgs e)
-        {
-            var project = VSIXUtils.GetSelectedProject();
-            var typesHandler = NativeTypeHandlers.CSharpNativeTypesHandler;
-            AddServiceStackReference(project, typesHandler);
-        }
-
         private void UpdateReferenceCallback(object sender, EventArgs e)
         {
             var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
@@ -374,6 +362,18 @@ namespace ServiceStackVS
             }
             var typesHandler = typeHandlers.First();
             UpdateGeneratedDtos(projectItem, typesHandler);
+        }
+
+        /// <summary>
+        /// This function is the callback used to execute a command when the a menu item is clicked.
+        /// See the Initialize method to see how the menu item is associated to this function using
+        /// the OleMenuCommandService service and the MenuCommand class.
+        /// </summary>
+        private void CSharpAddReferenceCallback(object sender, EventArgs e)
+        {
+            var project = VSIXUtils.GetSelectedProject();
+            var typesHandler = NativeTypeHandlers.CSharpNativeTypesHandler;
+            AddServiceStackReference(project, typesHandler);
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace ServiceStackVS
                 return;
             }
             string templateCode = dialog.CodeTemplate;
-            AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode);
+            AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
         }
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
@@ -457,8 +457,9 @@ namespace ServiceStackVS
             }
         }
 
-        private void AddNewDtoFileToProject(string fileName, string templateCode)
+        private void AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
+            nugetPackages = nugetPackages ?? new List<string>();
             var project = VSIXUtils.GetSelectedProject();
             string projectPath = project.Properties.Item("FullPath").Value.ToString();
             string fullPath = Path.Combine(projectPath, fileName);
@@ -470,8 +471,11 @@ namespace ServiceStackVS
             var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
             newDtoFile.Open(EnvDTE.Constants.vsViewKindCode);
             newDtoFile.Save();
-            AddNuGetDependencyIfMissing(project, "ServiceStack.Client");
-            AddNuGetDependencyIfMissing(project, "ServiceStack.Text");
+            foreach (var nugetPackage in nugetPackages)
+            {
+                AddNuGetDependencyIfMissing(project, nugetPackage);
+            }
+            
             project.Save();
         }
 

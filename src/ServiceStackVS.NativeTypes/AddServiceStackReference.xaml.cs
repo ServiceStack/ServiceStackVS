@@ -40,6 +40,7 @@ namespace ServiceStackVS
             InitializeComponent();
             FileNameTextBox.Text = suggestedFileName;
             this.KeyDown += ListenForShortcutKeys;
+            this.Loaded += Window_Loaded;
             typesHandler = nativeTypesHandler;
         }
 
@@ -66,34 +67,49 @@ namespace ServiceStackVS
             ErrorMessageBox.Visibility = Visibility.Hidden;
             UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Transparent);
             ErrorMessage.Text = "";
-            try
+            this.OkButton.IsEnabled = false;
+            bool success = false;
+            string url = UrlTextBox.Text;
+            string errorMessage = "";
+            Task.Run(() =>
             {
-                string serverUrl = CreateUrl(UrlTextBox.Text);
-                ServerUrl = serverUrl;
-                bool urlIsValid = ValidateUrl(serverUrl);
-                var webRequest = WebRequest.Create(serverUrl);
-                string result = webRequest.GetResponse().ReadToEnd();
-                CodeTemplate = result;
-                if (urlIsValid)
+                try
                 {
-                    AddReferenceSucceeded = true;
-                    Close();
+                    string serverUrl = CreateUrl(url);
+                    ServerUrl = serverUrl;
+                    bool urlIsValid = ValidateUrl(serverUrl);
+                    var webRequest = WebRequest.Create(serverUrl);
+                    string result = webRequest.GetResponse().ReadToEnd();
+                    CodeTemplate = result;
+                    if (urlIsValid)
+                    {
+                        success = true;
+                    }
                 }
-            }
-            catch (WebException webException)
+                catch (WebException webException)
+                {
+                    errorMessage = "Failed to generated client types, server responded with '" +
+                                        webException.Message + "'.";
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = "Failed to generate client types - " + ex.Message;
+                }
+            }).Wait();
+
+            if (success)
             {
-                ErrorMessageBox.Visibility = Visibility.Visible;
-                ErrorMessage.Text = "Failed to generated client types, server responded with '" +
-                                    webException.Message + "'.";
-                UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                AddReferenceSucceeded = true;
+                Close();
             }
-            catch (Exception ex)
+            else
             {
+                this.OkButton.IsEnabled = true;
+                ReferenceProgressBar.Visibility = Visibility.Hidden;
                 ErrorMessageBox.Visibility = Visibility.Visible;
-                ErrorMessage.Text = "Failed to generate client types - " + ex.Message;
-                UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                ErrorMessage.Text = errorMessage;
+                    UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
             }
-            ReferenceProgressBar.Visibility = Visibility.Hidden;
         }
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -129,6 +145,14 @@ namespace ServiceStackVS
             }
 
             return serverUrl.ToParentPath();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application curApp = Application.Current;
+            Window mainWindow = curApp.MainWindow;
+            this.Left = mainWindow.Left + (mainWindow.Width - this.ActualWidth) / 2;
+            this.Top = mainWindow.Top + (mainWindow.Height - this.ActualHeight) / 2;
         }
 
         private bool ValidateUrl(string url)
