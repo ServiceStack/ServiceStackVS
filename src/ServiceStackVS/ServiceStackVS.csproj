@@ -327,7 +327,7 @@
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\css\app.css" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\gruntfile.js" />
-    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\index.html" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\default.cshtml" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\app.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\hello\controllers.js" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\js\navigation\controllers.js" />
@@ -821,14 +821,15 @@
     <Content Include="ProjectTemplates\ReactJS\ReactJS\css\app.css" />
     <Content Include="ProjectTemplates\ReactJS\ReactJS\Global.asax" />
     <Content Include="ProjectTemplates\ReactJS\ReactJS\gruntfile.js" />
-    <Content Include="ProjectTemplates\ReactJS\ReactJS\index.html" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\default.cshtml" />
     <Content Include="ProjectTemplates\ReactJS\ReactJS\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJS\ReactJS\ReactJS.csproj" />
     <Content Include="ProjectTemplates\ReactJS\ReactJS\Scripts\_references.js" />
-    <Content Include="ProjectTemplates\ReactJS\ReactJS\tests\karma.conf.js" />
     <Resource Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\deploy\appsettings.txt" />
     <Resource Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\README.txt" />
     <Resource Include="ProjectTemplates\ReactJS\ReactJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\tests\preprocessor.js" />
+    <Content Include="ProjectTemplates\ReactJS\ReactJS\tests\unit\hello-test.js" />
     <Content Include="ProjectTemplates\ReactJS\ServiceInterface\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJS\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
     <Resource Include="ProjectTemplates\ReactJS\ServiceInterface\_preprocess.xml" />

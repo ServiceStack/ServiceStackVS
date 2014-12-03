@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+var React = require('react');
+
 var HelloWorld = React.createClass({
 	handleHello: function(e) {
 		e.preventDefault();
@@ -26,7 +28,4 @@ var HelloWorld = React.createClass({
 		);
 }
 });
-React.render(
-		<HelloWorld />,
-		document.getElementById('demo')
-);
+module.exports = HelloWorld

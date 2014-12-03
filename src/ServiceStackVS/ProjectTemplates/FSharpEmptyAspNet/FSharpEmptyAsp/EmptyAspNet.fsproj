@@ -117,40 +117,40 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
-      <HintPath>..\..\packages\FSharp.Core.Microsoft.Signed.3.1.1.1\lib\net45\FSharp.Core.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\FSharp.Core.Microsoft.Signed.3.1.1.1\lib\net45\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="ServiceStack">
-      <HintPath>..\..\packages\ServiceStack.4.0.32\lib\net40\ServiceStack.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.4.0.32\lib\net40\ServiceStack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Client">
-      <HintPath>..\..\packages\ServiceStack.Client.4.0.32\lib\net40\ServiceStack.Client.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Client.4.0.32\lib\net40\ServiceStack.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.32\lib\net40\ServiceStack.OrmLite.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.OrmLite.4.0.32\lib\net40\ServiceStack.OrmLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Server">
-      <HintPath>..\..\packages\ServiceStack.Server.4.0.32\lib\net40\ServiceStack.Server.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Server.4.0.32\lib\net40\ServiceStack.Server.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

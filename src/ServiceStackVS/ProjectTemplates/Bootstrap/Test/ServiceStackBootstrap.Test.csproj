@@ -37,22 +37,22 @@
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack">
-      <HintPath>..\..\packages\ServiceStack.4.0.32\lib\net40\ServiceStack.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.4.0.32\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Client">
-      <HintPath>..\..\packages\ServiceStack.Client.4.0.32\lib\net40\ServiceStack.Client.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Client.4.0.32\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net" />

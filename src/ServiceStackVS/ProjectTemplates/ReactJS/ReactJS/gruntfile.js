@@ -27,13 +27,8 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        karma: {
-            unit: {
-                configFile: 'tests/karma.conf.js',
-                singleRun: true,
-                browsers: ['PhantomJS'],
-                logLevel: 'ERROR'
-            }
+        exec: {
+            jest: 'jest'
         },
         msbuild: {
             release: {
@@ -144,26 +139,25 @@ module.exports = function (grunt) {
                     .pipe(gulpif('*.jsx.js', react()))
                     .pipe(gulpif(checkIfJsx, uglify()))
                     .pipe(gulpif('*.css', minifyCss()))
-
                     .pipe(assets.restore())
                     .pipe(useref())
                     .pipe(gulp.dest(webRoot));
             },
-            'wwwroot-copy-appsettings': function () {
-                return gulp.src('./wwwroot_build/deploy/appsettings.txt')
+            'wwwroot-copy-deploy-files': function () {
+                return gulp.src('./wwwroot_build/deploy/*.*')
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('ssvs-utils');
     grunt.loadNpmTasks('grunt-gulp');
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
 
-    grunt.registerTask('01-run-tests', ['karma']);
+    grunt.registerTask('01-run-tests', ['jest']);
     grunt.registerTask('02-package-server', [
         'nugetrestore',
         'msbuild:release',
@@ -171,7 +165,7 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-bin',
         'gulp:wwwroot-copy-webconfig',
         'gulp:wwwroot-copy-asax',
-        'gulp:wwwroot-copy-appsettings'
+        'gulp:wwwroot-copy-deploy-files'
     ]);
     grunt.registerTask('03-package-client', [
         'gulp:wwwroot-clean-client-assets',
@@ -180,6 +174,10 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-images',
         'gulp:wwwroot-bundle'
     ]);
+
+    grunt.registerTask('build', ['02-package-server', '03-package-client']);
+
+    grunt.registerTask('default', ['exec:jest', 'build']);
 
     grunt.registerTask('04-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
 };

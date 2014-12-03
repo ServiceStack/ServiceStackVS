@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿/// <reference path="~/node_modules/karma-jasmine/lib/jasmine.js" />
+"use strict";
 
 describe('hello controller unit tests', function () {
     var $scope;

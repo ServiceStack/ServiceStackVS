@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add ServiceStack Reference"  Height="320" Width="660"
         Icon="Resources/favicon.ico" MinHeight="300" MinWidth="500"
-        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxErrorTemplate" TargetType="Control">
             <Grid ClipToBounds="False" >

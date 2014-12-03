@@ -39,8 +39,7 @@ namespace $safeprojectname$
 
             SetConfig( new HostConfig
             {
-                DebugMode = AppSettings.Get("DebugMode",false),
-                AllowFileExtensions = {"jsx"}
+                DebugMode = AppSettings.Get("DebugMode",false)
             });
         }
     }
