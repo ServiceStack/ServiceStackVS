@@ -105,6 +105,7 @@
     <Content Include="bower.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
+    <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\01-run-tests.bat" />
     <Content Include="wwwroot_build\02-package-server.bat" />
     <Content Include="wwwroot_build\03-package-client.bat" />
