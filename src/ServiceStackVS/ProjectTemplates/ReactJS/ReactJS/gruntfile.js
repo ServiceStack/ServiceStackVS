@@ -157,7 +157,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
 
-    grunt.registerTask('01-run-tests', ['jest']);
+    grunt.registerTask('01-run-tests', ['exec:jest']);
     grunt.registerTask('02-package-server', [
         'nugetrestore',
         'msbuild:release',
@@ -176,8 +176,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', ['02-package-server', '03-package-client']);
-
-    grunt.registerTask('default', ['exec:jest', 'build']);
 
     grunt.registerTask('04-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
 };

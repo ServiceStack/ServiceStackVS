@@ -88,27 +88,28 @@ namespace ServiceStackVS
                 catch (WebException webException)
                 {
                     errorMessage = "Failed to generated client types, server responded with '" +
-                                        webException.Message + "'.";
+                                   webException.Message + "'.";
                 }
                 catch (Exception ex)
                 {
                     errorMessage = "Failed to generate client types - " + ex.Message;
                 }
-            }).Wait();
-
-            if (success)
+            }).ContinueWith(task =>
             {
-                AddReferenceSucceeded = true;
-                Close();
-            }
-            else
-            {
-                this.OkButton.IsEnabled = true;
-                ReferenceProgressBar.Visibility = Visibility.Hidden;
-                ErrorMessageBox.Visibility = Visibility.Visible;
-                ErrorMessage.Text = errorMessage;
+                if (success)
+                {
+                    AddReferenceSucceeded = true;
+                    Close();
+                }
+                else
+                {
+                    this.OkButton.IsEnabled = true;
+                    ReferenceProgressBar.Visibility = Visibility.Hidden;
+                    ErrorMessageBox.Visibility = Visibility.Visible;
+                    ErrorMessage.Text = errorMessage;
                     UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-            }
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)

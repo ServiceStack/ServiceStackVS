@@ -41,6 +41,8 @@ namespace $safeprojectname$
             {
                 DebugMode = AppSettings.Get("DebugMode",false)
             });
+
+            this.Plugins.Add(new RazorFormat());
         }
     }
 }

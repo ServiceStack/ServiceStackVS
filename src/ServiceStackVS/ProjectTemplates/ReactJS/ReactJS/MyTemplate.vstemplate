@@ -44,7 +44,6 @@
     <NodeJS>
       <npm-package id="grunt-cli" />
       <npm-package id="gulp" />
-      <npm-package id="jest-cli" />
     </NodeJS>
   </WizardData>
 </VSTemplate>

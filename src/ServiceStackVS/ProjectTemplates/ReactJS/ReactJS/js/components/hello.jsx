@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
-var React = require('react');
+
+var React = React || require('react');
+var module = module || {};
 
 var HelloWorld = React.createClass({
 	handleHello: function(e) {
