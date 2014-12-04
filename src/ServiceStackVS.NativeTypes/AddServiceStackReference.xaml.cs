@@ -84,6 +84,10 @@ namespace ServiceStackVS
                     {
                         success = true;
                     }
+                    else
+                    {
+                        throw new Exception("Failed to contact server. Unable to validate provided URL end point.");
+                    }
                 }
                 catch (WebException webException)
                 {

@@ -441,14 +441,21 @@ namespace ServiceStackVS
                     OutputWindowWriter.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
                     return;
                 }
-
-                var options = typesHandler.ParseComments(existingGeneratedCode);
-                string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
-                using (var streamWriter = File.CreateText(filePath))
+                try
                 {
-                    streamWriter.Write(updatedCode);
-                    streamWriter.Flush();
+                    var options = typesHandler.ParseComments(existingGeneratedCode);
+                    string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
+                    using (var streamWriter = File.CreateText(filePath))
+                    {
+                        streamWriter.Write(updatedCode);
+                        streamWriter.Flush();
+                    }
                 }
+                catch (Exception e)
+                {
+                    OutputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + e.Message);
+                }
+                
                 OutputWindowWriter.WriteLine("--- Update ServiceStack Reference Complete ---");
             }
             else
