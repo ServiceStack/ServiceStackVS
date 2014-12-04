@@ -8,6 +8,7 @@ using Funq;
 using $safeprojectname$.ServiceInterface;
 using ServiceStack;
 using ServiceStack.Configuration;
+using ServiceStack.Razor;
 
 namespace $safeprojectname$
 {
