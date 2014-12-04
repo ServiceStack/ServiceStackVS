@@ -133,7 +133,7 @@ module.exports = function (grunt) {
             'wwwroot-bundle': function () {
                 var assets = useref.assets();
 
-                return gulp.src('index.html')
+                return gulp.src('default.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.js', uglify()))
                     .pipe(gulpif('*.css', minifyCss()))

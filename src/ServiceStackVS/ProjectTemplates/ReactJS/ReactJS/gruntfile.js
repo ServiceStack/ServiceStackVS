@@ -134,7 +134,7 @@ module.exports = function (grunt) {
                 var checkIfJsx = function (file) {
                     return file.relative.indexOf('.jsx.js') !== -1;
                 }
-                return gulp.src('index.html')
+                return gulp.src('default.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.jsx.js', react()))
                     .pipe(gulpif(checkIfJsx, uglify()))
