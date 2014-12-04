@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
@@ -105,11 +106,18 @@ namespace ServiceStackVS.NuGetInstallerWizard
                 var package = CachedRepository.FindPackagesById(packageId)
                     .OrderByDescending(x => x.Version.ToString())
                     .FirstOrDefault();
-                if (package != null)
+                if (package != null && package.Version != null)
                 {
                     return package.Version.ToString();
                 }
-                    
+                MessageBox.Show(
+                    "Unable to connect to NuGet and no cached packages found for " + packageId,
+                    "ServiceStackVS Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly
+                    );
                 throw new WizardBackoutException("Unable to connect to NuGet and no cached packages found for " + packageId);
             }
             
