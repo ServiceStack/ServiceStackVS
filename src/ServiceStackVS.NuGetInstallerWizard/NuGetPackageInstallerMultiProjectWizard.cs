@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,32 @@ namespace ServiceStackVS.NuGetInstallerWizard
 {
     public class NuGetPackageInstallerMultiProjectWizard : IWizard
     {
+
+        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+
+        private IPackageRepository nuGetPackageRepository;
+        private IPackageRepository NuGetPackageRepository
+        {
+            get
+            {
+                return nuGetPackageRepository ??
+                       (nuGetPackageRepository =
+                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+            }
+        }
+
+        private IPackageRepository _cachedRepository;
+        private IPackageRepository CachedRepository
+        {
+            get
+            {
+                string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
+                return _cachedRepository ??
+                       (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
+            }
+        }
+
         public static NuGetWizardDataPackage RootNuGetPackage;
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
@@ -68,9 +95,24 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         private string GetLatestVersionOfPackage(string packageId)
         {
-            IPackageRepository nugetV2Repository = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            var package = nugetV2Repository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
-            return package.Version.ToString();
+            try
+            {
+                var package = NuGetPackageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
+                return package.Version.ToString();
+            }
+            catch (Exception)
+            {
+                var package = CachedRepository.FindPackagesById(packageId)
+                    .OrderByDescending(x => x.Version.ToString())
+                    .FirstOrDefault();
+                if (package != null)
+                {
+                    return package.Version.ToString();
+                }
+                    
+                throw new WizardBackoutException("Unable to connect to NuGet and no cached packages found for " + packageId);
+            }
+            
         }
     }
 }
