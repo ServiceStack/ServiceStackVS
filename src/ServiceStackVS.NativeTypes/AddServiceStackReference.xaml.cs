@@ -151,7 +151,7 @@ namespace ServiceStackVS
         {
             Uri validatedUri;
             bool isValidUri = Uri.TryCreate(url, UriKind.Absolute, out validatedUri) &&
-                              validatedUri.Scheme == Uri.UriSchemeHttp;
+                              (validatedUri.Scheme == Uri.UriSchemeHttp || validatedUri.Scheme == Uri.UriSchemeHttps);
             if (isValidUri)
             {
                 string metadataJsonUrl = validatedUri.ToString().ToLower().Replace("/" + typesHandler.RelativeTypesUrl.ToLowerInvariant(), "/types/metadata") + "?format=json";
