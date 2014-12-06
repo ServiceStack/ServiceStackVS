@@ -175,7 +175,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', ['02-package-server', '03-package-client']);
 
-    grunt.registerTask('default', ['karma', 'build']);
-
     grunt.registerTask('04-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
+
+    grunt.registerTask('package-and-deploy', ['02-package-server', '03-package-client', '04-deploy-app']);
+
+    grunt.registerTask('default', ['karma', 'build']);
 };
