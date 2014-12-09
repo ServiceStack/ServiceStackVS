@@ -26,6 +26,7 @@ using ServiceStack.Text;
 using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NPMInstallerWizard;
+using VSLangProj;
 using ServiceStackVS.Wizards;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using MessageBox = System.Windows.MessageBox;
@@ -334,13 +335,12 @@ namespace ServiceStackVS
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
-            var project = VSIXUtils.GetSelectedProject();
 
-            bool visible = project != null &&
-                           project.Kind != null &&
-                //Project is not unloaded
-                           !string.Equals(project.Kind, VsHelperGuids.ProjectUnloaded,
-                               StringComparison.InvariantCultureIgnoreCase);
+            var isProjectItemAFolder = VSIXUtils.IsSelectProjectItemAFolder();
+
+            var isAProjectAndLoaded = VSIXUtils.IsSelectedItemAReadyProject();
+
+            bool visible = isAProjectAndLoaded || isProjectItemAFolder;
 
             bool enabled = visible && ready;
 
@@ -371,9 +371,9 @@ namespace ServiceStackVS
         /// </summary>
         private void CSharpAddReferenceCallback(object sender, EventArgs e)
         {
-            var project = VSIXUtils.GetSelectedProject();
+            var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.CSharpNativeTypesHandler;
-            AddServiceStackReference(project, typesHandler);
+            AddServiceStackReference(projectPath, typesHandler);
         }
 
         /// <summary>
@@ -383,32 +383,33 @@ namespace ServiceStackVS
         /// </summary>
         private void FSharpAddReferenceCallback(object sender, EventArgs e)
         {
-            var project = VSIXUtils.GetSelectedProject();
+            var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.FSharpNativeTypesHandler;
-            AddServiceStackReference(project, typesHandler);
+            AddServiceStackReference(projectPath, typesHandler);
         }
 
         private void VbNetAddReferenceCallback(object sender, EventArgs e)
         {
-            var project = VSIXUtils.GetSelectedProject();
+            var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.VbNetNativeTypesHandler;
-            AddServiceStackReference(project, typesHandler);
+            AddServiceStackReference(projectPath, typesHandler);
         }
 
         private void TypeScriptAddReferenceCallback(object sender, EventArgs e)
         {
-            var project = VSIXUtils.GetSelectedProject();
+            var projectPath = VSIXUtils.GetSelectedProjectPath();
+            var folderPath = VSIXUtils.GetSelectedFolderPath();
+            string finalPath = projectPath ?? folderPath;
             var typesHandler = NativeTypeHandlers.TypeScriptNativeTypesHandler;
-            AddServiceStackReference(project, typesHandler);
+            AddServiceStackReference(finalPath, typesHandler);
         }
 
-        private void AddServiceStackReference(Project project, INativeTypesHandler typesHandler)
+        private void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
         {
-            string projectPath = project.Properties.Item("FullPath").Value.ToString();
             int fileNameNumber = 1;
             //Find a version of the default name that doesn't already exist, 
             //mimicing VS default file name behaviour.
-            while (File.Exists(Path.Combine(projectPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
+            while (File.Exists(Path.Combine(folderPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
             {
                 fileNameNumber++;
             }
@@ -427,7 +428,7 @@ namespace ServiceStackVS
             OutputWindowWriter.Show();
             OutputWindowWriter.ShowOutputPane(dte);
             OutputWindowWriter.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
-            string projectItemPath = projectItem.Properties.Item("FullPath").Value.ToString();
+            string projectItemPath = projectItem.GetFullPath();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
             bool selectedFSharpDto = selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
             if (selectedFSharpDto)
@@ -467,9 +468,9 @@ namespace ServiceStackVS
         private void AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
             nugetPackages = nugetPackages ?? new List<string>();
-            var project = VSIXUtils.GetSelectedProject();
-            string projectPath = project.Properties.Item("FullPath").Value.ToString();
-            string fullPath = Path.Combine(projectPath, fileName);
+            var project = VSIXUtils.GetSelectedProject() ?? VSIXUtils.GetSelectObject<ProjectItem>().ContainingProject;
+            var path = VSIXUtils.GetSelectedProjectPath() ?? VSIXUtils.GetSelectedFolderPath();
+            string fullPath = Path.Combine(path, fileName);
             using (var streamWriter = File.CreateText(fullPath))
             {
                 streamWriter.Write(templateCode);

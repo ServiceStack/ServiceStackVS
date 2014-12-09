@@ -125,7 +125,7 @@ namespace ServiceStackVS.FileHandlers
         private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,
             OutputWindowWriter outputWindowWriter)
         {
-            string fullPath = document.ProjectItem.Properties.Item("FullPath").Value.ToString();
+            string fullPath = document.ProjectItem.GetFullPath();
             outputWindowWriter.ShowOutputPane(document.DTE);
             outputWindowWriter.Show();
             outputWindowWriter.WriteLine(

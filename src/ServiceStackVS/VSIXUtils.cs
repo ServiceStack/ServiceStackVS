@@ -9,6 +9,7 @@ using EnvDTE;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using ServiceStackVS.NativeTypes;
 
 namespace ServiceStackVS
 {
@@ -63,6 +64,30 @@ namespace ServiceStackVS
             }
         }
 
+        public static bool IsSelectedItemAReadyProject()
+        {
+            var project = GetSelectedProject();
+            bool isAProjectAndLoaded = project != null &&
+                                       project.Kind != null &&
+                                       //Project is not unloaded
+                                       !String.Equals(project.Kind, VsHelperGuids.ProjectUnloaded,
+                                           StringComparison.InvariantCultureIgnoreCase);
+            return isAProjectAndLoaded;
+        }
+
+        public static bool IsSelectProjectItemAFolder()
+        {
+            var projectItem = GetSelectObject<ProjectItem>();
+            if (projectItem == null)
+            {
+                return false;
+            }
+            string folderFullPath = projectItem.GetFullPath();
+            var folderDirectoryInfo = new DirectoryInfo(folderFullPath);
+            bool isProjectItemAFolder = folderDirectoryInfo.Exists;
+            return isProjectItemAFolder;
+        }
+
         /// <summary>
         /// Gets the selected project.
         /// From http://uisurumadushanka89.blogspot.com.au/2013/04/visual-studio-extensibility-get-active.html
@@ -71,6 +96,26 @@ namespace ServiceStackVS
         public static Project GetSelectedProject()
         {
             return GetSelectObject<Project>();
+        }
+
+        public static string GetSelectedProjectPath()
+        {
+            var project = GetSelectObject<Project>();
+            if (project == null)
+            {
+                return null;
+            }
+            return project.GetFullPath();
+        }
+
+        public static string GetSelectedFolderPath()
+        {
+            var projectItem = GetSelectObject<ProjectItem>();
+            if (projectItem == null)
+            {
+                return null;
+            }
+            return projectItem.GetFullPath();
         }
 
         public static T GetSelectObject<T>() where T : class
@@ -110,6 +155,16 @@ namespace ServiceStackVS
             }
 
             return selectedObject as T;
+        }
+
+        public static string GetFullPath(this ProjectItem projectItem)
+        {
+            return projectItem.Properties.Item("FullPath").Value.ToString();
+        }
+
+        public static string GetFullPath(this Project projectItem)
+        {
+            return projectItem.Properties.Item("FullPath").Value.ToString();
         }
     }
 }
