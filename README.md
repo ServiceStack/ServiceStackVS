@@ -27,7 +27,7 @@ The templates conveniently pre-configures the above libraries into a working out
  - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
  - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
-For a in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
+For in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
 
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/chat-react.png)
 
