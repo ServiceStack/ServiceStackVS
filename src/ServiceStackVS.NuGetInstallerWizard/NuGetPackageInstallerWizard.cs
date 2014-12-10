@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet;
 using NuGet.VisualStudio;
@@ -46,6 +47,12 @@ namespace ServiceStackVS.NuGetInstallerWizard
                 return _cachedRepository ??
                        (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
             }
+        }
+
+        private IVsStatusbar bar;
+        private IVsStatusbar StatusBar
+        {
+            get { return bar ?? (bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar); }
         }
 
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
@@ -114,6 +121,22 @@ namespace ServiceStackVS.NuGetInstallerWizard
             OutputWindowWriter.WriteLine("--- Finished installing latest ServiceStack NuGet dependencies for '" + project.Name + "' ---");
         }
 
+        private void UpdateStatusMessage(string message)
+        {
+            int frozen = 1;
+            int retries = 0;
+            while (frozen != 0 && retries < 10)
+            {
+                StatusBar.IsFrozen(out frozen);
+                if (frozen == 0)
+                {
+                    StatusBar.SetText(message);
+                }
+                System.Threading.Thread.Sleep(10);
+                retries++;
+            }
+        }
+
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
 
@@ -148,6 +171,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
             //Check if existing nuget reference exists
             if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
             {
+                UpdateStatusMessage("Installing " + packageId + " from NuGet...");
                 Installer.InstallPackage("https://www.nuget.org/api/v2/",
                          project,
                          packageId,

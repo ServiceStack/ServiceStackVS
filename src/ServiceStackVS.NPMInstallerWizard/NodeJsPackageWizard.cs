@@ -152,13 +152,13 @@ namespace ServiceStackVS.NPMInstallerWizard
             int retries = 0;
             while (frozen != 0 && retries < 10)
             {
-                retries++;
                 StatusBar.IsFrozen(out frozen);
                 if (frozen == 0)
                 {
                     StatusBar.SetText(message);
                 }
                 System.Threading.Thread.Sleep(10);
+                retries++;
             }
         }
 
