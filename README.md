@@ -3,6 +3,34 @@ ServiceStackVS
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
+## 1.0.6 Release
+
+### [New Add TypeScript Reference](https://github.com/ServiceStack/ServiceStack/wiki/TypeScript-Add-ServiceStack-Reference)
+
+TypeScript references can now be added from ServiceStack 4.0.34+ servers to any project type. This uses the same add reference workflow as the other native type clients. References can also be updated on save as well as using the Update Reference context menu seen below.
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/typescript-add-reference-demo.gif)
+
+### New ReactJS App Template
+
+The new ServiceStackVS **ReactJS App** template shares the same approach for developing modern Single Page Apps in VS.NET as the existing [AngularJS App](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md) template by leveraging the **node.js** ecosystem for managing all aspects of Client App development utilizing the best-in-class libraries:
+
+ - [npm](https://www.npmjs.org/) to manage node.js dependencies (bower, grunt, gulp)
+ - [Bower](http://bower.io/) for managing client dependencies (angular, jquery, bootstrap, etc)
+ - [Grunt](http://gruntjs.com/) as the primary task runner for server, client packaging and deployments
+ - [Gulp](http://gulpjs.com/) used by Grunt to do the heavy-lifting bundling and minification
+
+The templates conveniently pre-configures the above libraries into a working out-of-the-box solution, including high-level grunt tasks to take care of the full-dev-cycle of **building**, **packaging** and **deploying** your app:
+
+ - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
+ - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
+ - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+
+For a in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
+
+![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/chat-react.png)
+
 ## 1.0.5 Release
 
 ### [New VB.NET Add ServiceStack Reference!](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
