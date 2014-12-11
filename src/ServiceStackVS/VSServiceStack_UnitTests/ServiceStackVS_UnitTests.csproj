@@ -53,8 +53,17 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
     <!---->
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VSSDK.UnitTestLibrary" />
     <Reference Include="Microsoft.VSSDK.TestHostFramework" />
+    <Reference Include="Moq, Version=4.2.1409.1722, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.8.50926.602, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NuGet.Core.2.8.3\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
     <Reference Include="NuGet.VisualStudio">
       <HintPath>..\..\packages\NuGet.VisualStudio.2.8.2\lib\net40\NuGet.VisualStudio.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -64,10 +73,12 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentExtensionTests.cs" />
     <Compile Include="NativeTypeUrlTests.cs" />
+    <Compile Include="NuGetWizardTests.cs" />
     <Compile Include="PackageTest.cs" />
     <!---->
     <!---->
@@ -82,6 +93,14 @@
     <ProjectReference Include="..\..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
       <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
       <Name>ServiceStackVS.NativeTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj">
+      <Project>{7344da1c-9297-49fd-be37-568a3c4ab544}</Project>
+      <Name>ServiceStackVS.NuGetInstallerWizard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServiceStackVS.TestUtility\ServiceStackVS.TestUtility.csproj">
+      <Project>{36b58306-4474-4519-9ed5-e446ab648a8e}</Project>
+      <Name>ServiceStackVS.TestUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.csproj">
       <Project>{05410bd6-c9bc-45da-b0aa-b73047bccf14}</Project>

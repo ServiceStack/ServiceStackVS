@@ -88,14 +88,14 @@ namespace ServiceStackVS.NuGetInstallerWizard
             packagesToLoad = element.ExtractNuGetPackages();
             rootPackage = NuGetPackageInstallerMultiProjectWizard.RootNuGetPackage;
 
-            if (!UseParentProjectRootPackage() && element.HasRootPackage())
+            if (!UseParentProjectRootPackage(rootPackage) && element.HasRootPackage())
             {
                 rootPackage = element.GetRootPackage();
                 rootPackage.Version = GetLatestVersionOfPackage(rootPackage.Id);
             }
         }
 
-        private bool UseParentProjectRootPackage()
+        private static bool UseParentProjectRootPackage(NuGetWizardDataPackage rootPackage)
         {
             return rootPackage != null &&
                    !(string.IsNullOrEmpty(rootPackage.Version) || rootPackage.Version.EqualsIgnoreCase("latest"));
