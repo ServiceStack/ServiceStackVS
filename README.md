@@ -3,15 +3,7 @@ ServiceStackVS
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
-## 1.0.6 Release
-
-### [New Add TypeScript Reference](https://github.com/ServiceStack/ServiceStack/wiki/TypeScript-Add-ServiceStack-Reference)
-
-TypeScript references can now be added from ServiceStack 4.0.34+ servers to any project type. This uses the same add reference workflow as the other native type clients. References can also be updated on save as well as using the Update Reference context menu seen below.
-
-![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/typescript-add-reference-demo.gif)
-
-### New ReactJS App Template
+### [New ReactJS App Template](https://github.com/ServiceStackApps/Chat-React)
 
 The new ServiceStackVS **ReactJS App** template shares the same approach for developing modern Single Page Apps in VS.NET as the existing [AngularJS App](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md) template by leveraging the **node.js** ecosystem for managing all aspects of Client App development utilizing the best-in-class libraries:
 
@@ -29,50 +21,7 @@ The templates conveniently pre-configures the above libraries into a working out
 
 For in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
 
-![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/chat-react.png)
-
-## 1.0.5 Release
-
-### [New VB.NET Add ServiceStack Reference!](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
-
-This release also adds [Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Add-ServiceStack-Reference) 
-support for the last remaining major .NET language with the new first-class support for 
-[VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)! 
-
-### Simplified UX for all languages
-
-Our first iteration of **Add ServiceStack Reference** for C# used a **T4 Template** to make it easy for clients to view and modify all 
-Customization options available and to be able to auto-generate the Server DTO's by modifying and saving (or re-running) the T4 template. 
-
-As F# projects didn't support T4 Templates, when we added support for 
-[F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference) 
-we had to skip the T4 template and add the server-generated DTO's source file directly to the project. 
-
-By skipping the T4 Template we pleasantly discovered we ended up with a nicer, simplified and more user-friendly UX, with less moving parts for 
-the default use case of generating client DTO's based on the 
-[Default Server Configuration](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference#change-default-server-configuration).
-
-#### Improving Single Generated Source File Story
-
-We've since decided to embrace and provide a better development experience around a single source file approach and use it consistently in all 
-C#, F# and VB.NET projects - now resulting simpler **Add ServiceStack Reference** UX for all client projects.
-
-#### Update ServiceStack Reference Context Menu Item
-
-With the latest **ServiceStackVS** you can now update the Server DTO's in all projects by clicking on `Update ServiceStack Reference` 
-on the context-menu, e.g:
-
-![Update ServiceStack Reference](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/updateref-vbnet.gif)
-
-
-## 1.0.4 Release 
-
-New to ServiceStackVS in 1.0.4 is the Add/Update ServiceStack Reference for F# and a new AngularJS App template.
-
-### F# Add/Update ServiceStack Reference 
-ServiceStackVS now supports Add ServiceStack for F# projects to work along side ServiceStack's new [F# Native Types](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#fsharp-native-types-notes). See our [example usage](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#example-usage) for a guide on how to use this in your project.
-
-### AngularJS Single Page App Template 
+### [AngularJS App Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md)
 
 **AngularJS App** is a new template in [ServiceStackVS](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project) that provides a modern opinionated web technology stack for developing rich Single Page Apps with [AngularJS](https://angularjs.org/) and ServiceStack. 
 
@@ -360,6 +309,60 @@ The simple HelloWorld AngularJS application that is provided in the template cal
 This project requires the Visual Studio 2013 SDK to build the extension.
 
 ------
+
+
+## 1.0.6 Release
+
+### [New Add TypeScript Reference](https://github.com/ServiceStack/ServiceStack/wiki/TypeScript-Add-ServiceStack-Reference)
+
+TypeScript references can now be added from ServiceStack 4.0.34+ servers to any project type. This uses the same add reference workflow as the other native type clients. References can also be updated on save as well as using the Update Reference context menu seen below.
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/typescript-add-reference-demo.gif)
+
+
+![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/chat-react.png)
+
+## 1.0.5 Release
+
+### [New VB.NET Add ServiceStack Reference!](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
+
+This release also adds [Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Add-ServiceStack-Reference) 
+support for the last remaining major .NET language with the new first-class support for 
+[VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)! 
+
+### Simplified UX for all languages
+
+Our first iteration of **Add ServiceStack Reference** for C# used a **T4 Template** to make it easy for clients to view and modify all 
+Customization options available and to be able to auto-generate the Server DTO's by modifying and saving (or re-running) the T4 template. 
+
+As F# projects didn't support T4 Templates, when we added support for 
+[F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference) 
+we had to skip the T4 template and add the server-generated DTO's source file directly to the project. 
+
+By skipping the T4 Template we pleasantly discovered we ended up with a nicer, simplified and more user-friendly UX, with less moving parts for 
+the default use case of generating client DTO's based on the 
+[Default Server Configuration](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference#change-default-server-configuration).
+
+#### Improving Single Generated Source File Story
+
+We've since decided to embrace and provide a better development experience around a single source file approach and use it consistently in all 
+C#, F# and VB.NET projects - now resulting simpler **Add ServiceStack Reference** UX for all client projects.
+
+#### Update ServiceStack Reference Context Menu Item
+
+With the latest **ServiceStackVS** you can now update the Server DTO's in all projects by clicking on `Update ServiceStack Reference` 
+on the context-menu, e.g:
+
+![Update ServiceStack Reference](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/updateref-vbnet.gif)
+
+
+## 1.0.4 Release 
+
+New to ServiceStackVS in 1.0.4 is the Add/Update ServiceStack Reference for F# and a new AngularJS App template.
+
+### F# Add/Update ServiceStack Reference 
+ServiceStackVS now supports Add ServiceStack for F# projects to work along side ServiceStack's new [F# Native Types](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#fsharp-native-types-notes). See our [example usage](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#example-usage) for a guide on how to use this in your project.
+
 
 ### Feedback
 
