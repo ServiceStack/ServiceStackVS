@@ -212,55 +212,13 @@ This task shows a quick way of updating your development server quickly after ma
     packages.config
     web.config
 
-This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows. The AngularJS side is largely influenced by various incarnations of the angular-seed project whilst still be contained within a VS project.
-
-### Feedback Welcomed!
-
-The AngularJS App template is trying to give a good starting point for developing a single page application within Visual Studio. Please raise any issues in the [Issues List](https://github.com/ServiceStack/Issues) or submit new [feature requests in our UserVoice](http://servicestack.uservoice.com/forums/176786-feature-requests).
-
-
-## 1.0.3 Release ##
-New for ServiceStackVS in 1.0.3 update are **5 F# templates** and a *beta* version of a new **AngularJS Single Page App template** which includes the use of **NPM**, **Bower**, **Grunt**, **Gulp** and **Karma**. This template is designed to work along side Microsoft's new **[Task Runner Explorer](http://www.hanselman.com/blog/IntroducingGulpGruntBowerAndNpmSupportForVisualStudio.aspx)** extension.
-
-#### F# Templates ####
-
-![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
-
-The 5 F# templates reflect their C# counter parts in the ServiceStackVS extension. There is also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension which also shows off ServiceStack (V3 and V4) using F# in various configurations. These templates are great single project templates, where as our new F# templates follow our recommended multi-project structure showing the F# equivilent of some of the existing C# templates.
-
-##### Demo #####
-Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code working with ServiceStack's data formats.
-
-![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
-
-The C# Project templates included in this extension:
-
-- ServiceStack ASP.NET Empty
-- ServiceStack ASP.NET MVC4 & MVC5
-- ServiceStack ASP.NET with AngularJS
-- ServiceStack ASP.NET with Bootstrap
-- ServiceStack ASp.NET with Razor
-- ServiceStack Self Host Empty
-
-These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
-
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/servicestackvs-templates.gif)
 
-## F# Templates
+### ServiceStack with Angular JS Demo
 
-New in ServiceStackVS **1.0.3** are multiple F# Templates:
+The simple HelloWorld AngularJS application that is provided in the template calls the `/hello/{Name}` route and displays the result in the `<p>` below. 
 
-![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
-
-These F# templates follow the same recommended multi-project structure used in the C# templates. There's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects in different single project configurations.
-
-### F# ASP.NET with Freebase API Demo
-
-Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code taking advantage of ServiceStack's built-in data formats:
-
-![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
-
-[About the F# Freebase Demo](https://github.com/ServiceStack/ServiceStackVS/blob/master/fsharp.md#f-aspnet-with-freebase-api-demo).
+![](https://github.com/ServiceStack/ServiceStackVS/raw/master/Images/angularjs_hello_app.png)
 
 # Getting Started
 
@@ -277,7 +235,24 @@ ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from th
 
 > Alternatively if continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed.
 
-## Projects
+This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows. The AngularJS side is largely influenced by various incarnations of the angular-seed project whilst still be contained within a VS project.
+
+## Project Templates 
+
+The C# Project templates included in ServiceStackVS extension:
+
+- AngularJS App 
+- ReactJS App
+- ServiceStack ASP.NET Empty
+- ServiceStack ASP.NET MVC4 & MVC5
+- ServiceStack ASP.NET with AngularJS
+- ServiceStack ASP.NET with Bootstrap
+- ServiceStack ASp.NET with Razor
+- ServiceStack Self Host Empty
+
+These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
+
+## Projects Structure
 
 Starting a new ServiceStack ASP.NET with AngularJS application will give you 4 new projects.
 
@@ -298,11 +273,21 @@ The Host project has dependencies on the Service Model and Service Inteface proj
 
 The Unit Testing project, also as a dependency on these projects as it tests them in isolation of the main Host project. In the template, we are using the BasicAppHost to mock the AppHost we are using in the Host project. The example unit test is using NUit to setup and run the tests.
 
-### ServiceStack with Angular JS Demo
+## F# Templates
 
-The simple HelloWorld AngularJS application that is provided in the template calls the `/hello/{Name}` route and displays the result in the `<p>` below. 
+The F# Project templates included in ServiceStackVS extension:
 
-![](https://github.com/ServiceStack/ServiceStackVS/raw/master/Images/angularjs_hello_app.png)
+![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
+
+These F# templates follow the same recommended multi-project structure used in the C# templates. There's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) extension for ServiceStack (V3 and V4) projects in different single project configurations.
+
+### F# ASP.NET with Freebase API Demo
+
+Below is an example of creating a service that serves data from Freebase, showing F# strengths of concise, readable code taking advantage of ServiceStack's built-in data formats:
+
+![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fsharp-template-with-demo.gif)
+
+[About the F# Freebase Demo](https://github.com/ServiceStack/ServiceStackVS/blob/master/fsharp.md#f-aspnet-with-freebase-api-demo).
 
 ## Build
 
@@ -310,61 +295,33 @@ This project requires the Visual Studio 2013 SDK to build the extension.
 
 ------
 
+# [Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Add-ServiceStack-Reference)
 
-## 1.0.6 Release
+ServiceStack's new **Add ServiceStack Reference** feature shows our initial support for adding generated Native Types to client VS.NET projects using [ServiceStackVS](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project#step-1-download-and-install-servicestackvs) - providing a simpler, cleaner and more versatile alternative to WCF's **Add Service Reference** feature that's built into VS.NET. 
 
-### [New Add TypeScript Reference](https://github.com/ServiceStack/ServiceStack/wiki/TypeScript-Add-ServiceStack-Reference)
+The first languages supported are C#, F#, VB.Net and TypeScript, effectively providing a flexible alternative than sharing your DTO assembly with clients, now clients can easily add a reference to a remote ServiceStack instance and update DTO's directly from within VS.NET. This also lays the groundwork and signals our approach on adding support for typed API's in other languages in future. Add a [feature request for your favorite language](http://servicestack.uservoice.com/forums/176786-feature-requests) to prioritize support for it sooner!
 
-TypeScript references can now be added from ServiceStack 4.0.34+ servers to any project type. This uses the same add reference workflow as the other native type clients. References can also be updated on save as well as using the Update Reference context menu seen below.
+Our goal with Native Types is to provide an alternative for sharing DTO dlls, that can enable a better dev workflow for external clients who are now able to generate (and update) Typed APIs for your Services from a remote url - reducing the burden and effort required to consume ServiceStack Services whilst benefiting from clients native language strong-typing feedback.
 
-![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/typescript-add-reference-demo.gif)
+ServiceStackVS offers the generation and updating of these clients through the same context for C#, F# and VB.Net. This gives developers a consistent way of creating and updating your DTOs regardless of your language of choice.
 
+### Supported Languages
 
-![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/chat-react.png)
+* [C# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference)
+* [F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference)
+* [VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
+* [TypeScript Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/TypeScript-Add-ServiceStack-Reference)
 
-## 1.0.5 Release
+## Example Usage
 
-### [New VB.NET Add ServiceStack Reference!](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
+> C# Android PCL Client example
 
-This release also adds [Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Add-ServiceStack-Reference) 
-support for the last remaining major .NET language with the new first-class support for 
-[VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)! 
+![C# Android PCL Client example](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/android-add-ref-demo.gif)
 
-### Simplified UX for all languages
+> VB.NET client talking with C# Server example
 
-Our first iteration of **Add ServiceStack Reference** for C# used a **T4 Template** to make it easy for clients to view and modify all 
-Customization options available and to be able to auto-generate the Server DTO's by modifying and saving (or re-running) the T4 template. 
-
-As F# projects didn't support T4 Templates, when we added support for 
-[F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference) 
-we had to skip the T4 template and add the server-generated DTO's source file directly to the project. 
-
-By skipping the T4 Template we pleasantly discovered we ended up with a nicer, simplified and more user-friendly UX, with less moving parts for 
-the default use case of generating client DTO's based on the 
-[Default Server Configuration](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference#change-default-server-configuration).
-
-#### Improving Single Generated Source File Story
-
-We've since decided to embrace and provide a better development experience around a single source file approach and use it consistently in all 
-C#, F# and VB.NET projects - now resulting simpler **Add ServiceStack Reference** UX for all client projects.
-
-#### Update ServiceStack Reference Context Menu Item
-
-With the latest **ServiceStackVS** you can now update the Server DTO's in all projects by clicking on `Update ServiceStack Reference` 
-on the context-menu, e.g:
-
-![Update ServiceStack Reference](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/updateref-vbnet.gif)
-
-
-## 1.0.4 Release 
-
-New to ServiceStackVS in 1.0.4 is the Add/Update ServiceStack Reference for F# and a new AngularJS App template.
-
-### F# Add/Update ServiceStack Reference 
-ServiceStackVS now supports Add ServiceStack for F# projects to work along side ServiceStack's new [F# Native Types](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#fsharp-native-types-notes). See our [example usage](https://github.com/ServiceStack/ServiceStack/blob/master/release-notes.md#example-usage) for a guide on how to use this in your project.
-
+![CSharp server with VB.Net client example](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/csharp-server-vb-client.gif)
 
 ### Feedback
 
-We hope **ServiceStackVS** helps make ServiceStack developers more productive than ever and we'll look at continue improving it with new features in future. [Suggestions and feedback are welcome](http://servicestack.uservoice.com/forums/176786-feature-requests).  
-
+We hope **ServiceStackVS** helps make ServiceStack developers more productive than ever and we'll look at continue improving it with new features in future. [Suggestions and feedback are welcome](http://servicestack.uservoice.com/forums/176786-feature-requests) or raise any issues in the [Issues List](https://github.com/ServiceStack/Issues) or submit new [feature requests in our UserVoice](http://servicestack.uservoice.com/forums/176786-feature-requests).
