@@ -38,6 +38,18 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //this.Plugins.Add(new CorsFeature());
 
+            //Return default.cshtml home page for all 404 requests so we can handle routing on the client
+            base.CustomErrorHttpHandlers[HttpStatusCode.NotFound] = new RazorHandler("/default.cshtml");
+
+            //this.Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[]
+            //{
+            //    new TwitterAuthProvider(AppSettings), 
+            //    new FacebookAuthProvider(AppSettings), 
+            //}) {
+            //    // Use query string instead of hash to avoid route collisions.
+            //    AddParamsToQueryString = true
+            //});
+
             SetConfig( new HostConfig
             {
                 DebugMode = AppSettings.Get("DebugMode",false)
