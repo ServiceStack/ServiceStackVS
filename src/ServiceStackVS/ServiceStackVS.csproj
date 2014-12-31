@@ -261,7 +261,7 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SolutionEvents.cs" />
-    <Compile Include="VsixProjectExtensions.cs" />
+    <Compile Include="NativeTypeExtensions.cs" />
     <Compile Include="VSIXUtils.cs" />
     <Compile Include="ServiceStackVSPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +281,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
+    <Content Include="ServiceStack.Text.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -845,10 +849,6 @@
     <Content Include="ProjectTemplates\ReactJS\Test\ServiceStackAngularJS.Test.csproj" />
     <Resource Include="ProjectTemplates\ReactJS\Test\_preprocess.xml" />
     <Resource Include="ProjectTemplates\ReactJS\_preprocess.xml" />
-    <Content Include="ServiceStack.Text.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Resource Include="Resources\ServiceModelTemplate.txt" />
     <Resource Include="Resources\servicestacklogo.ico" />
     <Resource Include="Resources\logoAddReference.bmp" />
@@ -1001,6 +1001,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.NativeTypesWizard\ServiceStackVS.NativeTypesWizard.csproj">
+      <Project>{f5130cfd-c749-427e-a814-8115eebdca90}</Project>
+      <Name>ServiceStackVS.NativeTypesWizard</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
       <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
       <Name>ServiceStackVS.NativeTypes</Name>

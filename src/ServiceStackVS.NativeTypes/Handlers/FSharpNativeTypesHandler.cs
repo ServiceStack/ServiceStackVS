@@ -49,16 +49,6 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EndsWith(".dto.fs");
         }
 
-        private readonly List<string> validProjectGuids = new List<string>
-                {
-                    VsHelperGuids.FSharpProjectKind
-                };
-
-        public List<string> ValidVsProjectTypeGuids
-        {
-            get { return validProjectGuids; }
-        }
-
         private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" };
 
         public List<string> RequiredNuGetPackages

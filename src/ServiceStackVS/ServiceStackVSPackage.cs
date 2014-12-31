@@ -25,6 +25,7 @@ using ServiceStack;
 using ServiceStack.Text;
 using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
+using ServiceStackVS.NativeTypesWizard;
 using ServiceStackVS.NPMInstallerWizard;
 using VSLangProj;
 using ServiceStackVS.Wizards;
@@ -275,7 +276,7 @@ namespace ServiceStackVS
             {
                 var typeHandler = typeHandlers.First();
                 bool validVsProjectType =
-                    typeHandler.ValidVsProjectTypeGuids.FirstOrDefault(
+                    typeHandler.ValidVsProjectTypeGuids().FirstOrDefault(
                         projectTypeGuid =>
                             string.Equals(projectItem.ContainingProject.Kind, projectTypeGuid,
                                 StringComparison.InvariantCultureIgnoreCase)) != null;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="1.0.6" Language="en-US" Publisher="ServiceStack" />
+    <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="1.0.7" Language="en-US" Publisher="ServiceStack" />
     <DisplayName>ServiceStackVS</DisplayName>
     <Description>Templates and tools for use with the ServiceStack framework.</Description>
     <MoreInfo>https://github.com/ServiceStack/ServiceStackVS</MoreInfo>
@@ -29,5 +29,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NPMInstallerWizard" Path="|ServiceStackVS.NPMInstallerWizard|" AssemblyName="|ServiceStackVS.NPMInstallerWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NuGetInstallerWizard" Path="|ServiceStackVS.NuGetInstallerWizard|" AssemblyName="|ServiceStackVS.NuGetInstallerWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypesWizard" Path="|ServiceStackVS.NativeTypesWizard|" AssemblyName="|ServiceStackVS.NativeTypesWizard;AssemblyName|" />
   </Assets>
 </PackageManifest>

@@ -49,18 +49,6 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return fileName.EndsWithIgnoreCase(CodeFileExtension);
         }
 
-        private readonly List<string> validProjectGuids = new List<string>
-                {
-                    VsHelperGuids.CSharpProjectKind,
-                    VsHelperGuids.FSharpProjectKind,
-                    VsHelperGuids.VbNetProjectKind
-                }; 
-
-        public List<string> ValidVsProjectTypeGuids 
-        {
-            get { return validProjectGuids; } 
-        }
-
         private readonly List<string> requiredNuGetPackages = new List<string>(); 
         public List<string> RequiredNuGetPackages
         {

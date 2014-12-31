@@ -53,16 +53,6 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return fileName.EndsWithIgnoreCase(CodeFileExtension);
         }
 
-        private readonly List<string> validProjectGuids = new List<string>
-                {
-                    VsHelperGuids.VbNetProjectKind
-                };
-
-        public List<string> ValidVsProjectTypeGuids
-        {
-            get { return validProjectGuids; }
-        }
-
         private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" }; 
 
         public List<string> RequiredNuGetPackages

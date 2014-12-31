@@ -16,8 +16,8 @@
   </TemplateContent>
   
   <WizardExtension>
-    <Assembly>ServiceStackVS.NativeTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
-    <FullClassName>ServiceStackVS.NativeTypes.NativeTypesWizard</FullClassName>
+    <Assembly>ServiceStackVS.NativeTypesWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.NativeTypesWizard.NativeTypesWizard</FullClassName>
   </WizardExtension>
   <WizardData>
     <NativeType>typescript</NativeType>
