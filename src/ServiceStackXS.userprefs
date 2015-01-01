@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="ServiceStackXS\ServiceStackXS.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServiceStackXS\Commands\AddReferenceHandler.cs">
+    <Files>
+      <File FileName="ServiceStackXS\Commands\AddReferenceHandler.cs" Line="5" Column="5" />
+      <File FileName="ServiceStackXS\Commands\UpdateReferenceHandler.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\Properties\AddinInfo.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\Properties\AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\Properties\Manifest.addin.xml" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\UI\AddReferenceDialog.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\NodeBuilders\AddReferenceNodeBuilder.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\packages.config" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
