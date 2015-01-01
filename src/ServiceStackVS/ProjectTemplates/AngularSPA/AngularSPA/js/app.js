@@ -7,9 +7,11 @@ angular.module('helloApp', [
   'helloApp.controllers',
   'navigation.controllers'
 ]).
-config(['$routeProvider', function ($routeProvider) {
+config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.when('/', { templateUrl: 'partials/hello/hello.html', controller: 'helloCtrl' });
     $routeProvider.when('/view1', { templateUrl: 'partials/partial1.html' });
     $routeProvider.when('/view2', { templateUrl: 'partials/partial2.html' });
     $routeProvider.otherwise({ redirectTo: '/' });
+
+    $locationProvider.html5Mode(true);
 }]);
