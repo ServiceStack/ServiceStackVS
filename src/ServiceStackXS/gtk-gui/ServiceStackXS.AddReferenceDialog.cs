@@ -33,6 +33,7 @@ namespace ServiceStackXS
 			this.Icon = global::Gdk.Pixbuf.LoadFromResource ("ServiceStackXS.favicon.ico");
 			this.TypeHint = ((global::Gdk.WindowTypeHint)(1));
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+			this.Modal = true;
 			this.DefaultWidth = 620;
 			this.DefaultHeight = 320;
 			// Internal child ServiceStackXS.AddReferenceDialog.VBox
@@ -142,13 +143,11 @@ namespace ServiceStackXS
 			w11.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
-			this.buttonOk.CanDefault = true;
 			this.buttonOk.CanFocus = true;
 			this.buttonOk.Name = "buttonOk";
-			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
-			this.buttonOk.Label = "gtk-ok";
-			this.AddActionWidget (this.buttonOk, -5);
+			this.buttonOk.Label = global::Mono.Unix.Catalog.GetString ("OK");
+			w10.Add (this.buttonOk);
 			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.buttonOk]));
 			w12.Position = 1;
 			w12.Expand = false;

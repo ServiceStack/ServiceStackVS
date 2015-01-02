@@ -32,6 +32,6 @@
   </Extension>
 
   <Extension path="/MonoDevelop/Core/StockIcons">
-    <StockIcon stockid="servicestack-addref-item" icon = "res:add-ref-item.png" size="Menu" />
+    <StockIcon stockid="servicestack-addref-item" resource = "add-ref-item.png" />
   </Extension>
 </ExtensionModel>

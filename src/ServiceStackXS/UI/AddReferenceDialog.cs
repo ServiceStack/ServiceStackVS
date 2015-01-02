@@ -42,7 +42,11 @@ namespace ServiceStackXS
 
 		protected void AddReference (object sender, EventArgs e)
 		{
-			Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference ());
+			var dispatcherOp = Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference ());
+			dispatcherOp.Wait ();
+			if (AddReferenceSucceeded) {
+				this.OnClose ();
+			}
 		}
 
 		private bool GetCodeFromServer(string url)
@@ -86,7 +90,6 @@ namespace ServiceStackXS
 			string errorMessage = "";
 			if (GetCodeFromServer (url)) {
 				AddReferenceSucceeded = true;
-				this.OnClose();
 			} else {
 				AddReferenceSucceeded = false;
 				//TODO Add error message
