@@ -2,17 +2,32 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ServiceStackXS\Commands\AddReferenceHandler.cs">
     <Files>
-      <File FileName="ServiceStackXS\Commands\AddReferenceHandler.cs" Line="35" Column="35" />
-      <File FileName="ServiceStackXS\UI\AddReferenceDialog.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\Commands\AddReferenceHandler.cs" Line="47" Column="47" />
       <File FileName="ServiceStackVS.NativeTypes\Handlers\CSharpNativeTypesHandler.cs" Line="1" Column="1" />
       <File FileName="ServiceStackVS.NativeTypes\INativeTypesHandler.cs" Line="1" Column="1" />
+      <File FileName="ServiceStackXS\UI\AddReferenceDialog.cs" Line="30" Column="30" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ServiceStackXS" expanded="True" selected="True">
+            <Node name="UserInterface" expanded="True" />
+            <Node name="Commands" expanded="True" />
+            <Node name="UI" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\UI\AddReferenceDialog.cs" line="230" column="4" />
-      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\UI\AddReferenceDialog.cs" line="193" column="21" />
-      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\Commands\AddReferenceHandler.cs" line="69" column="18" />
+      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\UI\AddReferenceDialog.cs" line="241" column="4" />
+      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\UI\AddReferenceDialog.cs" line="204" column="21" />
+      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\Commands\AddReferenceHandler.cs" line="68" column="9" />
+      <Breakpoint file="C:\projects\ServiceStack\ServiceStackVS\src\ServiceStackXS\Commands\AddReferenceHandler.cs" line="73" column="22" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

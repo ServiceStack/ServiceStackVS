@@ -35,6 +35,10 @@ namespace ServiceStackXS.Commands
 				nativeTypesHandler = new VbNetNativeTypesHandler ();
 			}
 
+			if (nativeTypesHandler == null) {
+				throw new ArgumentNullException ("No supported languages found");
+			}
+
 			string fileName = "ServiceReference";
 			string finalFileName = "";
 			int count = 0;
@@ -45,36 +49,38 @@ namespace ServiceStackXS.Commands
 				exists = existingFile != null;
 				finalFileName = fileName + count.ToString () + nativeTypesHandler.CodeFileExtension;
 			}
-			AddReferenceDialog dialog = null;
-
-
-			dialog = new AddReferenceDialog (fileName + count.ToString(),nativeTypesHandler);
+				
+			var dialog = new AddReferenceDialog (fileName + count.ToString(),nativeTypesHandler);
 			dialog.Run ();
 
-			if (dialog == null) {
-				throw new ArgumentNullException ("No supported languages found");
+			if (!dialog.AddReferenceSucceeded) {
+				return;
 			}
 
-			if (dialog.AddReferenceSucceeded) {
-				string code = dialog.CodeTemplate;
-				dialog.Destroy ();
-				string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString(), finalFileName);
-				using (var streamWriter = File.CreateText (fullPath)) {
-					streamWriter.Write (code);
-					streamWriter.Flush ();
-				}
-				project.AddFile (fullPath,BuildAction.Compile);
+			string code = dialog.CodeTemplate;
+			dialog.Destroy ();
+			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString(), finalFileName);
+			using (var streamWriter = File.CreateText (fullPath)) {
+				streamWriter.Write (code);
+				streamWriter.Flush ();
+			}
+			project.AddFile (fullPath,BuildAction.Compile);
 
-				try {
-					AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Client");
-					AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Interfaces");
-					AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Text");
-				} catch (Exception ex) {
-					//TODO Error message for user
-				}
-
-			} else {
-				dialog.ErrorBell ();
+			try {
+				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Client");
+				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Interfaces");
+				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Text");
+			} catch (Exception ex) {
+				//TODO Error message for user
+				var messageDialog = new MessageDialog (
+					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
+					DialogFlags.Modal, 
+					MessageType.Warning, 
+					ButtonsType.Close, 
+					"An error occurred trying to add required NuGet packages. Error : " + ex.Message + 
+					"\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
+				messageDialog.Run ();
+				messageDialog.Destroy ();
 			}
 		}
 
