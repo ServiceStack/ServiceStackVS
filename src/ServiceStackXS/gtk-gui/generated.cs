@@ -11,10 +11,8 @@ namespace Stetic
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
 				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
-				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("ServiceStackXS.add-ref-item.png"));
-				w1.Add ("servicestack-addref-item", w2);
-				global::Gtk.IconSet w3 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("ServiceStackXS.favicon.ico"));
-				w1.Add ("favicon.ico", w3);
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("ServiceStackXS.favicon.ico"));
+				w1.Add ("favicon.ico", w2);
 				w1.AddDefault ();
 			}
 		}

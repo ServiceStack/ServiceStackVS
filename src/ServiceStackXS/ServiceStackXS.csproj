@@ -33,7 +33,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Commands\UpdateReferenceHandler.cs" />
-    <Compile Include="NodeBuilders\AddReferenceNodeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\AddReferenceHandler.cs" />
     <Compile Include="gtk-gui\generated.cs" />
@@ -45,9 +44,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Mono.Addins">
-      <Package>C:\Program Files (x86)\Xamarin Studio\AddIns\ServiceStackXS\Mono.Addins.dll</Package>
-    </Reference>
     <Reference Include="MonoDevelop.Core">
       <Package>C:\Program Files (x86)\Xamarin Studio\bin\MonoDevelop.Core.dll</Package>
     </Reference>
@@ -81,19 +77,23 @@
     <Reference Include="MonoDevelop.PackageManagement, Version=1.0.0.0, Culture=neutral">
       <Package>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\MonoDevelop.PackageManagement.dll</Package>
     </Reference>
+    <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <Package>C:\Program Files (x86)\Xamarin Studio\bin\Mono.Addins.dll</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
-    <EmbeddedResource Include="add-ref-item.png">
-      <DeployService-Deploy>True</DeployService-Deploy>
-    </EmbeddedResource>
     <EmbeddedResource Include="favicon.ico">
       <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />
+    <Content Include="add-ref-item.png">
+      <DeployService-Deploy>True</DeployService-Deploy>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

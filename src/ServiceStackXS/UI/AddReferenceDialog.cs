@@ -38,7 +38,7 @@ namespace ServiceStackXS
 
 		protected void CancelAdd (object sender, EventArgs e)
 		{
-			this.OnClose ();
+
 		}
 
 		protected void AddReference (object sender, EventArgs e)

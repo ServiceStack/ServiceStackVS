@@ -1,11 +1,15 @@
 ﻿<ExtensionModel>
   <Runtime>
+	<Import file="add-ref-item.png" />
     <Import assembly="ServiceStackXS.dll" />
     <Import assembly="ServiceStackVS.NativeTypes.dll" />
     <Import assembly="ServiceStack.Text.dll" />
-    <Import assembly="Microsoft.Web.XmlTransform.dll" />
     <Import assembly="NuGet.Core.dll" />
   </Runtime>
+
+  <Extension path="/MonoDevelop/Core/StockIcons">
+    <StockIcon stockid="servicestack-addref-item" file = "add-ref-item.png" />
+  </Extension>
 
   <Extension path = "/MonoDevelop/Ide/Commands">
       <Command
@@ -29,9 +33,5 @@
 				insertafter="MonoDevelop.WebReferences.WebReferenceCommands.Add" />
 
     </Condition>
-  </Extension>
-
-  <Extension path="/MonoDevelop/Core/StockIcons">
-    <StockIcon stockid="servicestack-addref-item" resource = "add-ref-item.png" />
   </Extension>
 </ExtensionModel>

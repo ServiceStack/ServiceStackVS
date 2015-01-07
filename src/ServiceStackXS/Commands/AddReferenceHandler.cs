@@ -52,13 +52,13 @@ namespace ServiceStackXS.Commands
 				
 			var dialog = new AddReferenceDialog (fileName + count.ToString(),nativeTypesHandler);
 			dialog.Run ();
-
+			string code = dialog.CodeTemplate;
+			dialog.Destroy ();
 			if (!dialog.AddReferenceSucceeded) {
 				return;
 			}
 
-			string code = dialog.CodeTemplate;
-			dialog.Destroy ();
+
 			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString(), finalFileName);
 			using (var streamWriter = File.CreateText (fullPath)) {
 				streamWriter.Write (code);

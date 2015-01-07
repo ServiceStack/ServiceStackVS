@@ -8,11 +8,6 @@
     <widget-library name="../bin/Debug/ServiceStackXS.dll" internal="true" />
   </import>
   <icon-factory>
-    <icon-set id="servicestack-addref-item">
-      <source>
-        <property name="Image">resource:ServiceStackXS.add-ref-item.png</property>
-      </source>
-    </icon-set>
     <icon-set id="favicon.ico">
       <source>
         <property name="Image">resource:ServiceStackXS.favicon.ico</property>
