@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using System.Net;
 using ServiceStack;
 using ServiceStack.Text;
+using System.Threading.Tasks;
 
 namespace ServiceStackXS
 {
@@ -25,12 +26,12 @@ namespace ServiceStackXS
 			suggestedFileName = fileName;
 			typesHandler = nativeTypesHandler;
 			nameEntry.Text = suggestedFileName;
-			nameEntry.KeyReleaseEvent += (o, keyEventArgs) => { 
-				if (keyEventArgs.Event.Key == Gdk.Key.ISO_Enter) {
+			this.KeyReleaseEvent += (o, keyEventArgs) => { 
+				if (keyEventArgs.Event.Key == Gdk.Key.Return) {
 					Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference());
 				}
 				if (keyEventArgs.Event.Key == Gdk.Key.Escape) {
-					OnClose ();
+					this.OnClose ();
 				}
 			};
 		}
@@ -42,11 +43,7 @@ namespace ServiceStackXS
 
 		protected void AddReference (object sender, EventArgs e)
 		{
-			var dispatcherOp = Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference ());
-			dispatcherOp.Wait ();
-			if (AddReferenceSucceeded) {
-				this.OnClose ();
-			}
+			Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference ());
 		}
 
 		private bool GetCodeFromServer(string url)
@@ -63,10 +60,7 @@ namespace ServiceStackXS
 				{
 					return true;
 				}
-				else
-				{
-					throw new Exception("Failed to contact server. Unable to validate provided URL end point.");
-				}
+				errorMessage = "Failed to contact server. Unable to validate provided URL end point.";
 			}
 			catch (WebException webException)
 			{
@@ -83,17 +77,34 @@ namespace ServiceStackXS
 
 		private void CreateServiceReference()
 		{
-			//ErrorMessage.Text = "";
 			this.buttonOk.Sensitive = false;
-			bool success = false;
+			httpRequestProgressBar.Visible = true;
+			errorMessageView.Visible = false;
+			httpRequestProgressBar.Activate ();
+			httpRequestProgressBar.Pulse ();
 			string url = addressEntry.Text;
-			string errorMessage = "";
-			if (GetCodeFromServer (url)) {
-				AddReferenceSucceeded = true;
-			} else {
-				AddReferenceSucceeded = false;
-				//TODO Add error message
-			}
+			bool success = false;
+			Task.Run (() => { 
+				httpRequestProgressBar.Pulse ();
+				success = GetCodeFromServer (url);
+				httpRequestProgressBar.Pulse ();
+			}).ContinueWith (task => { 
+				if(success) { 
+					AddReferenceSucceeded = true;
+					this.OnClose();
+				} else {
+					errorMessageView.Buffer.Text = "";
+					var tag = new TextTag(null);
+					tag.Foreground = "#FF0000";
+					tag.Weight = Pango.Weight.Bold;
+					var iter = errorMessageView.Buffer.GetIterAtLine(0);
+					errorMessageView.Buffer.TagTable.Add(tag);
+					errorMessageView.Buffer.InsertWithTags(ref iter, errorMessage, tag);
+					this.buttonOk.Sensitive = true;
+					httpRequestProgressBar.Visible = false;
+					errorMessageView.Visible = true;
+				}
+			}, TaskScheduler.FromCurrentSynchronizationContext ());
 		}
 
 		private string CreateUrl(string url)

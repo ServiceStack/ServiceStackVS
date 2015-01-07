@@ -19,7 +19,7 @@
       </source>
     </icon-set>
   </icon-factory>
-  <widget class="Gtk.Dialog" id="ServiceStackXS.AddReferenceDialog" design-size="799 295">
+  <widget class="Gtk.Dialog" id="ServiceStackXS.AddReferenceDialog" design-size="799 369">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Add ServiceStack Reference</property>
     <property name="Icon">resource:ServiceStackXS.favicon.ico</property>
@@ -39,26 +39,27 @@
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.TextView" id="instructionsTextView">
+              <widget class="Gtk.VBox" id="vbox2">
                 <property name="MemberName" />
-                <property name="Sensitive">False</property>
-                <property name="Editable">False</property>
-                <property name="CursorVisible">False</property>
-                <property name="AcceptsTab">False</property>
-                <property name="Text" translatable="yes">To generate the DTO Service Model types for a specific ServiceStack instance, enter the base URI for the remote ServiceStack server and click OK.</property>
-                <property name="WrapMode">Word</property>
-                <property name="LeftMargin">15</property>
-                <property name="RightMargin">15</property>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.VBox" id="vbox4">
-                <property name="MemberName" />
-                <property name="Spacing">2</property>
+                <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.TextView" id="instructionsTextView">
+                    <property name="MemberName" />
+                    <property name="Sensitive">False</property>
+                    <property name="Editable">False</property>
+                    <property name="CursorVisible">False</property>
+                    <property name="AcceptsTab">False</property>
+                    <property name="Text" translatable="yes">
+To generate the DTO Service Model types for a specific ServiceStack instance, enter the base URI for the remote ServiceStack server and click OK.</property>
+                    <property name="WrapMode">Word</property>
+                    <property name="LeftMargin">15</property>
+                    <property name="RightMargin">15</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
                 <child>
                   <widget class="Gtk.Label" id="addressLabel">
                     <property name="MemberName" />
@@ -67,8 +68,8 @@
                     <property name="SingleLineMode">True</property>
                   </widget>
                   <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
                   </packing>
@@ -81,7 +82,7 @@
                     <property name="InvisibleChar">●</property>
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -89,16 +90,14 @@
                 </child>
               </widget>
               <packing>
-                <property name="Position">1</property>
+                <property name="Position">0</property>
                 <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.VBox" id="vbox5">
+              <widget class="Gtk.VBox" id="vbox4">
                 <property name="MemberName" />
-                <property name="Spacing">6</property>
+                <property name="Spacing">2</property>
                 <child>
                   <widget class="Gtk.Label" id="label2">
                     <property name="MemberName" />
@@ -128,10 +127,47 @@
                 </child>
               </widget>
               <packing>
-                <property name="Position">2</property>
+                <property name="Position">1</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.VBox" id="vbox5">
+                <property name="MemberName" />
+                <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.TextView" id="errorMessageView">
+                    <property name="MemberName" />
+                    <property name="Visible">False</property>
+                    <property name="Sensitive">False</property>
+                    <property name="CanFocus">True</property>
+                    <property name="Editable">False</property>
+                    <property name="Text" translatable="yes" />
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.ProgressBar" id="httpRequestProgressBar">
+                    <property name="MemberName" />
+                    <property name="Visible">False</property>
+                    <property name="Sensitive">False</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
               </packing>
             </child>
           </widget>
