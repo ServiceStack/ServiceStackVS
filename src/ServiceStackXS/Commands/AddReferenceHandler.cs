@@ -26,9 +26,16 @@ namespace ServiceStackXS.Commands
 				return;
 			}
 			INativeTypesHandler nativeTypesHandler = null;
-			//TODO Need to work out valid states for SupportedLanguages to better support Add ref usages.
+			//SupportedLanguage names currently returns an empty item and the 'languageName' the DotNetProject
+			//is initialized with. This might be an array to enable extension for other projects? DotNetProject 
+			//only returns an empty and languageName. See source link.
+			// https://github.com/mono/monodevelop/blob/dcafac668cbe8f63b4e42ea7f8f032f13aba8221/main/src/core/MonoDevelop.Core/MonoDevelop.Projects/DotNetProject.cs#L198
 			if (project.SupportedLanguages.Contains ("C#")) {
 				nativeTypesHandler = new CSharpNativeTypesHandler ();
+			}
+
+			if (project.SupportedLanguages.Contains ("F#")) {
+				nativeTypesHandler = new FSharpNativeTypesHandler ();
 			}
 
 			if (project.SupportedLanguages.Contains ("VBNet")) {
@@ -57,8 +64,7 @@ namespace ServiceStackXS.Commands
 			if (!dialog.AddReferenceSucceeded) {
 				return;
 			}
-
-
+				
 			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString(), finalFileName);
 			using (var streamWriter = File.CreateText (fullPath)) {
 				streamWriter.Write (code);
