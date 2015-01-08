@@ -9,6 +9,8 @@ using MonoDevelop.Projects;
 using ServiceStackVS.NativeTypes;
 using ServiceStack;
 using System.IO;
+using MonoDevelop.Core;
+using Gtk;
 
 namespace ServiceStackXS.Commands
 {
@@ -28,7 +30,7 @@ namespace ServiceStackXS.Commands
 			var nativeTypeHandler = NativeTypeHandlers
 				.All
 				.FirstOrDefault(
-					handler => handler.IsHandledFileType(selectedFile.Name.ToLowerInvariant()) != null);
+					handler => handler.IsHandledFileType(selectedFile.Name.ToLowerInvariant()));
 			if (nativeTypeHandler == null) {
 				return;
 			}
@@ -37,7 +39,15 @@ namespace ServiceStackXS.Commands
 			string existingCode = File.ReadAllLines (filePath).Join (Environment.NewLine);
 			string baseUrl;
 			if (!nativeTypeHandler.TryExtractBaseUrl (existingCode, out baseUrl)) {
-				//TODO Warning message box for user
+				var messageDialog = new MessageDialog (
+					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
+					DialogFlags.Modal, 
+					MessageType.Warning, 
+					ButtonsType.Close, 
+					"Unable to read ServiceStack reference property 'BaseUrl'. Please check it is correct and try again.");
+				messageDialog.Run ();
+				messageDialog.Destroy ();
+				return;
 			}
 
 			try {
@@ -48,12 +58,22 @@ namespace ServiceStackXS.Commands
 					streamWriter.Write(updatedCode);
 					streamWriter.Flush();
 				}
-
+				//Refresh document
+				var openDocument = IdeApp.Workbench.GetDocument(selectedFile.Name);
+				if(openDocument != null) {
+					openDocument.Close();
+					IdeApp.Workbench.OpenDocument(selectedFile.FilePath,selectedFile.Project,true); 
+				}
 			} catch (Exception ex) {
-				//TODO Error message box failed to update
+				var messageDialog = new MessageDialog (
+					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
+					DialogFlags.Modal, 
+					MessageType.Error, 
+					ButtonsType.Close, 
+					"Unable to update reference. Error: " + ex.Message);
+				messageDialog.Run ();
+				messageDialog.Destroy ();
 			}
         }
-
-
     }
 }
