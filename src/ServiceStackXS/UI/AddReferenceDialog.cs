@@ -28,7 +28,7 @@ namespace ServiceStackXS
 			nameEntry.Text = suggestedFileName;
 			this.KeyReleaseEvent += (o, keyEventArgs) => { 
 				if (keyEventArgs.Event.Key == Gdk.Key.Return) {
-					Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference());
+					CreateServiceReference();
 				}
 				if (keyEventArgs.Event.Key == Gdk.Key.Escape) {
 					this.OnClose ();
@@ -43,7 +43,7 @@ namespace ServiceStackXS
 
 		protected void AddReference (object sender, EventArgs e)
 		{
-			Dispatcher.CurrentDispatcher.InvokeAsync (() => CreateServiceReference ());
+			CreateServiceReference ();
 		}
 
 		private bool GetCodeFromServer(string url)
