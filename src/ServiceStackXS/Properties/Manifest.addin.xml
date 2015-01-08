@@ -7,6 +7,8 @@
     <Import assembly="NuGet.Core.dll" />
   </Runtime>
 
+  <ConditionType id="ServiceStackReferemceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
+
   <Extension path="/MonoDevelop/Core/StockIcons">
     <StockIcon stockid="servicestack-addref-item" file = "add-ref-item.png" />
   </Extension>
@@ -15,15 +17,15 @@
       <Command
         id = "ServiceStackXS.Commands.AddReference"
         _description = "Add a ServiceStack reference from a ServiceStack server URL."
-        _label = "_Add Service Reference..."
+        _label = "Add Service _Reference..."
         icon="servicestack-addref-item"
         defaultHandler = "ServiceStackXS.Commands.AddReferenceHandler" />
-      <Command
-        id = "ServiceStackXS.Commands.UpdateReference"
-        _description = "Update ServiceStack reference"
-        icon="servicestack-addref-item"
-        _label = "_Update Service Reference"
-        defaultHandler = "ServiceStackXS.Commands.UpdateReferenceHandler" />
+	   <Command
+	        id = "ServiceStackXS.Commands.UpdateReference"
+	        _description = "Update ServiceStack reference"
+	        icon="servicestack-addref-item"
+	        _label = "_Update Service Reference"
+	        defaultHandler = "ServiceStackXS.Commands.UpdateReferenceHandler" />      
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/ContextMenu/ProjectPad/Add">
@@ -32,6 +34,13 @@
 				id="ServiceStackXS.Commands.AddReference"
 				insertafter="MonoDevelop.WebReferences.WebReferenceCommands.Add" />
 
+    </Condition>
+  </Extension>
+
+  <Extension path="/MonoDevelop/Ide/ContextMenu/ProjectPad">
+  	<Condition id="ServiceStackReferemceDto">
+    	<CommandItem
+				id="ServiceStackXS.Commands.UpdateReference" insertafter="VersionControl" />
     </Condition>
   </Extension>
 </ExtensionModel>

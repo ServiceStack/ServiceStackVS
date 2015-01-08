@@ -431,8 +431,8 @@ namespace ServiceStackVS
             OutputWindowWriter.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
             string projectItemPath = projectItem.GetFullPath();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
-            bool selectedFSharpDto = selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
-            if (selectedFSharpDto)
+            bool isDtoSelected = selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
+            if (isDtoSelected)
             {
                 string filePath = projectItemPath;
                 var existingGeneratedCode = File.ReadAllLines(filePath).Join(Environment.NewLine);

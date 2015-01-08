@@ -62,10 +62,10 @@ namespace ServiceStackVS.NativeTypes
             return result;
         }
 
-        public static bool TryExtractBaseUrl(this INativeTypesHandler typesHandler, string codeFile, out string baseUrl)
+        public static bool TryExtractBaseUrl(this INativeTypesHandler typesHandler, string codeFromFile, out string baseUrl)
         {
             baseUrl = "";
-            var options = typesHandler.ParseComments(codeFile);
+            var options = typesHandler.ParseComments(codeFromFile);
             if (options.ContainsKey("BaseUrl"))
             {
                 baseUrl = options["BaseUrl"];

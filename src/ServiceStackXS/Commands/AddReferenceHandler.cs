@@ -31,15 +31,15 @@ namespace ServiceStackXS.Commands
 			//only returns an empty and languageName. See source link.
 			// https://github.com/mono/monodevelop/blob/dcafac668cbe8f63b4e42ea7f8f032f13aba8221/main/src/core/MonoDevelop.Core/MonoDevelop.Projects/DotNetProject.cs#L198
 			if (project.SupportedLanguages.Contains ("C#")) {
-				nativeTypesHandler = new CSharpNativeTypesHandler ();
+				nativeTypesHandler = NativeTypeHandlers.CSharpNativeTypesHandler;
 			}
 
 			if (project.SupportedLanguages.Contains ("F#")) {
-				nativeTypesHandler = new FSharpNativeTypesHandler ();
+				nativeTypesHandler = NativeTypeHandlers.FSharpNativeTypesHandler;
 			}
 
 			if (project.SupportedLanguages.Contains ("VBNet")) {
-				nativeTypesHandler = new VbNetNativeTypesHandler ();
+				nativeTypesHandler = NativeTypeHandlers.VbNetNativeTypesHandler;
 			}
 
 			if (nativeTypesHandler == null) {

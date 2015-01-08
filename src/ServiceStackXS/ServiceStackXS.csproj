@@ -39,6 +39,7 @@
     <Compile Include="UI\AddReferenceDialog.cs" />
     <Compile Include="gtk-gui\ServiceStackXS.AddReferenceDialog.cs" />
     <Compile Include="Properties\AddinInfo.cs" />
+    <Compile Include="Conditions\ServiceReferenceDtoCondition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -112,5 +113,8 @@
       <Project>{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}</Project>
       <Name>ServiceStackVS.NativeTypes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Conditions\" />
   </ItemGroup>
 </Project>
