@@ -4,6 +4,7 @@
 		<Description>An extension to work with the ServiceStack framework.</Description>
 		<Author>ServiceStack</Author>
 		<Url>https://github.com/ServiceStack/ServiceStackVS</Url>
+		<Icon32>logo_32x32.png</Icon32>
 	</Header>
 
   <Runtime>

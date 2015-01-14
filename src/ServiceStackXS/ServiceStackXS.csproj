@@ -104,4 +104,7 @@
   <ItemGroup>
     <Folder Include="Conditions\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="logo_32x32.png" />
+  </ItemGroup>
 </Project>
