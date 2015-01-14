@@ -1,4 +1,11 @@
-﻿<ExtensionModel>
+﻿<Addin id="ServiceStack.ServiceStackXS">
+	<Header>
+		<Name>ServiceStackXS</Name>
+		<Description>An extension to work with the ServiceStack framework.</Description>
+		<Author>ServiceStack</Author>
+		<Url>https://github.com/ServiceStack/ServiceStackVS</Url>
+	</Header>
+
   <Runtime>
 	<Import file="add-ref-item.png" />
     <Import assembly="ServiceStackXS.dll" />
@@ -43,4 +50,4 @@
 				id="ServiceStackXS.Commands.UpdateReference" insertafter="VersionControl" />
     </Condition>
   </Extension>
-</ExtensionModel>
+</Addin>
