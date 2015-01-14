@@ -15,7 +15,7 @@ namespace ServiceStackXS
 		public bool AddReferenceSucceeded { get; set; }
 		public string CodeTemplate { get; set; }
 		public string ServerUrl { get; private set; }
-		private string suggestedFileName;
+		public string ReferenceName { get; set; }
 		private readonly INativeTypesHandler typesHandler;
 
 		string errorMessage;
@@ -23,9 +23,8 @@ namespace ServiceStackXS
 		public AddReferenceDialog (string fileName, INativeTypesHandler nativeTypesHandler)
 		{
 			this.Build ();
-			suggestedFileName = fileName;
 			typesHandler = nativeTypesHandler;
-			nameEntry.Text = suggestedFileName;
+			nameEntry.Text = fileName;
 			this.KeyReleaseEvent += (o, keyEventArgs) => { 
 				if (keyEventArgs.Event.Key == Gdk.Key.Return) {
 					CreateServiceReference();
@@ -78,16 +77,13 @@ namespace ServiceStackXS
 		private void CreateServiceReference()
 		{
 			this.buttonOk.Sensitive = false;
-			httpRequestProgressBar.Visible = true;
+			this.buttonCancel.Sensitive = false;
 			errorMessageView.Visible = false;
-			httpRequestProgressBar.Activate ();
-			httpRequestProgressBar.Pulse ();
 			string url = addressEntry.Text;
+			ReferenceName = nameEntry.Text;
 			bool success = false;
 			Task.Run (() => { 
-				httpRequestProgressBar.Pulse ();
 				success = GetCodeFromServer (url);
-				httpRequestProgressBar.Pulse ();
 			}).ContinueWith (task => { 
 				if(success) { 
 					AddReferenceSucceeded = true;
@@ -101,7 +97,7 @@ namespace ServiceStackXS
 					errorMessageView.Buffer.TagTable.Add(tag);
 					errorMessageView.Buffer.InsertWithTags(ref iter, errorMessage, tag);
 					this.buttonOk.Sensitive = true;
-					httpRequestProgressBar.Visible = false;
+					this.buttonCancel.Sensitive = true;
 					errorMessageView.Visible = true;
 				}
 			}, TaskScheduler.FromCurrentSynchronizationContext ());

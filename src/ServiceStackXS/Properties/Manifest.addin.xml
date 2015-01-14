@@ -17,14 +17,14 @@
       <Command
         id = "ServiceStackXS.Commands.AddReference"
         _description = "Add a ServiceStack reference from a ServiceStack server URL."
-        _label = "Add Service _Reference..."
+        _label = "Add ServiceStack _Reference..."
         icon="servicestack-addref-item"
         defaultHandler = "ServiceStackXS.Commands.AddReferenceHandler" />
 	   <Command
 	        id = "ServiceStackXS.Commands.UpdateReference"
 	        _description = "Update ServiceStack reference"
 	        icon="servicestack-addref-item"
-	        _label = "_Update Service Reference"
+	        _label = "_Update ServiceStack Reference"
 	        defaultHandler = "ServiceStackXS.Commands.UpdateReferenceHandler" />      
   </Extension>
 

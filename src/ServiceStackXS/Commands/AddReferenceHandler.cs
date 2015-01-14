@@ -13,6 +13,7 @@ using ServiceStackVS.NativeTypes;
 using ICSharpCode;
 using NuGet;
 using ICSharpCode.PackageManagement;
+using System.Threading.Tasks;
 
 namespace ServiceStackXS.Commands
 {
@@ -47,44 +48,52 @@ namespace ServiceStackXS.Commands
 			}
 
 			string fileName = "ServiceReference";
-			string finalFileName = "";
+
 			int count = 0;
 			bool exists = true;
 			while (exists) {
 				count++;
-				var existingFile = project.Files.FirstOrDefault (x => x.FilePath.FileName == fileName + count.ToString() + nativeTypesHandler.CodeFileExtension);
+				var existingFile = project.Files.FirstOrDefault (x => x.FilePath.FileName == fileName + count.ToString () + nativeTypesHandler.CodeFileExtension);
 				exists = existingFile != null;
-				finalFileName = fileName + count.ToString () + nativeTypesHandler.CodeFileExtension;
 			}
 				
-			var dialog = new AddReferenceDialog (fileName + count.ToString(),nativeTypesHandler);
+			var dialog = new AddReferenceDialog (fileName + count.ToString (), nativeTypesHandler);
 			dialog.Run ();
+			string finalFileName = dialog.ReferenceName + nativeTypesHandler.CodeFileExtension;
 			string code = dialog.CodeTemplate;
 			dialog.Destroy ();
 			if (!dialog.AddReferenceSucceeded) {
 				return;
 			}
-				
-			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString(), finalFileName);
+			IdeApp.Workbench.StatusBar.ShowReady ();
+			IdeApp.Workbench.StatusBar.ShowMessage ("Adding ServiceStack Reference...");
+			IdeApp.Workbench.StatusBar.Pulse ();
+			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString (), finalFileName);
 			using (var streamWriter = File.CreateText (fullPath)) {
 				streamWriter.Write (code);
 				streamWriter.Flush ();
 			}
-			project.AddFile (fullPath,BuildAction.Compile);
+
+			project.AddFile (fullPath, BuildAction.Compile);
 
 			try {
-				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Client");
-				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Interfaces");
-				AddNuGetPackageReference(dotNetProjectProxy, "ServiceStack.Text");
+				Task.Run (() => { 
+					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Client");
+					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Interfaces");
+					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Text");
+				}).ContinueWith (task => { 
+					IdeApp.Workbench.StatusBar.Pulse ();
+					IdeApp.Workbench.StatusBar.ShowReady ();
+				},TaskScheduler.FromCurrentSynchronizationContext ());
 			} catch (Exception ex) {
 				//TODO Error message for user
 				var messageDialog = new MessageDialog (
-					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
-					DialogFlags.Modal, 
-					MessageType.Warning, 
-					ButtonsType.Close, 
-					"An error occurred trying to add required NuGet packages. Error : " + ex.Message + 
-					"\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
+					                     (Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
+					                     DialogFlags.Modal, 
+					                     MessageType.Warning, 
+					                     ButtonsType.Close, 
+					                     "An error occurred trying to add required NuGet packages. Error : " + ex.Message +
+					                     "\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
 				messageDialog.Run ();
 				messageDialog.Destroy ();
 			}

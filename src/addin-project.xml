@@ -1,0 +1,7 @@
+<AddinProject appVersion="0.1">
+	<Project>
+		<AddinFile>ServiceStackXS/bin/Release/ServiceStackXS.dll</AddinFile>
+		<BuildFile>ServiceStackXS.sln</BuildFile>
+		<BuildConfiguration>Release</BuildConfiguration>
+	</Project>
+</AddinProject>

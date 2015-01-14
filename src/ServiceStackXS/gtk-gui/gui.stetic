@@ -5,7 +5,7 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/ServiceStackXS.dll" internal="true" />
+    <widget-library name="../bin/Release/ServiceStackXS.dll" internal="true" />
   </import>
   <icon-factory>
     <icon-set id="favicon.ico">
@@ -14,7 +14,7 @@
       </source>
     </icon-set>
   </icon-factory>
-  <widget class="Gtk.Dialog" id="ServiceStackXS.AddReferenceDialog" design-size="799 369">
+  <widget class="Gtk.Dialog" id="ServiceStackXS.AddReferenceDialog" design-size="809 369">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Add ServiceStack Reference</property>
     <property name="Icon">resource:ServiceStackXS.favicon.ico</property>
@@ -32,7 +32,8 @@
         <child>
           <widget class="Gtk.VBox" id="vbox3">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
+            <property name="Spacing">10</property>
+            <property name="BorderWidth">20</property>
             <child>
               <widget class="Gtk.VBox" id="vbox2">
                 <property name="MemberName" />
@@ -47,8 +48,6 @@
                     <property name="Text" translatable="yes">
 To generate the DTO Service Model types for a specific ServiceStack instance, enter the base URI for the remote ServiceStack server and click OK.</property>
                     <property name="WrapMode">Word</property>
-                    <property name="LeftMargin">15</property>
-                    <property name="RightMargin">15</property>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
@@ -144,19 +143,6 @@ To generate the DTO Service Model types for a specific ServiceStack instance, en
                   <packing>
                     <property name="Position">0</property>
                     <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.ProgressBar" id="httpRequestProgressBar">
-                    <property name="MemberName" />
-                    <property name="Visible">False</property>
-                    <property name="Sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
                   </packing>
                 </child>
               </widget>

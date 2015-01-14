@@ -24,8 +24,6 @@ namespace ServiceStackXS
 		
 		private global::Gtk.TextView errorMessageView;
 		
-		private global::Gtk.ProgressBar httpRequestProgressBar;
-		
 		private global::Gtk.Button buttonCancel;
 		
 		private global::Gtk.Button buttonOk;
@@ -49,23 +47,22 @@ namespace ServiceStackXS
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
 			this.vbox3 = new global::Gtk.VBox ();
 			this.vbox3.Name = "vbox3";
-			this.vbox3.Spacing = 6;
+			this.vbox3.Spacing = 10;
+			this.vbox3.BorderWidth = ((uint)(20));
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.instructionsTextView = new global::Gtk.TextView ();
-			this.instructionsTextView.Buffer.Text = "\r\nTo generate the DTO Service Model types for a specific ServiceStack instance, e" +
-			"nter the base URI for the remote ServiceStack server and click OK.";
+			this.instructionsTextView.Buffer.Text = "\nTo generate the DTO Service Model types for a specific ServiceStack instance, en" +
+			"ter the base URI for the remote ServiceStack server and click OK.";
 			this.instructionsTextView.Sensitive = false;
 			this.instructionsTextView.Name = "instructionsTextView";
 			this.instructionsTextView.Editable = false;
 			this.instructionsTextView.CursorVisible = false;
 			this.instructionsTextView.AcceptsTab = false;
 			this.instructionsTextView.WrapMode = ((global::Gtk.WrapMode)(2));
-			this.instructionsTextView.LeftMargin = 15;
-			this.instructionsTextView.RightMargin = 15;
 			this.vbox2.Add (this.instructionsTextView);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.instructionsTextView]));
 			w2.Position = 0;
@@ -137,27 +134,18 @@ namespace ServiceStackXS
 			this.vbox5.Add (this.errorMessageView);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.errorMessageView]));
 			w9.Position = 0;
-			// Container child vbox5.Gtk.Box+BoxChild
-			this.httpRequestProgressBar = new global::Gtk.ProgressBar ();
-			this.httpRequestProgressBar.Sensitive = false;
-			this.httpRequestProgressBar.Name = "httpRequestProgressBar";
-			this.vbox5.Add (this.httpRequestProgressBar);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.httpRequestProgressBar]));
-			w10.Position = 1;
-			w10.Expand = false;
-			w10.Fill = false;
 			this.vbox3.Add (this.vbox5);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.vbox5]));
-			w11.Position = 2;
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.vbox5]));
+			w10.Position = 2;
 			w1.Add (this.vbox3);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox3]));
-			w12.Position = 0;
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox3]));
+			w11.Position = 0;
 			// Internal child ServiceStackXS.AddReferenceDialog.ActionArea
-			global::Gtk.HButtonBox w13 = this.ActionArea;
-			w13.Name = "dialog1_ActionArea";
-			w13.Spacing = 10;
-			w13.BorderWidth = ((uint)(5));
-			w13.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w12 = this.ActionArea;
+			w12.Name = "dialog1_ActionArea";
+			w12.Spacing = 10;
+			w12.BorderWidth = ((uint)(5));
+			w12.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -167,25 +155,24 @@ namespace ServiceStackXS
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w13 [this.buttonCancel]));
-			w14.Expand = false;
-			w14.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonCancel]));
+			w13.Expand = false;
+			w13.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanFocus = true;
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = global::Mono.Unix.Catalog.GetString ("OK");
-			w13.Add (this.buttonOk);
-			global::Gtk.ButtonBox.ButtonBoxChild w15 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w13 [this.buttonOk]));
-			w15.Position = 1;
-			w15.Expand = false;
-			w15.Fill = false;
+			w12.Add (this.buttonOk);
+			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonOk]));
+			w14.Position = 1;
+			w14.Expand = false;
+			w14.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.errorMessageView.Hide ();
-			this.httpRequestProgressBar.Hide ();
 			this.Show ();
 			this.buttonCancel.Clicked += new global::System.EventHandler (this.CancelAdd);
 			this.buttonOk.Clicked += new global::System.EventHandler (this.AddReference);
