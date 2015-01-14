@@ -99,7 +99,7 @@ namespace ServiceStackXS.Commands
 			}
 		}
 
-		void AddNuGetPackageReference(DotNetProjectProxy project,string packageId)
+		void AddNuGetPackageReference(IDotNetProject project,string packageId)
 		{
 			var packageRepoFactory = new SharpDevelopPackageRepositoryFactory();
 			var packageRepo = packageRepoFactory.CreateRepository ("http://www.nuget.org/api/v2/");
