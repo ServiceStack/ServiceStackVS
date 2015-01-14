@@ -1,5 +1,5 @@
-<AddinProject appVersion="5.4">
-	<Project>
+<AddinProject appVersion="5.0">
+	<Project platforms="Mac Linux Win32">
 		<AddinFile>ServiceStackXS/bin/Release/ServiceStackXS.dll</AddinFile>
 		<BuildFile>ServiceStackXS.sln</BuildFile>
 		<BuildConfiguration>Release</BuildConfiguration>
