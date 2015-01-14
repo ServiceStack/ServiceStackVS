@@ -81,6 +81,9 @@
     <Reference Include="Mono.Addins">
       <HintPath>..\lib\Mono.Addins.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStackVS.NativeTypes">
+      <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
@@ -104,12 +107,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MonoDevelop.Addins.0.1.4\build\net40\MonoDevelop.Addins.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoDevelop.Addins.0.1.4\build\net40\MonoDevelop.Addins.targets'))" />
   </Target>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
-      <Project>{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}</Project>
-      <Name>ServiceStackVS.NativeTypes</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Conditions\" />
   </ItemGroup>
