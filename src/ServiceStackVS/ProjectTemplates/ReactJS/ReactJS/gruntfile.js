@@ -3,9 +3,7 @@
 /// <reference path="~/node_modules/gulp/index.js"/>
 /// <reference path="~/node_modules/requirejs/require.js"/>
 
-'use strict';
-/*global require,module*/
-
+"use strict";
 
 module.exports = function (grunt) {
     var path = require('path');
@@ -130,11 +128,11 @@ module.exports = function (grunt) {
                     .pipe(gulp.dest(webRoot + 'img/'));
             },
             'wwwroot-bundle': function () {
-                var assets = useref.assets();
+                var assets = useref.assets({ searchPath: './' });
                 var checkIfJsx = function (file) {
                     return file.relative.indexOf('.jsx.js') !== -1;
                 }
-                return gulp.src('default.cshtml')
+                return gulp.src('./**/*.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.jsx.js', react()))
                     .pipe(gulpif(checkIfJsx, uglify()))

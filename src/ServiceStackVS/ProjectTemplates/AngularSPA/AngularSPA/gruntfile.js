@@ -3,7 +3,7 @@
 /// <reference path="~/node_modules/gulp/index.js"/>
 /// <reference path="~/node_modules/requirejs/require.js"/>
 
-'use strict';
+"use strict";
 
 module.exports = function (grunt) {
     var path = require('path');
@@ -112,7 +112,8 @@ module.exports = function (grunt) {
                     webRoot + '**/*.*',
                     '!./wwwroot/bin/**/*.*', //Don't delete dlls
                     '!./wwwroot/**/*.asax', //Don't delete asax
-                    '!./wwwroot/**/*.config' //Don't delete config
+                    '!./wwwroot/**/*.config', //Don't delete config
+                    '!./wwwroot/lib/**/*' //Don't delete existing 3rd party client libs
                 ], { read: false })
                         .pipe(rimraf());
             },
@@ -131,9 +132,9 @@ module.exports = function (grunt) {
                     .pipe(gulp.dest(webRoot + 'img/'));
             },
             'wwwroot-bundle': function () {
-                var assets = useref.assets();
+                var assets = useref.assets({ searchPath: './' });
 
-                return gulp.src('default.cshtml')
+                return gulp.src('./**/*.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.js', uglify()))
                     .pipe(gulpif('*.css', minifyCss()))
