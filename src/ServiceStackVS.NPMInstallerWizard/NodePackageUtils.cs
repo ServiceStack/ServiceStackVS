@@ -393,8 +393,12 @@ namespace ServiceStackVS.Wizards
                 bool containsArgs = firstSpaceIndex > 0;
                 string commandFile = command.Substring(0, containsArgs ? firstSpaceIndex : command.Length) + currentExtension;
                 var processEnvironmentPath = System.Environment.GetEnvironmentVariable("PATH");
+                
                 var paths = processEnvironmentPath.Split(';');
-                execPath = paths.Select(x => Path.Combine(x, commandFile)).FirstOrDefault(File.Exists);
+                execPath = paths.Where(x => 
+                    x.IndexOfAny(Path.GetInvalidPathChars()) == -1)
+                    .Select(x => Path.Combine(x, commandFile))
+                    .FirstOrDefault(File.Exists);
                 if (execPath != null)
                     break;
             }
