@@ -15,6 +15,7 @@
     <ProjectTemplate Path="ProjectTemplates\ASPNETRazor\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET with Razor" Description="A project to kickstart your ServiceStack ASPNET with Razor application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\EmptyAspNetHost\Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET Empty" Description="ServiceStack ASP.NET Empty" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\EmptySelfHost\Definitions\CSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\RazorSelfHost\Definitions\CSharp.vstemplate" Name="ServiceStack Self Host with Razor" Description="ServiceStack Self Host with Razor" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\FSharpEmptyAspNet\Definitions\FSharp.vstemplate" Name="ServiceStack ASP.NET Empty" Description="ServiceStack ASP.NET Empty" ProjectType="FSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\FSharpAngular\Definitions\FSharp.vstemplate" Name="ServiceStack ASP.NET with AngularJS" Description="ServiceStack ASP.NET with AngularJS" ProjectType="FSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\FSharpBootstrap\Definitions\FSharp.vstemplate" Name="ServiceStack ASP.NET with Bootstrap" Description="ServiceStack ASP.NET with Bootstrap" ProjectType="FSharp" ProjectSubType="" />

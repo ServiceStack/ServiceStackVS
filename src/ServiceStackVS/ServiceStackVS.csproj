@@ -142,6 +142,15 @@
   <ItemGroup>
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
     <Compile Include="Guids.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\AppHost.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Program.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
     <Compile Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
     <Compile Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -281,6 +290,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
+    <Content Include="ProjectTemplates\RazorSelfHost\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\logo.png" />
+    <Content Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\RazorSelfHost.csproj" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\_preprocess.xml" />
+    <Content Include="ProjectTemplates\RazorSelfHost\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\RazorSelfHost\ServiceInterface\ServiceStack.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\RazorSelfHost\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\RazorSelfHost\ServiceModel\ServiceStack.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\RazorSelfHost\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\RazorSelfHost\Test\ServiceStack.Test.csproj" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\RazorSelfHost\_preprocess.xml" />
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -681,6 +705,14 @@
     <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Web.Release.config" />
     <None Include="ProjectTemplates\Bootstrap\Test\packages.config" />
     <None Include="ProjectTemplates\MVC5\Test\packages.config" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\App.config" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\default.cshtml" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\packages.config" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Views\Hello.cshtml" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Views\Shared\_Layout.cshtml" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\RazorSelfHost\Test\packages.config" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\bower.json" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\js\app.jsx" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\js\components\hello.jsx" />
@@ -996,6 +1028,7 @@
     <Folder Include="ProjectTemplates\MVC5\MVC5\App_Data\" />
     <Folder Include="ProjectTemplates\MVC5\MVC5\Models\" />
     <Folder Include="ProjectTemplates\MVC5\ServiceModel\Types\" />
+    <Folder Include="ProjectTemplates\RazorSelfHost\ServiceModel\Types\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

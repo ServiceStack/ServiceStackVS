@@ -1,0 +1,16 @@
+﻿@using $safeprojectname$.ServiceModel
+@using ServiceStack
+@inherits ServiceStack.Razor.ViewPage
+
+@{
+    ViewBag.Title = "ServiceStack Self Host with Razor";
+}
+
+<h2>Hello World Service</h2>
+
+<form action="@(new Hello().ToPostUrl())">
+    <div>
+        <input class="form-control input-lg" name="Name" type="text" placeholder="Type your name">
+        <button>Submit</button>
+    </div>
+</form>
