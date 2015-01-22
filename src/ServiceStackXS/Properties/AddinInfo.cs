@@ -4,7 +4,7 @@ using Mono.Addins.Description;
 
 [assembly: Addin("ServiceStackXS",
     Namespace = "ServiceStackXS",
-	Version = "0.1",
+	Version = "0.2",
 	Category = "IDE extensions")]
 
 [assembly: AddinName("ServiceStackXS")]

@@ -81,7 +81,7 @@
     <Reference Include="ServiceStackVS.NativeTypes">
       <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
     </Reference>
-    <Reference Include="MD.PackageManagement">
+    <Reference Include="MonoDevelop.PackageManagement">
       <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -95,6 +95,42 @@
       <DeployService-Deploy>True</DeployService-Deploy>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ProjectTemplates\AspNetRazor\AspNetRazor.xpt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="servicestack-project-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\AppHost.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Global.asax.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Global.asax">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\UnitTests.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\MyServices.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Hello.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Views\default.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Views\Hello.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\Files\Views\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -103,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Conditions\" />
+    <Folder Include="ProjectTemplates\" />
+    <Folder Include="ProjectTemplates\AspNetRazor\" />
+    <Folder Include="ProjectTemplates\Files\" />
+    <Folder Include="ProjectTemplates\Files\Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logo_32x32.png" />

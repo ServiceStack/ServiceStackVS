@@ -9,16 +9,33 @@
 
   <Runtime>
 	<Import file="add-ref-item.png" />
+	<Import file="servicestack-project-icon.png" />
+
     <Import assembly="ServiceStackXS.dll" />
     <Import assembly="ServiceStackVS.NativeTypes.dll" />
     <Import assembly="ServiceStack.Text.dll" />
     <Import assembly="NuGet.Core.dll" />
+
+    <Import file="ProjectTemplates/AspNetRazor/AspNetRazor.xpt.xml" />
+
+    <Import file="ProjectTemplates/Files/AppHost.cs" />
+    <Import file="ProjectTemplates/Files/Global.asax" />
+    <Import file="ProjectTemplates/Files/Global.asax.cs" />
+    <Import file="ProjectTemplates/Files/Hello.cs" />
+    <Import file="ProjectTemplates/Files/MyServices.cs" />
+    <Import file="ProjectTemplates/Files/UnitTests.cs" />
+    <Import file="ProjectTemplates/Files/Web.config" />
+
+    <Import file="ProjectTemplates/Files/Views/default.cshtml" />
+    <Import file="ProjectTemplates/Files/Views/Hello.cshtml" />
+    <Import file="ProjectTemplates/Files/Views/_Layout.cshtml" />
   </Runtime>
 
   <ConditionType id="ServiceStackReferemceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
 
   <Extension path="/MonoDevelop/Core/StockIcons">
     <StockIcon stockid="servicestack-addref-item" file = "add-ref-item.png" />
+    <StockIcon stockid="servicestack-project-icon" file = "servicestack-project-icon.png" />
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/Commands">
@@ -51,4 +68,9 @@
 				id="ServiceStackXS.Commands.UpdateReference" insertafter="VersionControl" />
     </Condition>
   </Extension>
+
+  <Extension path = "/MonoDevelop/Ide/ProjectTemplates">
+		<ProjectTemplate id   = "ServiceStackAspNetRazor"
+		                 file = "ProjectTemplates/AspNetRazor/AspNetRazor.xpt.xml" />
+	</Extension>
 </Addin>
