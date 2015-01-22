@@ -81,7 +81,7 @@
     <Reference Include="ServiceStackVS.NativeTypes">
       <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
     </Reference>
-    <Reference Include="MonoDevelop.PackageManagement">
+    <Reference Include="MD.PackageManagement">
       <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
     </Reference>
   </ItemGroup>
