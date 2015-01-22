@@ -237,7 +237,7 @@ ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from th
 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows. The AngularJS side is largely influenced by various incarnations of the angular-seed project whilst still be contained within a VS project.
 
-## Project Templates 
+## ServiceStackVS Project Templates 
 
 The C# Project templates included in ServiceStackVS extension:
 
@@ -249,6 +249,7 @@ The C# Project templates included in ServiceStackVS extension:
 - ServiceStack ASP.NET with Bootstrap
 - ServiceStack ASp.NET with Razor
 - ServiceStack Self Host Empty
+- ServiceStack Self Host with Razor
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
 
@@ -321,6 +322,13 @@ ServiceStackVS offers the generation and updating of these clients through the s
 > VB.NET client talking with C# Server example
 
 ![CSharp server with VB.Net client example](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/servicestack%20reference/csharp-server-vb-client.gif)
+
+## ServiceStackXS - Xamarin Studio Addin
+ServiceStack's **Add ServiceStack Reference** is now available for Xamarin Studio via the official ServiceStack addin, ServiceStackXS! Just like ServiceStackVS, ServiceStackXS includes Add/Update ServiceStack Reference for use with ServiceStack servers enabling a better workflow for external clients. ServiceStackXS is initially adding support for the following languages.
+
+* [C# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference)
+* [F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference)
+* [VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
 
 ### Feedback
 
