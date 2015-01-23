@@ -141,6 +141,20 @@ module.exports = function (grunt) {
                     .pipe(useref())
                     .pipe(gulp.dest(webRoot));
             },
+            'wwwroot-bundle-html': function () {
+                var assets = useref.assets({ searchPath: './' });
+                var checkIfJsx = function (file) {
+                    return file.relative.indexOf('.jsx.js') !== -1;
+                }
+                return gulp.src('./default.html')
+                    .pipe(assets)
+                    .pipe(gulpif('*.jsx.js', react()))
+                    .pipe(gulpif(checkIfJsx, uglify()))
+                    .pipe(gulpif('*.css', minifyCss()))
+                    .pipe(assets.restore())
+                    .pipe(useref())
+                    .pipe(gulp.dest(webRoot));
+            },
             'wwwroot-copy-deploy-files': function () {
                 return gulp.src('./wwwroot_build/deploy/*.*')
                     .pipe(newer(webRoot))
@@ -170,7 +184,8 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-partials',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle'
+        'gulp:wwwroot-bundle',
+        'gulp:wwwroot-bundle-html'
     ]);
 
     grunt.registerTask('build', ['02-package-server', '03-package-client']);
