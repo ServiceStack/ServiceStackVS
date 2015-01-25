@@ -100,6 +100,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="partials\partial1.html" />
     <Content Include="partials\partial2.html" />
+    <Content Include="partials\404.html" />
     <Content Include="tests\karma.conf.js" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>

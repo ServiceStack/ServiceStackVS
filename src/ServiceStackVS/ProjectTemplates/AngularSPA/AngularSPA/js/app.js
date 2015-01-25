@@ -8,10 +8,11 @@ angular.module('helloApp', [
   'navigation.controllers'
 ]).
 config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    $routeProvider.when('/', { templateUrl: 'partials/hello/hello.html', controller: 'helloCtrl' });
-    $routeProvider.when('/view1', { templateUrl: 'partials/partial1.html' });
-    $routeProvider.when('/view2', { templateUrl: 'partials/partial2.html' });
-    $routeProvider.otherwise({ redirectTo: '/' });
+    $routeProvider.when('/', { templateUrl: '/partials/hello/hello.html', controller: 'helloCtrl' });
+    $routeProvider.when('/view1', { templateUrl: '/partials/partial1.html' });
+    $routeProvider.when('/view2', { templateUrl: '/partials/partial2.html' });
+    $routeProvider.when('/404', { templateUrl: '/partials/404.html' });
+    $routeProvider.otherwise({ redirectTo: '/404' });
 
     $locationProvider.html5Mode(true);
 }]);

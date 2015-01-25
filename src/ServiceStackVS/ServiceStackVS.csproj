@@ -290,6 +290,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
+    <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\404.html" />
     <Content Include="ProjectTemplates\RazorSelfHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\RazorSelfHost\logo.png" />
     <Content Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\MyTemplate.vstemplate" />

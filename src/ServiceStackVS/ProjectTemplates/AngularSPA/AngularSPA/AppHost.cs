@@ -39,9 +39,6 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //this.Plugins.Add(new CorsFeature());
 
-            //Return default.cshtml home page for all 404 requests so we can handle routing on the client
-            base.CustomErrorHttpHandlers[HttpStatusCode.NotFound] = new RazorHandler("/default.cshtml");
-
             SetConfig( new HostConfig
             {
                 DebugMode = AppSettings.Get("DebugMode",false),
