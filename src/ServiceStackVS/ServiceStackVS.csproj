@@ -324,10 +324,7 @@
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Debug.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Web.Release.config" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\00-install-dependencies.bat" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\01-run-tests.bat" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\02-package-server.bat" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\03-package-client.bat" />
-    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\04-deploy-app.bat" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\package-and-deploy.bat" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\wwwroot_build\publish\config.json" />
     <None Include="ProjectTemplates\AngularSPA\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\AngularSPA\ServiceModel\packages.config" />
@@ -723,10 +720,7 @@
     <None Include="ProjectTemplates\ReactJS\ReactJS\Web.Debug.config" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\Web.Release.config" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\00-install-dependencies.bat" />
-    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\01-run-tests.bat" />
-    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\02-package-server.bat" />
-    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\03-package-client.bat" />
-    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\04-deploy-app.bat" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\package-and-deploy.bat" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\wwwroot_build\publish\config.json" />
     <None Include="ProjectTemplates\ReactJS\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\ReactJS\ServiceModel\packages.config" />
