@@ -3,9 +3,11 @@
 /// <reference path="~/node_modules/gulp/index.js"/>
 /// <reference path="~/node_modules/requirejs/require.js"/>
 
-"use strict";
+/* global module, require */
 
 module.exports = function (grunt) {
+    "use strict";
+
     var path = require('path');
     // include gulp
     var gulp = require('gulp');
@@ -124,14 +126,14 @@ module.exports = function (grunt) {
                     .pipe(gulp.dest(webRoot + 'lib/fonts/'));
             },
             'wwwroot-copy-images': function () {
-                return gulp.src('./img/*.*')
+                return gulp.src('./img/**/*')
                     .pipe(gulp.dest(webRoot + 'img/'));
             },
             'wwwroot-bundle': function () {
                 var assets = useref.assets({ searchPath: './' });
                 var checkIfJsx = function (file) {
                     return file.relative.indexOf('.jsx.js') !== -1;
-                }
+                };
                 return gulp.src('./**/*.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.jsx.js', react()))
@@ -145,7 +147,7 @@ module.exports = function (grunt) {
                 var assets = useref.assets({ searchPath: './' });
                 var checkIfJsx = function (file) {
                     return file.relative.indexOf('.jsx.js') !== -1;
-                }
+                };
                 return gulp.src('./default.html')
                     .pipe(assets)
                     .pipe(gulpif('*.jsx.js', react()))

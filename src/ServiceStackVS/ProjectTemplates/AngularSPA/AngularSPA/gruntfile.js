@@ -3,9 +3,11 @@
 /// <reference path="~/node_modules/gulp/index.js"/>
 /// <reference path="~/node_modules/requirejs/require.js"/>
 
-"use strict";
+/* global module, require */
 
 module.exports = function (grunt) {
+    "use strict";
+
     var path = require('path');
     // include gulp
     var gulp = require('gulp');
@@ -115,7 +117,7 @@ module.exports = function (grunt) {
                     '!./wwwroot/**/*.config', //Don't delete config
                     '!./wwwroot/lib/**/*' //Don't delete existing 3rd party client libs
                 ], { read: false })
-                        .pipe(rimraf());
+                    .pipe(rimraf());
             },
             'wwwroot-copy-partials': function () {
                 var partialsDest = webRoot + 'partials';
@@ -128,7 +130,7 @@ module.exports = function (grunt) {
                     .pipe(gulp.dest(webRoot + 'lib/fonts/'));
             },
             'wwwroot-copy-images': function () {
-                return gulp.src('./img/*.*')
+                return gulp.src('./img/**/*')
                     .pipe(gulp.dest(webRoot + 'img/'));
             },
             'wwwroot-bundle': function () {
