@@ -98,6 +98,11 @@ module.exports = function (grunt) {
                     .pipe(newer(binDest))
                     .pipe(dest);
             },
+            'wwwroot-copy-appdata': function () {
+                return gulp.src('./App_Data/**/*')
+                    .pipe(newer(webRoot + 'App_Data/'))
+                    .pipe(gulp.dest(webRoot + 'App_Data/'));
+            },
             'wwwroot-copy-webconfig': function () {
                 return gulp.src('./web.config')
                     .pipe(newer(webRoot))
@@ -113,6 +118,7 @@ module.exports = function (grunt) {
                 return gulp.src([
                     webRoot + '**/*.*',
                     '!./wwwroot/bin/**/*.*', //Don't delete dlls
+                    '!./wwwroot/App_Data/**/*.*', //Don't delete App_Data
                     '!./wwwroot/**/*.asax', //Don't delete asax
                     '!./wwwroot/**/*.config', //Don't delete config
                     '!./wwwroot/lib/**/*' //Don't delete existing 3rd party client libs
@@ -175,6 +181,7 @@ module.exports = function (grunt) {
         'msbuild:release',
         'gulp:wwwroot-clean-dlls',
         'gulp:wwwroot-copy-bin',
+        'gulp:wwwroot-copy-appdata',
         'gulp:wwwroot-copy-webconfig',
         'gulp:wwwroot-copy-asax',
         'gulp:wwwroot-copy-deploy-files'
