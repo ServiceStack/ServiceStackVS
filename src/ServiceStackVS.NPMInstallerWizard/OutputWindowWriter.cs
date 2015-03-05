@@ -48,6 +48,18 @@ namespace ServiceStackVS.NPMInstallerWizard
             Write(format + Environment.NewLine, parameters);
         }
 
+        public void Write(string line)
+        {
+            if (outputWindowPane == null || line == null) return;
+
+            outputWindowPane.OutputString(line);
+        }
+
+        public void WriteLine(string line)
+        {
+            Write(line + Environment.NewLine);
+        }
+
         public void Clear()
         {
             outputWindowPane.Clear();
