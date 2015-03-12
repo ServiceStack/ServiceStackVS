@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     // include gulp
     var gulp = require('gulp');
     // include plug-ins
-    var rimraf = require('gulp-rimraf');
+    var del = require('del');
     var uglify = require('gulp-uglify');
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
@@ -81,9 +81,9 @@ module.exports = function (grunt) {
             }
         },
         gulp: {
-            'wwwroot-clean-dlls': function () {
-                return gulp.src(webRoot + '/bin/**/*.*', { read: false })
-                    .pipe(rimraf());
+            'wwwroot-clean-dlls': function (done) {
+                var binPath = webRoot + '/bin/';
+                del(binPath, done);
             },
             'wwwroot-copy-bin': function () {
                 var binDest = webRoot + 'bin/';
@@ -110,16 +110,15 @@ module.exports = function (grunt) {
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
             },
-            'wwwroot-clean-client-assets': function () {
-                return gulp.src([
+            'wwwroot-clean-client-assets': function (done) {
+                del([
                     webRoot + '**/*.*',
-                    '!./wwwroot/bin/**/*.*', //Don't delete dlls
-                    '!./wwwroot/App_Data/**/*.*', //Don't delete App_Data
-                    '!./wwwroot/**/*.asax', //Don't delete asax
-                    '!./wwwroot/**/*.config', //Don't delete config
-                    '!./wwwroot/appsettings.txt' //Don't delete deploy settings
-                ], { read: false })
-                    .pipe(rimraf());
+                    '!wwwroot/bin/**/*.*', //Don't delete dlls
+                    '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
+                    '!wwwroot/**/*.asax', //Don't delete asax
+                    '!wwwroot/**/*.config', //Don't delete config
+                    '!wwwroot/appsettings.txt' //Don't delete deploy settings
+                ], done);
             },
             'wwwroot-copy-partials': function () {
                 var partialsDest = webRoot + 'partials';
