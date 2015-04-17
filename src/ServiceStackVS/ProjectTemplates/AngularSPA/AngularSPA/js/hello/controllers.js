@@ -1,6 +1,10 @@
-﻿var app = angular.module('helloApp.controllers', []);
+﻿/* global angular */
+(function () {
+    "use strict";
 
-app.controller('helloCtrl', ['$scope', '$http',
+    var app = angular.module('helloApp.controllers', []);
+
+    app.controller('helloCtrl', ['$scope', '$http',
         function ($scope, $http) {
             $scope.$watch('name', function () {
                 if ($scope.name) {
@@ -11,8 +15,10 @@ app.controller('helloCtrl', ['$scope', '$http',
                 }
             });
 
-            $scope.testFunction = function() {
+            $scope.testFunction = function () {
                 return true;
-            }
+            };
         }
-]);
+    ]);
+})();
+
