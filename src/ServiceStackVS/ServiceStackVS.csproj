@@ -570,7 +570,9 @@
     <Resource Include="ProjectTemplates\FSharpSelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Content\themes.zip" />
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\App.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\install.bat" />
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\packages.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\uninstall.bat" />
     <None Include="ProjectTemplates\EmptyWindowService\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\EmptyWindowService\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\EmptyWindowService\Test\packages.config" />
