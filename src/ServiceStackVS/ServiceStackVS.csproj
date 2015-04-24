@@ -142,6 +142,23 @@
   <ItemGroup>
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
     <Compile Include="Guids.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\AppHost.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Program.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.Designer.cs">
+      <DependentUpon>WinService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.designer.cs">
+      <DependentUpon>WinServiceInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\EmptyWindowService\Test\UnitTest1.cs" />
     <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\AppHost.cs" />
     <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Program.cs" />
     <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Properties\AssemblyInfo.cs" />
@@ -277,6 +294,9 @@
     <Compile Include="PkgCmdID.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.resx">
+      <DependentUpon>WinServiceInstaller.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -291,6 +311,24 @@
   <ItemGroup>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\404.html" />
+    <Content Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\MyTemplate.vstemplate" />
+    <Resource Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Content Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\ServiceStack.CSharp.EmptyWindowsService.csproj">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="ProjectTemplates\EmptyWindowService\ServiceInterface\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\EmptyWindowService\logo.png" />
+    <Content Include="ProjectTemplates\EmptyWindowService\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\EmptyWindowService\ServiceInterface\ServiceStack.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\EmptyWindowService\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\EmptyWindowService\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\EmptyWindowService\ServiceModel\ServiceStack.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\EmptyWindowService\Test\_preprocess.xml" />
+    <Content Include="ProjectTemplates\EmptyWindowService\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\EmptyWindowService\Test\ServiceStack.Test.csproj" />
+    <Resource Include="ProjectTemplates\EmptyWindowService\_preprocess.xml" />
     <Content Include="ProjectTemplates\RazorSelfHost\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\RazorSelfHost\logo.png" />
     <Content Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\MyTemplate.vstemplate" />
@@ -306,6 +344,7 @@
     <Content Include="ProjectTemplates\RazorSelfHost\Test\ServiceStack.Test.csproj" />
     <Resource Include="ProjectTemplates\RazorSelfHost\Test\_preprocess.xml" />
     <Resource Include="ProjectTemplates\RazorSelfHost\_preprocess.xml" />
+    <Content Include="ProjectTemplates\EmptyWindowService\Definitions\CSharp.vstemplate" />
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -530,6 +569,11 @@
     <Resource Include="ProjectTemplates\FSharpSelfHost\Tests\_preprocess.xml" />
     <Resource Include="ProjectTemplates\FSharpSelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\MVC4\MVC4\Content\themes.zip" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\App.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\packages.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\Test\packages.config" />
     <None Include="ProjectTemplates\FSharpAngular\FSharpAngular\default.cshtml" />
     <None Include="ProjectTemplates\FSharpAngular\FSharpAngular\fonts\glyphicons-halflings-regular.eot" />
     <Resource Include="ProjectTemplates\FSharpAngular\FSharpAngular\fonts\glyphicons-halflings-regular.ttf" />
@@ -1018,6 +1062,7 @@
     <Folder Include="ProjectTemplates\Bootstrap\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\EmptySelfHost\ServiceModel\Types\" />
+    <Folder Include="ProjectTemplates\EmptyWindowService\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\MVC4\MVC4\App_Data\" />
     <Folder Include="ProjectTemplates\MVC4\ServiceModel\Types\" />
     <Folder Include="ProjectTemplates\MVC5\MVC5\App_Data\" />
