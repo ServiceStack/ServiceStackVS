@@ -47,9 +47,9 @@ namespace $safeprojectname$
 			// 
 			// serviceInstaller
 			// 
-			this.serviceInstaller.Description = "ServiceStack StarterTemplate for running in a Windows Service";
-			this.serviceInstaller.DisplayName = "ServiceStack WinServiceAppHost";
-			this.serviceInstaller.ServiceName = "ServiceStack WinServiceAppHost";
+			this.serviceInstaller.Description = "$safeprojectname$ - ServiceStack Windows Service.";
+			this.serviceInstaller.DisplayName = "$safeprojectname$";
+			this.serviceInstaller.ServiceName = "$safeprojectname$";
 			this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
 			// 
 			// WinServiceInstaller
