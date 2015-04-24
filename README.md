@@ -3,6 +3,28 @@ ServiceStackVS
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
+### [New Windows Service Template](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+
+The new Windows Service Template makes it super easy to create and install clean self-hosted ServiceStack solutions running in a Windows Service without requiring any additional 3rd Party packages or dependencies.
+
+#### Optimized for Developer Productivity
+
+To improve the development experience, the template includes a "Debug Mode" where **DEBUG** builds are run as a Console Application improving developer iteration times and debugging experience.
+
+#### Install, Start and Stop Windows Service Scripts
+
+Also included are `install.bat`, `uninstall.bat`, `start.bat` and `stop.bat` Batch Scripts which lets you easily install and run your project as a local Windows Service. 
+
+To Install, just build your project in **RELEASE** mode then run the `install.bat` script that's located in the home directory. After it's installed you can run `start.bat` to start your Windows Service which will launch your ServiceStack Project's Home Page in your default browser:
+
+![](https://github.com/ServiceStack/Assets/raw/69c62bfb26cfddcc99ceae70ba8b10ca62d4ce99/img/servicestackvs/windows-service-template.gif)
+
+> The batch files will automatically prompt for admin access if required
+
+#### Install ServiceStackVS VS.NET Plugin
+
+To use the new Windows Service Template [download the Install the latest ServiceStackVS](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7). If you have a previous version of **ServiceStackVS** installed, it will need to be uninstalled before installing the latest version.
+
 ### [New ReactJS App Template](https://github.com/ServiceStackApps/Chat-React)
 
 The new ServiceStackVS **ReactJS App** template shares the same approach for developing modern Single Page Apps in VS.NET as the existing [AngularJS App](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md) template by leveraging the **node.js** ecosystem for managing all aspects of Client App development utilizing the best-in-class libraries:
