@@ -5,17 +5,17 @@ ServiceStackVS is a Visual Studio extension that enhances the development experi
 
 ### [New Windows Service Template](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
-The new Windows Service Template makes it super easy to create and install clean self-hosted ServiceStack solutions running in a Windows Service without requiring any additional 3rd Party packages or dependencies.
+The new Windows Service Template makes it super easy to create and install self-hosted ServiceStack solutions running within vanilla Windows Services without needing to rely on any additional 3rd Party packages or dependencies.
 
 #### Optimized for Developer Productivity
 
-To improve the development experience, the template includes a "Debug Mode" where **DEBUG** builds are run as a Console Application improving developer iteration times and debugging experience.
+To improve the development experience, the Windows Service Template includes a "Debug Mode" where **DEBUG** builds are run as a Console Application - improving developer iteration times and debugging experience.
 
 #### Install, Start and Stop Windows Service Scripts
 
 Also included are `install.bat`, `uninstall.bat`, `start.bat` and `stop.bat` Batch Scripts which lets you easily install and run your project as a local Windows Service. 
 
-To Install, just build your project in **RELEASE** mode then run the `install.bat` script that's located in the home directory. After it's installed you can run `start.bat` to start your Windows Service which will launch your ServiceStack Project's Home Page in your default browser:
+To Install, just build your project in **RELEASE** mode then run the `install.bat` script that's located in your projects home directory. After it's installed you can run `start.bat` to start your Windows Service which will launch your ServiceStack Project's Home Page in your default browser:
 
 ![](https://github.com/ServiceStack/Assets/raw/69c62bfb26cfddcc99ceae70ba8b10ca62d4ce99/img/servicestackvs/windows-service-template.gif)
 
