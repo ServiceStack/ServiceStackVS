@@ -82,6 +82,8 @@
     <None Include="packages.config" />
     <None Include="install.bat" />
     <None Include="uninstall.bat" />
+    <None Include="start.bat" />
+    <None Include="stop.bat" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WinServiceInstaller.resx">
