@@ -572,6 +572,8 @@
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\App.config" />
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\install.bat" />
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\packages.config" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\start.bat" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\stop.bat" />
     <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\uninstall.bat" />
     <None Include="ProjectTemplates\EmptyWindowService\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\EmptyWindowService\ServiceModel\packages.config" />
