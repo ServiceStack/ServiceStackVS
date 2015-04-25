@@ -24,7 +24,7 @@ namespace $safeprojectname$
             {
                 appHost.Init();
                 appHost.Start(ListeningOn);
-
+                Process.Start(ListeningOn);
                 Console.WriteLine("Press <CTRL>+C to stop.");
                 Thread.Sleep(Timeout.Infinite);
             }
