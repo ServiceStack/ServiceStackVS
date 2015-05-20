@@ -61,11 +61,23 @@ namespace ServiceStackVS.NativeTypesWizard
             string errorMessage = "";
             Task.Run(() =>
             {
+                bool setSslValidationCallback = false;
                 try
                 {
                     string serverUrl = CreateUrl(url);
                     ServerUrl = serverUrl;
+                    
+                    //Don't set validation callback if one has already been set for VS.
+                    if (ServicePointManager.ServerCertificateValidationCallback == null)
+                    {
+                        //Temp set validation callback to return true to avoid common dev server ssl certificate validation issues.
+                        setSslValidationCallback = true;
+                        ServicePointManager.ServerCertificateValidationCallback =
+                            (sender, certificate, chain, errors) => true;
+                    }
                     bool urlIsValid = ValidateUrl(serverUrl);
+
+
                     var webRequest = WebRequest.Create(serverUrl);
                     string result = webRequest.GetResponse().ReadToEnd();
                     CodeTemplate = result;
@@ -86,6 +98,14 @@ namespace ServiceStackVS.NativeTypesWizard
                 catch (Exception ex)
                 {
                     errorMessage = "Failed to generate client types - " + ex.Message;
+                }
+                finally
+                {
+                    if (setSslValidationCallback)
+                    {
+                        //If callback was set to return true, reset back to null.
+                        ServicePointManager.ServerCertificateValidationCallback = null;
+                    }
                 }
             }).ContinueWith(task =>
             {
