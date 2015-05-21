@@ -446,7 +446,21 @@ namespace ServiceStackVS
                 try
                 {
                     var options = typesHandler.ParseComments(existingGeneratedCode);
+                    bool setSslValidationCallback = false;
+                    //Don't set validation callback if one has already been set for VS.
+                    if (ServicePointManager.ServerCertificateValidationCallback == null)
+                    {
+                        //Temp set validation callback to return true to avoid common dev server ssl certificate validation issues.
+                        setSslValidationCallback = true;
+                        ServicePointManager.ServerCertificateValidationCallback =
+                            (sender, certificate, chain, errors) => true;
+                    }
                     string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
+                    if (setSslValidationCallback)
+                    {
+                        //If callback was set to return true, reset back to null.
+                        ServicePointManager.ServerCertificateValidationCallback = null;
+                    }
                     using (var streamWriter = File.CreateText(filePath))
                     {
                         streamWriter.Write(updatedCode);
