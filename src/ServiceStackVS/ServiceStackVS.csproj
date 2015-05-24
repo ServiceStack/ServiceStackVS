@@ -316,6 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
+    <Content Include="ItemTemplates\Razor\CSharpRazor\Definitions\CSharp.vstemplate" />
+    <Resource Include="ItemTemplates\Razor\CSharpRazor\_preprocess.xml" />
+    <Resource Include="ItemTemplates\Razor\CSharpRazor\logo.png" />
     <Content Include="ProjectTemplates\AngularSPA\AngularSPA\partials\404.html" />
     <Content Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\MyTemplate.vstemplate" />
     <Resource Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\_preprocess.xml">
@@ -355,6 +358,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="ItemTemplates\Razor\CSharpRazor\razor.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

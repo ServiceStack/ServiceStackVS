@@ -1,0 +1,17 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <ProjectType>CSharp</ProjectType>
+    
+    <DefaultName>CSharpRazorItem</DefaultName>
+    <Name>Web Page (Razor v3)</Name>
+    <Description>Add a cshtml file to your project</Description>    
+    <Icon>logo.png</Icon>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  
+  <TemplateContent>
+    <References />
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cshtml">razor.cshtml</ProjectItem>
+    
+  </TemplateContent>
+</VSTemplate>

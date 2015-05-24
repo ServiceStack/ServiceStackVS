@@ -2,6 +2,7 @@
 <TemplateReport>
   <ItemTemplates>
     <ItemTemplate Path="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" Name="TypeScript Reference" Description="TypeScript reference from a ServiceStack server." ProjectType="CSharp" ProjectSubType="" />
+    <ItemTemplate Path="ItemTemplates\Razor\CSharpRazor\Definitions\CSharp.vstemplate" Name="Web Page (Razor v3)" Description="Add a cshtml file to your project" ProjectType="CSharp" ProjectSubType="" />
     <ItemTemplate Path="ItemTemplates\NativeTypes\FSharpTypeScriptRef\Definitions\FSharp.vstemplate" Name="TypeScript Reference" Description="TypeScript reference from a ServiceStack server." ProjectType="FSharp" ProjectSubType="" />
     <ItemTemplate Path="ItemTemplates\NativeTypes\VbNetTypeScriptRef\Definitions\VB.vstemplate" Name="TypeScript Reference" Description="TypeScript reference from a ServiceStack server." ProjectType="VisualBasic" ProjectSubType="" />
   </ItemTemplates>
