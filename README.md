@@ -246,7 +246,7 @@ The simple HelloWorld AngularJS application that is provided in the template cal
 
 ### Download ServiceStackVS
 
-ServiceStackVS supports both VS.NET 2013 and 2012 and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+ServiceStackVS supports Visual Studio 2015 RC1, 2013 and 2012 and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
 [![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
@@ -269,9 +269,10 @@ The C# Project templates included in ServiceStackVS extension:
 - ServiceStack ASP.NET MVC4 & MVC5
 - ServiceStack ASP.NET with AngularJS
 - ServiceStack ASP.NET with Bootstrap
-- ServiceStack ASp.NET with Razor
+- ServiceStack ASP.NET with Razor
 - ServiceStack Self Host Empty
 - ServiceStack Self Host with Razor
+- ServiceStack Windows Service
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
 
