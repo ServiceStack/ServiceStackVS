@@ -21,7 +21,16 @@ namespace ssutil_cli
                 return;
             }
 
-            Console.ReadLine();
+            try
+            {
+                ProcessModeHandler.Process(UtilCliOptions.GetInstance().Options);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failed to complete operation. " + e.Message);
+                optionSet.WriteOptionDescriptions(Console.Out);
+            }
+            
         }
     }
 }

@@ -73,6 +73,7 @@ namespace ssutil_cli
                     ProcessAdd(options[UtilCliOptions.URL], options[UtilCliOptions.FILE], options[UtilCliOptions.LANG]);
                     break;
                 case CmdMode.AddRefWithLang:
+                    ProcessAdd(options[UtilCliOptions.URL], null, options[UtilCliOptions.LANG]);
                     break;
                 case CmdMode.UpdateReference:
                     ProcessUpdate(options[UtilCliOptions.FILE]);
@@ -86,6 +87,7 @@ namespace ssutil_cli
         {
             INativeTypesHandler nativeTypesHandler = GetNativeTypesHandlerByLanguage(language);
             path = path ?? "ServiceStackReference" + nativeTypesHandler.CodeFileExtension;
+            path = path.Contains(".") ? path : path + nativeTypesHandler.CodeFileExtension;
             string code;
             try
             {
@@ -116,11 +118,15 @@ namespace ssutil_cli
                     return NativeTypeHandlers.CSharpNativeTypesHandler;
                 case "fsharp":
                     return NativeTypeHandlers.FSharpNativeTypesHandler;
-                case "typescript":
+                case "typescript.d":
                     return NativeTypeHandlers.TypeScriptNativeTypesHandler;
                 case "vbnet":
                     return NativeTypeHandlers.VbNetNativeTypesHandler;
                 default:
+                    if (lang != "")
+                    {
+                        Console.WriteLine("WARN: Invalid language '" + lang + "'. Defaulting to CSharp.");
+                    }
                     return NativeTypeHandlers.CSharpNativeTypesHandler;
             }
         }
