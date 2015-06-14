@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace ssutil_cli.Tests
@@ -24,7 +20,7 @@ namespace ssutil_cli.Tests
         [Test]
         public void Can_Update_Valid_CSharp_File()
         {
-            string[] args = new[] {"-f", "TestDtos"  + Path.DirectorySeparatorChar + "ServiceStackRef.dtos.cs"};
+            string[] args = new[] {"TestDtos"  + Path.DirectorySeparatorChar + "ServiceStackRef.dtos.cs"};
             var utilCli = new UtilCliOptions();
             utilCli.DefaultOptionSet.Parse(args);
             ProcessModeHandler.Process(utilCli.Options);

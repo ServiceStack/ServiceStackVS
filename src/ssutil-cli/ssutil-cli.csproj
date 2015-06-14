@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ssutil_cli</RootNamespace>
-    <AssemblyName>ssutil-cli</AssemblyName>
+    <AssemblyName>ssutil</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>ssutil_cli.Program</StartupObject>

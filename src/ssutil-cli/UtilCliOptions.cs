@@ -21,11 +21,11 @@ namespace ssutil_cli
                     val => { Options.Add(DEFAULT,val);}
                 },
                 {
-                    "l|lang=","Specific language used when adding a ServiceStack reference",
+                    "lang=","Specific language used when adding a ServiceStack reference",
                     val => { Options.Add(LANG,val); }
                 },
                 {
-                    "f|file=","Name/path of the new ServiceStack reference",
+                    "file=","Name/path of the new ServiceStack reference",
                     val => { Options.Add(FILE,val);}
                 }
             };

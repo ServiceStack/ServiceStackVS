@@ -17,14 +17,14 @@ namespace ssutil_cli
         public static readonly JavaNativeTypesHandler JavaNativeTypesHandler = new JavaNativeTypesHandler();
         public static readonly SwitfNativeTypesHandler SwitfNativeTypesHandler = new SwitfNativeTypesHandler();
 
-        public static readonly List<INativeTypesHandler> All = new List<INativeTypesHandler>
+        public static readonly Dictionary<string, INativeTypesHandler> All = new Dictionary<string,INativeTypesHandler>
         {
-            CSharpNativeTypesHandler,
-            FSharpNativeTypesHandler,
-            VbNetNativeTypesHandler,
-            TypeScriptNativeTypesHandler,
-            JavaNativeTypesHandler,
-            SwitfNativeTypesHandler
+            {"csharp",CSharpNativeTypesHandler},
+            {"fsharp",FSharpNativeTypesHandler},
+            {"vbnet",VbNetNativeTypesHandler},
+            {"typescript",TypeScriptNativeTypesHandler},
+            {"java",JavaNativeTypesHandler},
+            {"swift",SwitfNativeTypesHandler}
         };
         
 
@@ -114,7 +114,7 @@ namespace ssutil_cli
 
         private static void ProcessAdd(string url, string path = null, string language = null)
         {
-            INativeTypesHandler nativeTypesHandler = GetNativeTypesHandlerByLanguage(language);
+            INativeTypesHandler nativeTypesHandler = GetNativeTypeHandler(language);
             
             path = path ?? "ServiceStackReference" + nativeTypesHandler.CodeFileExtension;
             bool fileNameContainsExtension = 
@@ -143,31 +143,31 @@ namespace ssutil_cli
             }
         }
 
-        private static INativeTypesHandler GetNativeTypesHandlerByLanguage(string lang)
+        private static INativeTypesHandler GetNativeTypeHandler(string lang = null)
         {
-            lang = lang ?? "";
-            switch (lang.ToLowerInvariant())
+            INativeTypesHandler result = null;
+            if (lang == null)
             {
-                case "csharp":
-                    return CSharpNativeTypesHandler;
-                case "fsharp":
-                    return FSharpNativeTypesHandler;
-                case "typescript":
-                case "typescript.d":
-                    return TypeScriptNativeTypesHandler;
-                case "vbnet":
-                    return VbNetNativeTypesHandler;
-                case "java":
-                    return JavaNativeTypesHandler;
-                case "swift":
-                    return SwitfNativeTypesHandler;
-                default:
-                    if (lang != "")
+                foreach (var nativeTypesHandlerPair in All)
+                {
+                    if (AppDomain.CurrentDomain.FriendlyName.Contains(nativeTypesHandlerPair.Key))
                     {
-                        Console.WriteLine("WARN: Invalid language '" + lang + "'. Defaulting to CSharp.");
+                        result = nativeTypesHandlerPair.Value;
+                        break;
                     }
-                    return NativeTypeHandlers.CSharpNativeTypesHandler;
+                }
+                if (result == null)
+                {
+                    Console.WriteLine("WARN: Invalid language '" + lang + "'. Defaulting to CSharp.");
+                    result = CSharpNativeTypesHandler;
+                }
             }
+            else if(All.ContainsKey(lang.ToLowerInvariant()))
+            {
+                result = All[lang.ToLowerInvariant()];
+            }
+
+            return result ?? CSharpNativeTypesHandler;
         }
 
         private static void ProcessUpdate(string updateFilePath)
@@ -217,7 +217,7 @@ namespace ssutil_cli
 
         private static INativeTypesHandler ResolveNativeTypesHandlerByFilePath(string filePath)
         {
-            return All.FirstOrDefault(supportedNativeTypesHandler => supportedNativeTypesHandler.IsHandledFileType(filePath) );
+            return All.Values.FirstOrDefault(supportedNativeTypesHandler => supportedNativeTypesHandler.IsHandledFileType(filePath) );
         }
     }
 

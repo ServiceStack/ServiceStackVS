@@ -10,8 +10,8 @@ namespace ssutil_cli
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine();
-                Console.WriteLine("Create new reference. Eg ssutil-cli \"<URL>\" -f <PATH> -l <lang>");
-                Console.WriteLine("Update existing reference, eg ssutil-cli \"<PATH>\"");
+                Console.WriteLine("Create new reference. Eg ssutil \"<URL>\" -file <PATH> -lang <lang>");
+                Console.WriteLine("Update existing reference, eg ssutil \"<PATH>\"");
                 Console.WriteLine();
                 optionSet.WriteOptionDescriptions(Console.Out);
                 return;

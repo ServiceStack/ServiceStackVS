@@ -103,7 +103,7 @@ namespace ssutil_cli.Tests
         [Test]
         public void Populate_Lang_Option_Correctly()
         {
-            string[] args = {"-l","CSharp"};
+            string[] args = {"-lang","CSharp"};
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
             Assert.That(optionsUtil.Options[UtilCliOptions.LANG], Is.EqualTo("CSharp"));
@@ -121,7 +121,7 @@ namespace ssutil_cli.Tests
         [Test]
         public void Populate_UpdateRef_File_Option_Correctly()
         {
-            string[] args = { "-f", "."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs" };
+            string[] args = { "-file", "."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs" };
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
             Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("." + Path.DirectorySeparatorChar + "TestDtos" + Path.DirectorySeparatorChar + "ServiceReference.dto.cs"));
