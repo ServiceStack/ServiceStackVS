@@ -36,7 +36,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.URL,"http://techstacks.io/"}
+                {UtilCliOptions.DEFAULT,"http://techstacks.io/"}
             };
             var result = ProcessModeHandler.GetMode(options);
             Assert.That(result, Is.EqualTo(CmdMode.AddReference));
@@ -47,7 +47,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.URL,"http://techstacks.io/"},
+                {UtilCliOptions.DEFAULT,"http://techstacks.io/"},
                 {UtilCliOptions.FILE,"myfile.dto.cs"}
             };
             var result = ProcessModeHandler.GetMode(options);
@@ -59,7 +59,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.URL,"http://techstacks.io/"},
+                {UtilCliOptions.DEFAULT,"http://techstacks.io/"},
                 {UtilCliOptions.LANG,"FSharp"}
             };
             var result = ProcessModeHandler.GetMode(options);
@@ -71,7 +71,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.URL,"http://techstacks.io/"},
+                {UtilCliOptions.DEFAULT,"http://techstacks.io/"},
                 {UtilCliOptions.FILE,"myfile.dto.cs"},
                 {UtilCliOptions.LANG,"FSharp"}
             };
@@ -84,7 +84,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.FILE,"ServiceStackRef.dtos.cs"}
+                {UtilCliOptions.DEFAULT,"TestDtos\\ServiceStackRef.dtos.cs"}
             };
             var result = ProcessModeHandler.GetMode(options);
             Assert.That(result, Is.EqualTo(CmdMode.UpdateReference));
@@ -96,7 +96,7 @@ namespace ssutil_cli.Tests
             string[] args = { "http://techstacks.io/" };
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
-            Assert.That(optionsUtil.Options[UtilCliOptions.URL], Is.EqualTo("http://techstacks.io/"));
+            Assert.That(optionsUtil.Options[UtilCliOptions.DEFAULT], Is.EqualTo("http://techstacks.io/"));
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace ssutil_cli.Tests
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
             Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("C:\\mydir\\ServiceReference.dto.cs"));
-            Assert.That(optionsUtil.Options[UtilCliOptions.URL], Is.EqualTo("http://techstacks.io/"));
+            Assert.That(optionsUtil.Options[UtilCliOptions.DEFAULT], Is.EqualTo("http://techstacks.io/"));
         }
     }
 }

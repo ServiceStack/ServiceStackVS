@@ -17,8 +17,24 @@ namespace ssutil_cli
             {
                 throw new ArgumentNullException("options","No options found.");
             }
-            string url, filePath, lang;
-            options.TryGetValue(UtilCliOptions.URL, out url);
+            string urlOrFile, filePath, lang;
+            options.TryGetValue(UtilCliOptions.DEFAULT, out urlOrFile);
+            string url = "";
+            string existingFile = "";
+            if (File.Exists(urlOrFile))
+            {
+                existingFile = urlOrFile;
+            }
+            else
+            {
+                url = urlOrFile;
+            }
+
+            if (string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(existingFile))
+            {
+                //Fetch code from url, use BaseUrl and file extension to infer URL and language, save at specified path.
+                return CmdMode.UpdateReference;
+            }
             bool hasFilePath = options.TryGetValue(UtilCliOptions.FILE, out filePath);
             bool hasLang = options.TryGetValue(UtilCliOptions.LANG, out lang);
 
@@ -46,11 +62,7 @@ namespace ssutil_cli
                 return  CmdMode.AddRefWithLang;
             }
 
-            if (string.IsNullOrEmpty(url) && hasFilePath && !string.IsNullOrEmpty(filePath))
-            {
-                //Fetch code from url, use BaseUrl and file extension to infer URL and language, save at specified path.
-                return CmdMode.UpdateReference;
-            }
+            
             return CmdMode.Invalid;
         }
 
@@ -64,19 +76,19 @@ namespace ssutil_cli
                     //Do nothing
                     break;
                 case CmdMode.AddReference:
-                    ProcessAdd(options[UtilCliOptions.URL]);
+                    ProcessAdd(options[UtilCliOptions.DEFAULT]);
                     break;
                 case CmdMode.AddReferenceWithPath:
-                    ProcessAdd(options[UtilCliOptions.URL], options[UtilCliOptions.FILE]);
+                    ProcessAdd(options[UtilCliOptions.DEFAULT], options[UtilCliOptions.FILE]);
                     break;
                 case CmdMode.AddReferenceWithPathAndLang:
-                    ProcessAdd(options[UtilCliOptions.URL], options[UtilCliOptions.FILE], options[UtilCliOptions.LANG]);
+                    ProcessAdd(options[UtilCliOptions.DEFAULT], options[UtilCliOptions.FILE], options[UtilCliOptions.LANG]);
                     break;
                 case CmdMode.AddRefWithLang:
-                    ProcessAdd(options[UtilCliOptions.URL], null, options[UtilCliOptions.LANG]);
+                    ProcessAdd(options[UtilCliOptions.DEFAULT], null, options[UtilCliOptions.LANG]);
                     break;
                 case CmdMode.UpdateReference:
-                    ProcessUpdate(options[UtilCliOptions.FILE]);
+                    ProcessUpdate(options[UtilCliOptions.DEFAULT]);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

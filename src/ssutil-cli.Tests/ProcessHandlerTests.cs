@@ -43,7 +43,7 @@ namespace ssutil_cli.Tests
         [Test]
         public void Throw_For_Invalid_BaseUrl()
         {
-            string[] args = new[] { "-f", "TestDtos\\ServiceStackRefInvalidUrl.dtos.cs" };
+            string[] args = new[] { "TestDtos\\ServiceStackRefInvalidUrl.dtos.cs" };
             var utilCli = new UtilCliOptions();
             utilCli.DefaultOptionSet.Parse(args);
             bool result = false;

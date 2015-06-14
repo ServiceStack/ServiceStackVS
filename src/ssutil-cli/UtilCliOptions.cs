@@ -5,7 +5,7 @@ namespace ssutil_cli
 {
     public class UtilCliOptions
     {
-        public static string URL { get { return "URL"; } }
+        public static string DEFAULT { get { return "default"; } }
         public static string LANG { get { return "lang"; } }
         public static string FILE { get { return "file"; } }
 
@@ -17,8 +17,8 @@ namespace ssutil_cli
             defaultOptionSet = new OptionSet()
             {
                 {
-                    "<>","Url of the ServiceStack endpoint",
-                    val => { Options.Add(URL,val);}
+                    "<>","Url of the ServiceStack endpoint or file path of an existing reference",
+                    val => { Options.Add(DEFAULT,val);}
                 },
                 {
                     "l|lang=","Specific language used when adding or updating a ServiceStack reference",

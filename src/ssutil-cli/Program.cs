@@ -9,6 +9,9 @@ namespace ssutil_cli
             var optionSet = UtilCliOptions.GetInstance().DefaultOptionSet;
             if (args == null || args.Length == 0)
             {
+                Console.WriteLine();
+                Console.WriteLine("Specify ServiceStack base URL as first argument.");
+                Console.WriteLine();
                 optionSet.WriteOptionDescriptions(Console.Out);
                 return;
             }
