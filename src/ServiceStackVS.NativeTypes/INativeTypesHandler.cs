@@ -19,6 +19,8 @@ namespace ServiceStackVS.NativeTypes
         CSharp,
         FSharp,
         VbNet,
-        TypeScript
+        TypeScript,
+        Java,
+        Swift
     }
 }

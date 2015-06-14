@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ServiceStackVS.NativeTypes;
+using ServiceStackVS.NativeTypes.Handlers;
 
 namespace ssutil_cli
 {
     public class ProcessModeHandler
     {
-        private static readonly List<INativeTypesHandler> SupportedNativeTypesHandlers = NativeTypeHandlers.All;
 
+        public static readonly CSharpNativeTypesHandler CSharpNativeTypesHandler = new CSharpNativeTypesHandler();
+        public static readonly FSharpNativeTypesHandler FSharpNativeTypesHandler = new FSharpNativeTypesHandler();
+        public static readonly VbNetNativeTypesHandler VbNetNativeTypesHandler = new VbNetNativeTypesHandler();
+        public static readonly TypeScriptNativeTypesHandler TypeScriptNativeTypesHandler = new TypeScriptNativeTypesHandler();
+        public static readonly JavaNativeTypesHandler JavaNativeTypesHandler = new JavaNativeTypesHandler();
+        public static readonly SwitfNativeTypesHandler SwitfNativeTypesHandler = new SwitfNativeTypesHandler();
+
+        public static readonly List<INativeTypesHandler> All = new List<INativeTypesHandler>
+        {
+            CSharpNativeTypesHandler,
+            FSharpNativeTypesHandler,
+            VbNetNativeTypesHandler,
+            TypeScriptNativeTypesHandler,
+            JavaNativeTypesHandler,
+            SwitfNativeTypesHandler
+        };
+        
 
         public static CmdMode GetMode(Dictionary<string,string> options)
         {
@@ -98,8 +115,13 @@ namespace ssutil_cli
         private static void ProcessAdd(string url, string path = null, string language = null)
         {
             INativeTypesHandler nativeTypesHandler = GetNativeTypesHandlerByLanguage(language);
+            
             path = path ?? "ServiceStackReference" + nativeTypesHandler.CodeFileExtension;
-            path = path.Contains(".") ? path : path + nativeTypesHandler.CodeFileExtension;
+            bool fileNameContainsExtension = 
+                path.LastIndexOf(".", StringComparison.Ordinal) > path.LastIndexOf(Path.DirectorySeparatorChar) &&
+                (path.LastIndexOf(".", StringComparison.Ordinal) != path.LastIndexOf(Path.DirectorySeparatorChar));
+            path = fileNameContainsExtension ? path : path + nativeTypesHandler.CodeFileExtension;
+            
             string code;
             try
             {
@@ -127,13 +149,18 @@ namespace ssutil_cli
             switch (lang.ToLowerInvariant())
             {
                 case "csharp":
-                    return NativeTypeHandlers.CSharpNativeTypesHandler;
+                    return CSharpNativeTypesHandler;
                 case "fsharp":
-                    return NativeTypeHandlers.FSharpNativeTypesHandler;
+                    return FSharpNativeTypesHandler;
+                case "typescript":
                 case "typescript.d":
-                    return NativeTypeHandlers.TypeScriptNativeTypesHandler;
+                    return TypeScriptNativeTypesHandler;
                 case "vbnet":
-                    return NativeTypeHandlers.VbNetNativeTypesHandler;
+                    return VbNetNativeTypesHandler;
+                case "java":
+                    return JavaNativeTypesHandler;
+                case "swift":
+                    return SwitfNativeTypesHandler;
                 default:
                     if (lang != "")
                     {
@@ -190,7 +217,7 @@ namespace ssutil_cli
 
         private static INativeTypesHandler ResolveNativeTypesHandlerByFilePath(string filePath)
         {
-            return SupportedNativeTypesHandlers.FirstOrDefault(supportedNativeTypesHandler => supportedNativeTypesHandler.IsHandledFileType(filePath) );
+            return All.FirstOrDefault(supportedNativeTypesHandler => supportedNativeTypesHandler.IsHandledFileType(filePath) );
         }
     }
 

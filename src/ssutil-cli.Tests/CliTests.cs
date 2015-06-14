@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 
 namespace ssutil_cli.Tests
@@ -84,7 +85,7 @@ namespace ssutil_cli.Tests
         {
             var options = new Dictionary<string, string>()
             {
-                {UtilCliOptions.DEFAULT,"TestDtos\\ServiceStackRef.dtos.cs"}
+                {UtilCliOptions.DEFAULT,"TestDtos" + Path.DirectorySeparatorChar + "ServiceStackRef.dtos.cs"}
             };
             var result = ProcessModeHandler.GetMode(options);
             Assert.That(result, Is.EqualTo(CmdMode.UpdateReference));
@@ -120,28 +121,28 @@ namespace ssutil_cli.Tests
         [Test]
         public void Populate_UpdateRef_File_Option_Correctly()
         {
-            string[] args = { "-f", "C:\\mydir\\ServiceReference.dto.cs" };
+            string[] args = { "-f", "."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs" };
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
-            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("C:\\mydir\\ServiceReference.dto.cs"));
+            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("." + Path.DirectorySeparatorChar + "TestDtos" + Path.DirectorySeparatorChar + "ServiceReference.dto.cs"));
         }
 
         [Test]
         public void Populate_UpdateRef_File_Option_Correctly_DoubleDash()
         {
-            string[] args = { "--file", "C:\\mydir\\ServiceReference.dto.cs" };
+            string[] args = { "--file", "."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs" };
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
-            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("C:\\mydir\\ServiceReference.dto.cs"));
+            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs"));
         }
 
         [Test]
         public void Update_Ref_Works_Without_URL()
         {
-            string[] args = { "http://techstacks.io/", "--file", "C:\\mydir\\ServiceReference.dto.cs" };
+            string[] args = { "http://techstacks.io/", "--file", "."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs" };
             var optionsUtil = new UtilCliOptions();
             optionsUtil.DefaultOptionSet.Parse(args);
-            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("C:\\mydir\\ServiceReference.dto.cs"));
+            Assert.That(optionsUtil.Options[UtilCliOptions.FILE], Is.EqualTo("."  + Path.DirectorySeparatorChar + "TestDtos"  + Path.DirectorySeparatorChar + "ServiceReference.dto.cs"));
             Assert.That(optionsUtil.Options[UtilCliOptions.DEFAULT], Is.EqualTo("http://techstacks.io/"));
         }
     }
