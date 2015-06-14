@@ -10,7 +10,8 @@ namespace ssutil_cli
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine();
-                Console.WriteLine("Specify ServiceStack base URL as first argument.");
+                Console.WriteLine("Create new reference. Eg ssutil-cli \"<URL>\" -f <PATH> -l <lang>");
+                Console.WriteLine("Update existing reference, eg ssutil-cli \"<PATH>\"");
                 Console.WriteLine();
                 optionSet.WriteOptionDescriptions(Console.Out);
                 return;
