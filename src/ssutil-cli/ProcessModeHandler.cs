@@ -167,6 +167,11 @@ namespace ssutil_cli
                 result = All[lang.ToLowerInvariant()];
             }
 
+            if (result == null)
+            {
+                Console.WriteLine("WARN: Invalid language '" + lang + "'. Defaulting to CSharp.");
+            }
+
             return result ?? CSharpNativeTypesHandler;
         }
 

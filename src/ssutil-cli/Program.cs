@@ -28,6 +28,18 @@ namespace ssutil_cli
             try
             {
                 ProcessModeHandler.Process(UtilCliOptions.GetInstance().Options);
+                if (currentMode == CmdMode.AddReference ||
+                    currentMode == CmdMode.AddRefWithLang ||
+                    currentMode == CmdMode.AddReferenceWithPath ||
+                    currentMode == CmdMode.AddReferenceWithPathAndLang)
+                {
+                    Console.WriteLine("Successfully added new file.");
+                }
+
+                if (currentMode == CmdMode.UpdateReference)
+                {
+                    Console.WriteLine("Successfully updated " + UtilCliOptions.GetInstance().Options[UtilCliOptions.DEFAULT]);
+                }
             }
             catch (Exception e)
             {
