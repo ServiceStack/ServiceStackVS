@@ -16,6 +16,22 @@ namespace ServiceStackVS.NativeTypes
             FSharpNativeTypesHandler,
             VbNetNativeTypesHandler,
             TypeScriptNativeTypesHandler
-        }; 
+        };
+
+        public static bool IsValidResponse(this INativeTypesHandler typesHandler, string code)
+        {
+            if (typesHandler is VbNetNativeTypesHandler)
+            {
+                return code.StartsWith("' Options:");
+            }
+            if (typesHandler is FSharpNativeTypesHandler)
+            {
+                return code.StartsWith("(* Options:");
+            }
+            else
+            {
+                return code.StartsWith("/* Options:");
+            }
+        }
     }
 }

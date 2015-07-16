@@ -75,20 +75,20 @@ namespace ServiceStackVS.NativeTypesWizard
                         ServicePointManager.ServerCertificateValidationCallback =
                             (sender, certificate, chain, errors) => true;
                     }
-                    bool urlIsValid = ValidateUrl(serverUrl);
-
 
                     var webRequest = WebRequest.Create(serverUrl);
                     string result = webRequest.GetResponse().ReadToEnd();
-                    CodeTemplate = result;
-                    if (urlIsValid)
+
+                    if (typesHandler.IsValidResponse(result))
                     {
                         success = true;
                     }
                     else
                     {
-                        throw new Exception("Failed to contact server. Unable to validate provided URL end point.");
+                        throw new Exception("Unrecognized response from server. Please check if have provided the correct base URL for a ServiceStack API.");
                     }
+
+                    CodeTemplate = result;
                 }
                 catch (WebException webException)
                 {
@@ -158,33 +158,6 @@ namespace ServiceStackVS.NativeTypesWizard
             }
 
             return serverUrl.ToParentPath();
-        }
-
-        private bool ValidateUrl(string url)
-        {
-            Uri validatedUri;
-            bool isValidUri = Uri.TryCreate(url, UriKind.Absolute, out validatedUri) &&
-                              (validatedUri.Scheme == Uri.UriSchemeHttp || validatedUri.Scheme == Uri.UriSchemeHttps);
-            if (isValidUri)
-            {
-                string metadataJsonUrl = validatedUri.ToString().ToLower().Replace("/" + typesHandler.RelativeTypesUrl.ToLowerInvariant(), "/types/metadata") + "?format=json";
-                string metadataResponse = new WebClient().DownloadString(metadataJsonUrl);
-                MetadataTypes metaDataDto;
-                try
-                {
-                    metaDataDto = JsonSerializer.DeserializeFromString<MetadataTypes>(metadataResponse);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Failed deserializing metadata from server", ex);
-                }
-                if (metaDataDto.Operations.Count == 0)
-                {
-                    throw new Exception("Invalid or empty metadata from server");
-                }
-                return true;
-            }
-            return false;
         }
     }
 }
