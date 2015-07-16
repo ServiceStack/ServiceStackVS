@@ -19,10 +19,21 @@ module.exports = function (grunt) {
     var gulpif = require('gulp-if');
     var minifyCss = require('gulp-minify-css');
     var gulpReplace = require('gulp-replace');
+    var htmlBuild = require('gulp-htmlbuild');
+    var eventStream = require('event-stream');
     var webRoot = 'wwwroot/';
 
     //Deployment config
     var config = require('./wwwroot_build/publish/config.json');
+
+    // htmlbuild replace for CDN references
+    function pipeTemplate(block, template) {
+        eventStream.readArray([
+            template
+        ].map(function (str) {
+            return block.indent + str;
+        })).pipe(block);
+    }
 
     // Project configuration.
     grunt.initConfig({
@@ -147,6 +158,17 @@ module.exports = function (grunt) {
                     .pipe(gulpif('*.css', minifyCss()))
                     .pipe(assets.restore())
                     .pipe(useref())
+                    .pipe(htmlBuild({
+                        jqueryCdn: function (block) {
+                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
+                        },
+                        bootstrapCss: function (block) {
+                            pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />');
+                        },
+                        bootstrapJs: function (block) {
+                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>');
+                        }
+                    }))
                     .pipe(gulp.dest(webRoot));
             },
             'wwwroot-bundle-html': function () {
@@ -158,6 +180,17 @@ module.exports = function (grunt) {
                     .pipe(gulpif('*.css', minifyCss()))
                     .pipe(assets.restore())
                     .pipe(useref())
+                    .pipe(htmlBuild({
+                        jqueryCdn: function (block) {
+                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
+                        },
+                        bootstrapCss: function (block) {
+                            pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />');
+                        },
+                        bootstrapJs: function (block) {
+                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>');
+                        }
+                    }))
                     .pipe(gulp.dest(webRoot));
             },
             'wwwroot-copy-deploy-files': function () {
