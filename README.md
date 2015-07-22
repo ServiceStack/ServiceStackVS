@@ -190,6 +190,30 @@ Vendor resources from bower are also minified here to keep deployment simple and
 <script src="js/app.min.js"></script>
 ```
 
+If you want to use a **CDN resource when your application is deployed** but use bower components locally, `build` can be changed to `htmlbuild` specifying your own key after `:`. For example, if you want to include jQuery via a CDN when your application is deployed, the orignal
+
+```html
+<!-- build:js lib/js/jquery.min.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbuild -->
+```
+
+Would be changed to 
+```html
+<!-- htmlbuild:jqueryCdn -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbuild -->
+```
+
+To specify the URL or what should be added in the `htmlbuild` block at deploy time, just update the htmlBuild task assosiated with the `jqueryCdn` key. Eg,
+``` JavaScript
+.pipe(htmlBuild({
+    jqueryCdn: function (block) {
+        pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
+    })
+}))
+```
+
 #### 04-deploy-app
 
 To give developers a starting point for deployment, we have included the use of a **grunt-msdeploy** task that can deploy to an IIS server with Web deploy. Config for the deployment, eg the IIS Server address, application name, username and password is located in the `/wwwroot_build/publish/config.js`. 
