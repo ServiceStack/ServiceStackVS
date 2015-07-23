@@ -40,30 +40,80 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.CommandBars.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.ComponentModelHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.12.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Immutable.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Immutable.11.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Immutable.12.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.11.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.12.0.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime, Version=12.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0">
-      <EmbedInteropTypes>true</EmbedInteropTypes>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.8.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TextManager.Interop" />
-    <Reference Include="Microsoft.VisualStudio.Shell.12.0" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.Shell.Interop.9.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.TemplateWizardInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.VisualStudio.TextManager.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="NuGet.VisualStudio">
       <HintPath>..\packages\NuGet.VisualStudio.2.8.2\lib\net40\NuGet.VisualStudio.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -126,15 +176,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
-    <COMReference Include="Microsoft.VisualStudio.CommandBars">
-      <Guid>{1CBA492E-7263-47BB-87FE-639000619B15}</Guid>
-      <VersionMajor>8</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -148,144 +189,144 @@
   <ItemGroup>
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
     <Compile Include="Guids.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\AppHost.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Program.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.Designer.cs">
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\AppHost.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Program.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinService.Designer.cs">
       <DependentUpon>WinService.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.designer.cs">
+    </None>
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.designer.cs">
       <DependentUpon>WinServiceInstaller.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyWindowService\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Program.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyWindowService\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\AppHost.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Program.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\RazorSelfHost\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
+    <None Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ReactJS\ReactJS\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJS\Test\UnitTests.cs" />
+    </None>
+    <None Include="ProjectTemplates\ReactJS\ReactJS\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJS\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\ReactJS\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJS\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\ReactJS\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJS\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJS\Test\UnitTests.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\AngularSPA\AngularSPA\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularSPA\Test\UnitTests.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\AngularSPA\AngularSPA\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\AngularSPA\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularSPA\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularSPA\Test\UnitTests.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\AppHost.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptyAspNetHost\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\AppHost.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\Program.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\EmptySelfHost\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\App_Start\AppHost.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\App_Start\AuthConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\App_Start\BundleConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\App_Start\FilterConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\App_Start\RouteConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Controllers\AccountController.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Controllers\HomeController.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Filters\InitializeSimpleMembershipAttribute.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\EmptyAspNetHost\EmptyAspNetHost\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptyAspNetHost\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\AppHost.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\Program.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\EmptySelfHost\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\EmptySelfHost\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\App_Start\AppHost.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\App_Start\AuthConfig.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\App_Start\BundleConfig.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\App_Start\FilterConfig.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\App_Start\RouteConfig.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\Controllers\AccountController.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\Controllers\HomeController.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\Filters\InitializeSimpleMembershipAttribute.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Models\AccountModels.cs" />
-    <Compile Include="ProjectTemplates\MVC4\MVC4\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC4\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\MVC4\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC4\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\MVC4\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC4\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC4\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\AppHost.cs">
+    </None>
+    <None Include="ProjectTemplates\MVC4\MVC4\Models\AccountModels.cs" />
+    <None Include="ProjectTemplates\MVC4\MVC4\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC4\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\MVC4\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC4\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\MVC4\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC4\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC4\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\MVC5\MVC5\AppHost.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\BundleConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\FilterConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\App_Start\RouteConfig.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Controllers\HomeController.cs" />
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\MVC5\MVC5\App_Start\BundleConfig.cs" />
+    <None Include="ProjectTemplates\MVC5\MVC5\App_Start\FilterConfig.cs" />
+    <None Include="ProjectTemplates\MVC5\MVC5\App_Start\RouteConfig.cs" />
+    <None Include="ProjectTemplates\MVC5\MVC5\Controllers\HomeController.cs" />
+    <None Include="ProjectTemplates\MVC5\MVC5\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\MVC5\MVC5\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC5\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\MVC5\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC5\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\MVC5\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC5\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\MVC5\Test\UnitTest1.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\AppHost.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\MVC5\MVC5\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC5\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\MVC5\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC5\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\MVC5\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC5\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\MVC5\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\AppHost.cs" />
+    <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\AngularJS\Test\UnitTests.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\RazorSeed\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\RazorSeed\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularJS\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\AngularJS\Test\UnitTests.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\AppHost.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ASPNETRazor\RazorSeed\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ASPNETRazor\Test\UnitTests.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\AppHost.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Global.asax.cs">
+    </None>
+    <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ASPNETRazor\Test\UnitTests.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\AppHost.cs" />
+    <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\Bootstrap\Test\UnitTests.cs" />
+    </None>
+    <None Include="ProjectTemplates\Bootstrap\ServiceStackBootstrap\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\Bootstrap\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\Bootstrap\Test\UnitTests.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -725,15 +766,6 @@
     <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Web.Debug.config" />
     <None Include="ProjectTemplates\AngularJS\ServiceStackAngularJS\Web.Release.config" />
     <None Include="ProjectTemplates\AngularJS\Test\packages.config" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\repositories.config" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.4.0.23\ServiceStack.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Client.4.0.23\ServiceStack.Client.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Common.4.0.23\ServiceStack.Common.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\ServiceStack.Interfaces.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\ServiceStack.OrmLite.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\content\web.config.transform" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\ServiceStack.Razor.4.0.23.nupkg" />
-    <None Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Text.4.0.23\ServiceStack.Text.4.0.23.nupkg" />
     <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\default.cshtml" />
     <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\packages.config" />
     <None Include="ProjectTemplates\ASPNETRazor\RazorSeed\Views\Hello.cshtml" />
@@ -984,24 +1016,6 @@
     <Resource Include="ProjectTemplates\AngularJS\_preprocess.xml" />
     <Content Include="ProjectTemplates\ASPNETRazor\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ASPNETRazor\logo.png" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.4.0.23\lib\net40\ServiceStack.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Client.4.0.23\lib\net40\ServiceStack.Client.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Common.4.0.23\lib\net40\ServiceStack.Common.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Interfaces.4.0.23\lib\net40\ServiceStack.Interfaces.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\lib\net40\ServiceStack.OrmLite.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.OrmLite.4.0.23\lib\net40\ServiceStack.OrmLite.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net40\ServiceStack.Razor.dll" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net40\System.Web.Razor.Unofficial.dll" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\ServiceStack.Razor.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\ServiceStack.Razor.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\System.Web.Razor.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Razor.4.0.23\lib\net45\System.Web.Razor.xml" />
-    <Content Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll" />
-    <Resource Include="ProjectTemplates\ASPNETRazor\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.xml" />
     <Content Include="ProjectTemplates\ASPNETRazor\RazorSeed\Global.asax" />
     <Content Include="ProjectTemplates\ASPNETRazor\RazorSeed\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ASPNETRazor\RazorSeed\ServiceStack.CSharp.RazorSeed.csproj" />
