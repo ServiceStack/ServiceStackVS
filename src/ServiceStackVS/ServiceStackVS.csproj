@@ -215,6 +215,28 @@
     <None Include="ProjectTemplates\RazorSelfHost\ServiceModel\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\RazorSelfHost\Test\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.cshtml" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.eot" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\App.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Settings.settings" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\bower.json" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\default.cshtml" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\js\app.jsx" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\js\components\hello.jsx" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\package.json" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\Web.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\Web.Debug.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\Web.Release.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\00-install-dependencies.bat" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceInterface\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceModel\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\Test\packages.config" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\AppHost.cs" />
     <None Include="ProjectTemplates\ReactJS\ReactJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +248,28 @@
     <None Include="ProjectTemplates\ReactJS\ServiceModel\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJS\Test\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJS\Test\UnitTests.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSResources\CefResources.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSResources\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Program.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Resources.Designer.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Settings.Designer.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJS\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJS\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyServices.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ServiceModel\Hello.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ServiceModel\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\Test\Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\Test\UnitTests.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
@@ -344,6 +388,7 @@
     <EmbeddedResource Include="ProjectTemplates\EmptyWindowService\EmptyWindowService\WinServiceInstaller.resx">
       <DependentUpon>WinServiceInstaller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Resources.resx" />
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -395,6 +440,41 @@
     <Resource Include="ProjectTemplates\RazorSelfHost\Test\_preprocess.xml" />
     <Resource Include="ProjectTemplates\RazorSelfHost\_preprocess.xml" />
     <Content Include="ProjectTemplates\EmptyWindowService\Definitions\CSharp.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\Definitions\CSharp.vstemplate" />
+    <Resource Include="ProjectTemplates\ReactJSGap\logo.png" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.jsx.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\bootstrap.min.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\bootstrap.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\jquery.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\modernizr.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\react.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\ReactJSResources.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\ReactJSWinForms.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\css\app.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\gruntfile.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\ReactJS.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Scripts\_references.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\tests\preprocessor.js" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\tests\README.txt" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\tests\unit\hello-test.js" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\deploy\appsettings.txt" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ServiceInterface\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceModel\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ServiceModel\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJSGap\Test\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\Test\ServiceStackAngularJS.Test.csproj" />
+    <Resource Include="ProjectTemplates\ReactJSGap\Test\_preprocess.xml" />
+    <Resource Include="ProjectTemplates\ReactJSGap\_preprocess.xml" />
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
