@@ -49,7 +49,7 @@ namespace $safeprojectname$
     {
         public void Show()
         {
-            MessageBox.Show("$safeprojectname$ - ServiceStack with CefSharp + ReactJS","ServiceStack", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("ServiceStack with CefSharp + ReactJS","$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
