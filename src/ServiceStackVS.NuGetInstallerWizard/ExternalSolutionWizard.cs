@@ -23,7 +23,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
         {
             if (runKind == WizardRunKind.AsMultiProject)
             {
-                string ssvsPath = null;
+                string ssvsProjectTemplatesPath = null;
                 string templateZipPath;
                 using (var serviceProvider = new ServiceProvider((IServiceProvider)automationObject))
                 {
@@ -33,32 +33,10 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         container.ComposeParts(this);
                     }
                     //Get version of VS running extension.
-                    var vsVersion = componentModel.GetType().GetAssembly().GetName().Version.Major.ToString();
-                    //Append 0 after getting major version component. This is to match directory name.
-                    vsVersion += ".0";
-                    var extensionsFolder = "%LocalAppData%\\Microsoft\\VisualStudio\\{0}\\Extensions".Fmt(vsVersion);
-                    //Find generated folder containing SSVS extension by parsing mainfest files.
-                    var extensionFolderDirInfo = new DirectoryInfo(extensionsFolder);
-                    foreach (var directoryInfo in extensionFolderDirInfo.GetDirectories())
-                    {
-                        //Read manifest
-                        var manifestFileInfo = directoryInfo.GetFiles("*.vsixmanifest").FirstOrDefault();
-                        if (manifestFileInfo != null)
-                        {
-                            var manifestContents = File.ReadAllText(manifestFileInfo.FullName);
-                            var elements = XElement.Parse(manifestContents);
-                            var identityElement = elements.Descendants().FirstOrDefault(x => x.Name.LocalName.EqualsIgnoreCase("Identity"));
-                            string id = identityElement == null ? null : identityElement.Attribute(XName.Get("Id")).Value;
-                            //ServiceStackVS ID
-                            if (id != null && id == "97413fa1-bad9-4cfb-a91c-c8d7b2c3c844")
-                            {
-                                ssvsPath = Path.Combine(directoryInfo.FullName, "Output\\ProjectTemplates");
-                            }
-                        }
-                    }
+                    ssvsProjectTemplatesPath = GetSsvsProjectTemplatesPath(componentModel);
                 }
 
-                if (ssvsPath == null)
+                if (ssvsProjectTemplatesPath == null)
                 {
                     throw new Exception("Unable to find SSVS installed..");
                 }
@@ -75,7 +53,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                 }
                 string templateContainerName = templateContainerElement.Value;
                 var languageName = element.Descendants().FirstOrDefault(x => x.Name.LocalName.EqualsIgnoreCase("LanguageName"));
-                string langPath = Path.Combine(ssvsPath, languageName == null ? "CSharp" : languageName.Value);
+                string langPath = Path.Combine(ssvsProjectTemplatesPath, languageName == null ? "CSharp" : languageName.Value);
                 string languageZipPrefix = (languageName == null ? "CSharp" : languageName.Value).ToLower();
                 templateZipPath = Path.Combine(langPath, "ServiceStack\\" + templateContainerName + "." + languageZipPrefix + ".zip");
 
@@ -93,6 +71,36 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
 
             }
+        }
+
+        private static string GetSsvsProjectTemplatesPath(IComponentModel componentModel)
+        {
+            string result = null;
+            var vsVersion = componentModel.GetType().GetAssembly().GetName().Version.Major.ToString();
+            //Append 0 after getting major version component. This is to match directory name.
+            vsVersion += ".0";
+            var extensionsFolder = "%LocalAppData%\\Microsoft\\VisualStudio\\{0}\\Extensions".Fmt(vsVersion);
+            //Find generated folder containing SSVS extension by parsing mainfest files.
+            var extensionFolderDirInfo = new DirectoryInfo(extensionsFolder);
+            foreach (var directoryInfo in extensionFolderDirInfo.GetDirectories())
+            {
+                //Read manifest
+                var manifestFileInfo = directoryInfo.GetFiles("*.vsixmanifest").FirstOrDefault();
+                if (manifestFileInfo != null)
+                {
+                    var manifestContents = File.ReadAllText(manifestFileInfo.FullName);
+                    var elements = XElement.Parse(manifestContents);
+                    var identityElement =
+                        elements.Descendants().FirstOrDefault(x => x.Name.LocalName.EqualsIgnoreCase("Identity"));
+                    string id = identityElement == null ? null : identityElement.Attribute(XName.Get("Id")).Value;
+                    //ServiceStackVS ID
+                    if (id != null && id == "97413fa1-bad9-4cfb-a91c-c8d7b2c3c844")
+                    {
+                        result = Path.Combine(directoryInfo.FullName, "Output\\ProjectTemplates");
+                    }
+                }
+            }
+            return result;
         }
 
         public void ProjectFinishedGenerating(Project project)
