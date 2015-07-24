@@ -18,7 +18,6 @@
       <ProjectTemplateLink ProjectName="$safeprojectname$">ReactJS\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.AppWinForms">ReactJSWinForms\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.AppConsole">ReactJSConsole\MyTemplate.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="$safeprojectname$.AppMac">ReactJSMac\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Resources">ReactJSResources\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceModel">ServiceModel\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceInterface">ServiceInterface\MyTemplate.vstemplate</ProjectTemplateLink>
@@ -44,9 +43,15 @@
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerMultiProjectWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NuGetInstallerWizard.ExternalSolutionWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <packages>
       <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
     </packages>
+    <TemplateContainerName>ReactJSGap</TemplateContainerName>
+    <FolderPath>ReactJSMac</FolderPath>
   </WizardData>
 </VSTemplate>
