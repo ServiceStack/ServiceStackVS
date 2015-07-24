@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using $saferootprojectname$.Resources;
+﻿using $saferootprojectname$.Resources;
 using $saferootprojectname$.ServiceInterface;
 using Funq;
 using ServiceStack;
 using ServiceStack.Razor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace $safeprojectname$
 {

@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
 
   <TemplateData>
-    <Name>SelfHost with Chromium Embedded Framework Client using ReactJS</Name>
+    <Name>Chromium Embedded Framework with ReactJS Clients</Name>
     <Description>SelfHost with Chromium Embedded Framework Client using ReactJS App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your ReactJS application.</Description>
-    <DefaultName>CefReactApp</DefaultName>
+    <DefaultName>CefReactClient</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
@@ -16,7 +16,9 @@
   <TemplateContent>
     <ProjectCollection>
       <ProjectTemplateLink ProjectName="$safeprojectname$">ReactJS\MyTemplate.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="$safeprojectname$.WinForms">ReactJSWinForms\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.AppWinForms">ReactJSWinForms\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.AppConsole">ReactJSConsole\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.AppMac">ReactJSMac\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Resources">ReactJSResources\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceModel">ServiceModel\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceInterface">ServiceInterface\MyTemplate.vstemplate</ProjectTemplateLink>

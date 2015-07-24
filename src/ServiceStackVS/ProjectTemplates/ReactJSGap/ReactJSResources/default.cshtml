@@ -34,5 +34,13 @@
             <div id="demo"></div>
         </div>
         <script src="js/app.jsx.js"></script>
+        <script>
+            //Show about function for local dev, hooks into winforms when depoyed.
+            window.aboutDialog = window.aboutDialog || {
+                show: function () {
+                    alert("$safeprojectname$ - ServiceStack + ReactJS");
+                }
+            }
+        </script>
     </body>
 </html>

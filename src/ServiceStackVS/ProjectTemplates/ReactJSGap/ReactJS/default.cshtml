@@ -51,15 +51,13 @@
         <script type="text/jsx" src="js/components/hello.jsx"></script>
         <script type="text/jsx" src="js/app.jsx"></script>
         <!-- endbuild -->
-        <!-- build:remove -->
         <script>
             //Show about function for local dev, hooks into winforms when depoyed.
-            window.aboutDialog = {
+            window.aboutDialog = window.aboutDialog || {
                 show: function () {
-                    alert("Placeholder about box.");
+                    alert("$safeprojectname$ - ServiceStack + ReactJS");
                 }
             }
         </script>
-        <!-- endbuild -->
     </body>
 </html>
