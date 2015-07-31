@@ -1,4 +1,7 @@
+IF EXIST staging-console (
 RMDIR /S /Q .\staging-console
+)
+
 MKDIR staging-console
 
 SET TOOLS=.\tools

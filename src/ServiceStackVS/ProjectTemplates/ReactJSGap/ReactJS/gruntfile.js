@@ -23,8 +23,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
         exec: {
             jest: 'jest',
-            'package-console': 'cmd /c "cd wwwroot_build && 02-package-console.bat"',
-            'package-winforms': 'cmd /c "cd wwwroot_build && 02-package-winforms.bat"'
+            'package-console': {
+                command: 'cmd /c "cd wwwroot_build && 02-package-console.bat"',
+                exitCodes: [0, 1]
+            },
+            'package-winforms': {
+                command: 'cmd /c "cd wwwroot_build && 02-package-winforms.bat"',
+                exitCodes: [0, 1]
+            }
         },
         msbuild: {
             'release-console': {
