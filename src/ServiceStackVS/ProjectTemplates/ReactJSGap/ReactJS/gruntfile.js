@@ -22,7 +22,51 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         exec: {
-            jest: 'jest'
+            jest: 'jest',
+            'package-console': 'cmd /c "cd wwwroot_build && 02-package-console.bat"',
+            'package-winforms': 'cmd /c "cd wwwroot_build && 02-package-winforms.bat"'
+        },
+        msbuild: {
+            'release-console': {
+                src: ['../$safeprojectname$.AppConsole/$safeprojectname$.AppConsole.csproj'],
+                options: {
+                    projectConfiguration: 'Release',
+                    targets: ['Clean', 'Rebuild'],
+                    stdout: true,
+                    version: 4.0,
+                    maxCpuCount: 4,
+                    buildParameters: {
+                        WarningLevel: 2,
+                        SolutionDir: '..\\..'
+                    },
+                    verbosity: 'quiet'
+                }
+            },
+            'release-winforms': {
+                src: ['../$safeprojectname$.AppWinForms/$safeprojectname$.AppWinForms.csproj'],
+                options: {
+                    projectConfiguration: 'Release',
+                    targets: ['Clean', 'Rebuild'],
+                    stdout: true,
+                    version: 4.0,
+                    maxCpuCount: 4,
+                    buildParameters: {
+                        WarningLevel: 2,
+                        SolutionDir: '..\\..'
+                    },
+                    verbosity: 'quiet'
+                }
+            }
+        },
+        nugetrestore: {
+            'restore-console': {
+                src: '../$safeprojectname$.AppConsole/packages.config',
+                dest: '../../packages/'
+            },
+            'restore-winforms': {
+                src: '../$safeprojectname$.AppWinForms/packages.config',
+                dest: '../../packages/'
+            }
         },
         gulp: {
             'wwwroot-copy-webconfig': function () {
@@ -83,18 +127,34 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('ssvs-utils');
     grunt.loadNpmTasks('grunt-gulp');
+    grunt.loadNpmTasks('grunt-msbuild');
+    grunt.loadNpmTasks('grunt-nuget');
 
     grunt.registerTask('01-run-tests', ['exec:jest']);
+    grunt.registerTask('02-package-console', [
+        'gulp:wwwroot-copy-partials',
+        'gulp:wwwroot-copy-fonts',
+        'gulp:wwwroot-copy-images',
+        'gulp:wwwroot-bundle',
+        'gulp:wwwroot-bundle-html',
+        'nugetrestore:restore-console',
+        'msbuild:release-console',
+        'exec:package-console'
+    ]);
     grunt.registerTask('02-package-winforms', [
         'gulp:wwwroot-copy-partials',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
         'gulp:wwwroot-bundle',
-        'gulp:wwwroot-bundle-html'
+        'gulp:wwwroot-bundle-html',
+        'nugetrestore:restore-winforms',
+        'msbuild:release-winforms',
+        'exec:package-winforms'
     ]);
 
-    grunt.registerTask('build', ['02-package-winforms']);
+    grunt.registerTask('build', ['02-package-console','02-package-winforms']);
 
     grunt.registerTask('default', ['build']);
 };

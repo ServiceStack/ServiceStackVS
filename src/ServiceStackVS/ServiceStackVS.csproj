@@ -239,6 +239,9 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\Web.Debug.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\Web.Release.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\00-install-dependencies.bat" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\02-package-console.bat" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\02-package-winforms.bat" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\7z.sfx" />
     <None Include="ProjectTemplates\ReactJSGap\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ServiceModel\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\Test\packages.config" />
@@ -489,6 +492,9 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\tests\unit\hello-test.js" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\deploy\appsettings.txt" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\_preprocess.xml" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\7za.exe" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\ILMerge.exe" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\Licenses.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
     <Resource Include="ProjectTemplates\ReactJSGap\ServiceInterface\_preprocess.xml" />

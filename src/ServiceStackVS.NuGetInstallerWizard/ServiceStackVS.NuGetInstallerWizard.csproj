@@ -147,7 +147,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExternalSolutionWizard.cs" />
     <Compile Include="NuGetPackageInstallerMultiProjectWizard.cs" />
     <Compile Include="NuGetPackageInstallerWizard.cs" />
     <Compile Include="NuGetWizardDataPackage.cs" />
