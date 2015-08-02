@@ -492,9 +492,9 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\tests\unit\hello-test.js" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\deploy\appsettings.txt" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\_preprocess.xml" />
-    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-winforms.txt" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-winforms.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\7za.exe" />
-    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-console.txt" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-console.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\ILMerge.exe" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\Licenses.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyTemplate.vstemplate" />
