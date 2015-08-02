@@ -24,11 +24,11 @@ module.exports = function (grunt) {
         exec: {
             jest: 'jest',
             'package-console': {
-                command: 'cmd /c "cd wwwroot_build && 02-package-console.bat"',
+                command: 'cmd /c "cd wwwroot_build && package-deploy-console.bat"',
                 exitCodes: [0, 1]
             },
             'package-winforms': {
-                command: 'cmd /c "cd wwwroot_build && 02-package-winforms.bat"',
+                command: 'cmd /c "cd wwwroot_build && package-deploy-winforms.bat"',
                 exitCodes: [0, 1]
             }
         },

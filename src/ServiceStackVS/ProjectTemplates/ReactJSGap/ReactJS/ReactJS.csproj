@@ -106,10 +106,10 @@
     <Content Include="bower.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
-    <Content Include="wwwroot_build\02-package-console.bat" />
-    <Content Include="wwwroot_build\02-package-winforms.bat" />
+    <Content Include="wwwroot_build\package-deploy-console.bat" />
+    <Content Include="wwwroot_build\package-deploy-winforms.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\tools\7z.sfx" />
+    <Content Include="wwwroot_build\tools\7zsd_All.sfx" />
     <Content Include="wwwroot_build\tools\7za.exe" />
     <Content Include="wwwroot_build\tools\ILMerge.exe" />
     <Content Include="wwwroot_build\tools\Licenses.txt" />
