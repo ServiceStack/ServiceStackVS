@@ -139,28 +139,29 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-nuget');
 
     grunt.registerTask('01-run-tests', ['exec:jest']);
-    grunt.registerTask('02-package-console', [
+    grunt.registerTask('02-bundle-resources', [
         'gulp:wwwroot-copy-partials',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
         'gulp:wwwroot-bundle',
-        'gulp:wwwroot-bundle-html',
+        'gulp:wwwroot-bundle-html'
+    ]);
+
+    grunt.registerTask('03-package-console', [
+        '02-bundle-resources',
         'nugetrestore:restore-console',
         'msbuild:release-console',
         'exec:package-console'
     ]);
-    grunt.registerTask('02-package-winforms', [
-        'gulp:wwwroot-copy-partials',
-        'gulp:wwwroot-copy-fonts',
-        'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle',
-        'gulp:wwwroot-bundle-html',
+    grunt.registerTask('03-package-winforms', [
+        '02-bundle-resources',
         'nugetrestore:restore-winforms',
         'msbuild:release-winforms',
         'exec:package-winforms'
     ]);
 
-    grunt.registerTask('build', ['02-package-console','02-package-winforms']);
+    grunt.registerTask('build', ['02-bundle-resources']);
+    grunt.registerTask('package', ['03-package-console', '03-package-winforms']);
 
     grunt.registerTask('default', ['build']);
 };
