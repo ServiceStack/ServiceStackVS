@@ -78,7 +78,7 @@ This template relies on having [Node.js installed](http://nodejs.org/). If you t
 
 Once downloaded and installed, click `Continue` to create your project. If any of the NPM dependencies are not installed globally, the template will install the required NPM packages as well as download the Bower dependencies for the template. 
 
-Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.org/package/bower) and select the second option to **Use Git from the Windows Command Prompt**. This is required due to commands run by Bower to install dependencies from Git repositories.
+Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.com/package/bower#windows-users) and select the second option to **Use Git from the Windows Command Prompt**. This is required due to commands run by Bower to install dependencies from Git repositories.
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/git-setup.png)
 
