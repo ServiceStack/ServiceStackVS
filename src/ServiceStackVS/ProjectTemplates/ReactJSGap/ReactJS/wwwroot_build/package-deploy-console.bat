@@ -23,4 +23,8 @@ SET INPUT=%INPUT% %RELEASE%\System.Web.Razor.dll
 
 %ILMERGE% /target:exe /targetplatform:v4,"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5" /out:staging-console\%OUTPUTNAME% /ndebug %INPUT% 
 
-COPY .\staging-console\%OUTPUTNAME% .\
+IF NOT EXIST apps (
+mkdir apps
+)
+
+COPY /Y .\staging-console\%OUTPUTNAME% .\apps\
