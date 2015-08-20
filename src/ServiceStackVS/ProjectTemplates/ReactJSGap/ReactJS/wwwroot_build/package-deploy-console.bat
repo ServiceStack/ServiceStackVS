@@ -2,7 +2,7 @@ IF EXIST staging-console (
 RMDIR /S /Q .\staging-console
 )
 
-MKDIR staging-console
+MD staging-console
 
 SET TOOLS=.\tools
 SET OUTPUTNAME=$safeprojectname$.Console.exe
@@ -24,7 +24,7 @@ SET INPUT=%INPUT% %RELEASE%\System.Web.Razor.dll
 %ILMERGE% /target:exe /targetplatform:v4,"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5" /out:staging-console\%OUTPUTNAME% /ndebug %INPUT% 
 
 IF NOT EXIST apps (
-mkdir apps
+MD apps
 )
 
 COPY /Y .\staging-console\%OUTPUTNAME% .\apps\
