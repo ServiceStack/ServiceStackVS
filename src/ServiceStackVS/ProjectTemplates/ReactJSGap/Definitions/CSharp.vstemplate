@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
 
   <TemplateData>
-    <Name>React Apps</Name>
-    <Description>ReactJS Application with additional projects to produce; a CefSharp based WinForms application, Self host console application and Web application ready to deploy to IIS using preconfigured Grunt/Gulp tasks.</Description>
-    <DefaultName>ReactApps</DefaultName>
+    <Name>React Desktop Apps</Name>
+    <Description>React application with additional projects to produce; a CefSharp based WinForms application, Self host console application and Web application ready to deploy to IIS using preconfigured Grunt/Gulp tasks.</Description>
+    <DefaultName>ReactDesktopApps</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
