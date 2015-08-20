@@ -20,16 +20,8 @@ namespace $safeprojectname$
         {
             InitializeComponent();
 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(292, 273);
-
-            this.ControlBox = false;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.VerticalScroll.Visible = false;
-            this.FormBorderStyle = FormBorderStyle.None;
 
-            WindowState = FormWindowState.Maximized;
             chromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
             {
                 Dock = DockStyle.Fill
@@ -41,7 +33,17 @@ namespace $safeprojectname$
                 Cef.Shutdown();
             };
 
+            this.Load += Form1_Load;
+
             chromiumBrowser.RegisterJsObject("aboutDialog", new AboutDialogJsObject(), camelCaseJavascriptNames: true);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Left = Top = 0;
+            Width = Screen.PrimaryScreen.WorkingArea.Width;
+            Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
     }
 
