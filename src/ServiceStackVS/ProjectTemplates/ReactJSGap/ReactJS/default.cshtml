@@ -39,7 +39,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="#" onclick="aboutDialog.show()">About</a></li>
+                        <li><a href="#" onclick=" aboutDialog.show() ">About</a></li>
+                        <li><a href="#" onclick="winForm.close()">Close</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,10 +55,15 @@
         <script>
             //Show about function for local dev, hooks into winforms when depoyed.
             window.aboutDialog = window.aboutDialog || {
-                show: function () {
+                show: function() {
                     alert("$safeprojectname$ - ServiceStack + ReactJS");
                 }
-            }
+            };
+            window.winForm = window.winForm || {
+                close: function() {
+                    window.close();
+                }
+            };
         </script>
     </body>
 </html>

@@ -14,15 +14,13 @@ namespace $safeprojectname$
 {
     public partial class FormMain : Form
     {
-        private readonly ChromiumWebBrowser chromiumBrowser;
-
         public FormMain()
         {
             InitializeComponent();
 
             this.VerticalScroll.Visible = false;
 
-            chromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
+            var chromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
             {
                 Dock = DockStyle.Fill
             };
@@ -35,7 +33,8 @@ namespace $safeprojectname$
 
             this.Load += Form1_Load;
 
-            chromiumBrowser.RegisterJsObject("aboutDialog", new AboutDialogJsObject(), camelCaseJavascriptNames: true);
+            chromiumBrowser.RegisterJsObject("aboutDialog", new AboutDialogJsObject());
+            chromiumBrowser.RegisterJsObject("winForm",new WinFormsApp(this));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +50,25 @@ namespace $safeprojectname$
     {
         public void Show()
         {
-            MessageBox.Show("ServiceStack with CefSharp + ReactJS","$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"ServiceStack with CefSharp + ReactJS",@"$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+
+    public class WinFormsApp
+    {
+        public FormMain Form { get; set; }
+
+        public WinFormsApp(FormMain form)
+        {
+            Form = form;
+        }
+
+        public void Close()
+        {
+            Form.InvokeOnUiThreadIfRequired(() =>
+            {
+                Form.Close();  
+            });
         }
     }
 }

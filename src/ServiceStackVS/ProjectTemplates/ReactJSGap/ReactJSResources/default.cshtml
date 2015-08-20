@@ -25,7 +25,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="#" onclick="aboutDialog.show()">About</a></li>
+                        <li><a href="#" onclick=" aboutDialog.show()">About</a></li>
+                        <li><a href="#" onclick="winForm.close()">Close</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +41,12 @@
                 show: function () {
                     alert("$safeprojectname$ - ServiceStack + ReactJS");
                 }
-            }
+            };
+            window.winForm = window.winForm || {
+                close: function () {
+                    window.close();
+                }
+            };
         </script>
     </body>
 </html>
