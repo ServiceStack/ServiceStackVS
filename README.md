@@ -36,10 +36,10 @@ The new ServiceStackVS **ReactJS App** template shares the same approach for dev
 
 The templates conveniently pre-configures the above libraries into a working out-of-the-box solution, including high-level grunt tasks to take care of the full-dev-cycle of **building**, **packaging** and **deploying** your app:
 
- - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
- - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **[01-run-tests](#01-run-tests)** - Runs Karma JavaScript Unit Tests
+ - **[02-package-server](#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
+ - **[03-package-client](#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[04-deploy-app](#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
 For in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
 
