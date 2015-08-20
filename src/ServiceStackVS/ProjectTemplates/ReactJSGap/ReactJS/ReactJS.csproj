@@ -111,6 +111,7 @@
     <Content Include="wwwroot_build\config-winforms.txt" />
     <Content Include="wwwroot_build\package-deploy-winforms.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
+    <Content Include="wwwroot_build\publish\config.json" />
     <Content Include="wwwroot_build\tools\7zsd_All.sfx" />
     <Content Include="wwwroot_build\tools\7za.exe" />
     <Content Include="wwwroot_build\tools\ILMerge.exe" />

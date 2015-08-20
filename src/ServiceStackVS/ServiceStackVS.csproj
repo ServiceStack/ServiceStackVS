@@ -241,6 +241,7 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\00-install-dependencies.bat" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\package-deploy-console.bat" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\package-deploy-winforms.bat" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\publish\config.json" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\7zsd_All.sfx" />
     <None Include="ProjectTemplates\ReactJSGap\ServiceInterface\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ServiceModel\packages.config" />
