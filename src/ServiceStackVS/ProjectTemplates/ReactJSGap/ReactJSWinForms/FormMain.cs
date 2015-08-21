@@ -12,31 +12,30 @@ namespace $safeprojectname$
         {
             InitializeComponent();
 
-            this.VerticalScroll.Visible = false;
+            VerticalScroll.Visible = false;
 
             var chromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
             {
                 Dock = DockStyle.Fill
             };
-            this.Controls.Add(chromiumBrowser);
 
-            this.FormClosed += (sender, args) =>
+            Controls.Add(chromiumBrowser);
+
+            FormClosed += (sender, args) =>
             {
                 Cef.Shutdown();
             };
 
-            this.Load += Form1_Load;
+            Load += (sender, args) =>
+            {
+                FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                Left = Top = 0;
+                Width = Screen.PrimaryScreen.WorkingArea.Width;
+                Height = Screen.PrimaryScreen.WorkingArea.Height;
+            };
 
             chromiumBrowser.RegisterJsObject("aboutDialog", new AboutDialogJsObject());
             chromiumBrowser.RegisterJsObject("winForm",new WinFormsApp(this));
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Left = Top = 0;
-            Width = Screen.PrimaryScreen.WorkingArea.Width;
-            Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
     }
 
