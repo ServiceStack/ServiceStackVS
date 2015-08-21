@@ -26,6 +26,7 @@
   <WizardData>
     <packages>
       <package id="ServiceStack.Gap" version="latest" />
+      <package id="ServiceStack.Server" version="latest" />
     </packages>
   </WizardData>
 </VSTemplate>

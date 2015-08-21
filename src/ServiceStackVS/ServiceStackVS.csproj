@@ -495,7 +495,6 @@
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\_preprocess.xml" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-winforms.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\7za.exe" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\config-console.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\ILMerge.exe" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\Licenses.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyTemplate.vstemplate" />

@@ -1,4 +1,0 @@
-﻿;!@Install@!UTF-8!
-ExecuteFile="$safeprojectname$.Console.exe"
-GUIMode="2"
-;!@InstallEnd@!
