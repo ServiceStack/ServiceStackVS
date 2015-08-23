@@ -1,18 +1,20 @@
-﻿using Funq;
-using ${SolutionName}.ServiceInterface;
-using ServiceStack.Razor;
+﻿using System;
 using ServiceStack;
+using Funq;
+using ServiceStack.Razor;
+using ${SolutionName}.ServiceInterface;
+using ${SolutionName}.Resources;
 
 namespace ${Namespace}
 {
-	public class AppHost : AppHostBase
+	public class AppHost : AppSelfHostBase
 	{
 		/// <summary>
 		/// Default constructor.
 		/// Base constructor requires a name and assembly to locate web service classes. 
 		/// </summary>
 		public AppHost()
-			: base("${ProjectName}", typeof(MyServices).Assembly)
+			: base("${SolutionName}", typeof(MyServices).Assembly)
 		{
 
 		}
@@ -26,9 +28,19 @@ namespace ${Namespace}
 		{
 			//Config examples
 			//this.Plugins.Add(new PostmanFeature());
-			//this.Plugins.Add(new CorsFeature());
+			//Plugins.Add(new CorsFeature());
 
-			this.Plugins.Add(new RazorFormat());
+			Plugins.Add(new RazorFormat
+				{
+					LoadFromAssemblies = { typeof(CefResources).Assembly },
+				});
+
+			SetConfig(new HostConfig
+				{
+					DebugMode = true,
+					EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
+				});
 		}
 	}
 }
+
