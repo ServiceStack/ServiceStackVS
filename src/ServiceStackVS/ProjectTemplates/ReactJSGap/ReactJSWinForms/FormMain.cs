@@ -49,18 +49,27 @@ namespace $safeprojectname$
 
     public class WinFormsApp
     {
-        public FormMain Form { get; set; }
+        private FormMain form;
 
         public WinFormsApp(FormMain form)
         {
-            Form = form;
+            this.form = form;
         }
 
         public void Close()
         {
-            Form.InvokeOnUiThreadIfRequired(() =>
+            form.InvokeOnUiThreadIfRequired(() =>
             {
-                Form.Close();  
+                form.Close();  
+            });
+        }
+
+        public void ToggleFormBorder()
+        {
+            form.InvokeOnUiThreadIfRequired(() => {
+                form.FormBorderStyle = form.FormBorderStyle == FormBorderStyle.None
+                    ? FormBorderStyle.Sizable
+                    : FormBorderStyle.None;
             });
         }
     }
