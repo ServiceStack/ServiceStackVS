@@ -237,7 +237,7 @@ module.exports = function (grunt) {
         '01-bundle-all',
         'exec:package-winforms'
     ]);
-    grunt.registerTask('04-deploy-app', [
+    grunt.registerTask('04-deploy-webapp', [
         'nugetrestore:restore-webapp',
         'msbuild:release-webapp',
         '01-bundle-all',

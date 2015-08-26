@@ -1,2 +1,6 @@
 ﻿body {
 }
+
+.navbar {
+    border-radius: 0;
+}
