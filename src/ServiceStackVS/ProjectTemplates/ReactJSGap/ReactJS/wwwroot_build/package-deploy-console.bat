@@ -1,3 +1,4 @@
+@echo off
 IF EXIST staging-console (
 RMDIR /S /Q .\staging-console
 )
@@ -5,7 +6,7 @@ RMDIR /S /Q .\staging-console
 MD staging-console
 
 SET TOOLS=.\tools
-SET OUTPUTNAME=$safeprojectname$.Console.exe
+SET OUTPUTNAME=$safeprojectname$-console.exe
 SET ILMERGE=%TOOLS%\ILMerge.exe
 SET RELEASE=..\..\$safeprojectname$.AppConsole\bin\x86\Release
 SET INPUT=%RELEASE%\$safeprojectname$.AppConsole.exe
@@ -30,3 +31,5 @@ MD apps
 )
 
 COPY /Y .\staging-console\%OUTPUTNAME% .\apps\
+
+echo ------------- && echo  deployed to: .\wwwroot_build\apps\%OUTPUTNAME% && echo -------------
