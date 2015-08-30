@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="ProjectTemplates\ReactJsMac\ReactJS.AppMac.csproj" />
     <None Include="logo_32x32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

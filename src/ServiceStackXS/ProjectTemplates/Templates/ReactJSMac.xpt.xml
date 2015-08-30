@@ -20,7 +20,7 @@
 			<StartupProject>${ProjectName}</StartupProject>
 		</Options>
 
-		<Project name = "${ProjectName}" directory = "." type = "MonoMac">
+		<Project name = "${ProjectName}" directory = "." type = "XamMac">
 			<Options TargetFrameworkVersion = "4.5" />
 			<References>
 				<Reference type="Gac" refto="System" />
@@ -28,9 +28,16 @@
 				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Gac" refto="System.Xml.Linq" />
 				<Reference type="Gac" refto="System.Drawing" />
+				<Reference type="Gac" refto="MonoMac, Version=0.0.0.0, Culture=neutral" />
 			</References>
 			<Packages>
-
+				<Package ID="ServiceStack" 				Version="4.0.42" />
+				<Package ID="ServiceStack.Client" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Common" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Interfaces" 	Version="4.0.42" />
+				<Package ID="ServiceStack.OrmLite" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Razor" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Text" 		Version="4.0.42" />
 			</Packages>
 			<Files>
 				<File name="AppDelegate.cs" src="../ReactJsMac/AppDelegate.cs"/>
@@ -43,8 +50,8 @@
 				<File name="MainWindow.designer.cs" src="../ReactJsMac/MainWindow.designer.cs"/>
 				<File name="MainWindow.xib" src="../ReactJsMac/MainWindow.xib"/>
 				<File name="MainWindowController.cs" src="../ReactJsMac/MainWindowController.cs"/>
-				<File name="mac.css" src="../ReactJsMac/mac.css"/>
-				<File name="mac.js" src="../ReactJsMac/mac.js"/>
+				<File name="mac.css" src="../ReactJsMac/mac.css" BuildAction="EmbeddedResource"/>
+				<File name="mac.js" src="../ReactJsMac/mac.js" BuildAction="EmbeddedResource"/>
 			</Files>
 		</Project>
 

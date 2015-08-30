@@ -31,7 +31,6 @@
     <Import file="ProjectTemplates/ReactJsMac/MainWindowController.cs" />
     <Import file="ProjectTemplates/ReactJsMac/mac.css" />
     <Import file="ProjectTemplates/ReactJsMac/mac.js" />
-
   </Runtime>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
