@@ -45,8 +45,19 @@ namespace ${Namespace}
 			SetConfig(new HostConfig
 				{
 					DebugMode = true,
-					EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
+					EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) }
 				});
+
+			Routes.Add<NativeHostAction>("/nativehost/{Action}");
+			ServiceController.RegisterService(typeof(NativeHostService));
+
+			var allKeys = AppSettings.GetAllKeys();
+			if (!allKeys.Contains("platformsClassName"))
+				AppSettings.Set("platformsClassName", "console");
+			if (!allKeys.Contains("PlatformCss"))
+				AppSettings.Set("PlatformCss", "mac.css");
+			if (!allKeys.Contains("PlatformJs"))
+				AppSettings.Set("PlatformJs", "mac.js");
 		}
 	}
 
