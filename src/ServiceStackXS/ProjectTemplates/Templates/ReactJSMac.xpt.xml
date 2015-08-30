@@ -28,7 +28,6 @@
 				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Gac" refto="System.Xml.Linq" />
 				<Reference type="Gac" refto="System.Drawing" />
-				<Reference type="Gac" refto="MonoMac, Version=0.0.0.0, Culture=neutral" />
 			</References>
 			<Packages>
 
@@ -44,6 +43,8 @@
 				<File name="MainWindow.designer.cs" src="../ReactJsMac/MainWindow.designer.cs"/>
 				<File name="MainWindow.xib" src="../ReactJsMac/MainWindow.xib"/>
 				<File name="MainWindowController.cs" src="../ReactJsMac/MainWindowController.cs"/>
+				<File name="mac.css" src="../ReactJsMac/mac.css"/>
+				<File name="mac.js" src="../ReactJsMac/mac.js"/>
 			</Files>
 		</Project>
 

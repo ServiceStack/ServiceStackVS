@@ -10,6 +10,7 @@ namespace ${Namespace}
 	{
 		public static string HostUrl = "http://localhost:3337/";
 		public static AppHost App;
+		public static NSMenu MainMenu;
 
 		static void Main (string[] args)
 		{
