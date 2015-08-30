@@ -94,6 +94,7 @@
     <Content Include="gruntfile.js" />
     <Content Include="default.cshtml" />
     <Content Include="js\components\hello.jsx" />
+    <Content Include="js\web.js" />
     <Content Include="js\app.jsx" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />

@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$
 {
-  
     static class Program
     {
+        public static string HostUrl = "http://localhost:2337/";
+
         /// <summary>
         /// The main entry point for the application
         /// </summary>
@@ -25,7 +26,5 @@ namespace $safeprojectname$
 
             Thread.Sleep(Timeout.Infinite);
         }
-
-        public static string HostUrl = "http://localhost:2337/";
     }
 }

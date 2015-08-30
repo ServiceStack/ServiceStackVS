@@ -8,18 +8,18 @@ namespace $safeprojectname$
 {
     public partial class FormMain : Form
     {
+        public ChromiumWebBrowser ChromiumBrowser { get; private set; }
         public FormMain()
         {
             InitializeComponent();
-
             VerticalScroll.Visible = false;
 
-            var chromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
+            ChromiumBrowser = new ChromiumWebBrowser(Program.HostUrl)
             {
                 Dock = DockStyle.Fill
             };
 
-            Controls.Add(chromiumBrowser);
+            Controls.Add(ChromiumBrowser);
 
             FormClosed += (sender, args) =>
             {
@@ -34,43 +34,7 @@ namespace $safeprojectname$
                 Height = Screen.PrimaryScreen.WorkingArea.Height;
             };
 
-            chromiumBrowser.RegisterJsObject("aboutDialog", new AboutDialogJsObject());
-            chromiumBrowser.RegisterJsObject("winForm",new WinFormsApp(this));
-        }
-    }
-
-    public class AboutDialogJsObject
-    {
-        public void Show()
-        {
-            MessageBox.Show(@"ServiceStack with CefSharp + ReactJS",@"$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    }
-
-    public class WinFormsApp
-    {
-        private FormMain form;
-
-        public WinFormsApp(FormMain form)
-        {
-            this.form = form;
-        }
-
-        public void Close()
-        {
-            form.InvokeOnUiThreadIfRequired(() =>
-            {
-                form.Close();  
-            });
-        }
-
-        public void ToggleFormBorder()
-        {
-            form.InvokeOnUiThreadIfRequired(() => {
-                form.FormBorderStyle = form.FormBorderStyle == FormBorderStyle.None
-                    ? FormBorderStyle.Sizable
-                    : FormBorderStyle.None;
-            });
+            ChromiumBrowser.RegisterJsObject("nativeHost", new NativeHost(this));
         }
     }
 }

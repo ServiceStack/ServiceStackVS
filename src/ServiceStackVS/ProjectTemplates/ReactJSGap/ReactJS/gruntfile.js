@@ -17,6 +17,7 @@ module.exports = function (grunt) {
     var react = require('gulp-react');
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
+    var resourcesLib = '../../lib/';
 
     // Deployment config
     var config = require('./wwwroot_build/publish/config.json');
@@ -78,6 +79,21 @@ module.exports = function (grunt) {
                     },
                     verbosity: 'quiet'
                 }
+            },
+            'release-resources': {
+                src: ['..\\$safeprojectname$.Resources\\$safeprojectname$.Resources.csproj'],
+                options: {
+                    projectConfiguration: 'Release',
+                    targets: ['Clean', 'Rebuild'],
+                    stdout: true,
+                    version: 4.0,
+                    maxCpuCount: 4,
+                    buildParameters: {
+                        WarningLevel: 2,
+                        SolutionDir: '..\\..'
+                    },
+                    verbosity: 'quiet'
+                }
             }
         },
         nugetrestore: {
@@ -91,6 +107,10 @@ module.exports = function (grunt) {
             },
             'restore-webapp': {
                 src: './packages.config',
+                dest: '../../packages/'
+            },
+            'restore-resources': {
+                src: '../$safeprojectname$.Resources/packages.config',
                 dest: '../../packages/'
             }
         },
@@ -162,14 +182,6 @@ module.exports = function (grunt) {
                     '!wwwroot/appsettings.txt' //Don't delete deploy settings
                 ], done);
             },
-            'wwwroot-copy-partials': function () {
-                var partialsResourceDest = resourcesRoot + 'partials';
-                var partialsWebRootDest = webRoot + 'partials';
-                return gulp.src('partials/**/*.html')
-                    .pipe(newer(partialsResourceDest))
-                    .pipe(gulp.dest(partialsResourceDest))
-                    .pipe(gulp.dest(partialsWebRootDest));
-            },
             'wwwroot-copy-fonts': function () {
                 return gulp.src('./bower_components/bootstrap/dist/fonts/*.*')
                     .pipe(gulp.dest(resourcesRoot + 'lib/fonts/'))
@@ -179,6 +191,10 @@ module.exports = function (grunt) {
                 return gulp.src('./img/**/*')
                     .pipe(gulp.dest(resourcesRoot + 'img/'))
                     .pipe(gulp.dest(webRoot + 'img/'));
+            },
+            'wwwroot-copy-webjs': function () {
+                return gulp.src('./js/web.js')
+                   .pipe(gulp.dest(webRoot + 'js/'));
             },
             'wwwroot-bundle': function () {
                 var assets = useref.assets({ searchPath: './' });
@@ -201,6 +217,11 @@ module.exports = function (grunt) {
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
 
+            },
+            'copy-resources-lib': function () {
+                return gulp.src('../$safeprojectname$.Resources/bin/Release/$safeprojectname$.Resources.dll')
+                    .pipe(newer(resourcesLib))
+                    .pipe(gulp.dest(resourcesLib));
             }
         }
     });
@@ -219,10 +240,13 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-webconfig',
         'gulp:wwwroot-copy-asax',
         'gulp:wwwroot-copy-deploy-files',
-        'gulp:wwwroot-copy-partials',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle'
+        'gulp:wwwroot-copy-webjs',
+        'gulp:wwwroot-bundle',
+        'nugetrestore:restore-resources',
+        'msbuild:release-resources',
+        'gulp:copy-resources-lib'
     ]);
 
     grunt.registerTask('02-package-console', [
@@ -231,12 +255,14 @@ module.exports = function (grunt) {
         '01-bundle-all',
         'exec:package-console'
     ]);
+
     grunt.registerTask('03-package-winforms', [
         'nugetrestore:restore-winforms',
         'msbuild:release-winforms',
         '01-bundle-all',
         'exec:package-winforms'
     ]);
+
     grunt.registerTask('04-deploy-webapp', [
         'nugetrestore:restore-webapp',
         'msbuild:release-webapp',

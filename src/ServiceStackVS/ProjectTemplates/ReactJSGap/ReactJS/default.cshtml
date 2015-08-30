@@ -1,74 +1,71 @@
-﻿<!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <!--build:css lib/css/bootstrap.min.css-->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <!-- endbuild -->
-        <!--build:css css/app.min.css-->
-        <link rel="stylesheet" href="css/app.css" />
-        <!-- endbuild -->
-        <!-- build:js lib/js/jquery.min.js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <!-- endbuild -->
-        <!-- build:js lib/js/bootstrap.min.js -->
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <!-- endbuild -->
-        <!-- build:js lib/js/modernizr.min.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
-        <!-- build:js lib/js/react.min.js -->
-        <script src="bower_components/react/react.js"></script>
-        <!-- endbuild -->
-        <!-- build:remove -->
-        <script src="bower_components/react/JSXTransformer.js"></script>
-        <!-- endbuild -->
-
-        <title>$safeprojectname$</title>
-    </head>
-    <body>
-        <div class="navbar navbar-inverse" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">$safeprojectname$</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav pull-right">
-                        <li><a href="#" onclick=" aboutDialog.show() ">About</a></li>
-                        <li class="winforms"><a href="#" onclick="winForm.toggleFormBorder()">FormBorder</a></li>
-                        <li><a href="#" onclick="winForm.close()">Close</a></li>
-                    </ul>
-                </div>
+﻿@inherits ServiceStack.Razor.ViewPage
+@{
+    var platformsClassName = AppSettings.Exists("PlatformClassName") ? AppSettings.GetString("PlatformClassName") : "web";         
+}
+<!DOCTYPE html>
+<html @platformsClassName>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--build:css lib/css/bootstrap.min.css-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbuild -->
+    <!--build:css css/app.min.css-->
+    <link rel="stylesheet" href="css/app.css" />
+    <!-- endbuild -->
+    @if (AppSettings.Exists("PlatformCss"))
+    {
+        <link rel="stylesheet" href="@(AppSettings.GetString("PlatformCss") + "?disableCache=" + DateTime.Now.Ticks)" />
+    }
+    <!-- build:js lib/js/jquery.min.js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+    <!-- build:js lib/js/bootstrap.min.js -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbuild -->
+    <!-- build:js lib/js/modernizr.min.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <!-- build:js lib/js/react.min.js -->
+    <script src="bower_components/react/react.js"></script>
+    <!-- endbuild -->
+    <!-- build:remove -->
+    <script src="bower_components/react/JSXTransformer.js"></script>
+    <!-- endbuild -->
+    @if (AppSettings.Exists("PlatformJs"))
+    {
+        <script src="@(AppSettings.GetString("PlatformJs") + "?disableCache=" + DateTime.UtcNow.Ticks)"></script>
+    }
+    <title>$safeprojectname$</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">$safeprojectname$</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="#" onclick=" nativeHost.showAbout() ">About</a></li>
+                    <li class="nativeApp winforms"><a href="#" onclick="nativeHost.toggleFormBorder()">FormBorder</a></li>
+                    <li class="nativeApp winforms console"><a href="#" onclick="nativeHost.quit()">Close</a></li>
+                </ul>
             </div>
         </div>
-        <div class="container">
-            <div id="demo"></div>
-        </div>
-        <!-- build:js js/app.jsx.js -->
-        <script type="text/jsx" src="js/components/hello.jsx"></script>
-        <script type="text/jsx" src="js/app.jsx"></script>
-        <!-- endbuild -->
-        <script>
-            //Show about function for local dev, hooks into winforms when depoyed.
-            if (!window.winForm) {
-                $(".winforms").hide();
-            }
-            window.aboutDialog = window.aboutDialog || {
-                show: function() {
-                    alert("$safeprojectname$ - ServiceStack + ReactJS");
-                }
-            };
-            window.winForm = window.winForm || {
-                close: function() {
-                    window.close();
-                }
-            };
-        </script>
-    </body>
+    </div>
+    <div class="container">
+        <div id="demo"></div>
+    </div>
+    <!-- build:js js/app.jsx.js -->
+    <script type="text/jsx" src="js/components/hello.jsx">
+    </script>
+    <script type="text/jsx" src="js/app.jsx">
+    </script>
+    <!-- endbuild -->
+</body>
 </html>

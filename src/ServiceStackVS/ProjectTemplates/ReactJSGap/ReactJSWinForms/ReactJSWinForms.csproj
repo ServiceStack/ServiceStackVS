@@ -133,6 +133,10 @@
       <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="winforms.css" />
+    <EmbeddedResource Include="winforms.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\packages\cef.redist.x86.3.2272.32\build\cef.redist.x86.targets" Condition="Exists('$(SolutionDir)\packages\cef.redist.x86.3.2272.32\build\cef.redist.x86.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

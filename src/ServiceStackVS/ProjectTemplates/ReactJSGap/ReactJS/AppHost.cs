@@ -39,9 +39,11 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //this.Plugins.Add(new CorsFeature());
 
-            SetConfig( new HostConfig
+            SetConfig(new HostConfig
             {
-                DebugMode = AppSettings.Get("DebugMode",false),
+                DebugMode = AppSettings.Get("DebugMode", false),
+                DefaultContentType = MimeTypes.Json,
+                AllowFileExtensions = { "jsx" },
                 AddRedirectParamsToQueryString = true
             });
 

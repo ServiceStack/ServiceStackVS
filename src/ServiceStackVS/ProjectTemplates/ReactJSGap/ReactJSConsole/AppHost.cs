@@ -1,13 +1,18 @@
-﻿using $saferootprojectname$.Resources;
-using $saferootprojectname$.ServiceInterface;
-using Funq;
-using ServiceStack;
-using ServiceStack.Razor;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Reflection;
+using Funq;
+using $saferootprojectname$.Resources;
+using $saferootprojectname$.ServiceInterface;
+using ServiceStack;
+using ServiceStack.Auth;
+using ServiceStack.Configuration;
+using ServiceStack.Razor;
+using ServiceStack.Redis;
+using ServiceStack.Text;
+
 
 namespace $safeprojectname$
 {
@@ -44,6 +49,56 @@ namespace $safeprojectname$
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
             });
+
+            var allKeys = AppSettings.GetAllKeys();
+
+            if (!allKeys.Contains("platformsClassName"))
+                AppSettings.Set("platformsClassName", "console");
+            if (!allKeys.Contains("PlatformCss"))
+                AppSettings.Set("PlatformCss", "console.css");
+            if (!allKeys.Contains("PlatformJs"))
+                AppSettings.Set("PlatformJs", "console.js");
+
+            // This route is added using Routes.Add and ServiceController.RegisterService due to
+            // using ILMerge limiting our AppHost : base() call to one assembly.
+            // If two assemblies are used, the base() call searchs the same assembly twice due to the ILMerged result.
+            Routes.Add<NativeHostAction>("/nativehost/{Action}");
+            ServiceController.RegisterService(typeof(NativeHostService));
+        }
+    }
+
+    public class NativeHostService : Service
+    {
+        public object Get(NativeHostAction request)
+        {
+            if (string.IsNullOrEmpty(request.Action))
+            {
+                throw HttpError.NotFound("Function Not Found");
+            }
+            Type nativeHostType = typeof(NativeHost);
+            object nativeHost = nativeHostType.CreateInstance<NativeHost>();
+            //Upper case first character.
+            string methodName = request.Action.First().ToString().ToUpper() + String.Join("", request.Action.Skip(1));
+            MethodInfo methodInfo = nativeHostType.GetMethod(methodName);
+            if (methodInfo == null)
+            {
+                throw new HttpError(HttpStatusCode.NotFound, "Function Not Found");
+            }
+            methodInfo.Invoke(nativeHost, null);
+            return null;
+        }
+    }
+
+    public class NativeHostAction : IReturnVoid
+    {
+        public string Action { get; set; }
+    }
+
+    public class NativeHost
+    {
+        public void Quit()
+        {
+            Environment.Exit(0);
         }
     }
 }

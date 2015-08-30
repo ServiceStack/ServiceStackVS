@@ -1,13 +1,27 @@
-﻿<!DOCTYPE html>
+﻿@inherits ServiceStack.Razor.ViewPage
+@{
+    var platformsClassName = AppSettings.Exists("PlatformClassName") ? AppSettings.GetString("PlatformClassName") : "web";
+}
+<!DOCTYPE html>
 <html>
     <head lang="en">
         <meta charset="UTF-8">
         <link rel="stylesheet" href="lib/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/app.min.css">
         <script src="lib/js/jquery.min.js"></script>
         <script src="lib/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/app.min.css">
+        @if (AppSettings.Exists("PlatformCss"))
+        {
+            <link rel="stylesheet" href="@(AppSettings.GetString("PlatformCss") + "?disableCache=" + DateTime.Now.Ticks)" />
+        }
+
         <script src="lib/js/modernizr.min.js"></script>
         <script src="lib/js/react.min.js"></script>
+
+        @if (AppSettings.Exists("PlatformJs"))
+        {
+            <script src="@(AppSettings.GetString("PlatformJs") + "?disableCache=" + DateTime.UtcNow.Ticks)"></script>
+        }
     
         <title>$saferootprojectname$</title>
     </head>
@@ -25,9 +39,9 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="#" onclick=" aboutDialog.show() ">About</a></li>
-                        <li class="winforms"><a href="#" onclick="winForm.toggleFormBorder()">FormBorder</a></li>
-                        <li><a href="#" onclick="winForm.close()">Close</a></li>
+                        <li><a href="#" onclick=" nativeHost.showAbout() ">About</a></li>
+                        <li class="nativeApp winforms"><a href="#" onclick="nativeHost.toggleFormBorder()">FormBorder</a></li>
+                        <li class="nativeApp winforms console"><a href="#" onclick="nativeHost.quit()">Close</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,21 +50,5 @@
             <div id="demo"></div>
         </div>
         <script src="js/app.jsx.js"></script>
-        <script>
-            //Show about function for local dev, hooks into winforms when depoyed.
-            if (!window.winForm) {
-                $(".winforms").hide();
-            }
-            window.aboutDialog = window.aboutDialog || {
-                show: function () {
-                    alert("$saferootprojectname$ - ServiceStack + ReactJS");
-                }
-            };
-            window.winForm = window.winForm || {
-                close: function () {
-                    window.close();
-                }
-            };
-        </script>
     </body>
 </html>
