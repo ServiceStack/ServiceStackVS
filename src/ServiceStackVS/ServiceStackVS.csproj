@@ -217,6 +217,8 @@
     <None Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\App.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainMenu.xib" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.xib" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.cshtml" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.eot" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.ttf" />
@@ -261,6 +263,17 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\AppHost.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppHost.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\Main.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindowController.cs" />
     <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
@@ -456,6 +469,11 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\console.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\console.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\Info.plist" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.sln" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.jsx.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\bootstrap.min.css" />
@@ -1203,6 +1221,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.ExternalTemplateWizard\ServiceStackVS.ExternalTemplateWizard.csproj">
+      <Project>{E803E797-51CD-4ADE-87A3-27FBA70609C4}</Project>
+      <Name>ServiceStackVS.ExternalTemplateWizard</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.NativeTypesWizard\ServiceStackVS.NativeTypesWizard.csproj">
       <Project>{f5130cfd-c749-427e-a814-8115eebdca90}</Project>
       <Name>ServiceStackVS.NativeTypesWizard</Name>

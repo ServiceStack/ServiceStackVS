@@ -22,7 +22,7 @@ namespace $safeprojectname$
 
         public void ShowAbout()
         {
-            MessageBox.Show(@"ServiceStack with CefSharp + ReactJS", @"ReactDesktopApps8.AppWinForms", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"ServiceStack with CefSharp + ReactJS", @"$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ToggleFormBorder()

@@ -43,9 +43,31 @@
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerMultiProjectWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.ExternalTemplateWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.ExternalTemplateWizard.ExternalTemplateWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <packages>
       <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
     </packages>
+    <ExternalTemplate name="ReactJSMac" projFile="ReactJSMac.csproj" solutionFile="ReactJSMac.sln" 
+                      outputSolutionName="$safeprojectname$Mac.sln" 
+                      outputProjectName="$safeprojectname$.AppMac.csproj">
+      <Files>
+        <File name="AppDelegate.cs" />
+        <File name="AppDelegate.designer.cs" />
+        <File name="AppHost.cs" />
+        <File name="Info.plist" />
+        <File name="Main.cs" />
+        <File name="MainMenu.xib" />
+        <File name="MainWindow.cs" />
+        <File name="MainWindow.designer.cs" />
+        <File name="MainWindow.xib" />
+        <File name="MainWindowController.cs" />
+        <File name="mac.css" />
+        <File name="mac.js" />
+      </Files>
+    </ExternalTemplate>
   </WizardData>
 </VSTemplate>

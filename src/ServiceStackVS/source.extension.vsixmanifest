@@ -31,5 +31,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NPMInstallerWizard" Path="|ServiceStackVS.NPMInstallerWizard|" AssemblyName="|ServiceStackVS.NPMInstallerWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NuGetInstallerWizard" Path="|ServiceStackVS.NuGetInstallerWizard|" AssemblyName="|ServiceStackVS.NuGetInstallerWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.ExternalTemplateWizard" Path="|ServiceStackVS.ExternalTemplateWizard|" AssemblyName="|ServiceStackVS.ExternalTemplateWizard;AssemblyName|" />
   </Assets>
 </PackageManifest>
