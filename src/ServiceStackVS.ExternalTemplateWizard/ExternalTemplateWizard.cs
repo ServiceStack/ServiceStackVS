@@ -80,9 +80,9 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
             //Create proj
             string projectContents = File.ReadAllText(externalProjectPath);
-            string projectDestinationPath = Path.Combine(solutionDir, projectName);
+            string projectDestinationPath = Path.Combine(solutionDir, projOutputName.ReplaceAllTokens(replacementsDictionary));
             var projDirInfo = Directory.CreateDirectory(projectDestinationPath);
-            File.WriteAllText(projDirInfo.FullName, projectContents.ReplaceAllTokens(replacementsDictionary));
+            File.WriteAllText(Path.Combine(projDirInfo.FullName, projOutputName.ReplaceAllTokens(replacementsDictionary)), projectContents.ReplaceAllTokens(replacementsDictionary));
 
             //Create files
 
