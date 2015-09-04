@@ -80,9 +80,13 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
             //Create proj
             string projectContents = File.ReadAllText(externalProjectPath);
-            string projectDestinationPath = Path.Combine(solutionDir, projOutputName.ReplaceAllTokens(replacementsDictionary));
-            var projDirInfo = Directory.CreateDirectory(projectDestinationPath);
-            File.WriteAllText(Path.Combine(projDirInfo.FullName, projOutputName.ReplaceAllTokens(replacementsDictionary)), projectContents.ReplaceAllTokens(replacementsDictionary));
+            string projectContainerPath = Path.Combine(solutionDir, projectName);
+            var projContainerInfo = Directory.CreateDirectory(projectContainerPath);
+            string projOutputNameResult = projOutputName.ReplaceAllTokens(replacementsDictionary);
+            string projectContentsPath = Path.Combine(projContainerInfo.FullName,
+                projOutputNameResult.Substring(0, projOutputNameResult.Length - 7));
+            var projPath = Directory.CreateDirectory(projectContentsPath);
+            File.WriteAllText(Path.Combine(projPath.FullName, projOutputName.ReplaceAllTokens(replacementsDictionary)), projectContents.ReplaceAllTokens(replacementsDictionary));
 
             //Create files
 
@@ -90,7 +94,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
             {
                 string templateContents = File.ReadAllText(Path.Combine(externalTemplateDir, templatedFile));
                 string resultContents = templateContents.ReplaceAllTokens(replacementsDictionary);
-                File.WriteAllText(Path.Combine(projDirInfo.FullName, templatedFile), resultContents);
+                File.WriteAllText(Path.Combine(projPath.FullName, templatedFile), resultContents);
             }
         }
 

@@ -35,6 +35,7 @@
       <package id="ServiceStack.Razor" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
 	    <package id="CefSharp.WinForms" version="41.0.0" />
+      <package id="CefSharp.Common" version="41.0.0" />
     </NuGetPackages>
   </WizardData>
 </VSTemplate>

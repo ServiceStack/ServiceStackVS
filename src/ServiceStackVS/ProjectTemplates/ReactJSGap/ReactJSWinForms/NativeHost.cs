@@ -1,5 +1,7 @@
-﻿using CefSharp.WinForms.Internals;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using CefSharp.WinForms.Internals;
+using CefSharp;
 
 namespace $safeprojectname$
 {
@@ -34,5 +36,35 @@ namespace $safeprojectname$
                     : FormBorderStyle.None;
             });
         }
+
+        public void Ready()
+        {
+            formMain.InvokeOnUiThreadIfRequired(() =>
+            {
+#if DEBUG
+                formMain.ChromiumBrowser.KeyboardHandler = new KeyboardHandler();
+#endif
+            });
+        }
     }
+
+    #if DEBUG
+    public class KeyboardHandler : IKeyboardHandler
+    {
+        public bool OnPreKeyEvent(IWebBrowser browserControl, KeyType type, int windowsKeyCode, int nativeKeyCode,
+            CefEventFlags modifiers, bool isSystemKey, ref bool isKeyboardShortcut)
+        {
+            if (windowsKeyCode == (int)Keys.F12)
+            {
+                Program.Form.ChromiumBrowser.ShowDevTools();
+            }
+            return false;
+        }
+
+        public bool OnKeyEvent(IWebBrowser browserControl, KeyType type, int windowsKeyCode, CefEventFlags modifiers, bool isSystemKey)
+        {
+            return false;
+        }
+    }
+#endif
 }

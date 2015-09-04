@@ -219,6 +219,7 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainMenu.xib" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.xib" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\App.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.cshtml" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.eot" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.ttf" />
@@ -483,7 +484,9 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\modernizr.min.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\react.min.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\ReactJSResources.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\ReactJSResources.csproj">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\ReactJSWinForms.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.css" />
