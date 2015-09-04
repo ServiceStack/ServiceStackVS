@@ -53,7 +53,7 @@ namespace $safeprojectname$
 
 			var allKeys = AppSettings.GetAllKeys();
 			if (!allKeys.Contains("platformsClassName"))
-				AppSettings.Set("platformsClassName", "console");
+				AppSettings.Set("platformsClassName", "mac");
 			if (!allKeys.Contains("PlatformCss"))
 				AppSettings.Set("PlatformCss", "mac.css");
 			if (!allKeys.Contains("PlatformJs"))

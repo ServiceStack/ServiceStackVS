@@ -217,8 +217,10 @@
     <None Include="ProjectTemplates\RazorSelfHost\Test\UnitTest1.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\App.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\packages.config" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\logo.icns" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainMenu.xib" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.xib" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\App.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.cshtml" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.eot" />

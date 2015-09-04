@@ -51,9 +51,11 @@
     <packages>
       <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
     </packages>
-    <ExternalTemplate name="ReactJSMac" projFile="ReactJSMac.csproj" solutionFile="ReactJSMac.sln" 
-                      outputSolutionName="$safeprojectname$Mac.sln" 
-                      outputProjectName="$safeprojectname$.AppMac.csproj">
+    <ExternalTemplate name="ReactJSMac" projFile="ReactJSMac.csproj" solutionFile="ReactJSMac.sln"
+                      safeProjectNameReplace="$safeprojectname$.AppMac"
+                      outputSolutionName="$saferootprojectname$Mac.sln" 
+                      outputProjectName="$saferootprojectname$.AppMac.csproj"
+                      >
       <Files>
         <File name="AppDelegate.cs" />
         <File name="AppDelegate.designer.cs" />
@@ -68,6 +70,7 @@
         <File name="mac.css" />
         <File name="mac.js" />
         <File name="packages.config" />
+        <File name="logo.icns" dest="Resources"/>
       </Files>
     </ExternalTemplate>
   </WizardData>

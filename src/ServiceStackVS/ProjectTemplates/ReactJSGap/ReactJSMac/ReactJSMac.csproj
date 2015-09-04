@@ -100,7 +100,6 @@
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
     <InterfaceDefinition Include="MainWindow.xib" />
-    <InterfaceDefinition Include="About.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -55,6 +55,7 @@ module.exports = function (grunt) {
                 options: {
                     projectConfiguration: 'Release',
                     targets: ['Clean', 'Rebuild'],
+                    platform: 'x86',
                     stdout: true,
                     version: 4.0,
                     maxCpuCount: 4,
