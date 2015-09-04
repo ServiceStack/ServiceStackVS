@@ -51,6 +51,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
 	<Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="console.css" />
     <EmbeddedResource Include="console.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
