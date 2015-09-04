@@ -25,16 +25,17 @@ namespace ServiceStackVS.ExternalTemplateWizard
         
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary);
             projectName = replacementsDictionary["$safeprojectname$"];
+            localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary);
+            
             templatesRootDir = Path.GetDirectoryName(customParams[0] as string);
-            localReplacementsDictionary.Add("$saferootprojectname$", replacementsDictionary["$safeprojectname$"]);
+            localReplacementsDictionary.Add("$saferootprojectname$", projectName);
             if (templatesRootDir == null)
             {
                 throw new WizardBackoutException("Failed to create project, 'customParams' does not contain extension template path.");
             }
-            solutionDir = Path.GetDirectoryName(replacementsDictionary["$destinationdirectory$"]);
-            string wizardData = replacementsDictionary["$wizarddata$"];
+            solutionDir = Path.GetDirectoryName(localReplacementsDictionary["$destinationdirectory$"]);
+            string wizardData = localReplacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
             XElement externalTemplateRoot = null;
             if (element.Descendants().FirstOrDefault(x => x.Name.LocalName == "ExternalTemplate") != null)

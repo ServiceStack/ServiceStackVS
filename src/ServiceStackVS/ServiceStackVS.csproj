@@ -490,6 +490,7 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\ReactJSResources.csproj">
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\logo.ico" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\ReactJSWinForms.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.css" />
