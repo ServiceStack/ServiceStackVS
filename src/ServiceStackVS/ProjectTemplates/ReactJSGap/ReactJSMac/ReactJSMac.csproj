@@ -92,11 +92,6 @@
     <Compile Include="MainWindow.cs" />
     <Compile Include="MainWindow.designer.cs" />
     <Compile Include="MainWindowController.cs" />
-    <Compile Include="About.cs" />
-    <Compile Include="AboutController.cs" />
-    <Compile Include="About.designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

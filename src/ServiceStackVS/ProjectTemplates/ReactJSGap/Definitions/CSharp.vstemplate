@@ -67,6 +67,7 @@
         <File name="MainWindowController.cs" />
         <File name="mac.css" />
         <File name="mac.js" />
+        <File name="packages.config" />
       </Files>
     </ExternalTemplate>
   </WizardData>
