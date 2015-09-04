@@ -8,7 +8,7 @@ MD staging-console
 SET TOOLS=.\tools
 SET OUTPUTNAME=$safeprojectname$-console.exe
 SET ILMERGE=%TOOLS%\ILMerge.exe
-SET RELEASE=..\..\$safeprojectname$.AppConsole\bin\x86\Release
+SET RELEASE=..\..\$safeprojectname$.AppConsole\bin\Release
 SET INPUT=%RELEASE%\$safeprojectname$.AppConsole.exe
 SET INPUT=%INPUT% %RELEASE%\$safeprojectname$.Resources.dll
 SET INPUT=%INPUT% %RELEASE%\$safeprojectname$.ServiceInterface.dll
