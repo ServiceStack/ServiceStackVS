@@ -49,7 +49,7 @@ namespace ServiceStackVS.BuildConfigWizard
             {
                 foreach (SolutionContext solutionContext in solConfig.SolutionContexts)
                 {
-                    if (solutionContext.ProjectName.Contains(project.Name + projectFileExtension) &&
+                    if (solutionContext.ProjectName.Contains(project.Name + "." + projectFileExtension) &&
                         solutionContext.PlatformName == buildPlatformName &&
                         solutionConfig.Name == buildConfigName)
                     {
