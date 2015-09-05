@@ -51,7 +51,7 @@ namespace ServiceStackVS.BuildConfigWizard
                 {
                     if (solutionContext.ProjectName.Contains(project.Name + "." + projectFileExtension) &&
                         solutionContext.PlatformName == buildPlatformName &&
-                        solutionConfig.Name == buildConfigName)
+                        solConfig.Name == buildConfigName)
                     {
                         projSolutionContext = solutionContext;
                         solutionConfig = solConfig;
