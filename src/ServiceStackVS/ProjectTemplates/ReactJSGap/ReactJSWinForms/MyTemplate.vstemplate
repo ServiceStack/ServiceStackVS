@@ -25,6 +25,10 @@
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.BuildConfigWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.BuildConfigWizard.BuildConfigWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <NuGetPackages>
       <package id="ServiceStack" version="latest" />
@@ -37,5 +41,6 @@
 	    <package id="CefSharp.WinForms" version="41.0.0" />
       <package id="CefSharp.Common" version="41.0.0" />
     </NuGetPackages>
+    <BuildConfig platform="x86" configuration="Debug" projectFileExtension="csproj"></BuildConfig>
   </WizardData>
 </VSTemplate>

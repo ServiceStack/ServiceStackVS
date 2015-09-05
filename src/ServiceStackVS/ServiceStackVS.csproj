@@ -1228,6 +1228,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.BuildConfigWizard\ServiceStackVS.BuildConfigWizard.csproj">
+      <Project>{93df1a6f-3981-42df-8100-0692a3b0ff71}</Project>
+      <Name>ServiceStackVS.BuildConfigWizard</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.ExternalTemplateWizard\ServiceStackVS.ExternalTemplateWizard.csproj">
       <Project>{E803E797-51CD-4ADE-87A3-27FBA70609C4}</Project>
       <Name>ServiceStackVS.ExternalTemplateWizard</Name>

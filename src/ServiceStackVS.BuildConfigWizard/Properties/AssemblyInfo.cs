@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("$saferootprojectname$")]
+[assembly: AssemblyTitle("ServiceStackVS.BuildConfigWizard")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ServiceStack")]
-[assembly: AssemblyProduct("$saferootprojectname$")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ServiceStackVS.BuildConfigWizard")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("$guid3$")]
+[assembly: Guid("e37aa663-9b5d-46a7-8617-0588a945b141")]
 
 // Version information for an assembly consists of the following four values:
 //
