@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{42C0BBD9-55CE-4FC1-8D90-A7348ABAFB23};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{318B96DE-9A31-42A9-8241-84D14472F078}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>$safeprojectname$.AppMac</RootNamespace>
+    <RootNamespace>$safeprojectname$</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
     <AssemblyName>$safeprojectname$</AssemblyName>
   </PropertyGroup>
@@ -49,8 +49,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="$safeprojectname$.Resources">
-      <HintPath>..\..\lib\$safeprojectname$.Resources.dll</HintPath>
+    <Reference Include="$saferootprojectname$.Resources">
+      <HintPath>..\..\lib\$saferootprojectname$.Resources.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.44\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
@@ -103,13 +103,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
+    <ProjectReference Include="..\$saferootprojectname$\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
       <Project>{582DFB0F-F84D-4E43-9BCA-2A5A86600B7A}</Project>
-      <Name>$safeprojectname$.ServiceInterface</Name>
+      <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\$safeprojectname$\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
+    <ProjectReference Include="..\$saferootprojectname$\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
       <Project>{08BEF328-AB7D-48D3-800D-48ACC75C7914}</Project>
-      <Name>$safeprojectname$.ServiceModel</Name>
+      <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
