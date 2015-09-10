@@ -91,15 +91,29 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
             foreach (var templatedFile in allTemplatedFiles)
             {
-                string templateContents = File.ReadAllText(Path.Combine(externalTemplateDir, templatedFile.Name));
-                string resultContents = templateContents.ReplaceAllTokens(localReplacementsDictionary);
-                string fileOutputPath = projPath.FullName;
-                if (templatedFile.Dest != null)
+                if (templatedFile.IsTemplatableFile())
                 {
-                    fileOutputPath =
-                        Directory.CreateDirectory(Path.Combine(projPath.FullName, templatedFile.Dest)).FullName;
+                    string templateContents = File.ReadAllText(Path.Combine(externalTemplateDir, templatedFile.Name));
+                    string resultContents = templateContents.ReplaceAllTokens(localReplacementsDictionary);
+                    string fileOutputPath = projPath.FullName;
+                    if (templatedFile.Dest != null)
+                    {
+                        fileOutputPath =
+                            Directory.CreateDirectory(Path.Combine(projPath.FullName, templatedFile.Dest)).FullName;
+                    }
+                    File.WriteAllText(Path.Combine(fileOutputPath, templatedFile.Name), resultContents);
                 }
-                File.WriteAllText(Path.Combine(fileOutputPath, templatedFile.Name), resultContents);
+                else
+                {
+                    string fileOutputPath = projPath.FullName;
+                    if (templatedFile.Dest != null)
+                    {
+                        fileOutputPath =
+                            Directory.CreateDirectory(Path.Combine(projPath.FullName, templatedFile.Dest)).FullName;
+                    }
+                    File.Copy(Path.Combine(externalTemplateDir, templatedFile.Name), Path.Combine(fileOutputPath, templatedFile.Name));
+                }
+                
             }
         }
 
@@ -132,9 +146,24 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
     public static class ExternalTemplateUtils
     {
+
+        public static List<string> ExlcudedFileExtensions = new List<string>
+        {
+            "dll",
+            "icns",
+            "png",
+            "jpg",
+            "ico"
+        };
+
         public static string GetExternalTemplateName(this XElement element)
         {
             return GetAttributeValue(element,"name");
+        }
+
+        public static bool IsTemplatableFile(this TemplatedFile templatedFile)
+        {
+            return !ExlcudedFileExtensions.Any(x => templatedFile.Name.EndsWith(x));
         }
 
         public static string GetExternalTemplateProjectFileName(this XElement element)
