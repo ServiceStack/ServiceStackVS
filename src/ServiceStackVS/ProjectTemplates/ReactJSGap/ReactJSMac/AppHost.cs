@@ -21,7 +21,7 @@ namespace $safeprojectname$
 		/// Base constructor requires a name and assembly to locate web service classes. 
 		/// </summary>
 		public AppHost()
-			: base("$safeprojectname$.AppMac", typeof(MyServices).Assembly)
+			: base("$safeprojectname$", typeof(MyServices).Assembly)
 		{
 
 		}
@@ -93,7 +93,7 @@ namespace $safeprojectname$
 			//Invoke native about menu item programmatically.
 			MainClass.MainMenu.InvokeOnMainThread (() => {
 				foreach (var item in MainClass.MainMenu.ItemArray()) {
-					if (item.Title == "$safeprojectname$") {
+					if (item.Title == "$saferootprojectname$") {
 						item.Submenu.PerformActionForItem(0);
 					}
 				}
