@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "$safeprojectname$", "$safeprojectname$\$safeprojectname$\$safeprojectname$.csproj", "{318B96DE-9A31-42A9-8241-84D14472F078}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "$safeprojectname$", "$saferootprojectname$\$safeprojectname$\$safeprojectname$.csproj", "{318B96DE-9A31-42A9-8241-84D14472F078}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "$saferootprojectname$.ServiceModel", "$saferootprojectname$\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj", "{08BEF328-AB7D-48D3-800D-48ACC75C7914}"
 EndProject
