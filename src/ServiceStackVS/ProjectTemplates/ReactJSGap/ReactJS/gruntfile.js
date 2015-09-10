@@ -209,7 +209,7 @@ module.exports = function (grunt) {
                     .pipe(gulpif('*.css', minifyCss()))
                     .pipe(assets.restore())
                     .pipe(useref())
-                    .pipe(gulpif('*.cshtml',header("@*Auto generated file on " + (new Date().toLocaleString()) + ". See $safeprojectname$ project grunt file*@\r\n")))
+                    .pipe(gulpif('*.cshtml', header("@*Auto generated file on " + (new Date().toLocaleTimeString()) + ".*@\r\n")))
                     .pipe(gulp.dest(resourcesRoot))
                     .pipe(gulp.dest(webRoot));
 
