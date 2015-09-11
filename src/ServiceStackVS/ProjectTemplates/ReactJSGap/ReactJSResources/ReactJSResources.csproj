@@ -46,6 +46,7 @@
   <ItemGroup>
     <EmbeddedResource Include="css\app.min.css" />
     <EmbeddedResource Include="js\app.jsx.js" />
+    <EmbeddedResource Include="img\react-logo.png" />
     <EmbeddedResource Include="lib\css\bootstrap.min.css" />
     <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.svg" />
     <EmbeddedResource Include="lib\js\bootstrap.min.js" />

@@ -20,6 +20,24 @@ module.exports = function (grunt) {
     var webRoot = 'wwwroot/';
     var resourcesLib = '../../lib/';
 
+    var COPY_FILES = [
+        { src: './bin/**/*', dest: 'bin/', host: 'web' },
+        { src: './img/**/*', dest: 'img/' },
+        { src: './App_Data/**/*', dest: 'App_Data/', host: 'web' },
+        { src: './Global.asax', host: 'web' },
+        { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
+
+        { src: './js/web.js', dest: 'js/', host: 'web' },
+        { src: './wwwroot_build/deploy/*.*', host: 'web' },
+        {
+            src: './web.config',
+            host: 'web',
+            after: function () {
+                return gulpReplace('<compilation debug="true" targetFramework="4.5">', '<compilation targetFramework="4.5">');
+            }
+        }
+    ];
+
     // Deployment config
     var config = require('./wwwroot_build/publish/config.json');
 
@@ -144,34 +162,62 @@ module.exports = function (grunt) {
             }
         },
         gulp: {
+            'copy-files': function (done) {
+                var count = 0;
+                var length = COPY_FILES.length;
+                var result = [];
+                var processCopy = function (index) {
+                    var copy = COPY_FILES[index];
+                    var dest = copy.dest || '';
+                    var src = copy.src;
+
+                    var copyWeb = function () {
+                        if (copy.host == null) return true;
+                        return copy.host.toLowerCase().indexOf('web') > -1;
+                    }
+                    var copyNative = function () {
+                        if (copy.host == null) return true;
+                        return copy.host.toLowerCase().indexOf('native') > -1;
+                    }
+
+                    if (copy.after) {
+                        var copyTaskWithAfter = gulp.src(src)
+                            .pipe(copy.after())
+                            .pipe(gulpif(copyWeb, newer(webRoot + dest)))
+                            .pipe(gulpif(copyWeb, gulp.dest(webRoot + dest)))
+                            .pipe(gulpif(copyNative, newer(resourcesRoot + dest)))
+                            .pipe(gulpif(copyNative, gulp.dest(resourcesRoot + dest)));
+                        copyTaskWithAfter.on('finish', function () {
+                            count++;
+                            grunt.log.ok('Copied ' + copy.src);
+                            if (count === length) {
+                                done();
+                            }
+                        });
+                        return copyTaskWithAfter;
+                    } else {
+                        var copyTask = gulp.src(src)
+                            .pipe(gulpif(copyWeb, newer(webRoot + dest)))
+                            .pipe(gulpif(copyWeb, gulp.dest(webRoot + dest)))
+                            .pipe(gulpif(copyNative, newer(resourcesRoot + dest)))
+                            .pipe(gulpif(copyNative, gulp.dest(resourcesRoot + dest)));
+                        copyTask.on('finish', function () {
+                            grunt.log.ok('Copied ' + copy.src);
+                            count++;
+                            if (count === length) {
+                                done();
+                            }
+                        });
+                        return copyTask;
+                    }
+                }
+                for (var i = 0; i < length; i++) {
+                    result.push(processCopy(i));
+                }
+            },
             'wwwroot-clean-dlls': function (done) {
                 var binPath = webRoot + '/bin/';
                 del(binPath, done);
-            },
-            'wwwroot-copy-bin': function () {
-                var binDest = webRoot + 'bin/';
-                var dest = gulp.dest(binDest).on('end', function () {
-                    grunt.log.ok('wwwroot-copy-bin finished.');
-                });
-                return gulp.src('./bin/**/*')
-                    .pipe(newer(binDest))
-                    .pipe(dest);
-            },
-            'wwwroot-copy-appdata': function () {
-                return gulp.src('./App_Data/**/*')
-                    .pipe(newer(webRoot + 'App_Data/'))
-                    .pipe(gulp.dest(webRoot + 'App_Data/'));
-            },
-            'wwwroot-copy-webconfig': function () {
-                return gulp.src('./web.config')
-                    .pipe(newer(webRoot))
-                    .pipe(gulpReplace('<compilation debug="true" targetFramework="4.5">', '<compilation targetFramework="4.5">'))
-                    .pipe(gulp.dest(webRoot));
-            },
-            'wwwroot-copy-asax': function () {
-                return gulp.src('./Global.asax')
-                    .pipe(newer(webRoot))
-                    .pipe(gulp.dest(webRoot));
             },
             'wwwroot-clean-client-assets': function (done) {
                 del([
@@ -182,20 +228,6 @@ module.exports = function (grunt) {
                     '!wwwroot/**/*.config', //Don't delete config
                     '!wwwroot/appsettings.txt' //Don't delete deploy settings
                 ], done);
-            },
-            'wwwroot-copy-fonts': function () {
-                return gulp.src('./bower_components/bootstrap/dist/fonts/*.*')
-                    .pipe(gulp.dest(resourcesRoot + 'lib/fonts/'))
-                    .pipe(gulp.dest(webRoot + 'lib/fonts/'));
-            },
-            'wwwroot-copy-images': function () {
-                return gulp.src('./img/**/*')
-                    .pipe(gulp.dest(resourcesRoot + 'img/'))
-                    .pipe(gulp.dest(webRoot + 'img/'));
-            },
-            'wwwroot-copy-webjs': function () {
-                return gulp.src('./js/web.js')
-                   .pipe(gulp.dest(webRoot + 'js/'));
             },
             'wwwroot-bundle': function () {
                 var assets = useref.assets({ searchPath: './' });
@@ -211,12 +243,6 @@ module.exports = function (grunt) {
                     .pipe(useref())
                     .pipe(gulpif('*.cshtml', header("@*Auto generated file on " + (new Date().toLocaleTimeString()) + ".*@\r\n")))
                     .pipe(gulp.dest(resourcesRoot))
-                    .pipe(gulp.dest(webRoot));
-
-            },
-            'wwwroot-copy-deploy-files': function () {
-                return gulp.src('./wwwroot_build/deploy/*.*')
-                    .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
 
             },
@@ -237,14 +263,7 @@ module.exports = function (grunt) {
     grunt.registerTask('01-bundle-all', [
         'gulp:wwwroot-clean-dlls',
         'gulp:wwwroot-clean-client-assets',
-        'gulp:wwwroot-copy-bin',
-        'gulp:wwwroot-copy-appdata',
-        'gulp:wwwroot-copy-webconfig',
-        'gulp:wwwroot-copy-asax',
-        'gulp:wwwroot-copy-deploy-files',
-        'gulp:wwwroot-copy-fonts',
-        'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-copy-webjs',
+        'gulp:copy-files',
         'gulp:wwwroot-bundle',
         'nugetrestore:restore-resources',
         'msbuild:release-resources',

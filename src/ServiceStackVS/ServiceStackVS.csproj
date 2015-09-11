@@ -479,6 +479,7 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.sln" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\img\react-logo.png" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.jsx.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.svg" />
@@ -498,6 +499,7 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\css\app.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\gruntfile.js" />
+    <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\img\react-logo.png" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\js\web.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\ReactJS.csproj" />
