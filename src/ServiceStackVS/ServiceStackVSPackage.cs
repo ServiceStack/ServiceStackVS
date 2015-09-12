@@ -25,6 +25,7 @@ using ServiceStack;
 using ServiceStack.Text;
 using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
+using ServiceStackVS.NativeTypes.Handlers;
 using ServiceStackVS.NativeTypesWizard;
 using ServiceStackVS.NPMInstallerWizard;
 using VSLangProj;
@@ -431,7 +432,19 @@ namespace ServiceStackVS
             OutputWindowWriter.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
             string projectItemPath = projectItem.GetFullPath();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
-            bool isDtoSelected = selectedFiles.Any(item => item.Name.ToLowerInvariant().EndsWith(typesHandler.CodeFileExtension));
+            bool isDtoSelected = false;
+            isDtoSelected = selectedFiles
+                .Any(item => item.Name.ToLowerInvariant()
+                    .EndsWith(typesHandler.CodeFileExtension));
+
+            //Handle FSharp file extension name change for DTO files, eg .dto.fs to .dtos.fs
+            if (!isDtoSelected && typesHandler is FSharpNativeTypesHandler)
+            {
+                isDtoSelected = selectedFiles
+                .Any(item => item.Name.ToLowerInvariant()
+                    .EndsWith(".dto.fs"));
+            }
+
             if (isDtoSelected)
             {
                 string filePath = projectItemPath;

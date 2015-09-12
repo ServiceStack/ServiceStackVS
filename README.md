@@ -36,10 +36,10 @@ The new ServiceStackVS **ReactJS App** template shares the same approach for dev
 
 The templates conveniently pre-configures the above libraries into a working out-of-the-box solution, including high-level grunt tasks to take care of the full-dev-cycle of **building**, **packaging** and **deploying** your app:
 
- - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
- - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **[01-run-tests](#01-run-tests)** - Runs Karma JavaScript Unit Tests
+ - **[02-package-server](#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
+ - **[03-package-client](#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[04-deploy-app](#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
 For in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
 
@@ -51,7 +51,7 @@ For in-depth details on how this template can be used for a great development wo
 
 The future of modern client web development has been moving towards a pure JavaScript environment for client HTML/JS/CSS development, we've noticed the benefits of this approach years ago when we developed our [node.js powered Bundler](https://github.com/ServiceStack/Bundler) taking advantage of [node.js](http://nodejs.org/) rich ecosystem for all our bundling, minification and Web DSL needs. As this is also the trend we see with web development in VS.NET going visible by the recent preview of [Grunt and Gulp.js integration in Visual Studio](http://www.hanselman.com/blog/IntroducingGulpGruntBowerAndNpmSupportForVisualStudio.aspx), we're confident in promoting this approach for the development of large, JavaScript-heavy Web Apps. 
 
-This template marks our first iteration of this effort that we intend to continually improve and closely follow VS.NET's Grunt/Gulp.js integration so our automation tasks can be run directly from VS.NET UI Task Runners. In addition, this template also provides `.bat` files for running high-level grunt tasks so it alsa enables a good experience even without VS.NET's [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) (a preview of what will be available in VS 2014) which can be quickly run with a  [keyboard shortcut for running external commands](https://github.com/ServiceStack/Bundler#create-an-external-tool-inside-vsnet) in VS.NET.
+This template marks our first iteration of this effort that we intend to continually improve and closely follow VS.NET's Grunt/Gulp.js integration so our automation tasks can be run directly from VS.NET UI Task Runners. In addition, this template also provides `.bat` files for running high-level grunt tasks so it alsa enables a good experience even without VS.NET's [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) (extension for those using 2013, built into VS 2015) which can be quickly run with a  [keyboard shortcut for running external commands](https://github.com/ServiceStack/Bundler#create-an-external-tool-inside-vsnet) in VS.NET.
 
 ![Template Runner Explorer](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/trx-tasks.png)
 
@@ -78,7 +78,7 @@ This template relies on having [Node.js installed](http://nodejs.org/). If you t
 
 Once downloaded and installed, click `Continue` to create your project. If any of the NPM dependencies are not installed globally, the template will install the required NPM packages as well as download the Bower dependencies for the template. 
 
-Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.org/package/bower) and select the second option to **Use Git from the Windows Command Prompt**. This is required due to commands run by Bower to install dependencies from Git repositories.
+Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.com/package/bower#windows-users) and select the second option to **Use Git from the Windows Command Prompt**. This is required due to commands run by Bower to install dependencies from Git repositories.
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/git-setup.png)
 

@@ -22,10 +22,10 @@ This templates leverages a number of best-in-class libraries to managing client 
 
 A lot this functionality is pre-configured and working out-of-the-box encapsulated within the high-level Grunt Tasks below:
 
- - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
- - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
+ - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
+ - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
 ### Requirements
 
