@@ -45,14 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="css\app.min.css" />
+    <EmbeddedResource Include="js\app.min.js" />
     <EmbeddedResource Include="js\app.jsx.js" />
     <EmbeddedResource Include="img\react-logo.png" />
-    <EmbeddedResource Include="lib\css\bootstrap.min.css" />
+    <EmbeddedResource Include="lib\css\lib.min.css" />
     <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.svg" />
-    <EmbeddedResource Include="lib\js\bootstrap.min.js" />
-    <EmbeddedResource Include="lib\js\jquery.min.js" />
-    <EmbeddedResource Include="lib\js\modernizr.min.js" />
-    <EmbeddedResource Include="lib\js\react.min.js" />
+    <EmbeddedResource Include="lib\js\lib.min.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="default.cshtml" />

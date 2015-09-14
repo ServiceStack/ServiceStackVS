@@ -94,6 +94,7 @@
     <Content Include="gruntfile.js" />
     <Content Include="default.cshtml" />
     <Content Include="js\components\hello.jsx" />
+    <Content Include="js\utils.js" />
     <Content Include="js\web.js" />
     <Content Include="js\app.jsx" />
     <Content Include="img\react-logo.png" />
