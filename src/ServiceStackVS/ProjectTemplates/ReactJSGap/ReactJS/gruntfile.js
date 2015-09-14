@@ -1,5 +1,25 @@
-/* global module, require */
+var WEB = 'web';
+var NATIVE = 'native';
 
+var COPY_FILES = [
+    { src: './bin/**/*', dest: 'bin/', host: WEB },
+    { src: './img/**/*', dest: 'img/' },
+    { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
+    { src: './Global.asax', host: WEB },
+    { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
+    { src: './js/web.js', dest: 'js/', host: WEB },
+    { src: './wwwroot_build/deploy/*.*', host: WEB },
+    {
+        src: './web.config',
+        host: [WEB],
+        afterReplace: [{
+            from: '<compilation debug="true" targetFramework="4.5">',
+            to: '<compilation targetFramework="4.5">'
+        }]
+    }
+];
+
+/* global module, require */
 module.exports = function (grunt) {
     "use strict";
 
@@ -19,24 +39,6 @@ module.exports = function (grunt) {
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
     var resourcesLib = '../../lib/';
-
-    var COPY_FILES = [
-        { src: './bin/**/*', dest: 'bin/', host: 'web' },
-        { src: './img/**/*', dest: 'img/' },
-        { src: './App_Data/**/*', dest: 'App_Data/', host: 'web' },
-        { src: './Global.asax', host: 'web' },
-        { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
-
-        { src: './js/web.js', dest: 'js/', host: 'web' },
-        { src: './wwwroot_build/deploy/*.*', host: 'web' },
-        {
-            src: './web.config',
-            host: 'web',
-            after: function () {
-                return gulpReplace('<compilation debug="true" targetFramework="4.5">', '<compilation targetFramework="4.5">');
-            }
-        }
-    ];
 
     // Deployment config
     var config = require('./wwwroot_build/publish/config.json');
@@ -171,45 +173,43 @@ module.exports = function (grunt) {
                     var dest = copy.dest || '';
                     var src = copy.src;
 
-                    var copyWeb = function () {
-                        if (copy.host == null) return true;
-                        return copy.host.toLowerCase().indexOf('web') > -1;
+                    var copyTask = gulp.src(src);
+                    if (copy.afterReplace) {
+                        for (var i = 0; i < copy.afterReplace.length; i++) {
+                            var replace = copy.afterReplace[i];
+                            copyTask = copyTask.pipe(gulpReplace(replace.from, replace.to));
+                        }
                     }
-                    var copyNative = function () {
-                        if (copy.host == null) return true;
-                        return copy.host.toLowerCase().indexOf('native') > -1;
+                    if (copy.after) {
+                        copyTask = copyTask.pipe(copy.after());
                     }
 
-                    if (copy.after) {
-                        var copyTaskWithAfter = gulp.src(src)
-                            .pipe(copy.after())
-                            .pipe(gulpif(copyWeb, newer(webRoot + dest)))
-                            .pipe(gulpif(copyWeb, gulp.dest(webRoot + dest)))
-                            .pipe(gulpif(copyNative, newer(resourcesRoot + dest)))
-                            .pipe(gulpif(copyNative, gulp.dest(resourcesRoot + dest)));
-                        copyTaskWithAfter.on('finish', function () {
-                            count++;
-                            grunt.log.ok('Copied ' + copy.src);
-                            if (count === length) {
-                                done();
-                            }
-                        });
-                        return copyTaskWithAfter;
-                    } else {
-                        var copyTask = gulp.src(src)
-                            .pipe(gulpif(copyWeb, newer(webRoot + dest)))
-                            .pipe(gulpif(copyWeb, gulp.dest(webRoot + dest)))
-                            .pipe(gulpif(copyNative, newer(resourcesRoot + dest)))
-                            .pipe(gulpif(copyNative, gulp.dest(resourcesRoot + dest)));
-                        copyTask.on('finish', function () {
-                            grunt.log.ok('Copied ' + copy.src);
-                            count++;
-                            if (count === length) {
-                                done();
-                            }
-                        });
-                        return copyTask;
+                    var hosts = [];
+                    if (copy.host) {
+                        hosts = typeof copy.host == 'string'
+                            ? [copy.host]
+                            : copy.host;
                     }
+
+                    if (hosts.indexOf(WEB) >= 0) {
+                        copyTask = copyTask
+                            .pipe(newer(webRoot + dest))
+                            .pipe(gulp.dest(webRoot + dest));
+                    }
+                    if (hosts.indexOf(NATIVE) >= 0) {
+                        copyTask = copyTask
+                            .pipe(newer(resourcesRoot + dest))
+                            .pipe(gulp.dest(resourcesRoot + dest));
+                    }
+
+                    copyTask.on('finish', function () {
+                        grunt.log.ok('Copied ' + copy.src);
+                        count++;
+                        if (count === length) {
+                            done();
+                        }
+                    });
+                    return copyTask;
                 }
                 for (var i = 0; i < length; i++) {
                     result.push(processCopy(i));
