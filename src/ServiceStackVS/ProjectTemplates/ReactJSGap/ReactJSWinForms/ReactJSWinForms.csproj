@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)\packages\CefSharp.WinForms.41.0.0\build\CefSharp.WinForms.props" Condition="Exists('$(SolutionDir)\packages\CefSharp.WinForms.41.0.0\build\CefSharp.WinForms.props')" />
-  <Import Project="$(SolutionDir)\packages\CefSharp.Common.41.0.0\build\CefSharp.Common.props" Condition="Exists('$(SolutionDir)\packages\CefSharp.Common.41.0.0\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
