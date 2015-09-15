@@ -10,9 +10,7 @@ namespace $safeprojectname$
 	{
 		MainWindowController mainWindowController;
 
-		public AppDelegate ()
-		{
-		}
+		public AppDelegate(){}
 
 		public override void FinishedLaunching (NSObject notification)
 		{

@@ -1,18 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using Funq;
+using ServiceStack;
+using ServiceStack.Razor;
 using $saferootprojectname$.Resources;
 using $saferootprojectname$.ServiceInterface;
-using ServiceStack;
-using ServiceStack.Auth;
-using ServiceStack.Configuration;
-using ServiceStack.Razor;
-using ServiceStack.Redis;
-using ServiceStack.Text;
-
 
 namespace $safeprojectname$
 {
@@ -23,10 +16,7 @@ namespace $safeprojectname$
         /// Base constructor requires a name and assembly to locate web service classes. 
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly)
-        {
-
-        }
+            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
 
         /// <summary>
         /// Application specific configuration
@@ -39,13 +29,11 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //Plugins.Add(new CorsFeature());
 
-            Plugins.Add(new RazorFormat
-            {
+            Plugins.Add(new RazorFormat {
                 LoadFromAssemblies = { typeof(CefResources).Assembly },
             });
 
-            SetConfig(new HostConfig
-            {
+            SetConfig(new HostConfig {
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
             });
@@ -72,18 +60,14 @@ namespace $safeprojectname$
         public object Get(NativeHostAction request)
         {
             if (string.IsNullOrEmpty(request.Action))
-            {
                 throw HttpError.NotFound("Function Not Found");
-            }
-            Type nativeHostType = typeof(NativeHost);
-            object nativeHost = nativeHostType.CreateInstance<NativeHost>();
-            //Upper case first character.
-            string methodName = request.Action.First().ToString().ToUpper() + String.Join("", request.Action.Skip(1));
-            MethodInfo methodInfo = nativeHostType.GetMethod(methodName);
+
+            var nativeHost = typeof(NativeHost).CreateInstance<NativeHost>();
+            var methodName = request.Action.First().ToString().ToUpper() + string.Join("", request.Action.Skip(1));
+            var methodInfo = typeof(NativeHost).GetMethod(methodName);
             if (methodInfo == null)
-            {
                 throw new HttpError(HttpStatusCode.NotFound, "Function Not Found");
-            }
+
             methodInfo.Invoke(nativeHost, null);
             return null;
         }

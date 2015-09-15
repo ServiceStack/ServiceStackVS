@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using $saferootprojectname$.Resources;
-using $saferootprojectname$.ServiceInterface;
+using System.Collections.Generic;
 using Funq;
 using ServiceStack;
 using ServiceStack.Razor;
+using $saferootprojectname$.Resources;
+using $saferootprojectname$.ServiceInterface;
 
 namespace $safeprojectname$
 {
@@ -18,10 +18,7 @@ namespace $safeprojectname$
         /// Base constructor requires a name and assembly to locate web service classes. 
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly)
-        {
-
-        }
+            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
 
         /// <summary>
         /// Application specific configuration
@@ -34,13 +31,11 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //Plugins.Add(new CorsFeature());
 
-            Plugins.Add(new RazorFormat
-            {
+            Plugins.Add(new RazorFormat {
                 LoadFromAssemblies = { typeof(CefResources).Assembly },
             });
 
-            SetConfig(new HostConfig
-            {
+            SetConfig(new HostConfig {
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
             });
