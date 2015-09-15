@@ -184,7 +184,7 @@ module.exports = function (grunt) {
                         copyTask = copyTask.pipe(copy.after());
                     }
 
-                    var hosts = [];
+                    var hosts = [WEB, NATIVE];
                     if (copy.host) {
                         hosts = typeof copy.host == 'string'
                             ? [copy.host]
