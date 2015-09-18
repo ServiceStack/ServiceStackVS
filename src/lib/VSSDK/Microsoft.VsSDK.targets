@@ -69,6 +69,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
   <PropertyGroup>
     <ValidateVsixManifestDependsOn>$(ValidateVsixManifestDependsOn);FindSourceVsixManifest</ValidateVsixManifestDependsOn>
     <BypassVsixValidation Condition="'$(BypassVsixValidation)' == ''">false</BypassVsixValidation>
+    <VsixSchemaPath Condition="'$(VsixSchemaPath)' == ''"></VsixSchemaPath>
   </PropertyGroup>
   <Target Name="ValidateVsixManifest" DependsOnTargets="$(ValidateVsixManifestDependsOn)">
     <ValidateVsixManifest Condition="Exists('$(IntermediateVsixManifest)') AND '$(BypassVsixValidation)' != 'true'" ItemToValidate="$(IntermediateVsixManifest)" VsixSchemaPath="$(VsixSchemaPath)"/>
@@ -243,159 +244,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
         <VSIXSubPath Condition="'%(ReferencePath.VSIXSubPath)' == ''">$(AssemblyVSIXSubPath)</VSIXSubPath>
       </VSIXCopyLocalReferenceSourceItem>
     </ItemGroup>
-    
-    <ItemGroup>
-      <SuppressFromVsix Include="Microsoft.VisualStudio.CommandBars.dll" />
-      <SuppressFromVsix Include="VSLangProj90.dll" />
-      <SuppressFromVsix Include="VSLangProj100.dll" />
-      <SuppressFromVsix Include="VSLangProj110.dll" />
-      <SuppressFromVsix Include="VSLangProj140.dll" />
-      <SuppressFromVsix Include="VsWebSite.Interop.dll" />
-      <SuppressFromVsix Include="VsWebSite.Interop90.dll" />
-      <SuppressFromVsix Include="VsWebSite.Interop100.dll" />
-      <SuppressFromVsix Include="envdte.dll" />
-      <SuppressFromVsix Include="envdte80.dll" />
-      <SuppressFromVsix Include="envdte90.dll" />
-      <SuppressFromVsix Include="envdte90a.dll" />
-      <SuppressFromVsix Include="envdte100.dll" />
-      <SuppressFromVsix Include="extensibility.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.Conversion.Core.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.Engine.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.Framework.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.Tasks.Core.dll" />
-      <SuppressFromVsix Include="Microsoft.Build.Utilities.Core.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.CSharp.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.dll" />
-      <SuppressFromVsix Include="Microsoft.MSXML.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.CommonIDE.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ComponentModelHost.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Diagnostics.Assert.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ExtensibilityHosting.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.GraphModel.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TemplateWizardInterface.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Internal.dll" />
-      <SuppressFromVsix Include="microsoft.visualstudio.vcprojectengine.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.VSHelp.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.VSHelp80.dll" />
-      <SuppressFromVsix Include="stdole.dll" />
-      <SuppressFromVsix Include="System.Collections.Concurrent.dll" />
-      <SuppressFromVsix Include="System.Collections.dll" />
-      <SuppressFromVsix Include="System.Collections.Immutable.dll" />
-      <SuppressFromVsix Include="System.Composition.AttributedModel.dll" />
-      <SuppressFromVsix Include="System.Composition.Convention.dll" />
-      <SuppressFromVsix Include="System.Composition.Hosting.dll" />
-      <SuppressFromVsix Include="System.Composition.Runtime.dll" />
-      <SuppressFromVsix Include="System.Composition.TypedParts.dll" />
-      <SuppressFromVsix Include="System.Diagnostics.Debug.dll" />
-      <SuppressFromVsix Include="System.Diagnostics.Tools.dll" />
-      <SuppressFromVsix Include="System.Diagnostics.Tracing.dll" />
-      <SuppressFromVsix Include="System.Dynamic.Runtime.dll" />
-      <SuppressFromVsix Include="System.Globalization.dll" />
-      <SuppressFromVsix Include="System.IO.dll" />
-      <SuppressFromVsix Include="System.Linq.dll" />
-      <SuppressFromVsix Include="System.Reflection.dll" />
-      <SuppressFromVsix Include="System.Reflection.Extensions.dll" />
-      <SuppressFromVsix Include="System.Reflection.Metadata.dll" />
-      <SuppressFromVsix Include="System.Reflection.Primitives.dll" />
-      <SuppressFromVsix Include="System.Resources.ResourceManager.dll" />
-      <SuppressFromVsix Include="System.Runtime.dll" />
-      <SuppressFromVsix Include="System.Runtime.Extensions.dll" />
-      <SuppressFromVsix Include="System.Text.Encoding.dll" />
-      <SuppressFromVsix Include="System.Text.Encoding.Extensions.dll" />
-      <SuppressFromVsix Include="System.Threading.dll" />
-      <SuppressFromVsix Include="System.Threading.Tasks.Dataflow.dll" />
-      <SuppressFromVsix Include="System.Threading.Tasks.dll" />
-      <SuppressFromVsix Include="VSLangProj.dll" />
-      <SuppressFromVsix Include="VSLangProj2.dll" />
-      <SuppressFromVsix Include="VSLangProj80.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.v14only.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.VS.V14Only.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.Utilities.v14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Threading.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Validation.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Composition.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Composition.Configuration.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.10.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.11.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.12.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.InteropA.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Designer.Interfaces.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.9.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.WCF.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.OLE.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectAggregator.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.10.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.8.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.9.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.10.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.8.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.9.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.WCFReference.Interop.dll" />
-      <SuppressFromVsix Include="Microsoft.Data.ConnectionUI.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.CoreUtility.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Core.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Framework.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Services.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Engine.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Editor.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.ImageCatalog.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Imaging.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Language.Intellisense.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Language.StandardClassification.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Package.LanguageService.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.QualityTools.Vsip.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Design.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.10.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.11.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.12.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.11.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.12.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Data.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Logic.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.UI.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.UI.Wpf.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.11.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.12.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.12.1.DesignTime.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.VSHost.14.0.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.Utilities.dll" />
-      <SuppressFromVsix Include="Microsoft.VSSDK.UnitTestLibrary.dll" />
-      <SuppressFromVsix Include="Microsoft.Windows.Simulator.Client.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.VisualBasic.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.Workspaces.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.Workspaces.Desktop.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll" />
-      <SuppressFromVsix Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll" />
-      <SuppressFromVsix Include="Microsoft.VisualStudio.LanguageServices.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Shell.12.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Shell.11.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Shell.10.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Settings.12.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Settings.11.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Settings.10.0.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Shell.Platform.WindowManagement.dll" />
-      <SuppressFromVsix Include="Microsof.VisualStudio.Shell.ViewManager.dll" />
-    </ItemGroup>
-    
-    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(VSIXCopyLocalReferenceSourceItem)" SuppressedVSIXSourceItems="@(SuppressFromVsix)">
+
+    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(VSIXCopyLocalReferenceSourceItem)">
       <Output TaskParameter="VsixSourceItems" ItemName="VSIXSourceItem" />
     </CreateVsixSourceItemFromReferences>
 
@@ -463,7 +313,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <Output TaskParameter="TargetOutputs" ItemName="ReferencedVSIXSourceItem"/>
     </MSBuild>
 
-    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(ReferencedVSIXSourceItem)" SuppressedVSIXSourceItems="@(SuppressFromVsix)">
+    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(ReferencedVSIXSourceItem)">
       <Output TaskParameter="VsixSourceItems" ItemName="VSIXSourceItem" />
     </CreateVsixSourceItemFromReferences>
 

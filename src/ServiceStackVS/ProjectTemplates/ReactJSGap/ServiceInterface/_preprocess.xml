@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Preprocess>
-  <TemplateInfo Path="CSharp\ServiceStack\ServiceInterface"/>
+  <TemplateInfo Path="CSharp\ServiceStack\ReactJsGap\ServiceInterface"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
-    <add key="ServiceStack.CSharp.AngularJS" value="$saferootprojectname$"/>
+    <add key="ServiceStack.CSharp.ReactJSGap" value="$saferootprojectname$"/>
   </Replacements>
 </Preprocess>

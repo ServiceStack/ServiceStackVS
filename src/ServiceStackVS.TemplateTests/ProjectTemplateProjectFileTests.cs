@@ -19,7 +19,7 @@ namespace ServiceStackVS.TemplateTests
 
         /// <summary>
         /// This test is for ensuring template project files aren't trying to include files that don't exist.
-        /// If the plugin is packaged with any missing, template will fail all together.
+        /// If the plugin is packaged with anything missing, template will fail all together.
         /// </summary>
         [Test]
         public void IncludedFilesInProjectExistOnFileSystem()

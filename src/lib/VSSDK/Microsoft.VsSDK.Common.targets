@@ -54,25 +54,6 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <UsingTask TaskName="FindVsSDKInstallation" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
   <UsingTask TaskName="VSCTCompiler" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
   <UsingTask TaskName="CreateMenuPkgDef" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
@@ -81,8 +62,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     Set the general properties for this installation of the SDK
   -->
   <PropertyGroup>
-    <VsSDKVersion>14.0</VsSDKVersion>
-    <VSSDKTargetPlatformVersion>14.0</VSSDKTargetPlatformVersion>
+    <VsSDKVersion>12.0</VsSDKVersion>
+    <VSSDKTargetPlatformVersion>12.0</VSSDKTargetPlatformVersion>
     <VSSDKTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VsSDKVersion)\VSSDK</VSSDKTargetsPath>
     <VSSDKTargetPlatformRegRoot>Software\Microsoft\VisualStudio\$(VSSDKTargetPlatformVersion)</VSSDKTargetPlatformRegRoot>
     <VSSDKTargetPlatformRegRootSuffix Condition="'$(VSSDKTargetPlatformRegRootSuffix)' == ''">Exp</VSSDKTargetPlatformRegRootSuffix>

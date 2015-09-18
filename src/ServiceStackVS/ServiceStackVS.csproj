@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>12.0</OldToolsVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -37,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DeployExtension>True</DeployExtension>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +51,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\lib\Microsoft.VisualStudio.CommandBars.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.VisualStudio.ComponentModelHost.dll</HintPath>
     </Reference>
@@ -514,13 +520,13 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\ILMerge.exe" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\wwwroot_build\tools\Licenses.txt" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\ServiceStackAngularJS.ServiceInterface.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceInterface\ServiceStack.ServiceInterface.csproj" />
     <Resource Include="ProjectTemplates\ReactJSGap\ServiceInterface\_preprocess.xml" />
     <Content Include="ProjectTemplates\ReactJSGap\ServiceModel\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ReactJSGap\ServiceModel\ServiceStackAngularJS.ServiceModel.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\ServiceModel\ServiceStack.ServiceModel.csproj" />
     <Resource Include="ProjectTemplates\ReactJSGap\ServiceModel\_preprocess.xml" />
     <Content Include="ProjectTemplates\ReactJSGap\Test\MyTemplate.vstemplate" />
-    <Content Include="ProjectTemplates\ReactJSGap\Test\ServiceStackAngularJS.Test.csproj" />
+    <Content Include="ProjectTemplates\ReactJSGap\Test\ServiceStack.Test.csproj" />
     <Resource Include="ProjectTemplates\ReactJSGap\Test\_preprocess.xml" />
     <Resource Include="ProjectTemplates\ReactJSGap\_preprocess.xml" />
     <Content Include="ServiceStack.Text.dll">
@@ -1272,11 +1278,11 @@
     <TypeScriptCompile Include="ItemTemplates\NativeTypes\FSharpTypeScriptRef\template.ts" />
     <TypeScriptCompile Include="ItemTemplates\NativeTypes\VbNetTypeScriptRef\template.ts" />
   </ItemGroup>
-  <PropertyGroup>
-    <UseCodebase>true</UseCodebase>
-  </PropertyGroup>
   <PropertyGroup Label="TemplateBuilder">
     <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.0.3.52-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <UseCodebase>true</UseCodebase>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
