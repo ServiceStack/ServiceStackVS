@@ -1,33 +1,23 @@
-/** @jsx React.DOM */
-
-var React = React || require('react');
-var module = module || {};
-
 var HelloWorld = React.createClass({
-	handleHello: function(e) {
+    getInitialState: function () {
+        return { greeting: '' };
+    },
+    handleNameChange: function (e) {
 		e.preventDefault();
-		var yourName = this.refs.yourName.getDOMNode().value.trim();
-		var self = this;
-		$.ajax({
-			url: 'hello/' + yourName,
-			dataType: 'json',
-			type: 'GET',
-			success: function(response) {
-				self.setState({ yourName: response.Result });
-			}
-		});
-	},
-	getInitialState: function () {
-		return {yourName: ''};
+		var $this = this;
+		var yourName = e.target.value.trim();
+        $.getJSON('hello/' + yourName)
+            .then(function(response) {
+                $this.setState({ greeting: response.Result });
+            });
 	},
 	render: function() {
 		return (
 			<div>
-				<input type="text" placeholder="Your name" ref="yourName" className="form-control"
-						onChange={this.handleHello} />
-				<h3>{this.state.yourName}</h3>
+				<input type="text" className="form-control" placeholder="Your name"
+					   onChange={this.handleNameChange} />
+				<h3>{this.state.greeting}</h3>
 			</div>
 		);
-}
+	}
 });
-module.exports = HelloWorld

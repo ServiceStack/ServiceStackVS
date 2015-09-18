@@ -1,6 +1,4 @@
 ﻿/* console */
-body {
-}
-.nav > li.nativeApp.console   {
+.console {
     display: block;
 }
