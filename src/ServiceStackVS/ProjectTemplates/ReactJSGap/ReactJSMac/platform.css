@@ -1,4 +1,4 @@
 /* mac */
-.mac {
+.mac, ul > li.mac {
     display: block;
 }

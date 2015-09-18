@@ -1,4 +1,13 @@
 ﻿var App = React.createClass({
+    handleAbout: function () {
+        nativeHost.showAbout();
+    },
+    handleToggleWindow: function () {
+        nativeHost.toggleFormBorder();
+    },
+    handleQuit: function () {
+        nativeHost.quit();
+    },
     render: function () {
         return (
             <div>
@@ -18,12 +27,12 @@
                         </div>
                         <div className="navbar-collapse collapse">
                             <ul className="nav navbar-nav pull-right">
-                                <li><a onClick={nativeHost.showAbout}>About</a></li>
+                                <li><a onClick={this.handleAbout}>About</a></li>
                                 <li className="platform winforms">
-                                    <a onClick={nativeHost.toggleFormBorder}>Toggle Window</a>
+                                    <a onClick={this.handleToggleWindow}>Toggle Window</a>
                                 </li>
                                 <li className="platform winforms mac">
-                                    <a onClick={nativeHost.quit}>Close</a>
+                                    <a onClick={this.handleQuit}>Close</a>
                                 </li>
                             </ul>
                         </div>
