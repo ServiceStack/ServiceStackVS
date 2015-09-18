@@ -55,9 +55,6 @@
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>$(SolutionDir)\packages\ServiceStack.OrmLite.4.0.32\lib\net40\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Razor">
-      <HintPath>$(SolutionDir)\packages\ServiceStack.Razor.4.0.32\lib\net45\ServiceStack.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Redis">
       <HintPath>$(SolutionDir)\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
     </Reference>
@@ -67,35 +64,24 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>$(SolutionDir)\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Net" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\ServiceStack.Razor.4.0.32\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
     <Content Include="gruntfile.js" />
-    <Content Include="default.cshtml" />
+    <Content Include="default.html" />
+    <Content Include="platform.css" />
+    <Content Include="platform.js" />
     <Content Include="js\components\hello.jsx" />
     <Content Include="js\utils.js" />
-    <Content Include="js\web.js" />
     <Content Include="js\app.jsx" />
     <Content Include="img\react-logo.png" />
     <Content Include="Scripts\_references.js" />

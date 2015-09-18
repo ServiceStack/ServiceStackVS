@@ -1,9 +1,11 @@
-﻿window.nativeHost = {
+/* mac */
+document.documentElement.className += ' mac';
+window.nativeHost = {
     quit: function () {
-        window.close();
+        $.get('/nativehost/quit');
     },
     showAbout: function () {
-        alert('$safeprojectname$ - ServiceStack + ReactJS');
+    	$.get('/nativehost/showAbout');
     },
     toggleFormBorder: function () {
         //
@@ -17,5 +19,5 @@
     ready: function () {
         //
     },
-    platform: 'web'
-}
+    platform: 'mac'
+};

@@ -1,24 +1,26 @@
-﻿window.nativeHost = {
-    quit: function () {
+﻿/* console */
+document.documentElement.className += ' console';
+window.nativeHost = {
+    quit: function() {
         $.get('/nativehost/quit');
         setTimeout(function() {
             window.close();
         });
     },
-    showAbout: function () {
+    showAbout: function() {
         alert('ReactChat - ServiceStack + ReactJS');
     },
-    toggleFormBorder: function () {
+    toggleFormBorder: function() {
         //
     },
-    dockLeft: function () {
+    dockLeft: function() {
         //
     },
-    dockRight: function () {
+    dockRight: function() {
         //
     },
-    ready: function () {
+    ready: function() {
         //
     },
     platform: 'console'
-}
+};

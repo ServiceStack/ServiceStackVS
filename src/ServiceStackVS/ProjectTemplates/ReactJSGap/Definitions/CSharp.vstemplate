@@ -67,8 +67,8 @@
         <File name="MainWindow.designer.cs" />
         <File name="MainWindow.xib" />
         <File name="MainWindowController.cs" />
-        <File name="mac.css" />
-        <File name="mac.js" />
+        <File name="platform.css" />
+        <File name="platform.js" />
         <File name="packages.config" />
         <File name="logo.icns" dest="Resources"/>
       </Files>

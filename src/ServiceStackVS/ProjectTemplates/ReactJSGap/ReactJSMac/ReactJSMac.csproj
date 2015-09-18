@@ -70,12 +70,6 @@
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.44\lib\net45\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Razor">
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.44\lib\net45\ServiceStack.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.44\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="XamMac" />
     <Reference Include="ServiceStack.Redis">
       <HintPath>..\..\packages\ServiceStack.Redis.4.0.44\lib\net40\ServiceStack.Redis.dll</HintPath>
@@ -113,8 +107,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="mac.css" />
-    <EmbeddedResource Include="mac.js" />
+    <EmbeddedResource Include="platform.css" />
+    <EmbeddedResource Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\logo.icns" />

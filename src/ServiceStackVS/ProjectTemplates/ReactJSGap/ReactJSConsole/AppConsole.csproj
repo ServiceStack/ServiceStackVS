@@ -69,8 +69,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="console.css" />
-    <EmbeddedResource Include="console.js" />
+    <EmbeddedResource Include="platform.css" />
+    <EmbeddedResource Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="logo.ico" />

@@ -9,7 +9,6 @@ using Funq;
 using $safeprojectname$.ServiceInterface;
 using ServiceStack;
 using ServiceStack.Configuration;
-using ServiceStack.Razor;
 
 namespace $safeprojectname$
 {
@@ -46,8 +45,6 @@ namespace $safeprojectname$
                 AllowFileExtensions = { "jsx" },
                 AddRedirectParamsToQueryString = true
             });
-
-            this.Plugins.Add(new RazorFormat());
         }
     }
 }

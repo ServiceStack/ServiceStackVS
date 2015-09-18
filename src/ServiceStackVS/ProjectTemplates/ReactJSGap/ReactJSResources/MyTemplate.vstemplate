@@ -32,7 +32,6 @@
 	    <package id="ServiceStack.Common" version="latest" />
 	    <package id="ServiceStack.Interfaces" version="latest" />
 	    <package id="ServiceStack.OrmLite" version="latest" />
-	    <package id="ServiceStack.Razor" version="latest" />
 	    <package id="ServiceStack.Text" version="latest" />
     </NuGetPackages>
   </WizardData>

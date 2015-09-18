@@ -34,7 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -53,7 +52,7 @@
     <EmbeddedResource Include="lib\js\lib.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="default.cshtml" />
+    <EmbeddedResource Include="default.html" />
     <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.eot" />
     <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.ttf" />
     <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.woff" />

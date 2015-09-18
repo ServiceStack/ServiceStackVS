@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Linq;
 using Funq;
 using ServiceStack;
-using ServiceStack.Razor;
 using ServiceStack.Text;
 using ServiceStack.Auth;
 using ServiceStack.Redis;
@@ -33,10 +32,6 @@ namespace $safeprojectname$
 			//Config examples
 			//this.Plugins.Add(new PostmanFeature());
 			//Plugins.Add(new CorsFeature());
-
-			Plugins.Add(new RazorFormat {
-				LoadFromAssemblies = { typeof(CefResources).Assembly },
-			});
 
 			SetConfig(new HostConfig {
 				DebugMode = true,

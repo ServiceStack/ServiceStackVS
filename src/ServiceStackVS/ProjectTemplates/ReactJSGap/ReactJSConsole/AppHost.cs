@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using Funq;
 using ServiceStack;
-using ServiceStack.Razor;
 using $saferootprojectname$.Resources;
 using $saferootprojectname$.ServiceInterface;
 
@@ -29,23 +28,10 @@ namespace $safeprojectname$
             //this.Plugins.Add(new PostmanFeature());
             //Plugins.Add(new CorsFeature());
 
-            Plugins.Add(new RazorFormat {
-                LoadFromAssemblies = { typeof(CefResources).Assembly },
-            });
-
             SetConfig(new HostConfig {
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) },
             });
-
-            var allKeys = AppSettings.GetAllKeys();
-
-            if (!allKeys.Contains("platformsClassName"))
-                AppSettings.Set("platformsClassName", "console");
-            if (!allKeys.Contains("PlatformCss"))
-                AppSettings.Set("PlatformCss", "console.css");
-            if (!allKeys.Contains("PlatformJs"))
-                AppSettings.Set("PlatformJs", "console.js");
 
             // This route is added using Routes.Add and ServiceController.RegisterService due to
             // using ILMerge limiting our AppHost : base() call to one assembly.
