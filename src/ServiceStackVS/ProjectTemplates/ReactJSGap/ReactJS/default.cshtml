@@ -3,18 +3,16 @@
     var platformsClassName = AppSettings.Exists("PlatformClassName") ? AppSettings.GetString("PlatformClassName") : "web";
 }
 <!DOCTYPE html>
-<html @platformsClassName>
+<html class="@platformsClassName">
 <head lang="en">
     <meta charset="UTF-8">
 
     <!--build:css lib/css/lib.min.css-->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbuild -->
-
     <!--build:css css/app.min.css-->
     <link rel="stylesheet" href="/css/app.css" />
     <!-- endbuild -->
-
     @if (AppSettings.Exists("PlatformCss"))
     {
         <link rel="stylesheet" href="@(AppSettings.GetString("PlatformCss") + "?disableCache=" + DateTime.Now.Ticks)" />
@@ -28,11 +26,9 @@
     <!-- endbuild -->
 
     <script src="/js/ss-utils.js"></script><!-- in ServiceStack.dll -->
-
     <!-- build:js js/app.min.js -->
     <script src="/js/utils.js"></script>
     <!-- endbuild -->
-
     @if (AppSettings.Exists("PlatformJs"))
     {
         <script src="@(AppSettings.GetString("PlatformJs") + "?disableCache=" + DateTime.UtcNow.Ticks)"></script>
@@ -71,7 +67,6 @@
     <script type="text/jsx" src="/js/components/hello.jsx"></script>
     <script type="text/jsx" src="/js/app.jsx"></script>
     <!-- endbuild -->
-
     <!-- build:remove -->
     <script src="bower_components/react/JSXTransformer.js"></script>
     <!-- endbuild -->

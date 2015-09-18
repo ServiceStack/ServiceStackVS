@@ -12,6 +12,15 @@ namespace $safeprojectname$
         public NativeHost(FormMain formMain)
         {
             this.formMain = formMain;
+            //Enable Chrome Dev Tools when debugging WinForms
+#if DEBUG
+            formMain.ChromiumBrowser.KeyboardHandler = new KeyboardHandler();
+#endif
+        }
+
+        public string Platform
+        {
+            get { return "winforms"; }
         }
 
         public void Quit()
@@ -41,14 +50,12 @@ namespace $safeprojectname$
         {
             formMain.InvokeOnUiThreadIfRequired(() =>
             {
-#if DEBUG
-                formMain.ChromiumBrowser.KeyboardHandler = new KeyboardHandler();
-#endif
+                //Invoke on DOM ready
             });
         }
     }
 
-    #if DEBUG
+#if DEBUG
     public class KeyboardHandler : IKeyboardHandler
     {
         public bool OnPreKeyEvent(IWebBrowser browserControl, KeyType type, int windowsKeyCode, int nativeKeyCode,

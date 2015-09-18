@@ -4,7 +4,7 @@
     var platformsClassName = AppSettings.Exists("PlatformClassName") ? AppSettings.GetString("PlatformClassName") : "web";
 }
 <!DOCTYPE html>
-<html @platformsClassName>
+<html class="@platformsClassName">
 <head lang="en">
     <meta charset="UTF-8">
 
@@ -59,6 +59,6 @@
 
     <script src="js/app.jsx.js"></script>
 
-    
+
 </body>
 </html>
