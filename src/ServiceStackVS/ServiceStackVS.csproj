@@ -270,36 +270,36 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\AppHost.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.designer.cs">
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\Main.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.designer.cs">
+    </None>
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppHost.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\Program.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindowController.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.Designer.cs">
+    </None>
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindowController.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
+    </None>
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Program.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Resources.Designer.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Settings.Designer.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\NativeHost.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax.cs">
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\NativeHost.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    </None>
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyServices.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ServiceInterface\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ServiceModel\Hello.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ServiceModel\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\Test\Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\Test\UnitTests.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceInterface\MyServices.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceInterface\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceModel\Hello.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ServiceModel\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\Test\Properties\AssemblyInfo.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\Test\UnitTests.cs" />
     <Compile Include="VsixDocumentExtensions.cs" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\AppHost.cs" />
     <None Include="ProjectTemplates\AngularSPA\AngularSPA\Global.asax.cs">
@@ -478,8 +478,6 @@
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSConsole\logo.ico" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\Info.plist" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.css" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.sln" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
