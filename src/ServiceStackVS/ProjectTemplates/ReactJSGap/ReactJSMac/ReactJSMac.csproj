@@ -82,7 +82,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="AppDelegate.designer.cs" />
     <Compile Include="AppHost.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="MainWindow.designer.cs" />
     <Compile Include="MainWindowController.cs" />

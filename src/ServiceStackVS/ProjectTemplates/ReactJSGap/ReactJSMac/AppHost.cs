@@ -70,8 +70,8 @@ namespace $safeprojectname$
 		public void ShowAbout()
 		{
 			//Invoke native about menu item programmatically.
-			MainClass.MainMenu.InvokeOnMainThread (() => {
-				foreach (var item in MainClass.MainMenu.ItemArray()) {
+			Program.MainMenu.InvokeOnMainThread (() => {
+				foreach (var item in Program.MainMenu.ItemArray()) {
 					if (item.Title == "$saferootprojectname$") {
 						item.Submenu.PerformActionForItem(0);
 					}

@@ -6,7 +6,7 @@ using MonoMac.ObjCRuntime;
 
 namespace $safeprojectname$
 {
-	public static class MainClass
+	public static class Program
 	{
 		public static string HostUrl = "http://127.0.0.1:3337/";
 
