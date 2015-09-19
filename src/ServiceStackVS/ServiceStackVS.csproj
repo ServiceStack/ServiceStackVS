@@ -266,7 +266,7 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\AppHost.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\Program.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSConsole\Properties\AssemblyInfo.cs" />
-    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\CefResources.cs" />
+    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\SharedEmbeddedResources.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\Properties\AssemblyInfo.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\AppHost.cs" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\FormMain.cs" />
