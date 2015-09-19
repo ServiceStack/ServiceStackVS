@@ -61,7 +61,7 @@
         <File name="AppDelegate.designer.cs" />
         <File name="AppHost.cs" />
         <File name="Info.plist" />
-        <File name="Main.cs" />
+        <File name="Program.cs" />
         <File name="MainMenu.xib" />
         <File name="MainWindow.cs" />
         <File name="MainWindow.designer.cs" />

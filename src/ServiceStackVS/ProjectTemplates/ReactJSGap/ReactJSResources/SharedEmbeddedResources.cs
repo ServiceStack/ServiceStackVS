@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$
 {
-    public class CefResources
-    {
-    }
+    public class SharedEmbeddedResources { }
 }
