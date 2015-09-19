@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using CefSharp.WinForms.Internals;
-using CefSharp;
 
 namespace $safeprojectname$
 {

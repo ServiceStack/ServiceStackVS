@@ -35,7 +35,7 @@ namespace $safeprojectname$
 
 			SetConfig(new HostConfig {
 				DebugMode = true,
-				EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(CefResources) }
+				EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(SharedEmbeddedResources) }
 			});
 
 			Routes.Add<NativeHostAction>("/nativehost/{Action}");
