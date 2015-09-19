@@ -45,7 +45,7 @@ namespace $safeprojectname$
 
 	public class NativeHostService : Service
 	{
-		public object Get(NativeHostAction request)
+		public void Any(NativeHostAction request)
 		{
 			if (string.IsNullOrEmpty(request.Action)) 
 				throw HttpError.NotFound ("Function Not Found");
@@ -57,7 +57,6 @@ namespace $safeprojectname$
 				throw new HttpError(HttpStatusCode.NotFound,"Function Not Found");
 
 			methodInfo.Invoke(nativeHost, null);
-			return null;
 		}
 	}
 

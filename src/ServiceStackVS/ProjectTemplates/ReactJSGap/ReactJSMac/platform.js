@@ -2,10 +2,10 @@
 document.documentElement.className += ' mac';
 window.nativeHost = {
     quit: function () {
-        $.get('/nativehost/quit');
+        $.post('/nativehost/quit');
     },
     showAbout: function () {
-    	$.get('/nativehost/showAbout');
+    	$.post('/nativehost/showAbout');
     },
     toggleFormBorder: function () {
         //
