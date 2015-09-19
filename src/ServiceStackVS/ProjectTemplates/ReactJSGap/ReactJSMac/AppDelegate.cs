@@ -8,7 +8,7 @@ namespace $safeprojectname$
 {
 	public partial class AppDelegate : NSApplicationDelegate
 	{
-		MainWindowController mainWindowController;
+		public static MainWindowController MainWindowController;
 
 		public AppDelegate(){}
 
@@ -17,11 +17,11 @@ namespace $safeprojectname$
 #if DEBUG
 			//Enable WebInspector in WebView
 			var defaults = NSUserDefaults.StandardUserDefaults;
-			defaults.SetBool (true, "WebKitDeveloperExtras");
+			defaults.SetBool(true, "WebKitDeveloperExtras");
 			defaults.Synchronize();
 #endif
-			mainWindowController = new MainWindowController ();
-			mainWindowController.Window.MakeKeyAndOrderFront (this);
+			MainWindowController = new MainWindowController();
+			MainWindowController.Window.MakeKeyAndOrderFront(this);
 		}
 	}
 }

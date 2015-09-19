@@ -40,14 +40,6 @@ namespace $safeprojectname$
 
 			Routes.Add<NativeHostAction>("/nativehost/{Action}");
 			ServiceController.RegisterService(typeof(NativeHostService));
-
-			var allKeys = AppSettings.GetAllKeys();
-			if (!allKeys.Contains("platformsClassName"))
-				AppSettings.Set("platformsClassName", "mac");
-			if (!allKeys.Contains("PlatformCss"))
-				AppSettings.Set("PlatformCss", "mac.css");
-			if (!allKeys.Contains("PlatformJs"))
-				AppSettings.Set("PlatformJs", "mac.js");
 		}
 	}
 
@@ -90,6 +82,9 @@ namespace $safeprojectname$
 
 		public void Quit()
 		{
+			AppDelegate.MainWindowController.InvokeOnMainThread (() => {
+				AppDelegate.MainWindowController.Hide();
+			});
 			Environment.Exit(0);
 		}
 	}
