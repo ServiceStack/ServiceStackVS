@@ -18,6 +18,11 @@ namespace $safeprojectname$
 #endif
         }
 
+        public string Platform
+        {
+            get { return "winforms"; }
+        }
+
         public void Quit()
         {
             formMain.InvokeOnUiThreadIfRequired(() =>
