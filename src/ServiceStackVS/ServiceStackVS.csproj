@@ -275,7 +275,7 @@
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
     <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\AppHost.cs" />
-    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\Main.cs" />
+    <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\Program.cs" />
     <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.cs" />
     <Compile Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -473,25 +473,23 @@
     <Content Include="ProjectTemplates\ReactJSGap\Definitions\CSharp.vstemplate" />
     <Resource Include="ProjectTemplates\ReactJSGap\logo.png" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\AppConsole.csproj" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\console.css" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\console.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\platform.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\platform.js" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSConsole\logo.ico" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSConsole\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\Info.plist" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.css" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\mac.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\platform.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\platform.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.sln" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\img\react-logo.png" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.html" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.jsx.js" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\bootstrap.min.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\lib.min.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\bootstrap.min.js" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\jquery.min.js" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\modernizr.min.js" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\react.min.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\js\lib.min.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\ReactJSResources.csproj">
       <SubType>Designer</SubType>
@@ -499,14 +497,14 @@
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\logo.ico" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\ReactJSWinForms.csproj" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.css" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\platform.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\platform.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\css\app.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\default.html" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\gruntfile.js" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\img\react-logo.png" />
-    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\js\web.js" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\js\utils.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\MyTemplate.vstemplate" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\platform.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\platform.js" />
