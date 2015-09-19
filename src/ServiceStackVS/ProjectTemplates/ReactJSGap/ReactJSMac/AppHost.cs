@@ -51,7 +51,7 @@ namespace $safeprojectname$
 				throw HttpError.NotFound ("Function Not Found");
 
 			var nativeHost = typeof(NativeHost).CreateInstance<NativeHost>();
-            var methodName = request.Action.Substring(0, 1).ToUpper() + request.Action.Substring(1);
+			var methodName = request.Action.Substring(0, 1).ToUpper() + request.Action.Substring(1);
 			var methodInfo = typeof(NativeHost).GetMethod(methodName);
 			if (methodInfo == null)
 				throw new HttpError(HttpStatusCode.NotFound,"Function Not Found");
