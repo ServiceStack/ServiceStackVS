@@ -5,7 +5,7 @@ window.nativeHost = {
         window.close();
     },
     showAbout: function() {
-        alert('RedisReact - ServiceStack + ReactJS');
+        alert('$safeprojectname$ - ServiceStack + ReactJS');
     },
     toggleFormBorder: function() {
         //

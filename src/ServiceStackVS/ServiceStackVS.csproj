@@ -228,7 +228,6 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\MainWindow.xib" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSMac\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\App.config" />
-    <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.cshtml" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.eot" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.woff" />
@@ -238,7 +237,6 @@
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\packages.config" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\Properties\Settings.settings" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\bower.json" />
-    <None Include="ProjectTemplates\ReactJSGap\ReactJS\default.cshtml" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\js\app.jsx" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\js\components\hello.jsx" />
     <None Include="ProjectTemplates\ReactJSGap\ReactJS\package.json" />
@@ -486,6 +484,7 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSMac\ReactJSMac.sln" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\css\app.min.css" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJSResources\img\react-logo.png" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\default.html" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\js\app.jsx.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\css\bootstrap.min.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSResources\lib\fonts\glyphicons-halflings-regular.svg" />
@@ -503,11 +502,14 @@
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.css" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJSWinForms\winforms.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\css\app.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\default.html" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Global.asax" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\gruntfile.js" />
     <Resource Include="ProjectTemplates\ReactJSGap\ReactJS\img\react-logo.png" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\js\web.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\MyTemplate.vstemplate" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\platform.css" />
+    <Content Include="ProjectTemplates\ReactJSGap\ReactJS\platform.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\ReactJS.csproj" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\Scripts\_references.js" />
     <Content Include="ProjectTemplates\ReactJSGap\ReactJS\tests\preprocessor.js" />
