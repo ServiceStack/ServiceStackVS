@@ -7,15 +7,6 @@ window.nativeHost = {
     showAbout: function () {
     	$.post('/nativehost/showAbout');
     },
-    toggleFormBorder: function () {
-        //
-    },
-    dockLeft: function () {
-        //
-    },
-    dockRight: function () {
-        //
-    },
     ready: function () {
         //
     },
