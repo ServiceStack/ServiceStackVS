@@ -7,7 +7,7 @@ var COPY_FILES = [
     { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
     { src: './Global.asax', host: WEB },
     { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
-    { src: './platform.js', dest: 'js/', host: WEB },
+    { src: './platform.*', dest: '/', host: WEB },
     { src: './wwwroot_build/deploy/*.*', host: WEB },
     {
         src: './web.config',
