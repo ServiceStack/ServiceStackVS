@@ -141,6 +141,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
+	<Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Razor">
       <HintPath>$(SolutionDir)\packages\ServiceStack.Razor.4.0.32\lib\net45\System.Web.Razor.dll</HintPath>
