@@ -25,9 +25,6 @@ namespace ServiceStackVS
         private static readonly object BowerStartingLock = new object();
         private static readonly object BowerRunningLock = new object();
 
-        private static bool _hasBowerInstalled;
-        private static bool _hasNpmInstalled;
-
         public static List<INativeTypesHandler> GetTypeHandlerForSelectedFiles(this IList<SelectedItem> files)
         {
             if (files == null || files.Count == 0)

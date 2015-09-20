@@ -37,9 +37,11 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(447, 161);
+            this.btnContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnContinue.Location = new System.Drawing.Point(596, 188);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnContinue.Name = "btnContinue";
-            this.btnContinue.Size = new System.Drawing.Size(75, 23);
+            this.btnContinue.Size = new System.Drawing.Size(100, 28);
             this.btnContinue.TabIndex = 12;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
@@ -47,49 +49,54 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F);
-            this.label1.Location = new System.Drawing.Point(12, 161);
+            this.label1.Location = new System.Drawing.Point(13, 193);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(207, 18);
+            this.label1.Size = new System.Drawing.Size(268, 23);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Once installed, click continue";
+            this.label1.Text = "Once installed, click continue:";
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 12F);
-            this.label2.Location = new System.Drawing.Point(12, 10);
+            this.label2.Location = new System.Drawing.Point(16, 12);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(510, 48);
+            this.label2.Size = new System.Drawing.Size(680, 59);
             this.label2.TabIndex = 10;
-            this.label2.Text = "This template requires Git installed, click install below to download Git.";
+            this.label2.Text = "This template requires Git installed, click install below to install now:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnInstall
             // 
             this.btnInstall.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInstall.Location = new System.Drawing.Point(150, 84);
+            this.btnInstall.Location = new System.Drawing.Point(200, 103);
+            this.btnInstall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(234, 40);
+            this.btnInstall.Size = new System.Drawing.Size(312, 49);
             this.btnInstall.TabIndex = 13;
-            this.btnInstall.Text = "Install";
+            this.btnInstall.Text = "Download Git";
             this.btnInstall.UseVisualStyleBackColor = true;
             this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
             // GitBashInstallationPrompt
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 195);
+            this.ClientSize = new System.Drawing.Size(709, 229);
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(550, 233);
+            this.MaximumSize = new System.Drawing.Size(900, 400);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(550, 233);
+            this.MinimumSize = new System.Drawing.Size(727, 276);
             this.Name = "GitBashInstallationPrompt";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Git Installation Required";

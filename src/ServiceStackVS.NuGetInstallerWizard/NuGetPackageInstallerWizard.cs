@@ -159,7 +159,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         private void AddNuGetDependencyIfMissing(Project project, string packageId, string version = null)
         {
-            if (rootPackage != null)
+            if (rootPackage != null && (version == null || version.ToLower() == "latest"))
             {
                 version = rootPackage.Version;
             }

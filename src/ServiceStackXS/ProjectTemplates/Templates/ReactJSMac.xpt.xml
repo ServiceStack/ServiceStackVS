@@ -1,0 +1,59 @@
+﻿<?xml version="1.0"?>
+<Template originator="ServiceStack">
+
+	<!-- Template Header -->
+	<TemplateConfiguration>
+		<_Name>React Mac App</_Name>
+		<_Category>C#/ServiceStack</_Category>
+		<Icon>servicestack-project-icon</Icon>
+		<LanguageName>C#</LanguageName>
+		<_Description>A Mono Mac app project template to use with ServiceStackVS React Desktop Apps based solution.</_Description>
+	</TemplateConfiguration>
+
+
+	<!-- Actions -->
+
+
+	<!-- Template Content -->
+	<Combine name = "${ProjectName}" directory = ".">
+		<Options>
+			<StartupProject>${ProjectName}</StartupProject>
+		</Options>
+
+		<Project name = "${ProjectName}" directory = "." type = "XamMac">
+			<Options TargetFrameworkVersion = "4.5" />
+			<References>
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Xml" />
+				<Reference type="Gac" refto="System.Core" />
+				<Reference type="Gac" refto="System.Xml.Linq" />
+				<Reference type="Gac" refto="System.Drawing" />
+				<Reference type="Gac" refto="MonoMac, Version=0.0.0.0, Culture=neutral" />
+			</References>
+			<Packages>
+				<Package ID="ServiceStack" 				Version="4.0.42" />
+				<Package ID="ServiceStack.Client" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Common" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Interfaces" 	Version="4.0.42" />
+				<Package ID="ServiceStack.OrmLite" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Razor" 		Version="4.0.42" />
+				<Package ID="ServiceStack.Text" 		Version="4.0.42" />
+			</Packages>
+			<Files>
+				<File name="AppDelegate.cs" src="../ReactJsMac/AppDelegate.cs"/>
+				<File name="AppDelegate.designer.cs" src="../ReactJsMac/AppDelegate.designer.cs"/>
+				<File name="AppHost.cs" src="../ReactJsMac/AppHost.cs"/>
+				<File name="Info.plist" src="../ReactJsMac/Info.plist"/>
+				<File name="Main.cs" src="../ReactJsMac/Main.cs"/>
+				<File name="MainMenu.xib" src="../ReactJsMac/MainMenu.xib"/>
+				<File name="MainWindow.cs" src="../ReactJsMac/MainWindow.cs"/>
+				<File name="MainWindow.designer.cs" src="../ReactJsMac/MainWindow.designer.cs"/>
+				<File name="MainWindow.xib" src="../ReactJsMac/MainWindow.xib"/>
+				<File name="MainWindowController.cs" src="../ReactJsMac/MainWindowController.cs"/>
+				<File name="mac.css" src="../ReactJsMac/mac.css" BuildAction="EmbeddedResource"/>
+				<File name="mac.js" src="../ReactJsMac/mac.js" BuildAction="EmbeddedResource"/>
+			</Files>
+		</Project>
+
+	</Combine>
+</Template>

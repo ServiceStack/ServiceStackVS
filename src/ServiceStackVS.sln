@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS", "ServiceStackVS\ServiceStackVS.csproj", "{05410BD6-C9BC-45DA-B0AA-B73047BCCF14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS_IntegrationTests", "ServiceStackVS\VSServiceStack_IntegrationTests\ServiceStackVS_IntegrationTests.csproj", "{B82DD519-C1F9-4E50-915B-ED2D350C9020}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{524FA14C-C188-4A36-92FB-A92EBB1FA570}"
 	ProjectSection(SolutionItems) = preProject
 		IntegrationTests.testsettings = IntegrationTests.testsettings
 		UnitTests.testsettings = UnitTests.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS", "ServiceStackVS\ServiceStackVS.csproj", "{05410BD6-C9BC-45DA-B0AA-B73047BCCF14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS_IntegrationTests", "ServiceStackVS\VSServiceStack_IntegrationTests\ServiceStackVS_IntegrationTests.csproj", "{B82DD519-C1F9-4E50-915B-ED2D350C9020}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS_UnitTests", "ServiceStackVS\VSServiceStack_UnitTests\ServiceStackVS_UnitTests.csproj", "{CBF2528D-A52E-48B6-AC52-F67A77424CED}"
 EndProject
@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.TemplateTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypesWizard", "ServiceStackVS.NativeTypesWizard\ServiceStackVS.NativeTypesWizard.csproj", "{F5130CFD-C749-427E-A814-8115EEBDCA90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.ExternalTemplateWizard", "ServiceStackVS.ExternalTemplateWizard\ServiceStackVS.ExternalTemplateWizard.csproj", "{E803E797-51CD-4ADE-87A3-27FBA70609C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.BuildConfigWizard", "ServiceStackVS.BuildConfigWizard\ServiceStackVS.BuildConfigWizard.csproj", "{93DF1A6F-3981-42DF-8100-0692A3B0FF71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,11 +44,9 @@ Global
 		{B82DD519-C1F9-4E50-915B-ED2D350C9020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B82DD519-C1F9-4E50-915B-ED2D350C9020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B82DD519-C1F9-4E50-915B-ED2D350C9020}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B82DD519-C1F9-4E50-915B-ED2D350C9020}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBF2528D-A52E-48B6-AC52-F67A77424CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBF2528D-A52E-48B6-AC52-F67A77424CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF2528D-A52E-48B6-AC52-F67A77424CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBF2528D-A52E-48B6-AC52-F67A77424CED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +71,14 @@ Global
 		{F5130CFD-C749-427E-A814-8115EEBDCA90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5130CFD-C749-427E-A814-8115EEBDCA90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5130CFD-C749-427E-A814-8115EEBDCA90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

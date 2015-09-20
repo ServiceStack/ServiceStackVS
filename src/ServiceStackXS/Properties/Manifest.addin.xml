@@ -16,22 +16,24 @@
     <Import assembly="ServiceStack.Text.dll" />
     <Import assembly="NuGet.Core.dll" />
 
-    <Import file="ProjectTemplates/AspNetRazor/AspNetRazor.xpt.xml" />
+    <Import file="ProjectTemplates/Templates/ReactJSMac.xpt.xml" />
 
-    <Import file="ProjectTemplates/Files/AppHost.cs" />
-    <Import file="ProjectTemplates/Files/Global.asax" />
-    <Import file="ProjectTemplates/Files/Global.asax.cs" />
-    <Import file="ProjectTemplates/Files/Hello.cs" />
-    <Import file="ProjectTemplates/Files/MyServices.cs" />
-    <Import file="ProjectTemplates/Files/UnitTests.cs" />
-    <Import file="ProjectTemplates/Files/Web.config" />
-
-    <Import file="ProjectTemplates/Files/Views/default.cshtml" />
-    <Import file="ProjectTemplates/Files/Views/Hello.cshtml" />
-    <Import file="ProjectTemplates/Files/Views/_Layout.cshtml" />
+    <Import file="ProjectTemplates/ReactJsMac/AppDelegate.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/AppDelegate.designer.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/AppHost.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/Info.plist" />
+    <Import file="ProjectTemplates/ReactJsMac/Main.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/MainMenu.xib" />
+    <Import file="ProjectTemplates/ReactJsMac/MainWindow.cs" />
+						
+    <Import file="ProjectTemplates/ReactJsMac/MainWindow.designer.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/MainWindow.xib" />
+    <Import file="ProjectTemplates/ReactJsMac/MainWindowController.cs" />
+    <Import file="ProjectTemplates/ReactJsMac/mac.css" />
+    <Import file="ProjectTemplates/ReactJsMac/mac.js" />
   </Runtime>
 
-  <ConditionType id="ServiceStackReferemceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
+  <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
 
   <Extension path="/MonoDevelop/Core/StockIcons">
     <StockIcon stockid="servicestack-addref-item" file = "add-ref-item.png" />
@@ -63,14 +65,14 @@
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/ContextMenu/ProjectPad">
-  	<Condition id="ServiceStackReferemceDto">
+  	<Condition id="ServiceStackReferenceDto">
     	<CommandItem
 				id="ServiceStackXS.Commands.UpdateReference" insertafter="VersionControl" />
     </Condition>
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/ProjectTemplates">
-		<ProjectTemplate id   = "ServiceStackAspNetRazor"
-		                 file = "ProjectTemplates/AspNetRazor/AspNetRazor.xpt.xml" />
+		<ProjectTemplate id   = "ServiceStackReactMac"
+		                 file = "ProjectTemplates/Templates/ReactJSMac.xpt.xml" />
 	</Extension>
 </Addin>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectTypeGuids>{7DBEB09D-BB9F-4D92-A141-A009135475EF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{86F6BF2A-E449-4B3E-813B-9ACC37E5545F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{555B5243-E50E-4C60-AAB4-D789D44039C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>ServiceStackXS</RootNamespace>
@@ -31,6 +31,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoDevelop.Addins.0.2.3\build\net40\MonoDevelop.Addins.targets" Condition="Exists('..\packages\MonoDevelop.Addins.0.2.3\build\net40\MonoDevelop.Addins.targets')" />
   <ItemGroup>
     <Compile Include="Commands\UpdateReferenceHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -45,18 +46,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="MonoDevelop.Core">
-      <Package>C:\Program Files (x86)\Xamarin Studio\bin\MonoDevelop.Core.dll</Package>
-    </Reference>
-    <Reference Include="MonoDevelop.Ide">
-      <Package>C:\Program Files (x86)\Xamarin Studio\bin\MonoDevelop.Ide.dll</Package>
-    </Reference>
-    <Reference Include="Mono.TextEditor">
-      <Package>C:\Program Files (x86)\Xamarin Studio\bin\Mono.TextEditor.dll</Package>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <Package>C:\Program Files (x86)\Xamarin Studio\bin\ICSharpCode.NRefactory.dll</Package>
-    </Reference>
     <Reference Include="Mono.Cairo" />
     <Reference Include="System.Drawing" />
     <Reference Include="NuGet.Core">
@@ -81,8 +70,32 @@
     <Reference Include="ServiceStackVS.NativeTypes">
       <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
     </Reference>
-    <Reference Include="MD.PackageManagement">
+    <Reference Include="MonoDevelop.PackageManagement">
       <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Cecil">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Xml">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Xml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -95,40 +108,46 @@
       <DeployService-Deploy>True</DeployService-Deploy>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\AspNetRazor\AspNetRazor.xpt.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="servicestack-project-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\AppHost.cs">
+    <Content Include="ProjectTemplates\ReactJsMac\AppDelegate.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Global.asax.cs">
+    <Content Include="ProjectTemplates\ReactJsMac\AppDelegate.designer.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Global.asax">
+    <Content Include="ProjectTemplates\ReactJsMac\AppHost.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Web.config">
+    <Content Include="ProjectTemplates\ReactJsMac\Main.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\UnitTests.cs">
+    <Content Include="ProjectTemplates\ReactJsMac\MainMenu.xib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\MyServices.cs">
+    <Content Include="ProjectTemplates\ReactJsMac\Info.plist">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Hello.cs">
+    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Views\default.cshtml">
+    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.xib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Views\Hello.cshtml">
+    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.designer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\ReactJsMac\MainWindowController.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\Files\Views\_Layout.cshtml">
+    <Content Include="ProjectTemplates\Templates\ReactJSMac.xpt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\ReactJsMac\mac.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectTemplates\ReactJsMac\mac.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -140,11 +159,13 @@
   <ItemGroup>
     <Folder Include="Conditions\" />
     <Folder Include="ProjectTemplates\" />
-    <Folder Include="ProjectTemplates\AspNetRazor\" />
-    <Folder Include="ProjectTemplates\Files\" />
-    <Folder Include="ProjectTemplates\Files\Views\" />
+    <Folder Include="ProjectTemplates\Templates\" />
+    <Folder Include="ProjectTemplates\ReactJsMac\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="logo_32x32.png" />
+    <None Include="packages.config" />
+    <None Include="logo_32x32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
