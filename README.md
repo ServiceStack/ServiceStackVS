@@ -3,9 +3,52 @@
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
-### [New Windows Service Template](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+### [New React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
 
-The new Windows Service Template makes it super easy to create and install self-hosted ServiceStack solutions running within vanilla Windows Services without needing to rely on any additional 3rd Party packages or dependencies.
+The new **React Desktop Apps** template provides everything you need to package your ASP.NET ServiceStack Web App into a native Windows Winforms App, OSX Cocoa Desktop App or cross-platform (Windows/OSX/Linux) "headless" Console App which instead of being 
+embedded inside a Native UI, launches the Users prefered Web Browser for its Web UI.
+
+![React Desktop Apps](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/gap/react-desktop-splash.png)
+
+This Hybrid model of developing Desktop Apps with modern WebKit technologies offers a more productive and reusable alternative to developing bespoke WPF Apps in XAML or Cocoa OSX Apps with Xcode. It enables full code reuse of the Web App whilst still allowing for platform specific .js, .css and C# specialization when needed. These advantages are also why GitHub also adopted a similar approach for their new cross-platform UI in their flagship [Windows and OSX Desktop Apps](http://githubengineering.com/cross-platform-ui-in-github-desktop/).
+
+The template is pre-configured with the necessary tools to package your Web Application 
+into multiple platforms using the provided Grunt build tasks. The Desktop Apps are also debuggable allowing for a simplified and iterative dev workflow by running the preferred Host Project:
+
+- **Web** - ASP.NET Web Application
+- **Windows** - Native Windows application embedded in a CefSharp Chromium browser
+- **OSX** - Native OS X Cocoa App embedded in a WebView control (requires Xamarin.Mac)
+- **Console** - Single portable, cross platform executable that launches the user's prefered browser
+
+To highlight this new template, we've ported the Chat-React example application in the [ReactChatApps project](https://github.com/ServiceStackApps/ReactChatApps).
+
+![WinForms application with loading splash screen](https://github.com/ServiceStack/Assets/raw/master/img/livedemos/react-desktop-apps/redis-chat-app.gif)
+
+# Project Structure
+Just like other templates in ServiceStackVS, the **React Desktop Apps** template provides the same recommended structure as well as 3 additional other projects for producing the Console and WinForms applications in the VS generated solution as well as a **Xamarin.Mac** project and solution to build the native OSX application.
+
+![Project structure of ReactChatApps](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/react-desktop-apps-proj-structure.png)
+
+### Visual Studio Solution
+- **ReactChat** - Web applicaton which contains all our resources and files used while developing.
+- **ReactChat.AppConsole*** - Console application, launches default browser on users application
+- **ReactChat.AppWinForms*** - WinForms application using CefSharp and Chromium Embedded Framework to output our web application in a native application.
+- **ReactChat.Resources*** - Embedded resources that are used by our AppWinForms and AppConsole application and target of `01-bundle-all` Grunt task. This project has references to all minified client resources (CSS, JavaScript, images, etc) and includes each of them as an *Embedded Resource*.
+- **ReactChat.ServiceInterface** - Contains ServiceStack services.
+- **ReactChat.ServiceModel** - Contains request/response classes.
+- **ReactChat.Tests** - Contains NUnit tests. 
+
+### Xamarin Studio Solution
+The additional **ReactChat.AppMac** project which is referenced by the **ReactChatMac.sln** file is setup ready to run from Xamarin Studio, reusing resources as well as web services.
+
+- **ReactChat.AppMac** - Xamarin.Mac host application controling native UI features and platform specific files for OSX
+- **ReactChat.ServiceInterface** - Project refernce to Visual Studio generated project
+- **ReactChat.ServiceModel** - Project reference to the Visual Studio generated project
+- **ReactChat.Resources*** - Assembly reference, by running the `01-bundle-all` grunt task, the output assembly is placed in a `lib` folder which is referenced by the Xamarin.Mac project.
+
+### [Windows Service Template](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+
+The Windows Service Template makes it super easy to create and install self-hosted ServiceStack solutions running within vanilla Windows Services without needing to rely on any additional 3rd Party packages or dependencies.
 
 #### Optimized for Developer Productivity
 
@@ -25,9 +68,9 @@ To Install, just build your project in **RELEASE** mode then run the `install.ba
 
 To use the new Windows Service Template [download the Install the latest ServiceStackVS](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7). If you have a previous version of **ServiceStackVS** installed, it will need to be uninstalled before installing the latest version.
 
-### [New ReactJS App Template](https://github.com/ServiceStackApps/Chat-React)
+### [ReactJS App Template](https://github.com/ServiceStackApps/Chat-React)
 
-The new ServiceStackVS **ReactJS App** template shares the same approach for developing modern Single Page Apps in VS.NET as the existing [AngularJS App](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md) template by leveraging the **node.js** ecosystem for managing all aspects of Client App development utilizing the best-in-class libraries:
+The ServiceStackVS **ReactJS App** template shares the same approach for developing modern Single Page Apps in VS.NET as the existing [AngularJS App](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md) template by leveraging the **node.js** ecosystem for managing all aspects of Client App development utilizing the best-in-class libraries:
 
  - [npm](https://www.npmjs.org/) to manage node.js dependencies (bower, grunt, gulp)
  - [Bower](http://bower.io/) for managing client dependencies (angular, jquery, bootstrap, etc)
