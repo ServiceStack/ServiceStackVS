@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceStackVS.FileHandlers;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using ServiceStackVS.NativeTypes.Handlers;
 
-namespace ServiceStackVS_UnitTests
+namespace ServiceStackVS.Tests
 {
-    [TestClass]
-    public class NativeTypeUrlTests
+    [TestFixture]
+    public class NativeTypesTests
     {
-        [TestMethod]
-        public void CSharp_builds_url()
+        [Test]
+        public void CSharpNativeTypesGeneratesCorrectUrl()
         {
             var typeHandler = new CSharpNativeTypesHandler();
-            Dictionary<string, string> validUrls = new Dictionary<string,string>
+            Dictionary<string, string> validUrls = new Dictionary<string, string>
             {
                 {"http://localhost:8080/","http://localhost:8080/types/csharp"},
                 {"http://example.com","http://example.com/types/csharp"},
@@ -26,12 +21,12 @@ namespace ServiceStackVS_UnitTests
 
             foreach (var validUrl in validUrls)
             {
-                Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key,null));
+                NUnit.Framework.Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
             }
         }
 
-        [TestMethod]
-        public void FSharp_builds_url()
+        [Test]
+        public void FSharpNativeTypesGeneratesCorrectUrl()
         {
             var typeHandler = new FSharpNativeTypesHandler();
             Dictionary<string, string> validUrls = new Dictionary<string, string>
@@ -44,12 +39,12 @@ namespace ServiceStackVS_UnitTests
 
             foreach (var validUrl in validUrls)
             {
-                Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
+                NUnit.Framework.Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
             }
         }
 
-        [TestMethod]
-        public void VbNet_builds_url()
+        [Test]
+        public void VbNetNativeTypesGeneratesCorrectUrl()
         {
             var typeHandler = new VbNetNativeTypesHandler();
             Dictionary<string, string> validUrls = new Dictionary<string, string>
@@ -62,12 +57,12 @@ namespace ServiceStackVS_UnitTests
 
             foreach (var validUrl in validUrls)
             {
-                Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
+                NUnit.Framework.Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
             }
         }
 
-        [TestMethod]
-        public void TypeScript_builds_url()
+        [Test]
+        public void TypeScriptDNativeTypesGeneratesCorrectUrl()
         {
             var typeHandler = new TypeScriptNativeTypesHandler();
             Dictionary<string, string> validUrls = new Dictionary<string, string>
@@ -80,7 +75,7 @@ namespace ServiceStackVS_UnitTests
 
             foreach (var validUrl in validUrls)
             {
-                Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
+                NUnit.Framework.Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
             }
         }
     }

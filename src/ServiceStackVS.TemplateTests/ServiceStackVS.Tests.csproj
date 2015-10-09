@@ -7,8 +7,8 @@
     <ProjectGuid>{1933A6BA-3364-4F94-8015-1F029DCE9383}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceStackVS.TemplateTests</RootNamespace>
-    <AssemblyName>ServiceStackVS.TemplateTests</AssemblyName>
+    <RootNamespace>ServiceStackVS.Tests</RootNamespace>
+    <AssemblyName>ServiceStackVS.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -43,11 +49,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentExtensionTests.cs" />
+    <Compile Include="NativeTypeUrlTests.cs" />
+    <Compile Include="NpmTests.cs" />
+    <Compile Include="NuGetWizardTests.cs" />
     <Compile Include="ProjectTemplateProjectFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
+      <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
+      <Name>ServiceStackVS.NativeTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceStackVS.NPMInstallerWizard\ServiceStackVS.NPMInstallerWizard.csproj">
+      <Project>{f15d55c1-633a-4344-84e5-ce9c95988507}</Project>
+      <Name>ServiceStackVS.NPMInstallerWizard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj">
+      <Project>{7344DA1C-9297-49FD-BE37-568A3C4AB544}</Project>
+      <Name>ServiceStackVS.NuGetInstallerWizard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceStackVS.TestUtility\ServiceStackVS.TestUtility.csproj">
+      <Project>{36b58306-4474-4519-9ed5-e446ab648a8e}</Project>
+      <Name>ServiceStackVS.TestUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceStackVS\ServiceStackVS.csproj">
+      <Project>{05410bd6-c9bc-45da-b0aa-b73047bccf14}</Project>
+      <Name>ServiceStackVS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

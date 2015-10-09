@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using EnvDTE;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceStackVS;
+using NUnit.Framework;
 using ServiceStackVS.NativeTypes.Handlers;
+using Assert = NUnit.Framework.Assert;
 
-namespace ServiceStackVS_UnitTests
+namespace ServiceStackVS.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class DocumentExtensionTests
     {
-        [TestMethod]
+        [Test]
         public void Get_typehandler_from_file_list()
         {
             Dictionary<string, Type> selectedItems = new Dictionary<string, Type>
@@ -28,7 +28,7 @@ namespace ServiceStackVS_UnitTests
                 var listOfItems = new List<SelectedItem>();
                 listOfItems.Add(new MockSelecedItem { Name = selectedItem.Key });
                 var typeOfHandler = listOfItems.GetTypeHandlerForSelectedFiles().First().GetType();
-                Assert.AreEqual(selectedItem.Value, typeOfHandler);
+                Assert.That(selectedItem.Value, Is.EqualTo(typeOfHandler));
             }
         }
     }

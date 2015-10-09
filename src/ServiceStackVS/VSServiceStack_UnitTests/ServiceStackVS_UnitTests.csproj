@@ -139,10 +139,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentExtensionTests.cs" />
-    <Compile Include="NativeTypeUrlTests.cs" />
-    <Compile Include="NpmTests.cs" />
-    <Compile Include="NuGetWizardTests.cs" />
     <Compile Include="PackageTest.cs" />
     <!---->
     <!---->

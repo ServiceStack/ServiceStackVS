@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using NUnit.Framework;
 
-namespace ServiceStackVS.TemplateTests
+namespace ServiceStackVS.Tests
 {
     [TestFixture]
     public class ProjectTemplateProjectFileTests

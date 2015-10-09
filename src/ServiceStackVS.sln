@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypes"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.TestUtility", "ServiceStackVS.TestUtility\ServiceStackVS.TestUtility.csproj", "{36B58306-4474-4519-9ED5-E446AB648A8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.TemplateTests", "ServiceStackVS.TemplateTests\ServiceStackVS.TemplateTests.csproj", "{1933A6BA-3364-4F94-8015-1F029DCE9383}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Tests", "ServiceStackVS.TemplateTests\ServiceStackVS.Tests.csproj", "{1933A6BA-3364-4F94-8015-1F029DCE9383}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypesWizard", "ServiceStackVS.NativeTypesWizard\ServiceStackVS.NativeTypesWizard.csproj", "{F5130CFD-C749-427E-A814-8115EEBDCA90}"
 EndProject
