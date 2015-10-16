@@ -15,22 +15,6 @@
     <Import assembly="ServiceStackVS.NativeTypes.dll" />
     <Import assembly="ServiceStack.Text.dll" />
     <Import assembly="NuGet.Core.dll" />
-
-    <Import file="ProjectTemplates/Templates/ReactJSMac.xpt.xml" />
-
-    <Import file="ProjectTemplates/ReactJsMac/AppDelegate.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/AppDelegate.designer.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/AppHost.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/Info.plist" />
-    <Import file="ProjectTemplates/ReactJsMac/Main.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/MainMenu.xib" />
-    <Import file="ProjectTemplates/ReactJsMac/MainWindow.cs" />
-						
-    <Import file="ProjectTemplates/ReactJsMac/MainWindow.designer.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/MainWindow.xib" />
-    <Import file="ProjectTemplates/ReactJsMac/MainWindowController.cs" />
-    <Import file="ProjectTemplates/ReactJsMac/mac.css" />
-    <Import file="ProjectTemplates/ReactJsMac/mac.js" />
   </Runtime>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />

@@ -111,45 +111,6 @@
     <Content Include="servicestack-project-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\AppDelegate.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\AppDelegate.designer.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\AppHost.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\Main.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\MainMenu.xib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\Info.plist">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.xib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\MainWindow.designer.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\MainWindowController.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\Templates\ReactJSMac.xpt.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\mac.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectTemplates\ReactJsMac\mac.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -160,7 +121,6 @@
     <Folder Include="Conditions\" />
     <Folder Include="ProjectTemplates\" />
     <Folder Include="ProjectTemplates\Templates\" />
-    <Folder Include="ProjectTemplates\ReactJsMac\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
