@@ -55,8 +55,8 @@ namespace ServiceStackXS
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.instructionsTextView = new global::Gtk.TextView ();
-			this.instructionsTextView.Buffer.Text = "\nTo generate the DTO Service Model types for a specific ServiceStack instance, en" +
-			"ter the base URI for the remote ServiceStack server and click OK.";
+			this.instructionsTextView.Buffer.Text = "\r\nTo generate the DTO Service Model types for a specific ServiceStack instance, e" +
+			"nter the base URI for the remote ServiceStack server and click OK.";
 			this.instructionsTextView.Sensitive = false;
 			this.instructionsTextView.Name = "instructionsTextView";
 			this.instructionsTextView.Editable = false;
