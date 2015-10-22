@@ -65,7 +65,7 @@ module.exports = function (grunt) {
                 fs.mkdirSync(appSettingsDir);
             }
             fs.writeFileSync(appSettingsPath,
-                '# Release App Settings\n\nDebugMode false');
+                '# Release App Settings\r\nDebugMode false');
         }
     }
 

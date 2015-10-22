@@ -8,6 +8,7 @@
 module.exports = function (grunt) {
     "use strict";
 
+    var fs = required('fs');
     var path = require('path');
     // include gulp
     var gulp = require('gulp');
@@ -24,8 +25,37 @@ module.exports = function (grunt) {
     var react = require('gulp-react');
     var webRoot = 'wwwroot/';
 
+    var configFile = 'config.json';
+    var configDir = './wwwroot_build/publish/';
+    var configPath = configDir + configFile;
+    var appSettingsFile = 'appsettings.txt';
+    var appSettingsDir = './wwwroot_build/deploy/';
+    var appSettingsPath = appSettingsDir + appSettingsFile;
+
+    function createConfigsIfMissing() {
+        if (!fs.existsSync(configPath)) {
+            if (!fs.existsSync(configDir)) {
+                fs.mkdirSync(configDir);
+            }
+            fs.writeFileSync(configPath, JSON.stringify({
+                "iisApp": "$safeprojectname$",
+                "serverAddress": "deploy-server.example.com",
+                "userName": "{WebDeployUserName}",
+                "password": "{WebDeployPassword}"
+            }, null, 4));
+        }
+        if (!fs.existsSync(appSettingsPath)) {
+            if (!fs.existsSync(appSettingsDir)) {
+                fs.mkdirSync(appSettingsDir);
+            }
+            fs.writeFileSync(appSettingsPath,
+                '# Release App Settings\r\nDebugMode false');
+        }
+    }
+
     // Deployment config
-    var config = require('./wwwroot_build/publish/config.json');
+    createConfigsIfMissing();
+    var config = require(configPath);
 
     // htmlbuild replace for CDN references
     function pipeTemplate(block, template) {
