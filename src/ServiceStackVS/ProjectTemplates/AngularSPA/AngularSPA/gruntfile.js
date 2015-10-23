@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     var eventStream = require('event-stream');
 
     var webRoot = 'wwwroot/';
-    var webBuildDir = process.argv.serviceStackSettingsDir || './wwwroot_build/';
+    var webBuildDir = grunt.option('serviceStackSettingsDir') || './wwwroot_build/';
     var configFile = 'config.json';
     var configDir = webBuildDir + 'publish/';
     var configPath = configDir + configFile;

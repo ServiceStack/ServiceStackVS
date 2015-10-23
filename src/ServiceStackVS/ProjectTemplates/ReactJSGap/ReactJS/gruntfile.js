@@ -1,6 +1,8 @@
 var WEB = 'web';
 var NATIVE = 'native';
 
+var webBuildDir = grunt.option('serviceStackSettingsDir') || './wwwroot_build/';
+
 var COPY_FILES = [
     { src: './bin/**/*', dest: 'bin/', host: WEB },
     { src: './img/**/*', dest: 'img/' },
@@ -8,7 +10,7 @@ var COPY_FILES = [
     { src: './Global.asax', host: WEB },
     { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
     { src: './platform.*', dest: '/', host: WEB },
-    { src: './wwwroot_build/deploy/*.*', host: WEB },
+    { src: webBuildDir + 'deploy/*.*', host: WEB },
     {
         src: './web.config',
         host: [WEB],
@@ -40,8 +42,7 @@ module.exports = function (grunt) {
 
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
-    var resourcesLib = '../../lib/';
-    var webBuildDir = process.argv.serviceStackSettingsDir || './wwwroot_build/';
+    var resourcesLib = '../../lib/';   
     var configFile = 'config.json';
     var configDir = webBuildDir + 'publish/';
     var configPath = configDir + configFile;
