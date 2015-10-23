@@ -23,13 +23,14 @@ module.exports = function (grunt) {
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
     var react = require('gulp-react');
-    var webRoot = 'wwwroot/';
 
+    var webRoot = 'wwwroot/';
+    var webBuildDir = process.argv.serviceStackSettingsDir || './wwwroot_build/';
     var configFile = 'config.json';
-    var configDir = './wwwroot_build/publish/';
+    var configDir = webBuildDir + 'publish/';
     var configPath = configDir + configFile;
     var appSettingsFile = 'appsettings.txt';
-    var appSettingsDir = './wwwroot_build/deploy/';
+    var appSettingsDir = webBuildDir + 'deploy/';
     var appSettingsPath = appSettingsDir + appSettingsFile;
 
     function createConfigsIfMissing() {
@@ -226,7 +227,7 @@ module.exports = function (grunt) {
                     .pipe(gulp.dest(webRoot));
             },
             'wwwroot-copy-deploy-files': function () {
-                return gulp.src('./wwwroot_build/deploy/*.*')
+                return gulp.src(webBuildDir + 'deploy/*.*')
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
             }

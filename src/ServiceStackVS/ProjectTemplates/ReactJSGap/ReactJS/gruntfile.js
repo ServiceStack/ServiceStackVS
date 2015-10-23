@@ -37,15 +37,16 @@ module.exports = function (grunt) {
     var minifyCss = require('gulp-minify-css');
     var gulpReplace = require('gulp-replace');
     var react = require('gulp-react');
+
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
     var resourcesLib = '../../lib/';
-
+    var webBuildDir = process.argv.serviceStackSettingsDir || './wwwroot_build/';
     var configFile = 'config.json';
-    var configDir = './wwwroot_build/publish/';
+    var configDir = webBuildDir + 'publish/';
     var configPath = configDir + configFile;
     var appSettingsFile = 'appsettings.txt';
-    var appSettingsDir = './wwwroot_build/deploy/';
+    var appSettingsDir = webBuildDir + 'deploy/';
     var appSettingsPath = appSettingsDir + appSettingsFile;
 
     function createConfigsIfMissing() {
