@@ -17,26 +17,31 @@ namespace ServiceStackVS.NPMInstallerWizard
     public class NodeJsPackageWizard : IWizard
     {
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
-        private List<NpmPackage> npmPackages;
+        private List<NpmPackage> _npmPackages;
 
-        private OutputWindowWriter serviceStackOutputWindowWriter;
+        private OutputWindowWriter _serviceStackOutputWindowWriter;
         private OutputWindowWriter OutputWindowWriter
         {
             get
             {
-                return serviceStackOutputWindowWriter ??
-                    (serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+                return _serviceStackOutputWindowWriter ??
+                    (_serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
             }
         }
 
-        private uint progressRef;
+        public int MajorVisualStudioVersion
+        {
+            get { return int.Parse(_dte.Version.Substring(0, 2)); }
+        }
 
-        private IVsStatusbar bar;
-        private DTE dte;
+        private uint _progressRef;
+
+        private IVsStatusbar _bar;
+        private DTE _dte;
 
         private IVsStatusbar StatusBar
         {
-            get { return bar ?? (bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
+            get { return _bar ?? (_bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
         }
 
         /// <summary>
@@ -58,12 +63,12 @@ namespace ServiceStackVS.NPMInstallerWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary,
             WizardRunKind runKind, object[] customParams)
         {
-            dte = (DTE)automationObject;
+            _dte = (DTE)automationObject;
             string wizardData = replacementsDictionary["$wizarddata$"];
             //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
             //Problem is that only one SHARED WizardData node is supported and multiple extensions might use it.
             XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-            npmPackages =
+            _npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
                     .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
@@ -83,12 +88,12 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
             try
             {
-                // Initialize the progress bar.
-                StatusBar.Progress(ref progressRef, 1, "", 0, 0);
+                // Initialize the progress _bar.
+                StatusBar.Progress(ref _progressRef, 1, "", 0, 0);
                 OutputWindowWriter.Show();
-                for (int index = 0; index < npmPackages.Count; index++)
+                for (int index = 0; index < _npmPackages.Count; index++)
                 {
-                    var package = npmPackages[index];
+                    var package = _npmPackages[index];
                     UpdateStatusMessage("Installing required NPM package '" + package.Id + "'...");
                     package.InstallGlobally(
                         (sender, args) =>
@@ -107,14 +112,14 @@ namespace ServiceStackVS.NPMInstallerWizard
                                 OutputWindowWriter.WriteLine(s);
                             }
                         }); //Installs global npm package if missing
-                    StatusBar.Progress(ref progressRef, 1, "", Convert.ToUInt32(index),
-                        Convert.ToUInt32(npmPackages.Count));
+                    StatusBar.Progress(ref _progressRef, 1, "", Convert.ToUInt32(index),
+                        Convert.ToUInt32(_npmPackages.Count));
                 }
             }
             catch (ProcessException pe)
             {
-                MessageBox.Show("An error has occurred during a NPM package installation - " + pe.Message,
-                    "An error has occurred during a NPM package installation.",
+                MessageBox.Show(@"An error has occurred during a NPM package installation - " + pe.Message,
+                    @"An error has occurred during a NPM package installation.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
@@ -124,8 +129,8 @@ namespace ServiceStackVS.NPMInstallerWizard
             }
             catch (TimeoutException te)
             {
-                MessageBox.Show("An NPM install has timed out - " + te.Message,
-                    "An error has occurred during a NPM package installation.",
+                MessageBox.Show(@"An NPM install has timed out - " + te.Message,
+                    @"An error has occurred during a NPM package installation.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
@@ -135,8 +140,8 @@ namespace ServiceStackVS.NPMInstallerWizard
             }
             catch (Exception e)
             {
-                MessageBox.Show("An error has occurred during a NPM package installation." + e.Message,
-                    "An error has occurred during a NPM package installation.",
+                MessageBox.Show(@"An error has occurred during a NPM package installation." + e.Message,
+                    @"An error has occurred during a NPM package installation.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
@@ -168,81 +173,102 @@ namespace ServiceStackVS.NPMInstallerWizard
                 project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
             System.Threading.Tasks.Task.Run(() =>
             {
-                StartRequiredPackageInstallations();
-                try
+                if (MajorVisualStudioVersion < 14)
                 {
-                    if (!NodePackageUtils.HasBowerOnPath())
-                    {
-                        string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                        string npmFolder = Path.Combine(appDataFolder, "npm");
-                        npmFolder.AddToPathEnvironmentVariable();
-                    }
-                    UpdateStatusMessage("Downloading bower depedencies...");
-                    NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
-                    {
-                        if (!string.IsNullOrEmpty(args.Data))
-                        {
-                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                            OutputWindowWriter.WriteLine(s);
-                        }
-                    }, (sender, args) =>
-                    {
-                        if (!string.IsNullOrEmpty(args.Data))
-                        {
-                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                            OutputWindowWriter.WriteLine(s);
-                        }
-                    });
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("Bower install failed: " + exception.Message,
-                        "An error has occurred during a Bower install.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly,
-                        false);
+                    StartRequiredPackageInstallations();
+                    ProcessBowerInstall(projectPath);
                 }
             }).Wait();
 
-            UpdateStatusMessage("Downloading NPM depedencies...");
-            OutputWindowWriter.ShowOutputPane(dte);
+            if (MajorVisualStudioVersion < 14)
+            {
+                UpdateStatusMessage("Downloading NPM depedencies...");
+                OutputWindowWriter.ShowOutputPane(_dte);
+            }
+
             System.Threading.Tasks.Task.Run(() =>
             {
-                try
+                //Only automatically run for VS 2012 and 2013
+                if (MajorVisualStudioVersion < 14)
                 {
-                    UpdateStatusMessage("Clearing NPM cache...");
-                    NodePackageUtils.NpmClearCache(projectPath);
-                    UpdateStatusMessage("Running NPM install...");
-                    OutputWindowWriter.WriteLine("--- NPM install started ---");
-                    NodePackageUtils.RunNpmInstall(projectPath,
-                        (sender, args) =>
-                        {
-                            if (!string.IsNullOrEmpty(args.Data))
-                            {
-                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                OutputWindowWriter.WriteLine(s);
-                            }
-                        },
-                        (sender, args) =>
-                        {
-                            if (!string.IsNullOrEmpty(args.Data))
-                            {
-                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                                OutputWindowWriter.WriteLine(s);
-                            }
-                        }, 600);
-                    UpdateStatusMessage("Ready");
-                    StatusBar.Clear();
+                    ProcessNpmInstall(projectPath);
                 }
-                catch (Exception exception)
-                {
-                    OutputWindowWriter.WriteLine("An error has occurred during an NPM install");
-                    OutputWindowWriter.WriteLine("NPM install failed: " + exception.Message);
-                }
-                OutputWindowWriter.WriteLine("--- NPM install complete ---");
             });
+        }
+
+        private void ProcessBowerInstall(string projectPath)
+        {
+            try
+            {
+                if (!NodePackageUtils.HasBowerOnPath())
+                {
+                    string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    string npmFolder = Path.Combine(appDataFolder, "npm");
+                    npmFolder.AddToPathEnvironmentVariable();
+                }
+                UpdateStatusMessage("Downloading bower depedencies...");
+                NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        OutputWindowWriter.WriteLine(s);
+                    }
+                }, (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        OutputWindowWriter.WriteLine(s);
+                    }
+                });
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Bower install failed: " + exception.Message,
+                    @"An error has occurred during a Bower install.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+            }
+        }
+
+        private void ProcessNpmInstall(string projectPath)
+        {
+            try
+            {
+                UpdateStatusMessage("Clearing NPM cache...");
+                NodePackageUtils.NpmClearCache(projectPath);
+                UpdateStatusMessage("Running NPM install...");
+                OutputWindowWriter.WriteLine("--- NPM install started ---");
+                NodePackageUtils.RunNpmInstall(projectPath,
+                    (sender, args) =>
+                    {
+                        if (!string.IsNullOrEmpty(args.Data))
+                        {
+                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            OutputWindowWriter.WriteLine(s);
+                        }
+                    },
+                    (sender, args) =>
+                    {
+                        if (!string.IsNullOrEmpty(args.Data))
+                        {
+                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            OutputWindowWriter.WriteLine(s);
+                        }
+                    }, 600);
+                UpdateStatusMessage("Ready");
+                StatusBar.Clear();
+            }
+            catch (Exception exception)
+            {
+                OutputWindowWriter.WriteLine("An error has occurred during an NPM install");
+                OutputWindowWriter.WriteLine("NPM install failed: " + exception.Message);
+            }
+            OutputWindowWriter.WriteLine("--- NPM install complete ---");
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
