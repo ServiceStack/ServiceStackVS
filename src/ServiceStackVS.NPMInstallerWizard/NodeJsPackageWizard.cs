@@ -11,21 +11,30 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
 using ServiceStackVS.Wizards;
+using Task = System.Threading.Tasks.Task;
+using Thread = System.Threading.Thread;
 
 namespace ServiceStackVS.NPMInstallerWizard
 {
     public class NodeJsPackageWizard : IWizard
     {
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
+
+        private IVsStatusbar _bar;
+        private DTE _dte;
         private List<NpmPackage> _npmPackages;
 
+        private uint _progressRef;
+
         private OutputWindowWriter _serviceStackOutputWindowWriter;
+
         private OutputWindowWriter OutputWindowWriter
         {
             get
             {
                 return _serviceStackOutputWindowWriter ??
-                    (_serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+                       (_serviceStackOutputWindowWriter =
+                           new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
             }
         }
 
@@ -34,21 +43,16 @@ namespace ServiceStackVS.NPMInstallerWizard
             get { return int.Parse(_dte.Version.Substring(0, 2)); }
         }
 
-        private uint _progressRef;
-
-        private IVsStatusbar _bar;
-        private DTE _dte;
-
         private IVsStatusbar StatusBar
         {
             get { return _bar ?? (_bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
         }
 
         /// <summary>
-        /// Parses XML from WizardData and installs required npm packages
+        ///     Parses XML from WizardData and installs required npm packages
         /// </summary>
         /// <example>
-        /// <![CDATA[
+        ///     <![CDATA[
         /// <NodeJS>
         ///     <npm-package id="grunt"/>
         ///     <npm-package id="grunt-cli" />
@@ -63,11 +67,11 @@ namespace ServiceStackVS.NPMInstallerWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary,
             WizardRunKind runKind, object[] customParams)
         {
-            _dte = (DTE)automationObject;
-            string wizardData = replacementsDictionary["$wizarddata$"];
+            _dte = (DTE) automationObject;
+            var wizardData = replacementsDictionary["$wizarddata$"];
             //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
             //Problem is that only one SHARED WizardData node is supported and multiple extensions might use it.
-            XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
+            var element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
             _npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
@@ -84,6 +88,42 @@ namespace ServiceStackVS.NPMInstallerWizard
             }
         }
 
+        public void ProjectFinishedGenerating(Project project)
+        {
+            var projectPath = project.FullName.Substring(0,
+                project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
+
+            Task.Run(() => { StartRequiredPackageInstallations(); });
+            //Only run Bower/NPM insatll via SSVS for VS 2012/2013
+            //VS2015 built in Task Runner detects and runs required installs.
+            if (MajorVisualStudioVersion < 14)
+            {
+                Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
+
+                UpdateStatusMessage("Downloading NPM depedencies...");
+                OutputWindowWriter.ShowOutputPane(_dte);
+
+                Task.Run(() => { ProcessNpmInstall(projectPath); });
+            }
+        }
+
+        public void ProjectItemFinishedGenerating(ProjectItem projectItem)
+        {
+        }
+
+        public bool ShouldAddProjectItem(string filePath)
+        {
+            return true;
+        }
+
+        public void BeforeOpeningFile(ProjectItem projectItem)
+        {
+        }
+
+        public void RunFinished()
+        {
+        }
+
         private void StartRequiredPackageInstallations()
         {
             try
@@ -91,7 +131,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                 // Initialize the progress _bar.
                 StatusBar.Progress(ref _progressRef, 1, "", 0, 0);
                 OutputWindowWriter.Show();
-                for (int index = 0; index < _npmPackages.Count; index++)
+                for (var index = 0; index < _npmPackages.Count; index++)
                 {
                     var package = _npmPackages[index];
                     UpdateStatusMessage("Installing required NPM package '" + package.Id + "'...");
@@ -100,7 +140,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                         {
                             if (!string.IsNullOrEmpty(args.Data))
                             {
-                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                                 OutputWindowWriter.WriteLine(s);
                             }
                         },
@@ -108,7 +148,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                         {
                             if (!string.IsNullOrEmpty(args.Data))
                             {
-                                string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                                var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                                 OutputWindowWriter.WriteLine(s);
                             }
                         }); //Installs global npm package if missing
@@ -153,8 +193,8 @@ namespace ServiceStackVS.NPMInstallerWizard
 
         private void UpdateStatusMessage(string message)
         {
-            int frozen = 1;
-            int retries = 0;
+            var frozen = 1;
+            var retries = 0;
             while (frozen != 0 && retries < 10)
             {
                 StatusBar.IsFrozen(out frozen);
@@ -162,30 +202,8 @@ namespace ServiceStackVS.NPMInstallerWizard
                 {
                     StatusBar.SetText(message);
                 }
-                System.Threading.Thread.Sleep(10);
+                Thread.Sleep(10);
                 retries++;
-            }
-        }
-
-        public void ProjectFinishedGenerating(Project project)
-        {
-            //Only run Bower/NPM insatll via SSVS for VS 2012/2013
-            //VS2015 built in Task Runner detects and runs required installs.
-            if (MajorVisualStudioVersion < 14)
-            {
-                string projectPath = project.FullName.Substring(0,
-                    project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
-                System.Threading.Tasks.Task.Run(() => {
-                    StartRequiredPackageInstallations();
-                    ProcessBowerInstall(projectPath);
-                }).Wait();
-
-                UpdateStatusMessage("Downloading NPM depedencies...");
-                OutputWindowWriter.ShowOutputPane(_dte);
-
-                System.Threading.Tasks.Task.Run(() => {
-                    ProcessNpmInstall(projectPath);
-                });
             }
         }
 
@@ -195,8 +213,8 @@ namespace ServiceStackVS.NPMInstallerWizard
             {
                 if (!NodePackageUtils.HasBowerOnPath())
                 {
-                    string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    string npmFolder = Path.Combine(appDataFolder, "npm");
+                    var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    var npmFolder = Path.Combine(appDataFolder, "npm");
                     npmFolder.AddToPathEnvironmentVariable();
                 }
                 UpdateStatusMessage("Downloading bower depedencies...");
@@ -204,14 +222,14 @@ namespace ServiceStackVS.NPMInstallerWizard
                 {
                     if (!string.IsNullOrEmpty(args.Data))
                     {
-                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                         OutputWindowWriter.WriteLine(s);
                     }
                 }, (sender, args) =>
                 {
                     if (!string.IsNullOrEmpty(args.Data))
                     {
-                        string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                         OutputWindowWriter.WriteLine(s);
                     }
                 });
@@ -241,7 +259,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                     {
                         if (!string.IsNullOrEmpty(args.Data))
                         {
-                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                             OutputWindowWriter.WriteLine(s);
                         }
                     },
@@ -249,7 +267,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                     {
                         if (!string.IsNullOrEmpty(args.Data))
                         {
-                            string s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                            var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
                             OutputWindowWriter.WriteLine(s);
                         }
                     }, 600);
@@ -262,23 +280,6 @@ namespace ServiceStackVS.NPMInstallerWizard
                 OutputWindowWriter.WriteLine("NPM install failed: " + exception.Message);
             }
             OutputWindowWriter.WriteLine("--- NPM install complete ---");
-        }
-
-        public void ProjectItemFinishedGenerating(ProjectItem projectItem)
-        {
-        }
-
-        public bool ShouldAddProjectItem(string filePath)
-        {
-            return true;
-        }
-
-        public void BeforeOpeningFile(ProjectItem projectItem)
-        {
-        }
-
-        public void RunFinished()
-        {
         }
     }
 }
