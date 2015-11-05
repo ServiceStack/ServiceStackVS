@@ -8,7 +8,7 @@ namespace $safeprojectname$
 {
 	public static class Program
 	{
-		public static string HostUrl = "http://127.0.0.1:3337/";
+		public static string HostUrl = "http://localhost:2337/";
 
 		public static AppHost App;
 		public static NSMenu MainMenu;
@@ -16,7 +16,7 @@ namespace $safeprojectname$
 		static void Main (string[] args)
 		{
 			App = new AppHost();
-			App.Init().Start("http://*:3337/");
+			App.Init().Start("http://*:2337/");
 
 			NSApplication.Init();
 			NSApplication.Main(args);

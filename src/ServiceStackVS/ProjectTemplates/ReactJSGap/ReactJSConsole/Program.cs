@@ -12,7 +12,7 @@ namespace $safeprojectname$
 {
     static class Program
     {
-        public static string HostUrl = "http://127.0.0.1:2337/";
+        public static string HostUrl = "http://localhost:2337/";
 
         /// <summary>
         /// The main entry point for the application
