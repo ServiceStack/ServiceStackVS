@@ -169,31 +169,24 @@ namespace ServiceStackVS.NPMInstallerWizard
 
         public void ProjectFinishedGenerating(Project project)
         {
-            string projectPath = project.FullName.Substring(0,
-                project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                if (MajorVisualStudioVersion < 14)
-                {
-                    StartRequiredPackageInstallations();
-                    ProcessBowerInstall(projectPath);
-                }
-            }).Wait();
-
+            //Only run Bower/NPM insatll via SSVS for VS 2012/2013
+            //VS2015 built in Task Runner detects and runs required installs.
             if (MajorVisualStudioVersion < 14)
             {
+                string projectPath = project.FullName.Substring(0,
+                    project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
+                System.Threading.Tasks.Task.Run(() => {
+                    StartRequiredPackageInstallations();
+                    ProcessBowerInstall(projectPath);
+                }).Wait();
+
                 UpdateStatusMessage("Downloading NPM depedencies...");
                 OutputWindowWriter.ShowOutputPane(_dte);
-            }
 
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                //Only automatically run for VS 2012 and 2013
-                if (MajorVisualStudioVersion < 14)
-                {
+                System.Threading.Tasks.Task.Run(() => {
                     ProcessNpmInstall(projectPath);
-                }
-            });
+                });
+            }
         }
 
         private void ProcessBowerInstall(string projectPath)
