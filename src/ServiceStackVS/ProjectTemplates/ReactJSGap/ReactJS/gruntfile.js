@@ -1,29 +1,34 @@
-var WEB = 'web';
-var NATIVE = 'native';
-
-var webBuildDir = grunt.option('serviceStackSettingsDir') || './wwwroot_build/';
-
-var COPY_FILES = [
-    { src: './bin/**/*', dest: 'bin/', host: WEB },
-    { src: './img/**/*', dest: 'img/' },
-    { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
-    { src: './Global.asax', host: WEB },
-    { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
-    { src: './platform.*', dest: '/', host: WEB },
-    { src: webBuildDir + 'deploy/*.*', host: WEB },
-    {
-        src: './web.config',
-        host: [WEB],
-        afterReplace: [{
-            from: '<compilation debug="true" targetFramework="4.5"',
-            to: '<compilation targetFramework="4.5"'
-        }]
-    }
-];
+/// <reference path="~/node_modules/grunt/lib/grunt.js" />
+/// <reference path="~/node_modules/grunt/lib/util/task.js"/>
+/// <reference path="~/node_modules/gulp/index.js"/>
+/// <reference path="~/node_modules/requirejs/require.js"/>
 
 /* global module, require */
 module.exports = function (grunt) {
     "use strict";
+
+    var WEB = 'web';
+    var NATIVE = 'native';
+
+    var webBuildDir = grunt.option('serviceStackSettingsDir') || './wwwroot_build/';
+
+    var COPY_FILES = [
+        { src: './bin/**/*', dest: 'bin/', host: WEB },
+        { src: './img/**/*', dest: 'img/' },
+        { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
+        { src: './Global.asax', host: WEB },
+        { src: './bower_components/bootstrap/dist/fonts/*.*', dest: 'lib/fonts/' },
+        { src: './platform.*', dest: '/', host: WEB },
+        { src: webBuildDir + 'deploy/*.*', host: WEB },
+        {
+            src: './web.config',
+            host: [WEB],
+            afterReplace: [{
+                from: '<compilation debug="true" targetFramework="4.5"',
+                to: '<compilation targetFramework="4.5"'
+            }]
+        }
+    ];
 
     var fs = require('fs');
     var path = require('path');

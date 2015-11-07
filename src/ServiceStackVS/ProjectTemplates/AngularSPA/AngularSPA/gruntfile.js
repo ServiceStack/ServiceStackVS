@@ -4,7 +4,6 @@
 /// <reference path="~/node_modules/requirejs/require.js"/>
 
 /* global module, require */
-
 module.exports = function (grunt) {
     "use strict";
 
