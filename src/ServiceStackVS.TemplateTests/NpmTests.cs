@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using ServiceStackVS.Wizards;
+using ServiceStackVS.NPMInstallerWizard;
 
 namespace ServiceStackVS.Tests
 {

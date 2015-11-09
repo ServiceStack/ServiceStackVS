@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
-using ServiceStackVS.Wizards;
+using ServiceStackVS.Common;
 using Task = System.Threading.Tasks.Task;
 using Thread = System.Threading.Thread;
 

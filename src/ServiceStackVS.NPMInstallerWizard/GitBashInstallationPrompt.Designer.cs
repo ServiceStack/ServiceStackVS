@@ -1,4 +1,4 @@
-﻿namespace ServiceStackVS.Wizards
+﻿namespace ServiceStackVS.NPMInstallerWizard
 {
     partial class GitBashInstallationPrompt
     {

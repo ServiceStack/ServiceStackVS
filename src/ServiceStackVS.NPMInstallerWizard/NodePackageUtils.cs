@@ -4,10 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using static System.StringComparison;
 
-namespace ServiceStackVS.Wizards
+namespace ServiceStackVS.NPMInstallerWizard
 {
     public class NpmPackage
     {
@@ -160,9 +159,9 @@ namespace ServiceStackVS.Wizards
                 var packagesWithVersion =
                     allLines
                         .Where(x => !string.IsNullOrEmpty(x) &&
-                                    x.IndexOf(" ", System.StringComparison.Ordinal) != -1 &&
-                                    x.IndexOf(" ", System.StringComparison.Ordinal) == x.LastIndexOf(" ", System.StringComparison.Ordinal))
-                        .Select(x => x.Substring(x.LastIndexOf(" ", System.StringComparison.Ordinal) + 1)).ToList();
+                                    x.IndexOf(" ", Ordinal) != -1 &&
+                                    x.IndexOf(" ", Ordinal) == x.LastIndexOf(" ", Ordinal))
+                        .Select(x => x.Substring(x.LastIndexOf(" ", Ordinal) + 1)).ToList();
 
                 npmPackageCache = packagesWithVersion.Select(x => x.Substring(0, x.IndexOf('@'))).ToList();
             }
@@ -183,9 +182,9 @@ namespace ServiceStackVS.Wizards
             var packagesWithVersion =
                 allLines
                     .Where(x => !string.IsNullOrEmpty(x) &&
-                                x.IndexOf(" ", System.StringComparison.Ordinal) != -1 &&
-                                x.IndexOf(" ", System.StringComparison.Ordinal) == x.LastIndexOf(" ", System.StringComparison.Ordinal))
-                    .Select(x => x.Substring(x.LastIndexOf(" ", System.StringComparison.Ordinal) + 1)).ToList();
+                                x.IndexOf(" ", Ordinal) != -1 &&
+                                x.IndexOf(" ", Ordinal) == x.LastIndexOf(" ", Ordinal))
+                    .Select(x => x.Substring(x.LastIndexOf(" ", Ordinal) + 1)).ToList();
 
             return packagesWithVersion.Select(x => x.Substring(0, x.IndexOf('@'))).ToList();
         }
@@ -199,9 +198,9 @@ namespace ServiceStackVS.Wizards
                 var packagesWithVersion =
                     allLines
                         .Where(x => !string.IsNullOrEmpty(x) &&
-                                    x.IndexOf(" ", System.StringComparison.Ordinal) != -1 &&
-                                    x.IndexOf(" ", System.StringComparison.Ordinal) == x.LastIndexOf(" ", System.StringComparison.Ordinal))
-                        .Select(x => x.Substring(x.LastIndexOf(" ", System.StringComparison.Ordinal) + 1)).ToList();
+                                    x.IndexOf(" ", Ordinal) != -1 &&
+                                    x.IndexOf(" ", Ordinal) == x.LastIndexOf(" ", Ordinal))
+                        .Select(x => x.Substring(x.LastIndexOf(" ", Ordinal) + 1)).ToList();
 
             
             bowerPackageCache = packagesWithVersion.Select(x => x.Substring(0, x.IndexOf('#'))).ToList();
@@ -249,15 +248,13 @@ namespace ServiceStackVS.Wizards
                 return true;
             }
                 
-            string systemPath = System.Environment.GetEnvironmentVariable("SystemRoot");
-            bool x86Path;
-            bool x64Path;
+            string systemPath = Environment.GetEnvironmentVariable("SystemRoot");
             string path = "";
             if (systemPath != null)
             {
-                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", System.StringComparison.Ordinal) + 1);
-                x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\nodejs"));
-                x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\nodejs"));
+                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", Ordinal) + 1);
+                var x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\nodejs"));
+                var x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\nodejs"));
                 if (x86Path)
                 {
                     path = Path.Combine(systemDrive, "Program Files (x86)\\nodejs");
@@ -308,7 +305,7 @@ namespace ServiceStackVS.Wizards
         {
             var nodeCmdProcess = new Process();
             string fullPath = GetFullPathToCommand(command);
-            nodeCmdProcess.StartInfo.Arguments = "/c " + "\"" + fullPath + "\" " + command.Substring(command.IndexOf(" ", System.StringComparison.Ordinal) + 1);
+            nodeCmdProcess.StartInfo.Arguments = "/c " + "\"" + fullPath + "\" " + command.Substring(command.IndexOf(" ", Ordinal) + 1);
             nodeCmdProcess.StartInfo.RedirectStandardOutput = true;
             nodeCmdProcess.StartInfo.RedirectStandardError = true;
             nodeCmdProcess.StartInfo.UseShellExecute = false;
@@ -379,7 +376,7 @@ namespace ServiceStackVS.Wizards
             return eventData;
         }
 
-        private static List<string> supportedCommandExtensions = new List<string>(
+        private static readonly List<string> SupportedCommandExtensions = new List<string>(
             new[] 
                 {".cmd",".exe"}
             );
@@ -387,12 +384,12 @@ namespace ServiceStackVS.Wizards
         public static string GetFullPathToCommand(string command)
         {
             string execPath = null;
-            foreach (string currentExtension in supportedCommandExtensions)
+            foreach (string currentExtension in SupportedCommandExtensions)
             {
-                int firstSpaceIndex = command.IndexOf(" ", System.StringComparison.Ordinal);
+                int firstSpaceIndex = command.IndexOf(" ", Ordinal);
                 bool containsArgs = firstSpaceIndex > 0;
                 string commandFile = command.Substring(0, containsArgs ? firstSpaceIndex : command.Length) + currentExtension;
-                var processEnvironmentPath = System.Environment.GetEnvironmentVariable("PATH");
+                var processEnvironmentPath = Environment.GetEnvironmentVariable("PATH");
                 
                 var paths = processEnvironmentPath.Split(';');
                 execPath = paths.Where(x => 
@@ -438,15 +435,13 @@ namespace ServiceStackVS.Wizards
                 return true;
             }
 
-            string systemPath = System.Environment.GetEnvironmentVariable("SystemRoot");
-            bool x86Path;
-            bool x64Path;
+            string systemPath = Environment.GetEnvironmentVariable("SystemRoot");
             string path = "";
             if (systemPath != null)
             {
-                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", System.StringComparison.Ordinal) + 1);
-                x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\" + pfRelativePath));
-                x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\" + pfRelativePath));
+                string systemDrive = systemPath.Substring(0, systemPath.IndexOf("\\", Ordinal) + 1);
+                var x86Path = Directory.Exists(Path.Combine(systemDrive, "Program Files (x86)\\" + pfRelativePath));
+                var x64Path = Directory.Exists(Path.Combine(systemDrive, "Program Files\\" + pfRelativePath));
                 if (x86Path)
                 {
                     path = Path.Combine(systemDrive, "Program Files (x86)\\" + pfRelativePath);
@@ -470,7 +465,6 @@ namespace ServiceStackVS.Wizards
     public class ProcessException : Exception
     {
         public ProcessException()
-            : base()
         {
 
         }

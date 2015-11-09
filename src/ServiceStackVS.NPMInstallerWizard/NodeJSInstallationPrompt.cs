@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
 
-namespace ServiceStackVS.Wizards
+namespace ServiceStackVS.NPMInstallerWizard
 {
     public partial class NodeJSInstallationPrompt : Form
     {

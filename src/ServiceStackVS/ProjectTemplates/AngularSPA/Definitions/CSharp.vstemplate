@@ -30,11 +30,11 @@
   </WizardExtension>
   <WizardExtension>
     <Assembly>ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.Wizards.NodeJsRequiredWizard</FullClassName>
+    <FullClassName>ServiceStackVS.NPMInstallerWizard.NodeJsRequiredWizard</FullClassName>
   </WizardExtension>
   <WizardExtension>
     <Assembly>ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.Wizards.GitRequiredWizard</FullClassName>
+    <FullClassName>ServiceStackVS.NPMInstallerWizard.GitRequiredWizard</FullClassName>
   </WizardExtension>
   <WizardExtension>
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using EnvDTE;
 using ServiceStack;
 using ServiceStack.Text;
+using ServiceStackVS.Common;
 using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NPMInstallerWizard;
-using ServiceStackVS.Wizards;
 
 namespace ServiceStackVS
 {

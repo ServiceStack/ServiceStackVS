@@ -4,8 +4,6 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
@@ -20,16 +18,16 @@ namespace ServiceStackVS.NuGetInstallerWizard
     public class NuGetPackageInstallerMultiProjectWizard : IWizard
     {
 
-        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+        private const string NugetV2Url = "https://packages.nuget.org/api/v2";
 
-        private IPackageRepository nuGetPackageRepository;
+        private IPackageRepository _nuGetPackageRepository;
         private IPackageRepository NuGetPackageRepository
         {
             get
             {
-                return nuGetPackageRepository ??
-                       (nuGetPackageRepository =
-                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+                return _nuGetPackageRepository ??
+                       (_nuGetPackageRepository =
+                           PackageRepositoryFactory.Default.CreateRepository(NugetV2Url));
             }
         }
 

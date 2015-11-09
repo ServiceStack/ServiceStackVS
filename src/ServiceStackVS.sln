@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.ExternalTemp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.BuildConfigWizard", "ServiceStackVS.BuildConfigWizard\ServiceStackVS.BuildConfigWizard.csproj", "{93DF1A6F-3981-42DF-8100-0692A3B0FF71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Common", "ServiceStackVS.Common\ServiceStackVS.Common.csproj", "{05BF0855-569E-46D9-93BB-0A89E3866745}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93DF1A6F-3981-42DF-8100-0692A3B0FF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BF0855-569E-46D9-93BB-0A89E3866745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BF0855-569E-46D9-93BB-0A89E3866745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BF0855-569E-46D9-93BB-0A89E3866745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BF0855-569E-46D9-93BB-0A89E3866745}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

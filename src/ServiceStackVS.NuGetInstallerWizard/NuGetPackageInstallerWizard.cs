@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet;
 using NuGet.VisualStudio;
+using ServiceStackVS.Common;
 using ServiceStack;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
@@ -24,16 +25,16 @@ namespace ServiceStackVS.NuGetInstallerWizard
         [Import]
         internal IVsPackageInstallerServices PackageServices { get; set; }
 
-        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+        private const string NugetV2Url = "https://packages.nuget.org/api/v2";
 
-        private IPackageRepository nuGetPackageRepository;
+        private IPackageRepository _nuGetPackageRepository;
         private IPackageRepository NuGetPackageRepository
         {
             get
             {
-                return nuGetPackageRepository ??
-                       (nuGetPackageRepository =
-                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+                return _nuGetPackageRepository ??
+                       (_nuGetPackageRepository =
+                           PackageRepositoryFactory.Default.CreateRepository(NugetV2Url));
             }
         }
 
@@ -49,26 +50,26 @@ namespace ServiceStackVS.NuGetInstallerWizard
             }
         }
 
-        private IVsStatusbar bar;
+        private IVsStatusbar _bar;
         private IVsStatusbar StatusBar
         {
-            get { return bar ?? (bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar); }
+            get { return _bar ?? (_bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar); }
         }
 
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
-        private OutputWindowWriter serviceStackOutputWindowWriter;
+        private OutputWindowWriter _serviceStackOutputWindowWriter;
         private OutputWindowWriter OutputWindowWriter
         {
             get
             {
-                return serviceStackOutputWindowWriter ?? 
-                    (serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+                return _serviceStackOutputWindowWriter ?? 
+                    (_serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
             }
         }
 
-        private NuGetWizardDataPackage rootPackage;
+        private NuGetWizardDataPackage _rootPackage;
 
-        private List<NuGetWizardDataPackage> packagesToLoad = new List<NuGetWizardDataPackage>();
+        private List<NuGetWizardDataPackage> _packagesToLoad = new List<NuGetWizardDataPackage>();
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
@@ -85,13 +86,13 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
             string wizardData = replacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-            packagesToLoad = element.ExtractNuGetPackages();
-            rootPackage = NuGetPackageInstallerMultiProjectWizard.RootNuGetPackage;
+            _packagesToLoad = element.ExtractNuGetPackages();
+            _rootPackage = NuGetPackageInstallerMultiProjectWizard.RootNuGetPackage;
 
-            if (!UseParentProjectRootPackage(rootPackage) && element.HasRootPackage())
+            if (!UseParentProjectRootPackage(_rootPackage) && element.HasRootPackage())
             {
-                rootPackage = element.GetRootPackage();
-                rootPackage.Version = GetLatestVersionOfPackage(rootPackage.Id);
+                _rootPackage = element.GetRootPackage();
+                _rootPackage.Version = NuGetPackageRepository.GetLatestVersionOfPackage(_rootPackage.Id);
             }
         }
 
@@ -104,7 +105,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
         public void ProjectFinishedGenerating(Project project)
         {
             OutputWindowWriter.WriteLine("--- Installing latest ServiceStack NuGet dependencies for '" + project.Name + "' ---");
-            foreach (var packageFromWizard in packagesToLoad)
+            foreach (var packageFromWizard in _packagesToLoad)
             {
                 try
                 {
@@ -159,9 +160,9 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         private void AddNuGetDependencyIfMissing(Project project, string packageId, string version = null)
         {
-            if (rootPackage != null && (version == null || version.ToLower() == "latest"))
+            if (_rootPackage != null && (version == null || version.ToLower() == "latest"))
             {
-                version = rootPackage.Version;
+                version = _rootPackage.Version;
             }
 
             if (TryInstallPackageFromCache(project, packageId, version)) return;
@@ -240,12 +241,6 @@ namespace ServiceStackVS.NuGetInstallerWizard
             return false;
         }
 
-        private string GetLatestVersionOfPackage(string packageId)
-        {
-            var package = NuGetPackageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
-            return package.Version.ToString();
-        }
-
         private void InstallPackageFromLocalCache(Project project, string packageId, string cachePath, string version)
         {
             try
@@ -261,7 +256,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
             {
                 //Fall back to NuGet, local cache might not have required dependency
                 Installer.InstallPackage(
-                nugetV2Url,
+                NugetV2Url,
                 project,
                 packageId,
                 version,

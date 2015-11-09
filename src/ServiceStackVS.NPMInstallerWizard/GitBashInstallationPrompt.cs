@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ServiceStackVS.Wizards
+namespace ServiceStackVS.NPMInstallerWizard
 {
     public partial class GitBashInstallationPrompt : Form
     {

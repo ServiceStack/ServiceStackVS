@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
 using ServiceStack;
+using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NPMInstallerWizard;
-using ServiceStackVS.Wizards;
 
 namespace ServiceStackVS.FileHandlers
 {

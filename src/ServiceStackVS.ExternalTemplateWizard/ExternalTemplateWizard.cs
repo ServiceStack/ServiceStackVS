@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
+using NuGet;
+using ServiceStack;
+using ServiceStackVS.Common;
 
 namespace ServiceStackVS.ExternalTemplateWizard
 {
@@ -22,12 +26,51 @@ namespace ServiceStackVS.ExternalTemplateWizard
         private string projOutputName;
         private List<TemplatedFile> allTemplatedFiles = new List<TemplatedFile>();
         private Dictionary<string, string> localReplacementsDictionary;
-        
+
+        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+
+        private IPackageRepository nuGetPackageRepository;
+        private IPackageRepository NuGetPackageRepository
+        {
+            get
+            {
+                return nuGetPackageRepository ??
+                       (nuGetPackageRepository =
+                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+            }
+        }
+
+        private IPackageRepository _cachedRepository;
+        private IPackageRepository CachedRepository
+        {
+            get
+            {
+                string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
+                return _cachedRepository ??
+                       (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
+            }
+        }
+
+        private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
+        private OutputWindowWriter _serviceStackOutputWindowWriter;
+        private OutputWindowWriter OutputWindowWriter
+        {
+            get
+            {
+                return _serviceStackOutputWindowWriter ??
+                    (_serviceStackOutputWindowWriter = new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+            }
+        }
+
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             projectName = replacementsDictionary["$safeprojectname$"];
             localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary);
-            
+
+            string latestVersion = GetLatestVersionOfPackage("ServiceStack.Interfaces");
+            localReplacementsDictionary.Add("$currentServiceStackVersion$",latestVersion);
+
             templatesRootDir = Path.GetDirectoryName(customParams[0] as string);
             localReplacementsDictionary.Add("$saferootprojectname$", projectName);
             if (templatesRootDir == null)
@@ -115,6 +158,24 @@ namespace ServiceStackVS.ExternalTemplateWizard
                 }
                 
             }
+        }
+
+        private string GetLatestVersionOfPackage(string packageId)
+        {
+            string packageVersion;
+            try
+            {
+                var package = NuGetPackageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
+                packageVersion = package.Version.ToString();
+            }
+            catch (Exception)
+            {
+                OutputWindowWriter.WriteLine("Unable to get latest version number of '{0}' from NuGet. Falling back to cache.".Fmt(packageId));
+                var cachedPackage = CachedRepository.FindPackagesById(packageId).OrderByDescending(x => x.Version).First(x => x.IsLatestVersion);
+                packageVersion = cachedPackage.Version.ToString();
+            }
+            
+            return packageVersion;
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
