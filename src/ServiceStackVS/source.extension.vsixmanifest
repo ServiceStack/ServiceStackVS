@@ -33,6 +33,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.ExternalTemplateWizard" Path="|ServiceStackVS.ExternalTemplateWizard|" AssemblyName="|ServiceStackVS.ExternalTemplateWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.BuildConfigWizard" Path="|ServiceStackVS.BuildConfigWizard|" AssemblyName="|ServiceStackVS.BuildConfigWizard;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.Common" Path="|ServiceStackVS.Common|" AssemblyName="|ServiceStackVS.Common;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" Path="|ServiceStackVS.Common|" AssemblyName="|ServiceStackVS.Common;AssemblyName|" />
   </Assets>
 </PackageManifest>
