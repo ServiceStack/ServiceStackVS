@@ -113,6 +113,11 @@ namespace ServiceStackVS
             }
         }
 
+        public int MajorVisualStudioVersion
+        {
+            get { return int.Parse(dte.Version.Substring(0, 2)); }
+        }
+
         private DocumentEvents documentEvents;
         private ProjectItemsEvents projectItemsEvents;
 
@@ -332,6 +337,11 @@ namespace ServiceStackVS
             var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
+            // Adding static files while running supported by VS 2015+
+            if (MajorVisualStudioVersion > 11)
+            {
+                guid = VSConstants.UICONTEXT.SolutionExistsAndFullyLoaded_guid;
+            }
             uint contextCookie;
             int pfActive;
             monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
