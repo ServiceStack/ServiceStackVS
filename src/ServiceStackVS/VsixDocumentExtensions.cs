@@ -77,6 +77,23 @@ namespace ServiceStackVS
             return bowerInstallDisabled;
         }
 
+        public static bool IsUpdateReferenceOnSaveDisabled(this Document document)
+        {
+            string path = document.GetProjectPath();
+            string settingsFilePath = Path.Combine(path, "servicestack.vsconfig");
+            bool updateReferenceOnSaveDisabled = false;
+            if (settingsFilePath.FileExists())
+            {
+                var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
+                string disableUpdateOnSave;
+                if (settings.TryGetValue("DisableUpdateReferenceOnSave", out disableUpdateOnSave))
+                {
+                    updateReferenceOnSaveDisabled = disableUpdateOnSave.EqualsIgnoreCase("true");
+                }
+            }
+            return updateReferenceOnSaveDisabled;
+        }
+
         public static string GetProjectPath(this Document document)
         {
             string projectFile = document.ProjectItem.ContainingProject.FullName;

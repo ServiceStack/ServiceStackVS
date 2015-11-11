@@ -365,6 +365,14 @@ The Host project has dependencies on the Service Model and Service Inteface proj
 
 The Unit Testing project, also as a dependency on these projects as it tests them in isolation of the main Host project. In the template, we are using the BasicAppHost to mock the AppHost we are using in the Host project. The example unit test is using NUit to setup and run the tests.
 
+#### Disable Update On Save Settings
+The default beahviour of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behaviour might not be desired, so this behaviour can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. 
+``` servicestack.vsconfig
+DisableNpmInstallOnSave true
+DisableBowerInstallOnSave true
+DisableUpdateReferenceOnSave true
+```
+
 ## F# Templates
 
 The F# Project templates included in ServiceStackVS extension:

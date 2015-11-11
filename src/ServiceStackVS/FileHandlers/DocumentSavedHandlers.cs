@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
 using ServiceStack;
@@ -102,24 +100,27 @@ namespace ServiceStackVS.FileHandlers
 
         public static bool CSharpDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.CSharpNativeTypesHandler.CodeFileExtension);
+            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.CSharpNativeTypesHandler.CodeFileExtension)
+                && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         public static bool FSharpDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.FSharpNativeTypesHandler.CodeFileExtension) ||
+            return (document.Name.EndsWithIgnoreCase(NativeTypeHandlers.FSharpNativeTypesHandler.CodeFileExtension) ||
                     //To support original naming of FSharp files
-                   document.Name.EndsWithIgnoreCase(".dto.fs");
+                   document.Name.EndsWithIgnoreCase(".dto.fs")) && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         public static bool VbNetDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.VbNetNativeTypesHandler.CodeFileExtension);
+            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.VbNetNativeTypesHandler.CodeFileExtension)
+                && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         public static bool TypeScriptDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.TypeScriptNativeTypesHandler.CodeFileExtension);            
+            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.TypeScriptNativeTypesHandler.CodeFileExtension)
+                && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,
