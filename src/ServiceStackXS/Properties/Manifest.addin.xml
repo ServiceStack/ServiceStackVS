@@ -59,9 +59,4 @@
 				id="ServiceStackXS.Commands.UpdateReference" insertafter="VersionControl" />
     </Condition>
   </Extension>
-
-  <Extension path = "/MonoDevelop/Ide/ProjectTemplates">
-		<ProjectTemplate id   = "ServiceStackReactMac"
-		                 file = "ProjectTemplates/Templates/ReactJSMac.xpt.xml" />
-	</Extension>
 </Addin>
