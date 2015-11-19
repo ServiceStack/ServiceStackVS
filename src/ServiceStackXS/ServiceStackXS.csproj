@@ -63,21 +63,18 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\lib\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Addins">
-      <HintPath>..\lib\Mono.Addins.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStackVS.NativeTypes">
       <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
     </Reference>
     <Reference Include="MonoDevelop.PackageManagement">
       <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix" />
-    <Reference Include="Microsoft.Web.XmlTransform">
-      <HintPath>..\packages\Microsoft.Web.Xdt.1.0.0\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Addins">
+      <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core">
-      <HintPath>..\packages\Mono.NuGet.Core.2.8.7\lib\Net40\NuGet.Core.dll</HintPath>
+      <HintPath>..\lib\NuGet.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
