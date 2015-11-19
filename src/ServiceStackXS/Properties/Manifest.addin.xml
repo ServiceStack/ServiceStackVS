@@ -1,12 +1,4 @@
-﻿<<Addin 
-        id              ="ServiceStack.ServiceStackXS"
-        namespace       ="ServiceStackXS"
-        name            ="ServiceStackXS" 
-        author          ="ServiceStack" 
-        url             ="https://github.com/ServiceStack/ServiceStackVS" 
-        description     ="An extension to work with the ServiceStack framework."
-        category        ="IDE extensions"
-        version         ="0.3">
+﻿<ExtensionModel id="ServiceStack.ServiceStackXS">
 	<Header>
 		<Name>ServiceStackXS</Name>
 		<Description>An extension to work with the ServiceStack framework.</Description>
@@ -18,17 +10,14 @@
   <Runtime>
 	<Import file="add-ref-item.png" />
 	<Import file="servicestack-project-icon.png" />
+	<Import file="logo_32x32.png" />
 
-    <Import assembly="ServiceStackXS.dll" />
-    <Import assembly="ServiceStackVS.NativeTypes.dll" />
-    <Import assembly="ServiceStack.Text.dll" />
-    <Import assembly="NuGet.Core.dll" />
+	<Import assembly="ServiceStackXS.dll" />
+	<Import assembly="ServiceStackVS.NativeTypes.dll" />
+	<Import assembly="ServiceStack.Text.dll" />
+	<Import assembly="NuGet.Core.dll" />
+	<Import assembly="Microsoft.Web.XmlTransform.dll" />
   </Runtime>
-
-  <Dependencies>
-        <Addin id="::MonoDevelop.Core" version="5.0" />
-        <Addin id="::MonoDevelop.Ide" version="5.0" />
-  </Dependencies>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
 
