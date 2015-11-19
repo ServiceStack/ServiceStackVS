@@ -10,11 +10,13 @@
   <Runtime>
 	<Import file="add-ref-item.png" />
 	<Import file="servicestack-project-icon.png" />
+	<Import file="logo_32x32.png" />
 
-    <Import assembly="ServiceStackXS.dll" />
-    <Import assembly="ServiceStackVS.NativeTypes.dll" />
-    <Import assembly="ServiceStack.Text.dll" />
-    <Import assembly="NuGet.Core.dll" />
+	<Import assembly="ServiceStackXS.dll" />
+	<Import assembly="ServiceStackVS.NativeTypes.dll" />
+	<Import assembly="ServiceStack.Text.dll" />
+	<Import assembly="NuGet.Core.dll" />
+	<Import assembly="Microsoft.Web.XmlTransform.dll" />
   </Runtime>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
