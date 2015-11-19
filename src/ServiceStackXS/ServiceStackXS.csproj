@@ -102,9 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
-    <EmbeddedResource Include="favicon.ico">
-      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />
     <Content Include="add-ref-item.png">
       <DeployService-Deploy>True</DeployService-Deploy>
@@ -113,6 +110,10 @@
     <Content Include="servicestack-project-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="favicon.ico">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
