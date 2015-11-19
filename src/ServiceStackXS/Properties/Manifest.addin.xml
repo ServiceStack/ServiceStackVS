@@ -1,5 +1,5 @@
 ﻿<Addin 
-        id              ="ServiceStack.ServiceStackXS"
+        id              ="ServiceStackXS"
         namespace       ="ServiceStackXS"
         name            ="ServiceStackXS" 
         author          ="ServiceStack" 
