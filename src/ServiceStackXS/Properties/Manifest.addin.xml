@@ -17,11 +17,6 @@
     <Import assembly="NuGet.Core.dll" />
   </Runtime>
 
-  <Dependencies>
-        <Addin id="::MonoDevelop.Core" version="5.0" />
-        <Addin id="::MonoDevelop.Ide" version="5.0" />
-  </Dependencies>
-
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
 
   <Extension path="/MonoDevelop/Core/StockIcons">
