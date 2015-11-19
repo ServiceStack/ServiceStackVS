@@ -14,4 +14,13 @@ Global
 		{555B5243-E50E-4C60-AAB4-D789D44039C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{555B5243-E50E-4C60-AAB4-D789D44039C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.VersionControlPolicy = $2
+		$2.inheritsSet = Mono
+		version = 0.2
+	EndGlobalSection
 EndGlobal
