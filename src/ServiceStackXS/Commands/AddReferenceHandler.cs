@@ -82,8 +82,8 @@ namespace ServiceStackXS.Commands
 					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Interfaces");
 					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Text");
 				}).ContinueWith (task => { 
-					IdeApp.Workbench.StatusBar.Pulse ();
 					IdeApp.Workbench.StatusBar.ShowReady ();
+					IdeApp.Workbench.StatusBar.Pulse ();
 				},TaskScheduler.FromCurrentSynchronizationContext ());
 			} catch (Exception ex) {
 				//TODO Error message for user
@@ -96,6 +96,8 @@ namespace ServiceStackXS.Commands
 					                     "\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
 				messageDialog.Run ();
 				messageDialog.Destroy ();
+				IdeApp.Workbench.StatusBar.ShowReady ();
+				IdeApp.Workbench.StatusBar.Pulse ();
 			}
 		}
 
