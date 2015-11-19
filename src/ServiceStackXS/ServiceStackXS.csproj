@@ -10,7 +10,7 @@
     <AssemblyName>ServiceStackXS</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <NuGetPackageImportStamp>b31c0990</NuGetPackageImportStamp>
-    <ReleaseVersion>0.2</ReleaseVersion>
+    <ReleaseVersion>0.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +42,8 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="UI\AddReferenceDialog.cs" />
     <Compile Include="gtk-gui\ServiceStackXS.AddReferenceDialog.cs" />
-    <Compile Include="Properties\AddinInfo.cs" />
     <Compile Include="Conditions\ServiceReferenceDtoCondition.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -123,5 +123,6 @@
     <None Include="logo_32x32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\Resources.resx" />
   </ItemGroup>
 </Project>
