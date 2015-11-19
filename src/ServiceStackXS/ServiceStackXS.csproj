@@ -49,7 +49,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Mono.Cairo" />
     <Reference Include="System.Drawing" />
     <Reference Include="WindowsBase" />
     <Reference Include="System.Net" />
@@ -69,12 +68,15 @@
     <Reference Include="MonoDevelop.PackageManagement">
       <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <Reference Include="Mono.Addins">
       <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core">
       <HintPath>..\lib\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="Mono.Posix">
+      <HintPath>..\lib\Mono.Posix.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
