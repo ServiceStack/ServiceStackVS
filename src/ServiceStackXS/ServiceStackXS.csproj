@@ -112,7 +112,6 @@
     </Content>
     <EmbeddedResource Include="favicon.ico">
       <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,6 @@
   <Runtime>
 	<Import file="add-ref-item.png" />
 	<Import file="servicestack-project-icon.png" />
-	<Import file="favicon.ico" />
 
     <Import assembly="ServiceStackXS.dll" />
     <Import assembly="ServiceStackVS.NativeTypes.dll" />
