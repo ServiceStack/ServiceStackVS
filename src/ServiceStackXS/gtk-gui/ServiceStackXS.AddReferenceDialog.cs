@@ -33,7 +33,7 @@ namespace ServiceStackXS
 			global::Stetic.Gui.Initialize (this);
 			// Widget ServiceStackXS.AddReferenceDialog
 			this.Name = "ServiceStackXS.AddReferenceDialog";
-			this.Title = global::Mono.Unix.Catalog.GetString ("Add ServiceStack Reference");
+			this.Title = "Add ServiceStack Reference";
 			this.Icon = global::Gdk.Pixbuf.LoadFromResource ("ServiceStackXS.favicon.ico");
 			this.TypeHint = ((global::Gdk.WindowTypeHint)(1));
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
@@ -70,7 +70,7 @@ namespace ServiceStackXS
 			this.addressLabel = new global::Gtk.Label ();
 			this.addressLabel.Name = "addressLabel";
 			this.addressLabel.Xalign = 0.01F;
-			this.addressLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Address");
+			this.addressLabel.LabelProp = "Address";
 			this.addressLabel.SingleLineMode = true;
 			this.vbox2.Add (this.addressLabel);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.addressLabel]));
@@ -99,7 +99,7 @@ namespace ServiceStackXS
 			this.label2 = new global::Gtk.Label ();
 			this.label2.Name = "label2";
 			this.label2.Xalign = 0.01F;
-			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Name");
+			this.label2.LabelProp = "Name";
 			this.vbox4.Add (this.label2);
 			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.label2]));
 			w6.Position = 0;
@@ -163,7 +163,7 @@ namespace ServiceStackXS
 			this.buttonOk.CanFocus = true;
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.UseUnderline = true;
-			this.buttonOk.Label = global::Mono.Unix.Catalog.GetString ("OK");
+			this.buttonOk.Label = "OK";
 			w12.Add (this.buttonOk);
 			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonOk]));
 			w14.Position = 1;
