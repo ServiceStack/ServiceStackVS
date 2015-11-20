@@ -29,8 +29,8 @@
   </Runtime>
 
   <Dependencies>
-        <Addin id="::MonoDevelop.Core" version="5.10" />
-        <Addin id="::MonoDevelop.Ide" version="5.10" />
+        <Addin id="::MonoDevelop.Core" version="5.0" />
+        <Addin id="::MonoDevelop.Ide" version="5.0" />
   </Dependencies>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
