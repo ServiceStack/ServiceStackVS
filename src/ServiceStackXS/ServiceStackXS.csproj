@@ -69,7 +69,7 @@
       <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cairo" />
-    <Reference Include="Mono.Posix, Version=2.0.0.0">
+    <Reference Include="Mono.Posix">
       <HintPath>lib\Mono.Posix.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.XmlTransform">
