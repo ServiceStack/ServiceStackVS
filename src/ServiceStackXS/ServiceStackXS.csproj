@@ -65,9 +65,6 @@
     <Reference Include="ServiceStackVS.NativeTypes">
       <HintPath>..\lib\ServiceStackVS.NativeTypes.dll</HintPath>
     </Reference>
-    <Reference Include="MonoDevelop.PackageManagement">
-      <HintPath>..\lib\MonoDevelop.PackageManagement.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Addins">
       <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
@@ -79,7 +76,7 @@
       <HintPath>..\packages\Microsoft.Web.Xdt.1.0.0\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core">
-      <HintPath>..\packages\Mono.NuGet.Core.2.8.1\lib\Net40\NuGet.Core.dll</HintPath>
+      <HintPath>..\packages\Mono.NuGet.Core.2.8.7\lib\Net40\NuGet.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -114,5 +111,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.PackageManagement" />
   </ItemGroup>
 </Project>

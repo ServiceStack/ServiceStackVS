@@ -103,7 +103,7 @@ namespace ServiceStackXS.Commands
 
 		void AddNuGetPackageReference(IDotNetProject project,string packageId)
 		{
-			var packageRepoFactory = new PackageRepositoryFactory();
+			var packageRepoFactory = new SharpDevelopPackageRepositoryFactory();
 			var packageRepo = packageRepoFactory.CreateRepository ("http://www.nuget.org/api/v2/");
 			var packageManagementProjectFactory = new PackageManagementProjectFactory (PackageManagementServices.PackageManagementEvents);
 			var packageManagementProject = packageManagementProjectFactory.CreateProject (packageRepo, project);
