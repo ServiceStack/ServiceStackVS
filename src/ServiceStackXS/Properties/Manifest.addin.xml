@@ -22,6 +22,7 @@
     <Import assembly="ServiceStackXS.dll" />
     <Import assembly="ServiceStackVS.NativeTypes.dll" />
     <Import assembly="ServiceStack.Text.dll" />
+    <Import assembly="Microsoft.Web.XmlTransform.dll" />
     <Import assembly="NuGet.Core.dll" />
   </Runtime>
 

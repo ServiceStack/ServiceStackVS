@@ -71,12 +71,15 @@
     <Reference Include="Mono.Addins">
       <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
-    <Reference Include="NuGet.Core">
-      <HintPath>..\lib\NuGet.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Cairo" />
     <Reference Include="Mono.Posix">
       <HintPath>..\lib\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform">
+      <HintPath>..\packages\Microsoft.Web.Xdt.1.0.0\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\packages\Mono.NuGet.Core.2.8.1\lib\Net40\NuGet.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
