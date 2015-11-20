@@ -24,7 +24,6 @@
     <Import assembly="ServiceStack.Text.dll" />
 
     <Import assembly="Microsoft.Web.XmlTransform.dll" />
-    <Import assembly="MonoDevelop.PackageManagement.dll" />
     <Import assembly="NuGet.Core.dll" />
   </Runtime>
 
