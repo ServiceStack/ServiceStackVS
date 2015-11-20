@@ -71,6 +71,7 @@
     <Reference Include="Mono.Cairo" />
     <Reference Include="Mono.Posix">
       <HintPath>lib\Mono.Posix.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.XmlTransform">
       <HintPath>lib\Microsoft.Web.XmlTransform.dll</HintPath>
