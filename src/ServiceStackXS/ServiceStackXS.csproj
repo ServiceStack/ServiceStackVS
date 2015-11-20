@@ -78,6 +78,9 @@
     <Reference Include="NuGet.Core">
       <HintPath>lib\NuGet.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MonoDevelop.PackageManagement">
+      <HintPath>lib\MonoDevelop.PackageManagement.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
@@ -111,8 +114,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Resources.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <AddinReference Include="MonoDevelop.PackageManagement" />
   </ItemGroup>
 </Project>
