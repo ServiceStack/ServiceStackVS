@@ -45,11 +45,6 @@ namespace $safeprojectname$
                 AddRedirectParamsToQueryString = true
             });
 
-            for (int i = 0; i < Config.ScanSkipPaths.Count; i++)
-            {
-                Config.ScanSkipPaths[i] = Config.ScanSkipPaths[i].TrimStart('/');
-            }
-
             this.Plugins.Add(new RazorFormat());
         }
     }
