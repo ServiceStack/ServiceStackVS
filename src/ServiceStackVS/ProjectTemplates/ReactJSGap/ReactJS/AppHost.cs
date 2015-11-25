@@ -45,6 +45,11 @@ namespace $safeprojectname$
                 AllowFileExtensions = { "jsx" },
                 AddRedirectParamsToQueryString = true
             });
+
+            for (int i = 0; i < Config.ScanSkipPaths.Count; i++)
+            {
+                Config.ScanSkipPaths[i] = Config.ScanSkipPaths[i].TrimStart('/');
+            }
         }
     }
 }
