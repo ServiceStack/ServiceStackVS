@@ -4,6 +4,18 @@
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
+### Troubleshooting templates with 4.0.48
+If you're having issues with the **AngularJS App**, **React App** or **React Desktop Apps** templates add the following work around for 4.0.48 in your `AppHost.cs` below the `SetConfig` statement in the `Configure` method.
+
+```
+for (int i = 0; i < Config.ScanSkipPaths.Count; i++)
+{
+    Config.ScanSkipPaths[i] = Config.ScanSkipPaths[i].TrimStart('/');
+}
+```
+
+[More information about this work around in the 4.0.48 release notes](https://github.com/ServiceStack/ServiceStack/blob/1304873a9ee27e57942e3d97f0bd6edf4e8bae72/docs/2015/release-notes.md#configscanskippaths-not-ignoring-folders).
+
 ### [New React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
 
 The new **React Desktop Apps** template provides everything you need to package your ASP.NET ServiceStack Web App into a native Windows Winforms App, OSX Cocoa Desktop App or cross-platform (Windows/OSX/Linux) "headless" Console App which instead of being 
