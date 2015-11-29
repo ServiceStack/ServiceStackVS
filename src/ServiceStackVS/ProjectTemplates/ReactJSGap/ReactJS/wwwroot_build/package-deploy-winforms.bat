@@ -16,7 +16,7 @@ SET RELEASE=..\..\$safeprojectname$.AppWinForms\bin\x86\Release
 COPY %RELEASE%\$safeprojectname$.AppWinForms.exe .\%STAGING%
 COPY %RELEASE%\$safeprojectname$.AppWinForms.exe.config .\%STAGING%
 COPY %RELEASE%\CefSharp.BrowserSubprocess.exe .\%STAGING%
-ROBOCOPY "%RELEASE%" ".\%STAGING%" *.dll *.pak *.dat /E
+ROBOCOPY "%RELEASE%" ".\%STAGING%" *.dll *.pak *.dat *.bin /E
 
 IF NOT EXIST apps (
 MD apps
