@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+using CefSharp;
 using CefSharp.WinForms.Internals;
 
 namespace $safeprojectname$
@@ -57,8 +57,8 @@ namespace $safeprojectname$
 #if DEBUG
     public class KeyboardHandler : CefSharp.IKeyboardHandler
     {
-        public bool OnPreKeyEvent(CefSharp.IWebBrowser browserControl, CefSharp.KeyType type, int windowsKeyCode, int nativeKeyCode,
-            CefSharp.CefEventFlags modifiers, bool isSystemKey, ref bool isKeyboardShortcut)
+        public bool OnPreKeyEvent(IWebBrowser browserControl, IBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode,
+            CefEventFlags modifiers, bool isSystemKey, ref bool isKeyboardShortcut)
         {
             if (windowsKeyCode == (int)Keys.F12)
             {
@@ -67,7 +67,8 @@ namespace $safeprojectname$
             return false;
         }
 
-        public bool OnKeyEvent(CefSharp.IWebBrowser browserControl, CefSharp.KeyType type, int windowsKeyCode, CefSharp.CefEventFlags modifiers, bool isSystemKey)
+        public bool OnKeyEvent(IWebBrowser browserControl, IBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode,
+            CefEventFlags modifiers, bool isSystemKey)
         {
             return false;
         }

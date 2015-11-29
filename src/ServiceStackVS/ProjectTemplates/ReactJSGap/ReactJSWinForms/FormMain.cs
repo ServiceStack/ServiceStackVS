@@ -21,11 +21,6 @@ namespace $safeprojectname$
 
             Controls.Add(ChromiumBrowser);
 
-            FormClosed += (sender, args) =>
-            {
-                Cef.Shutdown();
-            };
-
             Load += (sender, args) =>
             {
                 FormBorderStyle = FormBorderStyle.None;
