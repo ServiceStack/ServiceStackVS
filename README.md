@@ -4,16 +4,6 @@
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
-### Troubleshooting templates with 4.0.48
-If you're having issues with the **AngularJS App**, **React App** or **React Desktop Apps** templates add the following work around for 4.0.48 in your `AppHost.cs` below the `SetConfig` statement in the `Configure` method.
-
-```
-for (int i = 0; i < Config.ScanSkipPaths.Count; i++)
-{
-    Config.ScanSkipPaths[i] = Config.ScanSkipPaths[i].TrimStart('/');
-}
-```
-
 [More information about this work around in the 4.0.48 release notes](https://github.com/ServiceStack/ServiceStack/blob/1304873a9ee27e57942e3d97f0bd6edf4e8bae72/docs/2015/release-notes.md#configscanskippaths-not-ignoring-folders).
 
 ### [New React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
@@ -440,6 +430,17 @@ ServiceStack's **Add ServiceStack Reference** is now available for Xamarin Studi
 * [C# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/CSharp-Add-ServiceStack-Reference)
 * [F# Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/FSharp-Add-ServiceStack-Reference)
 * [VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
+
+
+### Troubleshooting templates with 4.0.48
+If you're having issues with the **AngularJS App**, **React App** or **React Desktop Apps** templates add the following work around for 4.0.48 in your `AppHost.cs` below the `SetConfig` statement in the `Configure` method.
+
+```
+for (int i = 0; i < Config.ScanSkipPaths.Count; i++)
+{
+    Config.ScanSkipPaths[i] = Config.ScanSkipPaths[i].TrimStart('/');
+}
+```
 
 ### Feedback
 
