@@ -38,6 +38,16 @@ namespace ServiceStackVS.NativeTypes
                 }
             }
 
+            //Start from BaseUrl option, ignore Date,Version etc
+            for (int i = startOfBlockComment; i < allLines.Count; i++)
+            {
+                if (allLines[i].TrimStart().ToLower().Equals("baseurl"))
+                {
+                    startOfBlockComment = i;
+                    break;
+                }
+            }
+
             for (int i = startOfBlockComment; i < allLines.Count; i++)
             {
                 if (allLines[i].TrimStart().EqualsIgnoreCase(EndCommentsSyntax[langauge]))

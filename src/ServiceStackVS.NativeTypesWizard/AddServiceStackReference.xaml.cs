@@ -77,6 +77,7 @@ namespace ServiceStackVS.NativeTypesWizard
                     }
 
                     var webRequest = WebRequest.Create(serverUrl);
+                    webRequest.Credentials = CredentialCache.DefaultCredentials;
                     string result = webRequest.GetResponse().ReadToEnd();
 
                     if (typesHandler.IsValidResponse(result))

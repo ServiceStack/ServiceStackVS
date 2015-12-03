@@ -35,6 +35,7 @@ namespace ServiceStackVS.NativeTypes.Handlers
         {
             string url = GenerateUrl(baseUrl, options);
             var webRequest = WebRequest.Create(url);
+            webRequest.Credentials = CredentialCache.DefaultCredentials;
             string result = webRequest.GetResponse().ReadToEnd();
             return result;
         }
