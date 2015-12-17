@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -29,6 +30,7 @@ using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NativeTypes.Handlers;
 using ServiceStackVS.NativeTypesWizard;
 using ServiceStackVS.NPMInstallerWizard;
+using ServiceStackVS.Settings;
 using VSLangProj;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using MessageBox = System.Windows.MessageBox;
@@ -56,6 +58,9 @@ namespace ServiceStackVS
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid),
+    "ServiceStack", "General", 0, 0, true)]
     public sealed class ServiceStackVSPackage : Package
     {
         /// <summary>
@@ -100,6 +105,9 @@ namespace ServiceStackVS
                 return (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             }
         }
+
+        [Import]
+        public SVsServiceProvider ServiceProvider { get; set; }
 
         private SolutionEventsListener solutionEventsListener;
 

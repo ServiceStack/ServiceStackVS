@@ -8,9 +8,12 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet;
+using ServiceStack;
+using ServiceStackVS.Common;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace ServiceStackVS.NuGetInstallerWizard
@@ -43,6 +46,9 @@ namespace ServiceStackVS.NuGetInstallerWizard
             }
         }
 
+        [Import]
+        public SVsServiceProvider ServiceProvider { get; set; }
+
         public static NuGetWizardDataPackage RootNuGetPackage;
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
@@ -55,6 +61,25 @@ namespace ServiceStackVS.NuGetInstallerWizard
                     {
                         container.ComposeParts(this);
                     }
+                }
+
+                ServiceProvider.GetWritableSettingsStore().InitStorageSettings();
+
+                bool optOutOfStats = ServiceProvider.GetWritableSettingsStore().GetOptOutStatsSetting();
+                if (!optOutOfStats)
+                {
+                    System.Threading.Tasks.Task.Run(() =>
+                    {
+                        try
+                        {
+                            string templateName = WizardHelpers.GetTemplateNameFromPath(customParams[0] as string);
+                            "http://servicestack.net/stats/ssvs/record?Name={0}".Fmt(templateName).GetStringFromUrl();
+                        }
+                        catch (Exception e)
+                        {
+                            //do nothing
+                        }
+                    });
                 }
 
                 string wizardData = replacementsDictionary["$wizarddata$"];
