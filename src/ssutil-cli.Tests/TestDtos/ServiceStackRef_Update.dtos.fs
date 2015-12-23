@@ -1,6 +1,7 @@
 (* Options:
-Date: 2015-06-14 07:47:19
-Version: 1
+Date: 2015-12-23 23:52:30
+Version: 4.051
+Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
 //GlobalNamespace: 
@@ -9,6 +10,7 @@ BaseUrl: http://techstacks.io
 //AddDescriptionAsComments: True
 //AddDataContractAttributes: False
 //AddIndexesToDataMembers: False
+//AddGeneratedCodeAttributes: False
 //AddResponseStatus: False
 //AddImplicitVersion: 
 //IncludeTypes: 
@@ -135,26 +137,6 @@ open ServiceStack.DataAnnotations
         member val StacksCount:Int32 = new Int32() with get,set
 
     [<AllowNullLiteral>]
-    type PostComment() = 
-        member val Id:Int32 = new Int32() with get,set
-        member val PostId:Int32 = new Int32() with get,set
-        member val UserId:String = null with get,set
-        member val UserName:String = null with get,set
-        member val Date:String = null with get,set
-        member val ShortDate:String = null with get,set
-        member val TextHtml:String = null with get,set
-
-    [<AllowNullLiteral>]
-    type Post() = 
-        member val Id:Int32 = new Int32() with get,set
-        member val UserId:String = null with get,set
-        member val UserName:String = null with get,set
-        member val Date:String = null with get,set
-        member val ShortDate:String = null with get,set
-        member val TextHtml:String = null with get,set
-        member val Comments:List<PostComment> = new List<PostComment>() with get,set
-
-    [<AllowNullLiteral>]
     type LogoUrlApprovalResponse() = 
         member val Result:Technology = null with get,set
 
@@ -241,6 +223,7 @@ open ServiceStack.DataAnnotations
         member val TopUsers:List<UserInfo> = new List<UserInfo>() with get,set
         member val TopTechnologies:List<TechnologyInfo> = new List<TechnologyInfo>() with get,set
         member val LatestTechStacks:List<TechStackDetails> = new List<TechStackDetails>() with get,set
+        member val PopularTechStacks:List<TechnologyStack> = new List<TechnologyStack>() with get,set
         member val TopTechnologiesByTier:Dictionary<TechnologyTier, List<TechnologyInfo>> = new Dictionary<TechnologyTier, List<TechnologyInfo>>() with get,set
         member val ResponseStatus:ResponseStatus = null with get,set
 
@@ -250,6 +233,13 @@ open ServiceStack.DataAnnotations
         member val AllTiers:List<Option> = new List<Option>() with get,set
         member val TopTechnologies:List<TechnologyInfo> = new List<TechnologyInfo>() with get,set
         member val ResponseStatus:ResponseStatus = null with get,set
+
+    [<AllowNullLiteral>]
+    type GetPageStatsResponse() = 
+        member val Type:String = null with get,set
+        member val Slug:String = null with get,set
+        member val ViewCount:Int64 = new Int64() with get,set
+        member val FavCount:Int64 = new Int64() with get,set
 
     [<AllowNullLiteral>]
     type GetFavoriteTechStackResponse() = 
@@ -478,6 +468,13 @@ open ServiceStack.DataAnnotations
         interface IReturn<AppOverviewResponse>
         member val Reload:Boolean = new Boolean() with get,set
 
+    [<Route("/pagestats/{Type}/{Slug}")>]
+    [<AllowNullLiteral>]
+    type GetPageStats() = 
+        interface IReturn<GetPageStatsResponse>
+        member val Type:String = null with get,set
+        member val Slug:String = null with get,set
+
     [<Route("/techstacks/search")>]
     [<AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")>]
     [<AllowNullLiteral>]
@@ -533,10 +530,4 @@ open ServiceStack.DataAnnotations
         interface IReturn<GetUserInfoResponse>
         member val Reload:Boolean = new Boolean() with get,set
         member val UserName:String = null with get,set
-
-    [<Route("/posts")>]
-    [<AllowNullLiteral>]
-    type QueryPosts() = 
-        inherit QueryBase<Post>()
-        interface IReturn<QueryResponse<Post>>
 

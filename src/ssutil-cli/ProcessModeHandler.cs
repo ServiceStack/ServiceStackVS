@@ -14,6 +14,7 @@ namespace ssutil_cli
         public static readonly FSharpNativeTypesHandler FSharpNativeTypesHandler = new FSharpNativeTypesHandler();
         public static readonly VbNetNativeTypesHandler VbNetNativeTypesHandler = new VbNetNativeTypesHandler();
         public static readonly TypeScriptNativeTypesHandler TypeScriptNativeTypesHandler = new TypeScriptNativeTypesHandler();
+        public static readonly TypeScriptConcreteNativeTypesHandler TypeScriptConcreteNativeTypesHandler = new TypeScriptConcreteNativeTypesHandler();
         public static readonly JavaNativeTypesHandler JavaNativeTypesHandler = new JavaNativeTypesHandler();
         public static readonly SwitfNativeTypesHandler SwitfNativeTypesHandler = new SwitfNativeTypesHandler();
         public static readonly KotlinNativeTypesHandler KotlinNativeTypesHandler = new KotlinNativeTypesHandler();
@@ -23,12 +24,12 @@ namespace ssutil_cli
             {"csharp",CSharpNativeTypesHandler},
             {"fsharp",FSharpNativeTypesHandler},
             {"vbnet",VbNetNativeTypesHandler},
-            {"typescript",TypeScriptNativeTypesHandler},
+            {"typescript.d",TypeScriptNativeTypesHandler},
+            {"typescript",TypeScriptConcreteNativeTypesHandler},
             {"java",JavaNativeTypesHandler},
             {"swift",SwitfNativeTypesHandler},
             {"kotlin",KotlinNativeTypesHandler}
         };
-        
 
         public static CmdMode GetMode(Dictionary<string,string> options)
         {
@@ -81,7 +82,6 @@ namespace ssutil_cli
                 return  CmdMode.AddRefWithLang;
             }
 
-            
             return CmdMode.Invalid;
         }
 

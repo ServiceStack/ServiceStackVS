@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using ServiceStack;
 
 namespace ServiceStackVS.NativeTypes.Handlers
 {
-    public class VbNetNativeTypesHandler : INativeTypesHandler
+    public class VbNetNativeTypesHandler : BaseNativeTypesHandler, INativeTypesHandler
     {
-        public Dictionary<string, string> ParseComments(string codeOutput)
+        public override Dictionary<string, string> ParseComments(string codeOutput)
         {
             var commentLines = codeOutput.ExtractFirstCommentBlock(TypesLanguage);
 
@@ -26,37 +25,12 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return overriddenProperties;
         }
 
-        public string GenerateUrl(string baseUrl, Dictionary<string, string> options)
-        {
-            return (baseUrl.WithTrailingSlash() + RelativeTypesUrl).BuildTypesUrlWithQueryStringValues(options);
-        }
-
-        public string GetUpdatedCode(string baseUrl, Dictionary<string, string> options)
-        {
-            string url = GenerateUrl(baseUrl, options);
-            var webRequest = WebRequest.Create(url);
-            webRequest.Credentials = CredentialCache.DefaultCredentials;
-            string result = webRequest.GetResponse().ReadToEnd();
-            return result;
-        }
-
-        public NativeTypesLanguage TypesLanguage { get { return NativeTypesLanguage.VbNet; } }
-
-        public string CodeFileExtension { get { return ".dtos.vb"; } }
-        public string RelativeTypesUrl { get { return "types/vbnet"; } }
-
-        public bool IsHandledFileType(string fileName)
-        {
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return false;
-            }
-            return fileName.EndsWithIgnoreCase(CodeFileExtension);
-        }
+        public override NativeTypesLanguage TypesLanguage { get { return NativeTypesLanguage.VbNet; } }
+        public override string CodeFileExtension { get { return ".dtos.vb"; } }
+        public override string RelativeTypesUrl { get { return "types/vbnet"; } }
 
         private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" }; 
-
-        public List<string> RequiredNuGetPackages
+        public override List<string> RequiredNuGetPackages
         {
             get { return requiredNuGetPackages; }
         }

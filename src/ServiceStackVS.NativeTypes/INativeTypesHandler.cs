@@ -20,6 +20,7 @@ namespace ServiceStackVS.NativeTypes
         FSharp,
         VbNet,
         TypeScript,
+        TypeScriptConcrete,
         Java,
         Swift,
         Kotlin

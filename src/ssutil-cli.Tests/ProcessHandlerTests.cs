@@ -96,6 +96,44 @@ namespace ssutil_cli.Tests
         }
 
         [Test]
+        public void Can_Add_Valid_ServiceStack_Url_TypeScript_d()
+        {
+            string[] args = new[] { "http://techstacks.io/", "-lang", "Typescript.d" };
+            var utilCli = new UtilCliOptions();
+            utilCli.DefaultOptionSet.Parse(args);
+            ProcessModeHandler.Process(utilCli.Options);
+            Assert.That(File.Exists("ServiceStackReference.dtos.d.ts"));
+        }
+
+        [Test]
+        public void Can_Update_Valid_TypeScript_d_File()
+        {
+            string[] args = new[] { Environment.CurrentDirectory + Path.DirectorySeparatorChar + "ServiceStackReference.dtos.d.ts" };
+            var utilCli = new UtilCliOptions();
+            utilCli.DefaultOptionSet.Parse(args);
+            ProcessModeHandler.Process(utilCli.Options);
+        }
+
+        [Test]
+        public void Can_Add_Valid_ServiceStack_Url_TypeScript()
+        {
+            string[] args = new[] { "http://techstacks.io/", "-lang", "Typescript" };
+            var utilCli = new UtilCliOptions();
+            utilCli.DefaultOptionSet.Parse(args);
+            ProcessModeHandler.Process(utilCli.Options);
+            Assert.That(File.Exists("ServiceStackReference.dtos.ts"));
+        }
+
+        [Test]
+        public void Can_Update_Valid_TypeScript_File()
+        {
+            string[] args = new[] { Environment.CurrentDirectory + Path.DirectorySeparatorChar + "ServiceStackReference.dtos.ts" };
+            var utilCli = new UtilCliOptions();
+            utilCli.DefaultOptionSet.Parse(args);
+            ProcessModeHandler.Process(utilCli.Options);
+        }
+
+        [Test]
         public void Throw_For_Invalid_BaseUrl()
         {
             string[] args = new[] { Environment.CurrentDirectory + Path.DirectorySeparatorChar + "ServiceStackRefInvalidUrl.dtos.cs" };

@@ -1,6 +1,7 @@
 /* Options:
-Date: 2015-06-14 07:47:18
-Version: 1
+Date: 2015-12-23 23:52:29
+Version: 4.051
+Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
 //GlobalNamespace: 
@@ -11,6 +12,7 @@ BaseUrl: http://techstacks.io
 //AddDescriptionAsComments: True
 //AddDataContractAttributes: False
 //AddIndexesToDataMembers: False
+//AddGeneratedCodeAttributes: False
 //AddResponseStatus: False
 //AddImplicitVersion: 
 //InitializeCollections: True
@@ -63,39 +65,6 @@ namespace TechStacks.ServiceInterface
 
     [Route("/ping")]
     public partial class Ping
-    {
-    }
-
-    public partial class Post
-    {
-        public Post()
-        {
-            Comments = new List<PostComment>{};
-        }
-
-        public virtual int Id { get; set; }
-        public virtual string UserId { get; set; }
-        public virtual string UserName { get; set; }
-        public virtual string Date { get; set; }
-        public virtual string ShortDate { get; set; }
-        public virtual string TextHtml { get; set; }
-        public virtual List<PostComment> Comments { get; set; }
-    }
-
-    public partial class PostComment
-    {
-        public virtual int Id { get; set; }
-        public virtual int PostId { get; set; }
-        public virtual string UserId { get; set; }
-        public virtual string UserName { get; set; }
-        public virtual string Date { get; set; }
-        public virtual string ShortDate { get; set; }
-        public virtual string TextHtml { get; set; }
-    }
-
-    [Route("/posts")]
-    public partial class QueryPosts
-        : QueryBase<Post>, IReturn<QueryResponse<Post>>
     {
     }
 }
@@ -318,6 +287,22 @@ namespace TechStacks.ServiceModel
         public virtual List<TechnologyStack> Results { get; set; }
     }
 
+    [Route("/pagestats/{Type}/{Slug}")]
+    public partial class GetPageStats
+        : IReturn<GetPageStatsResponse>
+    {
+        public virtual string Type { get; set; }
+        public virtual string Slug { get; set; }
+    }
+
+    public partial class GetPageStatsResponse
+    {
+        public virtual string Type { get; set; }
+        public virtual string Slug { get; set; }
+        public virtual long ViewCount { get; set; }
+        public virtual long FavCount { get; set; }
+    }
+
     [Route("/technology/{Slug}")]
     public partial class GetTechnology
         : IReturn<GetTechnologyResponse>
@@ -527,6 +512,7 @@ namespace TechStacks.ServiceModel
             TopUsers = new List<UserInfo>{};
             TopTechnologies = new List<TechnologyInfo>{};
             LatestTechStacks = new List<TechStackDetails>{};
+            PopularTechStacks = new List<TechnologyStack>{};
             TopTechnologiesByTier = new Dictionary<TechnologyTier, List<TechnologyInfo>>{};
         }
 
@@ -534,6 +520,7 @@ namespace TechStacks.ServiceModel
         public virtual List<UserInfo> TopUsers { get; set; }
         public virtual List<TechnologyInfo> TopTechnologies { get; set; }
         public virtual List<TechStackDetails> LatestTechStacks { get; set; }
+        public virtual List<TechnologyStack> PopularTechStacks { get; set; }
         public virtual Dictionary<TechnologyTier, List<TechnologyInfo>> TopTechnologiesByTier { get; set; }
         public virtual ResponseStatus ResponseStatus { get; set; }
     }

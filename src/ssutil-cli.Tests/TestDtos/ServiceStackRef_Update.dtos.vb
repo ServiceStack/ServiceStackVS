@@ -1,6 +1,7 @@
 ' Options:
-'Date: 2015-06-14 07:47:21
-'Version: 1
+'Date: 2015-12-23 23:52:35
+'Version: 4.051
+'Tip: To override a DTO option, remove "''" prefix before updating
 'BaseUrl: http://techstacks.io
 '
 '''GlobalNamespace: 
@@ -11,6 +12,7 @@
 '''AddDescriptionAsComments: True
 '''AddDataContractAttributes: False
 '''AddIndexesToDataMembers: False
+'''AddGeneratedCodeAttributes: False
 '''AddResponseStatus: False
 '''AddImplicitVersion: 
 '''InitializeCollections: True
@@ -57,36 +59,6 @@ Namespace Global
 
         <Route("/ping")>
         Public Partial Class Ping
-        End Class
-
-        Public Partial Class Post
-            Public Sub New()
-                Comments = New List(Of PostComment)
-            End Sub
-
-            Public Overridable Property Id As Integer
-            Public Overridable Property UserId As String
-            Public Overridable Property UserName As String
-            Public Overridable Property Date As String
-            Public Overridable Property ShortDate As String
-            Public Overridable Property TextHtml As String
-            Public Overridable Property Comments As List(Of PostComment)
-        End Class
-
-        Public Partial Class PostComment
-            Public Overridable Property Id As Integer
-            Public Overridable Property PostId As Integer
-            Public Overridable Property UserId As String
-            Public Overridable Property UserName As String
-            Public Overridable Property Date As String
-            Public Overridable Property ShortDate As String
-            Public Overridable Property TextHtml As String
-        End Class
-
-        <Route("/posts")>
-        Public Partial Class QueryPosts
-            Inherits QueryBase(Of Post)
-            Implements IReturn(Of QueryResponse(Of Post))
         End Class
     End Namespace
 
@@ -276,6 +248,20 @@ Namespace Global
             Public Overridable Property Results As List(Of TechnologyStack)
         End Class
 
+        <Route("/pagestats/{Type}/{Slug}")>
+        Public Partial Class GetPageStats
+            Implements IReturn(Of GetPageStatsResponse)
+            Public Overridable Property Type As String
+            Public Overridable Property Slug As String
+        End Class
+
+        Public Partial Class GetPageStatsResponse
+            Public Overridable Property Type As String
+            Public Overridable Property Slug As String
+            Public Overridable Property ViewCount As Long
+            Public Overridable Property FavCount As Long
+        End Class
+
         <Route("/technology/{Slug}")>
         Public Partial Class GetTechnology
             Implements IReturn(Of GetTechnologyResponse)
@@ -453,6 +439,7 @@ Namespace Global
                 TopUsers = New List(Of UserInfo)
                 TopTechnologies = New List(Of TechnologyInfo)
                 LatestTechStacks = New List(Of TechStackDetails)
+                PopularTechStacks = New List(Of TechnologyStack)
                 TopTechnologiesByTier = New Dictionary(Of TechnologyTier, List(Of TechnologyInfo))
             End Sub
 
@@ -460,6 +447,7 @@ Namespace Global
             Public Overridable Property TopUsers As List(Of UserInfo)
             Public Overridable Property TopTechnologies As List(Of TechnologyInfo)
             Public Overridable Property LatestTechStacks As List(Of TechStackDetails)
+            Public Overridable Property PopularTechStacks As List(Of TechnologyStack)
             Public Overridable Property TopTechnologiesByTier As Dictionary(Of TechnologyTier, List(Of TechnologyInfo))
             Public Overridable Property ResponseStatus As ResponseStatus
         End Class

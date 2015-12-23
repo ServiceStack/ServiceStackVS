@@ -12,6 +12,7 @@ namespace ServiceStackVS.NativeTypes
             { NativeTypesLanguage.FSharp, "(*" },
             { NativeTypesLanguage.VbNet, "'" },
             { NativeTypesLanguage.TypeScript, "/*" },
+            { NativeTypesLanguage.TypeScriptConcrete, "/*" },
             { NativeTypesLanguage.Swift, "/*" },
             { NativeTypesLanguage.Java, "/*" },
             { NativeTypesLanguage.Kotlin, "/*" }
@@ -23,6 +24,7 @@ namespace ServiceStackVS.NativeTypes
             { NativeTypesLanguage.FSharp, "*)" },
             { NativeTypesLanguage.VbNet, "" },
             { NativeTypesLanguage.TypeScript, "*/" },
+            { NativeTypesLanguage.TypeScriptConcrete, "*/" },
             { NativeTypesLanguage.Swift, "*/" },
             { NativeTypesLanguage.Java, "*/" },
             { NativeTypesLanguage.Kotlin, "*/" },
