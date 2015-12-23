@@ -21,6 +21,7 @@ namespace ServiceStackVS.NativeTypes
         VbNet,
         TypeScript,
         Java,
-        Swift
+        Swift,
+        Kotlin
     }
 }

@@ -16,6 +16,7 @@ namespace ssutil_cli
         public static readonly TypeScriptNativeTypesHandler TypeScriptNativeTypesHandler = new TypeScriptNativeTypesHandler();
         public static readonly JavaNativeTypesHandler JavaNativeTypesHandler = new JavaNativeTypesHandler();
         public static readonly SwitfNativeTypesHandler SwitfNativeTypesHandler = new SwitfNativeTypesHandler();
+        public static readonly KotlinNativeTypesHandler KotlinNativeTypesHandler = new KotlinNativeTypesHandler();
 
         public static readonly Dictionary<string, INativeTypesHandler> All = new Dictionary<string,INativeTypesHandler>
         {
@@ -24,7 +25,8 @@ namespace ssutil_cli
             {"vbnet",VbNetNativeTypesHandler},
             {"typescript",TypeScriptNativeTypesHandler},
             {"java",JavaNativeTypesHandler},
-            {"swift",SwitfNativeTypesHandler}
+            {"swift",SwitfNativeTypesHandler},
+            {"kotlin",KotlinNativeTypesHandler}
         };
         
 
