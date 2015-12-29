@@ -322,11 +322,15 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('04-deploy-webapp', [
-        'nugetrestore:restore-webapp',
-        'msbuild:release-webapp',
-        '01-bundle-all',
+        'build',
         'msdeploy:pack',
         'msdeploy:push'
+    ]);
+
+    grunt.registerTask('build', [
+        'nugetrestore:restore-webapp',
+        'msbuild:release-webapp',
+        '01-bundle-all'
     ]);
 
     grunt.registerTask('default', ['02-package-console', '03-package-winforms']);
