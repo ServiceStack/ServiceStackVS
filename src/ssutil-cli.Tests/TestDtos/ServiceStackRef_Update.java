@@ -1,10 +1,11 @@
 /* Options:
-Date: 2015-06-14 07:47:22
-Version: 1
+Date: 2015-12-23 23:52:36
+Version: 4.051
+Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
 //Package: 
-//GlobalNamespace: dto
+//GlobalNamespace: dtos
 //AddPropertyAccessors: True
 //SettersReturnThis: True
 //AddServiceStackTypes: True
@@ -12,6 +13,7 @@ BaseUrl: http://techstacks.io
 //AddImplicitVersion: 
 //IncludeTypes: 
 //ExcludeTypes: 
+//TreatTypesAsStrings: 
 //DefaultImports: java.math.*,java.util.*,net.servicestack.client.*,com.google.gson.annotations.*,com.google.gson.reflect.*
 */
 
@@ -21,698 +23,8 @@ import net.servicestack.client.*;
 import com.google.gson.annotations.*;
 import com.google.gson.reflect.*;
 
-public class dto
+public class dtos
 {
-
-    public static class Technology extends TechnologyBase
-    {
-        
-    }
-
-    public static enum TechnologyTier
-    {
-        ProgrammingLanguage,
-        Client,
-        Http,
-        Server,
-        Data,
-        SoftwareInfrastructure,
-        OperatingSystem,
-        HardwareInfrastructure,
-        ThirdPartyServices;
-    }
-
-    public static class TechnologyStack extends TechnologyStackBase
-    {
-        
-    }
-
-    public static class TechnologyHistory extends TechnologyBase
-    {
-        public Long TechnologyId = null;
-        public String Operation = null;
-        
-        public Long getTechnologyId() { return TechnologyId; }
-        public TechnologyHistory setTechnologyId(Long value) { this.TechnologyId = value; return this; }
-        public String getOperation() { return Operation; }
-        public TechnologyHistory setOperation(String value) { this.Operation = value; return this; }
-    }
-
-    public static class QueryBase_1<T> extends QueryBase
-    {
-        
-    }
-
-    public static class TechStackDetails extends TechnologyStackBase
-    {
-        public String DetailsHtml = null;
-        public ArrayList<TechnologyInStack> TechnologyChoices = null;
-        
-        public String getDetailsHtml() { return DetailsHtml; }
-        public TechStackDetails setDetailsHtml(String value) { this.DetailsHtml = value; return this; }
-        public ArrayList<TechnologyInStack> getTechnologyChoices() { return TechnologyChoices; }
-        public TechStackDetails setTechnologyChoices(ArrayList<TechnologyInStack> value) { this.TechnologyChoices = value; return this; }
-    }
-
-    public static class TechnologyStackHistory extends TechnologyStackBase
-    {
-        public Long TechnologyStackId = null;
-        public String Operation = null;
-        public ArrayList<Long> TechnologyIds = null;
-        
-        public Long getTechnologyStackId() { return TechnologyStackId; }
-        public TechnologyStackHistory setTechnologyStackId(Long value) { this.TechnologyStackId = value; return this; }
-        public String getOperation() { return Operation; }
-        public TechnologyStackHistory setOperation(String value) { this.Operation = value; return this; }
-        public ArrayList<Long> getTechnologyIds() { return TechnologyIds; }
-        public TechnologyStackHistory setTechnologyIds(ArrayList<Long> value) { this.TechnologyIds = value; return this; }
-    }
-
-    @DataContract
-    public static class Option
-    {
-        @DataMember(Name="name")
-        @SerializedName("name")
-        public String Name = null;
-
-        @DataMember(Name="title")
-        @SerializedName("title")
-        public String Title = null;
-
-        @DataMember(Name="value")
-        @SerializedName("value")
-        public TechnologyTier Value = null;
-        
-        public String getName() { return Name; }
-        public Option setName(String value) { this.Name = value; return this; }
-        public String getTitle() { return Title; }
-        public Option setTitle(String value) { this.Title = value; return this; }
-        public TechnologyTier getValue() { return Value; }
-        public Option setValue(TechnologyTier value) { this.Value = value; return this; }
-    }
-
-    public static class UserInfo
-    {
-        public String UserName = null;
-        public String AvatarUrl = null;
-        public Integer StacksCount = null;
-        
-        public String getUserName() { return UserName; }
-        public UserInfo setUserName(String value) { this.UserName = value; return this; }
-        public String getAvatarUrl() { return AvatarUrl; }
-        public UserInfo setAvatarUrl(String value) { this.AvatarUrl = value; return this; }
-        public Integer getStacksCount() { return StacksCount; }
-        public UserInfo setStacksCount(Integer value) { this.StacksCount = value; return this; }
-    }
-
-    public static class TechnologyInfo
-    {
-        public TechnologyTier Tier = null;
-        public String Slug = null;
-        public String Name = null;
-        public String LogoUrl = null;
-        public Integer StacksCount = null;
-        
-        public TechnologyTier getTier() { return Tier; }
-        public TechnologyInfo setTier(TechnologyTier value) { this.Tier = value; return this; }
-        public String getSlug() { return Slug; }
-        public TechnologyInfo setSlug(String value) { this.Slug = value; return this; }
-        public String getName() { return Name; }
-        public TechnologyInfo setName(String value) { this.Name = value; return this; }
-        public String getLogoUrl() { return LogoUrl; }
-        public TechnologyInfo setLogoUrl(String value) { this.LogoUrl = value; return this; }
-        public Integer getStacksCount() { return StacksCount; }
-        public TechnologyInfo setStacksCount(Integer value) { this.StacksCount = value; return this; }
-    }
-
-    public static class Post
-    {
-        public Integer Id = null;
-        public String UserId = null;
-        public String UserName = null;
-        public String Date = null;
-        public String ShortDate = null;
-        public String TextHtml = null;
-        public ArrayList<PostComment> Comments = null;
-        
-        public Integer getId() { return Id; }
-        public Post setId(Integer value) { this.Id = value; return this; }
-        public String getUserId() { return UserId; }
-        public Post setUserId(String value) { this.UserId = value; return this; }
-        public String getUserName() { return UserName; }
-        public Post setUserName(String value) { this.UserName = value; return this; }
-        public String getDate() { return Date; }
-        public Post setDate(String value) { this.Date = value; return this; }
-        public String getShortDate() { return ShortDate; }
-        public Post setShortDate(String value) { this.ShortDate = value; return this; }
-        public String getTextHtml() { return TextHtml; }
-        public Post setTextHtml(String value) { this.TextHtml = value; return this; }
-        public ArrayList<PostComment> getComments() { return Comments; }
-        public Post setComments(ArrayList<PostComment> value) { this.Comments = value; return this; }
-    }
-
-    public static class TechnologyBase
-    {
-        public Long Id = null;
-        public String Name = null;
-        public String VendorName = null;
-        public String VendorUrl = null;
-        public String ProductUrl = null;
-        public String LogoUrl = null;
-        public String Description = null;
-        public Date Created = null;
-        public String CreatedBy = null;
-        public Date LastModified = null;
-        public String LastModifiedBy = null;
-        public String OwnerId = null;
-        public String Slug = null;
-        public Boolean LogoApproved = null;
-        public Boolean IsLocked = null;
-        public TechnologyTier Tier = null;
-        public Date LastStatusUpdate = null;
-        
-        public Long getId() { return Id; }
-        public TechnologyBase setId(Long value) { this.Id = value; return this; }
-        public String getName() { return Name; }
-        public TechnologyBase setName(String value) { this.Name = value; return this; }
-        public String getVendorName() { return VendorName; }
-        public TechnologyBase setVendorName(String value) { this.VendorName = value; return this; }
-        public String getVendorUrl() { return VendorUrl; }
-        public TechnologyBase setVendorUrl(String value) { this.VendorUrl = value; return this; }
-        public String getProductUrl() { return ProductUrl; }
-        public TechnologyBase setProductUrl(String value) { this.ProductUrl = value; return this; }
-        public String getLogoUrl() { return LogoUrl; }
-        public TechnologyBase setLogoUrl(String value) { this.LogoUrl = value; return this; }
-        public String getDescription() { return Description; }
-        public TechnologyBase setDescription(String value) { this.Description = value; return this; }
-        public Date getCreated() { return Created; }
-        public TechnologyBase setCreated(Date value) { this.Created = value; return this; }
-        public String getCreatedBy() { return CreatedBy; }
-        public TechnologyBase setCreatedBy(String value) { this.CreatedBy = value; return this; }
-        public Date getLastModified() { return LastModified; }
-        public TechnologyBase setLastModified(Date value) { this.LastModified = value; return this; }
-        public String getLastModifiedBy() { return LastModifiedBy; }
-        public TechnologyBase setLastModifiedBy(String value) { this.LastModifiedBy = value; return this; }
-        public String getOwnerId() { return OwnerId; }
-        public TechnologyBase setOwnerId(String value) { this.OwnerId = value; return this; }
-        public String getSlug() { return Slug; }
-        public TechnologyBase setSlug(String value) { this.Slug = value; return this; }
-        public Boolean isLogoApproved() { return LogoApproved; }
-        public TechnologyBase setLogoApproved(Boolean value) { this.LogoApproved = value; return this; }
-        public Boolean getIsLocked() { return IsLocked; }
-        public TechnologyBase setIsLocked(Boolean value) { this.IsLocked = value; return this; }
-        public TechnologyTier getTier() { return Tier; }
-        public TechnologyBase setTier(TechnologyTier value) { this.Tier = value; return this; }
-        public Date getLastStatusUpdate() { return LastStatusUpdate; }
-        public TechnologyBase setLastStatusUpdate(Date value) { this.LastStatusUpdate = value; return this; }
-    }
-
-    public static class TechnologyStackBase
-    {
-        public Long Id = null;
-        public String Name = null;
-        public String VendorName = null;
-        public String Description = null;
-        public String AppUrl = null;
-        public String ScreenshotUrl = null;
-        public Date Created = null;
-        public String CreatedBy = null;
-        public Date LastModified = null;
-        public String LastModifiedBy = null;
-        public Boolean IsLocked = null;
-        public String OwnerId = null;
-        public String Slug = null;
-        public String Details = null;
-        public Date LastStatusUpdate = null;
-        
-        public Long getId() { return Id; }
-        public TechnologyStackBase setId(Long value) { this.Id = value; return this; }
-        public String getName() { return Name; }
-        public TechnologyStackBase setName(String value) { this.Name = value; return this; }
-        public String getVendorName() { return VendorName; }
-        public TechnologyStackBase setVendorName(String value) { this.VendorName = value; return this; }
-        public String getDescription() { return Description; }
-        public TechnologyStackBase setDescription(String value) { this.Description = value; return this; }
-        public String getAppUrl() { return AppUrl; }
-        public TechnologyStackBase setAppUrl(String value) { this.AppUrl = value; return this; }
-        public String getScreenshotUrl() { return ScreenshotUrl; }
-        public TechnologyStackBase setScreenshotUrl(String value) { this.ScreenshotUrl = value; return this; }
-        public Date getCreated() { return Created; }
-        public TechnologyStackBase setCreated(Date value) { this.Created = value; return this; }
-        public String getCreatedBy() { return CreatedBy; }
-        public TechnologyStackBase setCreatedBy(String value) { this.CreatedBy = value; return this; }
-        public Date getLastModified() { return LastModified; }
-        public TechnologyStackBase setLastModified(Date value) { this.LastModified = value; return this; }
-        public String getLastModifiedBy() { return LastModifiedBy; }
-        public TechnologyStackBase setLastModifiedBy(String value) { this.LastModifiedBy = value; return this; }
-        public Boolean getIsLocked() { return IsLocked; }
-        public TechnologyStackBase setIsLocked(Boolean value) { this.IsLocked = value; return this; }
-        public String getOwnerId() { return OwnerId; }
-        public TechnologyStackBase setOwnerId(String value) { this.OwnerId = value; return this; }
-        public String getSlug() { return Slug; }
-        public TechnologyStackBase setSlug(String value) { this.Slug = value; return this; }
-        public String getDetails() { return Details; }
-        public TechnologyStackBase setDetails(String value) { this.Details = value; return this; }
-        public Date getLastStatusUpdate() { return LastStatusUpdate; }
-        public TechnologyStackBase setLastStatusUpdate(Date value) { this.LastStatusUpdate = value; return this; }
-    }
-
-    public static class QueryBase
-    {
-        @DataMember(Order=1)
-        public Integer Skip = null;
-
-        @DataMember(Order=2)
-        public Integer Take = null;
-
-        @DataMember(Order=3)
-        public String OrderBy = null;
-
-        @DataMember(Order=4)
-        public String OrderByDesc = null;
-        
-        public Integer getSkip() { return Skip; }
-        public QueryBase setSkip(Integer value) { this.Skip = value; return this; }
-        public Integer getTake() { return Take; }
-        public QueryBase setTake(Integer value) { this.Take = value; return this; }
-        public String getOrderBy() { return OrderBy; }
-        public QueryBase setOrderBy(String value) { this.OrderBy = value; return this; }
-        public String getOrderByDesc() { return OrderByDesc; }
-        public QueryBase setOrderByDesc(String value) { this.OrderByDesc = value; return this; }
-    }
-
-    public static class TechnologyInStack extends TechnologyBase
-    {
-        public Long TechnologyId = null;
-        public Long TechnologyStackId = null;
-        public String Justification = null;
-        
-        public Long getTechnologyId() { return TechnologyId; }
-        public TechnologyInStack setTechnologyId(Long value) { this.TechnologyId = value; return this; }
-        public Long getTechnologyStackId() { return TechnologyStackId; }
-        public TechnologyInStack setTechnologyStackId(Long value) { this.TechnologyStackId = value; return this; }
-        public String getJustification() { return Justification; }
-        public TechnologyInStack setJustification(String value) { this.Justification = value; return this; }
-    }
-
-    public static class PostComment
-    {
-        public Integer Id = null;
-        public Integer PostId = null;
-        public String UserId = null;
-        public String UserName = null;
-        public String Date = null;
-        public String ShortDate = null;
-        public String TextHtml = null;
-        
-        public Integer getId() { return Id; }
-        public PostComment setId(Integer value) { this.Id = value; return this; }
-        public Integer getPostId() { return PostId; }
-        public PostComment setPostId(Integer value) { this.PostId = value; return this; }
-        public String getUserId() { return UserId; }
-        public PostComment setUserId(String value) { this.UserId = value; return this; }
-        public String getUserName() { return UserName; }
-        public PostComment setUserName(String value) { this.UserName = value; return this; }
-        public String getDate() { return Date; }
-        public PostComment setDate(String value) { this.Date = value; return this; }
-        public String getShortDate() { return ShortDate; }
-        public PostComment setShortDate(String value) { this.ShortDate = value; return this; }
-        public String getTextHtml() { return TextHtml; }
-        public PostComment setTextHtml(String value) { this.TextHtml = value; return this; }
-    }
-
-    public static class LogoUrlApprovalResponse
-    {
-        public Technology Result = null;
-        
-        public Technology getResult() { return Result; }
-        public LogoUrlApprovalResponse setResult(Technology value) { this.Result = value; return this; }
-    }
-
-    public static class LockStackResponse
-    {
-        
-    }
-
-    public static class CreateTechnologyResponse
-    {
-        public Technology Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Technology getResult() { return Result; }
-        public CreateTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public CreateTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class UpdateTechnologyResponse
-    {
-        public Technology Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Technology getResult() { return Result; }
-        public UpdateTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public UpdateTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class DeleteTechnologyResponse
-    {
-        public Technology Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Technology getResult() { return Result; }
-        public DeleteTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public DeleteTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class GetTechnologyResponse
-    {
-        public Date Created = null;
-        public Technology Technology = null;
-        public ArrayList<TechnologyStack> TechnologyStacks = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Date getCreated() { return Created; }
-        public GetTechnologyResponse setCreated(Date value) { this.Created = value; return this; }
-        public Technology getTechnology() { return Technology; }
-        public GetTechnologyResponse setTechnology(Technology value) { this.Technology = value; return this; }
-        public ArrayList<TechnologyStack> getTechnologyStacks() { return TechnologyStacks; }
-        public GetTechnologyResponse setTechnologyStacks(ArrayList<TechnologyStack> value) { this.TechnologyStacks = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public GetTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class GetTechnologyPreviousVersionsResponse
-    {
-        public ArrayList<TechnologyHistory> Results = null;
-        
-        public ArrayList<TechnologyHistory> getResults() { return Results; }
-        public GetTechnologyPreviousVersionsResponse setResults(ArrayList<TechnologyHistory> value) { this.Results = value; return this; }
-    }
-
-    public static class GetTechnologyFavoriteDetailsResponse
-    {
-        public ArrayList<String> Users = null;
-        public Integer FavoriteCount = null;
-        
-        public ArrayList<String> getUsers() { return Users; }
-        public GetTechnologyFavoriteDetailsResponse setUsers(ArrayList<String> value) { this.Users = value; return this; }
-        public Integer getFavoriteCount() { return FavoriteCount; }
-        public GetTechnologyFavoriteDetailsResponse setFavoriteCount(Integer value) { this.FavoriteCount = value; return this; }
-    }
-
-    public static class GetAllTechnologiesResponse
-    {
-        public ArrayList<Technology> Results = null;
-        
-        public ArrayList<Technology> getResults() { return Results; }
-        public GetAllTechnologiesResponse setResults(ArrayList<Technology> value) { this.Results = value; return this; }
-    }
-
-    @DataContract
-    public static class QueryResponse<T>
-    {
-        @DataMember(Order=1)
-        public Integer Offset = null;
-
-        @DataMember(Order=2)
-        public Integer Total = null;
-
-        @DataMember(Order=3)
-        public ArrayList<T> Results = null;
-
-        @DataMember(Order=4)
-        public HashMap<String,String> Meta = null;
-
-        @DataMember(Order=5)
-        public ResponseStatus ResponseStatus = null;
-        
-        public Integer getOffset() { return Offset; }
-        public QueryResponse<T> setOffset(Integer value) { this.Offset = value; return this; }
-        public Integer getTotal() { return Total; }
-        public QueryResponse<T> setTotal(Integer value) { this.Total = value; return this; }
-        public ArrayList<T> getResults() { return Results; }
-        public QueryResponse<T> setResults(ArrayList<T> value) { this.Results = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public QueryResponse<T> setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public QueryResponse<T> setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class CreateTechnologyStackResponse
-    {
-        public TechStackDetails Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public TechStackDetails getResult() { return Result; }
-        public CreateTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public CreateTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class UpdateTechnologyStackResponse
-    {
-        public TechStackDetails Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public TechStackDetails getResult() { return Result; }
-        public UpdateTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public UpdateTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class DeleteTechnologyStackResponse
-    {
-        public TechStackDetails Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public TechStackDetails getResult() { return Result; }
-        public DeleteTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public DeleteTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class GetAllTechnologyStacksResponse
-    {
-        public ArrayList<TechnologyStack> Results = null;
-        
-        public ArrayList<TechnologyStack> getResults() { return Results; }
-        public GetAllTechnologyStacksResponse setResults(ArrayList<TechnologyStack> value) { this.Results = value; return this; }
-    }
-
-    public static class GetTechnologyStackResponse
-    {
-        public Date Created = null;
-        public TechStackDetails Result = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Date getCreated() { return Created; }
-        public GetTechnologyStackResponse setCreated(Date value) { this.Created = value; return this; }
-        public TechStackDetails getResult() { return Result; }
-        public GetTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public GetTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class GetTechnologyStackPreviousVersionsResponse
-    {
-        public ArrayList<TechnologyStackHistory> Results = null;
-        
-        public ArrayList<TechnologyStackHistory> getResults() { return Results; }
-        public GetTechnologyStackPreviousVersionsResponse setResults(ArrayList<TechnologyStackHistory> value) { this.Results = value; return this; }
-    }
-
-    public static class GetTechnologyStackFavoriteDetailsResponse
-    {
-        public ArrayList<String> Users = null;
-        public Integer FavoriteCount = null;
-        
-        public ArrayList<String> getUsers() { return Users; }
-        public GetTechnologyStackFavoriteDetailsResponse setUsers(ArrayList<String> value) { this.Users = value; return this; }
-        public Integer getFavoriteCount() { return FavoriteCount; }
-        public GetTechnologyStackFavoriteDetailsResponse setFavoriteCount(Integer value) { this.FavoriteCount = value; return this; }
-    }
-
-    public static class GetConfigResponse
-    {
-        public ArrayList<Option> AllTiers = null;
-        
-        public ArrayList<Option> getAllTiers() { return AllTiers; }
-        public GetConfigResponse setAllTiers(ArrayList<Option> value) { this.AllTiers = value; return this; }
-    }
-
-    public static class OverviewResponse
-    {
-        public Date Created = null;
-        public ArrayList<UserInfo> TopUsers = null;
-        public ArrayList<TechnologyInfo> TopTechnologies = null;
-        public ArrayList<TechStackDetails> LatestTechStacks = null;
-        public HashMap<TechnologyTier,ArrayList<TechnologyInfo>> TopTechnologiesByTier = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Date getCreated() { return Created; }
-        public OverviewResponse setCreated(Date value) { this.Created = value; return this; }
-        public ArrayList<UserInfo> getTopUsers() { return TopUsers; }
-        public OverviewResponse setTopUsers(ArrayList<UserInfo> value) { this.TopUsers = value; return this; }
-        public ArrayList<TechnologyInfo> getTopTechnologies() { return TopTechnologies; }
-        public OverviewResponse setTopTechnologies(ArrayList<TechnologyInfo> value) { this.TopTechnologies = value; return this; }
-        public ArrayList<TechStackDetails> getLatestTechStacks() { return LatestTechStacks; }
-        public OverviewResponse setLatestTechStacks(ArrayList<TechStackDetails> value) { this.LatestTechStacks = value; return this; }
-        public HashMap<TechnologyTier,ArrayList<TechnologyInfo>> getTopTechnologiesByTier() { return TopTechnologiesByTier; }
-        public OverviewResponse setTopTechnologiesByTier(HashMap<TechnologyTier,ArrayList<TechnologyInfo>> value) { this.TopTechnologiesByTier = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public OverviewResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class AppOverviewResponse
-    {
-        public Date Created = null;
-        public ArrayList<Option> AllTiers = null;
-        public ArrayList<TechnologyInfo> TopTechnologies = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public Date getCreated() { return Created; }
-        public AppOverviewResponse setCreated(Date value) { this.Created = value; return this; }
-        public ArrayList<Option> getAllTiers() { return AllTiers; }
-        public AppOverviewResponse setAllTiers(ArrayList<Option> value) { this.AllTiers = value; return this; }
-        public ArrayList<TechnologyInfo> getTopTechnologies() { return TopTechnologies; }
-        public AppOverviewResponse setTopTechnologies(ArrayList<TechnologyInfo> value) { this.TopTechnologies = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public AppOverviewResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class GetFavoriteTechStackResponse
-    {
-        public ArrayList<TechnologyStack> Results = null;
-        
-        public ArrayList<TechnologyStack> getResults() { return Results; }
-        public GetFavoriteTechStackResponse setResults(ArrayList<TechnologyStack> value) { this.Results = value; return this; }
-    }
-
-    public static class FavoriteTechStackResponse
-    {
-        public TechnologyStack Result = null;
-        
-        public TechnologyStack getResult() { return Result; }
-        public FavoriteTechStackResponse setResult(TechnologyStack value) { this.Result = value; return this; }
-    }
-
-    public static class GetFavoriteTechnologiesResponse
-    {
-        public ArrayList<Technology> Results = null;
-        
-        public ArrayList<Technology> getResults() { return Results; }
-        public GetFavoriteTechnologiesResponse setResults(ArrayList<Technology> value) { this.Results = value; return this; }
-    }
-
-    public static class FavoriteTechnologyResponse
-    {
-        public Technology Result = null;
-        
-        public Technology getResult() { return Result; }
-        public FavoriteTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
-    }
-
-    public static class GetUserFeedResponse
-    {
-        public ArrayList<TechStackDetails> Results = null;
-        
-        public ArrayList<TechStackDetails> getResults() { return Results; }
-        public GetUserFeedResponse setResults(ArrayList<TechStackDetails> value) { this.Results = value; return this; }
-    }
-
-    public static class GetUserInfoResponse
-    {
-        public String UserName = null;
-        public Date Created = null;
-        public String AvatarUrl = null;
-        public ArrayList<TechnologyStack> TechStacks = null;
-        public ArrayList<TechnologyStack> FavoriteTechStacks = null;
-        public ArrayList<Technology> FavoriteTechnologies = null;
-        
-        public String getUserName() { return UserName; }
-        public GetUserInfoResponse setUserName(String value) { this.UserName = value; return this; }
-        public Date getCreated() { return Created; }
-        public GetUserInfoResponse setCreated(Date value) { this.Created = value; return this; }
-        public String getAvatarUrl() { return AvatarUrl; }
-        public GetUserInfoResponse setAvatarUrl(String value) { this.AvatarUrl = value; return this; }
-        public ArrayList<TechnologyStack> getTechStacks() { return TechStacks; }
-        public GetUserInfoResponse setTechStacks(ArrayList<TechnologyStack> value) { this.TechStacks = value; return this; }
-        public ArrayList<TechnologyStack> getFavoriteTechStacks() { return FavoriteTechStacks; }
-        public GetUserInfoResponse setFavoriteTechStacks(ArrayList<TechnologyStack> value) { this.FavoriteTechStacks = value; return this; }
-        public ArrayList<Technology> getFavoriteTechnologies() { return FavoriteTechnologies; }
-        public GetUserInfoResponse setFavoriteTechnologies(ArrayList<Technology> value) { this.FavoriteTechnologies = value; return this; }
-    }
-
-    @DataContract
-    public static class AuthenticateResponse
-    {
-        @DataMember(Order=1)
-        public String UserId = null;
-
-        @DataMember(Order=2)
-        public String SessionId = null;
-
-        @DataMember(Order=3)
-        public String UserName = null;
-
-        @DataMember(Order=4)
-        public String DisplayName = null;
-
-        @DataMember(Order=5)
-        public String ReferrerUrl = null;
-
-        @DataMember(Order=6)
-        public ResponseStatus ResponseStatus = null;
-
-        @DataMember(Order=7)
-        public HashMap<String,String> Meta = null;
-        
-        public String getUserId() { return UserId; }
-        public AuthenticateResponse setUserId(String value) { this.UserId = value; return this; }
-        public String getSessionId() { return SessionId; }
-        public AuthenticateResponse setSessionId(String value) { this.SessionId = value; return this; }
-        public String getUserName() { return UserName; }
-        public AuthenticateResponse setUserName(String value) { this.UserName = value; return this; }
-        public String getDisplayName() { return DisplayName; }
-        public AuthenticateResponse setDisplayName(String value) { this.DisplayName = value; return this; }
-        public String getReferrerUrl() { return ReferrerUrl; }
-        public AuthenticateResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public AuthenticateResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public AuthenticateResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-    }
-
-    public static class AssignRolesResponse
-    {
-        public ArrayList<String> AllRoles = null;
-        public ArrayList<String> AllPermissions = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public ArrayList<String> getAllRoles() { return AllRoles; }
-        public AssignRolesResponse setAllRoles(ArrayList<String> value) { this.AllRoles = value; return this; }
-        public ArrayList<String> getAllPermissions() { return AllPermissions; }
-        public AssignRolesResponse setAllPermissions(ArrayList<String> value) { this.AllPermissions = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public AssignRolesResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class UnAssignRolesResponse
-    {
-        public ArrayList<String> AllRoles = null;
-        public ArrayList<String> AllPermissions = null;
-        public ResponseStatus ResponseStatus = null;
-        
-        public ArrayList<String> getAllRoles() { return AllRoles; }
-        public UnAssignRolesResponse setAllRoles(ArrayList<String> value) { this.AllRoles = value; return this; }
-        public ArrayList<String> getAllPermissions() { return AllPermissions; }
-        public UnAssignRolesResponse setAllPermissions(ArrayList<String> value) { this.AllPermissions = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public UnAssignRolesResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
 
     @Route("/admin/technology/{TechnologyId}/logo")
     public static class LogoUrlApproval implements IReturn<LogoUrlApprovalResponse>
@@ -1102,6 +414,20 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route("/pagestats/{Type}/{Slug}")
+    public static class GetPageStats implements IReturn<GetPageStatsResponse>
+    {
+        public String Type = null;
+        public String Slug = null;
+        
+        public String getType() { return Type; }
+        public GetPageStats setType(String value) { this.Type = value; return this; }
+        public String getSlug() { return Slug; }
+        public GetPageStats setSlug(String value) { this.Slug = value; return this; }
+        private static Object responseType = GetPageStatsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route("/techstacks/search")
     @AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")
     public static class FindTechStacks extends QueryBase_1<TechnologyStack> implements IReturn<QueryResponse<TechnologyStack>>
@@ -1289,10 +615,16 @@ public class dto
     }
 
     @Route("/assignroles")
+    @DataContract
     public static class AssignRoles implements IReturn<AssignRolesResponse>
     {
+        @DataMember(Order=1)
         public String UserName = null;
+
+        @DataMember(Order=2)
         public ArrayList<String> Permissions = null;
+
+        @DataMember(Order=3)
         public ArrayList<String> Roles = null;
         
         public String getUserName() { return UserName; }
@@ -1306,10 +638,16 @@ public class dto
     }
 
     @Route("/unassignroles")
+    @DataContract
     public static class UnAssignRoles implements IReturn<UnAssignRolesResponse>
     {
+        @DataMember(Order=1)
         public String UserName = null;
+
+        @DataMember(Order=2)
         public ArrayList<String> Permissions = null;
+
+        @DataMember(Order=3)
         public ArrayList<String> Roles = null;
         
         public String getUserName() { return UserName; }
@@ -1322,12 +660,684 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @Route("/posts")
-    public static class QueryPosts extends QueryBase_1<Post> implements IReturn<QueryResponse<Post>>
+    public static class LogoUrlApprovalResponse
+    {
+        public Technology Result = null;
+        
+        public Technology getResult() { return Result; }
+        public LogoUrlApprovalResponse setResult(Technology value) { this.Result = value; return this; }
+    }
+
+    public static class LockStackResponse
     {
         
-        private static Object responseType = new TypeToken<QueryResponse<Post>>(){}.getType();
-        public Object getResponseType() { return responseType; }
+    }
+
+    public static class CreateTechnologyResponse
+    {
+        public Technology Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Technology getResult() { return Result; }
+        public CreateTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public CreateTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class UpdateTechnologyResponse
+    {
+        public Technology Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Technology getResult() { return Result; }
+        public UpdateTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public UpdateTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class DeleteTechnologyResponse
+    {
+        public Technology Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Technology getResult() { return Result; }
+        public DeleteTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public DeleteTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class GetTechnologyResponse
+    {
+        public Date Created = null;
+        public Technology Technology = null;
+        public ArrayList<TechnologyStack> TechnologyStacks = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Date getCreated() { return Created; }
+        public GetTechnologyResponse setCreated(Date value) { this.Created = value; return this; }
+        public Technology getTechnology() { return Technology; }
+        public GetTechnologyResponse setTechnology(Technology value) { this.Technology = value; return this; }
+        public ArrayList<TechnologyStack> getTechnologyStacks() { return TechnologyStacks; }
+        public GetTechnologyResponse setTechnologyStacks(ArrayList<TechnologyStack> value) { this.TechnologyStacks = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public GetTechnologyResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class GetTechnologyPreviousVersionsResponse
+    {
+        public ArrayList<TechnologyHistory> Results = null;
+        
+        public ArrayList<TechnologyHistory> getResults() { return Results; }
+        public GetTechnologyPreviousVersionsResponse setResults(ArrayList<TechnologyHistory> value) { this.Results = value; return this; }
+    }
+
+    public static class GetTechnologyFavoriteDetailsResponse
+    {
+        public ArrayList<String> Users = null;
+        public Integer FavoriteCount = null;
+        
+        public ArrayList<String> getUsers() { return Users; }
+        public GetTechnologyFavoriteDetailsResponse setUsers(ArrayList<String> value) { this.Users = value; return this; }
+        public Integer getFavoriteCount() { return FavoriteCount; }
+        public GetTechnologyFavoriteDetailsResponse setFavoriteCount(Integer value) { this.FavoriteCount = value; return this; }
+    }
+
+    public static class GetAllTechnologiesResponse
+    {
+        public ArrayList<Technology> Results = null;
+        
+        public ArrayList<Technology> getResults() { return Results; }
+        public GetAllTechnologiesResponse setResults(ArrayList<Technology> value) { this.Results = value; return this; }
+    }
+
+    @DataContract
+    public static class QueryResponse<T>
+    {
+        @DataMember(Order=1)
+        public Integer Offset = null;
+
+        @DataMember(Order=2)
+        public Integer Total = null;
+
+        @DataMember(Order=3)
+        public ArrayList<T> Results = null;
+
+        @DataMember(Order=4)
+        public HashMap<String,String> Meta = null;
+
+        @DataMember(Order=5)
+        public ResponseStatus ResponseStatus = null;
+        
+        public Integer getOffset() { return Offset; }
+        public QueryResponse<T> setOffset(Integer value) { this.Offset = value; return this; }
+        public Integer getTotal() { return Total; }
+        public QueryResponse<T> setTotal(Integer value) { this.Total = value; return this; }
+        public ArrayList<T> getResults() { return Results; }
+        public QueryResponse<T> setResults(ArrayList<T> value) { this.Results = value; return this; }
+        public HashMap<String,String> getMeta() { return Meta; }
+        public QueryResponse<T> setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public QueryResponse<T> setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class CreateTechnologyStackResponse
+    {
+        public TechStackDetails Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public TechStackDetails getResult() { return Result; }
+        public CreateTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public CreateTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class UpdateTechnologyStackResponse
+    {
+        public TechStackDetails Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public TechStackDetails getResult() { return Result; }
+        public UpdateTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public UpdateTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class DeleteTechnologyStackResponse
+    {
+        public TechStackDetails Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public TechStackDetails getResult() { return Result; }
+        public DeleteTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public DeleteTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class GetAllTechnologyStacksResponse
+    {
+        public ArrayList<TechnologyStack> Results = null;
+        
+        public ArrayList<TechnologyStack> getResults() { return Results; }
+        public GetAllTechnologyStacksResponse setResults(ArrayList<TechnologyStack> value) { this.Results = value; return this; }
+    }
+
+    public static class GetTechnologyStackResponse
+    {
+        public Date Created = null;
+        public TechStackDetails Result = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Date getCreated() { return Created; }
+        public GetTechnologyStackResponse setCreated(Date value) { this.Created = value; return this; }
+        public TechStackDetails getResult() { return Result; }
+        public GetTechnologyStackResponse setResult(TechStackDetails value) { this.Result = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public GetTechnologyStackResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class GetTechnologyStackPreviousVersionsResponse
+    {
+        public ArrayList<TechnologyStackHistory> Results = null;
+        
+        public ArrayList<TechnologyStackHistory> getResults() { return Results; }
+        public GetTechnologyStackPreviousVersionsResponse setResults(ArrayList<TechnologyStackHistory> value) { this.Results = value; return this; }
+    }
+
+    public static class GetTechnologyStackFavoriteDetailsResponse
+    {
+        public ArrayList<String> Users = null;
+        public Integer FavoriteCount = null;
+        
+        public ArrayList<String> getUsers() { return Users; }
+        public GetTechnologyStackFavoriteDetailsResponse setUsers(ArrayList<String> value) { this.Users = value; return this; }
+        public Integer getFavoriteCount() { return FavoriteCount; }
+        public GetTechnologyStackFavoriteDetailsResponse setFavoriteCount(Integer value) { this.FavoriteCount = value; return this; }
+    }
+
+    public static class GetConfigResponse
+    {
+        public ArrayList<Option> AllTiers = null;
+        
+        public ArrayList<Option> getAllTiers() { return AllTiers; }
+        public GetConfigResponse setAllTiers(ArrayList<Option> value) { this.AllTiers = value; return this; }
+    }
+
+    public static class OverviewResponse
+    {
+        public Date Created = null;
+        public ArrayList<UserInfo> TopUsers = null;
+        public ArrayList<TechnologyInfo> TopTechnologies = null;
+        public ArrayList<TechStackDetails> LatestTechStacks = null;
+        public ArrayList<TechnologyStack> PopularTechStacks = null;
+        public HashMap<TechnologyTier,ArrayList<TechnologyInfo>> TopTechnologiesByTier = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Date getCreated() { return Created; }
+        public OverviewResponse setCreated(Date value) { this.Created = value; return this; }
+        public ArrayList<UserInfo> getTopUsers() { return TopUsers; }
+        public OverviewResponse setTopUsers(ArrayList<UserInfo> value) { this.TopUsers = value; return this; }
+        public ArrayList<TechnologyInfo> getTopTechnologies() { return TopTechnologies; }
+        public OverviewResponse setTopTechnologies(ArrayList<TechnologyInfo> value) { this.TopTechnologies = value; return this; }
+        public ArrayList<TechStackDetails> getLatestTechStacks() { return LatestTechStacks; }
+        public OverviewResponse setLatestTechStacks(ArrayList<TechStackDetails> value) { this.LatestTechStacks = value; return this; }
+        public ArrayList<TechnologyStack> getPopularTechStacks() { return PopularTechStacks; }
+        public OverviewResponse setPopularTechStacks(ArrayList<TechnologyStack> value) { this.PopularTechStacks = value; return this; }
+        public HashMap<TechnologyTier,ArrayList<TechnologyInfo>> getTopTechnologiesByTier() { return TopTechnologiesByTier; }
+        public OverviewResponse setTopTechnologiesByTier(HashMap<TechnologyTier,ArrayList<TechnologyInfo>> value) { this.TopTechnologiesByTier = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public OverviewResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class AppOverviewResponse
+    {
+        public Date Created = null;
+        public ArrayList<Option> AllTiers = null;
+        public ArrayList<TechnologyInfo> TopTechnologies = null;
+        public ResponseStatus ResponseStatus = null;
+        
+        public Date getCreated() { return Created; }
+        public AppOverviewResponse setCreated(Date value) { this.Created = value; return this; }
+        public ArrayList<Option> getAllTiers() { return AllTiers; }
+        public AppOverviewResponse setAllTiers(ArrayList<Option> value) { this.AllTiers = value; return this; }
+        public ArrayList<TechnologyInfo> getTopTechnologies() { return TopTechnologies; }
+        public AppOverviewResponse setTopTechnologies(ArrayList<TechnologyInfo> value) { this.TopTechnologies = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public AppOverviewResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class GetPageStatsResponse
+    {
+        public String Type = null;
+        public String Slug = null;
+        public Long ViewCount = null;
+        public Long FavCount = null;
+        
+        public String getType() { return Type; }
+        public GetPageStatsResponse setType(String value) { this.Type = value; return this; }
+        public String getSlug() { return Slug; }
+        public GetPageStatsResponse setSlug(String value) { this.Slug = value; return this; }
+        public Long getViewCount() { return ViewCount; }
+        public GetPageStatsResponse setViewCount(Long value) { this.ViewCount = value; return this; }
+        public Long getFavCount() { return FavCount; }
+        public GetPageStatsResponse setFavCount(Long value) { this.FavCount = value; return this; }
+    }
+
+    public static class GetFavoriteTechStackResponse
+    {
+        public ArrayList<TechnologyStack> Results = null;
+        
+        public ArrayList<TechnologyStack> getResults() { return Results; }
+        public GetFavoriteTechStackResponse setResults(ArrayList<TechnologyStack> value) { this.Results = value; return this; }
+    }
+
+    public static class FavoriteTechStackResponse
+    {
+        public TechnologyStack Result = null;
+        
+        public TechnologyStack getResult() { return Result; }
+        public FavoriteTechStackResponse setResult(TechnologyStack value) { this.Result = value; return this; }
+    }
+
+    public static class GetFavoriteTechnologiesResponse
+    {
+        public ArrayList<Technology> Results = null;
+        
+        public ArrayList<Technology> getResults() { return Results; }
+        public GetFavoriteTechnologiesResponse setResults(ArrayList<Technology> value) { this.Results = value; return this; }
+    }
+
+    public static class FavoriteTechnologyResponse
+    {
+        public Technology Result = null;
+        
+        public Technology getResult() { return Result; }
+        public FavoriteTechnologyResponse setResult(Technology value) { this.Result = value; return this; }
+    }
+
+    public static class GetUserFeedResponse
+    {
+        public ArrayList<TechStackDetails> Results = null;
+        
+        public ArrayList<TechStackDetails> getResults() { return Results; }
+        public GetUserFeedResponse setResults(ArrayList<TechStackDetails> value) { this.Results = value; return this; }
+    }
+
+    public static class GetUserInfoResponse
+    {
+        public String UserName = null;
+        public Date Created = null;
+        public String AvatarUrl = null;
+        public ArrayList<TechnologyStack> TechStacks = null;
+        public ArrayList<TechnologyStack> FavoriteTechStacks = null;
+        public ArrayList<Technology> FavoriteTechnologies = null;
+        
+        public String getUserName() { return UserName; }
+        public GetUserInfoResponse setUserName(String value) { this.UserName = value; return this; }
+        public Date getCreated() { return Created; }
+        public GetUserInfoResponse setCreated(Date value) { this.Created = value; return this; }
+        public String getAvatarUrl() { return AvatarUrl; }
+        public GetUserInfoResponse setAvatarUrl(String value) { this.AvatarUrl = value; return this; }
+        public ArrayList<TechnologyStack> getTechStacks() { return TechStacks; }
+        public GetUserInfoResponse setTechStacks(ArrayList<TechnologyStack> value) { this.TechStacks = value; return this; }
+        public ArrayList<TechnologyStack> getFavoriteTechStacks() { return FavoriteTechStacks; }
+        public GetUserInfoResponse setFavoriteTechStacks(ArrayList<TechnologyStack> value) { this.FavoriteTechStacks = value; return this; }
+        public ArrayList<Technology> getFavoriteTechnologies() { return FavoriteTechnologies; }
+        public GetUserInfoResponse setFavoriteTechnologies(ArrayList<Technology> value) { this.FavoriteTechnologies = value; return this; }
+    }
+
+    @DataContract
+    public static class AuthenticateResponse
+    {
+        @DataMember(Order=1)
+        public String UserId = null;
+
+        @DataMember(Order=2)
+        public String SessionId = null;
+
+        @DataMember(Order=3)
+        public String UserName = null;
+
+        @DataMember(Order=4)
+        public String DisplayName = null;
+
+        @DataMember(Order=5)
+        public String ReferrerUrl = null;
+
+        @DataMember(Order=6)
+        public ResponseStatus ResponseStatus = null;
+
+        @DataMember(Order=7)
+        public HashMap<String,String> Meta = null;
+        
+        public String getUserId() { return UserId; }
+        public AuthenticateResponse setUserId(String value) { this.UserId = value; return this; }
+        public String getSessionId() { return SessionId; }
+        public AuthenticateResponse setSessionId(String value) { this.SessionId = value; return this; }
+        public String getUserName() { return UserName; }
+        public AuthenticateResponse setUserName(String value) { this.UserName = value; return this; }
+        public String getDisplayName() { return DisplayName; }
+        public AuthenticateResponse setDisplayName(String value) { this.DisplayName = value; return this; }
+        public String getReferrerUrl() { return ReferrerUrl; }
+        public AuthenticateResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public AuthenticateResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+        public HashMap<String,String> getMeta() { return Meta; }
+        public AuthenticateResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
+    }
+
+    @DataContract
+    public static class AssignRolesResponse
+    {
+        @DataMember(Order=1)
+        public ArrayList<String> AllRoles = null;
+
+        @DataMember(Order=2)
+        public ArrayList<String> AllPermissions = null;
+
+        @DataMember(Order=3)
+        public ResponseStatus ResponseStatus = null;
+        
+        public ArrayList<String> getAllRoles() { return AllRoles; }
+        public AssignRolesResponse setAllRoles(ArrayList<String> value) { this.AllRoles = value; return this; }
+        public ArrayList<String> getAllPermissions() { return AllPermissions; }
+        public AssignRolesResponse setAllPermissions(ArrayList<String> value) { this.AllPermissions = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public AssignRolesResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    @DataContract
+    public static class UnAssignRolesResponse
+    {
+        @DataMember(Order=1)
+        public ArrayList<String> AllRoles = null;
+
+        @DataMember(Order=2)
+        public ArrayList<String> AllPermissions = null;
+
+        @DataMember(Order=3)
+        public ResponseStatus ResponseStatus = null;
+        
+        public ArrayList<String> getAllRoles() { return AllRoles; }
+        public UnAssignRolesResponse setAllRoles(ArrayList<String> value) { this.AllRoles = value; return this; }
+        public ArrayList<String> getAllPermissions() { return AllPermissions; }
+        public UnAssignRolesResponse setAllPermissions(ArrayList<String> value) { this.AllPermissions = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public UnAssignRolesResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class Technology extends TechnologyBase
+    {
+        
+    }
+
+    public static enum TechnologyTier
+    {
+        ProgrammingLanguage,
+        Client,
+        Http,
+        Server,
+        Data,
+        SoftwareInfrastructure,
+        OperatingSystem,
+        HardwareInfrastructure,
+        ThirdPartyServices;
+    }
+
+    public static class TechnologyStack extends TechnologyStackBase
+    {
+        
+    }
+
+    public static class TechnologyHistory extends TechnologyBase
+    {
+        public Long TechnologyId = null;
+        public String Operation = null;
+        
+        public Long getTechnologyId() { return TechnologyId; }
+        public TechnologyHistory setTechnologyId(Long value) { this.TechnologyId = value; return this; }
+        public String getOperation() { return Operation; }
+        public TechnologyHistory setOperation(String value) { this.Operation = value; return this; }
+    }
+
+    public static class QueryBase_1<T> extends QueryBase
+    {
+        
+    }
+
+    public static class TechStackDetails extends TechnologyStackBase
+    {
+        public String DetailsHtml = null;
+        public ArrayList<TechnologyInStack> TechnologyChoices = null;
+        
+        public String getDetailsHtml() { return DetailsHtml; }
+        public TechStackDetails setDetailsHtml(String value) { this.DetailsHtml = value; return this; }
+        public ArrayList<TechnologyInStack> getTechnologyChoices() { return TechnologyChoices; }
+        public TechStackDetails setTechnologyChoices(ArrayList<TechnologyInStack> value) { this.TechnologyChoices = value; return this; }
+    }
+
+    public static class TechnologyStackHistory extends TechnologyStackBase
+    {
+        public Long TechnologyStackId = null;
+        public String Operation = null;
+        public ArrayList<Long> TechnologyIds = null;
+        
+        public Long getTechnologyStackId() { return TechnologyStackId; }
+        public TechnologyStackHistory setTechnologyStackId(Long value) { this.TechnologyStackId = value; return this; }
+        public String getOperation() { return Operation; }
+        public TechnologyStackHistory setOperation(String value) { this.Operation = value; return this; }
+        public ArrayList<Long> getTechnologyIds() { return TechnologyIds; }
+        public TechnologyStackHistory setTechnologyIds(ArrayList<Long> value) { this.TechnologyIds = value; return this; }
+    }
+
+    @DataContract
+    public static class Option
+    {
+        @DataMember(Name="name")
+        @SerializedName("name")
+        public String Name = null;
+
+        @DataMember(Name="title")
+        @SerializedName("title")
+        public String Title = null;
+
+        @DataMember(Name="value")
+        @SerializedName("value")
+        public TechnologyTier Value = null;
+        
+        public String getName() { return Name; }
+        public Option setName(String value) { this.Name = value; return this; }
+        public String getTitle() { return Title; }
+        public Option setTitle(String value) { this.Title = value; return this; }
+        public TechnologyTier getValue() { return Value; }
+        public Option setValue(TechnologyTier value) { this.Value = value; return this; }
+    }
+
+    public static class UserInfo
+    {
+        public String UserName = null;
+        public String AvatarUrl = null;
+        public Integer StacksCount = null;
+        
+        public String getUserName() { return UserName; }
+        public UserInfo setUserName(String value) { this.UserName = value; return this; }
+        public String getAvatarUrl() { return AvatarUrl; }
+        public UserInfo setAvatarUrl(String value) { this.AvatarUrl = value; return this; }
+        public Integer getStacksCount() { return StacksCount; }
+        public UserInfo setStacksCount(Integer value) { this.StacksCount = value; return this; }
+    }
+
+    public static class TechnologyInfo
+    {
+        public TechnologyTier Tier = null;
+        public String Slug = null;
+        public String Name = null;
+        public String LogoUrl = null;
+        public Integer StacksCount = null;
+        
+        public TechnologyTier getTier() { return Tier; }
+        public TechnologyInfo setTier(TechnologyTier value) { this.Tier = value; return this; }
+        public String getSlug() { return Slug; }
+        public TechnologyInfo setSlug(String value) { this.Slug = value; return this; }
+        public String getName() { return Name; }
+        public TechnologyInfo setName(String value) { this.Name = value; return this; }
+        public String getLogoUrl() { return LogoUrl; }
+        public TechnologyInfo setLogoUrl(String value) { this.LogoUrl = value; return this; }
+        public Integer getStacksCount() { return StacksCount; }
+        public TechnologyInfo setStacksCount(Integer value) { this.StacksCount = value; return this; }
+    }
+
+    public static class TechnologyBase
+    {
+        public Long Id = null;
+        public String Name = null;
+        public String VendorName = null;
+        public String VendorUrl = null;
+        public String ProductUrl = null;
+        public String LogoUrl = null;
+        public String Description = null;
+        public Date Created = null;
+        public String CreatedBy = null;
+        public Date LastModified = null;
+        public String LastModifiedBy = null;
+        public String OwnerId = null;
+        public String Slug = null;
+        public Boolean LogoApproved = null;
+        public Boolean IsLocked = null;
+        public TechnologyTier Tier = null;
+        public Date LastStatusUpdate = null;
+        
+        public Long getId() { return Id; }
+        public TechnologyBase setId(Long value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public TechnologyBase setName(String value) { this.Name = value; return this; }
+        public String getVendorName() { return VendorName; }
+        public TechnologyBase setVendorName(String value) { this.VendorName = value; return this; }
+        public String getVendorUrl() { return VendorUrl; }
+        public TechnologyBase setVendorUrl(String value) { this.VendorUrl = value; return this; }
+        public String getProductUrl() { return ProductUrl; }
+        public TechnologyBase setProductUrl(String value) { this.ProductUrl = value; return this; }
+        public String getLogoUrl() { return LogoUrl; }
+        public TechnologyBase setLogoUrl(String value) { this.LogoUrl = value; return this; }
+        public String getDescription() { return Description; }
+        public TechnologyBase setDescription(String value) { this.Description = value; return this; }
+        public Date getCreated() { return Created; }
+        public TechnologyBase setCreated(Date value) { this.Created = value; return this; }
+        public String getCreatedBy() { return CreatedBy; }
+        public TechnologyBase setCreatedBy(String value) { this.CreatedBy = value; return this; }
+        public Date getLastModified() { return LastModified; }
+        public TechnologyBase setLastModified(Date value) { this.LastModified = value; return this; }
+        public String getLastModifiedBy() { return LastModifiedBy; }
+        public TechnologyBase setLastModifiedBy(String value) { this.LastModifiedBy = value; return this; }
+        public String getOwnerId() { return OwnerId; }
+        public TechnologyBase setOwnerId(String value) { this.OwnerId = value; return this; }
+        public String getSlug() { return Slug; }
+        public TechnologyBase setSlug(String value) { this.Slug = value; return this; }
+        public Boolean isLogoApproved() { return LogoApproved; }
+        public TechnologyBase setLogoApproved(Boolean value) { this.LogoApproved = value; return this; }
+        public Boolean getIsLocked() { return IsLocked; }
+        public TechnologyBase setIsLocked(Boolean value) { this.IsLocked = value; return this; }
+        public TechnologyTier getTier() { return Tier; }
+        public TechnologyBase setTier(TechnologyTier value) { this.Tier = value; return this; }
+        public Date getLastStatusUpdate() { return LastStatusUpdate; }
+        public TechnologyBase setLastStatusUpdate(Date value) { this.LastStatusUpdate = value; return this; }
+    }
+
+    public static class TechnologyStackBase
+    {
+        public Long Id = null;
+        public String Name = null;
+        public String VendorName = null;
+        public String Description = null;
+        public String AppUrl = null;
+        public String ScreenshotUrl = null;
+        public Date Created = null;
+        public String CreatedBy = null;
+        public Date LastModified = null;
+        public String LastModifiedBy = null;
+        public Boolean IsLocked = null;
+        public String OwnerId = null;
+        public String Slug = null;
+        public String Details = null;
+        public Date LastStatusUpdate = null;
+        
+        public Long getId() { return Id; }
+        public TechnologyStackBase setId(Long value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public TechnologyStackBase setName(String value) { this.Name = value; return this; }
+        public String getVendorName() { return VendorName; }
+        public TechnologyStackBase setVendorName(String value) { this.VendorName = value; return this; }
+        public String getDescription() { return Description; }
+        public TechnologyStackBase setDescription(String value) { this.Description = value; return this; }
+        public String getAppUrl() { return AppUrl; }
+        public TechnologyStackBase setAppUrl(String value) { this.AppUrl = value; return this; }
+        public String getScreenshotUrl() { return ScreenshotUrl; }
+        public TechnologyStackBase setScreenshotUrl(String value) { this.ScreenshotUrl = value; return this; }
+        public Date getCreated() { return Created; }
+        public TechnologyStackBase setCreated(Date value) { this.Created = value; return this; }
+        public String getCreatedBy() { return CreatedBy; }
+        public TechnologyStackBase setCreatedBy(String value) { this.CreatedBy = value; return this; }
+        public Date getLastModified() { return LastModified; }
+        public TechnologyStackBase setLastModified(Date value) { this.LastModified = value; return this; }
+        public String getLastModifiedBy() { return LastModifiedBy; }
+        public TechnologyStackBase setLastModifiedBy(String value) { this.LastModifiedBy = value; return this; }
+        public Boolean getIsLocked() { return IsLocked; }
+        public TechnologyStackBase setIsLocked(Boolean value) { this.IsLocked = value; return this; }
+        public String getOwnerId() { return OwnerId; }
+        public TechnologyStackBase setOwnerId(String value) { this.OwnerId = value; return this; }
+        public String getSlug() { return Slug; }
+        public TechnologyStackBase setSlug(String value) { this.Slug = value; return this; }
+        public String getDetails() { return Details; }
+        public TechnologyStackBase setDetails(String value) { this.Details = value; return this; }
+        public Date getLastStatusUpdate() { return LastStatusUpdate; }
+        public TechnologyStackBase setLastStatusUpdate(Date value) { this.LastStatusUpdate = value; return this; }
+    }
+
+    public static class QueryBase
+    {
+        @DataMember(Order=1)
+        public Integer Skip = null;
+
+        @DataMember(Order=2)
+        public Integer Take = null;
+
+        @DataMember(Order=3)
+        public String OrderBy = null;
+
+        @DataMember(Order=4)
+        public String OrderByDesc = null;
+
+        @DataMember(Order=5)
+        public String Include = null;
+
+        @DataMember(Order=6)
+        public HashMap<String,String> Meta = null;
+        
+        public Integer getSkip() { return Skip; }
+        public QueryBase setSkip(Integer value) { this.Skip = value; return this; }
+        public Integer getTake() { return Take; }
+        public QueryBase setTake(Integer value) { this.Take = value; return this; }
+        public String getOrderBy() { return OrderBy; }
+        public QueryBase setOrderBy(String value) { this.OrderBy = value; return this; }
+        public String getOrderByDesc() { return OrderByDesc; }
+        public QueryBase setOrderByDesc(String value) { this.OrderByDesc = value; return this; }
+        public String getInclude() { return Include; }
+        public QueryBase setInclude(String value) { this.Include = value; return this; }
+        public HashMap<String,String> getMeta() { return Meta; }
+        public QueryBase setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
+    }
+
+    public static class TechnologyInStack extends TechnologyBase
+    {
+        public Long TechnologyId = null;
+        public Long TechnologyStackId = null;
+        public String Justification = null;
+        
+        public Long getTechnologyId() { return TechnologyId; }
+        public TechnologyInStack setTechnologyId(Long value) { this.TechnologyId = value; return this; }
+        public Long getTechnologyStackId() { return TechnologyStackId; }
+        public TechnologyInStack setTechnologyStackId(Long value) { this.TechnologyStackId = value; return this; }
+        public String getJustification() { return Justification; }
+        public TechnologyInStack setJustification(String value) { this.Justification = value; return this; }
     }
 
 }

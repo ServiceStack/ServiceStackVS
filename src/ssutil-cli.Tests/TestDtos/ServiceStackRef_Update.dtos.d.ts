@@ -1,9 +1,11 @@
 /* Options:
-Date: 2015-06-14 07:47:20
-Version: 1
+Date: 2015-12-23 23:52:32
+Version: 4.051
+Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
 //GlobalNamespace: 
+//ExportAsTypes: False
 //MakePropertiesOptional: True
 //AddServiceStackTypes: True
 //AddResponseStatus: False
@@ -56,6 +58,9 @@ declare module TechStacks.ServiceModel
 
         // @DataMember(Order=4)
         Errors?: ResponseError[];
+
+        // @DataMember(Order=5)
+        Meta?: { [index:string]: string; };
     }
 
     interface TechnologyStack extends TechnologyStackBase
@@ -114,17 +119,6 @@ declare module TechStacks.ServiceModel
         StacksCount?: number;
     }
 
-    interface Post
-    {
-        Id?: number;
-        UserId?: string;
-        UserName?: string;
-        Date?: string;
-        ShortDate?: string;
-        TextHtml?: string;
-        Comments?: PostComment[];
-    }
-
     interface TechnologyBase
     {
         Id?: number;
@@ -157,6 +151,9 @@ declare module TechStacks.ServiceModel
 
         // @DataMember(Order=3, EmitDefaultValue=false)
         Message?: string;
+
+        // @DataMember(Order=4, EmitDefaultValue=false)
+        Meta?: { [index:string]: string; };
     }
 
     interface TechnologyStackBase
@@ -191,6 +188,12 @@ declare module TechStacks.ServiceModel
 
         // @DataMember(Order=4)
         OrderByDesc?: string;
+
+        // @DataMember(Order=5)
+        Include?: string;
+
+        // @DataMember(Order=6)
+        Meta?: { [index:string]: string; };
     }
 
     interface TechnologyInStack extends TechnologyBase
@@ -198,17 +201,6 @@ declare module TechStacks.ServiceModel
         TechnologyId?: number;
         TechnologyStackId?: number;
         Justification?: string;
-    }
-
-    interface PostComment
-    {
-        Id?: number;
-        PostId?: number;
-        UserId?: string;
-        UserName?: string;
-        Date?: string;
-        ShortDate?: string;
-        TextHtml?: string;
     }
 
     interface LogoUrlApprovalResponse
@@ -333,6 +325,7 @@ declare module TechStacks.ServiceModel
         TopUsers?: UserInfo[];
         TopTechnologies?: TechnologyInfo[];
         LatestTechStacks?: TechStackDetails[];
+        PopularTechStacks?: TechnologyStack[];
         TopTechnologiesByTier?: { [index:TechnologyTier]: TechnologyInfo[]; };
         ResponseStatus?: ResponseStatus;
     }
@@ -343,6 +336,14 @@ declare module TechStacks.ServiceModel
         AllTiers?: Option[];
         TopTechnologies?: TechnologyInfo[];
         ResponseStatus?: ResponseStatus;
+    }
+
+    interface GetPageStatsResponse
+    {
+        Type?: string;
+        Slug?: string;
+        ViewCount?: number;
+        FavCount?: number;
     }
 
     interface GetFavoriteTechStackResponse
@@ -405,17 +406,29 @@ declare module TechStacks.ServiceModel
         Meta?: { [index:string]: string; };
     }
 
+    // @DataContract
     interface AssignRolesResponse
     {
+        // @DataMember(Order=1)
         AllRoles?: string[];
+
+        // @DataMember(Order=2)
         AllPermissions?: string[];
+
+        // @DataMember(Order=3)
         ResponseStatus?: ResponseStatus;
     }
 
+    // @DataContract
     interface UnAssignRolesResponse
     {
+        // @DataMember(Order=1)
         AllRoles?: string[];
+
+        // @DataMember(Order=2)
         AllPermissions?: string[];
+
+        // @DataMember(Order=3)
         ResponseStatus?: ResponseStatus;
     }
 
@@ -619,6 +632,13 @@ declare module TechStacks.ServiceModel
         Reload?: boolean;
     }
 
+    // @Route("/pagestats/{Type}/{Slug}")
+    interface GetPageStats extends IReturn<GetPageStatsResponse>
+    {
+        Type?: string;
+        Slug?: string;
+    }
+
     // @Route("/techstacks/search")
     // @AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")
     interface FindTechStacks extends QueryBase_1<TechnologyStack>, IReturn<QueryResponse<TechnologyStack>>
@@ -728,24 +748,31 @@ declare module TechStacks.ServiceModel
     }
 
     // @Route("/assignroles")
+    // @DataContract
     interface AssignRoles extends IReturn<AssignRolesResponse>
     {
+        // @DataMember(Order=1)
         UserName?: string;
+
+        // @DataMember(Order=2)
         Permissions?: string[];
+
+        // @DataMember(Order=3)
         Roles?: string[];
     }
 
     // @Route("/unassignroles")
+    // @DataContract
     interface UnAssignRoles extends IReturn<UnAssignRolesResponse>
     {
+        // @DataMember(Order=1)
         UserName?: string;
-        Permissions?: string[];
-        Roles?: string[];
-    }
 
-    // @Route("/posts")
-    interface QueryPosts extends QueryBase_1<Post>, IReturn<QueryResponse<Post>>
-    {
+        // @DataMember(Order=2)
+        Permissions?: string[];
+
+        // @DataMember(Order=3)
+        Roles?: string[];
     }
 
 }
