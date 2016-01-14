@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
 using NuGet;
 
 namespace ServiceStackVS.Common
@@ -13,6 +16,50 @@ namespace ServiceStackVS.Common
         {
             var package = packageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
             return package.Version.ToString();
+        }
+    }
+
+    public static class VsSettingsUtils
+    {
+        public static WritableSettingsStore GetWritableSettingsStore(this SVsServiceProvider vsServiceProvider)
+        {
+            var shellSettingsManager = new ShellSettingsManager(vsServiceProvider);
+            return shellSettingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
+        }
+    }
+
+    public static class WizardHelpers
+    {
+        public static string GetTemplateNameFromPath(string vsTemplatePath)
+        {
+            string result = "";
+            int lastBackSlashIndex = vsTemplatePath.LastIndexOf("\\", StringComparison.Ordinal);
+            int dotVsTemplateIndex = vsTemplatePath.IndexOf(".vstemplate", StringComparison.Ordinal);
+            result = vsTemplatePath.Substring(lastBackSlashIndex + 1, dotVsTemplateIndex - lastBackSlashIndex - 1);
+            return result;
+        }
+    }
+
+    public static class SettingsStorage
+    {
+        public const string CollectionName = "ServiceStackVS";
+        public const string OptOutPropertyName = "OptOutOfStats";
+
+        public static void InitStorageSettings(this WritableSettingsStore settingsStore)
+        {
+            if (!settingsStore.CollectionExists(CollectionName))
+            {
+                settingsStore.CreateCollection(CollectionName);
+            }
+            if (!settingsStore.PropertyExists(CollectionName, OptOutPropertyName))
+            {
+                settingsStore.SetBoolean(CollectionName, OptOutPropertyName, false);
+            }
+        }
+
+        public static bool GetOptOutStatsSetting(this WritableSettingsStore settingsStore)
+        {
+            return settingsStore.GetBoolean(CollectionName, OptOutPropertyName);
         }
     }
 }
