@@ -6,9 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ServiceStack;
-using ServiceStack.Text;
 using ServiceStackVS.NativeTypes;
-using ServiceStackVS.NativeTypes.Types;
+using ServiceStackVS.NativeTypes.Handlers;
 
 namespace ServiceStackVS.NativeTypesWizard
 {
@@ -20,16 +19,21 @@ namespace ServiceStackVS.NativeTypesWizard
         public bool AddReferenceSucceeded { get; set; }
         public string CodeTemplate { get; set; }
         public string ServerUrl { get; private set; }
-        private string suggestedFileName;
         private readonly INativeTypesHandler typesHandler;
+
+        protected bool IsTypedScriptReference { get; set; }
+        protected bool TypeScriptOnlyDefinitions { get; set; }
 
         public AddServiceStackReference(string fileName, INativeTypesHandler nativeTypesHandler)
         {
-            suggestedFileName = fileName;
             InitializeComponent();
-            FileNameTextBox.Text = suggestedFileName;
+            FileNameTextBox.Text = fileName;
             this.KeyDown += ListenForShortcutKeys;
             typesHandler = nativeTypesHandler;
+            IsTypedScriptReference = nativeTypesHandler is TypeScriptConcreteNativeTypesHandler ||
+                                     nativeTypesHandler is TypeScriptNativeTypesHandler;
+
+            TypeScriptCheckbox.Visibility = IsTypedScriptReference ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
@@ -158,7 +162,27 @@ namespace ServiceStackVS.NativeTypesWizard
                 serverUrl += typesHandler.RelativeTypesUrl + "/";
             }
 
-            return serverUrl.ToParentPath();
+            string result = serverUrl.ToParentPath();
+            if (IsTypedScriptReference)
+            {
+                result = result.AddQueryParam("ExportAsTypes", TypeScriptOnlyDefinitions ? "False" : "True");
+            }
+            return result;
+        }
+
+        private void TypeScriptCheckbox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            Handle(sender as CheckBox);
+        }
+
+        private void TypeScriptCheckbox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            Handle(sender as CheckBox);
+        }
+
+        void Handle(CheckBox checkBox)
+        {
+            TypeScriptOnlyDefinitions = checkBox.IsChecked ?? false;
         }
     }
 }

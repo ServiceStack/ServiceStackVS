@@ -37,6 +37,16 @@
             <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontSize="13.333" Margin="0,110,0,0"/>
             <TextBox x:Name="FileNameTextBox" Height="24" Margin="0,140,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ServiceReference1"
                      x:FieldModifier="public" />
+            
+            <CheckBox Content="Only TypeScript definitions"
+                      ToolTip="Include only interface definitions, untick to include exported classes as well."
+                      IsChecked="True"
+                      Name="TypeScriptCheckbox"
+                      Checked="TypeScriptCheckbox_OnChecked"
+                      Unchecked="TypeScriptCheckbox_OnUnchecked"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="419,211,0,0"></CheckBox>
 
             <ProgressBar Name="ReferenceProgressBar" Margin="0,172,10,0" IsIndeterminate="True" Value="0" Visibility="Hidden" Height="22" VerticalAlignment="Top"/>
             <ScrollViewer Margin="0,199,220,10" Name="ErrorMessageBox" Visibility="Hidden">
