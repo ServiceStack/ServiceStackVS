@@ -44,9 +44,8 @@
                       Name="TypeScriptCheckbox"
                       Checked="TypeScriptCheckbox_OnChecked"
                       Unchecked="TypeScriptCheckbox_OnUnchecked"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      Margin="419,211,0,0"></CheckBox>
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,55,45" HorizontalAlignment="Right"/>
 
             <ProgressBar Name="ReferenceProgressBar" Margin="0,172,10,0" IsIndeterminate="True" Value="0" Visibility="Hidden" Height="22" VerticalAlignment="Top"/>
             <ScrollViewer Margin="0,199,220,10" Name="ErrorMessageBox" Visibility="Hidden">
