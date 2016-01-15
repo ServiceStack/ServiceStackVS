@@ -15,16 +15,15 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid Margin="0,0,0,0">
-        <Grid Margin="10,10,8,10">
+        <Grid Margin="10,10,10,10">
             <TextBlock Height="44" 
                        Margin="10,10,10,0" 
                        TextWrapping="Wrap" 
                        Text="To generate the DTO Service Model types for a specific ServiceStack instance, enter the base URI for the remote ServiceStack server and click OK." 
                        VerticalAlignment="Top">
-
             </TextBlock>
 
-            <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontSize="13.333" Margin="0,59,0,0"/>
+            <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="0,59,0,0"/>
             <TextBox x:Name="UrlTextBox" 
                      Height="23" Margin="0,90,10,0" 
                      TextWrapping="Wrap" 
@@ -34,10 +33,10 @@
                      Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
             </TextBox>
 
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.484,0.617" FontSize="13.333" Margin="0,110,0,0"/>
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="0,110,0,0"/>
             <TextBox x:Name="FileNameTextBox" Height="24" Margin="0,140,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ServiceReference1"
                      x:FieldModifier="public" />
-            
+
             <CheckBox Content="Only TypeScript definitions"
                       ToolTip="Include only interface definitions, untick to include exported classes as well."
                       IsChecked="True"
@@ -45,11 +44,12 @@
                       Checked="TypeScriptCheckbox_OnChecked"
                       Unchecked="TypeScriptCheckbox_OnUnchecked"
                       VerticalAlignment="Bottom"
-                      Margin="0,0,55,45" HorizontalAlignment="Right"/>
+                      FontSize="13.333"
+                      Margin="10,0,0,10" HorizontalAlignment="Left"/>
 
             <ProgressBar Name="ReferenceProgressBar" Margin="0,172,10,0" IsIndeterminate="True" Value="0" Visibility="Hidden" Height="22" VerticalAlignment="Top"/>
-            <ScrollViewer Margin="0,199,220,10" Name="ErrorMessageBox" Visibility="Hidden">
-                <TextBox Margin="0,0,0,0" Name="ErrorMessage" Foreground="Red" TextWrapping="Wrap" IsReadOnly="True" IsEnabled="False"></TextBox>
+            <ScrollViewer Margin="0,172,10,37" Name="ErrorMessageBox" Visibility="Hidden">
+                <TextBox Margin="0,0,0,0" Name="ErrorMessage" Foreground="Red" TextWrapping="Wrap" IsReadOnly="True" IsEnabled="False" Height="51"></TextBox>
             </ScrollViewer>
 
             <Button Name="OkButton" Content="OK" Margin="0,0,115,8" Click="ButtonBase_OnClick" IsEnabled="False" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Bottom"/>
