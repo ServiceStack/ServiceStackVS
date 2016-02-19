@@ -211,11 +211,16 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
             try
             {
+                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 if (!NodePackageUtils.HasBowerOnPath())
                 {
-                    var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    
                     var npmFolder = Path.Combine(appDataFolder, "npm");
                     npmFolder.AddToPathEnvironmentVariable();
+                }
+                if (!File.Exists(Path.Combine(appDataFolder, "bower.json")))
+                {
+                    return;
                 }
                 UpdateStatusMessage("Downloading bower depedencies...");
                 NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>

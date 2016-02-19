@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "postinstall": "dir"
+  },
+  "jspm": {
+    "registry": "npm",
+    "dependencies": {
+      "react": "^0.14.7",
+      "react-dom": "^0.14.7"
+    },
+    "devDependencies": {
+      "jspm": "^0.16.29"
+    }
+  },
+  "devDependencies": {
+    "jspm": "^0.16.29",
+    "gulp": "^3.9.0",
+    "gulp-tslint": "^3.2.0"
+  }
+}
