@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "postinstall": "dir"
+    "postinstall": "jspm install && typings install"
   },
   "jspm": {
     "registry": "npm",
