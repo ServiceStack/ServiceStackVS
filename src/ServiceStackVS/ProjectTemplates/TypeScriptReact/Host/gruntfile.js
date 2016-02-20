@@ -21,6 +21,8 @@ module.exports = function (grunt) {
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
+    var jspmBuild = require('gulp-jspm');
+    var rename = require('gulp-rename');
 
     var webRoot = 'wwwroot/';
     var webBuildDir = grunt.option('serviceStackSettingsDir') || './wwwroot_build/';
@@ -177,8 +179,17 @@ module.exports = function (grunt) {
                     .pipe(htmlBuild({
                         bootstrapCss: function (block) {
                             pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />');
+                        },
+                        appbundle: function(block) {
+                            pipeTemplate(block, '<script src="/build.js"></script>'); // file comes from 'wwwroot-jspm-build' task below
                         }
                     }))
+                    .pipe(gulp.dest(webRoot));
+            },
+            'wwwroot-jspm-build': function () {
+                return gulp.src('./app.js')
+                    .pipe(jspmBuild())
+                    .pipe(rename('build.js'))
                     .pipe(gulp.dest(webRoot));
             },
             'wwwroot-copy-appjs': function() {
@@ -219,8 +230,7 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
         'gulp:wwwroot-bundle-html',
-        'gulp:wwwroot-copy-components',
-        'gulp:wwwroot-copy-appjs'
+        'gulp:wwwroot-jspm-build'
     ]);
 
     grunt.registerTask('build', ['01-package-server', '02-package-client']);
