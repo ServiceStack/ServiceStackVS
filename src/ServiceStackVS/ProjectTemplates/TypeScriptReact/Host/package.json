@@ -1,12 +1,15 @@
 {
   "scripts": {
-    "postinstall": "jspm install && typings install"
+    "postinstall": "jspm install && typings install && jspm bundle deps deps.lib.js"
   },
   "jspm": {
     "registry": "npm",
     "dependencies": {
+      "es6-shim": "github:es-shims/es6-shim@^0.34.1",
+      "jquery": "^2.2.0",
       "react": "^0.14.7",
-      "react-dom": "^0.14.7"
+      "react-dom": "^0.14.7",
+      "ss-utils": "^0.1.2"
     },
     "devDependencies": {
       "jspm": "^0.16.29"
