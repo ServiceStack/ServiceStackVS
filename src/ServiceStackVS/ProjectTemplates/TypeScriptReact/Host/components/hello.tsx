@@ -31,9 +31,9 @@ export default class HelloWorld extends React.Component<any, any> {
     }
 
     render() {
-        return <div>
-                <input type="text" value={this.state.value} onChange={this.update.bind(this)} />
-                <span>{this.state.yourName}</span>
+        return <div className="form-group">
+                <input type="text" placeholder="Your name" value={this.state.value} onChange={this.update.bind(this)} className="form-control" />
+                <h3>{this.state.yourName}</h3>
             </div>;
     }
 }
