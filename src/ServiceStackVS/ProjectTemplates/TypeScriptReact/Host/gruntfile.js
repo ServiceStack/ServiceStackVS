@@ -67,14 +67,6 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        karma: {
-            unit: {
-                configFile: 'tests/karma.conf.js',
-                singleRun: true,
-                browsers: ['PhantomJS'],
-                logLevel: 'ERROR'
-            }
-        },
         msbuild: {
             release: {
                 src: ['$safeprojectname$.csproj'],
@@ -165,41 +157,13 @@ module.exports = function (grunt) {
                     '!wwwroot/appsettings.txt' //Don't delete deploy settings
                 ], done);
             },
-            'wwwroot-copy-partials': function () {
-                var partialsDest = webRoot + 'partials';
-                return gulp.src('partials/**/*.html')
-                    .pipe(newer(partialsDest))
-                    .pipe(gulp.dest(partialsDest));
-            },
             'wwwroot-copy-fonts': function () {
-                return gulp.src('./bower_components/bootstrap/dist/fonts/*.*')
+                return gulp.src('./jspm_packages/npm/bootstrap@3.2.0/fonts/*.*')
                     .pipe(gulp.dest(webRoot + 'lib/fonts/'));
             },
             'wwwroot-copy-images': function () {
                 return gulp.src('./img/**/*')
                     .pipe(gulp.dest(webRoot + 'img/'));
-            },
-            'wwwroot-bundle': function () {
-                var assets = useref.assets({ searchPath: './' });
-
-                return gulp.src('./**/*.cshtml')
-                    .pipe(assets)
-                    .pipe(gulpif('*.js', uglify()))
-                    .pipe(gulpif('*.css', minifyCss()))
-                    .pipe(assets.restore())
-                    .pipe(useref())
-                    .pipe(htmlBuild({
-                        jqueryCdn: function (block) {
-                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
-                        },
-                        bootstrapCss: function (block) {
-                            pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />');
-                        },
-                        bootstrapJs: function (block) {
-                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>');
-                        }
-                    }))
-                    .pipe(gulp.dest(webRoot));
             },
             'wwwroot-bundle-html': function () {
                 var assets = useref.assets({ searchPath: './' });
@@ -211,14 +175,8 @@ module.exports = function (grunt) {
                     .pipe(assets.restore())
                     .pipe(useref())
                     .pipe(htmlBuild({
-                        jqueryCdn: function (block) {
-                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
-                        },
                         bootstrapCss: function (block) {
-                            pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />');
-                        },
-                        bootstrapJs: function (block) {
-                            pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>');
+                            pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />');
                         }
                     }))
                     .pipe(gulp.dest(webRoot));
@@ -231,14 +189,12 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('ssvs-utils');
     grunt.loadNpmTasks('grunt-gulp');
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
 
-    grunt.registerTask('01-run-tests', ['karma']);
-    grunt.registerTask('02-package-server', [
+    grunt.registerTask('01-package-server', [
         'nugetrestore',
         'msbuild:release',
         'gulp:wwwroot-clean-dlls',
@@ -248,20 +204,18 @@ module.exports = function (grunt) {
         'gulp:wwwroot-copy-asax',
         'gulp:wwwroot-copy-deploy-files'
     ]);
-    grunt.registerTask('03-package-client', [
+    grunt.registerTask('02-package-client', [
         'gulp:wwwroot-clean-client-assets',
-        'gulp:wwwroot-copy-partials',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle',
         'gulp:wwwroot-bundle-html'
     ]);
 
-    grunt.registerTask('build', ['02-package-server', '03-package-client']);
+    grunt.registerTask('build', ['01-package-server', '02-package-client']);
 
-    grunt.registerTask('04-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
+    grunt.registerTask('03-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
 
-    grunt.registerTask('package-and-deploy', ['02-package-server', '03-package-client', '04-deploy-app']);
+    grunt.registerTask('package-and-deploy', ['01-package-server', '02-package-client', '03-deploy-app']);
 
-    grunt.registerTask('default', ['karma', 'build']);
+    grunt.registerTask('default', ['build']);
 };
