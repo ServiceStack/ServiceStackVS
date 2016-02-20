@@ -120,7 +120,7 @@ namespace ServiceStackVS.NPMInstallerWizard
             //Only run Bower/NPM install via SSVS for VS 2012/2013
             //VS2015 built in Task Runner detects and runs required installs.
             //VS2013 Update 5 also does package restore on load.
-            if (MajorVisualStudioVersion < 14 && !ExtensionManager.HasExtension("Package Intellisense"))
+            if (MajorVisualStudioVersion == 12 && !ExtensionManager.HasExtension("Package Intellisense") || MajorVisualStudioVersion == 11)
             {
                 Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
 
