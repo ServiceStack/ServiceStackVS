@@ -206,6 +206,12 @@ module.exports = function (grunt) {
                 return gulp.src(webBuildDir + 'deploy/*.*')
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
+            },
+            'jspm-deps': function() {
+                return gulp.src('./deps.js')
+                    .pipe(jspmBuild())
+                    .pipe(rename('deps.lib.js'))
+                    .pipe(gulp.dest('./'));
             }
         }
     });
@@ -234,6 +240,8 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', ['01-package-server', '02-package-client']);
+
+    grunt.registerTask('update-depsjs', ['msbuild:release', 'gulp:jspm-deps']);
 
     grunt.registerTask('03-deploy-app', ['msdeploy:pack', 'msdeploy:push']);
 
