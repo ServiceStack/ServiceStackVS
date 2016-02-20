@@ -4,8 +4,8 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>TypeScript React App</Name>
-    <Description>TypeScript React App.</Description>
+    <Name>TypeScript React App (Beta)</Name>
+    <Description>TypeScript React App (Beta)</Description>
     <DefaultName>ReactTSApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
