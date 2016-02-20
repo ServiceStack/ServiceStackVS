@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using EnvDTE;
+using Microsoft.VisualStudio.ExtensionManager;
+using Microsoft.VisualStudio.Shell;
 using ServiceStack;
 using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NPMInstallerWizard;
+using Task = System.Threading.Tasks.Task;
 
 namespace ServiceStackVS.FileHandlers
 {
@@ -14,6 +16,23 @@ namespace ServiceStackVS.FileHandlers
     {
         private static bool _hasBowerInstalled;
         private static bool _hasNpmInstalled;
+
+        public static int MajorVisualStudioVersion
+        {
+            get { return int.Parse(Dte.Version.Substring(0, 2)); }
+        }
+
+        private static DTE _dte;
+        public static DTE Dte
+        {
+            get { return _dte ?? (_dte = (DTE)Package.GetGlobalService(typeof (DTE))); }
+        }
+
+        private static IVsExtensionManager extensionManager;
+        public static IVsExtensionManager ExtensionManager
+        {
+            get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
+        }
 
         private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FilterWatchers =
             new Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>>
@@ -40,7 +59,7 @@ namespace ServiceStackVS.FileHandlers
 
         private static void NpmDocumentHandler(Document document, OutputWindowWriter windowWriter)
         {
-            if (document.IsNpmUpdateDisable())
+            if (document.IsNpmUpdateDisable() || MajorVisualStudioVersion == 14 || (MajorVisualStudioVersion == 12 && ExtensionManager.HasExtension("Package Intellisense")))
             {
                 return;
             }

@@ -115,7 +115,7 @@
   <ItemGroup>
     <Content Include="config.js" />
     <Content Include="default.html" />
-    <Content Include="deps.js" />
+    <Content Include="deps.lib.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="typings.json" />
