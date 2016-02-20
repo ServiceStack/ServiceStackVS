@@ -120,12 +120,14 @@
     <Content Include="package.json" />
     <Content Include="typings.json" />
 	<Content Include="css\app.css" />
+	<Content Include="gruntfile.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+	<Content Include="wwwroot_build\build.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
