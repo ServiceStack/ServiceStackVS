@@ -1,12 +1,39 @@
 ﻿// A '.tsx' file enables JSX support in the TypeScript compiler, 
 // for more information see the following page on the TypeScript wiki:
 // https://github.com/Microsoft/TypeScript/wiki/JSX
-/// <reference path="../typings/browser.d.ts" />
+/// <reference path='../typings/browser/ambient/jquery/jquery.d.ts'/>
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import 'jquery';
 export default class HelloWorld extends React.Component<any, any> {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { yourName: '' };
+    }
+
+    update(event: any) {
+        event.preventDefault();
+        var yourName = event.target.value;
+        var self = this;
+        $.ajax({
+            url: 'hello/' + yourName,
+            dataType: 'json',
+            type: 'GET',
+            success(response) {
+                self.setState({ yourName: response.Result });
+            }
+        });
+    }
+
+    handleChange(event:any) {
+        this.setState({ yourName: event.target.value });
+    }
+
     render() {
-        return <div>Hello, World!!!</div>;
+        return <div>
+                <input type="text" value={this.state.value} onChange={this.update.bind(this)} />
+                <span>{this.state.yourName}</span>
+            </div>;
     }
 }
