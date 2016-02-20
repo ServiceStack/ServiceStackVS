@@ -1,5 +1,6 @@
-REM pre-requisite that only needs to run once for installing npm and bower dependencies
+REM pre-requisite that only needs to run once for installing npm, jspm and typings dependencies
 
 cd ..
 npm install
-bower install
+jspm install
+typings install

@@ -150,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+	<Folder Include="wwwroot\" />
+    <Content Include="wwwroot_build\README.txt" />
+    <Content Include="wwwroot_build\00-install-dependencies.bat" />
+    <Content Include="wwwroot_build\package-and-deploy.bat" />
+    <Content Include="wwwroot_build\deploy\appsettings.txt" />
+    <Content Include="wwwroot_build\publish\config.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

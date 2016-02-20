@@ -69,7 +69,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         msbuild: {
             release: {
-                src: ['$safeprojectname$.csproj'],
+                src: ['../../$safeprojectname$.sln'],
                 options: {
                     projectConfiguration: 'Release',
                     targets: ['Clean', 'Rebuild'],
@@ -181,6 +181,16 @@ module.exports = function (grunt) {
                     }))
                     .pipe(gulp.dest(webRoot));
             },
+            'wwwroot-copy-appjs': function() {
+                return gulp.src('./app.js')
+                    .pipe(uglify())
+                    .pipe(gulp.dest(webRoot));
+            },
+            'wwwroot-copy-components': function () {
+                return gulp.src('./components/**/*.js')
+                    .pipe(uglify())
+                    .pipe(gulp.dest(webRoot + 'components'));
+            },
             'wwwroot-copy-deploy-files': function () {
                 return gulp.src(webBuildDir + 'deploy/*.*')
                     .pipe(newer(webRoot))
@@ -208,7 +218,9 @@ module.exports = function (grunt) {
         'gulp:wwwroot-clean-client-assets',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle-html'
+        'gulp:wwwroot-bundle-html',
+        'gulp:wwwroot-copy-components',
+        'gulp:wwwroot-copy-appjs'
     ]);
 
     grunt.registerTask('build', ['01-package-server', '02-package-client']);
