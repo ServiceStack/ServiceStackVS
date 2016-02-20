@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--htmlbuild:bootstrapCss -->
+    <link rel="stylesheet" href="/jspm_packages/npm/bootstrap@3.2.0/css/bootstrap.css" />
+    <!-- endbuild -->
+    <!--build:css css/app.min.css-->
+    <link rel="stylesheet" href="css/app.css" />
+    <!-- endbuild -->
+    <title>$safeprojectname$</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">$safeprojectname$</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    <div class="container">
+        <div id="content"></div>
+    </div>
+	    <!-- build:js system.js -->
+    <script src="/jspm_packages/system.js"></script>
+    <!-- endbuild -->
+    <!-- build:js config.min.js -->
+    <script src="/config.js"></script>
+    <!-- endbuild -->
+    <!-- htmlbuild:appbundle -->
+    <script src="/deps.lib.js"></script>
+    <!-- endbuild -->
+    <script>
+        System.import("./app");
+    </script>
+</body>
+</html>

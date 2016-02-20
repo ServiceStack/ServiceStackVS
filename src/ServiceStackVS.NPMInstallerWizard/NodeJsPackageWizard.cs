@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
 using ServiceStackVS.Common;
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using Task = System.Threading.Tasks.Task;
 using Thread = System.Threading.Thread;
 
@@ -27,6 +32,7 @@ namespace ServiceStackVS.NPMInstallerWizard
         private uint _progressRef;
 
         private OutputWindowWriter _serviceStackOutputWindowWriter;
+        private IVsExtensionManager extensionManager;
 
         private OutputWindowWriter OutputWindowWriter
         {
@@ -36,6 +42,14 @@ namespace ServiceStackVS.NPMInstallerWizard
                        (_serviceStackOutputWindowWriter =
                            new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
             }
+        }
+
+        [Import]
+        public SVsServiceProvider ServiceProvider { get; set; }
+
+        public IVsExtensionManager ExtensionManager
+        {
+            get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
         }
 
         public int MajorVisualStudioVersion
@@ -68,6 +82,15 @@ namespace ServiceStackVS.NPMInstallerWizard
             WizardRunKind runKind, object[] customParams)
         {
             _dte = (DTE) automationObject;
+
+            using (var serviceProvider = new ServiceProvider((IServiceProvider)automationObject))
+            {
+                var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+                using (var container = new CompositionContainer(componentModel.DefaultExportProvider))
+                {
+                    container.ComposeParts(this);
+                }
+            }
             var wizardData = replacementsDictionary["$wizarddata$"];
             //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
             //Problem is that only one SHARED WizardData node is supported and multiple extensions might use it.
@@ -94,9 +117,10 @@ namespace ServiceStackVS.NPMInstallerWizard
                 project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
 
             Task.Run(() => { StartRequiredPackageInstallations(); });
-            //Only run Bower/NPM insatll via SSVS for VS 2012/2013
+            //Only run Bower/NPM install via SSVS for VS 2012/2013
             //VS2015 built in Task Runner detects and runs required installs.
-            if (MajorVisualStudioVersion < 14)
+            //VS2013 Update 5 also does package restore on load.
+            if (MajorVisualStudioVersion == 12 && !ExtensionManager.HasExtension("Package Intellisense") || MajorVisualStudioVersion == 11)
             {
                 Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
 
@@ -211,11 +235,16 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
             try
             {
+                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 if (!NodePackageUtils.HasBowerOnPath())
                 {
-                    var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    
                     var npmFolder = Path.Combine(appDataFolder, "npm");
                     npmFolder.AddToPathEnvironmentVariable();
+                }
+                if (!File.Exists(Path.Combine(appDataFolder, "bower.json")))
+                {
+                    return;
                 }
                 UpdateStatusMessage("Downloading bower depedencies...");
                 NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>

@@ -34,6 +34,26 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         x.Attribute("rootPackage") != null) != null;
         }
 
+        public static bool HasMinVsVersion(this XElement wizardData)
+        {
+            return wizardData
+                .Descendants()
+                .FirstOrDefault(
+                    x =>
+                        x.Name.LocalName.EqualsIgnoreCase("minVsVersion") &&
+                        x.Descendants().Any(y => y.Name.LocalName.EqualsIgnoreCase("version"))) != null;
+        }
+
+        public static int? GetMinVersion(this XElement wizardData)
+        {
+            var minVersionElement = wizardData
+                .Descendants()
+                .FirstOrDefault(x => x.Name.LocalName.EqualsIgnoreCase("minVsVersion"));
+            if (minVersionElement != null)
+                return int.Parse(minVersionElement.Descendants().First().Value);
+            return null;
+        }
+
         public static NuGetWizardDataPackage GetRootPackage(this XElement wizardData)
         {
             return wizardData

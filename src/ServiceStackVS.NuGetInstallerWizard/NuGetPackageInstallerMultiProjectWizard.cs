@@ -46,12 +46,20 @@ namespace ServiceStackVS.NuGetInstallerWizard
             }
         }
 
+        public int MajorVisualStudioVersion
+        {
+            get { return int.Parse(_dte.Version.Substring(0, 2)); }
+        }
+
         [Import]
         public SVsServiceProvider ServiceProvider { get; set; }
 
         public static NuGetWizardDataPackage RootNuGetPackage;
+        private DTE _dte;
+
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
+            _dte = (DTE)automationObject;
             if (runKind == WizardRunKind.AsMultiProject)
             {
                 using (var serviceProvider = new ServiceProvider((IServiceProvider)automationObject))
@@ -82,8 +90,32 @@ namespace ServiceStackVS.NuGetInstallerWizard
                     });
                 }
 
+                Dictionary<int, string> versionAlias = new Dictionary<int, string>
+                {
+                    {11,"Visual Studio 2012"},
+                    {12,"Visual Studio 2013"},
+                    {14,"Visual Studio 2015"},
+                };
+
                 string wizardData = replacementsDictionary["$wizarddata$"];
                 XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
+                if (element.HasMinVsVersion())
+                {
+                    if(MajorVisualStudioVersion < element.GetMinVersion())
+                    {
+                        var minVersion = element.GetMinVersion();
+                        if (minVersion != null)
+                            MessageBox.Show(
+                                "Features of this template are not fully supported by your version of Visual Studio. Minimum version is {0}."
+                                    .Fmt(versionAlias[(int)minVersion]),
+                                "ServiceStackVS Warning",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning,
+                                MessageBoxDefaultButton.Button1,
+                                MessageBoxOptions.DefaultDesktopOnly
+                                );
+                    }
+                }
                 if (element.HasRootPackage())
                 {
                     RootNuGetPackage = element.GetRootPackage();
