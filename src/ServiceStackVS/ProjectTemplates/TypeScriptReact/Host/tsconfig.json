@@ -1,0 +1,19 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "system",
+    "noImplicitAny": false,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+	"jsx": "React",
+	"target": "ES5",
+	"noEmitOnError": true
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "jspm_packages",
+    "typings"
+  ]
+}
