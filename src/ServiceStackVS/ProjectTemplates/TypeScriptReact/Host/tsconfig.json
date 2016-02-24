@@ -1,19 +1,19 @@
 {
-  "compileOnSave": true,
+  "compileOnSave":  true,
   "compilerOptions": {
-    "module": "system",
     "noImplicitAny": false,
+    "noEmitOnError": true,
     "removeComments": false,
-    "preserveConstEnums": true,
     "sourceMap": true,
-	"jsx": "React",
-	"target": "ES5",
-	"noEmitOnError": true
+    "target": "es5",
+    "module": "system",
+    "jsx": "react",
+    "experimentalDecorators": true
   },
   "exclude": [
+    "typings",
     "node_modules",
-    "wwwroot",
     "jspm_packages",
-    "typings"
+    "wwwroot"
   ]
 }
