@@ -29,7 +29,7 @@
     "gulp-jspm": "^0.5.7",
     "gulp-minify-css": "~0.3.8",
     "gulp-msbuild": "^0.2.21",
-    "gulp-msdeploy": "0.0.3",
+    "gulp-msdeploy": "^0.0.4",
     "gulp-newer": "~1.1.0",
     "gulp-nuget-restore": "^0.3.1",
     "gulp-rename": "^1.2.2",

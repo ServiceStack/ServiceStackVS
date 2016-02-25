@@ -45,7 +45,7 @@
       <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
     </packages>
     <minVsVersion>
-      <version>14</version>
+      <version>12</version>
     </minVsVersion>
   </WizardData>
 </VSTemplate>

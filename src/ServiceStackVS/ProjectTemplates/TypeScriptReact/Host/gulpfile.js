@@ -22,7 +22,7 @@
     var msbuild = require('gulp-msbuild');
 	var msdeploy = require('gulp-msdeploy');
 
-    var webRoot = 'wwwroot/';
+    var webRoot = 'www/';
     var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
     var configFile = 'config.json';
     var configDir = webBuildDir + 'publish/';
@@ -67,51 +67,51 @@
 
     // Tasks
 
-    gulp.task('wwwroot-clean-dlls', function (done) {
+    gulp.task('www-clean-dlls', function (done) {
         var binPath = webRoot + '/bin/';
         del(binPath, done);
     });
-    gulp.task('wwwroot-copy-bin', function () {
+    gulp.task('www-copy-bin', function () {
         var binDest = webRoot + 'bin/';
         return gulp.src('./bin/**/*')
             .pipe(newer(binDest))
             .pipe(gulp.dest(binDest));
     });
-    gulp.task('wwwroot-copy-appdata', function () {
+    gulp.task('www-copy-appdata', function () {
         return gulp.src('./App_Data/**/*')
             .pipe(newer(webRoot + 'App_Data/'))
             .pipe(gulp.dest(webRoot + 'App_Data/'));
     });
-    gulp.task('wwwroot-copy-webconfig', function () {
+    gulp.task('www-copy-webconfig', function () {
         return gulp.src('./web.config')
             .pipe(newer(webRoot))
             .pipe(gulpReplace('<compilation debug="true" targetFramework="4.5">', '<compilation targetFramework="4.5">'))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('wwwroot-copy-asax', function () {
+    gulp.task('www-copy-asax', function () {
         return gulp.src('./Global.asax')
             .pipe(newer(webRoot))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('wwwroot-clean-client-assets', function (done) {
+    gulp.task('www-clean-client-assets', function (done) {
         del([
             webRoot + '**/*.*',
-            '!wwwroot/bin/**/*.*', //Don't delete dlls
-            '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
-            '!wwwroot/**/*.asax', //Don't delete asax
-            '!wwwroot/**/*.config', //Don't delete config
-            '!wwwroot/appsettings.txt' //Don't delete deploy settings
+            '!www/bin/**/*.*', //Don't delete dlls
+            '!www/App_Data/**/*.*', //Don't delete App_Data
+            '!www/**/*.asax', //Don't delete asax
+            '!www/**/*.config', //Don't delete config
+            '!www/appsettings.txt' //Don't delete deploy settings
         ], done);
     });
-    gulp.task('wwwroot-copy-fonts', function () {
+    gulp.task('www-copy-fonts', function () {
         return gulp.src('./jspm_packages/npm/bootstrap@3.2.0/fonts/*.*')
             .pipe(gulp.dest(webRoot + 'lib/fonts/'));
     });
-    gulp.task('wwwroot-copy-images', function () {
+    gulp.task('www-copy-images', function () {
         return gulp.src('./img/**/*')
             .pipe(gulp.dest(webRoot + 'img/'));
     });
-    gulp.task('wwwroot-bundle-html', function () {
+    gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
             .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
@@ -121,39 +121,39 @@
                     pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />');
                 },
                 appbundle: function (block) {
-                    pipeTemplate(block, '<script src="/build.js"></script>'); // file comes from 'wwwroot-jspm-build' task below
+                    pipeTemplate(block, '<script src="/build.js"></script>'); // file comes from 'www-jspm-build' task below
                 }
             }))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('wwwroot-jspm-build', function () {
+    gulp.task('www-jspm-build', function () {
         return gulp.src('./app.js')
             .pipe(jspmBuild())
             .pipe(rename('build.js'))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('wwwroot-copy-appjs', function () {
+    gulp.task('www-copy-appjs', function () {
         return gulp.src('./app.js')
         .pipe(uglify())
         .pipe(gulp.dest(webRoot));
     });
-    gulp.task('wwwroot-copy-components', function () {
+    gulp.task('www-copy-components', function () {
         return gulp.src('./components/**/*.js')
         .pipe(uglify())
         .pipe(gulp.dest(webRoot + 'components'));
     });
-    gulp.task('wwwroot-copy-deploy-files', function () {
+    gulp.task('www-copy-deploy-files', function () {
         return gulp.src(webBuildDir + 'deploy/*.*')
             .pipe(newer(webRoot))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('jspm-deps', function () {
+    gulp.task('www-jspm-deps', function () {
         return gulp.src('./deps.js')
             .pipe(jspmBuild())
             .pipe(rename('deps.lib.js'))
             .pipe(gulp.dest('./'));
     });
-    gulp.task('msbuild', function () {
+    gulp.task('www-msbuild', function () {
         return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
             .pipe(msbuild({
@@ -165,39 +165,35 @@
     });
 
     gulp.task('01-package-server', function (callback) {
-        runSequence('msbuild', 'wwwroot-clean-dlls',
+        runSequence('www-msbuild', 'www-clean-dlls',
                 [
-                    'wwwroot-copy-bin',
-                    'wwwroot-copy-appdata',
-                    'wwwroot-copy-webconfig',
-                    'wwwroot-copy-asax',
-                    'wwwroot-copy-deploy-files'
+                    'www-copy-bin',
+                    'www-copy-appdata',
+                    'www-copy-webconfig',
+                    'www-copy-asax',
+                    'www-copy-deploy-files'
                 ],
                 callback);
     });
 
     gulp.task('02-package-client', function (callback) {
-        runSequence('wwwroot-clean-client-assets',
+        runSequence('www-clean-client-assets',
                 [
-                    'wwwroot-copy-fonts',
-                    'wwwroot-copy-images',
-                    'wwwroot-bundle-html'
+                    'www-copy-fonts',
+                    'www-copy-images',
+                    'www-bundle-html'
                 ],
-                'wwwroot-jspm-build',
-                callback);
-    });
-    gulp.task('build', function (callback) {
-        runSequence('01-package-server', '02-package-client',
+                'www-jspm-build',
                 callback);
     });
 
-    gulp.task('update-depsjs', function (callback) {
-        runSequence('msbuild', 'jspm-deps',
+    gulp.task('00-update-deps-js', function (callback) {
+        runSequence('www-msbuild', 'jspm-deps',
                 callback);
     });
 
-    gulp.task('msdeploy-pack', function () {
-        return gulp.src('wwwroot/')
+    gulp.task('www-msdeploy-pack', function () {
+        return gulp.src('www/')
             .pipe(msdeploy({
                 verb: 'sync',
                 sourceType: 'iisApp',
@@ -207,7 +203,7 @@
             }));
     });
 
-    gulp.task('msdeploy-push', function () {
+    gulp.task('www-msdeploy-push', function () {
         return gulp.src('./webdeploy.zip')
             .pipe(msdeploy({
                 verb: 'sync',
@@ -223,7 +219,7 @@
     });
 
     gulp.task('03-deploy-app', function (callback) {
-        runSequence('msdeploy-pack', 'msdeploy-push',
+        runSequence('www-msdeploy-pack', 'www-msdeploy-push',
             callback);
     });
 
@@ -232,6 +228,7 @@
             callback);
     });
     gulp.task('default', function (callback) {
-        runSequence('build', callback);
+        runSequence('01-package-server', '02-package-client',
+                callback);
     });
 })();
