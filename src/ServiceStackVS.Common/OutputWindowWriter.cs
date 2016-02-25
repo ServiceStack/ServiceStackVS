@@ -40,16 +40,16 @@ namespace ServiceStackVS.Common
             }
         }
 
-        public void Write(string format, params object[] parameters)
+        public void Write(string format)
         {
             if (outputWindowPane == null || format == null) return;
 
-            outputWindowPane.OutputString(String.Format(format, parameters));
+            outputWindowPane.OutputString(format);
         }
 
-        public void WriteLine(string format, params object[] parameters)
+        public void WriteLine(string format)
         {
-            Write(format + Environment.NewLine, parameters);
+            Write(format + Environment.NewLine);
         }
 
         public void Clear()
