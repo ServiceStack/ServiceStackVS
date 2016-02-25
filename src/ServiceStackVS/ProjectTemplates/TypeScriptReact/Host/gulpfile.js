@@ -19,7 +19,8 @@
     var runSequence = require('run-sequence');
     var argv = require('yargs').argv;
     var nugetRestore = require('gulp-nuget-restore');
-    var msbuild = require("gulp-msbuild");
+    var msbuild = require('gulp-msbuild');
+	var msdeploy = require('gulp-msdeploy');
 
     var webRoot = 'wwwroot/';
     var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
