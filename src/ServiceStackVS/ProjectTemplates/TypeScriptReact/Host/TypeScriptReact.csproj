@@ -121,7 +121,7 @@
     <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
 	  <Content Include="css\app.css" />
-	  <Content Include="gruntfile.js" />
+	  <Content Include="gulpfile.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

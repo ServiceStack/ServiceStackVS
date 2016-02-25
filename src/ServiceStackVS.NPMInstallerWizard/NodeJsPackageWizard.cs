@@ -93,7 +93,7 @@ namespace ServiceStackVS.NPMInstallerWizard
             }
             var wizardData = replacementsDictionary["$wizarddata$"];
             //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
-            //Problem is that only one SHARED WizardData node is supported and multiple extensions might use it.
+            //Problem is that only one SHARED WizardData node is supported and multiple wizards might use it.
             var element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
             _npmPackages =
                 element.Descendants()
@@ -127,7 +127,6 @@ namespace ServiceStackVS.NPMInstallerWizard
             if (MajorVisualStudioVersion == 12 && !ExtensionManager.HasExtension("Package Intellisense") || MajorVisualStudioVersion == 11)
             {
                 Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
-                
 
                 UpdateStatusMessage("Downloading NPM depedencies...");
                 OutputWindowWriter.ShowOutputPane(_dte);
