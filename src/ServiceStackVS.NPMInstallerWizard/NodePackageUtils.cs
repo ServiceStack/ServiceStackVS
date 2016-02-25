@@ -84,6 +84,16 @@ namespace ServiceStackVS.NPMInstallerWizard
             CommandUtils.StartCommand("bower install", workingDirectory, output, error, timeoutSeconds);
         }
 
+        public static void RunTypingsInstall(string workingDirectory, Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, int timeoutSeconds = 60)
+        {
+            if (string.IsNullOrEmpty(workingDirectory))
+            {
+                throw new Exception("Typings working directory null or empty");
+            }
+
+            CommandUtils.StartCommand("typings install", workingDirectory, output, error, timeoutSeconds);
+        }
+
         public static bool HasNodeInPath()
         {
             //If user has not restarted visual studio since node install, this will still return false even though node is accessible from command-line
@@ -123,6 +133,18 @@ namespace ServiceStackVS.NPMInstallerWizard
                 return true;
             }
             bool canRun = CommandUtils.HasExecutableOnPath("bower", "bower help <command>");
+            return canRun;
+        }
+
+        public static bool HasTypingsOnPath()
+        {
+            //If user has not restarted visual studio since node install, this will still return false even though typings is accessible from command-line
+            bool execFoundOnPath = CommandUtils.HasExecutableOnPath("typings");
+            if (execFoundOnPath)
+            {
+                return true;
+            }
+            bool canRun = CommandUtils.HasExecutableOnPath("typings", "Usage: typings <command>");
             return canRun;
         }
 

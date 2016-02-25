@@ -116,13 +116,18 @@ namespace ServiceStackVS.NPMInstallerWizard
             var projectPath = project.FullName.Substring(0,
                 project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
 
-            Task.Run(() => { StartRequiredPackageInstallations(); });
+            Task.Run(() => { StartRequiredPackageInstallations(); }).Wait();
+            // Typings isn't supported by any built in VS features.. yet.., run manually and wait
+            // This is due to problem with TSX intellisense which is fixed if project reloaded.
+            // This is to ensure *.d.ts files are ready when template first loads
+            Task.Run(() => { ProcessTypingsInstall(projectPath); }).Wait();
             //Only run Bower/NPM install via SSVS for VS 2012/2013
             //VS2015 built in Task Runner detects and runs required installs.
             //VS2013 Update 5 also does package restore on load.
             if (MajorVisualStudioVersion == 12 && !ExtensionManager.HasExtension("Package Intellisense") || MajorVisualStudioVersion == 11)
             {
                 Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
+                
 
                 UpdateStatusMessage("Downloading NPM depedencies...");
                 OutputWindowWriter.ShowOutputPane(_dte);
@@ -236,15 +241,14 @@ namespace ServiceStackVS.NPMInstallerWizard
             try
             {
                 var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                if (!NodePackageUtils.HasBowerOnPath())
-                {
-                    
-                    var npmFolder = Path.Combine(appDataFolder, "npm");
-                    npmFolder.AddToPathEnvironmentVariable();
-                }
-                if (!File.Exists(Path.Combine(appDataFolder, "bower.json")))
+                if (!File.Exists(Path.Combine(projectPath, "bower.json")))
                 {
                     return;
+                }
+                if (!NodePackageUtils.HasBowerOnPath())
+                {
+                    var npmFolder = Path.Combine(appDataFolder, "npm");
+                    npmFolder.AddToPathEnvironmentVariable();
                 }
                 UpdateStatusMessage("Downloading bower depedencies...");
                 NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
@@ -267,6 +271,51 @@ namespace ServiceStackVS.NPMInstallerWizard
             {
                 MessageBox.Show(@"Bower install failed: " + exception.Message,
                     @"An error has occurred during a Bower install.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly,
+                    false);
+            }
+        }
+
+        private void ProcessTypingsInstall(string projectPath)
+        {
+            try
+            {
+                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                if (!File.Exists(Path.Combine(projectPath, "typings.json")))
+                {
+                    return;
+                }
+                if (!NodePackageUtils.HasTypingsOnPath())
+                {
+
+                    var npmFolder = Path.Combine(appDataFolder, "npm");
+                    npmFolder.AddToPathEnvironmentVariable();
+                }
+
+                UpdateStatusMessage("Downloading typings depedencies...");
+                NodePackageUtils.RunTypingsInstall(projectPath, (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        OutputWindowWriter.WriteLine(s);
+                    }
+                }, (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
+                        OutputWindowWriter.WriteLine(s);
+                    }
+                });
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Typings install failed: " + exception.Message,
+                    @"An error has occurred during a Typings install.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
