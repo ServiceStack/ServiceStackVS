@@ -112,13 +112,9 @@
             .pipe(gulp.dest(webRoot + 'img/'));
     });
     gulp.task('wwwroot-bundle-html', function () {
-        var assets = useref.assets({ searchPath: './' });
-
         return gulp.src('./default.html')
-            .pipe(assets)
             .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
-            .pipe(assets.restore())
             .pipe(useref())
             .pipe(htmlBuild({
                 bootstrapCss: function (block) {
