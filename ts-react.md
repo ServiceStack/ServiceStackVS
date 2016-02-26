@@ -1,8 +1,7 @@
 ### TypeScript React Template
 To follow up Microsoft's recent [release of TypeScript 1.8 and related extensions for Visual Studio (2013 & 2015)](https://github.com/Microsoft/TypeScript/releases), ServiceStackVS now includes the simplest way to get your new TypeScript React project going with a new template that includes everything you'll need to start, iterate and deploy. 
 
-<div style="text-align:center"><img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/ts_template_heading.png"/></div>
-
+<img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/ts_template_heading.png" />
 This template has a lot of similarities to the other ServiceStackVS templates but with all the configuration to help [kick start your Typescript React](https://github.com/ServiceStackApps/typescript-redux#start-typescripting) application. NPM's package.json is setup to include all the parts you'll need including:
 
 - [Typings](https://github.com/typings/typings) - For ambient TypeScript definitions
