@@ -4,9 +4,9 @@
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
-### [New React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
+### [React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
 
-The new **React Desktop Apps** template provides everything you need to package your ASP.NET ServiceStack Web App into a native Windows Winforms App, OSX Cocoa Desktop App or cross-platform (Windows/OSX/Linux) "headless" Console App which instead of being 
+The **React Desktop Apps** template provides everything you need to package your ASP.NET ServiceStack Web App into a native Windows Winforms App, OSX Cocoa Desktop App or cross-platform (Windows/OSX/Linux) "headless" Console App which instead of being 
 embedded inside a Native UI, launches the Users prefered Web Browser for its Web UI.
 
 ![React Desktop Apps](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/gap/react-desktop-splash.png)
