@@ -17,6 +17,6 @@ We've removed the use of Grunt and Bower in this new template to help reduce the
 - `default` - This is the default task that builds and stages your application.
 - `package-and-deploy` - This task is the whole process of building, staging and deploying your application.
 
-The template provides your client side application entry point in `app.tsx` and splits out HelloWorld example into the `components` directory. This is just a guide line to show separating out your application from the various components to help keep your application more maintainable.
+The template provides your client side application entry point in `app.tsx` and splits out HelloWorld example into the `components` directory.
 
-> This new template is only supported by VS 2013 and 2015, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
+> *NOTE* This new template is only supported by VS 2013 and 2015, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
