@@ -19,4 +19,4 @@ We've removed the use of Grunt and Bower in this new template to help reduce the
 
 The template provides your client side application entry point in `app.tsx` and splits out HelloWorld example into the `components` directory.
 
-> **NOTE**: This new template is only supported by VS 2013 and 2015, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
+> This new template is **only supported by VS 2013 and 2015**, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
