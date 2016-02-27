@@ -22,7 +22,7 @@
     var msbuild = require('gulp-msbuild');
 	var msdeploy = require('gulp-msdeploy');
 
-    var webRoot = 'www/';
+    var webRoot = 'wwwroot/';
     var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
     var configFile = 'config.json';
     var configDir = webBuildDir + 'publish/';
@@ -96,11 +96,11 @@
     gulp.task('www-clean-client-assets', function (done) {
         del([
             webRoot + '**/*.*',
-            '!www/bin/**/*.*', //Don't delete dlls
-            '!www/App_Data/**/*.*', //Don't delete App_Data
-            '!www/**/*.asax', //Don't delete asax
-            '!www/**/*.config', //Don't delete config
-            '!www/appsettings.txt' //Don't delete deploy settings
+            '!wwwroot/bin/**/*.*', //Don't delete dlls
+            '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
+            '!wwwroot/**/*.asax', //Don't delete asax
+            '!wwwroot/**/*.config', //Don't delete config
+            '!wwwroot/appsettings.txt' //Don't delete deploy settings
         ], done);
     });
     gulp.task('www-copy-fonts', function () {
@@ -193,7 +193,7 @@
     });
 
     gulp.task('www-msdeploy-pack', function () {
-        return gulp.src('www/')
+        return gulp.src('wwwroot/')
             .pipe(msdeploy({
                 verb: 'sync',
                 sourceType: 'iisApp',
