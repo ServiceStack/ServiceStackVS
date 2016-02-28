@@ -188,7 +188,7 @@
     });
 
     gulp.task('00-update-deps-js', function (callback) {
-        runSequence('www-msbuild', 'jspm-deps',
+        runSequence('www-msbuild', 'www-jspm-deps',
                 callback);
     });
 
