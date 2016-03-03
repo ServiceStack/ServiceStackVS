@@ -24,14 +24,11 @@ export default class HelloWorld extends React.Component<any, any> {
         }
     }
 
-    handleChange(event:any) {
-        this.setState({ yourName: event.target.value });
-    }
-
     render() {
-        return <div className="form-group">
-                <input type="text" placeholder="Your name" value={this.state.value} onChange={this.update.bind(this)} className="form-control" />
+        return (
+            <div className="form-group">
+                <input type="text" placeholder="Your name" value={this.state.value} onChange={e => this.update(e)} className="form-control" />
                 <h3>{this.state.yourName}</h3>
-            </div>;
+            </div>);
     }
 }
