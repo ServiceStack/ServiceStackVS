@@ -14,16 +14,20 @@ export default class HelloWorld extends React.Component<any, any> {
 
     update(event: any) {
         event.preventDefault();
-        var yourName = event.target.value;
         var self = this;
-        $.ajax({
-            url: 'hello/' + yourName,
-            dataType: 'json',
-            type: 'GET',
-            success(response) {
-                self.setState({ yourName: response.Result });
-            }
-        });
+        var yourName = event.target.value;
+        if (yourName == null || yourName.length === 0) {
+            self.setState({ yourName: '' });
+        } else {
+            $.ajax({
+                url: 'hello/' + yourName,
+                dataType: 'json',
+                type: 'GET',
+                success(response) {
+                    self.setState({ yourName: response.Result });
+                }
+            });
+        }
     }
 
     handleChange(event:any) {
