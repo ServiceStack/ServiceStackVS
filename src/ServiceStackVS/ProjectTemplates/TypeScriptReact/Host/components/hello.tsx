@@ -19,14 +19,9 @@ export default class HelloWorld extends React.Component<any, any> {
         if (yourName == null || yourName.length === 0) {
             self.setState({ yourName: '' });
         } else {
-            $.ajax({
-                url: 'hello/' + yourName,
-                dataType: 'json',
-                type: 'GET',
-                success(response) {
-                    self.setState({ yourName: response.Result });
-                }
-            });
+            $.getJSON(`hello/${yourName}`, (r) => {
+			   self.setState({ yourName: r.Result });
+			});
         }
     }
 
