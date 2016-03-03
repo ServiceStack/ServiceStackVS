@@ -111,6 +111,10 @@
         return gulp.src('./img/**/*')
             .pipe(gulp.dest(webRoot + 'img/'));
     });
+	gulp.task('www-copy-jspm-config', function () {
+        return gulp.src('./config.js')
+            .pipe(gulp.dest(webRoot + '/'));
+    });
     gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
             .pipe(gulpif('*.js', uglify()))
@@ -171,6 +175,7 @@
                 [
                     'www-copy-fonts',
                     'www-copy-images',
+					'www-copy-jspm-config',
                     'www-bundle-html'
                 ],
                 'www-jspm-build',
