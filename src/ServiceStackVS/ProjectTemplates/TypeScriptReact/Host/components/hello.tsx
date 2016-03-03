@@ -14,13 +14,12 @@ export default class HelloWorld extends React.Component<any, any> {
 
     update(event: any) {
         event.preventDefault();
-        var self = this;
         var yourName = event.target.value;
         if (yourName == null || yourName.length === 0) {
-            self.setState({ yourName: '' });
+            this.setState({ yourName: '' });
         } else {
             $.getJSON(`hello/${yourName}`, (r) => {
-			   self.setState({ yourName: r.Result });
+			   this.setState({ yourName: r.Result });
 			});
         }
     }
