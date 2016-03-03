@@ -4,76 +4,37 @@
 
 ServiceStackVS is a Visual Studio extension that enhances the development experience when working the [ServiceStack framework](https://servicestack.net).
 
-### TypeScript React App (Beta) Template
-To follow up Microsoft's recent [release of TypeScript 1.8 and related extensions for Visual Studio (2013 & 2015)](https://github.com/Microsoft/TypeScript/releases), ServiceStackVS now includes the simplest way to get your new TypeScript React project going with a new template that includes everything you'll need to start, iterate and deploy. 
-> This new template is **only supported by VS 2013 and 2015**, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
+# [TypeScript React App (beta)](https://github.com/ServiceStackApps/typescript-react-template/)
 
-![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-banner.png)
+[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-banner.png)](https://github.com/ServiceStackApps/typescript-react-template/)
 
-This template has a lot of similarities to the other ServiceStackVS templates but with all the configuration to help [kick start your Typescript React](https://github.com/ServiceStackApps/typescript-redux#start-typescripting) application. NPM's package.json is setup to include all the parts you'll need including:
+ServiceStack's new TypeScript React Single Page App VS.NET template offers the current **Gold Standard** for 
+developing modern JavaScript Apps in VS.NET with the just released:
+ 
+  - [TypeScript 1.8](http://www.typescriptlang.org/) - Superset of JavaScript with optional typing, advanced language features and down-level ES5 support
+  - [JSPM](http://jspm.io/) - JavaScript Package Manager supporting SystemJS modules and multiple npm and GitHub repositories 
+  - [typings](https://github.com/typings/typings) - Package manager to search and install TypeScript definition files
+  - [React](https://facebook.github.io/react/) - Simple, high-performance JavaScript UI Framework utilizing a Virtual DOM and Reactive Data flows
+  - [Redux](https://github.com/rackt/redux) - Predictable state manager for JavaScript Apps
+  
+Providing a great base for the development of large-scale, JavaScript Apps that's further enhanced by a great 
+development experience within Visual Studio. 
 
-- [Typings](https://github.com/typings/typings) - For ambient TypeScript definitions
-- [JSPM](http://jspm.io/) - To manage your application dependencies and give you a smooth workflow
-- [Gulp](http://gulpjs.com/) - Grunt has been removed in favor of a Gulp only approach to simplify build setup.
+### Pre-Requisites
 
-We've removed the use of Grunt and Bower in this new template to help reduce the number of concepts and points of configuration, however the tasks to help you build, stage and deploy your application are very similar using just Gulp.
+Download and install the latest **TypeScript 1.8+** for your IDE:
 
- ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/ts-template-gulp.png)
+ - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
+ - [VS.NET 2013](https://www.microsoft.com/en-us/download/details.aspx?id=48739)
 
-- `default` - This is the default task that builds and stages your application.
-- `00-update-deps-js` - This task is to regenerate `deps.lib.js` from `deps.tsx` which is used to [reduce how much HTTP requests are done each time you make a change](https://github.com/ServiceStackApps/typescript-redux#preloading-dependencies).
-- `01-package-server` - build and stage the **server** components of your application.
-- `02-package-client` - build and stage the **client** side resources of your application.
-- `03-deploy-app` - This deploys your application using `msdeploy` and `config.json` found in `wwwroot_build/publish`. 
-- `package-and-deploy` - This task is the whole process of **building, staging and deploying** your application.
+> The TypeScript Single Page App templates are optimized for VS.NET 2015's support for [tsconfig.json](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json)
 
-#### Template App and working with JSPM
+![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-template.png)
 
-The template provides your client side application entry point in `src/app.tsx` and a single `hello.tsx` component as an example. Though JSPM will dynamically import required modules, it can cause long load times even locally waiting for the all the dependencies to resolve. The `deps.tsx` file is to improve the developer workflow by using a pre-bundled `deps.lib.js` file. This can greatly reduce the number of requests when iterating improving the speed of iterations. This can regenerated by using the `00-update-deps-js` Gulp task. 
+## [typescript-react-template](https://github.com/ServiceStackApps/typescript-react-template/)
 
-```
-import * as React from 'react';
-import { render } from 'react-dom';
-
-class Deps extends React.Component<any, any> {
-    render() {
-        return <div>Hello, World!</div>;
-    }
-}
-
-const ignore = () => render(<Deps/>, document.body);
-```
-If you find loading your application locally starts to take longer, try including uses of your components in the `deps.tsx` file and running the `00-update-deps-js` Gulp task. The use of your components in `deps.tsx` aren't there for function but just to get JSPM to include the them in the bundling step. In the deps.tsx provided, calling `render` on a React component forces the bundle the required dependencies even though the code below is not used.
-
-#### Staging for release
-The template provides all the Gulp tasks required for building, staging and deploying your application using `msdeploy`. Since this uses JSPM, we only need to include `system.js`, `config.js` and our JSPM bundled application when staged for release. The below scripts and `gulp-useref` build comments ensure those pieces are in place for working locally and when staged.
-
-```
-<!-- build:js system.js -->
-<script src="jspm_packages/system.js"></script>
-<!-- endbuild -->
-
-<script src="config.js"></script>
-
-<!-- build:remove -->
-<script src="deps.lib.js"></script>
-<!-- endbuild -->
-
-<!-- htmlbuild:appbundle -->
-<!-- endbuild -->
-
-<script>
-    System.import("./src/app");
-</script>
-```
-
-##### Workflow
-Everytime you save a `.tsx` file, TypeScript is regnerating client side JS files, this is configured in the `tsconfig.json`. When you refresh, these updates are loaded via JSPM. `tsconfig.json` also has been configured to produce source maps for debugging and to work correctly with React. 
-
-When you create a new `tsx` file, be sure to include the `browser.d.ts` reference generated by Typings. This is so you'll get intellisense and type information from the various modules installed via Typings.
-```
-/// <reference path='typings/browser.d.ts'/>
-```
+To learn more about this template and explore its different features. please see the 
+[in-depth typescript-react-template guide](https://github.com/ServiceStackApps/typescript-react-template/).
 
 Happy TypeScripting!
 
