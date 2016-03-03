@@ -6,6 +6,7 @@ using ServiceStack;
 
 namespace $safeprojectname$
 {
+	[Route("/hello")]
     [Route("/hello/{Name}")]
     public class Hello : IReturn<HelloResponse>
     {

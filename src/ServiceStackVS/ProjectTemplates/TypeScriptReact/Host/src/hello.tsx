@@ -9,26 +9,21 @@ import 'jquery';
 export default class HelloWorld extends React.Component<any, any> {
     constructor(props, context) {
         super(props, context);
-        this.state = { yourName: '' };
+        this.state = { msg: '' };
     }
 
     update(event: any) {
-        event.preventDefault();
         var yourName = event.target.value;
-        if (yourName == null || yourName.length === 0) {
-            this.setState({ yourName: '' });
-        } else {
-            $.getJSON(`hello/${yourName}`, (r) => {
-			   this.setState({ yourName: r.Result });
-			});
-        }
+        $.getJSON(`hello/${yourName}`, (r) => {
+		   this.setState({ msg: r.Result });
+		});
     }
 
     render() {
         return (
             <div className="form-group">
                 <input type="text" placeholder="Your name" value={this.state.value} onChange={e => this.update(e)} className="form-control" />
-                <h3>{this.state.yourName}</h3>
+                <h3>{this.state.msg}</h3>
             </div>);
     }
 }
