@@ -5,6 +5,6 @@
 
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import HelloWorld from './components/hello';
+import HelloWorld from './hello';
 
 ReactDOM.render(<HelloWorld/>, document.getElementById("content"));

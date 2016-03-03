@@ -127,14 +127,9 @@
             .pipe(gulp.dest(webRoot));
     });
     gulp.task('www-jspm-build', function () {
-        return gulp.src('./app.js')
+        return gulp.src('./src/app.js')
             .pipe(jspmBuild())
             .pipe(gulp.dest(webRoot));
-    });
-    gulp.task('www-copy-components', function () {
-        return gulp.src('./components/**/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest(webRoot + 'components'));
     });
     gulp.task('www-copy-deploy-files', function () {
         return gulp.src(webBuildDir + 'deploy/*.*')
@@ -142,7 +137,7 @@
             .pipe(gulp.dest(webRoot));
     });
     gulp.task('www-jspm-deps', function () {
-        return gulp.src('./deps.js')
+        return gulp.src('./src/deps.js')
             .pipe(jspmBuild())
             .pipe(rename('deps.lib.js'))
             .pipe(gulp.dest('./'));

@@ -159,9 +159,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>-->
   <ItemGroup>
-    <TypeScriptCompile Include="app.tsx" />
-    <TypeScriptCompile Include="components\hello.tsx" />
-    <TypeScriptCompile Include="deps.tsx" />
+    <TypeScriptCompile Include="src\app.tsx" />
+    <TypeScriptCompile Include="src\hello.tsx" />
+    <TypeScriptCompile Include="src\deps.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
