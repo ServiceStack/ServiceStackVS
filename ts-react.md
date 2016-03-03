@@ -1,5 +1,6 @@
 ### TypeScript React Template
 To follow up Microsoft's recent [release of TypeScript 1.8 and related extensions for Visual Studio (2013 & 2015)](https://github.com/Microsoft/TypeScript/releases), ServiceStackVS now includes the simplest way to get your new TypeScript React project going with a new template that includes everything you'll need to start, iterate and deploy. 
+> This new template is **only supported by VS 2013 and 2015**, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
 
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-banner.png)
 
@@ -67,4 +68,4 @@ When you create a new `tsx` file, be sure to include the `browser.d.ts` referenc
 /// <reference path='typings/browser.d.ts'/>
 ```
 
-> This new template is **only supported by VS 2013 and 2015**, VS 2012 can't install the required Microsoft extension to work productively in VS with TypeScript. Also although `tsconfig.json` is included, VS2013 ignores this file and only uses settings found in the projects Properties menu.
+Happy TypeScripting!
