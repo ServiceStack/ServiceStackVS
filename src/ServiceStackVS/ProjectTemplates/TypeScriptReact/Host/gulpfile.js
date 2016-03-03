@@ -121,7 +121,7 @@
                     pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />');
                 },
                 appbundle: function (block) {
-                    pipeTemplate(block, '<script src="/build.js"></script>'); // file comes from 'www-jspm-build' task below
+                    pipeTemplate(block, '<script src="/app.js"></script>'); // file comes from 'www-jspm-build' task below
                 }
             }))
             .pipe(gulp.dest(webRoot));
@@ -129,13 +129,7 @@
     gulp.task('www-jspm-build', function () {
         return gulp.src('./app.js')
             .pipe(jspmBuild())
-            .pipe(rename('build.js'))
             .pipe(gulp.dest(webRoot));
-    });
-    gulp.task('www-copy-appjs', function () {
-        return gulp.src('./app.js')
-        .pipe(uglify())
-        .pipe(gulp.dest(webRoot));
     });
     gulp.task('www-copy-components', function () {
         return gulp.src('./components/**/*.js')
