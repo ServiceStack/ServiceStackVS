@@ -81,7 +81,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         try
                         {
                             string templateName = WizardHelpers.GetTemplateNameFromPath(customParams[0] as string);
-                            "http://servicestack.net/stats/ssvs/record?Name={0}".Fmt(templateName).GetStringFromUrl();
+                            "https://servicestack.net/stats/ssvs/record?Name={0}".Fmt(templateName).GetStringFromUrl();
                         }
                         catch (Exception e)
                         {
