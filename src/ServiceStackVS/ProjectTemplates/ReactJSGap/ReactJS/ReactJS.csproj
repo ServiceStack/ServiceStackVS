@@ -29,6 +29,13 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptModuleKind>system</TypeScriptModuleKind>
+    <TypeScriptJsxEmit>react</TypeScriptJsxEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +44,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptModuleKind>system</TypeScriptModuleKind>
+    <TypeScriptJsxEmit>react</TypeScriptJsxEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -74,15 +88,17 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
+    <ItemGroup>
+    <TypeScriptCompile Include="src\app.tsx" />
+    <TypeScriptCompile Include="src\hello.tsx" />
+    <TypeScriptCompile Include="src\deps.tsx" />
+	<TypeScriptCompile Include="platform.tsx" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
-    <Content Include="gruntfile.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="default.html" />
     <Content Include="platform.css" />
-    <Content Include="platform.js" />
-    <Content Include="js\components\hello.jsx" />
-    <Content Include="js\utils.js" />
-    <Content Include="js\app.jsx" />
     <Content Include="img\react-logo.png" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />
@@ -92,10 +108,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
-    <Content Include="bower.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
+	<Content Include="wwwroot_build\build.bat" />
     <Content Include="wwwroot_build\config-winforms.txt" />
     <Content Include="wwwroot_build\package-deploy-winforms.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
