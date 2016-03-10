@@ -1,0 +1,51 @@
+﻿@inherits ViewPage
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--htmlbuild:bootstrapCss -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbuild -->
+    <!--build:css css/app.min.css-->
+    <link rel="stylesheet" href="css/app.css" />
+    <!-- endbuild -->
+    <!-- htmlbuild:jqueryCdn -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+    <!-- htmlbuild:bootstrapJs -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbuild -->
+    <!-- build:js lib/js/modernizr.min.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <!-- build:js lib/js/react.min.js -->
+    <script src="bower_components/react/react.js"></script>
+    <!-- endbuild -->
+    <!-- build:remove -->
+    <script src="bower_components/react/JSXTransformer.js"></script>
+    <!-- endbuild -->
+    <title>React Template</title>
+</head>
+    <body>
+        <div class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ReactJS App</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div id="demo"></div>
+        </div>
+        <!-- build:js js/app.jsx.js -->
+        <script type="text/jsx" src="js/components/hello.jsx"></script>
+        <script type="text/jsx" src="js/app.jsx"></script>
+        <!-- endbuild -->
+    </body>
+</html>
