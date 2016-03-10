@@ -1,5 +1,5 @@
-REM grunt 02-package-server
-REM grunt 03-package-client
-REM grunt 04-deploy-app
+REM gulp 02-package-server
+REM gulp 03-package-client
+REM gulp 04-deploy-app
 
-grunt package-and-deploy
+gulp package-and-deploy

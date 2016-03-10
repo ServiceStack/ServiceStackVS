@@ -42,7 +42,6 @@
       <package id="ServiceStack.Text" version="latest" />
     </NuGetPackages>
     <NodeJS>
-      <npm-package id="grunt-cli" />
       <npm-package id="gulp" />
       <npm-package id="karma-cli" />
     </NodeJS>
