@@ -1,0 +1,23 @@
+{
+    "name": "$safeprojectname$",
+    "version": "0.0.1",
+    "authors": [
+        ""
+    ],
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "react": "~0.13.3",
+        "bootstrap": "~3.3.1",
+        "modernizr": "~2.8.3",
+        "jquery": "~1.11.3"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+
+}
