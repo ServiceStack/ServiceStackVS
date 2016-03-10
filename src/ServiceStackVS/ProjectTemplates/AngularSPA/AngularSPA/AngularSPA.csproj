@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
-    <Content Include="gruntfile.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="default.cshtml" />
     <Content Include="js\app.js" />
     <Content Include="js\hello\controllers.js" />
@@ -106,7 +106,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
-    <Content Include="bower.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
