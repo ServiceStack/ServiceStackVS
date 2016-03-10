@@ -1,0 +1,4 @@
+/* web */
+.web, ul > li.web {
+    display: block;
+}

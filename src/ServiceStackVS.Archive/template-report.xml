@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TemplateReport>
+  <ItemTemplates />
+  <ProjectTemplates>
+    <ProjectTemplate Path="ProjectTemplates\ReactJSGap\Definitions\CSharp.vstemplate" Name="React Desktop Apps (Beta)" Description="React application with additional projects to produce; a CefSharp based WinForms application, Self host console application and Web application ready to deploy to IIS using preconfigured Grunt/Gulp tasks." ProjectType="CSharp" ProjectSubType="" />
+  </ProjectTemplates>
+  <Snippets />
+</TemplateReport>

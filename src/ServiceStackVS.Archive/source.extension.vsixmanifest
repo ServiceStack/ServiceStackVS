@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="ServiceStackVS.Archive.Microsoft.26671a15-6da1-4bb2-afe2-a951ac27b335" Version="1.0" Language="en-US" Publisher="Microsoft" />
+    <DisplayName>ServiceStackVS.Archive</DisplayName>
+    <Description xml:space="preserve">Archive of ServiceStackVS templates</Description>
+    <License>license.txt</License>
+    <Icon>icon.png</Icon>
+    <PreviewImage>logo-280.png</PreviewImage>
+    <Tags>ServiceStack, Service Stack</Tags>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,14.0)" />
+    <InstallationTarget Version="[11.0,14.0)" Id="Microsoft.VisualStudio.Ultimate" />
+    <InstallationTarget Version="[14.0,]" Id="Microsoft.VisualStudio.Community" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.BuildConfigWizard.dll" AssemblyName="ServiceStackVS.BuildConfigWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.Common.dll" AssemblyName="ServiceStackVS.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.ExternalTemplateWizard.dll" AssemblyName="ServiceStackVS.ExternalTemplateWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NativeTypes.dll" AssemblyName="ServiceStackVS.NativeTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NativeTypesWizard.dll" AssemblyName="ServiceStackVS.NativeTypesWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NPMInstallerWizard.dll" AssemblyName="ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NuGetInstallerWizard.dll" AssemblyName="ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b" />
+    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
+  </Assets>
+</PackageManifest>
