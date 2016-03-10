@@ -4,8 +4,10 @@
     <Identity Id="ServiceStackVS.Archive.Microsoft.26671a15-6da1-4bb2-afe2-a951ac27b335" Version="1.0" Language="en-US" Publisher="Microsoft" />
     <DisplayName>ServiceStackVS.Archive</DisplayName>
     <Description xml:space="preserve">Archive of ServiceStackVS templates</Description>
+    <License>license.txt</License>
     <Icon>icon.png</Icon>
     <PreviewImage>logo-280.png</PreviewImage>
+    <Tags>ServiceStack, Service Stack</Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,14.0)" />
@@ -25,5 +27,6 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NPMInstallerWizard.dll" AssemblyName="ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStackVS.NuGetInstallerWizard.dll" AssemblyName="ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b" />
     <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
   </Assets>
 </PackageManifest>
