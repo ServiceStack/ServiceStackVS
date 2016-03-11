@@ -311,8 +311,8 @@
     gulp.task('02-package-console', function(cb) {
         runSequence(
             'www-nuget-restore',
-            'www-msbuild-console',
             '01-bundle-all',
+            'www-msbuild-console',
             'exec-package-console');
     });
 
