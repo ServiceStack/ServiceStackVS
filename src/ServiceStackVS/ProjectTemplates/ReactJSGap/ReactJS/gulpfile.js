@@ -283,8 +283,16 @@
             .pipe(nugetRestore());
     });
 
-    gulp.task('exec-package-console', function(cb) {
-        exec('cmd /c "cd wwwroot_build && package-deploy-console.bat', function(err, stdout, stderr) {
+    gulp.task('exec-package-console', function (cb) {
+        exec('cmd /c "cd wwwroot_build && package-deploy-console.bat"', function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            cb(err);
+        });
+    });
+
+    gulp.task('exec-package-winforms', function(cb) {
+        exec('cmd /c "cd wwwroot_build && package-deploy-winforms.bat"', function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
             cb(err);
