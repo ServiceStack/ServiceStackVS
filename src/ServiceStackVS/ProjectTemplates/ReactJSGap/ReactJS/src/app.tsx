@@ -1,15 +1,29 @@
-﻿var App = React.createClass({
-    handleAbout: function () {
-        nativeHost.showAbout();
-    },
-    handleToggleWindow: function () {
-        nativeHost.toggleFormBorder();
-    },
-    handleQuit: function () {
-        nativeHost.quit();
-    },
-    render: function () {
-        return (
+﻿// A '.tsx' file enables JSX support in the TypeScript compiler, 
+// for more information see the following page on the TypeScript wiki:
+// https://github.com/Microsoft/TypeScript/wiki/JSX
+/// <reference path='../typings/browser.d.ts'/>
+
+import * as ReactDOM from 'react-dom';
+import * as React from 'react';
+import HelloWorld from './hello';
+
+class App extends React.Component<any,any> { 
+    constructor(props,context) {
+        super(props, context);
+    }
+
+    handleAbout() {
+        window['nativeHost'].showAbout();
+    }
+    handleToggleWindow() {
+        window['nativeHost'].toggleFormBorder();
+    }
+    handleQuit() {
+        window['nativeHost'].quit();
+    }
+
+    render() {
+        return(
             <div>
                 <div className="navbar navbar-inverse" role="navigation">
                     <div className="container">
@@ -31,7 +45,7 @@
                                 <li className="platform winforms">
                                     <a onClick={this.handleToggleWindow}>Toggle Window</a>
                                 </li>
-                                <li className="platform winforms mac">
+                                <li className="platform winforms mac console">
                                     <a onClick={this.handleQuit}>Close</a>
                                 </li>
                             </ul>
@@ -41,9 +55,8 @@
                 <div className="container">
                     <HelloWorld />
                 </div>
-            </div>
-        );
+            </div>);
     }
-});
+}
 
-React.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('content'));
