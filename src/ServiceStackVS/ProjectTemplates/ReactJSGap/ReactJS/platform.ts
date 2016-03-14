@@ -15,4 +15,4 @@ class WebNativeHost implements $safeprojectname$.Platform.INativeHost {
     }
 }
 
-window.NativeHost = window.NativeHost || new WebNativeHost();
+window.nativeHost = window.nativeHost || new WebNativeHost();

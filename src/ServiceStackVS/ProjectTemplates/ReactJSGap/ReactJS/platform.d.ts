@@ -1,5 +1,5 @@
 ﻿interface Window {
-    NativeHost: $safeprojectname$.Platform.INativeHost;
+    nativeHost: $safeprojectname$.Platform.INativeHost;
 }
 declare module $safeprojectname$.Platform {
     export interface INativeHost {

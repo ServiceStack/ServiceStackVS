@@ -21,4 +21,4 @@ class ConsoleNativeHost implements Platform.INativeHost {
     }
 }
 
-window.NativeHost = new ConsoleNativeHost();
+window.nativeHost = new ConsoleNativeHost();
