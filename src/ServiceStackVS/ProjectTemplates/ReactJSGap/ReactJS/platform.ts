@@ -6,35 +6,29 @@
 import INativeHost = $safeprojectname$.Platform.INativeHost;
 
 export namespace NativeHost {
-
-    export function getInstance(): INativeHost {
-        return window['nativeHost'] as INativeHost;
-    }
     export function showAbout() {
-        getInstance().showAbout();
+        window.NativeHost.showAbout();
     }
 
     export function toggleFormBorder() {
-        getInstance().toggleFormBorder();
+        window.NativeHost.toggleFormBorder();
     }
 
     export function quit() {
-        getInstance().quit();
+        window.NativeHost.quit();
     }
 }
 
 class WebNativeHost implements INativeHost {
     showAbout() {
-        alert("ReactDesktopApps3 - ServiceStack + ReactJS");
+        alert("$safeprojectname$ - ServiceStack + ReactJS");
     }
 
-    toggleFormBorder() {
-
-    }
+    toggleFormBorder() {}
 
     quit() {
         window.close();
     }
 }
 
-window['nativeHost'] = new WebNativeHost();
+window.NativeHost = window.NativeHost || new WebNativeHost();
