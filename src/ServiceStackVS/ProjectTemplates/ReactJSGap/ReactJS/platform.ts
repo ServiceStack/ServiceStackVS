@@ -14,7 +14,7 @@ class WebNativeHost implements $safeprojectname$.Platform.INativeHost {
         window.close();
     }
 	
-	ready() {}
+    ready() {}
 }
 
 window.nativeHost = window.nativeHost || new WebNativeHost();
