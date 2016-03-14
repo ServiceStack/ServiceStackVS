@@ -1,28 +1,28 @@
-﻿<!-- Auto generated file by $saferootprojectname$\gruntfile.js -->
+﻿<!-- Auto generated file by $saferootprojectname$\gulpfile.js -->
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="/lib/css/lib.min.css">
-
-    <link rel="stylesheet" href="/css/app.min.css">
-
-    <link rel="stylesheet" href="/platform.css" />
-
-    <script src="/lib/js/lib.min.js"></script>
-
-    <script src="/js/ss-utils.js"></script><!-- in ServiceStack.dll -->
-       
-    <script src="/js/app.min.js"></script>
-
-    <script src="/platform.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.min.css">
+    <link rel="stylesheet" href="platform.css" />
 
     <title>$saferootprojectname$</title>
 </head>
 <body>
-    <script src="/js/app.jsx.js"></script>
+    <div id="content"></div>
+    <script src="system.js"></script>
+
+    <script src="config.js"></script>
+
     
-    
+    <script src="app.js"></script>
+
+    <script>
+        System.import("./src/app");
+    </script>
+
+    <script src="platform.js"></script>
 </body>
 </html>

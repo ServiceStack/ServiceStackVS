@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -19,7 +20,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+	<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+	<UseGlobalApplicationHostFile />
+	<TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +33,13 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptModuleKind>system</TypeScriptModuleKind>
+    <TypeScriptJsxEmit>react</TypeScriptJsxEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +48,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptModuleKind>system</TypeScriptModuleKind>
+    <TypeScriptJsxEmit>react</TypeScriptJsxEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -74,15 +92,21 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
+    <ItemGroup>
+    <TypeScriptCompile Include="src\app.tsx" />
+    <TypeScriptCompile Include="src\hello.tsx" />
+    <TypeScriptCompile Include="src\deps.tsx" />
+	<TypeScriptCompile Include="platform.ts" />
+	<TypeScriptCompile Include="platform.d.ts" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
-    <Content Include="gruntfile.js" />
+    <Content Include="gulpfile.js" />
+	<Content Include="config.js" />
     <Content Include="default.html" />
     <Content Include="platform.css" />
-    <Content Include="platform.js" />
-    <Content Include="js\components\hello.jsx" />
-    <Content Include="js\utils.js" />
-    <Content Include="js\app.jsx" />
+	<Content Include="platform.js" />
+	<Content Include="deps.lib.js" />
     <Content Include="img\react-logo.png" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />
@@ -92,10 +116,12 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
-    <Content Include="bower.json" />
+	<Content Include="typings.json" />
+    <Content Include="tsconfig.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
+	<Content Include="wwwroot_build\build.bat" />
     <Content Include="wwwroot_build\config-winforms.txt" />
     <Content Include="wwwroot_build\package-deploy-winforms.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
@@ -136,6 +162,7 @@
     <Folder Include="img\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />  
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
