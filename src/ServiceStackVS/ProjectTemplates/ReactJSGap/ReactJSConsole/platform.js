@@ -2,7 +2,7 @@ var ConsoleNativeHost = (function () {
     function ConsoleNativeHost() {
     }
     ConsoleNativeHost.prototype.showAbout = function () {
-        alert('ReactDesktopApps222 - ServiceStack + ReactJS');
+        alert("$safeprojectname$ - ServiceStack + ReactJS");
     };
     ConsoleNativeHost.prototype.toggleFormBorder = function () {
     };
@@ -13,5 +13,4 @@ var ConsoleNativeHost = (function () {
     };
     return ConsoleNativeHost;
 }());
-window['nativeHost'] = new ConsoleNativeHost();
-//# sourceMappingURL=platform.js.map
+window.nativeHost = new ConsoleNativeHost();
