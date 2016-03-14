@@ -101,6 +101,7 @@
     <Content Include="default.html" />
     <Content Include="platform.css" />
 	<Content Include="platform.js" />
+	<Content Include="deps.lib.js" />
     <Content Include="img\react-logo.png" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />
@@ -110,6 +111,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
+	<Content Include="typings.json" />
+    <Content Include="tsconfig.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
