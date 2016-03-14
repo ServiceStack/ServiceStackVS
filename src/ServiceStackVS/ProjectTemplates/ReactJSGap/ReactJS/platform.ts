@@ -13,6 +13,8 @@ class WebNativeHost implements $safeprojectname$.Platform.INativeHost {
     quit() {
         window.close();
     }
+	
+	ready() {}
 }
 
 window.nativeHost = window.nativeHost || new WebNativeHost();

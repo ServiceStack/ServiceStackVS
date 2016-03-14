@@ -10,15 +10,15 @@ class ConsoleNativeHost implements Platform.INativeHost {
         alert("$safeprojectname$ - ServiceStack + ReactJS");
     }
 
-    toggleFormBorder() {
-
-    }
+    toggleFormBorder() {}
 
     quit() {
         $.post('/nativehost/quit').then(response => {
             window.close();
         });
     }
+	
+	ready() {}
 }
 
 window.nativeHost = new ConsoleNativeHost();
