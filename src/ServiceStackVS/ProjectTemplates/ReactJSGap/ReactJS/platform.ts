@@ -3,23 +3,7 @@
 // https://github.com/Microsoft/TypeScript/wiki/JSX
 /// <reference path='platform.d.ts'/>
 
-import INativeHost = $safeprojectname$.Platform.INativeHost;
-
-export namespace NativeHost {
-    export function showAbout() {
-        window.NativeHost.showAbout();
-    }
-
-    export function toggleFormBorder() {
-        window.NativeHost.toggleFormBorder();
-    }
-
-    export function quit() {
-        window.NativeHost.quit();
-    }
-}
-
-class WebNativeHost implements INativeHost {
+class WebNativeHost implements $safeprojectname$.Platform.INativeHost {
     showAbout() {
         alert("$safeprojectname$ - ServiceStack + ReactJS");
     }
