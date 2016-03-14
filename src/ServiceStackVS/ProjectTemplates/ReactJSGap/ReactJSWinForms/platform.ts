@@ -5,7 +5,7 @@
 /// <reference path="../$saferootprojectname$/platform.d.ts" />
 document.documentElement.className += ' winforms';
 $(document).ready(() => {
-    window.nativeHost.ready();
+    window['nativeHost'].ready();
 
     $(document).on('keydown', e => {
         if (e.altKey && e.which === 37) {

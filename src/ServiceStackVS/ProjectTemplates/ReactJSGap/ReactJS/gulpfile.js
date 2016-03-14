@@ -93,9 +93,9 @@
 
     // Tasks
 
-    gulp.task('www-clean-dlls', function (done) {
+    gulp.task('www-clean-dlls', function (callback) {
         var binPath = webRoot + '/bin/';
-        del(binPath, done);
+        del(binPath, callback);
     });
     gulp.task('www-copy-bin', function () {
         var binDest = webRoot + 'bin/';
@@ -119,7 +119,7 @@
             .pipe(newer(webRoot))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-clean-client-assets', function (done) {
+    gulp.task('www-clean-client-assets', function (callback) {
         del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
@@ -127,13 +127,13 @@
             '!wwwroot/**/*.asax', //Don't delete asax
             '!wwwroot/**/*.config', //Don't delete config
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ], done);
+        ], callback);
     });
     gulp.task('www-copy-fonts', function () {
         return gulp.src('./jspm_packages/npm/bootstrap@3.2.0/fonts/*.*')
             .pipe(gulp.dest(webRoot + 'lib/fonts/'));
     });
-    gulp.task('www-copy-files', function(done) {
+    gulp.task('www-copy-files', function(callback) {
         var count = 0;
         var length = COPY_FILES.length;
         var result = [];
@@ -175,7 +175,7 @@
                 gulpUtil.log(gulpUtil.colors.green('Copied ' + copy.src));
                 count++;
                 if (count === length) {
-                    done();
+                    callback();
                 }
             });
             return copyTask;
@@ -193,7 +193,7 @@
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
     });
-    gulp.task('www-bundle-html', function (done) {
+    gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
             .pipe(gulpif('*.css', minifyCss()))
             .pipe(useref())
@@ -283,19 +283,19 @@
             .pipe(nugetRestore());
     });
 
-    gulp.task('exec-package-console', function (cb) {
+    gulp.task('www-exec-package-console', function (callback) {
         exec('cmd /c "cd wwwroot_build && package-deploy-console.bat"', function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
-            cb(err);
+            callback(err);
         });
     });
 
-    gulp.task('exec-package-winforms', function(cb) {
+    gulp.task('www-exec-package-winforms', function(callback) {
         exec('cmd /c "cd wwwroot_build && package-deploy-winforms.bat"', function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
-            cb(err);
+            callback(err);
         });
     });
 
@@ -316,12 +316,22 @@
         );
     });
 
-    gulp.task('02-package-console', function(cb) {
+    gulp.task('02-package-console', function(callback) {
         runSequence(
             'www-nuget-restore',
             '01-bundle-all',
             'www-msbuild-console',
-            'exec-package-console');
+            'www-exec-package-console',
+			callback);
+    });
+	
+	gulp.task('02-package-winforms', function (callback) {
+        runSequence(
+            'www-nuget-restore',
+            '01-bundle-all',
+            'www-msbuild-winforms',
+            'www-exec-package-winforms',
+			callback);
     });
 
     gulp.task('01-package-server', function (callback) {

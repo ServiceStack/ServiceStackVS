@@ -13,13 +13,13 @@ class App extends React.Component<any,any> {
     }
 
     handleAbout() {
-        window['nativeHost'].showAbout();
+        window.nativeHost.showAbout();
     }
     handleToggleWindow() {
-        window['nativeHost'].toggleFormBorder();
+        window.nativeHost.toggleFormBorder();
     }
     handleQuit() {
-        window['nativeHost'].quit();
+        window.nativeHost.quit();
     }
 
     render() {
