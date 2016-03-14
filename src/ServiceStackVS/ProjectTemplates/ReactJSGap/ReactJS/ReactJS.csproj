@@ -99,6 +99,7 @@
   <ItemGroup>
     <Content Include="css\app.css" />
     <Content Include="gulpfile.js" />
+	<Content Include="config.js" />
     <Content Include="default.html" />
     <Content Include="platform.css" />
 	<Content Include="platform.js" />
