@@ -6,6 +6,6 @@ declare module $safeprojectname$.Platform {
         showAbout();
         toggleFormBorder();
         quit();
-		ready();
+        ready();
     }
 }
