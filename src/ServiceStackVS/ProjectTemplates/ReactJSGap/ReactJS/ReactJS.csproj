@@ -100,6 +100,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="default.html" />
     <Content Include="platform.css" />
+	<Content Include="platform.js" />
     <Content Include="img\react-logo.png" />
     <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />
