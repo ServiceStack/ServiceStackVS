@@ -111,17 +111,14 @@
             .pipe(gulp.dest(webRoot + 'img/'));
     });
     gulp.task('www-bundle-html', function () {
-        var assets = useref.assets({ searchPath: './' });
         var checkIfJsx = function (file) {
             return file.relative.indexOf('.jsx.js') !== -1;
         };
         return gulp.src('./**/*.cshtml')
-            .pipe(assets)
+            .pipe(useref())
             .pipe(gulpif('*.jsx.js', react()))
             .pipe(gulpif(checkIfJsx, uglify()))
             .pipe(gulpif('*.css', minifyCss()))
-            .pipe(assets.restore())
-            .pipe(useref())
             .pipe(htmlBuild({
                 jqueryCdn: function (block) {
                     pipeTemplate(block, '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>');
