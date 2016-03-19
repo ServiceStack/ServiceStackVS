@@ -8,22 +8,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AngularJS App</title>
+		<base href="/"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--htmlbuild:bootstrapCss -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
         <!-- endbuild -->
         <!--build:css css/app.min.css-->
         <link rel="stylesheet" href="css/app.css" />
         <!-- endbuild -->
         <!-- htmlbuild:jqueryCdn -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="node_modules/jquery/dist/jquery.js"></script>
         <!-- endbuild -->
         <!-- htmlbuild:bootstrapJs -->
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
         <!-- endbuild -->
         <!-- build:js lib/js/modernizr.min.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
+        <script src="node_modules/modernizr/modernizr.js"></script>
         <!-- endbuild -->
     </head>
     <body>
@@ -49,8 +50,8 @@
         </div>
         <div class="container" ng-view></div>
         <!-- build:js lib/js/angular.min.js -->
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-route/angular-route.js"></script>
         <!-- endbuild -->
         <!-- build:js js/app.min.js -->
         <script src="js/hello/controllers.js"></script>
