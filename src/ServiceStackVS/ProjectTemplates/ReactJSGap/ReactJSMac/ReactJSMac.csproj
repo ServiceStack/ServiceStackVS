@@ -24,6 +24,18 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <EnablePackageSigning>false</EnablePackageSigning>
     <EnableCodeSigning>false</EnableCodeSigning>
+	<Profiling>false</Profiling>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnBuildEnabled>True</TypeScriptCompileOnBuildEnabled>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptModuleKind>system</TypeScriptModuleKind>
+    <TypeScriptOutFile>
+	</TypeScriptOutFile>
+    <TypeScriptOutDir>
+	</TypeScriptOutDir>
     <CreatePackage>false</CreatePackage>
     <NoStdLib>true</NoStdLib>
   </PropertyGroup>
@@ -90,6 +102,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="packages.config" />
+	<None Include="platform.ts" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
