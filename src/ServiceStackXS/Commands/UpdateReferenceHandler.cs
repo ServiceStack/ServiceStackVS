@@ -60,10 +60,7 @@ namespace ServiceStackXS.Commands
 				}
 				//Refresh document
 				var openDocument = IdeApp.Workbench.GetDocument(selectedFile.Name);
-				if(openDocument != null) {
-					openDocument.Close();
-					IdeApp.Workbench.OpenDocument(selectedFile.FilePath,selectedFile.Project,true); 
-				}
+				FileService.NotifyFileChanged(openDocument.FileName);
 			} catch (Exception ex) {
 				var messageDialog = new MessageDialog (
 					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
