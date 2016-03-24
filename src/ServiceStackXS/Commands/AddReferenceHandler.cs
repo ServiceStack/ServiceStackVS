@@ -67,6 +67,7 @@ namespace ServiceStackXS.Commands
 			}
 			IdeApp.Workbench.StatusBar.ShowReady ();
 			IdeApp.Workbench.StatusBar.ShowMessage ("Adding ServiceStack Reference...");
+			IdeApp.Workbench.StatusBar.BeginProgress ("Adding ServiceStack Reference...");
 			IdeApp.Workbench.StatusBar.Pulse ();
 			string fullPath = Path.Combine (project.BaseDirectory.FullPath.ToString (), finalFileName);
 			using (var streamWriter = File.CreateText (fullPath)) {
@@ -75,30 +76,28 @@ namespace ServiceStackXS.Commands
 			}
 
 			project.AddFile (fullPath, BuildAction.Compile);
-
-			try {
 				Task.Run (() => { 
+				try {
 					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Client");
 					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Interfaces");
 					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Text");
-				}).ContinueWith (task => { 
+				} catch (Exception ex) {
+					//TODO Error message for user
+					var messageDialog = new MessageDialog (
+						(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
+						DialogFlags.Modal, 
+						MessageType.Warning, 
+						ButtonsType.Close, 
+						"An error occurred trying to add required NuGet packages. Error : " + ex.Message +
+						"\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
+					messageDialog.Run ();
+					messageDialog.Destroy ();
+				} finally {
 					IdeApp.Workbench.StatusBar.ShowReady ();
-					IdeApp.Workbench.StatusBar.Pulse ();
+					IdeApp.Workbench.StatusBar.EndProgress();
+				}}).ContinueWith (task => { 
+					IdeApp.Workbench.StatusBar.ShowReady ();
 				},TaskScheduler.FromCurrentSynchronizationContext ());
-			} catch (Exception ex) {
-				//TODO Error message for user
-				var messageDialog = new MessageDialog (
-					                     (Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,
-					                     DialogFlags.Modal, 
-					                     MessageType.Warning, 
-					                     ButtonsType.Close, 
-					                     "An error occurred trying to add required NuGet packages. Error : " + ex.Message +
-					                     "\r\n\r\nGenerated service reference will require ServiceStack.Interfaces as a minimum.");
-				messageDialog.Run ();
-				messageDialog.Destroy ();
-				IdeApp.Workbench.StatusBar.ShowReady ();
-				IdeApp.Workbench.StatusBar.Pulse ();
-			}
 		}
 
 		void AddNuGetPackageReference(IDotNetProject project,string packageId)
