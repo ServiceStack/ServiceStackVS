@@ -46,6 +46,7 @@
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
     var exec = require('child_process').exec;
+	var nugetpack = require('gulp-nuget-pack');
 
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';

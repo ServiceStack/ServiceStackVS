@@ -22,11 +22,11 @@ namespace $safeprojectname$
         [STAThread]
         static void Main()
         {
-			SquirrelAwareApp.HandleEvents(
-                AppHost.OnInitialInstall,
-                AppHost.OnAppUpdate,
-                onAppUninstall: AppHost.OnAppUninstall,
-                onFirstRun: AppHost.OnFirstRun);
+            SquirrelAwareApp.HandleEvents(
+                version => AppHost.OnInitialInstall(version),
+                version => AppHost.OnAppUpdate(version),
+                onAppUninstall: version => AppHost.OnAppUninstall(version),
+                onFirstRun: () => AppHost.OnFirstRun());
 		
             Cef.Initialize(new CefSettings());
 

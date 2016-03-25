@@ -39,9 +39,19 @@ namespace $safeprojectname$
 			Task.Run(() => CheckForUpdates());
         }
 		
-		private async void CheckForUpdates()
+        private async void CheckForUpdates()
         {
-            using (var mgr = new UpdateManager(AppSettings.GetString("PackageDeployUrl") ?? "..\\..\\Releases".MapProjectPath()))
+#if DEBUG
+            if (!IsInstalled())
+                return;
+
+            if (!File.Exists("..\\Update.exe"))
+            {
+                File.Copy("..\\..\\..\\..\\..\\packages\\squirrel.windows.1.2.5\\tools\\Squirrel.exe".MapHostAbsolutePath(),"..\\Update.exe");
+            }
+            AppSettings.Set("PackageDeployUrl",GetInstallPath());
+#endif
+            using (var mgr = new UpdateManager(AppSettings.GetString("PackageDeployUrl")))
             {
                 var updateInfo = await mgr.CheckForUpdate();
                 if (updateInfo.ReleasesToApply.Count > 0)
@@ -51,6 +61,19 @@ namespace $safeprojectname$
                 }
             }
         }
+		
+#if DEBUG
+        private bool IsInstalled()
+        {
+            return File.Exists(GetInstallPath());
+        }
+
+        private string GetInstallPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "$saferootprojectname$");
+        }
+#endif
 
         public void OnInitialInstall(Version version)
         {
