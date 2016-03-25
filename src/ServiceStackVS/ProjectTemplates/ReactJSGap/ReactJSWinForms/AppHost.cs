@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Funq;
 using ServiceStack;
+using Squirrel;
 using $saferootprojectname$.Resources;
 using $saferootprojectname$.ServiceInterface;
 
@@ -34,6 +35,41 @@ namespace $safeprojectname$
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(SharedEmbeddedResources) },
             });
+			
+			Task.Run(() => CheckForUpdates());
+        }
+		
+		private async void CheckForUpdates()
+        {
+            using (var mgr = new UpdateManager(AppSettings.GetString("PackageDeployUrl") ?? "..\\..\\Releases".MapProjectPath()))
+            {
+                var updateInfo = await mgr.CheckForUpdate();
+                if (updateInfo.ReleasesToApply.Count > 0)
+                {
+                    await mgr.DownloadReleases(updateInfo.ReleasesToApply);
+                    await mgr.ApplyReleases(updateInfo);
+                }
+            }
+        }
+
+        public void OnInitialInstall(Version version)
+        {
+            // Hook for first install
+        }
+
+        public void OnAppUpdate(Version version)
+        {
+            // Hook for application update, CheckForUpdates() initiates this.
+        }
+
+        public void OnAppUninstall(Version version)
+        {
+            // Hook for application uninstall
+        }
+
+        public void OnFirstRun()
+        {
+            // Hook for first run
         }
     }
 }

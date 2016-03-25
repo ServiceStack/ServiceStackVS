@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CefSharp;
 using ServiceStack;
 using ServiceStack.Text;
+using Squirrel;
 
 namespace $safeprojectname$
 {
@@ -21,6 +22,12 @@ namespace $safeprojectname$
         [STAThread]
         static void Main()
         {
+			SquirrelAwareApp.HandleEvents(
+                AppHost.OnInitialInstall,
+                AppHost.OnAppUpdate,
+                onAppUninstall: AppHost.OnAppUninstall,
+                onFirstRun: AppHost.OnFirstRun);
+		
             Cef.Initialize(new CefSettings());
 
             Application.EnableVisualStyles();

@@ -283,6 +283,52 @@
             .pipe(nugetRestore());
     });
 
+    function extractAssemblyAttribute(filePath, attrName) {
+        var assemblyInfoContents = fs.readFileSync(filePath, { encoding: 'utf8' });
+        var lines = assemblyInfoContents.split('\n');
+        var result = null;
+        for (var i = 0; i < lines.length; i++) {
+            if(lines[i].startsWith('//'))
+                continue;
+            var line = lines[i].trim();
+            if (line.startsWith('[assembly: ') && line.indexOf(attrName) > 0) {
+                var startIndex = line.indexOf('(') + 1;
+                var endIndex = line.indexOf(')');
+                if (line.indexOf('("') > -1) {
+                    //String value
+                    startIndex = line.indexOf('("') + 2;
+                    endIndex = line.indexOf('")');
+                }
+                result = line.substr(startIndex, endIndex - startIndex);
+                break;
+            }
+        }
+        return result;
+    }
+
+    gulp.task('www-nuget-pack-winforms', function (callback) {
+        var assemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
+        var version = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyVersion');
+        var title = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyTitle');
+        var description = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyDescription') || 'Test';
+        var authors = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyCompany');
+        var excludes = ['*.pdb', '*.vshost'];
+        var includes = [
+        { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/*.*', dest: '/lib/net45/' },
+        { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/locales/*.*', dest: '/lib/net45/locales/' }];
+        return nugetpack({
+            id: '$safeprojectname$.AppWinForms',
+                title:title,
+                version: version,
+                authors: authors,
+                description: description,
+                excludes: excludes,
+                outputDir: '../../'
+            },
+            includes,
+            callback);
+    });
+
     gulp.task('www-exec-package-console', function (callback) {
         exec('cmd /c "cd wwwroot_build && package-deploy-console.bat"', function (err, stdout, stderr) {
             console.log(stdout);
@@ -292,9 +338,19 @@
     });
 
     gulp.task('www-exec-package-winforms', function(callback) {
-        exec('cmd /c "cd wwwroot_build && package-deploy-winforms.bat"', function (err, stdout, stderr) {
+        var squirrelPath = path.resolve('../../packages/squirrel.windows.1.2.5/tools/');
+        var appName = '$safeprojectname$.AppWinforms';
+        var version = extractAssemblyAttribute('../' + appName + '/Properties/AssemblyInfo.cs', 'AssemblyVersion');
+        var rootDir = '..\\..\\';
+        var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
+        var releaseDir = rootDir + 'Releases';
+        gulpUtil.log(gulpUtil.colors.green('Packaging using Squirrel: ') + gulpUtil.colors.white(nugetPkg));
+        exec('Squirrel.exe --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir, { env: { 'PATH': squirrelPath + ';' } }, function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
+            if (!err) {
+                gulpUtil.log(gulpUtil.colors.green('Package created/updated at: ') + gulpUtil.colors.white(releaseDir));
+            }
             callback(err);
         });
     });
@@ -330,6 +386,7 @@
             'www-nuget-restore',
             '01-bundle-all',
             'www-msbuild-winforms',
+            'www-nuget-pack-winforms',
             'www-exec-package-winforms',
 			callback);
     });
