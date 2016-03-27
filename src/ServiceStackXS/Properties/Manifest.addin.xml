@@ -6,7 +6,7 @@
         url             ="https://github.com/ServiceStack/ServiceStackVS" 
         description     ="An extension to work with the ServiceStack framework."
         category        ="IDE extensions"
-        version         ="0.3">
+        version         ="0.4">
 	<Header>
 		<Name>ServiceStackXS</Name>
 		<Description>An extension to work with the ServiceStack framework.</Description>

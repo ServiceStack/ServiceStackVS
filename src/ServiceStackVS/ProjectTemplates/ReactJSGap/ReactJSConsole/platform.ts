@@ -13,7 +13,8 @@ class ConsoleNativeHost implements Platform.INativeHost {
     toggleFormBorder() {}
 
     quit() {
-        $.post('/nativehost/quit').then(response => {
+        $.post('/nativehost/quit').always(_ => {
+
             window.close();
         });
     }
