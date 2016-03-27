@@ -7,7 +7,7 @@ var ConsoleNativeHost = (function () {
     ConsoleNativeHost.prototype.toggleFormBorder = function () {
     };
     ConsoleNativeHost.prototype.quit = function () {
-        $.post('/nativehost/quit').then(function (response) {
+        $.post('/nativehost/quit').always(function (_) {
             window.close();
         });
     };
