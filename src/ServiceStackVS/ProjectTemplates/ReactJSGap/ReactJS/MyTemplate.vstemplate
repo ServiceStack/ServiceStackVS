@@ -42,6 +42,7 @@
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
+      <npm-package id="jspm" />
       <npm-package id="typings" />
     </NodeJS>
   </WizardData>
