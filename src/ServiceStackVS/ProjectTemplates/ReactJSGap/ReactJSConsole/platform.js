@@ -8,7 +8,7 @@ window.nativeHost = {
             });
     },
     showAbout: function() {
-        alert('ReactChat - ServiceStack + ReactJS');
+        alert('ServiceStack SelfHost Console + React');
     },
     ready: function() {
         //

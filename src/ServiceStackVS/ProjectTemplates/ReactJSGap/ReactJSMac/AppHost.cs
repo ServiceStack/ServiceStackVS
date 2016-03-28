@@ -74,6 +74,7 @@ namespace $safeprojectname$
 				foreach (var item in Program.MainMenu.ItemArray()) {
 					if (item.Title == "$saferootprojectname$") {
 						item.Submenu.PerformActionForItem(0);
+                        return;
 					}
 				}
 			});

@@ -4,7 +4,7 @@
 
 class WebNativeHost {
     showAbout() {
-        alert("$safeprojectname$ - ServiceStack + ReactJS");
+        alert("$safeprojectname$ - ServiceStack + React");
     }
 
     toggleFormBorder() {}

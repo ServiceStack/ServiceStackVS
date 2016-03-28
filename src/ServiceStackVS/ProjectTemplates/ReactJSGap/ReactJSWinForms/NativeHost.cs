@@ -32,7 +32,7 @@ namespace $safeprojectname$
 
         public void ShowAbout()
         {
-            MessageBox.Show(@"ServiceStack with CefSharp + ReactJS", @"$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"ServiceStack Winforms with CefSharp + React", @"$safeprojectname$", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ToggleFormBorder()
