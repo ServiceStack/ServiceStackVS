@@ -7,7 +7,7 @@ using ServiceStack;
 using ServiceStack.Text;
 using ServiceStack.Auth;
 using ServiceStack.Redis;
-using MonoMac.AppKit;
+using AppKit;
 using $saferootprojectname$.ServiceInterface;
 using $saferootprojectname$.Resources;
 
@@ -84,7 +84,10 @@ namespace $safeprojectname$
 			AppDelegate.MainWindowController.InvokeOnMainThread (() => {
 				AppDelegate.MainWindowController.Hide();
 			});
+			
 			Environment.Exit(0);
+			
+			AppDelegate.MainWindowController.Window.PerformClose (this);
 		}
 	}
 }

@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 namespace $safeprojectname$
 {
-	public partial class MainWindowController : MonoMac.AppKit.NSWindowController
+	public partial class MainWindowController : AppKit.NSWindowController
 	{
 		#region Constructors
 
@@ -48,7 +48,7 @@ namespace $safeprojectname$
 		{
 			var xPos = Window.Screen.Frame.Width / 2 - Window.Frame.Width / 2;
 			var yPos = Window.Screen.Frame.Height / 2 - Window.Frame.Height / 2;
-			Window.SetFrame(new System.Drawing.RectangleF(xPos, yPos, Window.Frame.Width, Window.Frame.Height), display:true);
+			Window.SetFrame(new CoreGraphics.CGRect(xPos, yPos, Window.Frame.Width, Window.Frame.Height), display:true);
 		}
 
 		public void Hide()
