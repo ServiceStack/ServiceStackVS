@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CefSharp.BrowserSubprocess.Core">
-      <HintPath>..\..\packages\CefSharp.Common.45.0.0\CefSharp\x86\CefSharp.BrowserSubprocess.Core.dll</HintPath>
+      <HintPath>..\..\packages\CefSharp.Common.47.0.3\CefSharp\x86\CefSharp.BrowserSubprocess.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
