@@ -67,8 +67,9 @@ namespace $safeprojectname$
     {
         public void Quit()
         {
-            ThreadPool.QueueUserWorkItem(_ => {
-                Thread.Sleep(10);    // Allow /nativehost/quit to return gracefully
+            System.Threading.ThreadPool.QueueUserWorkItem(_ =>
+            {
+                System.Threading.Thread.Sleep(10);    // Allow /nativehost/quit to return gracefully
                 Environment.Exit(0);
             });
         }
