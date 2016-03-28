@@ -103,7 +103,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="packages.config" />
-	<None Include="platform.ts" />
+	<None Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

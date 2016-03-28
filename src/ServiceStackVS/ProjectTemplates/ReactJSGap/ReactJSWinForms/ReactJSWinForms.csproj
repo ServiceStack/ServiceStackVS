@@ -91,7 +91,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
-	<None Include="tsconfig.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,9 +124,6 @@
   </ItemGroup>
     <ItemGroup>
     <Content Include="logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-	<TypeScriptCompile Include="platform.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

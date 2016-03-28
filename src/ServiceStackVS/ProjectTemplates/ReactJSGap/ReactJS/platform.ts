@@ -3,7 +3,7 @@
 // https://github.com/Microsoft/TypeScript/wiki/JSX
 /// <reference path='platform.d.ts'/>
 
-class WebNativeHost implements $safeprojectname$.Platform.INativeHost {
+class WebNativeHost {
     showAbout() {
         alert("$safeprojectname$ - ServiceStack + ReactJS");
     }
