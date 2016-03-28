@@ -232,8 +232,8 @@
             .pipe(gulp.dest('./'));
     });
 
-    gulp.task('www-msbuild', function() {
-        return gulp.src('../../$safeprojectname$.sln')
+    gulp.task('www-msbuild-web', function() {
+        return gulp.src('./$safeprojectname$.csproj')
             .pipe(msbuild({
                 targets: ['Clean', 'Rebuild'],
                 properties: {
@@ -336,7 +336,7 @@
 
     gulp.task('01-package-server', function (callback) {
         runSequence('www-nuget-restore',
-            'www-msbuild', 'www-clean-dlls',
+            'www-msbuild-web', 'www-clean-dlls',
                 [
                     'www-copy-bin',
                     'www-copy-appdata',
@@ -361,7 +361,7 @@
 
     gulp.task('00-update-deps-js', function (callback) {
         runSequence('www-nuget-restore',
-            'www-msbuild', 'www-jspm-deps',
+            'www-msbuild-web', 'www-jspm-deps',
                 callback);
     });
 
