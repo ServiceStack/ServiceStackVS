@@ -21,6 +21,7 @@ namespace $safeprojectname$
         [STAThread]
         static void Main()
         {
+            Cef.EnableHighDPISupport();
             Cef.Initialize(new CefSettings());
 
             Application.EnableVisualStyles();
