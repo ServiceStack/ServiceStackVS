@@ -38,8 +38,8 @@
       <package id="ServiceStack.OrmLite" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
-	    <package id="CefSharp.WinForms" version="45.0.0" />
-      <package id="CefSharp.Common" version="45.0.0" />
+	    <package id="CefSharp.WinForms" version="47.0.3" />
+      <package id="CefSharp.Common" version="47.0.3" />
     </NuGetPackages>
     <BuildConfig platform="x86" configuration="Debug" projectFileExtension="csproj"></BuildConfig>
   </WizardData>
