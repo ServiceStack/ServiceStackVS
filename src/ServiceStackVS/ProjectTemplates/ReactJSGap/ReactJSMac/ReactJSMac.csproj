@@ -101,11 +101,11 @@
     <InterfaceDefinition Include="MainWindow.xib" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$saferootprojectname$\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceInterface\$saferootprojectname$.ServiceInterface.csproj">
       <Project>{582DFB0F-F84D-4E43-9BCA-2A5A86600B7A}</Project>
       <Name>$saferootprojectname$.ServiceInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\$saferootprojectname$\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
+    <ProjectReference Include="..\$saferootprojectname$.ServiceModel\$saferootprojectname$.ServiceModel.csproj">
       <Project>{08BEF328-AB7D-48D3-800D-48ACC75C7914}</Project>
       <Name>$saferootprojectname$.ServiceModel</Name>
     </ProjectReference>
