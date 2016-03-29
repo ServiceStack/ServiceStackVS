@@ -17400,7 +17400,7 @@ System.register("platform.js", [], function(exports_1, context_1) {
       WebNativeHost = (function() {
         function WebNativeHost() {}
         WebNativeHost.prototype.showAbout = function() {
-          alert("ReactDesktopApps3 - ServiceStack + ReactJS");
+          alert("$saferootprojectname$ - ServiceStack + ReactJS");
         };
         WebNativeHost.prototype.toggleFormBorder = function() {};
         WebNativeHost.prototype.quit = function() {
@@ -17469,7 +17469,7 @@ System.register("src/app.js", ["npm:react-dom@0.14.7.js", "npm:react@0.14.7.js",
           }, React.createElement("span", {className: "sr-only"}, "Toggle navigation"), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"})), React.createElement("a", {
             className: "navbar-brand",
             href: "/"
-          }, React.createElement("img", {src: "/img/react-logo.png"}), "ReactDesktopApps2")), React.createElement("div", {className: "navbar-collapse collapse"}, React.createElement("ul", {className: "nav navbar-nav pull-right"}, React.createElement("li", null, React.createElement("a", {onClick: this.handleAbout}, "About")), React.createElement("li", {className: "platform winforms"}, React.createElement("a", {onClick: this.handleToggleWindow}, "Toggle Window")), React.createElement("li", {className: "platform winforms mac console"}, React.createElement("a", {onClick: this.handleQuit}, "Close")))))), React.createElement("div", {className: "container"}, React.createElement(hello_1.default, null))));
+          }, React.createElement("img", {src: "/img/react-logo.png"}), "$saferootprojectname$")), React.createElement("div", {className: "navbar-collapse collapse"}, React.createElement("ul", {className: "nav navbar-nav pull-right"}, React.createElement("li", null, React.createElement("a", {onClick: this.handleAbout}, "About")), React.createElement("li", {className: "platform winforms"}, React.createElement("a", {onClick: this.handleToggleWindow}, "Toggle Window")), React.createElement("li", {className: "platform winforms mac console"}, React.createElement("a", {onClick: this.handleQuit}, "Close")))))), React.createElement("div", {className: "container"}, React.createElement(hello_1.default, null))));
         };
         return App;
       }(React.Component));
