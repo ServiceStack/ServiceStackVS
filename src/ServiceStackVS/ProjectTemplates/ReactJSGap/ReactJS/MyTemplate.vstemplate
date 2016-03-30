@@ -41,8 +41,9 @@
       <package id="ServiceStack.Text" version="latest" />
     </NuGetPackages>
     <NodeJS>
-      <npm-package id="grunt-cli" />
       <npm-package id="gulp" />
+      <npm-package id="jspm" />
+      <npm-package id="typings" />
     </NodeJS>
   </WizardData>
 </VSTemplate>

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
-using MonoMac.ObjCRuntime;
+using CoreGraphics;
+using Foundation;
+using AppKit;
+using ObjCRuntime;
 
 namespace $safeprojectname$
 {
@@ -12,7 +12,7 @@ namespace $safeprojectname$
 
 		public AppDelegate(){}
 
-		public override void FinishedLaunching (NSObject notification)
+		public override void DidFinishLaunching (NSNotification notification)
 		{
 #if DEBUG
 			//Enable WebInspector in WebView

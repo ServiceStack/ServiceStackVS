@@ -69,7 +69,6 @@
         <File name="MainWindowController.cs" />
         <File name="platform.css" />
         <File name="platform.js" />
-		<File name="platform.ts" />
         <File name="packages.config" />
         <File name="logo.icns" dest="Resources"/>
       </Files>

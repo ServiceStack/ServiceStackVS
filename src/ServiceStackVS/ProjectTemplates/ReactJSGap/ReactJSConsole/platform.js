@@ -1,16 +1,17 @@
-var ConsoleNativeHost = (function () {
-    function ConsoleNativeHost() {
-    }
-    ConsoleNativeHost.prototype.showAbout = function () {
-        alert("$safeprojectname$ - ServiceStack + ReactJS");
-    };
-    ConsoleNativeHost.prototype.toggleFormBorder = function () {
-    };
-    ConsoleNativeHost.prototype.quit = function () {
-        $.post('/nativehost/quit').always(function (_) {
-            window.close();
-        });
-    };
-    return ConsoleNativeHost;
-}());
-window.nativeHost = new ConsoleNativeHost();
+/* console */
+document.documentElement.className += ' console';
+window.nativeHost = {
+    quit: function() {
+        $.post('/nativehost/quit')
+            .then(function() {
+                window.close();
+            });
+    },
+    showAbout: function() {
+        alert('ServiceStack SelfHost Console + React');
+    },
+    ready: function() {
+        //
+    },
+    platform: 'console'
+};

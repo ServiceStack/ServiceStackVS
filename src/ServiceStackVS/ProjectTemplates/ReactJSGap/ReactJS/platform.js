@@ -1,14 +1,15 @@
-﻿/* web */
-document.documentElement.className += ' web';
-window.nativeHost = {
-    quit: function() {
+﻿document.documentElement.className += ' web';
+var WebNativeHost = (function () {
+    function WebNativeHost() {
+    }
+    WebNativeHost.prototype.showAbout = function () {
+        alert("ReactDesktopTest - ServiceStack + React");
+    };
+    WebNativeHost.prototype.toggleFormBorder = function () { };
+    WebNativeHost.prototype.quit = function () {
         window.close();
-    },
-    showAbout: function() {
-        alert('$safeprojectname$ - ServiceStack + ReactJS');
-    },
-    ready: function() {
-        //
-    },
-    platform: 'web'
-};
+    };
+    WebNativeHost.prototype.ready = function () { };
+    return WebNativeHost;
+})();
+window.nativeHost = window.nativeHost || new WebNativeHost();

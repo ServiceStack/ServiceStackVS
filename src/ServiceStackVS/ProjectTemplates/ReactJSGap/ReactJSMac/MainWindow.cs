@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 namespace $safeprojectname$
 {
-	public partial class MainWindow : MonoMac.AppKit.NSWindow
+	public partial class MainWindow : AppKit.NSWindow
 	{
 		#region Constructors
 
@@ -36,9 +36,9 @@ namespace $safeprojectname$
 			base.AwakeFromNib ();
 			Program.MainMenu = NSApplication.SharedApplication.MainMenu;
 			webView.MainFrameUrl = Program.HostUrl;
-			webView.Frame = new System.Drawing.RectangleF(0,0,this.Frame.Width,this.Frame.Height);
+			webView.Frame = new CoreGraphics.CGRect(0,0,this.Frame.Width,this.Frame.Height);
 			this.DidResize += (sender, e) =>  {
-				webView.Frame = new System.Drawing.RectangleF(0,0,this.Frame.Width,this.Frame.Height);
+				webView.Frame = new CoreGraphics.CGRect(0,0,this.Frame.Width,this.Frame.Height);
 			};
 		}
 	}

@@ -55,7 +55,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-	<None Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$saferootprojectname$.Resources\$saferootprojectname$.Resources.csproj">
@@ -77,9 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-	<TypeScriptCompile Include="platform.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

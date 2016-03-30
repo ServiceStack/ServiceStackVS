@@ -7,7 +7,7 @@ using ServiceStack;
 using ServiceStack.Text;
 using ServiceStack.Auth;
 using ServiceStack.Redis;
-using MonoMac.AppKit;
+using AppKit;
 using $saferootprojectname$.ServiceInterface;
 using $saferootprojectname$.Resources;
 
@@ -74,6 +74,7 @@ namespace $safeprojectname$
 				foreach (var item in Program.MainMenu.ItemArray()) {
 					if (item.Title == "$saferootprojectname$") {
 						item.Submenu.PerformActionForItem(0);
+                        return;
 					}
 				}
 			});
@@ -81,10 +82,9 @@ namespace $safeprojectname$
 
 		public void Quit()
 		{
-			AppDelegate.MainWindowController.InvokeOnMainThread (() => {
-				AppDelegate.MainWindowController.Hide();
-			});
-			Environment.Exit(0);
+            Program.MainMenu.InvokeOnMainThread (() => {
+                NSApplication.SharedApplication.Terminate(NSApplication.SharedApplication);
+            });
 		}
 	}
 }

@@ -28,6 +28,7 @@ namespace $safeprojectname$
                 onAppUninstall: version => AppHost.OnAppUninstall(version),
                 onFirstRun: () => AppHost.OnFirstRun());
 		
+            Cef.EnableHighDPISupport();
             Cef.Initialize(new CefSettings());
 
             Application.EnableVisualStyles();
