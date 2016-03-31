@@ -356,9 +356,10 @@
         runSequence(
             'www-clean-dlls',
             'www-clean-client-assets',
+		    'www-msbuild-web',
             'www-copy-fonts',
             'www-copy-images',
-			'www-copy-jspm-config',
+		    'www-copy-jspm-config',
             'www-copy-files',
             'www-jspm-build',
             'www-bundle-html',
