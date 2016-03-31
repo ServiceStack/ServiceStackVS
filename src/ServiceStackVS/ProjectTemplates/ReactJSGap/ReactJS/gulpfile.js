@@ -303,7 +303,19 @@
         return result;
     }
 
+    function initWinformsReleaseDirectory() {
+        var appsDir = webBuildDir + 'apps/';
+        var winFormsInstall = appsDir + 'winforms-installer/';
+        if (!fs.existsSync(appsDir)) {
+            fs.mkdirSync(appsDir);
+        }
+        if (!fs.existsSync(winFormsInstall)) {
+            fs.mkdirSync(winFormsInstall);
+        }
+    }
+
     gulp.task('www-nuget-pack-winforms', function (callback) {
+        initWinformsReleaseDirectory();
         var assemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
         var version = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyVersion');
         var title = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyTitle');
@@ -320,7 +332,7 @@
                 authors: authors,
                 description: description,
                 excludes: excludes,
-                outputDir: '../../'
+                outputDir: 'wwwroot_build/apps/winforms-installer/'
             },
             includes,
             callback);
@@ -334,11 +346,12 @@
         });
     });
 
-    gulp.task('www-exec-package-winforms', function(callback) {
+    gulp.task('www-exec-package-winforms', function (callback) {
+        initWinformsReleaseDirectory();
         var squirrelPath = path.resolve('../../packages/squirrel.windows.1.2.5/tools/');
         var appName = '$safeprojectname$.AppWinforms';
         var version = extractAssemblyAttribute('../' + appName + '/Properties/AssemblyInfo.cs', 'AssemblyVersion');
-        var rootDir = '..\\..\\';
+        var rootDir = 'wwwroot_build\\apps\\winforms-installer\\';
         var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
         var releaseDir = rootDir + 'Releases';
         gulpUtil.log(gulpUtil.colors.green('Packaging using Squirrel: ') + gulpUtil.colors.white(nugetPkg));
@@ -356,6 +369,7 @@
         runSequence(
             'www-clean-dlls',
             'www-clean-client-assets',
+            'www-nuget-restore',
 		    'www-msbuild-web',
             'www-copy-fonts',
             'www-copy-images',
@@ -363,7 +377,6 @@
             'www-copy-files',
             'www-jspm-build',
             'www-bundle-html',
-            'www-nuget-restore',
             'www-msbuild-resources',
             'www-copy-resources-lib',
             callback
