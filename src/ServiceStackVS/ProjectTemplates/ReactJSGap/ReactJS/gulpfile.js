@@ -271,8 +271,7 @@
             .pipe(msbuild({
                 targets: ['Clean', 'Rebuild'],
                 properties: {
-                    Configuration: 'Release',
-                    Platform: 'x86'
+                    Configuration: 'Release'
                 },
                 stdout: true,
                 verbosity: 'quiet'
