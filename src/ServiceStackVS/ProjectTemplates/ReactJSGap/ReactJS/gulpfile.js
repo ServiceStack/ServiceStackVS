@@ -31,7 +31,6 @@
     var gulpUtil = require('gulp-util');
     // include plug-ins
     var del = require('del');
-    var uglify = require('gulp-uglify');
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
     var gulpif = require('gulp-if');
