@@ -23,10 +23,10 @@ namespace $safeprojectname$
         static void Main()
         {
             SquirrelAwareApp.HandleEvents(
-                version => AppHost.OnInitialInstall(version),
-                version => AppHost.OnAppUpdate(version),
-                onAppUninstall: version => AppHost.OnAppUninstall(version),
-                onFirstRun: () => AppHost.OnFirstRun());
+                OnInitialInstall,
+                OnAppUpdate,
+                onAppUninstall: OnAppUninstall,
+                onFirstRun: OnFirstRun);
 		
             Cef.EnableHighDPISupport();
             Cef.Initialize(new CefSettings());
@@ -39,6 +39,26 @@ namespace $safeprojectname$
             "ServiceStack SelfHost listening at {0} ".Fmt(HostUrl).Print();
             Form = new FormMain();
             Application.Run(Form);
+        }
+		
+		public static void OnInitialInstall(Version version)
+        {
+            // Hook for first install
+        }
+
+        public static void OnAppUpdate(Version version)
+        {
+            // Hook for application update, CheckForUpdates() initiates this.
+        }
+
+        public static void OnAppUninstall(Version version)
+        {
+            // Hook for application uninstall
+        }
+
+        public static void OnFirstRun()
+        {
+            // Hook for first run
         }
     }
 }

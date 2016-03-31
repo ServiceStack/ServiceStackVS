@@ -34,25 +34,5 @@ namespace $safeprojectname$
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(SharedEmbeddedResources) },
             });
         }
-		
-        public void OnInitialInstall(Version version)
-        {
-            // Hook for first install
-        }
-
-        public void OnAppUpdate(Version version)
-        {
-            // Hook for application update, CheckForUpdates() initiates this.
-        }
-
-        public void OnAppUninstall(Version version)
-        {
-            // Hook for application uninstall
-        }
-
-        public void OnFirstRun()
-        {
-            // Hook for first run
-        }
     }
 }
