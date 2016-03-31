@@ -313,20 +313,24 @@
         }
     }
 
-    gulp.task('www-nuget-pack-winforms', function (callback) {
+gulp.task('www-nuget-pack-winforms', function (callback) {
+        var globule = require('globule');
         initWinformsReleaseDirectory();
         var assemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
         var version = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyVersion');
         var title = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyTitle');
         var description = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyDescription') || 'Test';
         var authors = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyCompany');
-        var excludes = ['*.pdb', '*.vshost'];
+        var excludes = globule.find([
+            '../$safeprojectname$.AppWinForms/bin/x86/Release/*.pdb',
+            '../$safeprojectname$.AppWinForms/bin/x86/Release/*.vshost.*'
+        ]);
         var includes = [
         { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/*.*', dest: '/lib/net45/' },
         { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/locales/*.*', dest: '/lib/net45/locales/' }];
         return nugetpack({
             id: '$safeprojectname$.AppWinForms',
-                title:title,
+            title: '$safeprojectname$.AppWinForms',
                 version: version,
                 authors: authors,
                 description: description,

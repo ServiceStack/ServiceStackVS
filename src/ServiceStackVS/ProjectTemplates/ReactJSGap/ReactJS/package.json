@@ -21,6 +21,7 @@
   "devDependencies": {
     "del": "~1.1.1",
     "event-stream": "~3.3.2",
+	"globule": "~0.2.0",
     "gulp": "~3.9.1",
     "gulp-htmlbuild": "~0.4.1",
     "gulp-if": "~1.2.4",
