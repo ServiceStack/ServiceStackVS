@@ -33,46 +33,8 @@ namespace $safeprojectname$
                 DebugMode = true,
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(SharedEmbeddedResources) },
             });
-			
-			Task.Run(() => CheckForUpdates());
         }
 		
-        private async void CheckForUpdates()
-        {
-#if DEBUG
-            if (!IsInstalled())
-                return;
-
-            if (!File.Exists("..\\Update.exe"))
-            {
-                File.Copy("..\\..\\..\\..\\..\\packages\\squirrel.windows.1.2.5\\tools\\Squirrel.exe".MapHostAbsolutePath(),"..\\Update.exe");
-            }
-            AppSettings.Set("PackageDeployUrl",GetInstallPath());
-#endif
-            using (var mgr = new UpdateManager(AppSettings.GetString("PackageDeployUrl")))
-            {
-                var updateInfo = await mgr.CheckForUpdate();
-                if (updateInfo.ReleasesToApply.Count > 0)
-                {
-                    await mgr.DownloadReleases(updateInfo.ReleasesToApply);
-                    await mgr.ApplyReleases(updateInfo);
-                }
-            }
-        }
-		
-#if DEBUG
-        private bool IsInstalled()
-        {
-            return File.Exists(GetInstallPath());
-        }
-
-        private string GetInstallPath()
-        {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "$saferootprojectname$");
-        }
-#endif
-
         public void OnInitialInstall(Version version)
         {
             // Hook for first install
