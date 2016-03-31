@@ -1,6 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms.Internals;
+using ServiceStack.Configuration;
 
 namespace $safeprojectname$
 {
@@ -50,6 +53,32 @@ namespace $safeprojectname$
             formMain.InvokeOnUiThreadIfRequired(() =>
             {
                 //Invoke on DOM ready
+                var appSettings = new AppSettings();
+                var checkForUpdates = appSettings.Get<bool>("EnableAutoUpdate");
+                if (!checkForUpdates)
+                    return;
+
+                var releaseFolderUrl = appSettings.GetString("UpdateManagerUrl");
+                var updatesAvailableTask = SquirrelHelpers.CheckForUpdates(releaseFolderUrl);
+                updatesAvailableTask.Wait(5000);
+                bool updatesAvailable = updatesAvailableTask.Result;
+                if (updatesAvailable)
+                {
+                    // Notify web client updates are available.
+                    formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
+                }
+            });
+        }
+		
+		public void PerformUpdate()
+        {
+            SquirrelHelpers.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
+            {
+                var version = t.Result.Version.Version;
+                var versionStr = version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision;
+                var exeName = Process.GetCurrentProcess().MainModule.FileName;
+                Process.Start(Path.Combine(Application.StartupPath, "..\\app-" + versionStr + "\\" + exeName));
+                formMain.Close();
             });
         }
     }
