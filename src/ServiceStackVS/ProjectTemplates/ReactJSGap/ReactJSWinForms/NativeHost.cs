@@ -79,15 +79,15 @@ namespace $safeprojectname$
             }
         }
 		
-		public void PerformUpdate()
+        public void PerformUpdate()
         {
             SquirrelHelpers.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
             {
-                var version = t.Result.Version.Version;
-                var versionStr = version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision;
-                var exeName = Process.GetCurrentProcess().MainModule.FileName;
-                Process.Start(Path.Combine(Application.StartupPath, "..\\app-" + versionStr + "\\" + exeName));
-                formMain.Close();
+                formMain.InvokeOnUiThreadIfRequired(() =>
+                {
+                    formMain.Close();
+                });
+                UpdateManager.RestartApp();
             });
         }
     }

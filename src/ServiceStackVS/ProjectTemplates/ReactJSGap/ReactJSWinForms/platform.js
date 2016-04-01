@@ -26,6 +26,9 @@ $(document).ready(function () {
         }, 1500);
     };
     window.updateNow = function () {
+        setTimeout(function () {
+            $("#alertUpdate")[0].innerHTML = 'Applying update.. Please wait, application will restart..';
+        }, 500);
         window.nativeHost.performUpdate();
     };
 });
