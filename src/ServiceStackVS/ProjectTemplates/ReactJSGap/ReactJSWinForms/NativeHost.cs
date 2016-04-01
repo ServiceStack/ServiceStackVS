@@ -50,24 +50,33 @@ namespace $safeprojectname$
 
         public void Ready()
         {
-            formMain.InvokeOnUiThreadIfRequired(() =>
-            {
-                //Invoke on DOM ready
-                var appSettings = new AppSettings();
-                var checkForUpdates = appSettings.Get<bool>("EnableAutoUpdate");
-                if (!checkForUpdates)
-                    return;
+            //Invoke on DOM ready
+            var appSettings = new AppSettings();
+            var checkForUpdates = appSettings.Get<bool>("EnableAutoUpdate");
+            if (!checkForUpdates)
+                return;
 
-                var releaseFolderUrl = appSettings.GetString("UpdateManagerUrl");
+            var releaseFolderUrl = appSettings.GetString("UpdateManagerUrl");
+            try
+            {
                 var updatesAvailableTask = SquirrelHelpers.CheckForUpdates(releaseFolderUrl);
-                updatesAvailableTask.Wait(5000);
-                bool updatesAvailable = updatesAvailableTask.Result;
-                if (updatesAvailable)
+                updatesAvailableTask.ContinueWith(isAvailable =>
                 {
-                    // Notify web client updates are available.
-                    formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
-                }
-            });
+                    bool updatesAvailable = isAvailable.Result;
+                    if (updatesAvailable)
+                    {
+                        // Notify web client updates are available.
+                        formMain.InvokeOnUiThreadIfRequired(() =>
+                        {
+                            formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
+                        });
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                // Error reaching update server
+            }
         }
 		
 		public void PerformUpdate()
