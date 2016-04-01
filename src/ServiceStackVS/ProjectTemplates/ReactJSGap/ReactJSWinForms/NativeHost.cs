@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms.Internals;
 using ServiceStack.Configuration;
+using Squirrel;
 
 namespace $safeprojectname$
 {
