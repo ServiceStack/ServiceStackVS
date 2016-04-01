@@ -22,6 +22,7 @@ namespace $safeprojectname$
         [STAThread]
         static void Main()
         {
+		    AppHost = new AppHost();
             SquirrelAwareApp.HandleEvents(
                 OnInitialInstall,
                 OnAppUpdate,
@@ -34,26 +35,37 @@ namespace $safeprojectname$
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            AppHost = new AppHost();
             AppHost.Init().Start("http://*:2337/");
             "ServiceStack SelfHost listening at {0} ".Fmt(HostUrl).Print();
             Form = new FormMain();
             Application.Run(Form);
         }
 		
-		public static void OnInitialInstall(Version version)
+        public static void OnInitialInstall(Version version)
         {
             // Hook for first install
+            using (var mgr = new UpdateManager(AppHost.AppSettings.GetString("UpdateManagerUrl")))
+            {
+                mgr.CreateShortcutForThisExe();
+            }
         }
 
         public static void OnAppUpdate(Version version)
         {
             // Hook for application update, CheckForUpdates() initiates this.
+            using (var mgr = new UpdateManager(AppHost.AppSettings.GetString("UpdateManagerUrl")))
+            {
+                mgr.CreateShortcutForThisExe();
+            }
         }
 
         public static void OnAppUninstall(Version version)
         {
             // Hook for application uninstall
+            using (var mgr = new UpdateManager(AppHost.AppSettings.GetString("UpdateManagerUrl")))
+            {
+                mgr.RemoveShortcutForThisExe();
+            }
         }
 
         public static void OnFirstRun()
