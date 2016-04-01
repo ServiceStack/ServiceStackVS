@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("$saferootprojectname$")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("$saferootprojectname$")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ServiceStack")]
 [assembly: AssemblyProduct("$saferootprojectname$")]

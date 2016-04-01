@@ -56,6 +56,7 @@
     var appSettingsFile = 'appsettings.txt';
     var appSettingsDir = webBuildDir + 'deploy/';
     var appSettingsPath = appSettingsDir + appSettingsFile;
+	var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
 
     function createConfigsIfMissing() {
         if (!fs.existsSync(configPath)) {
@@ -316,11 +317,10 @@
 gulp.task('www-nuget-pack-winforms', function (callback) {
         var globule = require('globule');
         initWinformsReleaseDirectory();
-        var assemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
-        var version = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyVersion');
-        var title = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyTitle');
-        var description = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyDescription') || 'Test';
-        var authors = extractAssemblyAttribute(assemblyInfoPath, 'AssemblyCompany');
+        var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
+        var title = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
+        var description = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyDescription') || 'Test';
+        var authors = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyCompany');
         var excludes = globule.find([
             '../$safeprojectname$.AppWinForms/bin/x86/Release/*.pdb',
             '../$safeprojectname$.AppWinForms/bin/x86/Release/*.vshost.*'
@@ -329,8 +329,8 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
         { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/*.*', dest: '/lib/net45/' },
         { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/locales/*.*', dest: '/lib/net45/locales/' }];
         return nugetpack({
-            id: '$safeprojectname$.AppWinForms',
-            title: '$safeprojectname$.AppWinForms',
+            id: title,
+            title: title,
                 version: version,
                 authors: authors,
                 description: description,
@@ -353,7 +353,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
         initWinformsReleaseDirectory();
         var squirrelPath = path.resolve('../../packages/squirrel.windows.1.2.5/tools/');
         var appName = '$safeprojectname$.AppWinforms';
-        var version = extractAssemblyAttribute('../' + appName + '/Properties/AssemblyInfo.cs', 'AssemblyVersion');
+        var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
         var rootDir = 'wwwroot_build\\apps\\winforms-installer\\';
         var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
         var releaseDir = rootDir + 'Releases';
