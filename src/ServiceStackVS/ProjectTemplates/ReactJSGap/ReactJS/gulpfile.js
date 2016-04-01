@@ -335,6 +335,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
                 authors: authors,
                 description: description,
                 excludes: excludes,
+				iconUrl: 'https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-100sq.png',
                 outputDir: 'wwwroot_build/apps/winforms-installer/'
             },
             includes,
