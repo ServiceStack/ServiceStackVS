@@ -119,9 +119,7 @@
     <Content Include="tsconfig.json" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
-    <Content Include="wwwroot_build\package-deploy-console.bat" />
 	<Content Include="wwwroot_build\build.bat" />
-    <Content Include="wwwroot_build\config-winforms.txt" />
     <Content Include="wwwroot_build\package-deploy-winforms.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />
