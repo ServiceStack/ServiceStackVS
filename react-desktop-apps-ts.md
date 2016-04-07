@@ -96,4 +96,6 @@ public static UpdateManager GitHubUpdateManager
 }
 ```
 
-The rest of the update process can stay the same.
+The rest of the update process can stay the same. For more information on using Amazon S3 with Squirrel.Windows, [see their documentation](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/using/amazon-s3.md).
+
+Squirrel.Windows also has a number of options for updating icons, installer gifs and other customizations. For more info, [checkout Squirrel.Windows documentation](https://github.com/Squirrel/Squirrel.Windows/tree/master/docs).
