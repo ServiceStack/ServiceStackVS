@@ -82,7 +82,7 @@ namespace $safeprojectname$
                 // Error reaching update server
             }
         }
-		
+        
         public void PerformUpdate()
         {
             AppGitHubUpdater.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>

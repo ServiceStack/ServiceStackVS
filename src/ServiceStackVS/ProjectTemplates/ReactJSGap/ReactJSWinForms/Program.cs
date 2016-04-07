@@ -28,7 +28,7 @@ namespace $safeprojectname$
                 OnAppUpdate,
                 onAppUninstall: OnAppUninstall,
                 onFirstRun: OnFirstRun);
-		
+        
             Cef.EnableHighDPISupport();
             Cef.Initialize(new CefSettings());
 

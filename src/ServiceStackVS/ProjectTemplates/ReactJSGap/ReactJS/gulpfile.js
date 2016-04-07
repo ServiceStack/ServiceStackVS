@@ -45,7 +45,7 @@
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
     var exec = require('child_process').exec;
-	var nugetpack = require('gulp-nuget-pack');
+    var nugetpack = require('gulp-nuget-pack');
 
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
@@ -56,7 +56,7 @@
     var appSettingsFile = 'appsettings.txt';
     var appSettingsDir = webBuildDir + 'deploy/';
     var appSettingsPath = appSettingsDir + appSettingsFile;
-	var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
+    var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
 
     function createConfigsIfMissing() {
         if (!fs.existsSync(configPath)) {
@@ -209,7 +209,7 @@
     gulp.task('www-jspm-build', function () {
         return gulp.src('./src/app.js')
             .pipe(jspmBuild())
-			.pipe(rename('app.js'))
+            .pipe(rename('app.js'))
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
     });
@@ -335,7 +335,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
                 authors: authors,
                 description: description,
                 excludes: excludes,
-				iconUrl: 'https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-100sq.png',
+                iconUrl: 'https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-100sq.png',
                 outputDir: 'wwwroot_build/apps/winforms-installer/'
             },
             includes,
@@ -374,7 +374,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
             'www-clean-dlls',
             'www-clean-client-assets',
             'www-nuget-restore',
-		    'www-msbuild-web',
+            'www-msbuild-web',
             'www-copy-fonts',
             'www-copy-images',
             'www-copy-jspm-config',
@@ -393,17 +393,17 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
             '01-bundle-all',
             'www-msbuild-console',
             'www-exec-package-console',
-			callback);
+            callback);
     });
-	
-	gulp.task('02-package-winforms', function (callback) {
+    
+    gulp.task('02-package-winforms', function (callback) {
         runSequence(
             'www-nuget-restore',
             '01-bundle-all',
             'www-msbuild-winforms',
             'www-nuget-pack-winforms',
             'www-exec-package-winforms',
-			callback);
+            callback);
     });
 
     gulp.task('01-package-server', function (callback) {
@@ -424,7 +424,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
                 [
                     'www-copy-fonts',
                     'www-copy-images',
-					'www-copy-jspm-config',
+                    'www-copy-jspm-config',
                     'www-bundle-html'
                 ],
                 'www-jspm-build',
