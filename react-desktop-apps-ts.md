@@ -2,7 +2,7 @@
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/Squirrel-Logo.png)](https://github.com/Squirrel/Squirrel.Windows)
 
-To improve the experience of deploying and installing of the standalone Windows application for this template, [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) has been incorporated so that you're application packages into a self executing installer that is setup to for quick automatic updates.
+To improve the experience of deploying and installing of the standalone Windows application for the [React Desktop Apps template](https://github.com/ServiceStackApps/ReactChatApps), [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) has been incorporated so that you're application packages into a self executing installer that is setup to for quick automatic updates.
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-banner.png)](https://github.com/ServiceStackApps/typescript-react-template/)
 
