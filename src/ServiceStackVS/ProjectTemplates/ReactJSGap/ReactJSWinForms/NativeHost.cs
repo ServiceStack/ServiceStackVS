@@ -61,18 +61,20 @@ namespace $safeprojectname$
             var releaseFolderUrl = appSettings.GetString("UpdateManagerUrl");
             try
             {
-                var updatesAvailableTask = SquirrelHelpers.CheckForUpdates(releaseFolderUrl);
+                var updatesAvailableTask = AppGitHubUpdater.CheckForUpdates(releaseFolderUrl);
                 updatesAvailableTask.ContinueWith(isAvailable =>
                 {
+                    isAvailable.Wait(TimeSpan.FromMinutes(1));
                     bool updatesAvailable = isAvailable.Result;
-                    if (updatesAvailable)
+                    if (!updatesAvailable || formMain == null)
                     {
-                        // Notify web client updates are available.
-                        formMain.InvokeOnUiThreadIfRequired(() =>
-                        {
-                            formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
-                        });
+                        return;
                     }
+                    // Notify web client updates are available.
+                    formMain.InvokeOnUiThreadIfRequired(() =>
+                    {
+                        formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
+                    });
                 });
             }
             catch (Exception e)
@@ -83,7 +85,7 @@ namespace $safeprojectname$
 		
         public void PerformUpdate()
         {
-            SquirrelHelpers.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
+            AppGitHubUpdater.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
             {
                 formMain.InvokeOnUiThreadIfRequired(() =>
                 {
