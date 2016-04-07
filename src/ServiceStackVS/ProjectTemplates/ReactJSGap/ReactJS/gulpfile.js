@@ -31,7 +31,6 @@
     var gulpUtil = require('gulp-util');
     // include plug-ins
     var del = require('del');
-    var uglify = require('gulp-uglify');
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
     var gulpif = require('gulp-if');
@@ -46,6 +45,7 @@
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
     var exec = require('child_process').exec;
+    var nugetpack = require('gulp-nuget-pack');
 
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var webRoot = 'wwwroot/';
@@ -56,6 +56,7 @@
     var appSettingsFile = 'appsettings.txt';
     var appSettingsDir = webBuildDir + 'deploy/';
     var appSettingsPath = appSettingsDir + appSettingsFile;
+    var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
 
     function createConfigsIfMissing() {
         if (!fs.existsSync(configPath)) {
@@ -208,7 +209,7 @@
     gulp.task('www-jspm-build', function () {
         return gulp.src('./src/app.js')
             .pipe(jspmBuild())
-			.pipe(rename('app.js'))
+            .pipe(rename('app.js'))
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
     });
@@ -279,6 +280,68 @@
             .pipe(nugetRestore());
     });
 
+    function extractAssemblyAttribute(filePath, attrName) {
+        var assemblyInfoContents = fs.readFileSync(filePath, { encoding: 'utf8' });
+        var lines = assemblyInfoContents.split('\n');
+        var result = null;
+        for (var i = 0; i < lines.length; i++) {
+            if(lines[i].startsWith('//'))
+                continue;
+            var line = lines[i].trim();
+            if (line.startsWith('[assembly: ') && line.indexOf(attrName) > 0) {
+                var startIndex = line.indexOf('(') + 1;
+                var endIndex = line.indexOf(')');
+                if (line.indexOf('("') > -1) {
+                    //String value
+                    startIndex = line.indexOf('("') + 2;
+                    endIndex = line.indexOf('")');
+                }
+                result = line.substr(startIndex, endIndex - startIndex);
+                break;
+            }
+        }
+        return result;
+    }
+
+    function initWinformsReleaseDirectory() {
+        var appsDir = webBuildDir + 'apps/';
+        var winFormsInstall = appsDir + 'winforms-installer/';
+        if (!fs.existsSync(appsDir)) {
+            fs.mkdirSync(appsDir);
+        }
+        if (!fs.existsSync(winFormsInstall)) {
+            fs.mkdirSync(winFormsInstall);
+        }
+    }
+
+gulp.task('www-nuget-pack-winforms', function (callback) {
+        var globule = require('globule');
+        initWinformsReleaseDirectory();
+        var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
+        var title = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
+        var description = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyDescription') || 'Test';
+        var authors = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyCompany');
+        var excludes = globule.find([
+            '../$safeprojectname$.AppWinForms/bin/x86/Release/*.pdb',
+            '../$safeprojectname$.AppWinForms/bin/x86/Release/*.vshost.*'
+        ]);
+        var includes = [
+        { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/*.*', dest: '/lib/net45/' },
+        { src: '../$safeprojectname$.AppWinForms/bin/x86/Release/locales/*.*', dest: '/lib/net45/locales/' }];
+        return nugetpack({
+            id: title,
+            title: title,
+                version: version,
+                authors: authors,
+                description: description,
+                excludes: excludes,
+                iconUrl: 'https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-100sq.png',
+                outputDir: 'wwwroot_build/apps/winforms-installer/'
+            },
+            includes,
+            callback);
+    });
+
     gulp.task('www-exec-package-console', function (callback) {
         exec('cmd /c "cd wwwroot_build && package-deploy-console.bat"', function (err, stdout, stderr) {
             console.log(stdout);
@@ -287,10 +350,21 @@
         });
     });
 
-    gulp.task('www-exec-package-winforms', function(callback) {
-        exec('cmd /c "cd wwwroot_build && package-deploy-winforms.bat"', function (err, stdout, stderr) {
+    gulp.task('www-exec-package-winforms', function (callback) {
+        initWinformsReleaseDirectory();
+        var squirrelPath = path.resolve('../../packages/squirrel.windows.1.2.5/tools/');
+        var appName = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
+        var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
+        var rootDir = 'wwwroot_build\\apps\\winforms-installer\\';
+        var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
+        var releaseDir = rootDir + 'Releases';
+        gulpUtil.log(gulpUtil.colors.green('Packaging using Squirrel: ') + gulpUtil.colors.white(nugetPkg));
+        exec('Squirrel.exe --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir + ' --no-msi', { env: { 'PATH': squirrelPath + ';' } }, function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
+            if (!err) {
+                gulpUtil.log(gulpUtil.colors.green('Package created/updated at: ') + gulpUtil.colors.white(releaseDir));
+            }
             callback(err);
         });
     });
@@ -299,13 +373,14 @@
         runSequence(
             'www-clean-dlls',
             'www-clean-client-assets',
+            'www-nuget-restore',
+            'www-msbuild-web',
             'www-copy-fonts',
             'www-copy-images',
-			'www-copy-jspm-config',
+            'www-copy-jspm-config',
             'www-copy-files',
             'www-jspm-build',
             'www-bundle-html',
-            'www-nuget-restore',
             'www-msbuild-resources',
             'www-copy-resources-lib',
             callback
@@ -318,16 +393,17 @@
             '01-bundle-all',
             'www-msbuild-console',
             'www-exec-package-console',
-			callback);
+            callback);
     });
-	
-	gulp.task('02-package-winforms', function (callback) {
+    
+    gulp.task('02-package-winforms', function (callback) {
         runSequence(
             'www-nuget-restore',
             '01-bundle-all',
             'www-msbuild-winforms',
+            'www-nuget-pack-winforms',
             'www-exec-package-winforms',
-			callback);
+            callback);
     });
 
     gulp.task('01-package-server', function (callback) {
@@ -348,7 +424,7 @@
                 [
                     'www-copy-fonts',
                     'www-copy-images',
-					'www-copy-jspm-config',
+                    'www-copy-jspm-config',
                     'www-bundle-html'
                 ],
                 'www-jspm-build',
