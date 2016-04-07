@@ -359,7 +359,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
         var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
         var releaseDir = rootDir + 'Releases';
         gulpUtil.log(gulpUtil.colors.green('Packaging using Squirrel: ') + gulpUtil.colors.white(nugetPkg));
-        exec('Squirrel.exe --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir, { env: { 'PATH': squirrelPath + ';' } }, function (err, stdout, stderr) {
+        exec('Squirrel.exe --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir + ' --no-msi', { env: { 'PATH': squirrelPath + ';' } }, function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
             if (!err) {
