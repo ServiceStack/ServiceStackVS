@@ -22,7 +22,7 @@ namespace $safeprojectname$
         [STAThread]
         static void Main()
         {
-		    AppHost = new AppHost();
+            AppHost = new AppHost();
             SquirrelAwareApp.HandleEvents(
                 OnInitialInstall,
                 OnAppUpdate,
