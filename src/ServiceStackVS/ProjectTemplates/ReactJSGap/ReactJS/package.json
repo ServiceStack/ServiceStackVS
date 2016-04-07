@@ -21,7 +21,7 @@
   "devDependencies": {
     "del": "~1.1.1",
     "event-stream": "~3.3.2",
-	"globule": "~0.2.0",
+    "globule": "~0.2.0",
     "gulp": "~3.9.1",
     "gulp-htmlbuild": "~0.4.1",
     "gulp-if": "~1.2.4",
@@ -31,7 +31,7 @@
     "gulp-msdeploy": "^0.0.4",
     "gulp-newer": "~1.1.0",
     "gulp-nuget-restore": "^0.3.1",
-	"gulp-nuget-pack": "^0.0.7",
+    "gulp-nuget-pack": "^0.0.7",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "~0.4.0",
     "gulp-uglify": "~1.5.3",
