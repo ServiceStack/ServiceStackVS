@@ -107,7 +107,6 @@
     <Content Include="platform.js" />
     <Content Include="deps.lib.js" />
     <Content Include="img\react-logo.png" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="tests\unit\hello-test.js" />
     <Content Include="tests\preprocessor.js" />
     <Content Include="tests\README.txt" />
