@@ -7,11 +7,11 @@ using Squirrel;
 
 namespace $safeprojectname$
 {
-    public static class AppGitHubUpdater
+    public static class AppUpdater
     {
         private static UpdateManager _updateManagerInstance;
 
-        public static UpdateManager GitHubUpdateManager
+        public static UpdateManager AppUpdateManager
         {
             get
             {
@@ -22,7 +22,7 @@ namespace $safeprojectname$
 
                 var appSettings = new AppSettings();
                 var updateManagerTask =
-                    UpdateManager.GitHubUpdateManager(appSettings.GetString("UpdateManagerUrl"));
+                    UpdateManager.AppUpdateManager(appSettings.GetString("UpdateManagerUrl"));
                 updateManagerTask.Wait(TimeSpan.FromMinutes(1));
                 _updateManagerInstance = updateManagerTask.Result;
                 return _updateManagerInstance;
@@ -51,7 +51,7 @@ namespace $safeprojectname$
 #endif
             try
             {
-                var updateInfo = await GitHubUpdateManager.CheckForUpdate();
+                var updateInfo = await AppUpdateManager.CheckForUpdate();
                 if (updateInfo.ReleasesToApply.Count > 0)
                 {
                     return true;
@@ -66,18 +66,18 @@ namespace $safeprojectname$
 
         public static async Task<ReleaseEntry> ApplyUpdates(string deployUrl)
         {
-            var result = await GitHubUpdateManager.UpdateApp();
+            var result = await AppUpdateManager.UpdateApp();
             return result;
         }
 
         public static void CreateShortcutForThisExe()
         {
-            GitHubUpdateManager.CreateShortcutForThisExe();
+            AppUpdateManager.CreateShortcutForThisExe();
         }
 
         public static void RemoveShortcutForThisExe()
         {
-            GitHubUpdateManager.RemoveShortcutForThisExe();
+            AppUpdateManager.RemoveShortcutForThisExe();
         }
     }
 }
