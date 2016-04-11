@@ -58,7 +58,7 @@ If you find the GitHub approach doesn't suit your needs, Squirrel.Windows also h
 The `AppGitHubUpdater` class in the AppWinForms project wraps Squirrel's `UpdateManager` to simplify correctly handling and disposing of the `UpdateManager`. To use Amazon S3, the static property `GitHubUpdater` can be changed from:
 
 ``` csharp
-public static UpdateManager GitHubUpdateManager
+public static UpdateManager AppUpdateManager
 {
     get
     {
@@ -69,7 +69,7 @@ public static UpdateManager GitHubUpdateManager
 
         var appSettings = new AppSettings();
         var updateManagerTask =
-            UpdateManager.GitHubUpdateManager(appSettings.GetString("UpdateManagerUrl"));
+            UpdateManager.AppUpdateManager(appSettings.GetString("UpdateManagerUrl"));
         updateManagerTask.Wait(TimeSpan.FromMinutes(1));
         _updateManagerInstance = updateManagerTask.Result;
         return _updateManagerInstance;
@@ -80,7 +80,7 @@ public static UpdateManager GitHubUpdateManager
 To:
 
 ``` csharp
-public static UpdateManager GitHubUpdateManager
+public static UpdateManager AppUpdateManager
 {
     get
     {
