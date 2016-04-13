@@ -42,7 +42,6 @@ namespace $safeprojectname$
             {
                 DebugMode = AppSettings.Get("DebugMode", false),
                 DefaultContentType = MimeTypes.Json,
-                AllowFileExtensions = { "jsx" },
                 AddRedirectParamsToQueryString = true
             });
         }
