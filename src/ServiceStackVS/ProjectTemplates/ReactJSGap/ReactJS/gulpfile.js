@@ -12,7 +12,7 @@
         { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
         { src: './Global.asax', host: WEB },
         { src: './jspm_packages/npm/bootstrap@3.2.0/dist/fonts/*.*', dest: 'lib/fonts/' },
-        { src: './platform.*', dest: '/', host: WEB },
+        { src: ['./config.js', './platform.js', './platform.css'], dest: '/', host: WEB },
         { src: webBuildDir + 'deploy/*.*', host: WEB },
         {
             src: './web.config',
@@ -98,28 +98,6 @@
         var binPath = webRoot + '/bin/';
         del(binPath, callback);
     });
-    gulp.task('www-copy-bin', function () {
-        var binDest = webRoot + 'bin/';
-        return gulp.src('./bin/**/*')
-            .pipe(newer(binDest))
-            .pipe(gulp.dest(binDest));
-    });
-    gulp.task('www-copy-appdata', function () {
-        return gulp.src('./App_Data/**/*')
-            .pipe(newer(webRoot + 'App_Data/'))
-            .pipe(gulp.dest(webRoot + 'App_Data/'));
-    });
-    gulp.task('www-copy-webconfig', function () {
-        return gulp.src('./web.config')
-            .pipe(newer(webRoot))
-            .pipe(gulpReplace('<compilation debug="true" targetFramework="4.5">', '<compilation targetFramework="4.5">'))
-            .pipe(gulp.dest(webRoot));
-    });
-    gulp.task('www-copy-asax', function () {
-        return gulp.src('./Global.asax')
-            .pipe(newer(webRoot))
-            .pipe(gulp.dest(webRoot));
-    });
     gulp.task('www-clean-client-assets', function (callback) {
         del([
             webRoot + '**/*.*',
@@ -130,10 +108,6 @@
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
         ], callback);
     });
-    gulp.task('www-copy-fonts', function () {
-        return gulp.src('./jspm_packages/npm/bootstrap@3.2.0/fonts/*.*')
-            .pipe(gulp.dest(webRoot + 'lib/fonts/'));
-    });
     gulp.task('www-copy-files', function(callback) {
         var count = 0;
         var length = COPY_FILES.length;
@@ -142,7 +116,6 @@
             var copy = COPY_FILES[index];
             var dest = copy.dest || '';
             var src = copy.src;
-
             var copyTask = gulp.src(src);
             if (copy.afterReplace) {
                 for (var i = 0; i < copy.afterReplace.length; i++) {
@@ -184,15 +157,6 @@
         for (var i = 0; i < length; i++) {
             result.push(processCopy(i));
         }
-    });
-    gulp.task('www-copy-images', function () {
-        return gulp.src('./img/**/*')
-            .pipe(gulp.dest(webRoot + 'img/'));
-    });
-    gulp.task('www-copy-jspm-config', function () {
-        return gulp.src('./config.js')
-            .pipe(gulp.dest(webRoot))
-            .pipe(gulp.dest(resourcesRoot));
     });
     gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
@@ -375,9 +339,6 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
             'www-clean-client-assets',
             'www-nuget-restore',
             'www-msbuild-web',
-            'www-copy-fonts',
-            'www-copy-images',
-            'www-copy-jspm-config',
             'www-copy-files',
             'www-jspm-build',
             'www-bundle-html',
@@ -410,10 +371,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
         runSequence('www-nuget-restore',
             'www-msbuild-web', 'www-clean-dlls',
                 [
-                    'www-copy-bin',
-                    'www-copy-appdata',
-                    'www-copy-webconfig',
-                    'www-copy-asax',
+                    'www-copy-files',
                     'www-copy-deploy-files'
                 ],
                 callback);
@@ -422,9 +380,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
     gulp.task('02-package-client', function (callback) {
         runSequence('www-clean-client-assets',
                 [
-                    'www-copy-fonts',
-                    'www-copy-images',
-                    'www-copy-jspm-config',
+                    'www-copy-files',
                     'www-bundle-html'
                 ],
                 'www-jspm-build',
