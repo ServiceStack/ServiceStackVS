@@ -69,7 +69,7 @@ namespace $safeprojectname$
                     //Only check once one launch then release UpdateManager.
                     if (!updatesAvailable)
                     {
-                        AppGitHubUpdater.Dispose();
+                        AppUpdater.Dispose();
                         return;
                     }
                     if (formMain == null)
