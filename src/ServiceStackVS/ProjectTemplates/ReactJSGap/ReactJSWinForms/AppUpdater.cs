@@ -22,7 +22,7 @@ namespace $safeprojectname$
 
                 var appSettings = new AppSettings();
                 var updateManagerTask =
-                    UpdateManager.AppUpdateManager(appSettings.GetString("UpdateManagerUrl"));
+                    UpdateManager.GitHubUpdateManager(appSettings.GetString("UpdateManagerUrl"));
                 updateManagerTask.Wait(TimeSpan.FromMinutes(1));
                 _updateManagerInstance = updateManagerTask.Result;
                 return _updateManagerInstance;
