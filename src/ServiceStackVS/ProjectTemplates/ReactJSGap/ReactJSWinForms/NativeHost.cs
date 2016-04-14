@@ -66,7 +66,13 @@ namespace $safeprojectname$
                 {
                     isAvailable.Wait(TimeSpan.FromMinutes(1));
                     bool updatesAvailable = isAvailable.Result;
-                    if (!updatesAvailable || formMain == null)
+                    //Only check once one launch then release UpdateManager.
+                    if (!updatesAvailable)
+                    {
+                        AppGitHubUpdater.Dispose();
+                        return;
+                    }
+                    if (formMain == null)
                     {
                         return;
                     }
