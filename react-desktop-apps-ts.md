@@ -66,10 +66,48 @@ Users that have installed version `1.0.0.0` will see a prompt already setup in t
 
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/auto-update-preview.gif)
 
-#### Switching to Amazon S3 for releases
+#### Controlling Updates
+Squirrel.Windows `UpdateManager` is the main class to control when and how your application gets updated. By default, the template hooks into a jQuery ready callback to fire the `NativeHost.Ready` method. This, in turn, checks for available updates and fires some JavaScript to notify the UI if an update is ready to download.
+
+``` CSharp
+// Notify web client updates are available.
+formMain.InvokeOnUiThreadIfRequired(() =>
+{
+    formMain.ChromiumBrowser.GetMainFrame().ExecuteJavaScriptAsync("window.updateAvailable();");
+});
+```
+
+Updating the UI for AppWinForms update is a platform specific customization so is handled independently in `platform.js` of the AppWinForms project. 
+
+## Switching to Amazon S3 for releases
 If you find the GitHub approach doesn't suit your needs, Squirrel.Windows also has support for Amazon S3 or any statically hosted URL. Though the template is setup to be used with GitHub, it can be easily changed to use Amazon S3. 
 
-The `AppGitHubUpdater` class in the AppWinForms project wraps Squirrel's `UpdateManager` to simplify correctly handling and disposing of the `UpdateManager`. To use Amazon S3, the static property `GitHubUpdater` can be changed from:
+- Create an S3 bucket to host the `Releases` directory produced by the Gulp task  `02-package-winforms`. Eg,  `my-react-app`.
+
+- Make your bucket publically read-only. To do this, you will need modify your "bucket policy" in S3. Below is the snippet to apply a public read policy, replace {BucketName} with the name of your bucket, eg `my-react-app`.
+``` json
+{
+	"Version": "2008-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowPublicRead",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "*"
+			},
+			"Action": [
+				"s3:GetObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::{BucketName}/*"
+			]
+		}
+	]
+}
+```
+- The URL configured in `UpdateManagerUrl` will need to be changed from the GitHub project URL to the S3 bucket URL, eg `https://s3-ap-southeast-2.amazonaws.com/my-react-app`.
+
+- The `AppUpdater` static class in the AppWinForms project wraps Squirrel's `UpdateManager` to simplify correctly handling and disposing of the `UpdateManager`. To use Amazon S3, the static property `AppUpdateManager` can be changed from:
 
 ``` csharp
 public static UpdateManager AppUpdateManager
@@ -110,6 +148,16 @@ public static UpdateManager AppUpdateManager
 }
 ```
 
-The rest of the update process can stay the same. For more information on using Amazon S3 with Squirrel.Windows, [see their documentation](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/using/amazon-s3.md).
+Now that the client is ready to use with your new S3 bucket, you just need to upload the new files produced by Squirrel.Windows via the Gulp task `02-package-winforms` to your bucket. Clients will read the updates `RELEASE` file to detect any changes. If you are uploading your first release, it will be the following 3 files.
+```
+MyReactApp-1.0.0.0-full.nupkg
+RELEASES
+Setup.exe 
+```
 
-Squirrel.Windows also has a number of options for updating icons, installer gifs and other customizations. For more info, [checkout Squirrel.Windows documentation](https://github.com/Squirrel/Squirrel.Windows/tree/master/docs).
+Subsequent releases will also include a `delta` file.
+
+### Squirrel Installer Customization
+Another customization Squirrel.Windows can do is control the icon used when your program is listed in the Windows Programs and Features UI. Since Squirrel uses NuGet heavily for packaging, these details come from what get put into the NuGet package that is produced by Gulp task `www-nuget-pack-winforms`. The template uses the [`gulp-nuget-pack`](https://www.npmjs.com/package/gulp-nuget-pack) module which can be customized to popuate the [different NuGet properties](https://docs.nuget.org/create/nuspec-reference), including the `iconUrl`.
+
+Squirrel.Windows can also provide a loading GIF for your users when first installing your application. This can be provided by the `-g` command line argument. The call to the Squirrel.exe command line can be customized in the templated `gulpfile.js` in the `www-exec-package-winforms` task to apply this change.
