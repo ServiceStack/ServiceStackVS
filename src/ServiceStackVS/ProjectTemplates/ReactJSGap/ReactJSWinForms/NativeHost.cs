@@ -61,7 +61,7 @@ namespace $safeprojectname$
             var releaseFolderUrl = appSettings.GetString("UpdateManagerUrl");
             try
             {
-                var updatesAvailableTask = AppGitHubUpdater.CheckForUpdates(releaseFolderUrl);
+                var updatesAvailableTask = AppUpdater.CheckForUpdates(releaseFolderUrl);
                 updatesAvailableTask.ContinueWith(isAvailable =>
                 {
                     isAvailable.Wait(TimeSpan.FromMinutes(1));
@@ -85,7 +85,7 @@ namespace $safeprojectname$
         
         public void PerformUpdate()
         {
-            AppGitHubUpdater.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
+            AppUpdater.ApplyUpdates(new AppSettings().GetString("UpdateManagerUrl")).ContinueWith(t =>
             {
                 formMain.InvokeOnUiThreadIfRequired(() =>
                 {

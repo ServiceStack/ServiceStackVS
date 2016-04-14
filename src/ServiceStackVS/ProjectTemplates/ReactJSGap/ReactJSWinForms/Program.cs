@@ -38,26 +38,26 @@ namespace $safeprojectname$
             AppHost.Init().Start("http://*:2337/");
             "ServiceStack SelfHost listening at {0} ".Fmt(HostUrl).Print();
             Form = new FormMain();
-            Form.Disposed += (sender, args) => AppGitHubUpdater.Dispose();
+            Form.Disposed += (sender, args) => AppUpdater.Dispose();
             Application.Run(Form);
         }
 
         public static void OnInitialInstall(Version version)
         {
             // Hook for first install
-            AppGitHubUpdater.CreateShortcutForThisExe();
+            AppUpdater.CreateShortcutForThisExe();
         }
 
         public static void OnAppUpdate(Version version)
         {
             // Hook for application update, CheckForUpdates() initiates this.
-            AppGitHubUpdater.CreateShortcutForThisExe();
+            AppUpdater.CreateShortcutForThisExe();
         }
 
         public static void OnAppUninstall(Version version)
         {
             // Hook for application uninstall
-            AppGitHubUpdater.RemoveShortcutForThisExe();
+            AppUpdater.RemoveShortcutForThisExe();
         }
 
         public static void OnFirstRun()
