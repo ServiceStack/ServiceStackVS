@@ -1,4 +1,4 @@
-## React Desktop Apps (Beta) Update
+## React Desktop Apps Update
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/Squirrel-Logo.png)](https://github.com/Squirrel/Squirrel.Windows)
 
