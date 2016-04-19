@@ -117,9 +117,9 @@
     });
     gulp.task('www-bundle-html', function () {
         return gulp.src(['./default.cshtml', './default.html'])
+            .pipe(useref())
             .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
-            .pipe(useref())
             .pipe(htmlBuild({
                 bootstrapCss: function (block) {
                     pipeTemplate(block, '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />');
