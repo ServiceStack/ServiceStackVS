@@ -13,7 +13,6 @@
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",
     "bootstrap": "~3.2.0",
-    "modernizr": "~3.3.1",
     "jquery": "~1.11.3" 
   },
     "devDependencies": {
@@ -22,7 +21,7 @@
     "gulp": "~3.9.1",
     "gulp-htmlbuild": "~0.4.1",
     "gulp-if": "~1.2.4",
-    "gulp-minify-css": "~0.3.8",
+    "gulp-clean-css": "~2.0.6",
     "gulp-msbuild": "^0.2.21",
     "gulp-msdeploy": "^0.0.4",
     "gulp-newer": "~1.1.0",

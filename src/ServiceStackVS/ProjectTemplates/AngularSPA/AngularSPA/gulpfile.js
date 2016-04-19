@@ -10,7 +10,7 @@
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
     var gulpif = require('gulp-if');
-    var minifyCss = require('gulp-minify-css');
+    var minifyCss = require('gulp-clean-css');
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
