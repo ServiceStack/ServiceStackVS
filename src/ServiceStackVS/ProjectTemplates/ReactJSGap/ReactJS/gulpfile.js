@@ -34,7 +34,7 @@
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
     var gulpif = require('gulp-if');
-    var minifyCss = require('gulp-minify-css');
+    var minifyCss = require('gulp-clean-css');
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
@@ -316,7 +316,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
 
     gulp.task('www-exec-package-winforms', function (callback) {
         initWinformsReleaseDirectory();
-        var squirrelPath = path.resolve('../../packages/squirrel.windows.1.2.5/tools/');
+        var squirrelPath = path.resolve('../../packages/squirrel.windows.1.3.0/tools/');
         var appName = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
         var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
         var rootDir = 'wwwroot_build\\apps\\winforms-installer\\';
