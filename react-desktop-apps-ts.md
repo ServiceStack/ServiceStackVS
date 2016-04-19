@@ -57,7 +57,7 @@ Steps to update your application, eg to 1.1, would be the following.
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/react-desktop-gulp-squirrel-package.png)
 
 
-- 3. Commit your changes and push them to GitHub.
+- 3. Commit your changes and push them to GitHub. (**This is required due to the new tag needs to be on a different commit**)
 - 4. Create a new GitHub release and include the same 3 files, plus the **delta** NuGet package. Clients running `1.0.0.0` will detect the new version and updates can be easily managed with Squirrel.Windows.
 
 >During step 2 your new version is picked up by the Gulp task and Squirrel creates a delta NuGet package, eg `MyReactApp-1.1.0.0-delta.nupkg` which will be used for quick updates to clients on the previous version (1.0). 
