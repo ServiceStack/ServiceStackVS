@@ -40,7 +40,7 @@ Happy TypeScripting!
 ### [React Desktop Apps (Beta) Template](https://github.com/ServiceStackApps/ReactDesktopApps)
 
 The **React Desktop Apps** template provides everything you need to package your ASP.NET ServiceStack Web App into a native Windows Winforms App, OSX Cocoa Desktop App or cross-platform (Windows/OSX/Linux) "headless" Console App which instead of being 
-embedded inside a Native UI, launches the Users prefered Web Browser for its Web UI.
+embedded inside a Native UI, launches the Users preferred Web Browser for its Web UI.
 
 ![React Desktop Apps](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/gap/react-desktop-splash.png)
 
@@ -52,7 +52,7 @@ into multiple platforms using the provided Grunt build tasks. The Desktop Apps a
 - **Web** - ASP.NET Web Application
 - **Windows** - Native Windows application embedded in a CefSharp Chromium browser
 - **OSX** - Native OS X Cocoa App embedded in a WebView control (requires Xamarin.Mac)
-- **Console** - Single portable, cross platform executable that launches the user's prefered browser
+- **Console** - Single portable, cross platform executable that launches the user's preferred browser
 
 To highlight this new template, we've ported the Chat-React example application in the [ReactChatApps project](https://github.com/ServiceStackApps/ReactChatApps).
 
@@ -75,8 +75,8 @@ Just like other templates in ServiceStackVS, the **React Desktop Apps** template
 ### Xamarin Studio Solution
 The additional **ReactChat.AppMac** project which is referenced by the **ReactChatMac.sln** file is setup ready to run from Xamarin Studio, reusing resources as well as web services.
 
-- **ReactChat.AppMac** - Xamarin.Mac host application controling native UI features and platform specific files for OSX
-- **ReactChat.ServiceInterface** - Project refernce to Visual Studio generated project
+- **ReactChat.AppMac** - Xamarin.Mac host application controlling native UI features and platform specific files for OSX
+- **ReactChat.ServiceInterface** - Project reference to Visual Studio generated project
 - **ReactChat.ServiceModel** - Project reference to the Visual Studio generated project
 - **ReactChat.Resources*** - Assembly reference, by running the `01-bundle-all` grunt task, the output assembly is placed in a `lib` folder which is referenced by the Xamarin.Mac project.
 
@@ -114,8 +114,8 @@ The ServiceStackVS **ReactJS App** template shares the same approach for develop
 The templates conveniently pre-configures the above libraries into a working out-of-the-box solution, including high-level grunt tasks to take care of the full-dev-cycle of **building**, **packaging** and **deploying** your app:
 
  - **[01-run-tests](#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[02-package-server](#02-package-server)** - Uses msbuild to build the application and copies server artifacts to `/wwwroot`
+ - **[03-package-client](#03-package-client)** - Optimizes and packages the client artifacts for deployment in `/wwwroot`
  - **[04-deploy-app](#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
 For in-depth details on how this template can be used for a great development workflow, see the [Chat-React demo](https://github.com/ServiceStackApps/Chat-React). 
@@ -145,8 +145,8 @@ This templates leverages a number of best-in-class libraries to managing client 
 A lot this functionality is pre-configured and working out-of-the-box encapsulated within the high-level Grunt Tasks below:
 
  - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
+ - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artifacts to `/wwwroot`
+ - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artifacts for deployment in `/wwwroot`
  - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
 
 ### Requirements
@@ -302,7 +302,7 @@ To give developers a starting point for deployment, we have included the use of 
         "password" : "{WebDeployPassword}"
     }
 
-If you are using **Github's default Visual Studio ignore, this file will not be included in source control** due to the default rule of `publish/` to be ignored. You should check your Git Repository `.gitignore` rules before committing any potentially sensitive information into public source control.
+If you are using **GitHub's default Visual Studio ignore, this file will not be included in source control** due to the default rule of `publish/` to be ignored. You should check your Git Repository `.gitignore` rules before committing any potentially sensitive information into public source control.
 
 This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Grunt or just Visual Studio publish, see '[WebDeploy with AWS](https://github.com/ServiceStack/ServiceStack/wiki/WebDeploy-with-AWS#deploy-using-grunt)'.
 
@@ -388,18 +388,18 @@ Starting a new ServiceStack ASP.NET with AngularJS application will give you 4 n
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/angularjs_solution.png)
 
-The Host project contains an AppHost which has been configured with the RazorFormat plugin as well as hosting all the required JavaScript packages like AngularJS, Bootstrap and jQuery. It is setup initially with a signle `_Layout.cshtml` using the default Bootstrap template and a `default.cshtml` which contains the HelloWorld demo.
+The Host project contains an `AppHost` which has been configured with the `RazorFormat` plugin as well as hosting all the required JavaScript packages like AngularJS, Bootstrap and jQuery. It is setup initially with a single `_Layout.cshtml` using the default Bootstrap template and a `default.cshtml` which contains the HelloWorld demo.
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/angularjs_main_project.png)
 
-The Host project has dependencies on the Service Model and Service Inteface projects. These are the projects that contain your request/response DTOs, validators and filters. This structure is trying to encourage have your data structures and services in separate projects make testing and reuse easier.
+The Host project has dependencies on the Service Model and Service Interface projects. These are the projects that contain your request/response DTOs, validators and filters. This structure is trying to encourage have your data structures and services in separate projects make testing and reuse easier.
 
 ![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/angularjs_other_projects.png)
 
-The Unit Testing project, also as a dependency on these projects as it tests them in isolation of the main Host project. In the template, we are using the BasicAppHost to mock the AppHost we are using in the Host project. The example unit test is using NUit to setup and run the tests.
+The Unit Testing project, also as a dependency on these projects as it tests them in isolation of the main Host project. In the template, we are using the `BasicAppHost` to mock the AppHost we are using in the Host project. The example unit test is using NUit to setup and run the tests.
 
 #### Disable Update On Save Settings
-The default beahviour of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behaviour might not be desired, so this behaviour can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. 
+The default behavior of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behavior might not be desired, so this behavior can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. 
 ``` servicestack.vsconfig
 DisableNpmInstallOnSave true
 DisableBowerInstallOnSave true
