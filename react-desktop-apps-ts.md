@@ -1,4 +1,14 @@
-## React Desktop Apps Update
+## ServiceStackVS v1.0.24 Update
+The latest update to ServiceStackVS includes various improvements to various templates, including:
+
+- React Desktop Apps Packaged Installer using Squirrel.Windows.
+- Integrated Auto-Update using GitHub ready to use.
+- Move React Desktop Apps to TypeScript and JSPM.
+- Updated React Desktop Apps and TypeScript React templates to React 15.0
+- Simplified builds switching to Gulp for all templates.
+- Simplify dependency management by deprecating use of Bower.
+- Update AngularJS App template to Angular 1.5
+
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/Squirrel-Logo.png)](https://github.com/Squirrel/Squirrel.Windows)
 
@@ -11,7 +21,7 @@ This template has also been updated to use TypeScript, React, JSPM and Gulp to m
 #### Enabling Auto Updates using GitHub
 To use GitHub for your releases of your Windows application updates, we need to have source committed to an accessible GitHub project. 
 
-A few things should be added to the **default Visual Studiom .gitignore** before we commit a new project. Ensure the following is in your .gitignore file.
+A few things should be added to the **default Visual Studio .gitignore** before we commit a new project. Ensure the following is in your .gitignore file.
 
 ```
 node_modules/
@@ -163,3 +173,10 @@ Subsequent releases will also include a `delta` file.
 Another customization Squirrel.Windows can do is control the icon used when your program is listed in the Windows Programs and Features UI. Since Squirrel uses NuGet heavily for packaging, these details come from what get put into the NuGet package that is produced by Gulp task `www-nuget-pack-winforms`. The template uses the [`gulp-nuget-pack`](https://www.npmjs.com/package/gulp-nuget-pack) module which can be customized to popuate the [different NuGet properties](https://docs.nuget.org/create/nuspec-reference), including the `iconUrl`.
 
 Squirrel.Windows can also provide a loading GIF for your users when first installing your application. This can be provided by the `-g` command line argument. The call to the Squirrel.exe command line can be customized in the templated `gulpfile.js` in the `www-exec-package-winforms` task to apply this change.
+
+#### Deprecating Grunt and Bower
+Since the introduction of Single Page Application templates in ServiceStackVS, Grunt was used in conjunction with Gulp to be able to leverage packages from both eco systems. This however forced developers to learn the use of both build tools and how to integrate Gulp tasks into Grunt. 
+
+Since then, Gulp has become the dominant tool in this space and it's concise syntax and performance makes it a better choice to script your JavaScript build environment.
+
+Bower was also previously used to manage front-end dependencies separately from development related dependencies. Whilst this separation makes sense, NPM has moved to become the place where nearly all dependencies are now available on NPM which removes another moving part from smooth development workflow.
