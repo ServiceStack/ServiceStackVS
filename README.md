@@ -80,7 +80,7 @@ into multiple platforms using the provided Gulp build tasks. The Desktop Apps ar
 
 To highlight this new template, we've ported the Chat-React example application in the [ReactChatApps project](https://github.com/ServiceStackApps/ReactChatApps).
 
-## [AngularJS App Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md)
+## [AngularJS App Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/angular-spa.md)
 
 **AngularJS App** is a new template in [ServiceStackVS](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project) that provides a modern opinionated web technology stack for developing rich Single Page Apps with [AngularJS](https://angularjs.org/) and ServiceStack. 
 
@@ -94,9 +94,9 @@ This templates leverages a number of best-in-class libraries to managing client 
 
 A lot this functionality is pre-configured and working out-of-the-box encapsulated within the high-level Gulp Tasks below:
 
- - **[01-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artifacts to `/wwwroot`
- - **[02-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#03-package-client)** - Optimizes and packages the client artifacts for deployment in `/wwwroot`
- - **[03-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/angular-spa-template/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **[01-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#01-package-server)** - Uses msbuild to build the application and copies server artifacts to `/wwwroot`
+ - **[02-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#02-package-client)** - Optimizes and packages the client artifacts for deployment in `/wwwroot`
+ - **[03-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#03-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
  - **package-and-deploy** - One task to rebuild and deploy via MS WebDeploy.
 
 #### Tests
