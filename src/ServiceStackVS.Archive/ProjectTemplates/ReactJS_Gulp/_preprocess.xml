@@ -6,7 +6,7 @@
   
   <TemplateInfo Path="CSharp\Web\Custom\Subcategory"/>
   -->
-  <TemplateInfo Path="CSharp\ServiceStack"/>
+  <TemplateInfo Path="CSharp\ServiceStackArchive"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
     <add key="ServiceStack.CSharp.ReactJS" value="$safeprojectname$"/>
     <!--targetFramework="4.0"-->
