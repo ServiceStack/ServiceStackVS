@@ -15,8 +15,6 @@ This template marks our first iteration of this effort that we intend to continu
 This templates leverages a number of best-in-class libraries to managing client web app development:
 
  - [Karma](http://karma-runner.github.io/0.12/index.html) for UI and JavaScript Unit testing
- - [Bower](http://bower.io/) for managing client dependencies (angular, jquery, bootstrap, etc)
- - [Grunt](http://gruntjs.com/) as the primary task runner for server, client packaging and deployments
  - [Gulp](http://gulpjs.com/) used by Grunt to do the heavy-lifting bundling and minification
  - [NPM](https://www.npmjs.org/) to manage node.js dependencies (grunt, gulp, etc)
 
@@ -31,13 +29,12 @@ A lot this functionality is pre-configured and working out-of-the-box encapsulat
 
 This template relies on having [Node.js installed](http://nodejs.org/). If you try to use this template without node.js installed (ie, node.exe not found on the local machines PATH), you will be prompted to install it.
 
-Once downloaded and installed, click `Continue` to create your project. If any of the NPM dependencies are not installed globally, the template will install the required NPM packages as well as download the Bower dependencies for the template. 
-
-Due to the dependency on Bower, [Git also needs to be installed](https://www.npmjs.org/package/bower) and select the second option to **Use Git from the Windows Command Prompt**. This is required due to commands run by Bower to install dependencies from Git repositories.
+Once downloaded and installed, click `Continue` to create your project. If any of the NPM dependencies are not installed globally, the template will install the required NPM dependencies for the template. 
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/git-setup.png)
 
-As soon as your project is open, all the required front-end dependencies will be ready to go. Local NPM dependencies to run Karma, Grunt and Gulp will download asynchronously and you'll be able to see the progress inside the ServiceStackVS output window in Visual Studio.
+As soon as your project is open, all the required front-end dependencies will be ready to go. Local NPM dependencies to run Karma and Gulp will download asynchronously and you'll be able to see the progress inside the ServiceStackVS output window in Visual Studio.
+> ServiceStackVS introduces auto install dependencies for 2012 but falls back to default Visual Studio behavior for 2013/2015.
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/npm-install-on-create.png)
 
@@ -45,7 +42,7 @@ As soon as your project is open, all the required front-end dependencies will be
 
 ### Managing front-end dependencies
 
-To help add and install Bower and NPM dependencies, ServiceStackVS watches `bower.json` and `package.json` for changes and will run the appropriate install whenever these files are updated.
+To help add and install NPM dependencies, ServiceStackVS watches `package.json` for changes and will run the appropriate install whenever these files are updated.
 
 ![NPM install performed on save](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-package-demo.gif)
 
@@ -53,25 +50,21 @@ A great extension to help find names and versions of these dependencies is the [
 
 ### Debugging and Intellisense
 
-Development iterations follow along with Visual Studio’s normal pattern when used with the built in IIS Express as it hosts the local development folder, so vendor provided JS/CSS are directly referenced from the `/bower_components` folder.
+Development iterations follow along with Visual Studio’s normal pattern when used with the built in IIS Express as it hosts the local development folder, so vendor provided JS/CSS are directly referenced from the `/node_modules` folder.
 
-Included in the template is the `_references.js` that enables CSS/JS intellisense for all the included Bower components and NPM components. It is included in the default location of `/Scripts/_references.js` so that it should work by default when creating a new application.
+Included in the template is the `_references.js` that enables CSS/JS intellisense for all the included NPM components. It is included in the default location of `/Scripts/_references.js` so that it should work by default when creating a new application.
 
-### Building with Grunt/Gulp
+### Building with Gulp
 
-As front-ends are getting more complicated, tools like Grunt and Gulp help to fill the gaps left out of the MSBuild cycle. Included in the template is a series of 4 tasks to test, package and deploy your application from Grunt. 
-
-![Building with TRX](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-build-app-demo_2.gif)
-
-Although the template doesn't include a Gulpfile.js, it leverages Gulp via a grunt package called **grunt-gulp**. This done to take advantage of Gulp packages whilst keeping all tasks within one file.
+As front-ends are getting more complicated, tools like Gulp help to fill the gaps left out of the MSBuild cycle. Included in the template is a series of 4 tasks to test, package and deploy your application from Gulp. 
 
 #### The `wwwroot` folder
 
-This folder is where your application is **packaged to ready to be deployed**. It contains the result of the 'package' Grunt tasks which take care of things like minification and updating the associated references. It also contains all the required server components like the 'bin', Global.asax and web.config. 
+This folder is where your application is **packaged to ready to be deployed**. It contains the result of the 'package' Gulp tasks which take care of things like minification and updating the associated references. It also contains all the required server components like the 'bin', Global.asax and web.config. 
 
 ![wwwroot folder output](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/angular-spa-wwwroot-output.png)
 
-#### 01-run-tests
+#### Karma tests
 
 This task runs your tests configured in the `karma.conf.js` file. The template by default runs the tests once using **PhantomJS** as the browser. If you want to have Karma running and watching your files as you code, this can be changed by switching the `singleRun` flag in the Grunt configuration:
 
@@ -79,14 +72,13 @@ This task runs your tests configured in the `karma.conf.js` file. The template b
             unit: {
                 configFile: 'tests/karma.conf.js',
                 singleRun: false,
-                browsers: ['PhantomJS'],
+                browsers: ['Chrome'],
                 logLevel: 'ERROR'
             }
         }
 
-![Running Karma tests via TRX](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/01-run-tests.png)
 
-#### 02-package-server
+#### 01-package-server
 
 To keep the packaging of your server self-contained within Grunt, this task performs the following tasks to get all the required server components staged in the `wwwroot` folder:
 
@@ -114,20 +106,20 @@ AppSettings = customSettings.Exists
 
 As an example the `appsettings.txt` contains a single `DebugMode` setting:
 
-    # Release App Settings
+# Release App Settings
 
     DebugMode false
 
 The `appsettings.txt` file is located in the `wwwroot_build/deploy` folder by default which is copied as a part of the `02-package-server` task.
 
-#### 03-package-client
+#### 02-package-client
 
 This task is also separated out to allow updating, and if required deployment, to just the client side resources. It cleans the client side related files in the wwwroot folder, bundles and copies the new resources. The bundling searches for assets in the index.html file and follows build comments to minify and replace references. This enables simple use of debug JS files whilst still having control how our resources minify.
 
 ```html
 <!-- build:js lib/js/angular.min.js -->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-route/angular-route.js"></script>
 <!-- endbuild -->
 <!-- build:js js/app.min.js -->
 <script src="js/hello/controllers.js"></script>
@@ -138,25 +130,25 @@ This task is also separated out to allow updating, and if required deployment, t
 
 When creating new JS files for your application, they should be added in the `build:js js/app.min.js` comments shown above.
 
-Vendor resources from bower are also minified here to keep deployment simple and straight forward. If it makes more sense to use CDN resources, these build comments can easily be replaced. The above example results in the following two script includes.
+Vendor resources from NPM are also minified here to keep deployment simple and straight forward. If it makes more sense to use CDN resources, these build comments can easily be replaced. The above example results in the following two script includes.
 
 ```html
 <script src="lib/js/angular.min.js"></script>
 <script src="js/app.min.js"></script>
 ```
 
-If you want to use a CDN resource when your application is deployed but use bower components locally, `build` can be changed to `htmlbuild` specifying your own key after `:`. For example, if you want to include jQuery via a CDN when your application is deployed, the orignal
+If you want to use a CDN resource when your application is deployed but use node module components locally, `build` can be changed to `htmlbuild` specifying your own key after `:`. For example, if you want to include jQuery via a CDN when your application is deployed, the orignal
 
 ```html
 <!-- build:js lib/js/jquery.min.js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="node_modules/jquery/dist/jquery.js"></script>
 <!-- endbuild -->
 ```
 
 Would be changed to 
 ```html
 <!-- htmlbuild:jqueryCdn -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="node_modules/jquery/dist/jquery.js"></script>
 <!-- endbuild -->
 ```
 
@@ -169,9 +161,9 @@ To specify the URL or what should be added in the `htmlbuild` block at deploy ti
 }))
 ```
 
-#### 04-deploy-app
+#### 03-deploy-app
 
-To give developers a starting point for deployment, we have included the use of a **grunt-msdeploy** task that can deploy to an IIS server with Web deploy. Config for the deployment, eg the IIS Server address, application name, username and password is located in the `/wwwroot_build/publish/config.js`. 
+To give developers a starting point for deployment, we have included the use of a **gulp-msdeploy** task that can deploy to an IIS server with Web deploy. Config for the deployment, eg the IIS Server address, application name, username and password is located in the `/wwwroot_build/publish/config.js`. 
 
     {
         "iisApp": "YourAppName",
@@ -203,11 +195,10 @@ This task shows a quick way of updating your development server quickly after ma
     /wwwroot
         Output directory
     /wwwroot_build
-        Grunt shortcuts, build and deploy files
+        Gulp shortcuts, build and deploy files
     AppHost.cs
-    bower.json
     Global.asax
-    gruntfile.js
+    gulpfile.js
     index.html
     package.json
     packages.config
