@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="ServiceStackVS.Archive.Microsoft.26671a15-6da1-4bb2-afe2-a951ac27b335" Version="1.0" Language="en-US" Publisher="Microsoft" />
+    <Identity Id="ServiceStackVS.Archive.Microsoft.26671a15-6da1-4bb2-afe2-a951ac27b335" Version="1.0.1" Language="en-US" Publisher="Microsoft" />
     <DisplayName>ServiceStackVS.Archive</DisplayName>
     <Description xml:space="preserve">Archive of ServiceStackVS templates</Description>
     <License>license.txt</License>

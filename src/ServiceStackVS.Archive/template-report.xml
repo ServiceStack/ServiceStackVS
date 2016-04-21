@@ -2,6 +2,8 @@
 <TemplateReport>
   <ItemTemplates />
   <ProjectTemplates>
+    <ProjectTemplate Path="ProjectTemplates\ReactJS\Definitions\CSharp.vstemplate" Name="React App (Grunt)" Description="React App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your ReactJS application." ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ReactJS_Gulp\Definitions\CSharp.vstemplate" Name="React App (Gulp)" Description="React App (Gulp). This template includes the use of NPM and Gulp to support the development of your ReactJS application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\ReactJSGap\Definitions\CSharp.vstemplate" Name="React Desktop Apps (Beta)" Description="React application with additional projects to produce; a CefSharp based WinForms application, Self host console application and Web application ready to deploy to IIS using preconfigured Grunt/Gulp tasks." ProjectType="CSharp" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />

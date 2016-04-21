@@ -4,8 +4,8 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>React App</Name>
-    <Description>React App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your ReactJS application.</Description>
+    <Name>React App (Gulp)</Name>
+    <Description>React App (Gulp). This template includes the use of NPM and Gulp to support the development of your ReactJS application.</Description>
     <DefaultName>ReactApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
