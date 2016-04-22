@@ -6,7 +6,7 @@
 
 The future of modern client web development has been moving towards a pure JavaScript environment for client HTML/JS/CSS development, we've noticed the benefits of this approach years ago when we developed our [node.js powered Bundler](https://github.com/ServiceStack/Bundler) taking advantage of [node.js](http://nodejs.org/) rich ecosystem for all our bundling, minification and Web DSL needs. As this is also the trend we see with web development in VS.NET going visible by the recent preview of [Grunt and Gulp.js integration in Visual Studio](http://www.hanselman.com/blog/IntroducingGulpGruntBowerAndNpmSupportForVisualStudio.aspx), we're confident in promoting this approach for the development of large, JavaScript-heavy Web Apps. 
 
-This template marks our first iteration of this effort that we intend to continually improve and closely follow VS.NET's Grunt/Gulp.js integration so our automation tasks can be run directly from VS.NET UI Task Runners. In addition, this template also provides `.bat` files for running high-level grunt tasks so it also enables a good experience even without VS.NET's [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) (a preview of what will be available in VS 2014) which can be quickly run with a  [keyboard shortcut for running external commands](https://github.com/ServiceStack/Bundler#create-an-external-tool-inside-vsnet) in VS.NET.
+This template marks our first iteration of this effort that we intend to continually improve and closely follow VS.NET's Grunt/Gulp.js integration so our automation tasks can be run directly from VS.NET UI Task Runners. In addition, this template also provides `.bat` files for running high-level Gulp tasks so it also enables a good experience even without VS.NET's [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) (a preview of what will be available in VS 2014) which can be quickly run with a  [keyboard shortcut for running external commands](https://github.com/ServiceStack/Bundler#create-an-external-tool-inside-vsnet) in VS.NET.
 
 ![Template Runner Explorer](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/trx-tasks.png)
 
@@ -14,16 +14,16 @@ This template marks our first iteration of this effort that we intend to continu
 
 This templates leverages a number of best-in-class libraries to managing client web app development:
 
- - [Karma](http://karma-runner.github.io/0.12/index.html) for UI and JavaScript Unit testing
- - [Gulp](http://gulpjs.com/) used by Grunt to do the heavy-lifting bundling and minification
- - [NPM](https://www.npmjs.org/) to manage node.js dependencies (grunt, gulp, etc)
+ - [Karma](http://karma-runner.github.io/0.12/index.html) for UI and JavaScript Unit testing.
+ - [Gulp](http://gulpjs.com/) used for bundling, minification and deployment.
+ - [NPM](https://www.npmjs.org/) to manage frontend and development depedencies.
 
-A lot this functionality is pre-configured and working out-of-the-box encapsulated within the high-level Grunt Tasks below:
+A lot this functionality is pre-configured and working out-of-the-box encapsulated within the high-level Gulp Tasks below:
 
- - **[01-run-tests](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#01-run-tests)** - Runs Karma JavaScript Unit Tests
- - **[02-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#02-package-server)** - Uses msbuild to build the application and copies server artefacts to `/wwwroot`
- - **[03-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#03-package-client)** - Optimizes and packages the client artefacts for deployment in `/wwwroot`
- - **[04-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/master/angular-spa.md#04-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **[01-package-server](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#01-package-server)** - Uses msbuild to build the application and copies server artifacts to `/wwwroot`
+ - **[02-package-client](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#02-package-client)** - Optimizes and packages the client artifacts for deployment in `/wwwroot`
+ - **[03-deploy-app](https://github.com/ServiceStack/ServiceStackVS/blob/docs/angular-spa.md#03-deploy-app)** - Uses MS WebDeploy and `/wwwroot_buld/publish/config.json` to deploy app to specified server
+ - **package-and-deploy** - One task to rebuild and deploy via MS WebDeploy.
 
 ### Requirements
 
@@ -38,7 +38,7 @@ As soon as your project is open, all the required front-end dependencies will be
 
 ![](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/npm-install-on-create.png)
 
-**For Visual Studio 2012 developers**, we have included shortcuts to the 4 main grunt tasks using batch files in the `wwwroot_build` folder. This is due to the [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) only supporting Visual Studio 2013 Update 3 and above.
+**For Visual Studio 2012 developers**, we have included shortcuts to the 3 main Gulp tasks using batch files in the `wwwroot_build` folder. This is due to the [Task Runner Explorer extension](http://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) only supporting Visual Studio 2013 Update 3 and above.
 
 ### Managing front-end dependencies
 
@@ -66,21 +66,11 @@ This folder is where your application is **packaged to ready to be deployed**. I
 
 #### Karma tests
 
-This task runs your tests configured in the `karma.conf.js` file. The template by default runs the tests once using **PhantomJS** as the browser. If you want to have Karma running and watching your files as you code, this can be changed by switching the `singleRun` flag in the Grunt configuration:
-
-    karma: {
-            unit: {
-                configFile: 'tests/karma.conf.js',
-                singleRun: false,
-                browsers: ['Chrome'],
-                logLevel: 'ERROR'
-            }
-        }
-
+A simple Karma-Jasmine configuration is also provided with this template using a preconfigured `karma.conf.js` file. Any runner can be used to run these tests, for example the [Karma Test Adapter](https://github.com/MortenHoustonLudvigsen/KarmaTestAdapter) extension.
 
 #### 01-package-server
 
-To keep the packaging of your server self-contained within Grunt, this task performs the following tasks to get all the required server components staged in the `wwwroot` folder:
+To keep the packaging of your server self-contained within Gulp, this task performs the following tasks to get all the required server components staged in the `wwwroot` folder:
 
  - Restore NuGet packages
  - Release build
@@ -174,7 +164,7 @@ To give developers a starting point for deployment, we have included the use of 
 
 If you are using **Github's default Visual Studio ignore, this file will not be included in source control** due to the default rule of `publish/` to be ignored. You should check your Git Repository `.gitignore` rules before committing any potentially sensitive information into public source control.
 
-This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Grunt or just Visual Studio publish, see **[Simple Deployments to AWS with WebDeploy](https://github.com/ServiceStack/ServiceStack/wiki/Simple-Deployments-to-AWS-with-WebDeploy#deploy-using-grunt)**.
+This task shows a quick way of updating your development server quickly after making changes to your application. For more information on use web-deploy using either Gulp or just Visual Studio publish, see **[Simple Deployments to AWS with WebDeploy](https://github.com/ServiceStack/ServiceStack/wiki/Simple-Deployments-to-AWS-with-WebDeploy#deploy-using-grunt)**.
 
 #### Main project structure
 
