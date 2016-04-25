@@ -172,7 +172,7 @@
     });
     gulp.task('www-jspm-build', function () {
         return gulp.src('./src/app.js')
-            .pipe(jspmBuild())
+            .pipe(jspmBuild({minify:true}))
             .pipe(rename('app.js'))
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
