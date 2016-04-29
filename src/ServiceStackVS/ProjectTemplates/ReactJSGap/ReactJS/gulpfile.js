@@ -429,7 +429,10 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
             callback);
     });
     gulp.task('default', function (callback) {
-        runSequence('01-package-server', '02-package-client',
+        runSequence('01-package-server',
+            '02-package-client',
+            '02-package-console',
+            '02-package-winforms',
                 callback);
     });
 })();
