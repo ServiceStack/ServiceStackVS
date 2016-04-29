@@ -96,6 +96,7 @@ namespace $safeprojectname$
                 formMain.InvokeOnUiThreadIfRequired(() =>
                 {
                     formMain.Close();
+                    Cef.Shutdown();
                     UpdateManager.RestartApp();
                 });
             });
