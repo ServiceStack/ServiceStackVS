@@ -122,10 +122,7 @@
     <Content Include="wwwroot_build\build.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />
-    <Content Include="wwwroot_build\tools\7zsd_All.sfx" />
-    <Content Include="wwwroot_build\tools\7za.exe" />
     <Content Include="wwwroot_build\tools\ILMerge.exe" />
-    <Content Include="wwwroot_build\tools\Licenses.txt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
