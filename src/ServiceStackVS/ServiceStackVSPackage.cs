@@ -58,7 +58,6 @@ namespace ServiceStackVS
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid),
     "ServiceStack", "General", 0, 0, true)]
     public sealed class ServiceStackVSPackage : Package

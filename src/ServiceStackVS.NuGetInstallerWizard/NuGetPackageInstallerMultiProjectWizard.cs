@@ -70,10 +70,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         container.ComposeParts(this);
                     }
                 }
-
-                ServiceProvider.GetWritableSettingsStore().InitStorageSettings();
-
-                bool optOutOfStats = ServiceProvider.GetWritableSettingsStore().GetOptOutStatsSetting();
+                bool optOutOfStats = _dte.GetOptOutStatsSetting();
                 if (!optOutOfStats)
                 {
                     System.Threading.Tasks.Task.Run(() =>
