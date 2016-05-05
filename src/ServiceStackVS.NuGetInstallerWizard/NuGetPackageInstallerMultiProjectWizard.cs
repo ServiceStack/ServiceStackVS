@@ -70,6 +70,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         container.ComposeParts(this);
                     }
                 }
+
                 bool optOutOfStats = _dte.GetOptOutStatsSetting();
                 if (!optOutOfStats)
                 {
