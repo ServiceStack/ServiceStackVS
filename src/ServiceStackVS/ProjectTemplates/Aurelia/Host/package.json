@@ -20,7 +20,8 @@
       "jquery": "^2.2.2"
     },
     "devDependencies": {
-      "jspm": "^0.16.31"
+      "jspm": "^0.16.31",
+      "text": "github:systemjs/plugin-text@^0.0.8"
     }
   },
   "devDependencies": {
