@@ -7,7 +7,8 @@
     "sourceMap": true,
     "target": "es5",
     "module": "system",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "filesGlob": [
     "./jspm_packages/**/*.d.ts"
