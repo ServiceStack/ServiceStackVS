@@ -11,13 +11,10 @@ export class HelloCustomElement {
     result: string;
     @bindable name: string;
 
-    httpClient: HttpClient;
-    constructor() {
-        this.httpClient = new HttpClient();
+    constructor(private httpClient: HttpClient, private observer: ObserverLocator) {
         this.httpClient.configure(config => {
             config.withHeader('Accept', 'application/json');
         });
-        var observer = new ObserverLocator();
         observer.getObserver(this, 'name')
             .subscribe(this.onChange);
     }
