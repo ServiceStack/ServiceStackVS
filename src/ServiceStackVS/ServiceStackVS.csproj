@@ -199,16 +199,7 @@
   <ItemGroup>
     <Compile Include="FileHandlers\DocumentSavedHandlers.cs" />
     <Compile Include="Guids.cs" />
-    <Compile Include="Settings\ServiceStackGeneralSettingsPane.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Settings\ServiceStackGeneralSettingsPane.Designer.cs">
-      <DependentUpon>ServiceStackGeneralSettingsPane.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings\ServiceStackOptionsDialogGrid.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Settings\ServiceStackOptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VsixDocumentExtensions.cs" />
@@ -230,9 +221,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Settings\ServiceStackGeneralSettingsPane.resx">
-      <DependentUpon>ServiceStackGeneralSettingsPane.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
 
 namespace ServiceStackVS.Settings
 {
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [CLSCompliant(false), ComVisible(true)]
     public class ServiceStackOptionsDialogGrid : DialogPage
     {
         [Category("General")]
