@@ -19,17 +19,17 @@ To take advantage of all the templates and to improve the development workflow, 
 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows.
 
-- AngularJS App
+- [AngularJS App](#servicestack-with-angularjs)
 - [React App](#typescript-react-app)
 - [React Desktop Apps](#react-desktop-apps-template)
-- ServiceStack ASP.NET Empty
-- ServiceStack ASP.NET MVC4
+- [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
+- [ServiceStack ASP.NET MVC4](https://github.com/ServiceStackApps/SocialBootstrapApi)
 - ServiceStack ASP.NET MVC5 Empty
 - [ServiceStack ASP.NET with AngularJS](#angularjs-app-template)
-- ServiceStack ASP.NET with Bootstrap
-- ServiceStack ASP.NET with Razor
-- Self Host Empty
-- Self Host with Razor
+- [ServiceStack ASP.NET with Bootstrap](https://github.com/ServiceStackApps/EmailContacts)
+- [ServiceStack ASP.NET with Razor](http://razor.servicestack.net)
+- [Self Host Empty](https://github.com/ServiceStack/ServiceStack/wiki/Self-hosting)
+- [Self Host with Razor](http://razor.servicestack.net/#runs-everywhere)
 - [Windows Service Empty](#windows-service-template)
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
