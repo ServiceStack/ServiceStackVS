@@ -20,6 +20,7 @@ To take advantage of all the templates and to improve the development workflow, 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows.
 
 - AngularJS App
+- [React App](#TypeScript-React-App)
 - [React Desktop Apps](#React-Desktop-Apps-Template)
 - ServiceStack ASP.NET Empty
 - ServiceStack ASP.NET MVC4
@@ -30,7 +31,6 @@ This project structure includes examples of a lot of the different tasks that wi
 - Self Host Empty
 - Self Host with Razor
 - [Windows Service Empty](#Windows-Service-Template)
-- [TypeScript React App](#TypeScript-React-App)
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
 
