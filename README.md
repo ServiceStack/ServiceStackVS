@@ -20,7 +20,7 @@ To take advantage of all the templates and to improve the development workflow, 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows.
 
 - AngularJS App
-- [React App](#TypeScript-React-App)
+- [React App](#typescript-react-app)
 - [React Desktop Apps](#React-Desktop-Apps-Template)
 - ServiceStack ASP.NET Empty
 - ServiceStack ASP.NET MVC4
