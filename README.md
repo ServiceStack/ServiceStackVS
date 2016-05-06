@@ -21,16 +21,16 @@ This project structure includes examples of a lot of the different tasks that wi
 
 - AngularJS App
 - [React App](#typescript-react-app)
-- [React Desktop Apps](#React-Desktop-Apps-Template)
+- [React Desktop Apps](#react-desktop-apps-template)
 - ServiceStack ASP.NET Empty
 - ServiceStack ASP.NET MVC4
 - ServiceStack ASP.NET MVC5 Empty
-- [ServiceStack ASP.NET with AngularJS](#ServiceStack-with-AngularJS)
+- [ServiceStack ASP.NET with AngularJS](#angularjs-app-template)
 - ServiceStack ASP.NET with Bootstrap
 - ServiceStack ASP.NET with Razor
 - Self Host Empty
 - Self Host with Razor
-- [Windows Service Empty](#Windows-Service-Template)
+- [Windows Service Empty](#windows-service-template)
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
 
