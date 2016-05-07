@@ -1,0 +1,22 @@
+{
+  "compileOnSave":  true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "system",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "filesGlob": [
+    "./jspm_packages/**/*.d.ts"
+  ],
+  "exclude": [
+    "typings",
+    "node_modules",
+    "wwwroot",
+    "!./node_modules/**/*.ts"
+  ]
+}

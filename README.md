@@ -4,6 +4,12 @@ ServiceStackVS supports Visual Studio 2015, 2013 and 2012* and can be [downloade
 
 [![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
+### Recommended Plugins and Tools
+To take advantage of all the templates and to improve the development workflow, it's best to get the following Visual Studio plugins/extensions for all available versions of Visual Studio.
+
+- [Node Tools for Visual Stuido](https://github.com/Microsoft/nodejstools/releases/tag/v1.1.1)
+- [TypeScript Extension](https://github.com/Microsoft/TypeScript/releases)
+
 ### VS.NET 2012 Prerequisites
 
   - VS.NET 2012 Users must install the [Microsoft Visual Studio Shell Redistributable](http://www.microsoft.com/en-au/download/details.aspx?id=40764)

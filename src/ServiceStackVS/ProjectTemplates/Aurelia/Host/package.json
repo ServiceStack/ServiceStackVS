@@ -1,0 +1,49 @@
+{
+  "name": "$safeprojectname$",
+  "version": "0.0.1",
+  "scripts": {
+    "postinstall": "cmd /c wwwroot_build\\build.bat"
+  },
+  "jspm": {
+    "registry": "npm",
+    "dependencies": {
+      "aurelia-bootstrapper": "1.0.0-beta.1.2.0",
+      "aurelia-framework": "1.0.0-beta.1.2.2",
+      "aurelia-http-client": "1.0.0-beta.1.2.0",
+      "aurelia-logging-console": "1.0.0-beta.1.2.0",
+      "aurelia-router": "1.0.0-beta.1.2.1",
+      "aurelia-templating-binding": "1.0.0-beta.1.2.2",
+      "aurelia-templating-resources": "1.0.0-beta.1.2.3",
+      "aurelia-templating-router": "1.0.0-beta.1.2.0",
+      "bootstrap": "~3.2.0",
+      "es6-shim": "github:es-shims/es6-shim@^0.35.0",
+      "jquery": "^2.2.2"
+    },
+    "devDependencies": {
+      "jspm": "^0.16.31",
+      "text": "github:systemjs/plugin-text@^0.0.8"
+    }
+  },
+  "devDependencies": {
+    "aurelia-bundler": "^0.3.2",
+    "del": "~1.1.1",
+    "event-stream": "~3.3.1",
+    "gulp": "~3.9.1",
+    "gulp-htmlbuild": "~0.4.1",
+    "gulp-if": "~1.2.4",
+    "gulp-jspm": "^0.5.8",
+    "gulp-clean-css": "~2.0.6",
+    "gulp-msbuild": "^0.2.21",
+    "gulp-msdeploy": "^0.0.4",
+    "gulp-newer": "~1.1.0",
+    "gulp-nuget-restore": "^0.3.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "~0.4.0",
+    "gulp-uglify": "~1.5.3",
+    "gulp-useref": "~3.0.8",
+    "jspm": "^0.16.31",
+    "requirejs": "~2.1.15",
+    "run-sequence": "^1.1.5",
+    "yargs": "^4.2.0"
+  }
+}

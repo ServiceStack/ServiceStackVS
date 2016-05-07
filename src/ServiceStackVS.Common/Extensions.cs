@@ -42,24 +42,15 @@ namespace ServiceStackVS.Common
 
     public static class SettingsStorage
     {
-        public const string CollectionName = "ServiceStackVS";
-        public const string OptOutPropertyName = "OptOutOfStats";
+        public const string CategoryName = "ServiceStack";
+        public const string PageName = "General";
+        public const string OptOutPropertyName = "OptOutStats";
 
-        public static void InitStorageSettings(this WritableSettingsStore settingsStore)
-        {
-            if (!settingsStore.CollectionExists(CollectionName))
-            {
-                settingsStore.CreateCollection(CollectionName);
-            }
-            if (!settingsStore.PropertyExists(CollectionName, OptOutPropertyName))
-            {
-                settingsStore.SetBoolean(CollectionName, OptOutPropertyName, false);
-            }
-        }
 
-        public static bool GetOptOutStatsSetting(this WritableSettingsStore settingsStore)
+        public static bool GetOptOutStatsSetting(this EnvDTE.DTE dte)
         {
-            return settingsStore.GetBoolean(CollectionName, OptOutPropertyName);
+            var props = dte.get_Properties(CategoryName, PageName);
+            return (bool) props.Item(OptOutPropertyName).Value;
         }
     }
 }
