@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using NuGet;
@@ -22,40 +21,45 @@ namespace ServiceStackVS.NuGetInstallerWizard
     {
 
         private const string NugetV2Url = "https://packages.nuget.org/api/v2";
+        private const string serviceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?Name={1}";
 
-        private IPackageRepository _nuGetPackageRepository;
+        private IPackageRepository nuGetPackageRepository;
         private IPackageRepository NuGetPackageRepository
         {
             get
             {
-                return _nuGetPackageRepository ??
-                       (_nuGetPackageRepository =
+                return nuGetPackageRepository ??
+                       (nuGetPackageRepository =
                            PackageRepositoryFactory.Default.CreateRepository(NugetV2Url));
             }
         }
 
-        private IPackageRepository _cachedRepository;
+        private IPackageRepository cachedRepository;
         private IPackageRepository CachedRepository
         {
             get
             {
                 string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
-                return _cachedRepository ??
-                       (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
+                return cachedRepository ??
+                       (cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
             }
         }
 
-        public int MajorVisualStudioVersion
-        {
-            get { return int.Parse(_dte.Version.Substring(0, 2)); }
-        }
+        public int MajorVisualStudioVersion => int.Parse(_dte.Version.Substring(0, 2));
 
         [Import]
         public SVsServiceProvider ServiceProvider { get; set; }
 
         public static NuGetWizardDataPackage RootNuGetPackage;
         private DTE _dte;
+
+        Dictionary<int, string> versionAlias = new Dictionary<int, string>
+                {
+                    {11,"2012"},
+                    {12,"2013"},
+                    {14,""},
+                };
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
@@ -79,7 +83,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                         try
                         {
                             string templateName = WizardHelpers.GetTemplateNameFromPath(customParams[0] as string);
-                            "https://servicestack.net/stats/ssvs/record?Name={0}".Fmt(templateName).GetStringFromUrl();
+                            serviceStackStatsUrl.Fmt(versionAlias[MajorVisualStudioVersion], templateName).GetStringFromUrl();
                         }
                         catch (Exception e)
                         {
@@ -88,32 +92,8 @@ namespace ServiceStackVS.NuGetInstallerWizard
                     });
                 }
 
-                Dictionary<int, string> versionAlias = new Dictionary<int, string>
-                {
-                    {11,"Visual Studio 2012"},
-                    {12,"Visual Studio 2013"},
-                    {14,"Visual Studio 2015"},
-                };
-
                 string wizardData = replacementsDictionary["$wizarddata$"];
                 XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-                if (element.HasMinVsVersion())
-                {
-                    if(MajorVisualStudioVersion < element.GetMinVersion())
-                    {
-                        var minVersion = element.GetMinVersion();
-                        if (minVersion != null)
-                            MessageBox.Show(
-                                "Features of this template are not fully supported by your version of Visual Studio. Minimum version is {0}."
-                                    .Fmt(versionAlias[(int)minVersion]),
-                                "ServiceStackVS Warning",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1,
-                                MessageBoxOptions.DefaultDesktopOnly
-                                );
-                    }
-                }
                 if (element.HasRootPackage())
                 {
                     RootNuGetPackage = element.GetRootPackage();

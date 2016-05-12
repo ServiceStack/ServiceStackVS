@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>ServiceStack ASP.NET with AngularJS</Name>
-    <Description>ServiceStack ASP.NET with AngularJS</Description>
+    <Name>ASP.NET Empty</Name>
+    <Description>An empty ASP.NET Web application with ServiceStack added.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>ServiceStackAngularJS</DefaultName>
+    <DefaultName>WebApplication</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -15,7 +15,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStackAngularJS.csproj" ReplaceParameters="true"></Project>
+    <Project TargetFileName="$safeprojectname$.csproj" File="Host.csproj" ReplaceParameters="true"></Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
@@ -32,14 +32,10 @@
       <package id="ServiceStack.Common" version="latest" />
       <package id="ServiceStack.Interfaces" version="latest" />
       <package id="ServiceStack.OrmLite" version="latest" />
-      <package id="ServiceStack.Razor" version="latest" />
       <package id="ServiceStack.Redis" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
-      <package id="AngularJS.Core" version="1.5.5" />
-      <package id="AngularJS.Route" version="1.5.5" />
-      <package id="bootstrap" version="3.0.1" />
-      <package id="jQuery" version="1.9.0" />
+      <package id="Microsoft.CodeDom.Providers.DotNetCompilerPlatform" version="1.0.0" />
     </packages>
   </WizardData>
 </VSTemplate>

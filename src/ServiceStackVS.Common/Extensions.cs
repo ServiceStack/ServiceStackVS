@@ -19,15 +19,6 @@ namespace ServiceStackVS.Common
         }
     }
 
-    public static class VsSettingsUtils
-    {
-        public static WritableSettingsStore GetWritableSettingsStore(this SVsServiceProvider vsServiceProvider)
-        {
-            var shellSettingsManager = new ShellSettingsManager(vsServiceProvider);
-            return shellSettingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
-        }
-    }
-
     public static class WizardHelpers
     {
         public static string GetTemplateNameFromPath(string vsTemplatePath)
@@ -46,11 +37,44 @@ namespace ServiceStackVS.Common
         public const string PageName = "General";
         public const string OptOutPropertyName = "OptOutStats";
 
-
+        public const string PackageSettingsCategory = "ServiceStackSettings";
+        public const string PackageReadyPropertyName = "PackageReady";
+        
         public static bool GetOptOutStatsSetting(this EnvDTE.DTE dte)
         {
             var props = dte.get_Properties(CategoryName, PageName);
             return (bool) props.Item(OptOutPropertyName).Value;
+        }
+
+        public static WritableSettingsStore GetWritableSettingsStore(this SVsServiceProvider vsServiceProvider)
+        {
+            var shellSettingsManager = new ShellSettingsManager(vsServiceProvider);
+            return shellSettingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
+        }
+
+        public static void InitWritableSettings(this WritableSettingsStore settingsStore)
+        {
+            if (!settingsStore.CollectionExists(PackageSettingsCategory))
+            {
+                settingsStore.CreateCollection(PackageSettingsCategory);
+            }
+
+            if (!settingsStore.PropertyExists(PackageSettingsCategory, PackageReadyPropertyName))
+            {
+                settingsStore.SetBoolean(PackageSettingsCategory,PackageReadyPropertyName,false);
+            }
+        }
+
+        public static void SetPackageReady(this WritableSettingsStore settingsStore, bool value)
+        {
+            settingsStore.InitWritableSettings();
+            settingsStore.SetBoolean(PackageSettingsCategory,PackageReadyPropertyName, value);
+        }
+
+        public static bool GetPackageReady(this WritableSettingsStore settingsStore)
+        {
+            settingsStore.InitWritableSettings();
+            return settingsStore.GetBoolean(PackageSettingsCategory, PackageReadyPropertyName);
         }
     }
 }

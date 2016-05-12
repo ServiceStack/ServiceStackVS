@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -58,6 +59,7 @@ namespace ServiceStackVS
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution)]
     [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid),
     "ServiceStack", "General", 0, 0, true)]
     public sealed class ServiceStackVSPackage : Package
@@ -74,28 +76,26 @@ namespace ServiceStackVS
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
 
+        public readonly Dictionary<int, List<string>> TemplateCleanupByVsVersion = new Dictionary<int, List<string>>
+                {
+                    {11,new List<string> { "Aurelia.csharp", "ReactJSGap.csharp", "TypeScriptReact.csharp" } },
+                    {12,new List<string> { "Aurelia.csharp" }},
+                    {14,new List<string>()}
+                };
+
         private IComponentModel componentModel;
-        public IComponentModel ComponentModel
-        {
-            get { return componentModel ?? (componentModel = (IComponentModel)GetService(typeof(SComponentModel))); }
-        }
+        public IComponentModel ComponentModel => 
+            componentModel ?? (componentModel = (IComponentModel)GetService(typeof(SComponentModel)));
 
         private IVsPackageInstaller packageInstaller;
-        public IVsPackageInstaller PackageInstaller
-        {
-            get { return packageInstaller ?? (packageInstaller = ComponentModel.GetService<IVsPackageInstaller>()); }
-        }
+
+        public IVsPackageInstaller PackageInstaller => 
+            packageInstaller ?? (packageInstaller = ComponentModel.GetService<IVsPackageInstaller>());
 
         private IVsPackageInstallerServices pkgInstallerServices;
 
         public IVsPackageInstallerServices PackageInstallerServices
-        {
-            get
-            {
-                return pkgInstallerServices ??
-                       (pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>());
-            }
-        }
+            => pkgInstallerServices ?? (pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>());
 
         public IVsMonitorSelection MonitorSelection
         {
@@ -105,8 +105,10 @@ namespace ServiceStackVS
             }
         }
 
-        [Import]
-        public SVsServiceProvider ServiceProvider { get; set; }
+        private SVsServiceProvider svcProvider;
+
+        public SVsServiceProvider ServiceProvider
+            => svcProvider ?? (svcProvider = ComponentModel.GetService<SVsServiceProvider>());
 
         private SolutionEventsListener solutionEventsListener;
 
@@ -120,10 +122,7 @@ namespace ServiceStackVS
             }
         }
 
-        public int MajorVisualStudioVersion
-        {
-            get { return int.Parse(dte.Version.Substring(0, 2)); }
-        }
+        public int MajorVisualStudioVersion => int.Parse(dte.Version.Substring(0, 2));
 
         private DocumentEvents documentEvents;
         private ProjectItemsEvents projectItemsEvents;
@@ -179,6 +178,67 @@ namespace ServiceStackVS
 
             solutionEventsListener = new SolutionEventsListener();
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
+
+            RegisterStartupEvents();
+        }
+
+        DTEEvents dte_events;
+
+        private void RegisterStartupEvents()
+        {
+            if(dte == null)
+                dte = (DTE)GetService(typeof(DTE));
+            
+
+            if (dte != null)
+            {
+                dte_events = dte.Events.DTEEvents;
+                dte_events.OnStartupComplete += OnStartupComplete;
+            }
+        }
+
+        private void OnStartupComplete()
+        {
+            dte_events.OnStartupComplete -= OnStartupComplete;
+            dte_events = null;
+            var cleanupList = TemplateCleanupByVsVersion[MajorVisualStudioVersion];
+            foreach (var deleteTemplate in cleanupList)
+            {
+                DirectoryInfo localVsDir = new DirectoryInfo(Path.Combine(UserLocalDataPath,"Extensions"));
+                var ssvsDllPath = localVsDir.GetFiles("ServiceStackVS.dll", SearchOption.AllDirectories);
+
+                // When updating from VSIX file, two dlls might exist.
+                foreach (var fileInfo in ssvsDllPath)
+                {
+                    DirectoryInfo ssvsExtensionDirInfo = fileInfo.Directory;
+
+                    if (ssvsExtensionDirInfo == null)
+                    {
+                        continue;
+                    }
+                    var files = ssvsExtensionDirInfo.GetFiles(deleteTemplate + ".zip", SearchOption.AllDirectories);
+                    if (files.Length > 0)
+                    {
+                        try
+                        {
+                            File.Delete(files[0].FullName);
+                        }
+                        catch (DirectoryNotFoundException)
+                        {
+                            //Possible race condition on upgrade, ignore.
+                        }
+                        catch (IOException)
+                        {
+                            //Possible race condition on upgrade, ignore.
+                        }
+                        catch (Exception e)
+                        {
+                            OutputWindowWriter.WriteLine("ServiceStackVS had trouble starting. \n\n" + e.Message + "\n" + e.StackTrace);
+                        }
+                    }
+                }
+            }
+            ServiceProvider.GetWritableSettingsStore().SetPackageReady(true);
         }
 
         private void SolutionLoaded()
