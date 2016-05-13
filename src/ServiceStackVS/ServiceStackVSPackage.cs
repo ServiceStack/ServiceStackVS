@@ -344,34 +344,43 @@ namespace ServiceStackVS
 
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
             var selectedItems = selectedFiles as IList<SelectedItem> ?? selectedFiles.ToList();
-            var typeHandlers = selectedItems.GetTypeHandlerForSelectedFiles();
-            if (typeHandlers.Count > 0)
-            {
-                var typeHandler = typeHandlers.First();
-                bool validVsProjectType =
-                    typeHandler.ValidVsProjectTypeGuids().FirstOrDefault(
-                        projectTypeGuid =>
-                            string.Equals(projectItem.ContainingProject.Kind, projectTypeGuid,
-                                StringComparison.InvariantCultureIgnoreCase)) != null;
 
-                bool visible = projectItem.ContainingProject != null &&
-                               projectItem.ContainingProject.Kind != null &&
-                               //Project is not unloaded
-                               !string.Equals(projectItem.ContainingProject.Kind, VsHelperGuids.ProjectUnloaded,
-                                   StringComparison.InvariantCultureIgnoreCase) && validVsProjectType;
-                               
-                bool enabled = visible && ready;
+            bool visible = projectItem.ContainingProject != null &&
+                           projectItem.ContainingProject.Kind != null &&
+                           //Project is not unloaded
+                           !string.Equals(projectItem.ContainingProject.Kind, VsHelperGuids.ProjectUnloaded,
+                               StringComparison.InvariantCultureIgnoreCase);
 
-                command.Visible = enabled;
-                command.Enabled = enabled;
-            }
-            else
+            if (!visible)
             {
                 command.Visible = false;
                 command.Enabled = false;
-            }            
-        }
+                return;
+            }
 
+            var typeHandlers = selectedItems.GetTypeHandlerForSelectedFiles();
+            if (typeHandlers.Count == 0)
+            {
+                command.Visible = false;
+                command.Enabled = false;
+                return;
+            }
+
+            var typeHandler = typeHandlers.First();
+            bool validVsProjectType =
+                typeHandler.ValidVsProjectTypeGuids().FirstOrDefault(
+                    projectTypeGuid =>
+                        string.Equals(projectItem.ContainingProject.Kind, projectTypeGuid,
+                            StringComparison.InvariantCultureIgnoreCase)) != null;
+
+
+            // Ensure update button is visable and project is 'ready' (of right type and not building) or item clicked is typescript dtos file.
+            bool enabled = ready || typeHandler.GetType() == typeof(TypeScriptNativeTypesHandler);
+
+            command.Visible = validVsProjectType;
+            command.Enabled = enabled;
+        }
+        
         private void VbNetQueryAddMenuItem(object sender, EventArgs eventArgs)
         {
             var command = (OleMenuCommand)sender;
@@ -581,6 +590,7 @@ namespace ServiceStackVS
                 streamWriter.Write(templateCode);
                 streamWriter.Flush();
             }
+            Thread.Sleep(20);
             var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
             newDtoFile.Open(EnvDTE.Constants.vsViewKindCode);
             newDtoFile.Save();
