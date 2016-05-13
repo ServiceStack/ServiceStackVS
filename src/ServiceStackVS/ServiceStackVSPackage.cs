@@ -590,6 +590,7 @@ namespace ServiceStackVS
                 streamWriter.Write(templateCode);
                 streamWriter.Flush();
             }
+            // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
             Thread.Sleep(20);
             var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
             newDtoFile.Open(EnvDTE.Constants.vsViewKindCode);
