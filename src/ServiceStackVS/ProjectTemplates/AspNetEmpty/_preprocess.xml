@@ -6,7 +6,7 @@
   
   <TemplateInfo Path="CSharp\Web\Custom\Subcategory"/>
   -->
-  <TemplateInfo Path="CSharp\Web"/>
+  <TemplateInfo Path="CSharp\ServiceStack"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
     <add key="ServiceStack.CSharp.AspNetEmpty" value="$safeprojectname$"/>
     <!--<add key="ServiceStack.CSharp.RazorSeed." value="$slnname$"/>-->
