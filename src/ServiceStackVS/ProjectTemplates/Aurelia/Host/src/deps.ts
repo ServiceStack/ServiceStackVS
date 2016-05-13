@@ -1,7 +1,4 @@
 ﻿/// <reference path='../typings/browser.d.ts'/>
-/// <reference path='../jspm_packages/npm/aurelia-framework@1.0.0-beta.1.2.2/aurelia-framework.d.ts'/>
-/// <reference path='../jspm_packages/npm/aurelia-binding@1.0.0-beta.1.3.4/aurelia-binding.d.ts'/>
-/// <reference path='../jspm_packages/npm/aurelia-templating-resources@1.0.0-beta.1.2.3/aurelia-templating-resources.d.ts'/>
 
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from "aurelia-http-client";
