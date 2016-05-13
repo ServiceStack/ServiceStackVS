@@ -30,13 +30,4 @@
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
     <FullClassName>TemplateBuilder.RootWizard</FullClassName>
   </WizardExtension>
-  <WizardExtension>
-    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
-    <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerMultiProjectWizard</FullClassName>
-  </WizardExtension>
-  <WizardData>
-    <packages>
-      <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
-    </packages>
-  </WizardData>
 </VSTemplate>
