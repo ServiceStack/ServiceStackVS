@@ -123,12 +123,18 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app.ts" />
     <TypeScriptCompile Include="src\hello.ts" />
+    <TypeScriptCompile Include="src\home.ts" />
     <TypeScriptCompile Include="src\deps.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\view1.ts" />
+    <TypeScriptCompile Include="src\view2.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\app.html" />
     <Content Include="src\hello.html" />
+    <Content Include="src\home.html" />
+    <Content Include="src\view1.html" />
+    <Content Include="src\view2.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
