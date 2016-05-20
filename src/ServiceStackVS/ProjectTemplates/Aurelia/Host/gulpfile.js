@@ -39,8 +39,8 @@
         bundles: {
             "./wwwroot/app": {
                 includes: [
-                    '[src/*.js]',
-                    'src/*.html!text',
+                    '[src/**/*.js]',
+                    'src/**/*.html!text',
                     'css/*.css!text',
                     "aurelia-bootstrapper",
                     "aurelia-framework",

@@ -122,23 +122,27 @@
   </ItemGroup>-->
   <ItemGroup>
     <TypeScriptCompile Include="src\app.ts" />
-    <TypeScriptCompile Include="src\hello.ts" />
-    <TypeScriptCompile Include="src\home.ts" />
+    <TypeScriptCompile Include="src\resources\elements\hello.ts" />
     <TypeScriptCompile Include="src\deps.ts" />
+    <TypeScriptCompile Include="src\resources\index.ts" />
+    <TypeScriptCompile Include="src\views\home.ts" />
     <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\view1.ts" />
-    <TypeScriptCompile Include="src\view2.ts" />
+    <TypeScriptCompile Include="src\views\view1.ts" />
+    <TypeScriptCompile Include="src\views\view2.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\app.html" />
-    <Content Include="src\hello.html" />
-    <Content Include="src\home.html" />
-    <Content Include="src\view1.html" />
-    <Content Include="src\view2.html" />
+    <Content Include="src\resources\elements\hello.html" />
+    <Content Include="src\views\home.html" />
+    <Content Include="src\views\view1.html" />
+    <Content Include="src\views\view2.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
 	<Folder Include="wwwroot\" />
+    <Folder Include="src\resources\attributes\" />
+    <Folder Include="src\resources\binding-behaviors\" />
+    <Folder Include="src\resources\value-converters\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
