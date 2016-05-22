@@ -3,8 +3,6 @@ using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using MonoDevelop.Core;
-using MonoDevelop.Projects.Formats.MSBuild;
-using MonoDevelop.PackageManagement;
 using System.Linq;
 using ServiceStackVS.NativeTypes.Handlers;
 using System.IO;
@@ -12,8 +10,9 @@ using System;
 using ServiceStackVS.NativeTypes;
 using ICSharpCode;
 using NuGet;
-using ICSharpCode.PackageManagement;
 using System.Threading.Tasks;
+using MonoDevelop.PackageManagement;
+using System.Collections.Generic;
 
 namespace ServiceStackXS.Commands
 {
@@ -22,7 +21,6 @@ namespace ServiceStackXS.Commands
 		protected override void Run()
 		{
 			DotNetProject project = IdeApp.ProjectOperations.CurrentSelectedProject as DotNetProject;
-			var dotNetProjectProxy = new DotNetProjectProxy (project);
 			if (project == null) {
 				return;
 			}
@@ -78,9 +76,9 @@ namespace ServiceStackXS.Commands
 
 			try {
 				Task.Run (() => { 
-					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Client");
-					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Interfaces");
-					AddNuGetPackageReference (dotNetProjectProxy, "ServiceStack.Text");
+					AddNuGetPackageReference (project, "ServiceStack.Client");
+					AddNuGetPackageReference (project, "ServiceStack.Interfaces");
+					AddNuGetPackageReference (project, "ServiceStack.Text");
 				}).ContinueWith (task => { 
 					IdeApp.Workbench.StatusBar.ShowReady ();
 					IdeApp.Workbench.StatusBar.Pulse ();
@@ -101,17 +99,16 @@ namespace ServiceStackXS.Commands
 			}
 		}
 
-		void AddNuGetPackageReference(IDotNetProject project,string packageId)
+		void AddNuGetPackageReference(DotNetProject project,string packageId)
 		{
 			var packageRepoFactory = new PackageRepositoryFactory();
 			var packageRepo = packageRepoFactory.CreateRepository ("http://www.nuget.org/api/v2/");
-			var packageManagementProjectFactory = new PackageManagementProjectFactory (PackageManagementServices.PackageManagementEvents);
-			var packageManagementProject = packageManagementProjectFactory.CreateProject (packageRepo, project);
 			var package = packageRepo.FindPackagesById (packageId).FirstOrDefault (x => x.IsLatestVersion);
-			var packageManagerFactory = new SharpDevelopPackageManagerFactory ();
-			var packageManager = packageManagerFactory.CreatePackageManager (packageRepo, project);
-			packageManager.InstallPackage (package, false, false);
-			packageManagementProject.AddPackageReference (package);
+			PackageManagementServices.
+                 ProjectOperations.
+                     InstallPackages("http://www.nuget.org/api/v2/",
+									 project,
+									 new List<PackageManagementPackageReference>() { new PackageManagementPackageReference(package.Id, package.Version.Version.ToString()) });
 		}
 
 		protected override void Update (CommandInfo info)

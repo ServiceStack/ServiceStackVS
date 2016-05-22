@@ -6,7 +6,7 @@
         url             ="https://github.com/ServiceStack/ServiceStackVS" 
         description     ="An extension to work with the ServiceStack framework."
         category        ="IDE extensions"
-        version         ="0.4">
+        version         ="0.5">
 	<Header>
 		<Name>ServiceStackXS</Name>
 		<Description>An extension to work with the ServiceStack framework.</Description>
@@ -25,8 +25,8 @@
   </Runtime>
 
   <Dependencies>
-        <Addin id="::MonoDevelop.Core" version="5.0" />
-        <Addin id="::MonoDevelop.Ide" version="5.0" />
+        <Addin id="::MonoDevelop.Core" version="6.0" />
+        <Addin id="::MonoDevelop.Ide" version="6.0" />
   </Dependencies>
 
   <ConditionType id="ServiceStackReferenceDto" type="ServiceStackXS.ServiceReferenceDtoCondition" />
