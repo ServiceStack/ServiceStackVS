@@ -72,9 +72,6 @@
     <Reference Include="Microsoft.Web.XmlTransform">
       <HintPath>lib\Microsoft.Web.XmlTransform.dll</HintPath>
     </Reference>
-    <Reference Include="MonoDevelop.PackageManagement">
-      <HintPath>lib\MonoDevelop.PackageManagement.dll</HintPath>
-    </Reference>
     <Reference Include="NuGet.Core">
       <HintPath>lib\NuGet.Core.dll</HintPath>
     </Reference>
@@ -111,5 +108,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.PackageManagement" />
   </ItemGroup>
 </Project>
