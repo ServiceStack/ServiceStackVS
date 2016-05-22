@@ -2,6 +2,6 @@
 	<Project platforms="Mac Linux Win32">
 		<AddinFile>ServiceStackXS/bin/Debug/ServiceStackXS.dll</AddinFile>
 		<BuildFile>ServiceStackXS.sln</BuildFile>
-		<BuildConfiguration>Debug</BuildConfiguration>
+		<BuildConfiguration>Release</BuildConfiguration>
 	</Project>
 </AddinProject>
