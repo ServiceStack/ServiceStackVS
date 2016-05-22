@@ -112,7 +112,4 @@
     </None>
     <None Include="Properties\Resources.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <AddinReference Include="MonoDevelop.PackageManagement" />
-  </ItemGroup>
 </Project>
