@@ -54,13 +54,6 @@ namespace ServiceStackVS.NuGetInstallerWizard
         public static NuGetWizardDataPackage RootNuGetPackage;
         private DTE _dte;
 
-        Dictionary<int, string> versionAlias = new Dictionary<int, string>
-                {
-                    {11,"2012"},
-                    {12,"2013"},
-                    {14,""},
-                };
-
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             _dte = (DTE)automationObject;
@@ -78,18 +71,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
                 bool optOutOfStats = _dte.GetOptOutStatsSetting();
                 if (!optOutOfStats)
                 {
-                    System.Threading.Tasks.Task.Run(() =>
-                    {
-                        try
-                        {
-                            string templateName = WizardHelpers.GetTemplateNameFromPath(customParams[0] as string);
-                            serviceStackStatsUrl.Fmt(versionAlias[MajorVisualStudioVersion], templateName).GetStringFromUrl();
-                        }
-                        catch (Exception e)
-                        {
-                            //do nothing
-                        }
-                    });
+                    Analytics.SubmitAnonymousTemplateUsage(MajorVisualStudioVersion, customParams[0] as string);
                 }
 
                 string wizardData = replacementsDictionary["$wizarddata$"];

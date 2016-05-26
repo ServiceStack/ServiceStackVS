@@ -5,9 +5,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using EnvDTE;
 using ServiceStack;
+using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NativeTypes.Handlers;
+using Package = Microsoft.VisualStudio.Shell.Package;
+using Window = System.Windows.Window;
 
 namespace ServiceStackVS.NativeTypesWizard
 {
@@ -117,6 +121,7 @@ namespace ServiceStackVS.NativeTypesWizard
                 if (success)
                 {
                     AddReferenceSucceeded = true;
+                    SubmitAddRefStats();
                     Close();
                 }
                 else
@@ -128,6 +133,24 @@ namespace ServiceStackVS.NativeTypesWizard
                     UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 }
             }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private void SubmitAddRefStats()
+        {
+            DTE dte = Package.GetGlobalService(typeof(DTE)) as DTE;
+            if (dte != null)
+            {
+                bool optOutOfStats = dte.GetOptOutStatsSetting();
+                if (!optOutOfStats)
+                {
+                    var langName = Enum.GetName(typeof(NativeTypesLanguage), typesHandler.TypesLanguage);
+                    Analytics.SubmitAnonymousAddReferenceUsage(langName);
+                }
+            }
+            else
+            {
+                OutputWindowWriter.WriterWindow.WriteLine("Warning: Failed to resolve DTE");
+            }
         }
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
