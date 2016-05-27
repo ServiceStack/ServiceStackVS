@@ -10,7 +10,7 @@ namespace ServiceStackVS.Common
     public static class Analytics
     {
         private const string serviceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?Name={1}";
-        private const string serviceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?Name={1}";
+        private const string serviceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?Name={0}";
 
         static readonly Dictionary<int, string> VersionAlias = new Dictionary<int, string>
                 {
