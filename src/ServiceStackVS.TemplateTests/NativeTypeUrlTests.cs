@@ -78,5 +78,12 @@ namespace ServiceStackVS.Tests
                 NUnit.Framework.Assert.AreEqual(validUrl.Value, typeHandler.GenerateUrl(validUrl.Key, null));
             }
         }
+
+        [Test]
+        public void TestLanguageStatsName()
+        {
+            var typesHandler = new TypeScriptNativeTypesHandler();
+            Assert.AreEqual("typescript.d",typesHandler.RelativeTypesUrl.Substring(6));
+        }
     }
 }

@@ -143,7 +143,7 @@ namespace ServiceStackVS.NativeTypesWizard
                 bool optOutOfStats = dte.GetOptOutStatsSetting();
                 if (!optOutOfStats)
                 {
-                    var langName = Enum.GetName(typeof(NativeTypesLanguage), typesHandler.TypesLanguage);
+                    var langName = typesHandler.RelativeTypesUrl.Substring(6);
                     Analytics.SubmitAnonymousAddReferenceUsage(langName);
                 }
             }
