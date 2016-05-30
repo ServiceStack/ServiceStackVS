@@ -164,6 +164,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceStackVS.Common\ServiceStackVS.Common.csproj">
+      <Project>{05bf0855-569e-46d9-93bb-0a89e3866745}</Project>
+      <Name>ServiceStackVS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">
       <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
       <Name>ServiceStackVS.NativeTypes</Name>

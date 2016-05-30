@@ -237,6 +237,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="app.config" />
     <None Include="ItemTemplates\Razor\CSharpRazor\razor.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

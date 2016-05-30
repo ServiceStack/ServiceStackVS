@@ -112,15 +112,6 @@ namespace ServiceStackVS
 
         private SolutionEventsListener solutionEventsListener;
 
-        private OutputWindowWriter serviceStackOutputWindowWriter;
-        private OutputWindowWriter OutputWindowWriter
-        {
-            get
-            {
-                return serviceStackOutputWindowWriter ??
-                    (serviceStackOutputWindowWriter = new OutputWindowWriter(GuidList.guidServiceStackVSOutputWindowPane, "ServiceStackVS"));
-            }
-        }
 
         public int MajorVisualStudioVersion => int.Parse(dte.Version.Substring(0, 2));
 
@@ -233,7 +224,7 @@ namespace ServiceStackVS
                         }
                         catch (Exception e)
                         {
-                            OutputWindowWriter.WriteLine("ServiceStackVS had trouble starting. \n\n" + e.Message + "\n" + e.StackTrace);
+                            OutputWindowWriter.WriterWindow.WriteLine("ServiceStackVS had trouble starting. \n\n" + e.Message + "\n" + e.StackTrace);
                         }
                     }
                 }
@@ -513,9 +504,9 @@ namespace ServiceStackVS
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
         {
-            OutputWindowWriter.Show();
-            OutputWindowWriter.ShowOutputPane(dte);
-            OutputWindowWriter.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
+            OutputWindowWriter.WriterWindow.Show();
+            OutputWindowWriter.WriterWindow.ShowOutputPane(dte);
+            OutputWindowWriter.WriterWindow.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
             string projectItemPath = projectItem.GetFullPath();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
             bool isDtoSelected = false;
@@ -539,7 +530,7 @@ namespace ServiceStackVS
                 string baseUrl;
                 if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
                 {
-                    OutputWindowWriter.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
+                    OutputWindowWriter.WriterWindow.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
                     return;
                 }
                 try
@@ -568,14 +559,14 @@ namespace ServiceStackVS
                 }
                 catch (Exception e)
                 {
-                    OutputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + e.Message);
+                    OutputWindowWriter.WriterWindow.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + e.Message);
                 }
-                
-                OutputWindowWriter.WriteLine("--- Update ServiceStack Reference Complete ---");
+
+                OutputWindowWriter.WriterWindow.WriteLine("--- Update ServiceStack Reference Complete ---");
             }
             else
             {
-                OutputWindowWriter.WriteLine("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
+                OutputWindowWriter.WriterWindow.WriteLine("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
             }
         }
 
@@ -625,7 +616,7 @@ namespace ServiceStackVS
 
         private void DocumentEventsOnDocumentSaved(Document document)
         {
-            document.HandleDocumentSaved(OutputWindowWriter);
+            document.HandleDocumentSaved(OutputWindowWriter.WriterWindow);
         }
     }
 }

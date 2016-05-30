@@ -13,6 +13,8 @@ namespace ServiceStackVS.Common
     {
         private readonly IVsOutputWindowPane outputWindowPane;
 
+        private const string outputWindowPaneGuid = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
+
         public OutputWindowWriter(string outputWindowPaneGuid, string outputWindowPaneName)
         {
             var outputWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
@@ -37,6 +39,17 @@ namespace ServiceStackVS.Common
             if (outputWindow != null)
             {
                 outputWindow.Visible = true;
+            }
+        }
+
+        private static OutputWindowWriter serviceStackOutputWindowWriter;
+
+        public static OutputWindowWriter WriterWindow
+        {
+            get
+            {
+                return serviceStackOutputWindowWriter ??
+                    (serviceStackOutputWindowWriter = new OutputWindowWriter(outputWindowPaneGuid, "ServiceStackVS"));
             }
         }
 

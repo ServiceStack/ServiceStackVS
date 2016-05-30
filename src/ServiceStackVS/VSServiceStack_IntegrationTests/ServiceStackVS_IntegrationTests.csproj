@@ -81,6 +81,7 @@
     <Compile Include="SignOff-Tests\VBProjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
