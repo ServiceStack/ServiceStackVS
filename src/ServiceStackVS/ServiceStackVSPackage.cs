@@ -556,6 +556,20 @@ namespace ServiceStackVS
                         streamWriter.Write(updatedCode);
                         streamWriter.Flush();
                     }
+                    try
+                    {
+                        bool optOutOfStats = dte.GetOptOutStatsSetting();
+                        if (!optOutOfStats)
+                        {
+                            var langName = typesHandler.RelativeTypesUrl.Substring(6);
+                            Analytics.SubmitAnonymousUpdateReferenceUsage(langName);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore errors
+                    }
+                    
                 }
                 catch (Exception e)
                 {

@@ -11,6 +11,7 @@ namespace ServiceStackVS.Common
     {
         private const string serviceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?Name={1}";
         private const string serviceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?Name={0}";
+        private const string serviceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?Name={0}";
 
         static readonly Dictionary<int, string> VersionAlias = new Dictionary<int, string>
                 {
@@ -46,6 +47,25 @@ namespace ServiceStackVS.Common
                 try
                 {
                     serviceStackStatsAddRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
+                }
+                catch (Exception e)
+                {
+                    //do nothing
+                }
+            });
+        }
+
+        public static void SubmitAnonymousUpdateReferenceUsage(string languageName)
+        {
+            if (languageName == null)
+            {
+                return;
+            }
+            Task.Run(() =>
+            {
+                try
+                {
+                    serviceStackStatsUpdateRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
                 catch (Exception e)
                 {

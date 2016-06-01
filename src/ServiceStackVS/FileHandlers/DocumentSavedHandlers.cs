@@ -173,6 +173,19 @@ namespace ServiceStackVS.FileHandlers
                     streamWriter.Write(updatedCode);
                     streamWriter.Flush();
                 }
+                try
+                {
+                    bool optOutOfStats = Dte.GetOptOutStatsSetting();
+                    if (!optOutOfStats)
+                    {
+                        var langName = typesHandler.RelativeTypesUrl.Substring(6);
+                        Analytics.SubmitAnonymousUpdateReferenceUsage(langName);
+                    }
+                }
+                catch (Exception)
+                {
+                    // Ignore errors
+                }
                 //HACK to ensure new file is loaded
                 Task.Run(() => { document.DTE.ItemOperations.OpenFile(fullPath); });
             }
