@@ -30,7 +30,7 @@ To try get the most of using Aurelia as your client application, this template i
 
 - [Entry point and application configuration](#entry-point-and-application-configuration)
 - Models and Views
-- Reusable common `resources`
+- Common `resources` feature
 
 
 ## [Entry point and application configuration](http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.2.4/doc/article/app-configuration-and-startup)
@@ -106,9 +106,89 @@ The replace the body with the different views associated with each route, `app.h
 ## Models and Views
 Like all MV* UI frameworks, we need a way to show data (our model) on a page (our view). Aurelia takes a simple default convention approach to match our models and views which is the the name of the file. In the Aurelia template, we have 3 example views, `home`, `view1` and `view2`.
 
-> By default they are separated into a `Views` folder, however this is *not* required or part of any convention, just a simple way to group them. 
+> By default they are separated into a `Views` folder, however **this is not required or part of any convention**, just a simple way to group them. 
+
+Again, this is where Aurelia's approach of simple conventions has it's advantages. The `hello.ts` model is just a class and referring to properties of data can be done simply by name.
+
+###### app.ts
+``` typescript
+export class Home {
+    message: string;
+    constructor() {
+        this.message = "Home";
+    }
+}
+```
+###### app.html
+``` html
+<template>
+    <h2>${message}</h2>
+    <hello></hello>
+</template>
+```
+
+Though this is just displaying a message on a page, the simplicity of binding, events, dependency injection and other functionality is used with very little ceremony. The use of a custom element `<hello>` comes from the template's `resources` 'feature and because the feature is registered in our application configuration, it's available in any view without additional work.
+
+## Common `resources` feature
+Although this template only has one sample `hello` custom element in the `resources` feature, this pattern is a recommended approach by Aurelia team as a way to isolate your internally reusable components for your application. The common types of reusable components Aurelia has are setup with there own directory structure within the project template.
+
+- [attributes](http://aurelia.io/docs.html#/aurelia/templating/1.0.0-beta.1.2.7/doc/article/templating-custom-attributes)
+- [binding-behaviours](http://aurelia.io/docs.html#/aurelia/binding/1.0.0-beta.1.3.5/doc/article/binding-binding-behaviors)
+- [elements](http://aurelia.io/docs.html#/aurelia/templating/1.0.0-beta.1.2.7/doc/article/templating-custom-elements)
+- [value-converters](http://aurelia.io/docs.html#/aurelia/binding/1.0.0-beta.1.3.5/doc/article/binding-value-converters)
+
+The `hello` custom element is a UI component that simply takes a name from an text input, calls the example ServiceStack service with that name, gets a hello message in return and displays it. Just like views, this component has a matching `.ts` and `.html` files.
 
 
+###### hello.ts
+``` typescript
+import {bindable, autoinject} from "aurelia-framework";
+import {HttpClient} from "aurelia-http-client";
+
+@autoinject()
+export class HelloCustomElement {
+    result: string;
+    @bindable name: string;
+
+    constructor(private httpClient: HttpClient) {
+        this.httpClient.configure(config => {
+            config.withHeader('Accept', 'application/json');
+        });
+    }
+
+    nameChanged(newValue) {
+        if (newValue.length > 0) {
+            this.httpClient.get('/hello/' + newValue).then((response) => {
+                this.result = response.content.Result;
+            });
+        } else {
+            this.result = '';
+        }
+    }
+}
+```
+
+The `hello.ts` file above uses a few Aurelia conventions and decorators (eg, `@autoinject`) to make this very clean and concise. The class name itself ends with the suffix `CustomElement`, which Aurelia detects and strips to get the `dash-case` element name of `<hello>` when it's used. If the name of the custom element class was `SecretMessageCustomElement`, the element usage would be `<secret-message>` for example. 
+
+The `@autoinect` handles dependency injection for our custom element, in this case, the Aurelia `HttpClient` is injected and automatically becomes a `private` member of our `HelloCustomElement` class.
+
+The custom element is also using the `@bindable` decorator to allow uses of this custom element to pass data. For example, `<hello name="Pat"></hello>` would set the `name` to `Pat`. Since this custom element also has an input text field using `value.bind` this the name value, `Pat` would appear in the input text field as well as the initial value.
+
+As a trigger to get the hello message back from our ServiceStack service, we are watching the `name` property for changes by simply having a function called `nameChanged(newValue)`. To watch any property for changes, as a convention, a function with the same property name prefixed to `Changed` needs to be present. Eg, to watch a property `foo` a `fooChanged(newValue)` function would be declared. As there values are updated, they are bound to our `hello.html` view.
+
+###### hello.html
+``` html
+<template bindable="name">
+    <div>
+        <input class="form-control input-lg" id="Name" value.bind="name" type="text" placeholder="Type your name">
+        <p>${result}</p>
+    </div>
+</template>
+```
+
+The `bindable` attribute in the template is to allow uses of the `<hello>` custom element to bind the initial name. These bindable attributes can be though of as a component contract for what data can be bound. The `input` text field value is bound to `name` by using the `value.bind="name"` attribute which triggers our `nameChnaged` function when the user types into the field.
+
+The `result` string property from our model is then displayed using the Aurelia templating syntax of `${result}`.
 
 #### Known Issues 
 Aurelia itself it still in beta and uses a lot of modern web developer tools which are still being worked on and updated by various vendors. Currently there are 2 known issues to a smooth workflow in Visual Studio that are easily worked around and/or a fix will soon be released.
