@@ -29,11 +29,11 @@ Just like our other TypeScript/JSPM/Gulp templates, we use Gulp for staging and 
 To try get the most of using Aurelia as your client application, this template is structured in a way that should grow well with your application as well as following some of the known patterns Aurelia encourages. Within the `src` directory, the application is broken up into 3 major parts.
 
 - [Entry point and application configuration](#entry-point-and-application-configuration)
+- Models and Views
 - Reusable common `resources`
-- Views
 
 
-#### [Entry point and application configuration](http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.2.4/doc/article/app-configuration-and-startup)
+## [Entry point and application configuration](http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.2.4/doc/article/app-configuration-and-startup)
 To start your Aurelia application, we are using the `aurelia-bootstrapper` module. The usage of the bootstrapper is declared in the `index.html` file.
 
 ``` html
@@ -60,7 +60,9 @@ export function configure(aurelia: Aurelia) {
 }
 ```
 
-Once we've declared our application configuration, we need to `start()` the application at a specific root. In the case of the template, our `app.ts` is where we want our entry point of our application. For those unfamiliar with Aurelia, this is where we start to see Aurelia's conventions of using plain TypeScript classes. The `app.ts` is just a class with a `configureRouter` function for client side routing, it doesn't `extend` or `implement` and special Aurelia base class or interface.
+Once we've declared our application configuration, we need to `start()` the application at a specific root. In the case of the template, our `app.ts` is where we want our entry point of our application. For those unfamiliar with Aurelia, this is where we start to see Aurelia's conventions of using plain TypeScript classes and matching `app.ts` and `app.html` file names which is also used for views. 
+
+The `app.ts` is just a class with a `configureRouter` function for client side routing, it doesn't `extend` or `implement` and special Aurelia base class or interface. 
 
 ``` app.ts
 import {Router} from 'aurelia-router';
@@ -78,6 +80,33 @@ export class App {
     }
 }
 ```
+
+The `config` being passed as the first argument is being setup with a `title` property. which sets the page `<title>`, and a `map` which the router can use to direct different client paths to different views with a sub title. For example, when the client navigates to `/#/view1` the `<title>` of the page is `Aurelia | View 1`.
+
+The `app.html` provides the related UI for `app.ts` which the template is using as a landing page. The router uses the known navigation paths to generate the different links using Aurelia's templating syntax.
+
+``` html
+	<ul class="nav navbar-nav">
+	    <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+	        <a href.bind="row.href">
+	            ${row.title}
+	        </a>
+	    </li>
+	</ul>
+```
+
+The replace the body with the different views associated with each route, `app.html` has also declared a `<router-view>` element.
+
+``` html
+    <div class="container">
+        <router-view></router-view>
+    </div>
+```
+
+## Models and Views
+Like all MV* UI frameworks, we need a way to show data (our model) on a page (our view). Aurelia takes a simple default convention approach to match our models and views which is the the name of the file. In the Aurelia template, we have 3 example views, `home`, `view1` and `view2`.
+
+> By default they are separated into a `Views` folder, however this is *not* required or part of any convention, just a simple way to group them. 
 
 
 
