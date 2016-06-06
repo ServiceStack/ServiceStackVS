@@ -40,7 +40,7 @@ These project templates are structured to encourage patterns to help kickstart y
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/typescript-aurelia-jspm-banner.png)](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
 
 ServiceStack's new [Aurelia TypeScript Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
-offers the a great starting point for developing modern web front-end that provides a great development experience in VS.NET:
+offers a great starting point for developing modern web front-end that provides a great development experience in VS.NET:
  
   - [TypeScript 1.8+](http://www.typescriptlang.org/) - Superset of JavaScript with optional typing, advanced language features and down-level ES5 support
   - [JSPM](http://jspm.io/) - JavaScript Package Manager supporting SystemJS modules and multiple npm and GitHub repositories 
