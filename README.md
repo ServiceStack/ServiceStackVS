@@ -20,6 +20,7 @@ To take advantage of all the templates and to improve the development workflow, 
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows.
 
 - [AngularJS App](#servicestack-with-angularjs)
+- [Aurelia App](#typescript-aurelia-app)
 - [React App](#typescript-react-app)
 - [React Desktop Apps](#react-desktop-apps-template)
 - [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
@@ -33,6 +34,28 @@ This project structure includes examples of a lot of the different tasks that wi
 - [Windows Service Empty](#windows-service-template)
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
+
+## [TypeScript Aurelia App](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
+
+[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/typescript-aurelia-jspm-banner.png)](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
+
+ServiceStack's new [Aurelia TypeScript Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
+offers the a great starting point for developing modern web front-end that provides a great development experience in VS.NET:
+ 
+  - [TypeScript 1.8+](http://www.typescriptlang.org/) - Superset of JavaScript with optional typing, advanced language features and down-level ES5 support
+  - [JSPM](http://jspm.io/) - JavaScript Package Manager supporting SystemJS modules and multiple npm and GitHub repositories 
+  - [typings](https://github.com/typings/typings) - Package manager to search and install TypeScript definition files
+  - [Aurelia](https://facebook.github.io/react/) - Aurelia is a JavaScript client framework for mobile, desktop and web leveraging simple conventions and empowering creativity.
+
+Providing a great base for the development of large-scale, JavaScript Apps that's further enhanced by Aurelia's simple approach to front-end development.
+
+### Pre-Requisites
+
+Download and install the latest **TypeScript 1.8+** for your IDE:
+
+ - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
+
+> Due to an [outstanding ReSharper bug](https://youtrack.jetbrains.com/issue/RSRP-458759) and VS.NET's default old version of NodeJS v0.10.31, there are [currently two known issues with simple work arounds when developing with this template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md#known-issues).
 
 ## TypeScript React App
 

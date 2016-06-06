@@ -29,8 +29,8 @@ Just like our other TypeScript/JSPM/Gulp templates, we use Gulp for staging and 
 To try get the most of using Aurelia as your client application, this template is structured in a way that should grow well with your application as well as following some of the known patterns Aurelia encourages. Within the `src` directory, the application is broken up into 3 major parts.
 
 - [Entry point and application configuration](#entry-point-and-application-configuration)
-- Models and Views
-- Common `resources` feature
+- [Models and Views](#models-and-views)
+- [Common `resources` feature](#common-resources-feature)
 
 
 ## [Entry point and application configuration](http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.2.4/doc/article/app-configuration-and-startup)
@@ -103,8 +103,8 @@ The replace the body with the different views associated with each route, `app.h
     </div>
 ```
 
-## Models and Views
-Like all MV* UI frameworks, we need a way to show data (our model) on a page (our view). Aurelia takes a simple default convention approach to match our models and views which is the the name of the file. In the Aurelia template, we have 3 example views, `home`, `view1` and `view2`.
+## [Models and Views](http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.2.4/doc/article/creating-components)
+Like all MV* UI frameworks, we need a way to show data (our model) on a page (our view). Aurelia takes a simple default convention approach to match our models and views which is the the name of the file. In the [Aurelia template](http://aurelia.io/docs.html#/aurelia/templating/1.0.0-beta.1.2.7/doc/article/templating-html-behaviors-introduction), we have 3 example views, `home`, `view1` and `view2`.
 
 > By default they are separated into a `Views` folder, however **this is not required or part of any convention**, just a simple way to group them. 
 
@@ -170,7 +170,7 @@ export class HelloCustomElement {
 
 The `hello.ts` file above uses a few Aurelia conventions and decorators (eg, `@autoinject`) to make this very clean and concise. The class name itself ends with the suffix `CustomElement`, which Aurelia detects and strips to get the `dash-case` element name of `<hello>` when it's used. If the name of the custom element class was `SecretMessageCustomElement`, the element usage would be `<secret-message>` for example. 
 
-The `@autoinect` handles dependency injection for our custom element, in this case, the Aurelia `HttpClient` is injected and automatically becomes a `private` member of our `HelloCustomElement` class.
+The `@autoinect` handles [dependency injection](http://aurelia.io/docs.html#/aurelia/dependency-injection/1.0.0-beta.1.2.3/doc/article/dependency-injection-basics) for our custom element, in this case, the Aurelia `HttpClient` is injected and automatically becomes a `private` member of our `HelloCustomElement` class.
 
 The custom element is also using the `@bindable` decorator to allow uses of this custom element to pass data. For example, `<hello name="Pat"></hello>` would set the `name` to `Pat`. Since this custom element also has an input text field using `value.bind` this the name value, `Pat` would appear in the input text field as well as the initial value.
 
