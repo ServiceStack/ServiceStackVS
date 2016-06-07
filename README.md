@@ -56,6 +56,8 @@ Download and install the latest **TypeScript 1.8+** for your IDE:
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
 
 > Due to an [outstanding ReSharper bug](https://youtrack.jetbrains.com/issue/RSRP-458759) and VS.NET's default old version of NodeJS v0.10.31, there are [currently two known issues with simple work arounds when developing with this template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md#known-issues).
+> 
+> **Only Visual Studio 2015 is supported** due to [lack of `tsconfig.json` support in earlier versions of Visual Studio](https://github.com/Microsoft/TypeScript/issues/8784).
 
 ## TypeScript React App
 
