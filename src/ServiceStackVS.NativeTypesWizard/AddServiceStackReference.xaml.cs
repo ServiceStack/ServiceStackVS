@@ -23,16 +23,21 @@ namespace ServiceStackVS.NativeTypesWizard
         public bool AddReferenceSucceeded { get; set; }
         public string CodeTemplate { get; set; }
         public string ServerUrl { get; private set; }
-        private readonly INativeTypesHandler typesHandler;
+        private INativeTypesHandler typesHandler;
 
         protected bool IsTypedScriptReference { get; set; }
         protected bool TypeScriptOnlyDefinitions { get; set; }
+
+        public INativeTypesHandler GetLastNativeTypesHandler()
+        {
+            return typesHandler;
+        }
 
         public AddServiceStackReference(string fileName, INativeTypesHandler nativeTypesHandler)
         {
             InitializeComponent();
             FileNameTextBox.Text = fileName;
-            this.KeyDown += ListenForShortcutKeys;
+            KeyDown += ListenForShortcutKeys;
             typesHandler = nativeTypesHandler;
             IsTypedScriptReference = nativeTypesHandler is TypeScriptConcreteNativeTypesHandler ||
                                      nativeTypesHandler is TypeScriptNativeTypesHandler;
@@ -63,7 +68,7 @@ namespace ServiceStackVS.NativeTypesWizard
             ErrorMessageBox.Visibility = Visibility.Hidden;
             UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Transparent);
             ErrorMessage.Text = "";
-            this.OkButton.IsEnabled = false;
+            OkButton.IsEnabled = false;
             bool success = false;
             string url = UrlTextBox.Text;
             string errorMessage = "";
@@ -126,7 +131,7 @@ namespace ServiceStackVS.NativeTypesWizard
                 }
                 else
                 {
-                    this.OkButton.IsEnabled = true;
+                    OkButton.IsEnabled = true;
                     ReferenceProgressBar.Visibility = Visibility.Hidden;
                     ErrorMessageBox.Visibility = Visibility.Visible;
                     ErrorMessage.Text = errorMessage;
@@ -186,10 +191,15 @@ namespace ServiceStackVS.NativeTypesWizard
             }
 
             string result = serverUrl.ToParentPath();
-            if (IsTypedScriptReference)
-            {
-                result = result.AddQueryParam("ExportAsTypes", TypeScriptOnlyDefinitions ? "False" : "True");
-            }
+            if (!IsTypedScriptReference)
+                return result;
+
+
+            result = result.AddQueryParam("ExportAsTypes", TypeScriptOnlyDefinitions ? "False" : "True");
+            // Update native types handler to handle different file names.
+            typesHandler = TypeScriptOnlyDefinitions
+                ? new TypeScriptNativeTypesHandler()
+                : new TypeScriptConcreteNativeTypesHandler() as INativeTypesHandler;
             return result;
         }
 

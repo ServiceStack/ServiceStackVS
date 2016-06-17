@@ -498,6 +498,8 @@ namespace ServiceStackVS
             {
                 return;
             }
+            // Change native types handler for TypeScript switching concrete.
+            typesHandler = dialog.GetLastNativeTypesHandler();
             string templateCode = dialog.CodeTemplate;
             AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
         }
