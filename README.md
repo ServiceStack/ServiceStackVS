@@ -45,7 +45,7 @@ offers a great starting point for developing modern web front-end that provides 
   - [TypeScript 1.8+](http://www.typescriptlang.org/) - Superset of JavaScript with optional typing, advanced language features and down-level ES5 support
   - [JSPM](http://jspm.io/) - JavaScript Package Manager supporting SystemJS modules and multiple npm and GitHub repositories 
   - [typings](https://github.com/typings/typings) - Package manager to search and install TypeScript definition files
-  - [Aurelia](https://facebook.github.io/react/) - Aurelia is a JavaScript client framework for mobile, desktop and web leveraging simple conventions and empowering creativity.
+  - [Aurelia](http://aurelia.io/) - Aurelia is a JavaScript client framework for mobile, desktop and web leveraging simple conventions and empowering creativity.
 
 Providing a great base for the development of large-scale, JavaScript Apps that's further enhanced by Aurelia's simple approach to front-end development.
 
