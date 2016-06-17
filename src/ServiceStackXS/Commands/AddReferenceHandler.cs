@@ -74,6 +74,9 @@ namespace ServiceStackXS.Commands
 
 			project.AddFile (fullPath, BuildAction.Compile);
 
+			if(!SettingsWidget.OptOut)
+				Analytics.SubmitAnonymousAddReferenceUsage(nativeTypesHandler.RelativeTypesUrl.Substring(6));
+
 			try {
 				Task.Run (() => { 
 					AddNuGetPackageReference (project, "ServiceStack.Client");

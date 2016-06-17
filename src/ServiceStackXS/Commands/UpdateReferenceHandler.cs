@@ -61,6 +61,10 @@ namespace ServiceStackXS.Commands
 				//Refresh document
 				var openDocument = IdeApp.Workbench.GetDocument(selectedFile.Name);
 				FileService.NotifyFileChanged(openDocument.FileName);
+
+				if (!SettingsWidget.OptOut)
+					Analytics.SubmitAnonymousUpdateReferenceUsage(nativeTypeHandler.RelativeTypesUrl.Substring(6));
+
 			} catch (Exception ex) {
 				var messageDialog = new MessageDialog (
 					(Gtk.Window)IdeApp.Workbench.RootWindow.Toplevel,

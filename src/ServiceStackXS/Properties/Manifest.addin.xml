@@ -6,7 +6,7 @@
         url             ="https://github.com/ServiceStack/ServiceStackVS" 
         description     ="An extension to work with the ServiceStack framework."
         category        ="IDE extensions"
-        version         ="0.5">
+        version         ="0.6">
 	<Header>
 		<Name>ServiceStackXS</Name>
 		<Description>An extension to work with the ServiceStack framework.</Description>
@@ -34,6 +34,10 @@
   <Extension path="/MonoDevelop/Core/StockIcons">
     <StockIcon stockid="servicestack-addref-item" file = "add-ref-item.png" />
     <StockIcon stockid="servicestack-project-icon" file = "servicestack-project-icon.png" />
+  </Extension>
+
+  <Extension path="/MonoDevelop/Ide/GlobalOptionsDialog/Other">
+    <Section id="ServiceStackSettings" _label="ServiceStack Settings" class = "ServiceStackXS.SettingOptionsPanel" />
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/Commands">

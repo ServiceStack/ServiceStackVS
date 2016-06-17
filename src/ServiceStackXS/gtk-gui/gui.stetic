@@ -202,4 +202,28 @@ To generate the DTO Service Model types for a specific ServiceStack instance, en
       </widget>
     </child>
   </widget>
+  <widget class="Gtk.Bin" id="ServiceStackXS.SettingsWidget" design-size="300 300">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Gtk.Fixed" id="fixed2">
+        <property name="MemberName" />
+        <property name="HasWindow">False</property>
+        <child>
+          <widget class="Gtk.CheckButton" id="optOutCheckbox">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Label" translatable="yes">Opt out of anonymous usage statistics</property>
+            <property name="DrawIndicator">True</property>
+            <property name="HasLabel">True</property>
+            <property name="UseUnderline">True</property>
+          </widget>
+          <packing>
+            <property name="X">10</property>
+            <property name="Y">17</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
 </stetic-interface>

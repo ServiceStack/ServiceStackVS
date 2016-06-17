@@ -44,6 +44,10 @@
     <Compile Include="gtk-gui\ServiceStackXS.AddReferenceDialog.cs" />
     <Compile Include="Conditions\ServiceReferenceDtoCondition.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Utils\Analytics.cs" />
+    <Compile Include="UI\SettingOptionsPanel.cs" />
+    <Compile Include="UI\SettingsWidget.cs" />
+    <Compile Include="gtk-gui\ServiceStackXS.SettingsWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,6 +79,7 @@
     <Reference Include="NuGet.Core">
       <HintPath>lib\NuGet.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
@@ -101,6 +106,7 @@
     <Folder Include="Conditions\" />
     <Folder Include="ProjectTemplates\" />
     <Folder Include="ProjectTemplates\Templates\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
