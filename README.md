@@ -55,6 +55,8 @@ Download and install the latest **TypeScript 1.8+** for your IDE:
 
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
 
+This template has been updated to [support Typings 1.0+ which had some breaking changes](https://github.com/typings/typings#updating-from-0x-to-10). If you are having trouble with any of the TypeScript templates, please ensure you have Typings 1.0+ installed globally by running `npm install -g typings`.
+
 > Due to an [outstanding ReSharper bug](https://youtrack.jetbrains.com/issue/RSRP-458759) and VS.NET's default old version of NodeJS v0.10.31, there are [currently two known issues with simple work arounds when developing with this template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md#known-issues).
 > 
 > **Only Visual Studio 2015 is supported** due to [lack of `tsconfig.json` support in earlier versions of Visual Studio](https://github.com/Microsoft/TypeScript/issues/8784).
@@ -80,6 +82,8 @@ Download and install the latest **TypeScript 1.8+** for your IDE:
 
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
  - [VS.NET 2013](https://www.microsoft.com/en-us/download/details.aspx?id=48739)
+
+This template has been updated to [support Typings 1.0+ which had some breaking changes](https://github.com/typings/typings#updating-from-0x-to-10). If you are having trouble with any of the TypeScript templates, please ensure you have Typings 1.0+ installed globally by running `npm install -g typings`.
 
 > The TypeScript Single Page App templates are optimized for VS.NET 2015's support for [tsconfig.json](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json)
 
@@ -110,6 +114,8 @@ into multiple platforms using the provided Gulp build tasks. The Desktop Apps ar
 - **Console** - Single portable, cross platform executable that launches the user's preferred browser
 
 To highlight this new template, we've ported the Chat-React example application in the [ReactChatApps project](https://github.com/ServiceStackApps/ReactChatApps).
+
+This template has been updated to [support Typings 1.0+ which had some breaking changes](https://github.com/typings/typings#updating-from-0x-to-10). If you are having trouble with any of the TypeScript templates, please ensure you have Typings 1.0+ installed globally by running `npm install -g typings`.
 
 ## [AngularJS App Template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/angular-spa.md)
 
