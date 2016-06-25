@@ -48,7 +48,9 @@ namespace ServiceStackVS.FileHandlers
                 //VbNet DTO
                 {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.VbNetNativeTypesHandler, writer)},
                 //TypeScript DTO
-                {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,NativeTypeHandlers.TypeScriptNativeTypesHandler, writer)}
+                {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,NativeTypeHandlers.TypeScriptNativeTypesHandler, writer)},
+                //TypeScript Concrete DTOs
+                {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler, writer) }
             };
 
         private static bool NpmDocumentPredicate(Document document)
@@ -140,6 +142,13 @@ namespace ServiceStackVS.FileHandlers
         {
             return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.TypeScriptNativeTypesHandler.CodeFileExtension)
                 && !document.IsUpdateReferenceOnSaveDisabled();
+        }
+
+        public static bool TypeScriptConcreteDtoPredicate(Document document)
+        {
+            return document.Name.EndsWithIgnoreCase(
+                       NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler.CodeFileExtension)
+                   && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,

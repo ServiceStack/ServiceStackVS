@@ -9,6 +9,7 @@ namespace ServiceStackVS.NativeTypes
         public static readonly FSharpNativeTypesHandler FSharpNativeTypesHandler = new FSharpNativeTypesHandler();
         public static readonly VbNetNativeTypesHandler VbNetNativeTypesHandler = new VbNetNativeTypesHandler();
         public static readonly TypeScriptNativeTypesHandler TypeScriptNativeTypesHandler = new TypeScriptNativeTypesHandler();
+        public static readonly TypeScriptConcreteNativeTypesHandler TypeScriptConcreteNativeTypesHandler = new TypeScriptConcreteNativeTypesHandler();
 
         public static readonly List<INativeTypesHandler> All = new List<INativeTypesHandler>
         {
