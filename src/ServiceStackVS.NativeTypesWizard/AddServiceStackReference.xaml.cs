@@ -43,6 +43,7 @@ namespace ServiceStackVS.NativeTypesWizard
                                      nativeTypesHandler is TypeScriptNativeTypesHandler;
 
             TypeScriptCheckbox.Visibility = IsTypedScriptReference ? Visibility.Visible : Visibility.Hidden;
+            TypeScriptCheckbox.IsChecked = false;
         }
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
