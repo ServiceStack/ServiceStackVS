@@ -16,7 +16,8 @@ namespace ServiceStackVS.NativeTypes
             CSharpNativeTypesHandler,
             FSharpNativeTypesHandler,
             VbNetNativeTypesHandler,
-            TypeScriptNativeTypesHandler
+            TypeScriptNativeTypesHandler,
+            TypeScriptConcreteNativeTypesHandler
         };
 
         public static bool IsValidResponse(this INativeTypesHandler typesHandler, string code)

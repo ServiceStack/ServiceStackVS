@@ -50,7 +50,7 @@ namespace ServiceStackVS.FileHandlers
                 //TypeScript DTO
                 {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,NativeTypeHandlers.TypeScriptNativeTypesHandler, writer)},
                 //TypeScript Concrete DTOs
-                {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler, writer) }
+                {TypeScriptConcreteDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler, writer) }
             };
 
         private static bool NpmDocumentPredicate(Document document)
