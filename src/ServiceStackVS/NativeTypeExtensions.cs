@@ -28,7 +28,8 @@ namespace ServiceStackVS
                 return new List<string> { VsHelperGuids.VbNetProjectKind };
             }
 
-            if (handler.TypesLanguage == NativeTypesLanguage.TypeScript)
+            if (handler.TypesLanguage == NativeTypesLanguage.TypeScript ||
+                handler.TypesLanguage == NativeTypesLanguage.TypeScriptConcrete)
             {
                 return new List<string> 
                 { 
