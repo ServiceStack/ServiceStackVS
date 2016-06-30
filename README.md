@@ -243,12 +243,19 @@ ServiceStack's **Add ServiceStack Reference** is now available for Xamarin Studi
 * [VB.NET Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/VB.Net-Add-ServiceStack-Reference)
 
 #### Disable Update On Save Settings
-The default behavior of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behavior might not be desired, so this behavior can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. 
+The default behavior of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behavior might not be desired, so this behavior can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. The following snippet can be pasted into a new file called `servicestack.vsconfig` at the ase of a project to control this behaviour on a project by project basis. 
+
 ``` servicestack.vsconfig
 DisableNpmInstallOnSave true
 DisableBowerInstallOnSave true
 DisableUpdateReferenceOnSave true
 ```
+
+To apply this configuration, right click on the appropriate project, select `File`->`Add`->`New Item`, search for `Text` and add a new file called `servicestack.vsconfig`. This file is just a key/value pair separated by space with 3 options.
+
+- `DisableNpmInstallOnSave` - This disables ServiceStackVS default to update NPM references on the save of a `packages.json` file*. *=This feature auto disables based on version of VS as to not intefer with other operations performing the NPM install.
+- `DisableBowerInstallOnSave` - This disables ServiceStackVS default to update Bower references on the save of a `bower.json` file*. * =This feature auto disables based on version of VS as to not intefer with other operations performing the Bower install.
+- DisableUpdateReferenceOnSave - This disables ServiceStackVS default to update ServiceStack reference files automatically on save.
 
 ### Feedback
 
