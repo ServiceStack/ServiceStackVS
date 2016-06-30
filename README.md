@@ -55,7 +55,9 @@ Download and install the latest **TypeScript 1.8+** for your IDE:
 
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
 
-This template has been updated to [support Typings 1.0+ which had some breaking changes](https://github.com/typings/typings#updating-from-0x-to-10). If you are having trouble with any of the TypeScript templates, please ensure you have Typings 1.0+ installed globally by running `npm install -g typings`.
+This template has been updated to [support Typings 1.0+ which had some breaking changes](https://github.com/typings/typings#updating-from-0x-to-10). If you are having trouble with any of the TypeScript templates, please ensure you have Typings 1.0+ installed globally by running: 
+
+    npm install -g typings
 
 > Due to an [outstanding ReSharper bug](https://youtrack.jetbrains.com/issue/RSRP-458759) and VS.NET's default old version of NodeJS v0.10.31, there are [currently two known issues with simple work arounds when developing with this template](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md#known-issues).
 > 
