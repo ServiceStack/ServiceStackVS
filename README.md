@@ -245,6 +245,7 @@ ServiceStack's **Add ServiceStack Reference** is now available for Xamarin Studi
 #### Disable Update On Save Settings
 The default behavior of ServiceStackVS is to update ServiceStack references on save so that you can easily get the latest changes and not work with incorrect or out of date references. Something this behavior might not be desired, so this behavior can be disabled with a `servicestack.vsconfig` file at the base of the project with these refereces. The following snippet can be pasted into a new file called `servicestack.vsconfig` at the ase of a project to control this behaviour on a project by project basis. 
 
+###### Example of `servicestack.vsconfig`
 ``` servicestack.vsconfig
 DisableNpmInstallOnSave true
 DisableBowerInstallOnSave true
