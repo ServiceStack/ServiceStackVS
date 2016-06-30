@@ -256,7 +256,7 @@ To apply this configuration, right click on the appropriate project, select `Fil
 
 - `DisableNpmInstallOnSave` - This disables ServiceStackVS default to update NPM references on the save of a `packages.json` file*. *=This feature auto disables based on version of VS as to not intefer with other operations performing the NPM install.
 - `DisableBowerInstallOnSave` - This disables ServiceStackVS default to update Bower references on the save of a `bower.json` file*. * =This feature auto disables based on version of VS as to not intefer with other operations performing the Bower install.
-- DisableUpdateReferenceOnSave - This disables ServiceStackVS default to update ServiceStack reference files automatically on save.
+- `DisableUpdateReferenceOnSave` - This disables ServiceStackVS default to update ServiceStack reference files automatically on save.
 
 ### Feedback
 
