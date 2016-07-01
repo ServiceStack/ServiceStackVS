@@ -83,7 +83,7 @@ namespace $safeprojectname$
                     });
                 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Error reaching update server
             }
