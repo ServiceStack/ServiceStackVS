@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ServiceStack;
 using ServiceStack.Configuration;
 using Squirrel;
+using System.Linq;
 
 namespace $safeprojectname$
 {
