@@ -10,31 +10,31 @@ namespace $safeprojectname$
 {
     public static class AppUpdater
     {
-        private static UpdateManager _updateManagerInstance;
+        private static UpdateManager updateManagerInstance;
 
         public static UpdateManager AppUpdateManager
         {
             get
             {
-                if (_updateManagerInstance != null)
+                if (updateManagerInstance != null)
                 {
-                    return _updateManagerInstance;
+                    return updateManagerInstance;
                 }
 
                 var appSettings = new AppSettings();
                 var updateManagerTask =
                     UpdateManager.GitHubUpdateManager(appSettings.GetString("UpdateManagerUrl"));
                 updateManagerTask.Wait(TimeSpan.FromMinutes(1));
-                _updateManagerInstance = updateManagerTask.Result;
-                return _updateManagerInstance;
+                updateManagerInstance = updateManagerTask.Result;
+                return updateManagerInstance;
             }
         }
 
         public static void Dispose()
         {
-            if (_updateManagerInstance != null)
+            if (updateManagerInstance != null)
             {
-                _updateManagerInstance.Dispose();
+                updateManagerInstance.Dispose();
             }
         }
 
