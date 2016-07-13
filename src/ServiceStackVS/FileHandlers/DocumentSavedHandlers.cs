@@ -34,7 +34,7 @@ namespace ServiceStackVS.FileHandlers
             get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
         }
 
-        private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FilterWatchers =
+        private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FileWatchers =
             new Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>>
             {
                 //NPM
@@ -46,11 +46,7 @@ namespace ServiceStackVS.FileHandlers
                 //FSharp DTO
                 {FSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.FSharpNativeTypesHandler, writer)},
                 //VbNet DTO
-                {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.VbNetNativeTypesHandler, writer)},
-                //TypeScript DTO
-                {TypeScriptDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,NativeTypeHandlers.TypeScriptNativeTypesHandler, writer)},
-                //TypeScript Concrete DTOs
-                {TypeScriptConcreteDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler, writer) }
+                {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.VbNetNativeTypesHandler, writer)}
             };
 
         private static bool NpmDocumentPredicate(Document document)
@@ -106,7 +102,7 @@ namespace ServiceStackVS.FileHandlers
 
         public static void HandleDocumentSaved(Document document, OutputWindowWriter windowWriter)
         {
-            foreach (var filterWatcher in FilterWatchers)
+            foreach (var filterWatcher in FileWatchers)
             {
                 var predicate = filterWatcher.Key;
                 var fileHandler = filterWatcher.Value;
