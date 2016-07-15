@@ -36,7 +36,7 @@
       <package id="ServiceStack.Redis" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
-      <package id="Microsoft.AspNet.WebPages" version="latest" />
+      <package id="Microsoft.AspNet.WebPages" version="3.2.3" />
     </packages>
   </WizardData>
 </VSTemplate>
