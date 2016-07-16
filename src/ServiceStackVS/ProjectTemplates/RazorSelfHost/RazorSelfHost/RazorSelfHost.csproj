@@ -38,7 +38,6 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ServiceStack">
       <HintPath>$(SolutionDir)\packages\ServiceStack.4.0.36\lib\net40\ServiceStack.dll</HintPath>
