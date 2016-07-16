@@ -13,7 +13,7 @@ namespace ServiceStack.CSharp.RazorSeed
     public class AppHost : AppHostBase
     {
         /// <summary>
-        /// Base class requires a Name and Assembly to locate web service implementation
+        /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
             : base("$safeprojectname$", typeof(MyServices).Assembly) {}
