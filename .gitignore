@@ -181,3 +181,4 @@ FakesAssemblies/
 *.DotSettings
 
 !src/ServiceStackVS/ServiceStack.Text.dll
+src/.vs/config/applicationhost.config
