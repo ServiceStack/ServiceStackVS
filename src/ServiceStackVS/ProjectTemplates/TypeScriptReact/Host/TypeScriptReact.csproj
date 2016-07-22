@@ -151,6 +151,7 @@
   </ItemGroup>-->
   <ItemGroup>
     <TypeScriptCompile Include="src\app.tsx" />
+    <TypeScriptCompile Include="src\app.dtos.ts" />
     <TypeScriptCompile Include="src\hello.tsx" />
     <TypeScriptCompile Include="src\deps.tsx" />
   </ItemGroup>
