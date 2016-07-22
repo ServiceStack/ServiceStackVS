@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Json;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using NUnit.Framework;
 using ServiceStack;
-using ServiceStack.Text;
-using ServiceStack.Text.Json;
 
 namespace ServiceStackVS.Tests
 {
@@ -77,13 +76,22 @@ namespace ServiceStackVS.Tests
             {
                 try
                 {
-                    var doc = JsonUtils.IsJsObject(UTF8Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully()));
+                    var tmpObj = JsonValue.Parse(Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully()));
                 }
-                catch (Exception)
+                catch (FormatException fex)
                 {
+                    //Invalid json format
+                    Console.WriteLine("Invalid json file at: " + jsonFile.FullName);
+                    Console.WriteLine(fex.Message);
+                    Console.WriteLine(fex.StackTrace);
                     passed = false;
                 }
-                
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine("Failed to parse json file at: " + jsonFile.FullName);
+                    Console.WriteLine(ex.ToString());
+                    passed = false;
+                }
             }
 
             Assert.That(passed, Is.EqualTo(true));
