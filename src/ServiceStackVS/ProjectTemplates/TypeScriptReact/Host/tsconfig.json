@@ -13,7 +13,6 @@
   "exclude": [
     "typings",
     "node_modules",
-    "jspm_packages",
     "wwwroot"
   ]
 }

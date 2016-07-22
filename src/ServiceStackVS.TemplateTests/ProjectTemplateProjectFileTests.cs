@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using NUnit.Framework;
+using ServiceStack;
+using ServiceStack.Text;
+using ServiceStack.Text.Json;
 
 namespace ServiceStackVS.Tests
 {
@@ -58,6 +62,31 @@ namespace ServiceStackVS.Tests
                     AssertProjectHasFile(cSharpProjectFile, element);
                 }
             }
+        }
+
+        [Test]
+        public void IncludedJsonFilesAreValidJson()
+        {
+            string projectTemplatePath = Path.GetFullPath("..\\..\\..\\ServiceStackVS\\ProjectTemplates");
+            var projectTemplateInfo = new DirectoryInfo(projectTemplatePath);
+            var jsonFiles =
+                projectTemplateInfo.GetFiles("*.json", SearchOption.AllDirectories)
+                    .Where(x => !excludedProjectFiles.Contains(x.Name));
+            bool passed = true;
+            foreach (FileInfo jsonFile in jsonFiles)
+            {
+                try
+                {
+                    var doc = JsonUtils.IsJsObject(UTF8Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully()));
+                }
+                catch (Exception)
+                {
+                    passed = false;
+                }
+                
+            }
+
+            Assert.That(passed, Is.EqualTo(true));
         }
 
         private void AssertProjectHasFile(FileInfo rootPath, XElement contentElement)
