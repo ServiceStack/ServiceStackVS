@@ -47,5 +47,6 @@
 	    <npm-package id="jspm" />
 	    <npm-package id="typings" />
     </NodeJS>
+    <IISExpressAddress Name="src\\app.dtos.ts"></IISExpressAddress>
   </WizardData>
 </VSTemplate>
