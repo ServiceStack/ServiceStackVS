@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
+using ServiceStack;
 
 namespace ServiceStackVS.ExternalTemplateWizard
 {
@@ -20,9 +21,9 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            if (runKind != WizardRunKind.AsMultiProject)
+            if (runKind != WizardRunKind.AsNewProject)
             {
-                throw new InvalidOperationException("IisExpressAddressWizard only to be used with Multi-Project templates");
+                throw new InvalidOperationException("IisExpressAddressWizard only to be used with new web project templates");
             }
             projectName = replacementsDictionary["$safeprojectname$"];
 
@@ -45,7 +46,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
             {
                 throw new WizardCancelledException("Failed to generated project, IISExpressAddressWizard failed to obtain solution path.");
             }
-            var projectPath = Path.Combine(solutionPath, projectName + "\\" + projectName);
+            var projectPath = Path.Combine(solutionPath, projectName);
             projectFilePath = Path.Combine(projectPath, projectName + ".csproj");
 
 
@@ -64,7 +65,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
         public bool ShouldAddProjectItem(string filePath)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void BeforeOpeningFile(ProjectItem projectItem)
@@ -76,8 +77,21 @@ namespace ServiceStackVS.ExternalTemplateWizard
         {
             Task.Run(() =>
             {
+                // IIS express auto assigned port is not ready until project has been opened so a delay is needed.
                 System.Threading.Thread.Sleep(5000);
                 // Read port from csproj
+                XElement element = XElement.Parse(File.ReadAllText(projectFilePath));
+                var devServerPortElement = element.Descendants()
+                    .FirstOrDefault(x => x.Name.LocalName == "ProjectExtensions")?.Descendants()
+                    .FirstOrDefault(x => x.Name.LocalName == "VisualStudio")?.Descendants()
+                    .FirstOrDefault(x => x.Name.LocalName == "WebProjectProperties")?.Descendants()
+                    .FirstOrDefault(x => x.Name.LocalName == "DevelopmentServerPort");
+                if (devServerPortElement != null)
+                {
+                    var devPort = devServerPortElement.Value;
+                    var originalContent = File.ReadAllText(fullPathTokenReplaceFile);
+                    File.WriteAllText(fullPathTokenReplaceFile,originalContent.ReplaceAll(iisPortToken,devPort));
+                }
             });
         }
     }
