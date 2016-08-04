@@ -1,21 +1,23 @@
 ﻿import {bindable, autoinject} from "aurelia-framework";
-import {HttpClient} from "aurelia-http-client";
+import {JsonServiceClient} from "servicestack-client";
+import {Hello} from "../../dtos";
 
 @autoinject()
 export class HelloCustomElement {
     result: string;
     @bindable name: string;
+    client: JsonServiceClient;
 
-    constructor(private httpClient: HttpClient) {
-        this.httpClient.configure(config => {
-            config.withHeader('Accept', 'application/json');
-        });
+    constructor() {
+        this.client = new JsonServiceClient('/');
     }
 
     nameChanged(newValue) {
         if (newValue.length > 0) {
-            this.httpClient.get('/hello/' + newValue).then((response) => {
-                this.result = response.content.Result;
+            var req = new Hello();
+            req.Name = newValue;
+            this.client.get(req).then((helloResponse) => {
+                this.result = helloResponse.Result
             });
         } else {
             this.result = '';
