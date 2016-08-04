@@ -18,9 +18,9 @@ export default class HelloWorld extends React.Component<any, any> {
     update(event: any) {
         var request = new Hello();
         request.Name = event.target.value;
-        this.client.get(request).then((hellResponse) => {
+        this.client.get(request).then((helloResponse) => {
             this.setState({
-                msg: hellResponse.Result
+                msg: helloResponse.Result
             });
         });
     }
