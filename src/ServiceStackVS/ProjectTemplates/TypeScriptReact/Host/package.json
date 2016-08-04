@@ -7,11 +7,11 @@
   "jspm": {
     "registry": "npm",
     "dependencies": {
-      "bootstrap": "~3.2.0",
+      "bootstrap.native": "^1.0.3",
       "es6-shim": "github:es-shims/es6-shim@^0.35.0",
       "react": "^15.0.1",
       "react-dom": "^15.0.1",
-      "servicestack-client": "^0.0.7"
+      "servicestack-client": "^0.0.10"
     },
     "devDependencies": {
       "jspm": "^0.16.31"

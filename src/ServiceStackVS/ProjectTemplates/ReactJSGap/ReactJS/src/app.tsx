@@ -28,18 +28,10 @@ class App extends React.Component<any,any> {
                 <div className="navbar navbar-inverse" role="navigation">
                     <div className="container">
                         <div className="navbar-header">
-                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span className="sr-only">Toggle navigation</span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                            </button>
                             <a className="navbar-brand" href="/">
                                 <img src="/img/react-logo.png" />
                                 $safeprojectname$
                             </a>
-                        </div>
-                        <div className="navbar-collapse collapse">
                             <ul className="nav navbar-nav pull-right">
                                 <li><a onClick={this.handleAbout}>About</a></li>
                                 <li className="platform winforms">
