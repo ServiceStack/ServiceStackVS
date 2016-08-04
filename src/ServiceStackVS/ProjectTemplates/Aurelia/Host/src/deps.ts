@@ -1,7 +1,6 @@
 ﻿/// <reference path='../typings/index.d.ts'/>
 
 import {Aurelia} from 'aurelia-framework';
-import {HttpClient} from "aurelia-http-client";
 import {bootstrap} from 'aurelia-bootstrapper'
 import {TemplatingBindingLanguage} from 'aurelia-templating-binding';
 import {NumberRepeatStrategy} from 'aurelia-templating-resources';
@@ -13,7 +12,6 @@ export class Deps {
     aurelia: Aurelia;
 
     constructor() {
-        var foo = new HttpClient();
         var a = new Aurelia();
         var b = bootstrap(null);
         var c = new TemplatingBindingLanguage();
