@@ -11,6 +11,7 @@
     "experimentalDecorators": true
   },
   "exclude": [
+    "jspm_packages",
     "typings",
     "node_modules",
     "wwwroot"

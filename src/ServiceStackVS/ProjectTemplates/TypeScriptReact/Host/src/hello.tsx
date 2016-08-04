@@ -6,7 +6,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {JsonServiceClient} from 'servicestack-client';
-import {Hello} from './app.dtos';
+import {Hello} from './dtos';
 export default class HelloWorld extends React.Component<any, any> {
     client: JsonServiceClient;
     constructor(props, context) {

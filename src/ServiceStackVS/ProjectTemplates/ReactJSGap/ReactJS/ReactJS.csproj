@@ -95,6 +95,7 @@
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\hello.tsx" />
     <TypeScriptCompile Include="src\deps.tsx" />
+    <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="platform.ts" />
   </ItemGroup>
   <ItemGroup>
