@@ -45,16 +45,14 @@
                     "aurelia-bootstrapper",
                     "aurelia-framework",
                     "aurelia-history-browser",
-                    "aurelia-http-client",
                     "aurelia-logging-console",
                     "aurelia-loader-default",
                     "aurelia-router",
                     "aurelia-templating-binding",
                     "aurelia-templating-resources",
                     "aurelia-templating-router",
-                    "bootstrap",
                     "es6-shim",
-                    "jquery"
+                    "servicestack-client"
                 ],
                 options: {
                     inject: true,
