@@ -8,7 +8,6 @@ import {ConsoleAppender} from 'aurelia-logging-console';
 import {TemplatingRouteLoader} from 'aurelia-templating-router';
 
 export class Deps {
-    httpClient: HttpClient;
     aurelia: Aurelia;
 
     constructor() {
