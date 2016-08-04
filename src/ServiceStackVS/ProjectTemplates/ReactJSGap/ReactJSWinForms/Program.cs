@@ -30,7 +30,11 @@ namespace $safeprojectname$
                 onFirstRun: OnFirstRun);
         
             Cef.EnableHighDPISupport();
-            Cef.Initialize(new CefSettings());
+
+            var cacheFolder = Path.Combine(Path.GetTempPath(), "cefsharp-cache");
+            Cef.Initialize(new CefSettings {
+                CachePath = cacheFolder
+            });
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
