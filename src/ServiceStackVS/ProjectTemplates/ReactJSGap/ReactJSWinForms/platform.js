@@ -1,34 +1,32 @@
 ﻿/* winforms */
 document.documentElement.className += ' winforms';
 
-$(document).ready(function () {
-    $("body").append('<div class="alert alert-success alert-hide" id="alertUpdate" style="position:absolute;width:100%;top:0;" role="alert">Update available! ' +
-    '<a class="close" id="closeUpdate">×</a><button class="btn btn-primary" type="button" onclick="updateNow();">Update Now!</button>' +
-    '</div>');
-    $("#closeUpdate").on("click", function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $(this).closest(".alert").slideUp(400);
-    });
-    window.nativeHost.ready();
+document.write('<div class="alert alert-success alert-hide" id="alertUpdate" role="alert">Update available! ' +
+  '<span class="close" id="closeUpdate" onclick="closeUpdate()">×</span>' +
+  '<button class="btn btn-primary" type="button" onclick="updateNow();">Update Now!</button>' +
+'</div>');
 
-    $(document).on('keydown', function(e) {
-        if (e.altKey && e.which == Keys.LEFT) {
-            history.back();
-        } else if (e.altKey && e.which == Keys.RIGHT) {
-            history.forward();
-        }
-    });
+window.updateAvailable = function () {
+    setTimeout(function () {
+        document.getElementById("alertUpdate").style.display = 'block';
+    }, 500);
+};
+window.updateNow = function () {
+    setTimeout(function () {
+        document.getElementById("alertUpdate").innerHTML = 'Applying update.. Please wait, application will restart..';
+    }, 500);
+    window.nativeHost.performUpdate();
+};
+window.closeUpdate = function (e) {
+    document.getElementById("alertUpdate").style.display = 'none';
+};
 
-    window.updateAvailable = function () {
-        setTimeout(function () {
-            $("#alertUpdate").slideDown(800);
-        }, 1500);
-    };
-    window.updateNow = function () {
-        setTimeout(function () {
-            $("#alertUpdate")[0].innerHTML = 'Applying update.. Please wait, application will restart..';
-        }, 500);
-        window.nativeHost.performUpdate();
-    };
-});
+window.onresize = function () {
+    console.log('onresize');
+    document.getElementById("content").style.height = '85%';
+    setTimeout(function () {
+        document.getElementById("content").style.height = '100%';
+    }, 0);
+};
+
+window.nativeHost.ready();

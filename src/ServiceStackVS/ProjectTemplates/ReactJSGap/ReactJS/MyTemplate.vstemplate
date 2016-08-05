@@ -29,6 +29,10 @@
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.ExternalTemplateWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.ExternalTemplateWizard.IisExpressAddressWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <NuGetPackages>
       <package id="ServiceStack" version="latest" />
@@ -45,5 +49,6 @@
       <npm-package id="jspm" />
       <npm-package id="typings" />
     </NodeJS>
+    <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

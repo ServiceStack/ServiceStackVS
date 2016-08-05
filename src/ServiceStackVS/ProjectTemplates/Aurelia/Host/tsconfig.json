@@ -10,13 +10,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "filesGlob": [
-    "./jspm_packages/**/*.d.ts"
-  ],
   "exclude": [
+    "jspm_packages",
     "typings",
     "node_modules",
-    "wwwroot",
-    "!./node_modules/**/*.ts"
+    "wwwroot"
   ]
 }

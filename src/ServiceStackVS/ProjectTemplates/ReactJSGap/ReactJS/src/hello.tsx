@@ -5,24 +5,30 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import 'jquery';
+import {JsonServiceClient} from 'servicestack-client';
+import {Hello} from './dtos';
 export default class HelloWorld extends React.Component<any, any> {
+    client: JsonServiceClient;
     constructor(props, context) {
         super(props, context);
         this.state = { msg: '' };
+        this.client = new JsonServiceClient('/');
     }
 
     update(event: any) {
-        var yourName = event.target.value;
-        $.getJSON(`hello/${yourName}`, (r) => {
-		   this.setState({ msg: r.Result });
-		});
+        var request = new Hello();
+        request.Name = event.target.value;
+        this.client.get(request).then((helloResponse) => {
+            this.setState({
+                msg: helloResponse.Result
+            });
+        });
     }
 
     render() {
         return (
             <div className="form-group">
-                <input type="text" placeholder="Your name" onChange={e => this.update(e)} className="form-control" />
+                <input type="text" placeholder="Your name" onChange={e => this.update(e) } className="form-control" />
                 <h3>{this.state.msg}</h3>
             </div>);
     }

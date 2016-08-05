@@ -1,16 +1,20 @@
 /* console */
 document.documentElement.className += ' console';
 window.nativeHost = {
-    quit: function() {
-        $.post('/nativehost/quit')
-            .then(function() {
-                window.close();
-            });
+    quit: function () {
+        var r = new XMLHttpRequest();
+        r.open("POST", "/nativehost/quit", true);
+        r.onreadystatechange = function () {
+            if (r.readyState != 4 || r.status != 200)
+                return;
+            window.close();
+        };
+        r.send("");
     },
-    showAbout: function() {
+    showAbout: function () {
         alert('ServiceStack SelfHost Console + React');
     },
-    ready: function() {
+    ready: function () {
         //
     },
     platform: 'console'

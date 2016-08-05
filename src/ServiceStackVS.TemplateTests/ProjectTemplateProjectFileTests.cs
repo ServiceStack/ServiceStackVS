@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Json;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using NUnit.Framework;
+using ServiceStack;
 
 namespace ServiceStackVS.Tests
 {
@@ -58,6 +61,40 @@ namespace ServiceStackVS.Tests
                     AssertProjectHasFile(cSharpProjectFile, element);
                 }
             }
+        }
+
+        [Test]
+        public void IncludedJsonFilesAreValidJson()
+        {
+            string projectTemplatePath = Path.GetFullPath("..\\..\\..\\ServiceStackVS\\ProjectTemplates");
+            var projectTemplateInfo = new DirectoryInfo(projectTemplatePath);
+            var jsonFiles =
+                projectTemplateInfo.GetFiles("*.json", SearchOption.AllDirectories)
+                    .Where(x => !excludedProjectFiles.Contains(x.Name));
+            bool passed = true;
+            foreach (FileInfo jsonFile in jsonFiles)
+            {
+                try
+                {
+                    var tmpObj = JsonValue.Parse(Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully()));
+                }
+                catch (FormatException fex)
+                {
+                    //Invalid json format
+                    Console.WriteLine("Invalid json file at: " + jsonFile.FullName);
+                    Console.WriteLine(fex.Message);
+                    Console.WriteLine(fex.StackTrace);
+                    passed = false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine("Failed to parse json file at: " + jsonFile.FullName);
+                    Console.WriteLine(ex.ToString());
+                    passed = false;
+                }
+            }
+
+            Assert.That(passed, Is.EqualTo(true));
         }
 
         private void AssertProjectHasFile(FileInfo rootPath, XElement contentElement)

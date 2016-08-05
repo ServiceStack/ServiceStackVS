@@ -1,7 +1,31 @@
 {
- "globalDependencies": {
-   "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
-   "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#470954c4f427e0805a2d633636a7c6aa7170def8",
-   "ss-utils": "github:DefinitelyTyped/DefinitelyTyped/ss-utils/ss-utils.d.ts#229cb92825ec05c986dff721018b7130126f09a9"
- }
+  "globalDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
+    "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160524142046"
+  },
+  "dependencies": {
+    "aurelia-binding": "github:aurelia/binding",
+    "aurelia-bootstrapper": "github:aurelia/bootstrapper",
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection",
+    "aurelia-event-aggregator": "github:aurelia/event-aggregator",
+    "aurelia-framework": "github:aurelia/framework",
+    "aurelia-history": "github:aurelia/history",
+    "aurelia-history-browser": "github:aurelia/history-browser",
+    "aurelia-loader": "github:aurelia/loader",
+    "aurelia-logging": "github:aurelia/logging",
+    "aurelia-logging-console": "github:aurelia/logging-console",
+    "aurelia-metadata": "github:aurelia/metadata",
+    "aurelia-pal": "github:aurelia/pal",
+    "aurelia-pal-browser": "github:aurelia/pal-browser",
+    "aurelia-path": "github:aurelia/path",
+    "aurelia-polyfills": "github:aurelia/polyfills",
+    "aurelia-route-recognizer": "github:aurelia/route-recognizer",
+    "aurelia-router": "github:aurelia/router",
+    "aurelia-task-queue": "github:aurelia/task-queue",
+    "aurelia-templating": "github:aurelia/templating",
+    "aurelia-templating-binding": "github:aurelia/templating-binding",
+    "aurelia-templating-resources": "github:aurelia/templating-resources",
+    "aurelia-templating-router": "github:aurelia/templating-router",
+    "servicestack-client": "registry:npm/servicestack-client#0.0.10+20160803174707"
+  }
 }

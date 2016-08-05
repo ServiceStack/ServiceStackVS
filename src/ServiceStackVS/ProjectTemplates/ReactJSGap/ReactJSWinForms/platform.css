@@ -11,3 +11,38 @@ body {
 .alert-hide {
     display: none;
 }
+
+#alertUpdate {
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+#closeUpdate {
+    position: absolute;
+    right: 45px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+#alertUpdate button {
+    position: absolute;
+    right: 70px;
+    padding: 5px 20px;
+    top: 8px;
+    font-size: 14px;
+}
+
+#footer-spacer {
+    min-height: 40px;
+    width: 100%;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.winforms #console {
+    height: 300px;
+}
