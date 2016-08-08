@@ -278,8 +278,11 @@ namespace ServiceStackVS
                 !string.Equals(project.Kind, VsHelperGuids.ProjectUnloaded,
                     StringComparison.InvariantCultureIgnoreCase) &&
                 //Project is Csharp project
-                string.Equals(project.Kind, VsHelperGuids.CSharpProjectKind,
-                    StringComparison.InvariantCultureIgnoreCase);
+                (string.Equals(project.Kind, VsHelperGuids.CSharpProjectKind,
+                    StringComparison.InvariantCultureIgnoreCase) ||
+                //Project is Csharp (dotnetcore)
+                string.Equals(project.Kind, VsHelperGuids.CSharpDotNetCore,
+                    StringComparison.InvariantCultureIgnoreCase));
                 //Not busy building
 
             bool enabled = ready && visible;
