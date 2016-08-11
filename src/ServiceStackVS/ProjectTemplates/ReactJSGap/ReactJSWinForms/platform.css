@@ -16,6 +16,7 @@ body {
     position: absolute;
     width: 100%;
     top: 0;
+    border-radius: 0;
 }
 #closeUpdate {
     position: absolute;
