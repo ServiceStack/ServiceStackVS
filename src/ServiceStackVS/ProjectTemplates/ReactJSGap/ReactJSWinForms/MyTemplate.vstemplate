@@ -38,8 +38,6 @@
       <package id="ServiceStack.OrmLite" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
-      <package id="cef.redist.x64" version="3.2704.1432"/>
-      <package id="cef.redist.x86" version="3.2704.1432"  />
       <package id="CefSharp.Common" version="51.0.0" />
       <package id="CefSharp.WinForms" version="51.0.0" />
 	    <package id="squirrel.windows" version="1.3.0" />
