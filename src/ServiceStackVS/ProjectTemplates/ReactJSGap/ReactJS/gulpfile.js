@@ -11,7 +11,7 @@
         { src: './img/**/*', dest: 'img/' },
         { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
         { src: './Global.asax', host: WEB },
-        { src: ['./config.js', './platform.js', './platform.css'], dest: '/', host: WEB },
+        { src: ['./platform.js', './platform.css'], dest: '/', host: WEB },
         { src: webBuildDir + 'deploy/*.*', host: WEB },
         {
             src: './web.config',
