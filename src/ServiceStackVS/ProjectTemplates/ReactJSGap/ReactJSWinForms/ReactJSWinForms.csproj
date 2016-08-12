@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>$safeprojectname$</RootNamespace>
     <AssemblyName>$saferootprojectname$</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>$targetframeworkversion$</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
@@ -37,18 +37,6 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CefSharp.BrowserSubprocess.Core">
-      <HintPath>..\..\packages\CefSharp.Common.49.0.1\CefSharp\x86\CefSharp.BrowserSubprocess.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Core">
-      <HintPath>..\..\packages\CefSharp.Common.49.0.1\CefSharp\x86\CefSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp">
-      <HintPath>..\..\packages\CefSharp.Common.49.0.1\CefSharp\x86\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.WinForms">
-      <HintPath>..\..\packages\CefSharp.WinForms.49.0.1\CefSharp\x86\CefSharp.WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

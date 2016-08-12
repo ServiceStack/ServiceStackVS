@@ -30,7 +30,7 @@ class App extends React.Component<any,any> {
                         <div className="navbar-header">
                             <a className="navbar-brand" href="/">
                                 <img src="/img/react-logo.png" />
-                                ReactDesktopApps4
+                                $safeprojectname$
                             </a>
                         </div>
                         <ul className="nav navbar-nav pull-right">
