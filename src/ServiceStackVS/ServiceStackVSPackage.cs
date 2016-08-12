@@ -593,7 +593,13 @@ namespace ServiceStackVS
         private void AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
             nugetPackages = nugetPackages ?? new List<string>();
+            
             var project = VSIXUtils.GetSelectedProject() ?? VSIXUtils.GetSelectObject<ProjectItem>().ContainingProject;
+
+            // This is a temporary work around for ServiceStack *.Core packages whilst they are separate/in beta. 
+            // This is to be removed/updated once the Text, Client and/or Interfaces NuGet packages support NetCore by default.
+            nugetPackages = ApplyNetCoreNuGetPackages(nugetPackages, project);
+
             var path = VSIXUtils.GetSelectedProjectPath() ?? VSIXUtils.GetSelectedFolderPath();
             string fullPath = Path.Combine(path, fileName);
             using (var streamWriter = File.CreateText(fullPath))
@@ -612,6 +618,19 @@ namespace ServiceStackVS
             }
             
             project.Save();
+        }
+
+        private List<string> ApplyNetCoreNuGetPackages(List<string> nugetPackages, EnvDTE.Project project)
+        {
+            List<string> result = new List<string>();
+            if (//Project is Csharp (dotnetcore)
+                string.Equals(project.Kind, VsHelperGuids.CSharpDotNetCore,
+                    StringComparison.InvariantCultureIgnoreCase))
+            {
+                nugetPackages.ForEach(x => result.Add(x + ".Core"));
+            }
+
+            return result;
         }
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)
