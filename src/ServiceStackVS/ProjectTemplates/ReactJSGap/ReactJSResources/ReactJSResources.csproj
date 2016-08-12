@@ -11,7 +11,6 @@
     <AssemblyName>$safeprojectname$</AssemblyName>
     <TargetFrameworkVersion>$targetframeworkversion$</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>6ec54f66</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,15 +48,9 @@
 	<EmbeddedResource Include="system.js" />
     <EmbeddedResource Include="img\react-logo.png" />
     <EmbeddedResource Include="lib\css\lib.min.css" />
-    <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.svg" />
-    <EmbeddedResource Include="lib\js\lib.min.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="default.html" />
-    <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.eot" />
-    <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.ttf" />
-    <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.woff" />
-    <EmbeddedResource Include="lib\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <None Include="App.config" />
   </ItemGroup>
