@@ -134,10 +134,6 @@
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
         ], done);
     });
-    gulp.task('www-copy-fonts', function () {
-        return gulp.src('./jspm_packages/npm/bootstrap@3.2.0/fonts/*.*')
-            .pipe(gulp.dest(webRoot + 'lib/fonts/'));
-    });
     gulp.task('www-copy-images', function () {
         return gulp.src('./img/**/*')
             .pipe(gulp.dest(webRoot + 'img/'));
@@ -198,7 +194,6 @@
     gulp.task('02-package-client', function (callback) {
         runSequence('www-clean-client-assets',
                 [
-                    'www-copy-fonts',
                     'www-copy-images',
 					'www-copy-jspm-config',
                     'www-bundle-html'
