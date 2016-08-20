@@ -517,8 +517,7 @@ namespace ServiceStackVS
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
             bool isDtoSelected = false;
             isDtoSelected = selectedFiles
-                .Any(item => item.Name.ToLowerInvariant()
-                    .EndsWith(typesHandler.CodeFileExtension));
+                .Any(item => typesHandler.IsHandledFileType(item.Name));
 
             //Handle FSharp file extension name change for DTO files, eg .dto.fs to .dtos.fs
             if (!isDtoSelected && typesHandler is FSharpNativeTypesHandler)

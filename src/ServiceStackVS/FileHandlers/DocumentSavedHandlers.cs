@@ -136,14 +136,13 @@ namespace ServiceStackVS.FileHandlers
 
         public static bool TypeScriptDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(NativeTypeHandlers.TypeScriptNativeTypesHandler.CodeFileExtension)
+            return NativeTypeHandlers.TypeScriptNativeTypesHandler.IsHandledFileType(document.Name)
                 && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
         public static bool TypeScriptConcreteDtoPredicate(Document document)
         {
-            return document.Name.EndsWithIgnoreCase(
-                       NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler.CodeFileExtension)
+            return NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler.IsHandledFileType(document.Name)
                    && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
