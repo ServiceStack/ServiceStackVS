@@ -13,7 +13,7 @@ namespace ServiceStackVS.NativeTypes.Handlers
             {
                 return false;
             }
-            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName == "dtos.d.ts";
+            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EqualsIgnoreCase("dtos.d.ts");
         }
     }
 
@@ -28,7 +28,7 @@ namespace ServiceStackVS.NativeTypes.Handlers
             {
                 return false;
             }
-            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName == "dtos.ts";
+            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EqualsIgnoreCase("dtos.ts");
         }
     }
 }
