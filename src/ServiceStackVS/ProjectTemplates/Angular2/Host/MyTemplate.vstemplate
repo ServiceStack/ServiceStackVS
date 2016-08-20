@@ -50,6 +50,7 @@
       <npm-package id="gulp" />
 	  <npm-package id="jspm" />
 	  <npm-package id="typings" />
+      <skiptypings>true</skiptypings>
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

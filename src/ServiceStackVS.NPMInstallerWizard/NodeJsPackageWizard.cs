@@ -25,21 +25,22 @@ namespace ServiceStackVS.NPMInstallerWizard
     {
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
 
-        private IVsStatusbar _bar;
-        private DTE _dte;
-        private List<NpmPackage> _npmPackages;
+        private IVsStatusbar bar;
+        private DTE dte;
+        private List<NpmPackage> npmPackages;
 
-        private uint _progressRef;
+        private uint progressRef;
 
-        private OutputWindowWriter _serviceStackOutputWindowWriter;
+        private OutputWindowWriter serviceStackOutputWindowWriter;
         private IVsExtensionManager extensionManager;
+        private bool skipTypings = false;
 
         private OutputWindowWriter OutputWindowWriter
         {
             get
             {
-                return _serviceStackOutputWindowWriter ??
-                       (_serviceStackOutputWindowWriter =
+                return serviceStackOutputWindowWriter ??
+                       (serviceStackOutputWindowWriter =
                            new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
             }
         }
@@ -54,12 +55,12 @@ namespace ServiceStackVS.NPMInstallerWizard
 
         public int MajorVisualStudioVersion
         {
-            get { return int.Parse(_dte.Version.Substring(0, 2)); }
+            get { return int.Parse(dte.Version.Substring(0, 2)); }
         }
 
         private IVsStatusbar StatusBar
         {
-            get { return _bar ?? (_bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
+            get { return bar ?? (bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace ServiceStackVS.NPMInstallerWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary,
             WizardRunKind runKind, object[] customParams)
         {
-            _dte = (DTE) automationObject;
+            dte = (DTE) automationObject;
 
             using (var serviceProvider = new ServiceProvider((IServiceProvider)automationObject))
             {
@@ -95,11 +96,16 @@ namespace ServiceStackVS.NPMInstallerWizard
             //HACK WizardData looks like root node, but not passed to this arg so we wrap it.
             //Problem is that only one SHARED WizardData node is supported and multiple wizards might use it.
             var element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-            _npmPackages =
+            npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
                     .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
                     .ToList();
+            var skipTypingsValue = element.Descendants()
+                .Where(x => x.Name.LocalName.EqualsIgnoreCase("skip-typings-install"))
+                .Select(x => x.Value)
+                .FirstOrDefault();
+            skipTypings = skipTypingsValue != null && skipTypingsValue == "true";
 
             if (NodePackageUtils.TryRegisterNpmFromDefaultLocation())
             {
@@ -129,7 +135,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                 Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
 
                 UpdateStatusMessage("Downloading NPM depedencies...");
-                OutputWindowWriter.ShowOutputPane(_dte);
+                OutputWindowWriter.ShowOutputPane(dte);
 
                 Task.Run(() => { ProcessNpmInstall(projectPath); });
             }
@@ -157,11 +163,11 @@ namespace ServiceStackVS.NPMInstallerWizard
             try
             {
                 // Initialize the progress _bar.
-                StatusBar.Progress(ref _progressRef, 1, "", 0, 0);
+                StatusBar.Progress(ref progressRef, 1, "", 0, 0);
                 OutputWindowWriter.Show();
-                for (var index = 0; index < _npmPackages.Count; index++)
+                for (var index = 0; index < npmPackages.Count; index++)
                 {
-                    var package = _npmPackages[index];
+                    var package = npmPackages[index];
                     UpdateStatusMessage("Installing required NPM package '" + package.Id + "'...");
                     package.InstallGlobally(
                         (sender, args) =>
@@ -180,8 +186,8 @@ namespace ServiceStackVS.NPMInstallerWizard
                                 OutputWindowWriter.WriteLine(s);
                             }
                         }); //Installs global npm package if missing
-                    StatusBar.Progress(ref _progressRef, 1, "", Convert.ToUInt32(index),
-                        Convert.ToUInt32(_npmPackages.Count));
+                    StatusBar.Progress(ref progressRef, 1, "", Convert.ToUInt32(index),
+                        Convert.ToUInt32(npmPackages.Count));
                 }
             }
             catch (ProcessException pe)
@@ -280,6 +286,8 @@ namespace ServiceStackVS.NPMInstallerWizard
 
         private void ProcessTypingsInstall(string projectPath)
         {
+            if (skipTypings)
+                return;
             try
             {
                 var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
