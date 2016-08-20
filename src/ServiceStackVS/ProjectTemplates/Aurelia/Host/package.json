@@ -19,7 +19,7 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-templating-resources": "^1.0.0",
       "aurelia-templating-router": "^1.0.0",
-      "bootstrap.native": "^1.0.3",
+      "bootstrap.native": "1.0.3",
       "es6-shim": "github:es-shims/es6-shim@^0.35.0",
       "servicestack-client": "^0.0.10"
     },
