@@ -7,7 +7,7 @@
     <ItemTemplate Path="ItemTemplates\NativeTypes\VbNetTypeScriptRef\Definitions\VB.vstemplate" Name="TypeScript Reference" Description="TypeScript reference from a ServiceStack server." ProjectType="VisualBasic" ProjectSubType="" />
   </ItemTemplates>
   <ProjectTemplates>
-    <ProjectTemplate Path="ProjectTemplates\Angular2\Definitions\CSharp.vstemplate" Name="Angular2 App" Description="Angular2 TypeScript App" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\Angular2\Definitions\CSharp.vstemplate" Name="Angular2 App (Beta)" Description="Angular2 TypeScript App (Beta)" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AngularSPA\Definitions\CSharp.vstemplate" Name="AngularJS App" Description="AngularJS App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\Aurelia\Definitions\CSharp.vstemplate" Name="Aurelia App" Description="Aurelia TypeScript App" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\TypeScriptReact\Definitions\CSharp.vstemplate" Name="React App" Description="TypeScript React App" ProjectType="CSharp" ProjectSubType="" />

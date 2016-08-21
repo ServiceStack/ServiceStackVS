@@ -113,7 +113,7 @@
     });
     gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
-            //.pipe(gulpif('*.js', uglify()))
+            .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
             .pipe(useref())
             .pipe(htmlBuild({
