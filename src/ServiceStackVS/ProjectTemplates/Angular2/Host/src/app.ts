@@ -27,6 +27,6 @@ import { RouterLink, Router } from '@angular/router';
     directives: [RouterLink]
 })
 export class AppComponent {
-    title = 'Angular2App1';
+    title = '$safeprojectname$';
     routes = appRoutes.filter((val) => val.path != '');
 }
