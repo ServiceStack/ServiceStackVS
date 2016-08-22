@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ServiceStack.CSharp.EmptySelfHost</RootNamespace>
     <AssemblyName>ServiceStack.CSharp.EmptySelfHost</AssemblyName>
-    <TargetFrameworkVersion>$targetframeworkversion$</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>

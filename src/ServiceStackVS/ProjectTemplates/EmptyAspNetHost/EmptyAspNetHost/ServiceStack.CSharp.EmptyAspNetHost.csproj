@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ServiceStack.CSharp.EmptyAspNetHost</RootNamespace>
     <AssemblyName>ServiceStack.CSharp.EmptyAspNetHost</AssemblyName>
-    <TargetFrameworkVersion>$targetframeworkversion$</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
