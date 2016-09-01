@@ -23,6 +23,7 @@ This project structure includes examples of a lot of the different tasks that wi
 - [Aurelia App](#typescript-aurelia-app)
 - [React App](#typescript-react-app)
 - [React Desktop Apps](#react-desktop-apps-template)
+- [ASP.NET Empty](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/empty-aspnet.md)
 - [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
 - [ServiceStack ASP.NET MVC4](https://github.com/ServiceStackApps/SocialBootstrapApi)
 - ServiceStack ASP.NET MVC5 Empty
