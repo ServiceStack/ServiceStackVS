@@ -195,7 +195,7 @@ Aurelia itself it still in beta and uses a lot of modern web developer tools whi
 
 ##### Aurelia bundler error when deploying via Gulp
 
-Due to the now 2-year-old version of NodeJS that still ships in Visual Studio External Web Tools, version `0.10.31`, the `aurelia-bunlder` won't work from Task Runner Explorer from Visual Studio. To resolve this issue, install the latest version of node and change the order of the paths used by Visual Studio to resolve External Web Tools. If NodeJS is installed on the `PATH`, it should be listed first like below.
+Due to the now 2-year-old version of NodeJS that still ships in Visual Studio External Web Tools, version `0.10.31`, the `aurelia-bundler` won't work from Task Runner Explorer from Visual Studio. To resolve this issue, install the latest version of node and change the order of the paths used by Visual Studio to resolve External Web Tools. If NodeJS is installed on the `PATH`, it should be listed first like below.
 
 ![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/aurelia-workaround-1.png)
 
