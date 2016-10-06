@@ -21,7 +21,6 @@ namespace ServiceStackVS.NuGetInstallerWizard
     {
 
         private const string NugetV2Url = "https://packages.nuget.org/api/v2";
-        private const string serviceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?Name={1}";
 
         private IPackageRepository nuGetPackageRepository;
         private IPackageRepository NuGetPackageRepository
