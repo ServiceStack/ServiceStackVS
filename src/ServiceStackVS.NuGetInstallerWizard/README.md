@@ -22,7 +22,7 @@ For example, a multi project `vstemplate` file with a root package would declare
 
 Child projects that specify `latest` for version or leave it out will pickup the rootPackage version. This is also to minimize the number of requests for `latest` version to the NuGet v2 servers (which are slow) and speeds up installs for creation of new projects from the template.
 
-This wizard can also be used in individual project `vstemplate`s. The `WizardData` mimics that of the `package.config` found in projects. Simply provide the `name` and the desired `version` and it will run the NuGet install. For example.
+This wizard can also be used in individual project `vstemplate`s. The `WizardData` mimics that of the `package.config` found in projects. Simply provide the `id` and the desired `version` and it will run the NuGet install. For example.
 
 ``` xml
 <WizardData>
