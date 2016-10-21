@@ -1,0 +1,8 @@
+﻿<div>
+    <input class="form-control input-lg"
+           id="Name" type="text"
+           placeholder="Type your name"
+           [(ngModel)]="name" 
+           (ngModelChange)="nameChanged($event)"/>
+    <p style="margin-top: 15px;font-size: large">{{result}}</p>
+</div>

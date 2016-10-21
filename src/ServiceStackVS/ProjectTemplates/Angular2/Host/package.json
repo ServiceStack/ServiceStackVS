@@ -1,0 +1,53 @@
+{
+  "name": "$safeprojectname$",
+  "version": "0.0.1",
+  "scripts": {
+    "postinstall": "cmd /c wwwroot_build\\build.bat"
+  },
+  "jspm": {
+    "registry": "npm",
+    "dependencies": {
+      "@angular/common": "2.1.1",
+      "@angular/compiler": "2.1.1",
+      "@angular/core": "2.1.1",
+      "@angular/forms": "2.1.1",
+      "@angular/http": "2.1.1",
+      "@angular/platform-browser": "2.1.1",
+      "@angular/platform-browser-dynamic": "2.1.1",
+      "@angular/router": "3.1.1",
+      "@reactivex/rxjs": "5.0.0-rc.1",
+      "bootstrap.native": "1.0.3",
+      "es6-shim": "github:es-shims/es6-shim@^0.35.1",
+      "reflect-metadata": "0.1.8",
+      "rxjs": "5.0.0-rc.1",
+      "servicestack-client": "^0.0.11",
+      "text": "github:systemjs/plugin-text@^0.0.8",
+      "zone.js": "^0.6.26"
+    },
+    "devDependencies": {
+      "jspm": "^0.16.39",
+      "text": "github:systemjs/plugin-text@^0.0.8"
+    }
+  },
+  "devDependencies": {
+    "del": "~1.1.1",
+    "event-stream": "~3.3.1",
+    "gulp": "~3.9.1",
+    "gulp-htmlbuild": "~0.4.1",
+    "gulp-if": "~1.2.4",
+    "gulp-jspm": "^0.5.8",
+    "gulp-clean-css": "~2.0.6",
+    "gulp-msbuild": "^0.2.21",
+    "gulp-msdeploy": "^0.0.4",
+    "gulp-newer": "~1.1.0",
+    "gulp-nuget-restore": "^0.3.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "~0.4.0",
+    "gulp-uglify": "~1.5.3",
+    "gulp-useref": "~3.0.8",
+    "jspm": "^0.16.31",
+    "requirejs": "~2.1.15",
+    "run-sequence": "^1.1.5",
+    "yargs": "^4.2.0"
+  }
+}
