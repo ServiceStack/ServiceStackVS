@@ -1,11 +1,11 @@
 ﻿import { NgModule } from '@angular/core';
-import { BrowserModule, BrowserPlatformLocation } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home';
 import { View1Component } from './view1/view1';
 import { View2Component } from './view2/view2';
+import { HelloComponent } from './hello/hello';
 import { RouterModule, Router } from '@angular/router';
-import { bootstrap } from '@angular/platform-browser-dynamic';
 import { AppComponent } from './app';
 import {
     appRoutes
@@ -29,7 +29,8 @@ import {
         AppComponent,
         HomeComponent,
         View1Component,
-        View2Component
+        View2Component,
+        HelloComponent
     ],
     bootstrap: [AppComponent]
 })

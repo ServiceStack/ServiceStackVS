@@ -8,8 +8,7 @@ import { HelloComponent } from './../hello/hello';
     <div>
         <h2>{{message}}</h2>
         <hello [name]="'from view 1!'"></hello>
-    </div>`,
-    directives: [HelloComponent]
+    </div>`
 })
 export class View1Component {
     message: string;

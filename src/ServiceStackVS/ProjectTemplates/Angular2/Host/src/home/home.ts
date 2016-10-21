@@ -8,8 +8,7 @@ import { HelloComponent } from './../hello/hello';
     <div>
         <h2>{{message}}</h2>
         <hello></hello>
-    </div>`,
-    directives: [HelloComponent]
+    </div>`
 })
 export class HomeComponent {
     message: string;

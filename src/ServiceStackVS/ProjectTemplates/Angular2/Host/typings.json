@@ -9,14 +9,15 @@
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
   },
   "dependencies": {
-    "@angular/core": "file:jspm_packages/npm/@angular/core@2.0.0-rc.5/index.d.ts",
-    "@angular/common": "file:jspm_packages/npm/@angular/common@2.0.0-rc.5/index.d.ts",
-    "@angular/platform-browser-dynamic": "file:jspm_packages/npm/@angular/platform-browser-dynamic@2.0.0-rc.5/index.d.ts",
-    "@angular/router": "file:jspm_packages/npm/@angular/router@3.0.0-rc.1/index.d.ts",
-    "@angular/platform-browser": "file:jspm_packages/npm/@angular/platform-browser@2.0.0-rc.5/index.d.ts",
-    "@angular/forms": "file:jspm_packages/npm/@angular/forms@0.3.0/index.d.ts",
-    "rxjs/Observable": "file:jspm_packages/npm/rxjs@5.0.0-beta.6/Observable.d.ts",
-    "rxjs/Subject": "file:jspm_packages/npm/rxjs@5.0.0-beta.6/Subject.d.ts",
+    "@angular/core": "file:jspm_packages/npm/@angular/core@2.1.1/index.d.ts",
+    "@angular/common": "file:jspm_packages/npm/@angular/common@2.1.1/index.d.ts",
+    "@angular/platform-browser-dynamic": "file:jspm_packages/npm/@angular/platform-browser-dynamic@2.1.1/index.d.ts",
+    "@angular/compiler": "file:jspm_packages/npm/@angular/compiler@2.1.1/index.d.ts",
+    "@angular/router": "file:jspm_packages/npm/@angular/router@3.1.1/index.d.ts",
+    "@angular/platform-browser": "file:jspm_packages/npm/@angular/platform-browser@2.1.1/index.d.ts",
+    "@angular/forms": "file:jspm_packages/npm/@angular/forms@2.1.1/index.d.ts",
+    "rxjs/Observable": "file:jspm_packages/npm/rxjs@5.0.0-rc.1/Observable.d.ts",
+    "rxjs/Subject": "file:jspm_packages/npm/rxjs@5.0.0-rc.1/Subject.d.ts",
     "servicestack-client": "registry:npm/servicestack-client#0.0.10+20160803174707"
   }
 }

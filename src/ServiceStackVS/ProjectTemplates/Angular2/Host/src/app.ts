@@ -23,8 +23,7 @@ import { RouterLink, Router } from '@angular/router';
         <div class="container">
             <router-outlet></router-outlet>
         </div>
-    `,
-    directives: [RouterLink]
+    `
 })
 export class AppComponent {
     title = '$safeprojectname$';
