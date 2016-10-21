@@ -78,8 +78,8 @@ namespace ServiceStackVS
 
         public readonly Dictionary<int, List<string>> TemplateCleanupByVsVersion = new Dictionary<int, List<string>>
                 {
-                    {11,new List<string> { "Aurelia.csharp", "ReactJSGap.csharp", "TypeScriptReact.csharp" } },
-                    {12,new List<string> { "Aurelia.csharp" }},
+                    {11,new List<string> { "Aurelia.csharp", "ReactJSGap.csharp", "TypeScriptReact.csharp","Angular2.csharp" } },
+                    {12,new List<string> { "Aurelia.csharp","Angular2.csharp" }},
                     {14,new List<string>()}
                 };
 
