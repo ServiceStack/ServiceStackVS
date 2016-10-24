@@ -17,6 +17,8 @@ To take advantage of all the templates and to improve the development workflow, 
 
 > Alternatively if continuing to use an older version of the **NuGet Package Manager** you will need to click on **Enable NuGet Package Restore** after creating a new project to ensure its NuGet dependencies are installed.
 
+## ServiceStack VS.NET Templates
+
 This project structure includes examples of a lot of the different tasks that will have to be done while building a single page application to guide developers as their application grows.
 
 - [AngularJS App](#servicestack-with-angularjs)
