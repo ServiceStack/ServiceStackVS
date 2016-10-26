@@ -8,4 +8,5 @@ These build servers can be a bit flaky and rules around which libs the build ser
 
 Once it is building successfully the addin can be published to the Alpha, Beta or Stable channels which developers can opt in from the IDE when looking for Addins.
 
+## Running locally
 Testing locally can be done by running `package.bat`. This uses the `mdtool` CLI to package the addin from the Debug folder to install locally and test. Alternatively, building and running the package from Xamarin Studio should launch a new instance of the IDE and allow debugging, this requres the `Addin Maker` addin to be installed (from the IDE).
