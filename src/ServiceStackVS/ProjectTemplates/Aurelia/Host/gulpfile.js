@@ -163,8 +163,8 @@
             .pipe(gulp.dest(webRoot));
     });
     gulp.task('www-jspm-deps', function () {
-        return gulp.src('./src/deps.js')
-            .pipe(jspmBuild())
+        return gulp.src('./src/app.js')
+            .pipe(jspmBuild({ arithmetic: '- [./src/**/*]' }))
             .pipe(rename('deps.lib.js'))
             .pipe(gulp.dest('./'));
     });

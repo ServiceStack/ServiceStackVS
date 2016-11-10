@@ -114,7 +114,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app.ts" />
     <TypeScriptCompile Include="src\resources\elements\hello.ts" />
-    <TypeScriptCompile Include="src\deps.ts" />
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\resources\index.ts" />
     <TypeScriptCompile Include="src\views\home.ts" />

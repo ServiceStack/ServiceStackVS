@@ -153,7 +153,6 @@
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\hello.tsx" />
-    <TypeScriptCompile Include="src\deps.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
