@@ -3,17 +3,22 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
-    "removeComments": false,
+    "removeComments": true,
     "sourceMap": true,
     "target": "es5",
     "module": "system",
     "jsx": "react",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "moduleResolution": "node"
   },
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./typings/index.d.ts",
+    "./wwwroot/jspm_packages/**/*.d.ts"
+  ],
   "exclude": [
-    "typings",
-    "node_modules",
     "jspm_packages",
+    "node_modules",
     "wwwroot"
   ]
 }

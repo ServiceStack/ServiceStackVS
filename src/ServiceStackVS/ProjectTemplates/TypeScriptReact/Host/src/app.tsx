@@ -3,6 +3,7 @@
 // https://github.com/Microsoft/TypeScript/wiki/JSX
 /// <reference path='../typings/index.d.ts'/>
 
+import "es6-shim";
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import HelloWorld from './hello';

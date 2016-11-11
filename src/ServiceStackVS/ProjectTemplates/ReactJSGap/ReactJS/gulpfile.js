@@ -11,7 +11,8 @@
         { src: './img/**/*', dest: 'img/' },
         { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
         { src: './Global.asax', host: WEB },
-        { src: ['./platform.js', './platform.css'], dest: '/', host: WEB },
+        { src: './jspm_packages/system-polyfills.js', host: WEB },
+        { src: ['./platform.js', './platform.css'], host: WEB },
         { src: webBuildDir + 'deploy/*.*', host: WEB },
         {
             src: './web.config',
@@ -91,13 +92,52 @@
         })).pipe(block);
     }
 
+    function copyFilesTask(copy, cb) {
+        var dest = copy.dest || '';
+        var src = copy.src;
+        var copyTask = gulp.src(src);
+        if (copy.afterReplace) {
+            for (var i = 0; i < copy.afterReplace.length; i++) {
+                var replace = copy.afterReplace[i];
+                copyTask = copyTask.pipe(gulpReplace(replace.from, replace.to));
+            }
+        }
+        if (copy.after) {
+            copyTask = copyTask.pipe(copy.after());
+        }
+
+        var hosts = [WEB, NATIVE];
+        if (copy.host) {
+            hosts = typeof copy.host == 'string'
+                ? [copy.host]
+                : copy.host;
+        }
+
+        if (hosts.indexOf(WEB) >= 0) {
+            copyTask = copyTask
+                .pipe(newer(webRoot + dest))
+                .pipe(gulp.dest(webRoot + dest));
+        }
+        if (hosts.indexOf(NATIVE) >= 0) {
+            copyTask = copyTask
+                .pipe(newer(resourcesRoot + dest))
+                .pipe(gulp.dest(resourcesRoot + dest));
+        }
+
+        copyTask.on('finish', function () {
+            gulpUtil.log(gulpUtil.colors.green('Copied ' + copy.src));
+            cb();
+        });
+        return copyTask;
+    }
+
     // Tasks
 
-    gulp.task('www-clean-dlls', function (callback) {
+    gulp.task('www-clean-server', function (done) {
         var binPath = webRoot + '/bin/';
-        del(binPath, callback);
+        del(binPath, done);
     });
-    gulp.task('www-clean-client-assets', function (callback) {
+    gulp.task('www-clean-client', function (done) {
         del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
@@ -105,56 +145,18 @@
             '!wwwroot/**/*.asax', //Don't delete asax
             '!wwwroot/**/*.config', //Don't delete config
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ], callback);
+        ], done);
     });
-    gulp.task('www-copy-files', function(callback) {
-        var count = 0;
-        var length = COPY_FILES.length;
-        var result = [];
-        var processCopy = function (index) {
-            var copy = COPY_FILES[index];
-            var dest = copy.dest || '';
-            var src = copy.src;
-            var copyTask = gulp.src(src);
-            if (copy.afterReplace) {
-                for (var i = 0; i < copy.afterReplace.length; i++) {
-                    var replace = copy.afterReplace[i];
-                    copyTask = copyTask.pipe(gulpReplace(replace.from, replace.to));
-                }
-            }
-            if (copy.after) {
-                copyTask = copyTask.pipe(copy.after());
-            }
+    gulp.task('www-copy-files', function (done) {
+        var completed = 0;
 
-            var hosts = [WEB, NATIVE];
-            if (copy.host) {
-                hosts = typeof copy.host == 'string'
-                    ? [copy.host]
-                    : copy.host;
-            }
-
-            if (hosts.indexOf(WEB) >= 0) {
-                copyTask = copyTask
-                    .pipe(newer(webRoot + dest))
-                    .pipe(gulp.dest(webRoot + dest));
-            }
-            if (hosts.indexOf(NATIVE) >= 0) {
-                copyTask = copyTask
-                    .pipe(newer(resourcesRoot + dest))
-                    .pipe(gulp.dest(resourcesRoot + dest));
-            }
-
-            copyTask.on('finish', function () {
-                gulpUtil.log(gulpUtil.colors.green('Copied ' + copy.src));
-                count++;
-                if (count === length) {
-                    callback();
-                }
-            });
-            return copyTask;
-        }
-        for (var i = 0; i < length; i++) {
-            result.push(processCopy(i));
+        for (var i = 0; i < COPY_FILES.length; i++) {
+            (function (index) {
+                copyFilesTask(COPY_FILES[index], function () {
+                    if (++completed == COPY_FILES.length)
+                        done();
+                });
+            })(i);
         }
     });
     gulp.task('www-bundle-html', function () {
@@ -333,8 +335,8 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
 
     gulp.task('01-bundle-all', function(callback) {
         runSequence(
-            'www-clean-dlls',
-            'www-clean-client-assets',
+            'www-clean-server',
+            'www-clean-client',
             'www-nuget-restore',
             'www-msbuild-web',
             'www-copy-files',
@@ -367,7 +369,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
 
     gulp.task('01-package-server', function (callback) {
         runSequence('www-nuget-restore',
-            'www-msbuild-web', 'www-clean-dlls',
+            'www-msbuild-web', 'www-clean-server',
                 [
                     'www-copy-files',
                     'www-copy-deploy-files'
@@ -376,7 +378,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
     });
 
     gulp.task('02-package-client', function (callback) {
-        runSequence('www-clean-client-assets',
+        runSequence('www-clean-client',
                 [
                     'www-copy-files',
                     'www-bundle-html'
