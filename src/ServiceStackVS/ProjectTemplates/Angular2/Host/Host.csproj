@@ -100,7 +100,6 @@
     <TypeScriptCompile Include="src\app.module.ts" />
     <TypeScriptCompile Include="src\app.routing.ts" />
     <TypeScriptCompile Include="src\custom_typings.d.ts" />
-    <TypeScriptCompile Include="src\deps.ts" />
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\hello\hello.ts" />
     <TypeScriptCompile Include="src\home\home.ts" />
