@@ -3,45 +3,45 @@
 <head lang="en">
     <meta charset="UTF-8">
     <!--build:css lib/css/lib.min.css-->
-    <link rel="stylesheet" href="jspm_packages/npm/bootstrap.native@1.0.3/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="jspm_packages/npm/bootstrap.native@1.0.3/assets/css/theme.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <!--endbuild-->
     <!--build:css css/app.min.css-->
     <link rel="stylesheet" href="css/app.css" />
     <!-- endbuild -->
-    <title>$safeprojectname$</title>
+    <title>ReactTSApp7</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">$safeprojectname$</a>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-dark bg-inverse">
+        <a class="navbar-brand" href="#">$safeprojectname$</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link 1 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row" style="margin: 10px 0">
+            <div id="content"></div>
         </div>
     </div>
-	
-    <div class="container">
-        <div id="content"></div>
-    </div>
-	    
-	<!-- build:js /system.js -->
-    <script src="/jspm_packages/system.js"></script>
-    <!-- endbuild -->
-
-    <script src="/config.js"></script>
 
     <!-- build:remove -->
+    <script src="/jspm_packages/system.js"></script>
+
+    <script src="/jspm.config.js"></script>
+
     <script src="/deps.lib.js"></script>
+
+    <script>
+        System.import("app");
+    </script>
     <!-- endbuild -->
-	
+
     <!-- htmlbuild:appbundle -->
     <!-- endbuild -->
-	
-    <script>
-        System.import("./src/app");
-    </script>
 </body>
 </html>

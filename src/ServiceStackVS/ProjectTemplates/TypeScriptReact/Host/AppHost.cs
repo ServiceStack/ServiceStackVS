@@ -29,21 +29,23 @@ namespace $safeprojectname$
 
         /// <summary>
         /// Application specific configuration
-        /// This method should initialize any IoC resources utilized by your web service classes.
+        /// This method should initialize any Plugins or IoC dependencies used by your web services
         /// </summary>
         public override void Configure(Container container)
         {
-            //Config examples
-            //this.Plugins.Add(new PostmanFeature());
-            //this.Plugins.Add(new CorsFeature());
-
             SetConfig( new HostConfig
             {
-                DebugMode = AppSettings.Get("DebugMode",false),
-                AddRedirectParamsToQueryString = true
+                DebugMode = AppSettings.Get("DebugMode", false),
+                AddRedirectParamsToQueryString = true,
+                AllowFileExtensions = { "json" },
+                UseCamelCase = true,
             });
 
-            this.Plugins.Add(new RazorFormat());
+            Plugins.Add(new RazorFormat());
+
+            //Other Plugin Examples
+            //Plugins.Add(new CorsFeature());
+            //Plugins.Add(new PostmanFeature());
         }
     }
 }

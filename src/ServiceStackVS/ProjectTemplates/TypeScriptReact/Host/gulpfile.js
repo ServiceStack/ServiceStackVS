@@ -15,7 +15,8 @@
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
-    var jspmBuild = require('gulp-jspm');
+    //var jspmBuild = require('gulp-jspm');
+    var shell = require('gulp-shell');
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
     var argv = require('yargs').argv;
@@ -47,9 +48,7 @@
     ];
 
     var COPY_CLIENT_FILES = [
-        { src: './img/**/*', dest: 'img/' },
-        { src: './config.js' },
-        { src: './jspm_packages/system-polyfills.js' }
+        { src: './img/**/*', dest: 'img/' }
     ];
 
     function createConfigsIfMissing() {
@@ -58,7 +57,7 @@
                 fs.mkdirSync(configDir);
             }
             fs.writeFileSync(configPath, JSON.stringify({
-                "iisApp": "ReactTSApp1",
+                "iisApp": "$safeprojectname$",
                 "serverAddress": "deploy-server.example.com",
                 "userName": "{WebDeployUserName}",
                 "password": "{WebDeployPassword}"
@@ -141,17 +140,17 @@
     });
     gulp.task('www-clean-server', function (done) {
         var binPath = webRoot + '/bin/';
-        del(binPath, done);
+        return del(binPath);
     });
     gulp.task('www-clean-client', function (done) {
-        del([
+        return del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
             '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
             '!wwwroot/**/*.asax', //Don't delete asax
             '!wwwroot/**/*.config', //Don't delete config
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ], done);
+        ]);
     });
     gulp.task('www-bundle-html', function () {
         return gulp.src('./default.html')
@@ -165,20 +164,14 @@
             }))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-jspm-build', function () {
-        return gulp.src('./src/app.js')
-            .pipe(jspmBuild({ minify: true }))
-			.pipe(rename('app.js'))
-            .pipe(gulp.dest(webRoot));
-    });
-    gulp.task('www-jspm-deps', function () {
-        return gulp.src('./src/app.js')
-            .pipe(jspmBuild({ arithmetic: '- [./src/**/*]' }))
-            .pipe(rename('deps.lib.js'))
-            .pipe(gulp.dest('./'));
-    });
+    gulp.task('www-jspm-build', shell.task([
+        'jspm build ./src/app.js ' + webRoot + '/app.js -minify'
+    ]));
+    gulp.task('www-jspm-deps', shell.task([
+        'jspm bundle ./src/app.js - [./src/**/*] ./deps.lib.js'
+    ]));
     gulp.task('www-msbuild', function () {
-        return gulp.src('../../ReactTSApp1.sln')
+        return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
             .pipe(msbuild({
                 targets: ['Clean', 'Build'],

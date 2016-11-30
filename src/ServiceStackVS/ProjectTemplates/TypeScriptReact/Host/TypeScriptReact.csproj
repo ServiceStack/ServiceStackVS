@@ -118,22 +118,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.js" />
+    <Content Include="jspm.config.js" />
     <Content Include="default.html" />
     <Content Include="deps.lib.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
-    <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
-	  <Content Include="css\app.css" />
-	  <Content Include="gulpfile.js" />
+    <Content Include="css\app.css" />
+    <Content Include="gulpfile.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-	<Content Include="wwwroot_build\build.bat" />
+    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -146,13 +145,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>-->
   <ItemGroup>
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\hello.tsx" />
+    <TypeScriptCompile Include="src\HelloWorld.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />

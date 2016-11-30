@@ -9,13 +9,12 @@
     "module": "system",
     "jsx": "react",
     "experimentalDecorators": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
   },
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./typings/index.d.ts",
-    "./wwwroot/jspm_packages/**/*.d.ts"
-  ],
   "exclude": [
     "jspm_packages",
     "node_modules",
