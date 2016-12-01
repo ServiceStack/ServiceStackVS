@@ -44,8 +44,6 @@
   <ItemGroup>
     <EmbeddedResource Include="css\app.min.css" />
     <EmbeddedResource Include="app.js" />
-    <EmbeddedResource Include="config.js" />
-	<EmbeddedResource Include="system.js" />
     <EmbeddedResource Include="img\react-logo.png" />
     <EmbeddedResource Include="lib\css\lib.min.css" />
   </ItemGroup>

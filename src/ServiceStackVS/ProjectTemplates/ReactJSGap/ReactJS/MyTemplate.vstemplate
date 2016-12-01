@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>ReactJS App</Name>
-    <Description>ReactJS App</Description>
+    <Name>React Desktop Apps</Name>
+    <Description>React Desktop Apps</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>ReactJSApp</DefaultName>
+    <DefaultName>ReactDesktopApps</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -47,7 +47,6 @@
     <NodeJS>
       <npm-package id="gulp" />
       <npm-package id="jspm" />
-      <npm-package id="typings" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

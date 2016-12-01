@@ -15,7 +15,6 @@
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
-    //var jspmBuild = require('gulp-jspm');
     var shell = require('gulp-shell');
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
@@ -165,7 +164,7 @@
             .pipe(gulp.dest(webRoot));
     });
     gulp.task('www-jspm-build', shell.task([
-        'jspm build ./src/app.js ' + webRoot + '/app.js -minify'
+        'jspm build ./src/app.js ' + webRoot + 'app.js -minify'
     ]));
     gulp.task('www-jspm-deps', shell.task([
         'jspm bundle ./src/app.js - [./src/**/*] ./deps.lib.js'

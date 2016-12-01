@@ -93,14 +93,14 @@
   </ItemGroup>
     <ItemGroup>
     <TypeScriptCompile Include="src\app.tsx" />
-    <TypeScriptCompile Include="src\hello.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
+    <TypeScriptCompile Include="src\HelloWorld.tsx" />
     <TypeScriptCompile Include="platform.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
     <Content Include="gulpfile.js" />
-    <Content Include="config.js" />
+    <Content Include="jspm.config.js" />
     <Content Include="default.html" />
     <Content Include="platform.css" />
     <Content Include="platform.js" />
@@ -113,12 +113,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
-    <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
     <Folder Include="wwwroot\" />
+    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
-    <Content Include="wwwroot_build\build.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />
     <Content Include="wwwroot_build\tools\ILMerge.exe" />

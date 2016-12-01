@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
 
     <!--build:css lib/css/lib.min.css-->
-    <link rel="stylesheet" href="jspm_packages/npm/bootstrap.native@1.0.3/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="jspm_packages/npm/bootstrap.native@1.0.3/assets/css/theme.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <!--endbuild-->
     <!--build:css css/app.min.css-->
     <link rel="stylesheet" href="css/app.css" />
@@ -16,21 +15,21 @@
 </head>
 <body>
     <div id="content"></div>
-    <!-- build:js /system.js -->
-    <script src="/jspm_packages/system.js"></script>
-    <!-- endbuild -->
-    <!-- build:js /config.js -->
-    <script src="/config.js"></script>
-    <!-- endbuild -->
+
     <!-- build:remove -->
+    <script src="/jspm_packages/system.js"></script>
+
+    <script src="/jspm.config.js"></script>
+
     <script src="/deps.lib.js"></script>
-    <!-- endbuild -->
-    <!-- htmlbuild:appbundle -->
-    <!-- endbuild -->
 
     <script>
-        System.import("./src/app");
+        System.import("app");
     </script>
+    <!-- endbuild -->
+
+    <!-- htmlbuild:appbundle -->
+    <!-- endbuild -->
 
     <script src="/platform.js"></script>
 </body>

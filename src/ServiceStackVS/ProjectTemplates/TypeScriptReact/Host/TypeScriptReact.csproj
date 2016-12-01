@@ -132,7 +132,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -154,6 +153,7 @@
     <Folder Include="img\" />
 	<Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
+    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />

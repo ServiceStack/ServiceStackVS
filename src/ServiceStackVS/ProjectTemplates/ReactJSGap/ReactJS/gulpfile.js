@@ -11,7 +11,6 @@
         { src: './img/**/*', dest: 'img/' },
         { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
         { src: './Global.asax', host: WEB },
-        { src: './jspm_packages/system-polyfills.js', host: WEB },
         { src: ['./platform.js', './platform.css'], host: WEB },
         { src: webBuildDir + 'deploy/*.*', host: WEB },
         {
@@ -38,7 +37,7 @@
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
-    var jspmBuild = require('gulp-jspm');
+    var shell = require('gulp-shell');
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
     var nugetRestore = require('gulp-nuget-restore');
@@ -135,17 +134,17 @@
 
     gulp.task('www-clean-server', function (done) {
         var binPath = webRoot + '/bin/';
-        del(binPath, done);
+        return del(binPath);
     });
     gulp.task('www-clean-client', function (done) {
-        del([
+        return del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
             '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
             '!wwwroot/**/*.asax', //Don't delete asax
             '!wwwroot/**/*.config', //Don't delete config
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ], done);
+        ]);
     });
     gulp.task('www-copy-files', function (done) {
         var completed = 0;
@@ -171,14 +170,11 @@
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
     });
-    gulp.task('www-jspm-build', function () {
-        return gulp.src('./src/app.js')
-            .pipe(jspmBuild({minify:true}))
-            .pipe(rename('app.js'))
-            .pipe(gulp.dest(webRoot))
-            .pipe(gulp.dest(resourcesRoot));
-    });
-    gulp.task('www-copy-resources-lib', function() {
+    gulp.task('www-jspm-build', shell.task([
+        'jspm build ./src/app.js ' + webRoot + 'app.js -minify',
+        ('copy ' + webRoot + 'app.js ' + resourcesRoot).replace(/\//g, "\\")
+    ]));
+    gulp.task('www-copy-resources-lib', function () {
         return gulp.src('../$safeprojectname$.Resources/bin/Release/$safeprojectname$.Resources.dll')
             .pipe(newer(resourcesLib))
             .pipe(gulp.dest(resourcesLib));
@@ -188,13 +184,10 @@
             .pipe(newer(webRoot))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-jspm-deps', function () {
-        return gulp.src('./src/app.js')
-            .pipe(jspmBuild({ arithmetic: '- [./src/**/*]' }))
-            .pipe(rename('deps.lib.js'))
-            .pipe(gulp.dest('./'));
-    });
-    gulp.task('www-msbuild-web', function() {
+    gulp.task('www-jspm-deps', shell.task([
+        'jspm bundle ./src/app.js - [./src/**/*] ./deps.lib.js'
+    ]));
+    gulp.task('www-msbuild-web', function () {
         return gulp.src('./$safeprojectname$.csproj')
             .pipe(msbuild({
                 targets: ['Clean', 'Rebuild'],
@@ -387,7 +380,7 @@ gulp.task('www-nuget-pack-winforms', function (callback) {
                 callback);
     });
 
-    gulp.task('00-update-deps-js', function (callback) {
+    gulp.task('00-update-deps', function (callback) {
         runSequence('www-nuget-restore',
             'www-msbuild-web', 'www-jspm-deps',
                 callback);
