@@ -1,17 +1,15 @@
 <template>
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar navbar-dark bg-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">AureliaTSApp2</a>
-                <ul class="nav navbar-nav">
-                    <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-                        <a href.bind="row.href">
-                            ${row.title}
-                            <i if.bind="row.settings.icon" class="fa fa-${row.settings.icon}"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="#">$safeprojectname$</a>
+            <ul class="nav navbar-nav float-xs-right">
+                <li class="nav-item" repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+                    <a class="nav-link" href.bind="row.href">
+                        ${row.title}
+                        <i if.bind="row.settings.icon" class="fa fa-${row.settings.icon}"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 

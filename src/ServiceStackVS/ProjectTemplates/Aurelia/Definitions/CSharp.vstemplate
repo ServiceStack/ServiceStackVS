@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>Aurelia App</Name>
     <Description>Aurelia TypeScript App</Description>
-    <DefaultName>AureliaTSApp</DefaultName>
+    <DefaultName>AureliaApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>

@@ -16,6 +16,7 @@
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
     var jspmBuild = require('gulp-jspm');
+    var shell = require('gulp-shell');
     var aureliaBundle = require('aurelia-bundler').bundle;
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
@@ -201,8 +202,13 @@
         return aureliaBundle(aureliaBundleConfig);
     });
     gulp.task('www-jspm-deps', function () {
+        var pkg = JSON.parse(fs.readFileSync('./package.json'));
+        var deps = pkg["jspm"]["dependencies"];
+        var modules = Object.keys(deps);
+        var include = " + " + modules.join(' + ');
+
         return gulp.src('./src/app.js')
-            .pipe(jspmBuild({ arithmetic: '- [./src/**/*]' }))
+            .pipe(jspmBuild({ arithmetic: include + ' - [./src/**/*]' }))
             .pipe(rename('deps.lib.js'))
             .pipe(gulp.dest('./'));
     });
@@ -213,8 +219,7 @@
                 targets: ['Clean', 'Build'],
                 stdout: true,
                 verbosity: 'quiet'
-            }
-            ));
+            }));
     });
     gulp.task('www-msdeploy-pack', function () {
         return gulp.src('wwwroot/')
@@ -246,7 +251,7 @@
             callback);
     });
 
-    gulp.task('00-update-deps-js', function (callback) {
+    gulp.task('00-update-deps', function (callback) {
         runSequence('www-msbuild', 'www-jspm-deps',
             callback);
     });
@@ -265,7 +270,7 @@
                 'www-copy-client',
                 'www-bundle-html'
             ],
-            'www-jspm-build',
+            'www-bundle-aurelia',
             callback);
     });
 

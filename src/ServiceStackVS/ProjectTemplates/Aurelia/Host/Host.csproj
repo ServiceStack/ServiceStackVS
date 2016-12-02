@@ -95,7 +95,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-	<Content Include="wwwroot_build\build.bat" />
+	<Content Include="wwwroot_build\00-npm-postinstall.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

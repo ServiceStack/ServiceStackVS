@@ -2,7 +2,7 @@
   "name": "$safeprojectname$",
   "version": "0.0.1",
   "scripts": {
-    "postinstall": "cmd /c wwwroot_build\\build.bat"
+    "postinstall": "cmd /c wwwroot_build\\00-npm-postinstall.bat"
   },
   "jspm": {
     "registry": "npm",
@@ -19,7 +19,6 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-templating-resources": "^1.0.0",
       "aurelia-templating-router": "^1.0.0",
-      "bootstrap.native": "1.0.3",
       "es6-shim": "github:es-shims/es6-shim@^0.35.0",
       "servicestack-client": "^0.0.10"
     },
@@ -27,6 +26,9 @@
       "jspm": "^0.16.31",
       "text": "github:systemjs/plugin-text@^0.0.8"
     }
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.5"
   },
   "devDependencies": {
     "aurelia-bundler": "^0.4.0",
@@ -36,6 +38,7 @@
     "gulp-htmlbuild": "~0.4.1",
     "gulp-if": "~1.2.4",
     "gulp-jspm": "^0.5.8",
+    "gulp-shell": "^0.5.2",
     "gulp-clean-css": "~2.0.6",
     "gulp-msbuild": "^0.2.21",
     "gulp-msdeploy": "^0.0.4",
