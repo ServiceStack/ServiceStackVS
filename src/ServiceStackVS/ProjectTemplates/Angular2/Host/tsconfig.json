@@ -1,19 +1,23 @@
 {
-  "compileOnSave":  true,
+  "compileOnSave": true,
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
-    "removeComments": false,
+    "removeComments": true,
     "sourceMap": true,
     "target": "es5",
-    "module": "commonjs",
-    "experimentalDecorators": true,
+    "module": "system",
+    "jsx": "react",
     "emitDecoratorMetadata": true,
-    "moduleResolution": "node"
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
   },
   "exclude": [
     "jspm_packages",
-    "typings",
     "node_modules",
     "wwwroot"
   ]

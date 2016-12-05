@@ -64,22 +64,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.js" />
-    <Content Include="default.html" />
-    <Content Include="deps.lib.js" />
+    <Content Include="img\android-desktop.png" />
+    <Content Include="img\favicon.png" />
+    <Content Include="img\ios-desktop.png" />
+    <Content Include="jspm.config.js" />
+    <Content Include="css\app.css" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
-    <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
-	  <Content Include="css\app.css" />
-	  <Content Include="gulpfile.js" />
+    <Content Include="gulpfile.js" />
+    <Content Include="deps.lib.js" />
+    <Content Include="default.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-	<Content Include="wwwroot_build\build.bat" />
+    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -92,30 +94,26 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>-->
   <ItemGroup>
+    <TypeScriptCompile Include="src\main.module.ts" />
     <TypeScriptCompile Include="src\app.ts" />
-    <TypeScriptCompile Include="src\app.module.ts" />
-    <TypeScriptCompile Include="src\app.routing.ts" />
-    <TypeScriptCompile Include="src\custom_typings.d.ts" />
+    <TypeScriptCompile Include="src\modules\app\app.module.ts" />
+    <TypeScriptCompile Include="src\shared\footer.ts" />
+    <TypeScriptCompile Include="src\shared\header.ts" />
+    <TypeScriptCompile Include="src\common.d.ts" />
     <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\hello\hello.ts" />
-    <TypeScriptCompile Include="src\home\home.ts" />
-    <TypeScriptCompile Include="src\view1\view1.ts" />
-    <TypeScriptCompile Include="src\view2\view2.ts" />
+    <TypeScriptCompile Include="src\modules\app\home\hello.ts" />
+    <TypeScriptCompile Include="src\modules\app\home\home.ts" />
+    <TypeScriptCompile Include="src\modules\app\products\products.ts" />
+    <TypeScriptCompile Include="src\modules\app\technology\technology.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\hello\hello.html" />
+    <Content Include="src\modules\app\home\hello.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
 	<Folder Include="wwwroot\" />
-    <Folder Include="src\resources\attributes\" />
-    <Folder Include="src\resources\binding-behaviors\" />
-    <Folder Include="src\resources\value-converters\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />

@@ -17,21 +17,18 @@ ExportAsTypes: True
 */
 
 
-export interface IReturnVoid {
-}
-
 export interface IReturn<T> {
 }
 
 export class HelloResponse {
-    Result: string;
+    result: string;
 }
 
 // @Route("/hello")
 // @Route("/hello/{Name}")
 export class Hello implements IReturn<HelloResponse>
 {
-    Name: string;
+    name: string;
     createResponse() { return new HelloResponse(); }
     getTypeName() { return "Hello"; }
 }

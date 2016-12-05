@@ -7,7 +7,7 @@
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>Angular2TSApp</DefaultName>
+    <DefaultName>Angular2App</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -40,17 +40,13 @@
       <package id="ServiceStack.Common" version="latest" />
       <package id="ServiceStack.Interfaces" version="latest" />
       <package id="ServiceStack.OrmLite" version="latest" />
-      <package id="ServiceStack.Razor" version="latest" />
       <package id="ServiceStack.Redis" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
-      <package id="Microsoft.AspNet.WebPages" version="3.2.3" />
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
 	  <npm-package id="jspm" />
-	  <npm-package id="typings" />
-      <skip-typings-install>true</skip-typings-install>
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

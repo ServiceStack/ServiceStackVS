@@ -1,0 +1,17 @@
+﻿<div class="mdl-card__supporting-text">
+    <h4>{{heading}}</h4>
+
+    Ajax request using ServiceStack's TypeScript JsonServiceClient and Typed DTOs:
+
+    <div class="mdl-textfield mdl-js-textfield" style="width:auto">
+
+        <input type="text" class="mdl-textfield__input" id="Name"
+               style="display:inline-block; width:auto; margin:0 10px 0 0"
+               placeholder="Type your name"
+               [(ngModel)]="name"
+               (ngModelChange)="nameChanged($event)" />
+
+        <span style="font-size:20px; color:#7a1ea1;">{{result}}</span>
+    </div>
+
+</div>

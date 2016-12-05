@@ -1,14 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using ServiceStack;
 using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
 {
+    [FallbackRoute("/{PathInfo*}")]
+    public class FallbackForClientRoutes
+    {
+        public string PathInfo { get; set; }
+    }
+
     public class MyServices : Service
     {
+        public object Any(FallbackForClientRoutes request)
+        {
+            //Return default.html for unmatched requests so routing is handled on client
+            return new HttpResult(VirtualFileSources.GetFile("default.html"));
+        }
+
         public object Any(Hello request)
         {
             return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
