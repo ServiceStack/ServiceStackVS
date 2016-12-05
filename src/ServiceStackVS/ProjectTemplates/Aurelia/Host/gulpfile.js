@@ -15,8 +15,7 @@
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
-    var jspmBuild = require('gulp-jspm');
-    var shell = require('gulp-shell');
+    var exec = require('child_process').exec;
     var aureliaBundle = require('aurelia-bundler').bundle;
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
@@ -145,45 +144,45 @@
 
     // Tasks
 
-    gulp.task('www-copy-server', function (done) {
+    gulp.task('www-copy-server', function (callback) {
         var completed = 0;
         var COPY_FILES = COPY_SERVER_FILES;
 
         for (var i = 0; i < COPY_FILES.length; i++) {
             (function (index) {
                 copyFilesTask(COPY_FILES[index], function () {
-                    if (++completed == COPY_FILES.length)
-                        done();
+                    if (++completed === COPY_FILES.length)
+                        callback();
                 });
             })(i);
         }
     });
-    gulp.task('www-copy-client', function (done) {
+    gulp.task('www-copy-client', function (callback) {
         var completed = 0;
         var COPY_FILES = COPY_CLIENT_FILES;
 
         for (var i = 0; i < COPY_FILES.length; i++) {
             (function (index) {
                 copyFilesTask(COPY_FILES[index], function () {
-                    if (++completed == COPY_FILES.length)
-                        done();
+                    if (++completed === COPY_FILES.length)
+                        callback();
                 });
             })(i);
         }
     });
-    gulp.task('www-clean-server', function (done) {
+    gulp.task('www-clean-server', function () {
         var binPath = webRoot + '/bin/';
-        del(binPath, done);
+        return del(binPath
     });
-    gulp.task('www-clean-client', function (done) {
-        del([
+    gulp.task('www-clean-client', function () {
+        return del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
             '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
             '!wwwroot/**/*.asax', //Don't delete asax
             '!wwwroot/**/*.config', //Don't delete config
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ], done);
+        ]);
     });
 
     gulp.task('www-bundle-html', function () {
@@ -201,24 +200,29 @@
     gulp.task('www-bundle-aurelia', function () {
         return aureliaBundle(aureliaBundleConfig);
     });
-    gulp.task('www-jspm-deps', function () {
+    gulp.task('www-jspm-deps', function (callback) {
         var pkg = JSON.parse(fs.readFileSync('./package.json'));
         var deps = pkg["jspm"]["dependencies"];
         var modules = Object.keys(deps);
         var include = " + " + modules.join(' + ');
 
-        return gulp.src('./src/app.js')
-            .pipe(jspmBuild({ arithmetic: include + ' - [./src/**/*]' }))
-            .pipe(rename('deps.lib.js'))
-            .pipe(gulp.dest('./'));
+        exec('jspm bundle ./src/app.js ' + include + ' - [./src/**/*] ./deps.lib.js', function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            callback();
+        });
     });
     gulp.task('www-msbuild', function () {
         return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
             .pipe(msbuild({
                 targets: ['Clean', 'Build'],
+                properties: {
+                    Configuration: 'Release'
+                },
                 stdout: true,
-                verbosity: 'quiet'
+                verbosity: 'quiet',
+                toolsVersion: 14.0 //remove to support <= VS 2013 / C# 5
             }));
     });
     gulp.task('www-msdeploy-pack', function () {
