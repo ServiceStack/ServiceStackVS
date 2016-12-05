@@ -35,11 +35,19 @@ namespace ServiceStackVS.NativeTypes.Handlers
 
         public virtual string GetUpdatedCode(string baseUrl, Dictionary<string, string> options)
         {
-            string url = GenerateUrl(baseUrl, options);
+            var url = GenerateUrl(baseUrl, options);
             var webRequest = WebRequest.Create(url);
             webRequest.Credentials = CredentialCache.DefaultCredentials;
-            string result = webRequest.GetResponse().ReadToEnd();
-            return result;
+
+            using (var response = webRequest.GetResponse())
+            {
+                var result = response.ReadToEnd();
+
+                if (!result.Contains("Options:"))
+                    throw new Exception("Invalid Response: " + result.SafeSubstring(50) + "...");
+
+                return result;
+            }
         }
 
         public virtual bool IsHandledFileType(string fileName)

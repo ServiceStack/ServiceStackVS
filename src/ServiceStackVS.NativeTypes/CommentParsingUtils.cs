@@ -87,9 +87,8 @@ namespace ServiceStackVS.NativeTypes
             if (options.ContainsKey("BaseUrl"))
             {
                 baseUrl = options["BaseUrl"];
-				if (baseUrl != null && baseUrl.Length > 0) {
-					return true;
-				}
+                if (!string.IsNullOrEmpty(baseUrl))
+                    return true;
             }
             return false;
         }

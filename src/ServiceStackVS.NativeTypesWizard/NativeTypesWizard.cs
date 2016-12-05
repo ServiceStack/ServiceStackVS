@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
+using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NativeTypes.Handlers;
 
@@ -97,15 +98,22 @@ namespace ServiceStackVS.NativeTypesWizard
 
             string baseUrl;
             if (!currentNativeTypesHandle.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
-            {
                 throw new WizardBackoutException("Failed to read from template base url");
-            }
-            string updatedCode = currentNativeTypesHandle.GetUpdatedCode(baseUrl, null);
-            using (var streamWriter = File.CreateText(fullItemPath))
+
+            try
             {
-                streamWriter.Write(updatedCode);
-                streamWriter.Flush();
+                string updatedCode = currentNativeTypesHandle.GetUpdatedCode(baseUrl, null);
+                using (var streamWriter = File.CreateText(fullItemPath))
+                {
+                    streamWriter.Write(updatedCode);
+                    streamWriter.Flush();
+                }
             }
+            catch (Exception ex)
+            {
+                OutputWindowWriter.WriterWindow.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + ex.Message);
+            }
+
             projectItem.Open();
             projectItem.Save();
         }
