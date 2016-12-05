@@ -59,6 +59,8 @@
   "devDependencies": {
     "@types/react": "^0.14.51",
     "@types/react-dom": "^0.14.19",
+    "jspm": "^0.17.0-beta.32",
+    "servicestack-client": "0.0.17",
     "globule": "^1.1.0",
     "gulp-nuget-pack": "0.0.7",
     "del": "^2.2.2",
@@ -67,7 +69,6 @@
     "gulp-clean-css": "^2.0.13",
     "gulp-htmlbuild": "^0.4.2",
     "gulp-if": "^2.0.2",
-    "gulp-shell": "^0.5.2",
     "gulp-msbuild": "^0.4.3",
     "gulp-msdeploy": "0.0.4",
     "gulp-newer": "^1.3.0",
@@ -77,10 +78,8 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.7",
-    "jspm": "^0.17.0-beta.32",
     "requirejs": "^2.3.2",
     "run-sequence": "^1.2.2",
-    "servicestack-client": "0.0.17",
     "yargs": "^6.4.0"
   }
 }

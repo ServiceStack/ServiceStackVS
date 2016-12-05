@@ -37,13 +37,12 @@
     var gulpReplace = require('gulp-replace');
     var htmlBuild = require('gulp-htmlbuild');
     var eventStream = require('event-stream');
-    var shell = require('gulp-shell');
     var rename = require('gulp-rename');
+    var exec = require('child_process').exec;
     var runSequence = require('run-sequence');
     var nugetRestore = require('gulp-nuget-restore');
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
-    var exec = require('child_process').exec;
     var nugetpack = require('gulp-nuget-pack');
 
     var resourcesRoot = '../$safeprojectname$.Resources/';
@@ -132,11 +131,11 @@
 
     // Tasks
 
-    gulp.task('www-clean-server', function (done) {
+    gulp.task('www-clean-server', function () {
         var binPath = webRoot + '/bin/';
         return del(binPath);
     });
-    gulp.task('www-clean-client', function (done) {
+    gulp.task('www-clean-client', function () {
         return del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
@@ -146,14 +145,14 @@
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
         ]);
     });
-    gulp.task('www-copy-files', function (done) {
+    gulp.task('www-copy-files', function (callback) {
         var completed = 0;
 
         for (var i = 0; i < COPY_FILES.length; i++) {
             (function (index) {
                 copyFilesTask(COPY_FILES[index], function () {
-                    if (++completed == COPY_FILES.length)
-                        done();
+                    if (++completed === COPY_FILES.length)
+                        callback();
                 });
             })(i);
         }
@@ -170,10 +169,17 @@
             .pipe(gulp.dest(webRoot))
             .pipe(gulp.dest(resourcesRoot));
     });
-    gulp.task('www-jspm-build', shell.task([
-        'jspm build ./src/app.js ' + webRoot + 'app.js -minify',
-        ('copy ' + webRoot + 'app.js ' + resourcesRoot).replace(/\//g, "\\")
-    ]));
+    gulp.task('www-jspm-build', function (callback) {
+        exec('jspm build ./src/app.js ' + webRoot + 'app.js -minify', function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            exec(('copy ' + webRoot + 'app.js ' + resourcesRoot).replace(/\//g, "\\"), function (err, stdout2, stderr2) {
+                console.log(stdout2);
+                console.log(stderr2);
+                callback();
+            });
+        });
+    });
     gulp.task('www-copy-resources-lib', function () {
         return gulp.src('../$safeprojectname$.Resources/bin/Release/$safeprojectname$.Resources.dll')
             .pipe(newer(resourcesLib))
@@ -184,9 +190,13 @@
             .pipe(newer(webRoot))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-jspm-deps', shell.task([
-        'jspm bundle ./src/app.js - [./src/**/*] ./deps.lib.js'
-    ]));
+    gulp.task('www-jspm-deps', function (callback) {
+        exec('jspm bundle ./src/app.js - [./src/**/*] ./deps.lib.js', function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            callback();
+        });
+    });
     gulp.task('www-msbuild-web', function () {
         return gulp.src('./$safeprojectname$.csproj')
             .pipe(msbuild({
@@ -195,7 +205,8 @@
                     Configuration: 'Release'
                 },
                 stdout: true,
-                verbosity: 'quiet'
+                verbosity: 'quiet',
+                toolsVersion: 14.0 //remove to support <= VS 2013 / C# 5
             }));
     });
     gulp.task('www-msbuild-resources', function () {
@@ -271,7 +282,7 @@
         }
     }
 
-gulp.task('www-nuget-pack-winforms', function (callback) {
+    gulp.task('www-nuget-pack-winforms', function (callback) {
         var globule = require('globule');
         initWinformsReleaseDirectory();
         var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
