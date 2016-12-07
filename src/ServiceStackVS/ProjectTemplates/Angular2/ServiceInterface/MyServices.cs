@@ -4,6 +4,7 @@ using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
 {
+    [Exclude(Feature.Metadata)]
     [FallbackRoute("/{PathInfo*}")]
     public class FallbackForClientRoutes
     {

@@ -16,13 +16,13 @@ import { FooterComponent } from './shared/footer';
                 <router-outlet></router-outlet>
             </div>
 
+            <h4 style="text-align: center">
+                <a href="https://servicestack.net/vs-templates/Angular2App">Learn about this Angular2 VS.NET template</a>
+            </h4>
+
             <app-footer></app-footer>
 
         </main>
-
-        <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
-            <a href="https://servicestack.net/vs-templates/Angular2App">Learn about this Angular2 VS.NET template</a>
-        </h4>
     </div>
     `
 })
