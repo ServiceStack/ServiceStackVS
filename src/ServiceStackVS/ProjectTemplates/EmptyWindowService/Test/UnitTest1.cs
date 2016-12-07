@@ -1,9 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
-using $saferootprojectname$.ServiceInterface;
-using $saferootprojectname$.ServiceModel;
-using ServiceStack.Testing;
 using ServiceStack;
+using ServiceStack.Testing;
+using $saferootprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceInterface;
 
 namespace $safeprojectname$
 {
@@ -24,14 +24,14 @@ namespace $safeprojectname$
             .Init();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             appHost.Dispose();
         }
 
         [Test]
-        public void TestMethod1()
+        public void Test_Method1()
         {
             var service = appHost.Container.Resolve<MyServices>();
 

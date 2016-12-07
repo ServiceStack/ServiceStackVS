@@ -14,7 +14,7 @@ namespace $safeprojectname$
 
         public UnitTests()
         {
-            appHost = new BasicAppHost(typeof (MyServices).Assembly)
+            appHost = new BasicAppHost(typeof(MyServices).Assembly)
             {
                 ConfigureContainer = container =>
                 {
@@ -24,14 +24,14 @@ namespace $safeprojectname$
             .Init();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             appHost.Dispose();
         }
 
         [Test]
-        public void TestMethod1()
+        public void Test_Method1()
         {
             var service = appHost.Container.Resolve<MyServices>();
 

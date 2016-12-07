@@ -15,13 +15,13 @@ type UnitTests ()=
     let configContainer (c: Container)=
         ignore()
     
-    [<TestFixtureSetUp>]
+    [<OneTimeSetUp>]
     member x.Init ()=
         appHost <- new BasicAppHost(typeof<MyServices>.Assembly)
         appHost.ConfigureContainer <- (fun c -> configContainer(c))
         appHost.Init() |> ignore
 
-    [<TestFixtureTearDown>]
+    [<OneTimeTearDown>]
     member x.CleanUp ()=
         appHost.Dispose()
 
