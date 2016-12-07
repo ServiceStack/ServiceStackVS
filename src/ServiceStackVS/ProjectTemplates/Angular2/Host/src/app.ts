@@ -19,6 +19,10 @@ import { FooterComponent } from './shared/footer';
             <app-footer></app-footer>
 
         </main>
+
+        <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
+            <a href="https://servicestack.net/vs-templates/Angular2App">Learn about this Angular2 VS.NET template</a>
+        </h4>
     </div>
     `
 })

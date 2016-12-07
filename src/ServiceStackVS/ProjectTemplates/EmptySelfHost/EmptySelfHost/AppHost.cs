@@ -4,6 +4,7 @@ using $safeprojectname$.ServiceInterface;
 
 namespace $safeprojectname$
 {
+    //VS.NET Template Info: https://servicestack.net/vs-templates/EmptySelfHost
     public class AppHost : AppSelfHostBase
     {
         /// <summary>
