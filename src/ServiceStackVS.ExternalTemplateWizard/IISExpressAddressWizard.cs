@@ -81,16 +81,29 @@ namespace ServiceStackVS.ExternalTemplateWizard
                 System.Threading.Thread.Sleep(5000);
                 // Read port from csproj
                 XElement element = XElement.Parse(File.ReadAllText(projectFilePath));
-                var devServerPortElement = element.Descendants()
+                var webProperties = element.Descendants()
                     .FirstOrDefault(x => x.Name.LocalName == "ProjectExtensions")?.Descendants()
                     .FirstOrDefault(x => x.Name.LocalName == "VisualStudio")?.Descendants()
-                    .FirstOrDefault(x => x.Name.LocalName == "WebProjectProperties")?.Descendants()
+                    .FirstOrDefault(x => x.Name.LocalName == "WebProjectProperties")?.Descendants();
+
+                var iisUrl = webProperties?
+                    .FirstOrDefault(x => x.Name.LocalName == "IISUrl");
+                if (iisUrl != null)
+                {
+                    var originalContent = File.ReadAllText(fullPathTokenReplaceFile);
+                    File.WriteAllText(fullPathTokenReplaceFile, 
+                        originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl.Value));
+                    return;
+                }
+
+                var devServerPortElement = webProperties?
                     .FirstOrDefault(x => x.Name.LocalName == "DevelopmentServerPort");
                 if (devServerPortElement != null)
                 {
                     var devPort = devServerPortElement.Value;
                     var originalContent = File.ReadAllText(fullPathTokenReplaceFile);
-                    File.WriteAllText(fullPathTokenReplaceFile,originalContent.ReplaceAll(iisPortToken,devPort));
+                    File.WriteAllText(fullPathTokenReplaceFile,
+                        originalContent.ReplaceAll(iisPortToken, devPort));
                 }
             });
         }

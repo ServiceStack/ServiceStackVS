@@ -214,21 +214,6 @@
                 }
             }));
     });
-    gulp.task('www-sync-iis-port', function (callback) {
-        fs.readFile('./$safeprojectname$.csproj', 'utf8', function (err, xml) {
-            if (err) return callback();
-            var baseUrl = xml.match(/IISUrl\>([^\<]+)/)[1];
-            if (!baseUrl) return callback();
-            fs.readFile('./src/dtos.ts', 'utf8', function (err, ts) {
-                if (err) return callback();
-                var tsSync = ts.replace(/(BaseUrl\:.*)/, ("BaseUrl: " + baseUrl));
-                console.log('Syncing BaseUrl: ' + baseUrl);
-                fs.writeFile('./src/dtos.ts', tsSync, 'utf8', function (err) {
-                    callback();
-                });
-            });
-        });
-    });
 
     gulp.task('default', function (callback) {
         runSequence('01-package-server', '02-package-client',
