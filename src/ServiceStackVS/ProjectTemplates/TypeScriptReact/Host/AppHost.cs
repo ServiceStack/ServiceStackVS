@@ -37,7 +37,6 @@ namespace $safeprojectname$
             {
                 DebugMode = AppSettings.Get("DebugMode", false),
                 AddRedirectParamsToQueryString = true,
-                AllowFileExtensions = { "json" },
                 UseCamelCase = true,
             });
 

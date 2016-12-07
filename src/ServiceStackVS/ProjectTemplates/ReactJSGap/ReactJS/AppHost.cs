@@ -37,7 +37,6 @@ namespace $safeprojectname$
                 DebugMode = AppSettings.Get("DebugMode", false),
                 DefaultContentType = MimeTypes.Json,
                 AddRedirectParamsToQueryString = true,
-                AllowFileExtensions = { "json" },
                 UseCamelCase = true,
             });
 

@@ -39,8 +39,9 @@ namespace $safeprojectname$
 
             SetConfig( new HostConfig
             {
-                DebugMode = AppSettings.Get("DebugMode",false),
-                AddRedirectParamsToQueryString = true
+                DebugMode = AppSettings.Get("DebugMode", false),
+                AddRedirectParamsToQueryString = true,
+                UseCamelCase = true,
             });
 
             this.Plugins.Add(new RazorFormat());
