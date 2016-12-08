@@ -80,12 +80,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.js" />
+    <Content Include="jspm.config.js" />
     <Content Include="default.html" />
     <Content Include="deps.lib.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
-    <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
 	<Content Include="css\app.css" />
 	<Content Include="gulpfile.js" />

@@ -1,5 +1,4 @@
-﻿/// <reference path='../typings/index.d.ts'/>
-import {Router} from 'aurelia-router';
+﻿import {Router} from 'aurelia-router';
 
 export class App {
     router: Router;

@@ -1,5 +1,5 @@
 /* Options:
-Date: 2016-07-22 12:50:06
+Date: 2017-01-01 12:00:00
 Version: 4
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://localhost:$iisexpressport$
