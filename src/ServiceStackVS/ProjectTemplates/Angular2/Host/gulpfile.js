@@ -175,6 +175,10 @@
         var pkg = JSON.parse(fs.readFileSync('./package.json'));
         var deps = pkg["jspm"]["dependencies"];
         var modules = Object.keys(deps);
+        var peerDeps = pkg["jspm"]["peerDependencies"];
+        if (peerDeps) {
+            modules = modules.concat(Object.keys(peerDeps));
+        }
         var include = " + " + modules.join(' + ');
 
         exec('jspm bundle ./src/main.js ' + include + ' - [./src/**/*] ./deps.lib.js', function (err, stdout, stderr) {
