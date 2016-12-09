@@ -7,11 +7,6 @@ SystemJS.config({
     browserConfig: {
         "baseURL": "/"
     },
-    devConfig: {
-        "map": {
-            "text": "github:systemjs/plugin-text@0.0.9"
-        }
-    },
     packages: {
         "app": {
             "main": "main.js"
@@ -21,14 +16,14 @@ SystemJS.config({
 
 SystemJS.config({
     packageConfigPaths: [
-      "npm:@*/*.json",
-      "npm:*.json",
-      "github:*/*.json"
+        "npm:@*/*.json",
+        "npm:*.json",
+        "github:*/*.json"
     ],
     map: {
         "assert": "npm:jspm-nodelibs-assert@0.2.0",
         "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
-        "aurelia-binding": "npm:aurelia-binding@1.0.9",
+        "aurelia-binding": "npm:aurelia-binding@1.1.0",
         "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.0.0",
         "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.0",
         "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
@@ -66,6 +61,7 @@ SystemJS.config({
         "servicestack-client": "npm:servicestack-client@0.0.17",
         "stream": "npm:jspm-nodelibs-stream@0.2.0",
         "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.0",
+        "text": "github:systemjs/plugin-text@0.0.9",
         "url": "npm:jspm-nodelibs-url@0.2.0",
         "util": "npm:jspm-nodelibs-util@0.2.1",
         "vm": "npm:jspm-nodelibs-vm@0.2.0",

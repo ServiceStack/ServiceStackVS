@@ -54,7 +54,7 @@
     "devDependencies": {},
     "peerDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
-      "aurelia-binding": "npm:aurelia-binding@^1.0.0",
+      "aurelia-binding": "npm:aurelia-binding@^1.1.0",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@^1.0.0",
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@^1.0.0",
       "aurelia-framework": "npm:aurelia-framework@^1.0.7",
