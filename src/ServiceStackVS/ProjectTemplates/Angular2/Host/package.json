@@ -47,7 +47,6 @@
       "@angular/http": "npm:@angular/http@^2.3.0",
       "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@^2.3.0",
       "@angular/router": "npm:@angular/router@^3.3.0",
-      "@reactivex/rxjs": "npm:@reactivex/rxjs@^5.0.0-rc.4",
       "es6-shim": "github:es-shims/es6-shim@^0.35.2",
       "reflect-metadata": "npm:reflect-metadata@^0.1.8",
       "servicestack-client": "npm:servicestack-client@^0.0.17",
@@ -72,7 +71,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "rxjs": "npm:rxjs@5.0.0-beta.12",
+      "rxjs": "npm:rxjs@^5.0.0-rc.4",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "timers": "npm:jspm-nodelibs-timers@^0.2.0",
@@ -180,9 +179,6 @@
           "@angular/router": ".",
           "./testing": "./bundles/router-testing.umd.js"
         }
-      },
-      "npm:@reactivex/rxjs@5.0.0-rc.4": {
-        "format": "cjs"
       },
       "npm:browserify-zlib@0.1.4": {
         "dependencies": {
