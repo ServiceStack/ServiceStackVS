@@ -21,15 +21,14 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
-    "@angular/common": "npm:@angular/common@2.2.4",
-    "@angular/compiler": "npm:@angular/compiler@2.2.4",
-    "@angular/core": "npm:@angular/core@2.2.4",
-    "@angular/forms": "npm:@angular/forms@2.2.4",
-    "@angular/http": "npm:@angular/http@2.2.4",
-    "@angular/platform-browser": "npm:@angular/platform-browser@2.2.4",
-    "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@2.2.4",
-    "@angular/router": "npm:@angular/router@3.2.4",
-    "@reactivex/rxjs": "npm:@reactivex/rxjs@5.0.0-rc.4",
+    "@angular/common": "npm:@angular/common@2.3.0",
+    "@angular/compiler": "npm:@angular/compiler@2.3.0",
+    "@angular/core": "npm:@angular/core@2.3.0",
+    "@angular/forms": "npm:@angular/forms@2.3.0",
+    "@angular/http": "npm:@angular/http@2.3.0",
+    "@angular/platform-browser": "npm:@angular/platform-browser@2.3.0",
+    "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@2.3.0",
+    "@angular/router": "npm:@angular/router@3.3.0",
     "assert": "npm:jspm-nodelibs-assert@0.2.0",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.1",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.0",
@@ -45,7 +44,7 @@ SystemJS.config({
     "path": "npm:jspm-nodelibs-path@0.2.1",
     "process": "npm:jspm-nodelibs-process@0.2.0",
     "reflect-metadata": "npm:reflect-metadata@0.1.8",
-    "rxjs": "npm:rxjs@5.0.0-beta.12",
+    "rxjs": "npm:rxjs@5.0.0-rc.4",
     "servicestack-client": "npm:servicestack-client@0.0.17",
     "stream": "npm:jspm-nodelibs-stream@0.2.0",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.0",
@@ -55,19 +54,9 @@ SystemJS.config({
     "util": "npm:jspm-nodelibs-util@0.2.1",
     "vm": "npm:jspm-nodelibs-vm@0.2.0",
     "zlib": "npm:jspm-nodelibs-zlib@0.2.2",
-    "zone.js": "npm:zone.js@0.6.26"
+    "zone.js": "npm:zone.js@0.7.2"
   },
   packages: {
-    "npm:@reactivex/rxjs@5.0.0-rc.4": {
-      "map": {
-        "symbol-observable": "npm:symbol-observable@1.0.4"
-      }
-    },
-    "npm:rxjs@5.0.0-beta.12": {
-      "map": {
-        "symbol-observable": "npm:symbol-observable@1.0.4"
-      }
-    },
     "npm:servicestack-client@0.0.17": {
       "map": {
         "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",

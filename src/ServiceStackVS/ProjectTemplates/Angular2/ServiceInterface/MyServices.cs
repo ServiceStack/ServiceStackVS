@@ -1,5 +1,6 @@
 ﻿using System;
 using ServiceStack;
+using ServiceStack.DataAnnotations;
 using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
