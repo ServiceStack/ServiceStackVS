@@ -597,7 +597,7 @@ namespace ServiceStackVS
 
             // This is a temporary work around for ServiceStack *.Core packages whilst they are separate/in beta. 
             // This is to be removed/updated once the Text, Client and/or Interfaces NuGet packages support NetCore by default.
-            nugetPackages = ApplyNetCoreNuGetPackages(nugetPackages, project);
+            ApplyNetCoreNuGetPackages(nugetPackages, project);
 
             var path = VSIXUtils.GetSelectedProjectPath() ?? VSIXUtils.GetSelectedFolderPath();
             string fullPath = Path.Combine(path, fileName);
