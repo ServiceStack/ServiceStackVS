@@ -32,7 +32,7 @@ class App extends React.Component<any,any> {
                             $safeprojectname$
                         </a>
 
-                        <div className="collapse navbar-collapse">
+                        <div className="collapse navbar-collapse" style={{ paddingLeft: 15 }}>
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item"><a className="nav-link" onClick={this.handleAbout}>About</a></li>
                                 <li className="nav-item platform winforms">
