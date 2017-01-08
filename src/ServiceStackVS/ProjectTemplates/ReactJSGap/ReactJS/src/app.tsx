@@ -25,23 +25,26 @@ class App extends React.Component<any,any> {
     render() {
         return (
             <div>
-                <div className="navbar navbar-dark bg-inverse" role="navigation">
+                <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <div className="container">
                         <a className="navbar-brand" href="/">
                             <img src="/img/react-logo.png" />
                             $safeprojectname$
                         </a>
-                        <ul className="nav navbar-nav float-xs-right">
-                            <li className="nav-item"><a className="nav-link" onClick={this.handleAbout}>About</a></li>
-                            <li className="nav-item platform winforms">
-                                <a className="nav-link" onClick={this.handleToggleWindow}>Toggle Window</a>
-                            </li>
-                            <li className="nav-item platform winforms mac console">
-                                <a className="nav-link" onClick={this.handleQuit}>Close</a>
-                            </li>
-                        </ul>
+
+                        <div className="collapse navbar-collapse">
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item"><a className="nav-link" onClick={this.handleAbout}>About</a></li>
+                                <li className="nav-item platform winforms">
+                                    <a className="nav-link" onClick={this.handleToggleWindow}>Toggle Window</a>
+                                </li>
+                                <li className="nav-item platform winforms mac console">
+                                    <a className="nav-link" onClick={this.handleQuit}>Close</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </nav>
                 <div className="container">
                     <div className="row" style={{ margin: "10px 0" }}>
                         <HelloWorld />

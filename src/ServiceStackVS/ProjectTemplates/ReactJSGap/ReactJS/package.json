@@ -54,7 +54,7 @@
     }
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.5"
+    "bootstrap": "^4.0.0-alpha.6"
   },
   "devDependencies": {
     "@types/react": "^0.14.51",

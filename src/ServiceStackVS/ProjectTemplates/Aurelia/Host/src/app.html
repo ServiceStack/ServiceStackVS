@@ -1,17 +1,20 @@
 <template>
-    <div class="navbar navbar-dark bg-inverse" role="navigation">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
         <div class="container">
             <a class="navbar-brand" href="#">$safeprojectname$</a>
-            <ul class="nav navbar-nav float-xs-right">
-                <li class="nav-item" repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-                    <a class="nav-link" href.bind="row.href">
-                        ${row.title}
-                        <i if.bind="row.settings.icon" class="fa fa-${row.settings.icon}"></i>
-                    </a>
-                </li>
-            </ul>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
+                        <a class="nav-link" href.bind="row.href">
+                            ${row.title}
+                            <i if.bind="row.settings.icon" class="fa fa-${row.settings.icon}"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 
     <div class="container">
         <router-view></router-view>

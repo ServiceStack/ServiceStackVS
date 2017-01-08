@@ -5,7 +5,7 @@
     "postinstall": "cmd /c wwwroot_build\\00-npm-postinstall.bat"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.5"
+    "bootstrap": "^4.0.0-alpha.6"
   },
   "devDependencies": {
     "aurelia-animator-css": "^1.0.1",
