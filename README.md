@@ -38,6 +38,27 @@ This project structure includes examples of a lot of the different tasks that wi
 
 These project templates are structured to encourage patterns to help kickstart your new ServiceStack application.
 
+## Single Page App Templates
+
+Our goal with our Single Page App VS.NET templates is to provide access to the best tooling and development 
+experience whilst keeping complexity and required knowledge to an absolute minimum, as such we're constantly 
+researching how we can simplify our SPA templates, using the least moving parts and pick technologies that work 
+seamlessly together whilst offering maximum value for minimal complexity. As the best SPA tooling mandates an
+npm-based workflow this is a delicate balance of trade-offs as the number of 3rd party JS components, tools, 
+transpilers, scripts and plugins required for building on a modern SPA JS framework can quickly explode - something
+we actively fight hard against that influences each aspect of our default templates. 
+
+### Benefits of TypeScript
+
+Centering around TypeScript enables a lot of benefits in both a modern Type Safe language as well as access to 
+the latest JS features whilst being able to target downstream ES5 browsers for broad compatibility. TypeScript
+is expertly designed and actively developed with frequent releases where new features added are backwards-compatible, 
+intuitive and work well with existing features. Being encapsulated within a single tool means new features 
+doesn't introduce new complexity, i.e. there's no additional config files to learn and little possibility
+that new TypeScript releases will break existing Apps. Another benefit from TypeScript is its VS.NET integration 
+which takes care of re-generating .js files on save which enables a fast `Ctrl + S` and `F5` reload cycle 
+without needing to configure an external loader or monitor a watcher process.
+
 ## [TypeScript Aurelia App](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/typescript-aurelia-jspm-banner.png)](https://github.com/ServiceStack/ServiceStackVS/blob/master/docs/aurelia.md)
@@ -66,7 +87,7 @@ This template has been updated to [support Typings 1.0+ which had some breaking 
 > 
 > **Only Visual Studio 2015 is supported** due to [lack of `tsconfig.json` support in earlier versions of Visual Studio](https://github.com/Microsoft/TypeScript/issues/8784).
 
-## TypeScript React App
+## [TypeScript React App](https://github.com/ServiceStackApps/typescript-react-template/)
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/typescript-react-jspm-banner.png)](https://github.com/ServiceStackApps/typescript-react-template/)
 
