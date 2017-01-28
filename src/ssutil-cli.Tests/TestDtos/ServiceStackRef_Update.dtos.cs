@@ -1,12 +1,13 @@
 /* Options:
-Date: 2015-12-23 23:52:29
-Version: 4.051
+Date: 2017-01-28 22:45:47
+Version: 4.55
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
 //GlobalNamespace: 
 //MakePartial: True
 //MakeVirtual: True
+//MakeInternal: False
 //MakeDataContractsExtensible: False
 //AddReturnMarker: True
 //AddDescriptionAsComments: True
@@ -18,6 +19,7 @@ BaseUrl: http://techstacks.io
 //InitializeCollections: True
 //IncludeTypes: 
 //ExcludeTypes: 
+//AddNamespaces: 
 //AddDefaultXmlNamespace: http://schemas.servicestack.net/types
 */
 
@@ -189,20 +191,28 @@ namespace TechStacks.ServiceModel
     }
 
     [Route("/technology/search")]
-    [AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="/img/app/tech-white-75.png", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")]
+    [AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")]
     public partial class FindTechnologies
-        : QueryBase<Technology>, IReturn<QueryResponse<Technology>>
+        : QueryDb<Technology>, IReturn<QueryResponse<Technology>>
     {
         public virtual string Name { get; set; }
-        public virtual bool Reload { get; set; }
+        public virtual string NameContains { get; set; }
+    }
+
+    [Route("/admin/technology/search")]
+    [AutoQueryViewer(Title="Find Technologies Admin", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")]
+    public partial class FindTechnologiesAdmin
+        : QueryDb<Technology>, IReturn<QueryResponse<Technology>>
+    {
+        public virtual string Name { get; set; }
     }
 
     [Route("/techstacks/search")]
-    [AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")]
+    [AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="material-icons:cloud", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")]
     public partial class FindTechStacks
-        : QueryBase<TechnologyStack>, IReturn<QueryResponse<TechnologyStack>>
+        : QueryDb<TechnologyStack>, IReturn<QueryResponse<TechnologyStack>>
     {
-        public virtual bool Reload { get; set; }
+        public virtual string NameContains { get; set; }
     }
 
     [Route("/technology", "GET")]
@@ -307,7 +317,6 @@ namespace TechStacks.ServiceModel
     public partial class GetTechnology
         : IReturn<GetTechnologyResponse>
     {
-        public virtual bool Reload { get; set; }
         public virtual string Slug { get; set; }
     }
 
@@ -316,7 +325,6 @@ namespace TechStacks.ServiceModel
         : IReturn<GetTechnologyFavoriteDetailsResponse>
     {
         public virtual string Slug { get; set; }
-        public virtual bool Reload { get; set; }
     }
 
     public partial class GetTechnologyFavoriteDetailsResponse
@@ -364,7 +372,6 @@ namespace TechStacks.ServiceModel
     public partial class GetTechnologyStack
         : IReturn<GetTechnologyStackResponse>
     {
-        public virtual bool Reload { get; set; }
         public virtual string Slug { get; set; }
     }
 
@@ -373,7 +380,6 @@ namespace TechStacks.ServiceModel
         : IReturn<GetTechnologyStackFavoriteDetailsResponse>
     {
         public virtual string Slug { get; set; }
-        public virtual bool Reload { get; set; }
     }
 
     public partial class GetTechnologyStackFavoriteDetailsResponse
@@ -431,7 +437,6 @@ namespace TechStacks.ServiceModel
     public partial class GetUserInfo
         : IReturn<GetUserInfoResponse>
     {
-        public virtual bool Reload { get; set; }
         public virtual string UserName { get; set; }
     }
 
@@ -513,7 +518,7 @@ namespace TechStacks.ServiceModel
             TopTechnologies = new List<TechnologyInfo>{};
             LatestTechStacks = new List<TechStackDetails>{};
             PopularTechStacks = new List<TechnologyStack>{};
-            TopTechnologiesByTier = new Dictionary<TechnologyTier, List<TechnologyInfo>>{};
+            TopTechnologiesByTier = new Dictionary<string, List<TechnologyInfo>>{};
         }
 
         public virtual DateTime Created { get; set; }
@@ -521,7 +526,7 @@ namespace TechStacks.ServiceModel
         public virtual List<TechnologyInfo> TopTechnologies { get; set; }
         public virtual List<TechStackDetails> LatestTechStacks { get; set; }
         public virtual List<TechnologyStack> PopularTechStacks { get; set; }
-        public virtual Dictionary<TechnologyTier, List<TechnologyInfo>> TopTechnologiesByTier { get; set; }
+        public virtual Dictionary<string, List<TechnologyInfo>> TopTechnologiesByTier { get; set; }
         public virtual ResponseStatus ResponseStatus { get; set; }
     }
 

@@ -1,6 +1,6 @@
 ' Options:
-'Date: 2015-12-23 23:52:35
-'Version: 4.051
+'Date: 2017-01-28 22:45:50
+'Version: 4.55
 'Tip: To override a DTO option, remove "''" prefix before updating
 'BaseUrl: http://techstacks.io
 '
@@ -18,6 +18,7 @@
 '''InitializeCollections: True
 '''IncludeTypes: 
 '''ExcludeTypes: 
+'''AddNamespaces: 
 '''AddDefaultXmlNamespace: http://schemas.servicestack.net/types
 
 Imports System
@@ -165,20 +166,28 @@ Namespace Global
         End Class
 
         <Route("/technology/search")>
-        <AutoQueryViewer(Title:="Find Technologies", Description:="Explore different Technologies", IconUrl:="/img/app/tech-white-75.png", DefaultSearchField:="Tier", DefaultSearchType:="=", DefaultSearchText:="Data")>
+        <AutoQueryViewer(Title:="Find Technologies", Description:="Explore different Technologies", IconUrl:="octicon:database", DefaultSearchField:="Tier", DefaultSearchType:="=", DefaultSearchText:="Data")>
         Public Partial Class FindTechnologies
-            Inherits QueryBase(Of Technology)
+            Inherits QueryDb(Of Technology)
             Implements IReturn(Of QueryResponse(Of Technology))
             Public Overridable Property Name As String
-            Public Overridable Property Reload As Boolean
+            Public Overridable Property NameContains As String
+        End Class
+
+        <Route("/admin/technology/search")>
+        <AutoQueryViewer(Title:="Find Technologies Admin", Description:="Explore different Technologies", IconUrl:="octicon:database", DefaultSearchField:="Tier", DefaultSearchType:="=", DefaultSearchText:="Data")>
+        Public Partial Class FindTechnologiesAdmin
+            Inherits QueryDb(Of Technology)
+            Implements IReturn(Of QueryResponse(Of Technology))
+            Public Overridable Property Name As String
         End Class
 
         <Route("/techstacks/search")>
-        <AutoQueryViewer(Title:="Find Technology Stacks", Description:="Explore different Technology Stacks", IconUrl:="/img/app/stacks-white-75.png", DefaultSearchField:="Description", DefaultSearchType:="Contains", DefaultSearchText:="ServiceStack")>
+        <AutoQueryViewer(Title:="Find Technology Stacks", Description:="Explore different Technology Stacks", IconUrl:="material-icons:cloud", DefaultSearchField:="Description", DefaultSearchType:="Contains", DefaultSearchText:="ServiceStack")>
         Public Partial Class FindTechStacks
-            Inherits QueryBase(Of TechnologyStack)
+            Inherits QueryDb(Of TechnologyStack)
             Implements IReturn(Of QueryResponse(Of TechnologyStack))
-            Public Overridable Property Reload As Boolean
+            Public Overridable Property NameContains As String
         End Class
 
         <Route("/technology", "GET")>
@@ -265,7 +274,6 @@ Namespace Global
         <Route("/technology/{Slug}")>
         Public Partial Class GetTechnology
             Implements IReturn(Of GetTechnologyResponse)
-            Public Overridable Property Reload As Boolean
             Public Overridable Property Slug As String
         End Class
 
@@ -273,7 +281,6 @@ Namespace Global
         Public Partial Class GetTechnologyFavoriteDetails
             Implements IReturn(Of GetTechnologyFavoriteDetailsResponse)
             Public Overridable Property Slug As String
-            Public Overridable Property Reload As Boolean
         End Class
 
         Public Partial Class GetTechnologyFavoriteDetailsResponse
@@ -313,7 +320,6 @@ Namespace Global
         <Route("/techstacks/{Slug}", "GET")>
         Public Partial Class GetTechnologyStack
             Implements IReturn(Of GetTechnologyStackResponse)
-            Public Overridable Property Reload As Boolean
             Public Overridable Property Slug As String
         End Class
 
@@ -321,7 +327,6 @@ Namespace Global
         Public Partial Class GetTechnologyStackFavoriteDetails
             Implements IReturn(Of GetTechnologyStackFavoriteDetailsResponse)
             Public Overridable Property Slug As String
-            Public Overridable Property Reload As Boolean
         End Class
 
         Public Partial Class GetTechnologyStackFavoriteDetailsResponse
@@ -369,7 +374,6 @@ Namespace Global
         <Route("/userinfo/{UserName}")>
         Public Partial Class GetUserInfo
             Implements IReturn(Of GetUserInfoResponse)
-            Public Overridable Property Reload As Boolean
             Public Overridable Property UserName As String
         End Class
 
@@ -440,7 +444,7 @@ Namespace Global
                 TopTechnologies = New List(Of TechnologyInfo)
                 LatestTechStacks = New List(Of TechStackDetails)
                 PopularTechStacks = New List(Of TechnologyStack)
-                TopTechnologiesByTier = New Dictionary(Of TechnologyTier, List(Of TechnologyInfo))
+                TopTechnologiesByTier = New Dictionary(Of String, List(Of TechnologyInfo))
             End Sub
 
             Public Overridable Property Created As Date
@@ -448,7 +452,7 @@ Namespace Global
             Public Overridable Property TopTechnologies As List(Of TechnologyInfo)
             Public Overridable Property LatestTechStacks As List(Of TechStackDetails)
             Public Overridable Property PopularTechStacks As List(Of TechnologyStack)
-            Public Overridable Property TopTechnologiesByTier As Dictionary(Of TechnologyTier, List(Of TechnologyInfo))
+            Public Overridable Property TopTechnologiesByTier As Dictionary(Of String, List(Of TechnologyInfo))
             Public Overridable Property ResponseStatus As ResponseStatus
         End Class
 

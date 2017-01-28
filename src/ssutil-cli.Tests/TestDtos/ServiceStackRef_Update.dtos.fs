@@ -1,6 +1,6 @@
 (* Options:
-Date: 2015-12-23 23:52:30
-Version: 4.051
+Date: 2017-01-28 22:45:48
+Version: 4.55
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
@@ -16,6 +16,7 @@ BaseUrl: http://techstacks.io
 //IncludeTypes: 
 //ExcludeTypes: 
 //InitializeCollections: True
+//AddNamespaces: 
 *)
 
 namespace TechStacks.ServiceModel
@@ -81,16 +82,6 @@ open ServiceStack.DataAnnotations
         member val LastStatusUpdate:Nullable<DateTime> = new Nullable<DateTime>() with get,set
 
     [<AllowNullLiteral>]
-    type TechnologyStack() = 
-        inherit TechnologyStackBase()
-
-    [<AllowNullLiteral>]
-    type TechnologyHistory() = 
-        inherit TechnologyBase()
-        member val TechnologyId:Int64 = new Int64() with get,set
-        member val Operation:String = null with get,set
-
-    [<AllowNullLiteral>]
     type TechnologyInStack() = 
         inherit TechnologyBase()
         member val TechnologyId:Int64 = new Int64() with get,set
@@ -104,23 +95,21 @@ open ServiceStack.DataAnnotations
         member val TechnologyChoices:List<TechnologyInStack> = new List<TechnologyInStack>() with get,set
 
     [<AllowNullLiteral>]
+    type TechnologyHistory() = 
+        inherit TechnologyBase()
+        member val TechnologyId:Int64 = new Int64() with get,set
+        member val Operation:String = null with get,set
+
+    [<AllowNullLiteral>]
+    type TechnologyStack() = 
+        inherit TechnologyStackBase()
+
+    [<AllowNullLiteral>]
     type TechnologyStackHistory() = 
         inherit TechnologyStackBase()
         member val TechnologyStackId:Int64 = new Int64() with get,set
         member val Operation:String = null with get,set
         member val TechnologyIds:List<Int64> = new List<Int64>() with get,set
-
-    [<DataContract>]
-    [<AllowNullLiteral>]
-    type Option() = 
-        [<DataMember(Name="name")>]
-        member val Name:String = null with get,set
-
-        [<DataMember(Name="title")>]
-        member val Title:String = null with get,set
-
-        [<DataMember(Name="value")>]
-        member val Value:Nullable<TechnologyTier> = new Nullable<TechnologyTier>() with get,set
 
     [<AllowNullLiteral>]
     type UserInfo() = 
@@ -135,6 +124,18 @@ open ServiceStack.DataAnnotations
         member val Name:String = null with get,set
         member val LogoUrl:String = null with get,set
         member val StacksCount:Int32 = new Int32() with get,set
+
+    [<DataContract>]
+    [<AllowNullLiteral>]
+    type Option() = 
+        [<DataMember(Name="name")>]
+        member val Name:String = null with get,set
+
+        [<DataMember(Name="title")>]
+        member val Title:String = null with get,set
+
+        [<DataMember(Name="value")>]
+        member val Value:Nullable<TechnologyTier> = new Nullable<TechnologyTier>() with get,set
 
     [<AllowNullLiteral>]
     type LogoUrlApprovalResponse() = 
@@ -160,26 +161,6 @@ open ServiceStack.DataAnnotations
         member val ResponseStatus:ResponseStatus = null with get,set
 
     [<AllowNullLiteral>]
-    type GetTechnologyResponse() = 
-        member val Created:DateTime = new DateTime() with get,set
-        member val Technology:Technology = null with get,set
-        member val TechnologyStacks:List<TechnologyStack> = new List<TechnologyStack>() with get,set
-        member val ResponseStatus:ResponseStatus = null with get,set
-
-    [<AllowNullLiteral>]
-    type GetTechnologyPreviousVersionsResponse() = 
-        member val Results:List<TechnologyHistory> = new List<TechnologyHistory>() with get,set
-
-    [<AllowNullLiteral>]
-    type GetTechnologyFavoriteDetailsResponse() = 
-        member val Users:List<String> = new List<String>() with get,set
-        member val FavoriteCount:Int32 = new Int32() with get,set
-
-    [<AllowNullLiteral>]
-    type GetAllTechnologiesResponse() = 
-        member val Results:List<Technology> = new List<Technology>() with get,set
-
-    [<AllowNullLiteral>]
     type CreateTechnologyStackResponse() = 
         member val Result:TechStackDetails = null with get,set
         member val ResponseStatus:ResponseStatus = null with get,set
@@ -195,27 +176,35 @@ open ServiceStack.DataAnnotations
         member val ResponseStatus:ResponseStatus = null with get,set
 
     [<AllowNullLiteral>]
-    type GetAllTechnologyStacksResponse() = 
-        member val Results:List<TechnologyStack> = new List<TechnologyStack>() with get,set
+    type GetTechnologyPreviousVersionsResponse() = 
+        member val Results:List<TechnologyHistory> = new List<TechnologyHistory>() with get,set
 
     [<AllowNullLiteral>]
-    type GetTechnologyStackResponse() = 
+    type GetAllTechnologiesResponse() = 
+        member val Results:List<Technology> = new List<Technology>() with get,set
+
+    [<AllowNullLiteral>]
+    type GetTechnologyResponse() = 
         member val Created:DateTime = new DateTime() with get,set
-        member val Result:TechStackDetails = null with get,set
+        member val Technology:Technology = null with get,set
+        member val TechnologyStacks:List<TechnologyStack> = new List<TechnologyStack>() with get,set
         member val ResponseStatus:ResponseStatus = null with get,set
+
+    [<AllowNullLiteral>]
+    type GetTechnologyFavoriteDetailsResponse() = 
+        member val Users:List<String> = new List<String>() with get,set
+        member val FavoriteCount:Int32 = new Int32() with get,set
 
     [<AllowNullLiteral>]
     type GetTechnologyStackPreviousVersionsResponse() = 
         member val Results:List<TechnologyStackHistory> = new List<TechnologyStackHistory>() with get,set
 
     [<AllowNullLiteral>]
-    type GetTechnologyStackFavoriteDetailsResponse() = 
-        member val Users:List<String> = new List<String>() with get,set
-        member val FavoriteCount:Int32 = new Int32() with get,set
-
-    [<AllowNullLiteral>]
-    type GetConfigResponse() = 
-        member val AllTiers:List<Option> = new List<Option>() with get,set
+    type GetPageStatsResponse() = 
+        member val Type:String = null with get,set
+        member val Slug:String = null with get,set
+        member val ViewCount:Int64 = new Int64() with get,set
+        member val FavCount:Int64 = new Int64() with get,set
 
     [<AllowNullLiteral>]
     type OverviewResponse() = 
@@ -224,7 +213,7 @@ open ServiceStack.DataAnnotations
         member val TopTechnologies:List<TechnologyInfo> = new List<TechnologyInfo>() with get,set
         member val LatestTechStacks:List<TechStackDetails> = new List<TechStackDetails>() with get,set
         member val PopularTechStacks:List<TechnologyStack> = new List<TechnologyStack>() with get,set
-        member val TopTechnologiesByTier:Dictionary<TechnologyTier, List<TechnologyInfo>> = new Dictionary<TechnologyTier, List<TechnologyInfo>>() with get,set
+        member val TopTechnologiesByTier:Dictionary<String, List<TechnologyInfo>> = new Dictionary<String, List<TechnologyInfo>>() with get,set
         member val ResponseStatus:ResponseStatus = null with get,set
 
     [<AllowNullLiteral>]
@@ -235,11 +224,23 @@ open ServiceStack.DataAnnotations
         member val ResponseStatus:ResponseStatus = null with get,set
 
     [<AllowNullLiteral>]
-    type GetPageStatsResponse() = 
-        member val Type:String = null with get,set
-        member val Slug:String = null with get,set
-        member val ViewCount:Int64 = new Int64() with get,set
-        member val FavCount:Int64 = new Int64() with get,set
+    type GetAllTechnologyStacksResponse() = 
+        member val Results:List<TechnologyStack> = new List<TechnologyStack>() with get,set
+
+    [<AllowNullLiteral>]
+    type GetTechnologyStackResponse() = 
+        member val Created:DateTime = new DateTime() with get,set
+        member val Result:TechStackDetails = null with get,set
+        member val ResponseStatus:ResponseStatus = null with get,set
+
+    [<AllowNullLiteral>]
+    type GetTechnologyStackFavoriteDetailsResponse() = 
+        member val Users:List<String> = new List<String>() with get,set
+        member val FavoriteCount:Int32 = new Int32() with get,set
+
+    [<AllowNullLiteral>]
+    type GetConfigResponse() = 
+        member val AllTiers:List<Option> = new List<Option>() with get,set
 
     [<AllowNullLiteral>]
     type GetFavoriteTechStackResponse() = 
@@ -321,11 +322,6 @@ open ServiceStack.DataAnnotations
     type ClientUser() = 
         member val UserName:String = null with get,set
 
-    [<Route("/my-session")>]
-    [<AllowNullLiteral>]
-    type SessionInfo() = 
-        class end
-
     [<Route("/technology", "POST")>]
     [<AllowNullLiteral>]
     type CreateTechnology() = 
@@ -358,40 +354,6 @@ open ServiceStack.DataAnnotations
     type DeleteTechnology() = 
         interface IReturn<DeleteTechnologyResponse>
         member val Id:Int64 = new Int64() with get,set
-
-    [<Route("/technology/{Slug}")>]
-    [<AllowNullLiteral>]
-    type GetTechnology() = 
-        interface IReturn<GetTechnologyResponse>
-        member val Reload:Boolean = new Boolean() with get,set
-        member val Slug:String = null with get,set
-
-    [<Route("/technology/{Slug}/previous-versions", "GET")>]
-    [<AllowNullLiteral>]
-    type GetTechnologyPreviousVersions() = 
-        interface IReturn<GetTechnologyPreviousVersionsResponse>
-        member val Slug:String = null with get,set
-
-    [<Route("/technology/{Slug}/favorites")>]
-    [<AllowNullLiteral>]
-    type GetTechnologyFavoriteDetails() = 
-        interface IReturn<GetTechnologyFavoriteDetailsResponse>
-        member val Slug:String = null with get,set
-        member val Reload:Boolean = new Boolean() with get,set
-
-    [<Route("/technology", "GET")>]
-    [<AllowNullLiteral>]
-    type GetAllTechnologies() = 
-        interface IReturn<GetAllTechnologiesResponse>
-
-    [<Route("/technology/search")>]
-    [<AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="/img/app/tech-white-75.png", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")>]
-    [<AllowNullLiteral>]
-    type FindTechnologies() = 
-        inherit QueryBase<Technology>()
-        interface IReturn<QueryResponse<Technology>>
-        member val Name:String = null with get,set
-        member val Reload:Boolean = new Boolean() with get,set
 
     [<Route("/techstacks", "POST")>]
     [<AllowNullLiteral>]
@@ -426,16 +388,41 @@ open ServiceStack.DataAnnotations
         interface IReturn<DeleteTechnologyStackResponse>
         member val Id:Int64 = new Int64() with get,set
 
-    [<Route("/techstacks", "GET")>]
+    [<Route("/my-session")>]
     [<AllowNullLiteral>]
-    type GetAllTechnologyStacks() = 
-        interface IReturn<GetAllTechnologyStacksResponse>
+    type SessionInfo() = 
+        class end
 
-    [<Route("/techstacks/{Slug}", "GET")>]
+    [<Route("/technology/{Slug}/previous-versions", "GET")>]
     [<AllowNullLiteral>]
-    type GetTechnologyStack() = 
-        interface IReturn<GetTechnologyStackResponse>
-        member val Reload:Boolean = new Boolean() with get,set
+    type GetTechnologyPreviousVersions() = 
+        interface IReturn<GetTechnologyPreviousVersionsResponse>
+        member val Slug:String = null with get,set
+
+    [<Route("/technology", "GET")>]
+    [<AllowNullLiteral>]
+    type GetAllTechnologies() = 
+        interface IReturn<GetAllTechnologiesResponse>
+
+    [<Route("/technology/search")>]
+    [<AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")>]
+    [<AllowNullLiteral>]
+    type FindTechnologies() = 
+        inherit QueryDb<Technology>()
+        interface IReturn<QueryResponse<Technology>>
+        member val Name:String = null with get,set
+        member val NameContains:String = null with get,set
+
+    [<Route("/technology/{Slug}")>]
+    [<AllowNullLiteral>]
+    type GetTechnology() = 
+        interface IReturn<GetTechnologyResponse>
+        member val Slug:String = null with get,set
+
+    [<Route("/technology/{Slug}/favorites")>]
+    [<AllowNullLiteral>]
+    type GetTechnologyFavoriteDetails() = 
+        interface IReturn<GetTechnologyFavoriteDetailsResponse>
         member val Slug:String = null with get,set
 
     [<Route("/techstacks/{Slug}/previous-versions", "GET")>]
@@ -444,17 +431,20 @@ open ServiceStack.DataAnnotations
         interface IReturn<GetTechnologyStackPreviousVersionsResponse>
         member val Slug:String = null with get,set
 
-    [<Route("/techstacks/{Slug}/favorites")>]
+    [<Route("/pagestats/{Type}/{Slug}")>]
     [<AllowNullLiteral>]
-    type GetTechnologyStackFavoriteDetails() = 
-        interface IReturn<GetTechnologyStackFavoriteDetailsResponse>
+    type GetPageStats() = 
+        interface IReturn<GetPageStatsResponse>
+        member val Type:String = null with get,set
         member val Slug:String = null with get,set
-        member val Reload:Boolean = new Boolean() with get,set
 
-    [<Route("/config")>]
+    [<Route("/techstacks/search")>]
+    [<AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="material-icons:cloud", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")>]
     [<AllowNullLiteral>]
-    type GetConfig() = 
-        interface IReturn<GetConfigResponse>
+    type FindTechStacks() = 
+        inherit QueryDb<TechnologyStack>()
+        interface IReturn<QueryResponse<TechnologyStack>>
+        member val NameContains:String = null with get,set
 
     [<Route("/overview")>]
     [<AllowNullLiteral>]
@@ -468,20 +458,27 @@ open ServiceStack.DataAnnotations
         interface IReturn<AppOverviewResponse>
         member val Reload:Boolean = new Boolean() with get,set
 
-    [<Route("/pagestats/{Type}/{Slug}")>]
+    [<Route("/techstacks", "GET")>]
     [<AllowNullLiteral>]
-    type GetPageStats() = 
-        interface IReturn<GetPageStatsResponse>
-        member val Type:String = null with get,set
+    type GetAllTechnologyStacks() = 
+        interface IReturn<GetAllTechnologyStacksResponse>
+
+    [<Route("/techstacks/{Slug}", "GET")>]
+    [<AllowNullLiteral>]
+    type GetTechnologyStack() = 
+        interface IReturn<GetTechnologyStackResponse>
         member val Slug:String = null with get,set
 
-    [<Route("/techstacks/search")>]
-    [<AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")>]
+    [<Route("/techstacks/{Slug}/favorites")>]
     [<AllowNullLiteral>]
-    type FindTechStacks() = 
-        inherit QueryBase<TechnologyStack>()
-        interface IReturn<QueryResponse<TechnologyStack>>
-        member val Reload:Boolean = new Boolean() with get,set
+    type GetTechnologyStackFavoriteDetails() = 
+        interface IReturn<GetTechnologyStackFavoriteDetailsResponse>
+        member val Slug:String = null with get,set
+
+    [<Route("/config")>]
+    [<AllowNullLiteral>]
+    type GetConfig() = 
+        interface IReturn<GetConfigResponse>
 
     [<Route("/favorites/techtacks", "GET")>]
     [<AllowNullLiteral>]
@@ -528,6 +525,13 @@ open ServiceStack.DataAnnotations
     [<AllowNullLiteral>]
     type GetUserInfo() = 
         interface IReturn<GetUserInfoResponse>
-        member val Reload:Boolean = new Boolean() with get,set
         member val UserName:String = null with get,set
+
+    [<Route("/admin/technology/search")>]
+    [<AutoQueryViewer(Title="Find Technologies Admin", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")>]
+    [<AllowNullLiteral>]
+    type FindTechnologiesAdmin() = 
+        inherit QueryDb<Technology>()
+        interface IReturn<QueryResponse<Technology>>
+        member val Name:String = null with get,set
 

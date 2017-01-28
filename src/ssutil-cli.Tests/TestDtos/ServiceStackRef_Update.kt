@@ -1,6 +1,6 @@
 /* Options:
-Date: 2015-12-23 23:52:39
-Version: 4.051
+Date: 2017-01-28 22:45:53
+Version: 4.55
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://techstacks.io
 
@@ -8,6 +8,7 @@ BaseUrl: http://techstacks.io
 //AddServiceStackTypes: True
 //AddResponseStatus: False
 //AddImplicitVersion: 
+//AddDescriptionAsComments: True
 //IncludeTypes: 
 //ExcludeTypes: 
 //InitializeCollections: True
@@ -28,7 +29,7 @@ open class LogoUrlApproval : IReturn<LogoUrlApprovalResponse>
     var TechnologyId:Long? = null
     var Approved:Boolean? = null
     companion object { private val responseType = LogoUrlApprovalResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = LogoUrlApproval.responseType
 }
 
 @Route("/admin/techstacks/{TechnologyStackId}/lock")
@@ -37,7 +38,7 @@ open class LockTechStack : IReturn<LockStackResponse>
     var TechnologyStackId:Long? = null
     var IsLocked:Boolean? = null
     companion object { private val responseType = LockStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = LockTechStack.responseType
 }
 
 @Route("/admin/technology/{TechnologyId}/lock")
@@ -46,7 +47,7 @@ open class LockTech : IReturn<LockStackResponse>
     var TechnologyId:Long? = null
     var IsLocked:Boolean? = null
     companion object { private val responseType = LockStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = LockTech.responseType
 }
 
 @Route("/ping")
@@ -82,11 +83,6 @@ open class ClientUser
     var UserName:String? = null
 }
 
-@Route("/my-session")
-open class SessionInfo
-{
-}
-
 @Route(Path="/technology", Verbs="POST")
 open class CreateTechnology : IReturn<CreateTechnologyResponse>
 {
@@ -99,7 +95,7 @@ open class CreateTechnology : IReturn<CreateTechnologyResponse>
     var IsLocked:Boolean? = null
     var Tier:TechnologyTier? = null
     companion object { private val responseType = CreateTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = CreateTechnology.responseType
 }
 
 @Route(Path="/technology/{Id}", Verbs="PUT")
@@ -115,7 +111,7 @@ open class UpdateTechnology : IReturn<UpdateTechnologyResponse>
     var IsLocked:Boolean? = null
     var Tier:TechnologyTier? = null
     companion object { private val responseType = UpdateTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = UpdateTechnology.responseType
 }
 
 @Route(Path="/technology/{Id}", Verbs="DELETE")
@@ -123,50 +119,7 @@ open class DeleteTechnology : IReturn<DeleteTechnologyResponse>
 {
     var Id:Long? = null
     companion object { private val responseType = DeleteTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/technology/{Slug}")
-open class GetTechnology : IReturn<GetTechnologyResponse>
-{
-    var Reload:Boolean? = null
-    var Slug:String? = null
-    companion object { private val responseType = GetTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route(Path="/technology/{Slug}/previous-versions", Verbs="GET")
-open class GetTechnologyPreviousVersions : IReturn<GetTechnologyPreviousVersionsResponse>
-{
-    var Slug:String? = null
-    companion object { private val responseType = GetTechnologyPreviousVersionsResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/technology/{Slug}/favorites")
-open class GetTechnologyFavoriteDetails : IReturn<GetTechnologyFavoriteDetailsResponse>
-{
-    var Slug:String? = null
-    var Reload:Boolean? = null
-    companion object { private val responseType = GetTechnologyFavoriteDetailsResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route(Path="/technology", Verbs="GET")
-open class GetAllTechnologies : IReturn<GetAllTechnologiesResponse>
-{
-    companion object { private val responseType = GetAllTechnologiesResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/technology/search")
-@AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="/img/app/tech-white-75.png", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")
-open class FindTechnologies : QueryBase_1<Technology>(), IReturn<QueryResponse<Technology>>
-{
-    var Name:String? = null
-    var Reload:Boolean? = null
-    companion object { private val responseType = object : TypeToken<QueryResponse<Technology>>(){}.type }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = DeleteTechnology.responseType
 }
 
 @Route(Path="/techstacks", Verbs="POST")
@@ -181,7 +134,7 @@ open class CreateTechnologyStack : IReturn<CreateTechnologyStackResponse>
     var IsLocked:Boolean? = null
     var TechnologyIds:ArrayList<Long> = ArrayList<Long>()
     companion object { private val responseType = CreateTechnologyStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = CreateTechnologyStack.responseType
 }
 
 @Route(Path="/techstacks/{Id}", Verbs="PUT")
@@ -197,7 +150,7 @@ open class UpdateTechnologyStack : IReturn<UpdateTechnologyStackResponse>
     var IsLocked:Boolean? = null
     var TechnologyIds:ArrayList<Long> = ArrayList<Long>()
     companion object { private val responseType = UpdateTechnologyStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = UpdateTechnologyStack.responseType
 }
 
 @Route(Path="/techstacks/{Id}", Verbs="DELETE")
@@ -205,23 +158,53 @@ open class DeleteTechnologyStack : IReturn<DeleteTechnologyStackResponse>
 {
     var Id:Long? = null
     companion object { private val responseType = DeleteTechnologyStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = DeleteTechnologyStack.responseType
 }
 
-@Route(Path="/techstacks", Verbs="GET")
-open class GetAllTechnologyStacks : IReturn<GetAllTechnologyStacksResponse>
+@Route("/my-session")
+open class SessionInfo
 {
-    companion object { private val responseType = GetAllTechnologyStacksResponse::class.java }
-    override fun getResponseType(): Any? = responseType
 }
 
-@Route(Path="/techstacks/{Slug}", Verbs="GET")
-open class GetTechnologyStack : IReturn<GetTechnologyStackResponse>
+@Route(Path="/technology/{Slug}/previous-versions", Verbs="GET")
+open class GetTechnologyPreviousVersions : IReturn<GetTechnologyPreviousVersionsResponse>
 {
-    var Reload:Boolean? = null
     var Slug:String? = null
-    companion object { private val responseType = GetTechnologyStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    companion object { private val responseType = GetTechnologyPreviousVersionsResponse::class.java }
+    override fun getResponseType(): Any? = GetTechnologyPreviousVersions.responseType
+}
+
+@Route(Path="/technology", Verbs="GET")
+open class GetAllTechnologies : IReturn<GetAllTechnologiesResponse>
+{
+    companion object { private val responseType = GetAllTechnologiesResponse::class.java }
+    override fun getResponseType(): Any? = GetAllTechnologies.responseType
+}
+
+@Route("/technology/search")
+@AutoQueryViewer(Title="Find Technologies", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")
+open class FindTechnologies : QueryDb<Technology>(), IReturn<QueryResponse<Technology>>
+{
+    var Name:String? = null
+    var NameContains:String? = null
+    companion object { private val responseType = object : TypeToken<QueryResponse<Technology>>(){}.type }
+    override fun getResponseType(): Any? = FindTechnologies.responseType
+}
+
+@Route("/technology/{Slug}")
+open class GetTechnology : IReturn<GetTechnologyResponse>
+{
+    var Slug:String? = null
+    companion object { private val responseType = GetTechnologyResponse::class.java }
+    override fun getResponseType(): Any? = GetTechnology.responseType
+}
+
+@Route("/technology/{Slug}/favorites")
+open class GetTechnologyFavoriteDetails : IReturn<GetTechnologyFavoriteDetailsResponse>
+{
+    var Slug:String? = null
+    companion object { private val responseType = GetTechnologyFavoriteDetailsResponse::class.java }
+    override fun getResponseType(): Any? = GetTechnologyFavoriteDetails.responseType
 }
 
 @Route(Path="/techstacks/{Slug}/previous-versions", Verbs="GET")
@@ -229,39 +212,7 @@ open class GetTechnologyStackPreviousVersions : IReturn<GetTechnologyStackPrevio
 {
     var Slug:String? = null
     companion object { private val responseType = GetTechnologyStackPreviousVersionsResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/techstacks/{Slug}/favorites")
-open class GetTechnologyStackFavoriteDetails : IReturn<GetTechnologyStackFavoriteDetailsResponse>
-{
-    var Slug:String? = null
-    var Reload:Boolean? = null
-    companion object { private val responseType = GetTechnologyStackFavoriteDetailsResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/config")
-open class GetConfig : IReturn<GetConfigResponse>
-{
-    companion object { private val responseType = GetConfigResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/overview")
-open class Overview : IReturn<OverviewResponse>
-{
-    var Reload:Boolean? = null
-    companion object { private val responseType = OverviewResponse::class.java }
-    override fun getResponseType(): Any? = responseType
-}
-
-@Route("/app-overview")
-open class AppOverview : IReturn<AppOverviewResponse>
-{
-    var Reload:Boolean? = null
-    companion object { private val responseType = AppOverviewResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetTechnologyStackPreviousVersions.responseType
 }
 
 @Route("/pagestats/{Type}/{Slug}")
@@ -270,16 +221,62 @@ open class GetPageStats : IReturn<GetPageStatsResponse>
     var Type:String? = null
     var Slug:String? = null
     companion object { private val responseType = GetPageStatsResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetPageStats.responseType
 }
 
 @Route("/techstacks/search")
-@AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="/img/app/stacks-white-75.png", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")
-open class FindTechStacks : QueryBase_1<TechnologyStack>(), IReturn<QueryResponse<TechnologyStack>>
+@AutoQueryViewer(Title="Find Technology Stacks", Description="Explore different Technology Stacks", IconUrl="material-icons:cloud", DefaultSearchField="Description", DefaultSearchType="Contains", DefaultSearchText="ServiceStack")
+open class FindTechStacks : QueryDb<TechnologyStack>(), IReturn<QueryResponse<TechnologyStack>>
+{
+    var NameContains:String? = null
+    companion object { private val responseType = object : TypeToken<QueryResponse<TechnologyStack>>(){}.type }
+    override fun getResponseType(): Any? = FindTechStacks.responseType
+}
+
+@Route("/overview")
+open class Overview : IReturn<OverviewResponse>
 {
     var Reload:Boolean? = null
-    companion object { private val responseType = object : TypeToken<QueryResponse<TechnologyStack>>(){}.type }
-    override fun getResponseType(): Any? = responseType
+    companion object { private val responseType = OverviewResponse::class.java }
+    override fun getResponseType(): Any? = Overview.responseType
+}
+
+@Route("/app-overview")
+open class AppOverview : IReturn<AppOverviewResponse>
+{
+    var Reload:Boolean? = null
+    companion object { private val responseType = AppOverviewResponse::class.java }
+    override fun getResponseType(): Any? = AppOverview.responseType
+}
+
+@Route(Path="/techstacks", Verbs="GET")
+open class GetAllTechnologyStacks : IReturn<GetAllTechnologyStacksResponse>
+{
+    companion object { private val responseType = GetAllTechnologyStacksResponse::class.java }
+    override fun getResponseType(): Any? = GetAllTechnologyStacks.responseType
+}
+
+@Route(Path="/techstacks/{Slug}", Verbs="GET")
+open class GetTechnologyStack : IReturn<GetTechnologyStackResponse>
+{
+    var Slug:String? = null
+    companion object { private val responseType = GetTechnologyStackResponse::class.java }
+    override fun getResponseType(): Any? = GetTechnologyStack.responseType
+}
+
+@Route("/techstacks/{Slug}/favorites")
+open class GetTechnologyStackFavoriteDetails : IReturn<GetTechnologyStackFavoriteDetailsResponse>
+{
+    var Slug:String? = null
+    companion object { private val responseType = GetTechnologyStackFavoriteDetailsResponse::class.java }
+    override fun getResponseType(): Any? = GetTechnologyStackFavoriteDetails.responseType
+}
+
+@Route("/config")
+open class GetConfig : IReturn<GetConfigResponse>
+{
+    companion object { private val responseType = GetConfigResponse::class.java }
+    override fun getResponseType(): Any? = GetConfig.responseType
 }
 
 @Route(Path="/favorites/techtacks", Verbs="GET")
@@ -287,7 +284,7 @@ open class GetFavoriteTechStack : IReturn<GetFavoriteTechStackResponse>
 {
     var TechnologyStackId:Int? = null
     companion object { private val responseType = GetFavoriteTechStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetFavoriteTechStack.responseType
 }
 
 @Route(Path="/favorites/techtacks/{TechnologyStackId}", Verbs="PUT")
@@ -295,7 +292,7 @@ open class AddFavoriteTechStack : IReturn<FavoriteTechStackResponse>
 {
     var TechnologyStackId:Int? = null
     companion object { private val responseType = FavoriteTechStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = AddFavoriteTechStack.responseType
 }
 
 @Route(Path="/favorites/techtacks/{TechnologyStackId}", Verbs="DELETE")
@@ -303,7 +300,7 @@ open class RemoveFavoriteTechStack : IReturn<FavoriteTechStackResponse>
 {
     var TechnologyStackId:Int? = null
     companion object { private val responseType = FavoriteTechStackResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = RemoveFavoriteTechStack.responseType
 }
 
 @Route(Path="/favorites/technology", Verbs="GET")
@@ -311,7 +308,7 @@ open class GetFavoriteTechnologies : IReturn<GetFavoriteTechnologiesResponse>
 {
     var TechnologyId:Int? = null
     companion object { private val responseType = GetFavoriteTechnologiesResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetFavoriteTechnologies.responseType
 }
 
 @Route(Path="/favorites/technology/{TechnologyId}", Verbs="PUT")
@@ -319,7 +316,7 @@ open class AddFavoriteTechnology : IReturn<FavoriteTechnologyResponse>
 {
     var TechnologyId:Int? = null
     companion object { private val responseType = FavoriteTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = AddFavoriteTechnology.responseType
 }
 
 @Route(Path="/favorites/technology/{TechnologyId}", Verbs="DELETE")
@@ -327,23 +324,22 @@ open class RemoveFavoriteTechnology : IReturn<FavoriteTechnologyResponse>
 {
     var TechnologyId:Int? = null
     companion object { private val responseType = FavoriteTechnologyResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = RemoveFavoriteTechnology.responseType
 }
 
 @Route("/my-feed")
 open class GetUserFeed : IReturn<GetUserFeedResponse>
 {
     companion object { private val responseType = GetUserFeedResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetUserFeed.responseType
 }
 
 @Route("/userinfo/{UserName}")
 open class GetUserInfo : IReturn<GetUserInfoResponse>
 {
-    var Reload:Boolean? = null
     var UserName:String? = null
     companion object { private val responseType = GetUserInfoResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = GetUserInfo.responseType
 }
 
 @Route("/auth")
@@ -351,7 +347,7 @@ open class GetUserInfo : IReturn<GetUserInfoResponse>
 // @Route("/authenticate")
 // @Route("/authenticate/{provider}")
 @DataContract
-open class Authenticate : IReturn<AuthenticateResponse>
+open class Authenticate : IReturn<AuthenticateResponse>, IPost
 {
     @DataMember(Order=1)
     var provider:String? = null
@@ -396,14 +392,17 @@ open class Authenticate : IReturn<AuthenticateResponse>
     var cnonce:String? = null
 
     @DataMember(Order=15)
+    var UseTokenCookie:Boolean? = null
+
+    @DataMember(Order=16)
     var Meta:HashMap<String,String> = HashMap<String,String>()
     companion object { private val responseType = AuthenticateResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = Authenticate.responseType
 }
 
 @Route("/assignroles")
 @DataContract
-open class AssignRoles : IReturn<AssignRolesResponse>
+open class AssignRoles : IReturn<AssignRolesResponse>, IPost
 {
     @DataMember(Order=1)
     var UserName:String? = null
@@ -414,12 +413,12 @@ open class AssignRoles : IReturn<AssignRolesResponse>
     @DataMember(Order=3)
     var Roles:ArrayList<String> = ArrayList<String>()
     companion object { private val responseType = AssignRolesResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = AssignRoles.responseType
 }
 
 @Route("/unassignroles")
 @DataContract
-open class UnAssignRoles : IReturn<UnAssignRolesResponse>
+open class UnAssignRoles : IReturn<UnAssignRolesResponse>, IPost
 {
     @DataMember(Order=1)
     var UserName:String? = null
@@ -430,7 +429,26 @@ open class UnAssignRoles : IReturn<UnAssignRolesResponse>
     @DataMember(Order=3)
     var Roles:ArrayList<String> = ArrayList<String>()
     companion object { private val responseType = UnAssignRolesResponse::class.java }
-    override fun getResponseType(): Any? = responseType
+    override fun getResponseType(): Any? = UnAssignRoles.responseType
+}
+
+@Route("/session-to-token")
+@DataContract
+open class ConvertSessionToToken : IReturn<ConvertSessionToTokenResponse>, IPost
+{
+    @DataMember(Order=1)
+    var PreserveSession:Boolean? = null
+    companion object { private val responseType = ConvertSessionToTokenResponse::class.java }
+    override fun getResponseType(): Any? = ConvertSessionToToken.responseType
+}
+
+@Route("/admin/technology/search")
+@AutoQueryViewer(Title="Find Technologies Admin", Description="Explore different Technologies", IconUrl="octicon:database", DefaultSearchField="Tier", DefaultSearchType="=", DefaultSearchText="Data")
+open class FindTechnologiesAdmin : QueryDb<Technology>(), IReturn<QueryResponse<Technology>>
+{
+    var Name:String? = null
+    companion object { private val responseType = object : TypeToken<QueryResponse<Technology>>(){}.type }
+    override fun getResponseType(): Any? = FindTechnologiesAdmin.responseType
 }
 
 open class LogoUrlApprovalResponse
@@ -460,23 +478,27 @@ open class DeleteTechnologyResponse
     var ResponseStatus:ResponseStatus? = null
 }
 
-open class GetTechnologyResponse
+open class CreateTechnologyStackResponse
 {
-    var Created:Date? = null
-    var Technology:Technology? = null
-    var TechnologyStacks:ArrayList<TechnologyStack> = ArrayList<TechnologyStack>()
+    var Result:TechStackDetails? = null
+    var ResponseStatus:ResponseStatus? = null
+}
+
+open class UpdateTechnologyStackResponse
+{
+    var Result:TechStackDetails? = null
+    var ResponseStatus:ResponseStatus? = null
+}
+
+open class DeleteTechnologyStackResponse
+{
+    var Result:TechStackDetails? = null
     var ResponseStatus:ResponseStatus? = null
 }
 
 open class GetTechnologyPreviousVersionsResponse
 {
     var Results:ArrayList<TechnologyHistory> = ArrayList<TechnologyHistory>()
-}
-
-open class GetTechnologyFavoriteDetailsResponse
-{
-    var Users:ArrayList<String> = ArrayList<String>()
-    var FavoriteCount:Int? = null
 }
 
 open class GetAllTechnologiesResponse
@@ -503,21 +525,49 @@ open class QueryResponse<T>
     var ResponseStatus:ResponseStatus? = null
 }
 
-open class CreateTechnologyStackResponse
+open class GetTechnologyResponse
 {
-    var Result:TechStackDetails? = null
+    var Created:Date? = null
+    var Technology:Technology? = null
+    var TechnologyStacks:ArrayList<TechnologyStack> = ArrayList<TechnologyStack>()
     var ResponseStatus:ResponseStatus? = null
 }
 
-open class UpdateTechnologyStackResponse
+open class GetTechnologyFavoriteDetailsResponse
 {
-    var Result:TechStackDetails? = null
+    var Users:ArrayList<String> = ArrayList<String>()
+    var FavoriteCount:Int? = null
+}
+
+open class GetTechnologyStackPreviousVersionsResponse
+{
+    var Results:ArrayList<TechnologyStackHistory> = ArrayList<TechnologyStackHistory>()
+}
+
+open class GetPageStatsResponse
+{
+    var Type:String? = null
+    var Slug:String? = null
+    var ViewCount:Long? = null
+    var FavCount:Long? = null
+}
+
+open class OverviewResponse
+{
+    var Created:Date? = null
+    var TopUsers:ArrayList<UserInfo> = ArrayList<UserInfo>()
+    var TopTechnologies:ArrayList<TechnologyInfo> = ArrayList<TechnologyInfo>()
+    var LatestTechStacks:ArrayList<TechStackDetails> = ArrayList<TechStackDetails>()
+    var PopularTechStacks:ArrayList<TechnologyStack> = ArrayList<TechnologyStack>()
+    var TopTechnologiesByTier:HashMap<String,ArrayList<TechnologyInfo>> = HashMap<String,ArrayList<TechnologyInfo>>()
     var ResponseStatus:ResponseStatus? = null
 }
 
-open class DeleteTechnologyStackResponse
+open class AppOverviewResponse
 {
-    var Result:TechStackDetails? = null
+    var Created:Date? = null
+    var AllTiers:ArrayList<Option> = ArrayList<Option>()
+    var TopTechnologies:ArrayList<TechnologyInfo> = ArrayList<TechnologyInfo>()
     var ResponseStatus:ResponseStatus? = null
 }
 
@@ -533,11 +583,6 @@ open class GetTechnologyStackResponse
     var ResponseStatus:ResponseStatus? = null
 }
 
-open class GetTechnologyStackPreviousVersionsResponse
-{
-    var Results:ArrayList<TechnologyStackHistory> = ArrayList<TechnologyStackHistory>()
-}
-
 open class GetTechnologyStackFavoriteDetailsResponse
 {
     var Users:ArrayList<String> = ArrayList<String>()
@@ -547,33 +592,6 @@ open class GetTechnologyStackFavoriteDetailsResponse
 open class GetConfigResponse
 {
     var AllTiers:ArrayList<Option> = ArrayList<Option>()
-}
-
-open class OverviewResponse
-{
-    var Created:Date? = null
-    var TopUsers:ArrayList<UserInfo> = ArrayList<UserInfo>()
-    var TopTechnologies:ArrayList<TechnologyInfo> = ArrayList<TechnologyInfo>()
-    var LatestTechStacks:ArrayList<TechStackDetails> = ArrayList<TechStackDetails>()
-    var PopularTechStacks:ArrayList<TechnologyStack> = ArrayList<TechnologyStack>()
-    var TopTechnologiesByTier:HashMap<TechnologyTier,ArrayList<TechnologyInfo>> = HashMap<TechnologyTier,ArrayList<TechnologyInfo>>()
-    var ResponseStatus:ResponseStatus? = null
-}
-
-open class AppOverviewResponse
-{
-    var Created:Date? = null
-    var AllTiers:ArrayList<Option> = ArrayList<Option>()
-    var TopTechnologies:ArrayList<TechnologyInfo> = ArrayList<TechnologyInfo>()
-    var ResponseStatus:ResponseStatus? = null
-}
-
-open class GetPageStatsResponse
-{
-    var Type:String? = null
-    var Slug:String? = null
-    var ViewCount:Long? = null
-    var FavCount:Long? = null
 }
 
 open class GetFavoriteTechStackResponse
@@ -630,9 +648,12 @@ open class AuthenticateResponse
     var ReferrerUrl:String? = null
 
     @DataMember(Order=6)
-    var ResponseStatus:ResponseStatus? = null
+    var BearerToken:String? = null
 
     @DataMember(Order=7)
+    var ResponseStatus:ResponseStatus? = null
+
+    @DataMember(Order=8)
     var Meta:HashMap<String,String> = HashMap<String,String>()
 }
 
@@ -662,6 +683,16 @@ open class UnAssignRolesResponse
     var ResponseStatus:ResponseStatus? = null
 }
 
+@DataContract
+open class ConvertSessionToTokenResponse
+{
+    @DataMember(Order=1)
+    var Meta:HashMap<String,String> = HashMap<String,String>()
+
+    @DataMember(Order=2)
+    var ResponseStatus:ResponseStatus? = null
+}
+
 open class Technology : TechnologyBase()
 {
 }
@@ -679,8 +710,10 @@ enum class TechnologyTier
     ThirdPartyServices,
 }
 
-open class TechnologyStack : TechnologyStackBase()
+open class TechStackDetails : TechnologyStackBase()
 {
+    var DetailsHtml:String? = null
+    var TechnologyChoices:ArrayList<TechnologyInStack> = ArrayList<TechnologyInStack>()
 }
 
 open class TechnologyHistory : TechnologyBase()
@@ -689,14 +722,12 @@ open class TechnologyHistory : TechnologyBase()
     var Operation:String? = null
 }
 
-open class QueryBase_1<T> : QueryBase()
+open class QueryDb<T> : QueryBase()
 {
 }
 
-open class TechStackDetails : TechnologyStackBase()
+open class TechnologyStack : TechnologyStackBase()
 {
-    var DetailsHtml:String? = null
-    var TechnologyChoices:ArrayList<TechnologyInStack> = ArrayList<TechnologyInStack>()
 }
 
 open class TechnologyStackHistory : TechnologyStackBase()
@@ -704,22 +735,6 @@ open class TechnologyStackHistory : TechnologyStackBase()
     var TechnologyStackId:Long? = null
     var Operation:String? = null
     var TechnologyIds:ArrayList<Long> = ArrayList<Long>()
-}
-
-@DataContract
-open class Option
-{
-    @DataMember(Name="name")
-    @SerializedName("name")
-    var Name:String? = null
-
-    @DataMember(Name="title")
-    @SerializedName("title")
-    var Title:String? = null
-
-    @DataMember(Name="value")
-    @SerializedName("value")
-    var Value:TechnologyTier? = null
 }
 
 open class UserInfo
@@ -736,6 +751,22 @@ open class TechnologyInfo
     var Name:String? = null
     var LogoUrl:String? = null
     var StacksCount:Int? = null
+}
+
+@DataContract
+open class Option
+{
+    @DataMember(Name="name")
+    @SerializedName("name")
+    var Name:String? = null
+
+    @DataMember(Name="title")
+    @SerializedName("title")
+    var Title:String? = null
+
+    @DataMember(Name="value")
+    @SerializedName("value")
+    var Value:TechnologyTier? = null
 }
 
 open class TechnologyBase
@@ -757,6 +788,13 @@ open class TechnologyBase
     var IsLocked:Boolean? = null
     var Tier:TechnologyTier? = null
     var LastStatusUpdate:Date? = null
+}
+
+open class TechnologyInStack : TechnologyBase()
+{
+    var TechnologyId:Long? = null
+    var TechnologyStackId:Long? = null
+    var Justification:String? = null
 }
 
 open class TechnologyStackBase
@@ -796,12 +834,8 @@ open class QueryBase
     var Include:String? = null
 
     @DataMember(Order=6)
-    var Meta:HashMap<String,String> = HashMap<String,String>()
-}
+    var Fields:String? = null
 
-open class TechnologyInStack : TechnologyBase()
-{
-    var TechnologyId:Long? = null
-    var TechnologyStackId:Long? = null
-    var Justification:String? = null
+    @DataMember(Order=7)
+    var Meta:HashMap<String,String> = HashMap<String,String>()
 }
