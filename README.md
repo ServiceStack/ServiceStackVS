@@ -1,3 +1,6 @@
+Join the [ServiceStack Google+ Community](https://plus.google.com/communities/112445368900682590445) or follow [@ServiceStack](https://twitter.com/servicestack) 
+for updates, or [StackOverflow](http://stackoverflow.com/questions/ask) or the [Customer Support Forums](https://forums.servicestack.net/) for support.
+
 # [ServiceStack VS.NET Templates](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
 ServiceStackVS supports Visual Studio 2015, 2013 and 2012* and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
