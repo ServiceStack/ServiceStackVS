@@ -9,7 +9,6 @@
   <TemplateInfo Path="CSharp\ServiceStack"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
     <add key="ServiceStack.CSharp.AngularJS" value="$safeprojectname$"/>
-    <!--<add key="ServiceStack.CSharp.RazorSeed." value="$slnname$"/>-->
     <!--targetFramework="4.0"-->
     <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>
     <!--<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>-->

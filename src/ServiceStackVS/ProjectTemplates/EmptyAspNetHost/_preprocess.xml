@@ -7,7 +7,7 @@
   <TemplateInfo Path="CSharp\Web\Custom\Subcategory"/>
   -->
   <TemplateInfo Path="CSharp\ServiceStack"/>
-  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;_preprocess.xml">
+  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
     <add key="ServiceStack.CSharp.EmptyAspNetHost" value="$safeprojectname$"/>
     <!--targetFramework="4.0"-->
     <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>

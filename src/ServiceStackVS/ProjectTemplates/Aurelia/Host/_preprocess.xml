@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Preprocess>
-  <TemplateInfo Path="CSharp\ServiceStack\TypeScriptReact"/>
+  <TemplateInfo Path="CSharp\ServiceStack\Aurelia"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
-    <add key="ServiceStack.CSharp.TypeScriptReact" value="$saferootprojectname$"/>
+    <add key="ServiceStack.CSharp.Aurelia" value="$saferootprojectname$"/>
   </Replacements>
 </Preprocess>
