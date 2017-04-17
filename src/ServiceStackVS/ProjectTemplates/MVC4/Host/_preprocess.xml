@@ -4,6 +4,7 @@
   You can specify the path where this should show up in the
   Add New Project / Add New Item dialog by setting the value below
   -->
+  <TemplateInfo Path="CSharp\ServiceStack\MVC4"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj;*.fsproj;*.vbproj;*.jpg;*.png;*.ico;">
     <!--targetFramework="4.0"-->
     <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>

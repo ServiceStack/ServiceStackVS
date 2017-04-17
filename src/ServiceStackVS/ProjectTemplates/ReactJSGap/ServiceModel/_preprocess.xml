@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Preprocess>
-  <TemplateInfo Path="CSharp\ServiceStack\ReactJSGap\ServiceModel"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
     <add key="ServiceStack.CSharp.ReactJSGap" value="$saferootprojectname$"/>
   </Replacements>
