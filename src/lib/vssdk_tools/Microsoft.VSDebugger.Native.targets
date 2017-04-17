@@ -15,7 +15,7 @@
     <Error Condition="!Exists('$(ConcordSDKDir)Tools\Bin\vsdconfigtool.exe')"
       Text="The 'ConcordSDKDir' property is not correctly set. $(ConcordSDKDir)Tools\Bin\vsdconfigtool.exe does not exist"/>
 
-    <Exec Command="$(ConcordSDKDir)Tools\Bin\vsdconfigtool.exe @(VsdConfigXmlFiles, ' ') $(VsdConfigContractFile)" />
+    <Exec Command="&quot;$(ConcordSDKDir)Tools\Bin\vsdconfigtool.exe&quot; @(VsdConfigXmlFiles, ' ') $(VsdConfigContractFile)" />
   </Target>
 
   <!--Code for cleaning the contract file-->

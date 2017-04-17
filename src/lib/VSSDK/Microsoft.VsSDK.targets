@@ -12,37 +12,45 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 -->
 
   <Import Project="Microsoft.VsSDK.Common.targets" />
+  
+  <PropertyGroup>
+    <VsSDKAssemblyFile>Microsoft.VsSDK.Build.Tasks.dll</VsSDKAssemblyFile>
+  </PropertyGroup>
 
-  <UsingTask TaskName="CtoResourceMerger" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CreatePkgDef" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CopyIfChanged" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="VsTemplatePaths" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CalculateZipItems" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="GetVSTemplateItems" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="ZipItems" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="EnableExtension" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="EnableLoadingAllExtensions" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="FindInstalledExtension" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="UninstallExtension" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="FindVsixManifest" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="GetExtensionsPath" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="GetDeploymentPathFromVsixManifest" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CreateZipPackage" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="ReadReferencesFromVsixManifest" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="DetokenizeVsixManifestSource" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="ValidateVsixManifest" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="ValidateVsixParts" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="Devenv" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CheckProfileSetup" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="CreateVsixSourceItemFromReferences" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="SplitIncludeOutputGroupsInVSIX" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
-  <UsingTask TaskName="ReadInfoFromVsixManifest" AssemblyFile="Microsoft.VsSDK.Build.Tasks.dll" />
+  <UsingTask TaskName="CtoResourceMerger" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CreatePkgDef" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CopyIfChanged" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CalculateZipItems" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="GetVSTemplateItems" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="ZipItems" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="EnableExtension" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="EnableLoadingAllExtensions" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="FindInstalledExtension" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="UninstallExtension" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="FindVsixManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="GetExtensionsPath" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="GetDeploymentPathFromVsixManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CreateTemplatesManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CreateZipPackage" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="ReadReferencesFromVsixManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="DetokenizeVsixManifestSource" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="ValidateVsixManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="ValidateVsixParts" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="Devenv" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CheckProfileSetup" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CreateVsixSourceItemFromReferences" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="SplitIncludeOutputGroupsInVSIX" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="ReadInfoFromVsixManifest" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="CompareBuildTaskVersion" AssemblyFile="$(VsSDKAssemblyFile)" />
+  <UsingTask TaskName="Unzip" AssemblyFile="$(VsSDKAssemblyFile)" />
 
   <PropertyGroup>
+    <IsProductComponent Condition="'$(IsProductComponent)' == ''">false</IsProductComponent>
     <DeployVSTemplates Condition="'$(DeployVSTemplates)' == ''">true</DeployVSTemplates>
+    <BuildDependsOn>VerifyTargetVersion;$(BuildDependsOn)</BuildDependsOn>
+    <VerifyTargetVersion Condition="'$(VerifyTargetVersion)' == ''">true</VerifyTargetVersion>
     <GetVsixItemsToBundleDependsOn>$(GetVsixItemsToBundleDependsOn);Compile</GetVsixItemsToBundleDependsOn>
     <DeployVsixExtensionFilesDependsOn>$(DeployVsixExtensionFilesDependsOn);Compile</DeployVsixExtensionFilesDependsOn>
-    <ExtensionsDeploymentSubPath Condition="'$(ExtensionsDeploymentSubPath)' == ''">Microsoft\VisualStudio\$(VSSDKTargetPlatformVersion)$(VSSDKTargetPlatformRegRootSuffix)\Extensions\</ExtensionsDeploymentSubPath>
     <TargetVSVersion Condition="'$(TargetVSVersion)' == ''">$(VSSDKTargetPlatformVersion)</TargetVSVersion>
     <DeployExtension Condition="'$(DeployExtension)' == ''">true</DeployExtension>
     <CopyVsixExtensionFiles Condition="'$(CopyVsixExtensionFiles)'==''">false</CopyVsixExtensionFiles>
@@ -55,10 +63,18 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
                           Find Source Vsix Manifest File
     =================================================================================
     -->
-  <Target Name="FindSourceVsixManifest">
-    <FindVsixManifest ItemsToConsider="@(None)">
+  <Target Name="FindSourceVsixManifest"
+          Condition="'$(CreateVsixContainer)' == 'true'">
+    <FindVsixManifest ItemsToConsider="@(None)"
+                      ProjectName="$(MSBuildProjectName)">
       <Output TaskParameter="VsixManifest" ItemName="SourceVsixManifest"/>
     </FindVsixManifest>
+  </Target>
+
+  <Target Name="VerifyTargetVersion">
+    <CompareBuildTaskVersion
+      TargetsAssemblyPath="$(MSBuildThisFileDirectory)$(VsSDKAssemblyFile)">
+    </CompareBuildTaskVersion>
   </Target>
 
   <!--
@@ -69,7 +85,6 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
   <PropertyGroup>
     <ValidateVsixManifestDependsOn>$(ValidateVsixManifestDependsOn);FindSourceVsixManifest</ValidateVsixManifestDependsOn>
     <BypassVsixValidation Condition="'$(BypassVsixValidation)' == ''">false</BypassVsixValidation>
-    <VsixSchemaPath Condition="'$(VsixSchemaPath)' == ''"></VsixSchemaPath>
   </PropertyGroup>
   <Target Name="ValidateVsixManifest" DependsOnTargets="$(ValidateVsixManifestDependsOn)">
     <ValidateVsixManifest Condition="Exists('$(IntermediateVsixManifest)') AND '$(BypassVsixValidation)' != 'true'" ItemToValidate="$(IntermediateVsixManifest)" VsixSchemaPath="$(VsixSchemaPath)"/>
@@ -104,7 +119,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <ReadReferencesFromVsixManifest
       InputFile="@(SourceVsixManifest)"
       CurrentProjectName="$(ProjectName)"
-      ProjectReferences="@(_VsixManifestProjectReference)">
+      ProjectReferences="@(_VsixManifestProjectReference)"
+      Condition="Exists('@(SourceVsixManifest)')">
       <Output TaskParameter="ProjectReferencesToResolve" ItemName="_VsixManifestReferencesToResolve" />
     </ReadReferencesFromVsixManifest>
 
@@ -118,7 +134,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <DetokenizeVsixManifestSource
       InputFile="@(SourceVsixManifest)"
       OutputFile="$(IntermediateVsixManifest)"
-      ResolvedReferences="@(_VsixManifestResolvedReferences)">
+      ResolvedReferences="@(_VsixManifestResolvedReferences)"
+      Condition="Exists('@(SourceVsixManifest)')">
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
     </DetokenizeVsixManifestSource>
 
@@ -168,13 +185,14 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <TargetVsixContainer Condition="'$(TargetVsixContainer)'==''">$(OutDir)$(TargetVsixContainerName)</TargetVsixContainer>
     <GetVsixSourceItemsDependsOn>$(GetVsixSourceItemsDependsOn);AssignProjectConfiguration;DetokenizeVsixManifestFile;ZipProjects;ZipItems</GetVsixSourceItemsDependsOn>
     <ValidateVsixPartsDependsOn>$(ValidateVsixPartsDependsOn);GetVsixSourceItems</ValidateVsixPartsDependsOn>
-    <CreateVsixContainerDependsOn>$(CreateVsixContainerDependsOn);ValidateVsixParts</CreateVsixContainerDependsOn>
+    <GenerateTemplatesManifestDependsOn>$(GenerateTemplatesManifestDependsOn);ValidateVsixParts</GenerateTemplatesManifestDependsOn>
+    <CreateVsixContainerDependsOn>$(CreateVsixContainerDependsOn);ValidateVsixParts;GenerateTemplatesManifest</CreateVsixContainerDependsOn>
 
     <ZipPackageCompressionLevel Condition="'$(ZipPackageCompressionLevel)' == '' AND '_$(Configuration)' == '_Debug'">NotCompressed</ZipPackageCompressionLevel>
     <ZipPackageCompressionLevel Condition="'$(ZipPackageCompressionLevel)' == '' AND '_$(Configuration)' == '_Release'">Normal</ZipPackageCompressionLevel>
     <ZipPackageCompressionLevel Condition="'$(ZipPackageCompressionLevel)' == ''">NotCompressed</ZipPackageCompressionLevel>
 
-    <!--By default, only include items necessary for executing. 
+    <!--By default, only include items necessary for executing.
         Exclude debug symbols & documentation files.-->
     <IncludeAssemblyInVSIXContainer Condition="'$(IncludeAssemblyInVSIXContainer)'==''">true</IncludeAssemblyInVSIXContainer>
     <IncludeAddModulesInVSIXContainer Condition="'$(IncludeAddModulesInVSIXContainer)'==''">true</IncludeAddModulesInVSIXContainer>
@@ -196,56 +214,249 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <!--Create an item for the primary output of the project-->
       <VSIXSourceItem Include="@(IntermediateAssembly)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
+        <Ngen>$(Ngen)</Ngen>
+        <NgenApplication>$(NgenApplication)</NgenApplication>
+        <NgenArchitecture>$(NgenArchitecture)</NgenArchitecture>
+        <NgenPriority>$(NgenPriority)</NgenPriority>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeAddModulesInVSIXContainer)'=='true'">
       <VSIXSourceItem Include="@(AddModules)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeSGenDllInVSIXContainer)'=='true' AND '$(_SGenDllCreated)'=='true'">
       <VSIXSourceItem Include="$(IntermediateOutputPath)$(_SGenDllName)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup>
       <VSIXSourceItem Condition="'$(IncludeDebugSymbolsInVSIXContainer)'=='true'" Include="@(_DebugSymbolsIntermediatePath)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
 
       <VSIXSourceItemLocalOnly Include="@(_DebugSymbolsIntermediatePath)" Condition="'$(IncludeDebugSymbolsInLocalVSIXDeployment)'=='true'">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItemLocalOnly>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeDocFilesInVSIXContainer)'=='true'">
       <VSIXSourceItem Include="@(DocFileItem)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeSatelliteAssembliesInVSIXContainer)'=='true'">
       <VSIXSourceItem Include="@(IntermediateSatelliteAssembliesWithTargetPath->'$(OutDir)%(Culture)\$(TargetName).resources.dll')">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeCOMReferencesInVSIXContainer)'=='true'">
       <VSIXSourceItem Include="@(ReferenceComWrappersToCopyLocal); @(ResolvedIsolatedComModules); @(_DeploymentLooseManifestFile); @(NativeReferenceFile)">
         <VSIXSubPath>$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot>$(InstallRoot)</InstallRoot>
       </VSIXSourceItem>
     </ItemGroup>
 
     <ItemGroup Condition="'$(IncludeCopyLocalReferencesInVSIXContainer)'=='true'">
       <VSIXCopyLocalReferenceSourceItem Include="@(ReferencePath)">
         <VSIXSubPath Condition="'%(ReferencePath.VSIXSubPath)' == ''">$(AssemblyVSIXSubPath)</VSIXSubPath>
+        <InstallRoot Condition="'%(ReferencePath.InstallRoot)' == ''">$(InstallRoot)</InstallRoot>
       </VSIXCopyLocalReferenceSourceItem>
     </ItemGroup>
 
-    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(VSIXCopyLocalReferenceSourceItem)">
+    <ItemGroup>
+      <SuppressFromVsix Include="Microsoft.VisualStudio.CommandBars.dll" />
+      <SuppressFromVsix Include="VSLangProj90.dll" />
+      <SuppressFromVsix Include="VSLangProj100.dll" />
+      <SuppressFromVsix Include="VSLangProj110.dll" />
+      <SuppressFromVsix Include="VSLangProj140.dll" />
+      <SuppressFromVsix Include="VsWebSite.Interop.dll" />
+      <SuppressFromVsix Include="VsWebSite.Interop90.dll" />
+      <SuppressFromVsix Include="VsWebSite.Interop100.dll" />
+      <SuppressFromVsix Include="envdte.dll" />
+      <SuppressFromVsix Include="envdte80.dll" />
+      <SuppressFromVsix Include="envdte90.dll" />
+      <SuppressFromVsix Include="envdte90a.dll" />
+      <SuppressFromVsix Include="envdte100.dll" />
+      <SuppressFromVsix Include="extensibility.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.Conversion.Core.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.Engine.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.Framework.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.Tasks.Core.dll" />
+      <SuppressFromVsix Include="Microsoft.Build.Utilities.Core.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.CSharp.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.dll" />
+      <SuppressFromVsix Include="Microsoft.MSXML.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.CommonIDE.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ComponentModelHost.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Diagnostics.Assert.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ExtensibilityHosting.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.GraphModel.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TemplateWizardInterface.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Internal.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.vcprojectengine.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.VSHelp.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.VSHelp80.dll" />
+      <SuppressFromVsix Include="stdole.dll" />
+      <SuppressFromVsix Include="System.Collections.Concurrent.dll" />
+      <SuppressFromVsix Include="System.Collections.dll" />
+      <SuppressFromVsix Include="System.Collections.Immutable.dll" />
+      <SuppressFromVsix Include="System.Composition.AttributedModel.dll" />
+      <SuppressFromVsix Include="System.Composition.Convention.dll" />
+      <SuppressFromVsix Include="System.Composition.Hosting.dll" />
+      <SuppressFromVsix Include="System.Composition.Runtime.dll" />
+      <SuppressFromVsix Include="System.Composition.TypedParts.dll" />
+      <SuppressFromVsix Include="System.Diagnostics.Debug.dll" />
+      <SuppressFromVsix Include="System.Diagnostics.Tools.dll" />
+      <SuppressFromVsix Include="System.Diagnostics.Tracing.dll" />
+      <SuppressFromVsix Include="System.Dynamic.Runtime.dll" />
+      <SuppressFromVsix Include="System.Globalization.dll" />
+      <SuppressFromVsix Include="System.IO.dll" />
+      <SuppressFromVsix Include="System.Linq.dll" />
+      <SuppressFromVsix Include="System.Reflection.dll" />
+      <SuppressFromVsix Include="System.Reflection.Extensions.dll" />
+      <SuppressFromVsix Include="System.Reflection.Metadata.dll" />
+      <SuppressFromVsix Include="System.Reflection.Primitives.dll" />
+      <SuppressFromVsix Include="System.Resources.ResourceManager.dll" />
+      <SuppressFromVsix Include="System.Runtime.dll" />
+      <SuppressFromVsix Include="System.Runtime.Extensions.dll" />
+      <SuppressFromVsix Include="System.Text.Encoding.dll" />
+      <SuppressFromVsix Include="System.Text.Encoding.Extensions.dll" />
+      <SuppressFromVsix Include="System.Threading.dll" />
+      <SuppressFromVsix Include="System.Threading.Tasks.Dataflow.dll" />
+      <SuppressFromVsix Include="System.Threading.Tasks.dll" />
+      <SuppressFromVsix Include="VSLangProj.dll" />
+      <SuppressFromVsix Include="VSLangProj2.dll" />
+      <SuppressFromVsix Include="VSLangProj80.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.VS.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectSystem.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Threading.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Validation.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Composition.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Composition.Configuration.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.InteropA.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Designer.Interfaces.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.9.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ManagedInterfaces.WCF.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.OLE.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ProjectAggregator.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.8.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.9.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Framework.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.8.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.9.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.WCFReference.Interop.dll" />
+      <SuppressFromVsix Include="Microsoft.Data.ConnectionUI.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.CoreUtility.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Core.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Framework.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Data.Services.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Debugger.Engine.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Editor.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.ImageCatalog.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Imaging.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Language.Intellisense.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Language.StandardClassification.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Package.LanguageService.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.QualityTools.Vsip.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Design.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Interop.15.0.DesignTime.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Data.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.Logic.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.UI.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Text.UI.Wpf.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextManager.Interop.12.1.DesignTime.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.VSHost.14.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Utilities.dll" />
+      <SuppressFromVsix Include="Microsoft.VSSDK.UnitTestLibrary.dll" />
+      <SuppressFromVsix Include="Microsoft.Windows.Simulator.Client.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.VisualBasic.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.Workspaces.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.Workspaces.Desktop.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll" />
+      <SuppressFromVsix Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.LanguageServices.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.12.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.11.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.10.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Platform.WindowManagement.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.ViewManager.dll" />
+      <SuppressFromVsix Include="System.Management.dll" />
+      <SuppressFromVsix Include="System.Numerics.dll" />
+      <SuppressFromVsix Include="System.ServiceModel.dll" />
+      <SuppressFromVsix Include="System.ServiceModel.Discovery.dll" />
+      <SuppressFromVsix Include="Microsoft.Diagnostics.Tracing.EventSource.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Telemetry.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Settings.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Shell.Immutable.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.Interfaces.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.TextTemplating.VSHost.15.0.dll" />
+      <SuppressFromVsix Include="Microsoft.VisualStudio.Diagnostics.PerformanceProvider.dll" />
+      <SuppressFromVsix Include="PresentationCore.dll" />
+      <SuppressFromVsix Include="PresentationFramework.dll" />
+      <SuppressFromVsix Include="System.Design.dll" />
+      <SuppressFromVsix Include="System.Drawing.Design.dll" />
+      <SuppressFromVsix Include="System.Runtime.Serialization.dll" />
+      <SuppressFromVsix Include="System.Transactions.dll" />
+      <SuppressFromVsix Include="System.Windows.Forms.dll" />
+      <SuppressFromVsix Include="System.Xaml.dll" />
+      <SuppressFromVsix Include="UIAutomationProvider.dll" />
+      <SuppressFromVsix Include="UIAutomationTypes.dll" />
+      <SuppressFromVsix Include="WindowsBase.dll" />
+      <SuppressFromVsix Include="WindowsFormsIntegration.dll" />
+      <SuppressFromVsix Include="System.ComponentModel.Composition.dll" />
+      <SuppressFromVsix Include="System.Configuration.dll" />
+    </ItemGroup>
+
+    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(VSIXCopyLocalReferenceSourceItem)" SuppressedVSIXSourceItems="@(SuppressFromVsix)">
       <Output TaskParameter="VsixSourceItems" ItemName="VSIXSourceItem" />
     </CreateVsixSourceItemFromReferences>
 
@@ -256,14 +467,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       </VSIXSourceItem>
     </ItemGroup>
 
-    <!-- Include the detokenized VSIX Manifest file-->
-    <ItemGroup>
-      <VSIXSourceItem Include="$(IntermediateVsixManifest)" />
-    </ItemGroup>
-
     <!-- Include any Content items marked with IncludeInVSIX=true -->
     <ItemGroup>
-
       <VSIXSourceItem Include="@(Content)" Condition="'%(Content.IncludeInVSIX)'=='true' AND '%(Content.VSIXSubPath)'==''">
         <!-- Sets VSIXSubPath for content items that are nonlinked files -->
         <VSIXSubPath Condition="'%(Content.Link)'==''">%(Content.RelativeDir)</VSIXSubPath>
@@ -272,14 +477,13 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       </VSIXSourceItem>
 
       <VSIXSourceItem Include="@(Content)" Condition="'%(Content.IncludeInVSIX)'=='true' AND '%(Content.VSIXSubPath)'!=''" />
-
     </ItemGroup>
 
 
     <!-- For any project references that are set to copy local ('Private' property != false), add the output groups for project references that are not set -->
     <ItemGroup>
-      <ProjectReferenceWithConfiguration Condition="'%(ProjectReferenceWithConfiguration.Private)' != 'false' AND 
-                                                    '%(ProjectReferenceWithConfiguration.IncludeOutputGroupsInVSIX)' == '' AND 
+      <ProjectReferenceWithConfiguration Condition="'%(ProjectReferenceWithConfiguration.Private)' != 'false' AND
+                                                    '%(ProjectReferenceWithConfiguration.IncludeOutputGroupsInVSIX)' == '' AND
                                                     '%(ProjectReferenceWithConfiguration.IncludeOutputGroupsInVSIXLocalOnly)' == ''">
         <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup;BuiltProjectOutputGroupDependencies;GetCopyToOutputDirectoryItems;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
         <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup;</IncludeOutputGroupsInVSIXLocalOnly>
@@ -290,10 +494,10 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
          The IncludeOutputGroupsInVSIX values on items in the FilteredGroups list will only be BuiltProjectOutputGroupDependencies.
          The IncludeOutputGroupsInVSIX values on items in the UnfilteredGroups list will only be all other output groups.
-         
+
          This is done because we only want to filter out items in the CreateVsixSourceItemFromReferences task that were build dependencies to
          avoid unintentially excluding output groups explicitly requested in IncludeOutputGroupsInVSIX.
-         
+
          The task properly handles escaped values for IncludeOutputGroupsInVSIX (e.g. Target1%3bTarget2).
     -->
 
@@ -313,7 +517,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <Output TaskParameter="TargetOutputs" ItemName="ReferencedVSIXSourceItem"/>
     </MSBuild>
 
-    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(ReferencedVSIXSourceItem)">
+    <CreateVsixSourceItemFromReferences ReferencedVSIXSourceItems="@(ReferencedVSIXSourceItem)" SuppressedVSIXSourceItems="@(SuppressFromVsix)">
       <Output TaskParameter="VsixSourceItems" ItemName="VSIXSourceItem" />
     </CreateVsixSourceItemFromReferences>
 
@@ -358,19 +562,40 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     </ValidateVsixParts>
   </Target>
 
+  <!-- Generate manifest files for templates in the VSIX package. -->
+  <Target
+    Name="GenerateTemplatesManifest"
+    DependsOnTargets="$(GenerateTemplatesManifestDependsOn)">
+
+    <CreateTemplatesManifest
+        TemplateFiles="@(VSIXSourceItem)"
+        IntermediateDirectory="$(IntermediateOutputPath)">
+      <Output TaskParameter="OutputFiles" ItemName="VSIXSourceItem" />
+    </CreateTemplatesManifest>
+  </Target>
+
   <Target
       Name="CreateVsixContainer"
       Condition="$(CreateVsixContainer)"
-      Inputs="@(VSIXSourceItem)"
+      Inputs="@(VSIXSourceItem);$(IntermediateVsixManifest)"
       Outputs="$(TargetVsixContainer)"
       DependsOnTargets="$(CreateVsixContainerDependsOn)">
 
-    <Message Importance="High" Text="Creating VSIX Container..." />
+    <Message Text="Creating VSIX Container..." />
+
+    <ItemGroup>
+      <_VsixManifest Include="$(IntermediateVsixManifest)" />
+    </ItemGroup>
 
     <CreateZipPackage
+         SourceManifest="@(_VsixManifest)"
          Files="@(VSIXSourceItem)"
          ZipPackage="$(TargetVsixContainer)"
-         CompressionLevel="$(ZipPackageCompressionLevel)">
+         CompressionLevel="$(ZipPackageCompressionLevel)"
+         IsProductComponent="$(IsProductComponent)"
+         ItemsToConsider="@(None)"
+         InstallationRoot="$(ExtensionInstallationRoot)"
+         InstallationFolder="$(ExtensionInstallationFolder)">
       <Output TaskParameter="ZipPackage" ItemName="FileWrites" />
       <Output TaskParameter="ZipPackage" ItemName="_CreatedVsixContainer" />
     </CreateZipPackage>
@@ -390,10 +615,11 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
   <Target
       Name="GetVsixDeploymentPath"
-      Condition="'$(DeployExtension)'=='true'"
+      Condition="'$(DeployExtension)'=='true' and '$(CreateVsixContainer)'=='true'"
       DependsOnTargets="$(GetVsixDeploymentPathDependsOn)">
 
-    <GetExtensionsPath SubPath="$(ExtensionsDeploymentSubPath)">
+    <GetExtensionsPath 
+        RootSuffix="$(VSSDKTargetPlatformRegRootSuffix)" >
       <Output TaskParameter="LocalExtensionsPath" PropertyName="ExtensionsPath"/>
     </GetExtensionsPath>
 
@@ -418,18 +644,20 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
   </PropertyGroup>
 
   <Target Name="FindExistingDeploymentPath"
-          Condition="'$(DeployExtension)'=='true'"
+          Condition="'$(DeployExtension)'=='true' and '$(CreateVsixContainer)'=='true'"
           DependsOnTargets="$(FindExistingDeploymentPathDependsOn)">
     <FindInstalledExtension
         VsixIdentifier="$(VsixID)"
+        InstallableExtensionVersion="$(VsixVersion)"
         RootSuffix="$(VSSDKTargetPlatformRegRootSuffix)"
         FailIfNotInstalled="false">
       <Output TaskParameter="DeploymentPath" PropertyName="ExistingDeploymentPath" />
+      <Output TaskParameter="AllUsers" PropertyName="AllUsersExtension" />
     </FindInstalledExtension>
   </Target>
 
   <Target Name="DeployVsixExtensionFiles"
-      Condition="'$(DeployExtension)'=='true'"
+      Condition="'$(DeployExtension)'=='true' and '$(CreateVsixContainer)'=='true'"
       DependsOnTargets="$(DeployVsixExtensionFilesDependsOn)">
 
     <!-- Uninstall any existing extension with the same identifier with a different deployment path.
@@ -440,7 +668,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
              call uninstall if the existing installation directory is different than the one we're deploying files
              to. -->
     <UninstallExtension
-        Condition="'$(ExistingDeploymentPath)' != '$(VsixDeploymentPath)' AND '$(ExistingDeploymentPath)' != ''"
+        Condition="'$(ExistingDeploymentPath)' != '$(VsixDeploymentPath)' AND '$(ExistingDeploymentPath)' != '' AND '$(AllUsersExtension)' != 'true'"
         VsixIdentifier="$(VsixID)"
         RootSuffix="$(VSSDKTargetPlatformRegRootSuffix)"
         FailIfNotInstalled="false" />
@@ -449,34 +677,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <Message Text="VsixVersion = $(VsixVersion)" />
     <Message Text="VsixDeploymentPath = $(VsixDeploymentPath)" />
 
-    <ItemGroup>
-      <VsixExtensionFiles Include="@(VSIXSourceItem);@(VSIXSourceItemLocalOnly)" />
-    </ItemGroup>
-
-    <!-- The TargetPath metadata contains the whole path, not just the directory -->
-
-    <Copy
-        SourceFiles="@(VsixExtensionFiles)"
-        DestinationFiles="@(VsixExtensionFiles->'$(VsixDeploymentPath)%(VSIXSubPath)\%(Filename)%(Extension)')"
-        Condition="'%(VsixExtensionFiles.TargetPath)'==''"
-        SkipUnchangedFiles="true"
-        OverwriteReadOnlyFiles="$(OverwriteReadOnlyFiles)"
-        Retries="$(CopyRetryCount)"
-        RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)">
-      <Output TaskParameter="DestinationFiles" ItemName="_VsixDeployCurrentFileWrites"/>
-    </Copy>
-
-    <Copy
-        SourceFiles="@(VsixExtensionFiles)"
-        DestinationFiles="@(VsixExtensionFiles->'$(VsixDeploymentPath)%(VSIXSubPath)\%(TargetPath)')"
-        Condition="'%(VsixExtensionFiles.TargetPath)'!=''"
-        SkipUnchangedFiles="true"
-        OverwriteReadOnlyFiles="$(OverwriteReadOnlyFiles)"
-        Retries="$(CopyRetryCount)"
-        RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)">
-      <Output TaskParameter="DestinationFiles" ItemName="_VsixDeployCurrentFileWrites"/>
-    </Copy>
-
+    <Unzip ZipFile="@(_CreatedVsixContainer->'%(FullPath)')" TargetDirectory="$(VsixDeploymentPath)" />
+    
     <!--Check if the user is an administrator and the user profile hasn't been setup for the target instance. -->
     <CheckProfileSetup
         RootSuffix="$(VSSDKTargetPlatformRegRootSuffix)">
@@ -502,6 +704,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <!--Enable this extension via Extension Manager-->
     <EnableExtension
         VsixIdentifier="$(VsixID)"
+        VsixVersion="$(VsixVersion)"
         RootSuffix="$(VSSDKTargetPlatformRegRootSuffix)"
         FailIfNotInstalled="true" />
   </Target>
@@ -510,7 +713,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     =======================================================================================================
                                          Copy Vsix Extension Files
 
-       Target to do a raw copy of extension files. Does not use Extension Manager API to 
+       Target to do a raw copy of extension files. Does not use Extension Manager API to
        enable/manage an extension. Typically only used for Isolated Shell solutions.
     =======================================================================================================
   -->
@@ -556,7 +759,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
   <!--
     ============================================================
              VSIXContainerProjectOutputGroup
-             
+
       Used for determining the VSIX Container that this project
       builds from other projects that reference it.
     ============================================================
@@ -593,7 +796,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <_VSIXName></_VSIXName>
     </PropertyGroup>
 
-    <ReadInfoFromVsixManifest VsixManifest="@(SourceVsixManifest)" >
+    <ReadInfoFromVsixManifest VsixManifest="@(SourceVsixManifest)"
+                              ProjectName="$(MSBuildProjectName)">
       <Output TaskParameter="VsixName" PropertyName="_VSIXName" />
     </ReadInfoFromVsixManifest>
 
@@ -620,7 +824,8 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <_VSIXIdentifier></_VSIXIdentifier>
     </PropertyGroup>
 
-    <ReadInfoFromVsixManifest VsixManifest="@(SourceVsixManifest)" >
+    <ReadInfoFromVsixManifest VsixManifest="@(SourceVsixManifest)"
+                              ProjectName="$(MSBuildProjectName)">
       <Output TaskParameter="VsixId" PropertyName="_VSIXIdentifier" />
     </ReadInfoFromVsixManifest>
 
@@ -647,11 +852,11 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
          Condition="'$(RunRegRiched)' == 'true'">
     <Warning
       Text="RegRiched20.exe was not found."
-      Condition="!Exists('$(VsSDKInstall)VisualStudioIntegration\Tools\Bin\RegRiched20.exe')">
+      Condition="!Exists('$(VsSDKInstall)\VisualStudioIntegration\Tools\Bin\RegRiched20.exe')">
     </Warning>
-    <Exec Command="&quot;$(VsSDKInstall)VisualStudioIntegration\Tools\Bin\RegRiched20.exe&quot;"
+    <Exec Command="&quot;$(VsSDKInstall)\VisualStudioIntegration\Tools\Bin\RegRiched20.exe&quot;"
           ContinueOnError="true"
-          Condition="Exists('$(VsSDKInstall)VisualStudioIntegration\Tools\Bin\RegRiched20.exe')">
+          Condition="Exists('$(VsSDKInstall)\VisualStudioIntegration\Tools\Bin\RegRiched20.exe')">
     </Exec>
   </Target>
 
@@ -756,14 +961,13 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
           Condition="'$(GeneratePkgDefFile)'=='true'"
           DependsOnTargets="$(GeneratePkgDefDependsOn)">
 
-    <Message Importance="High" Text="Creating intermediate PkgDef file." />
+    <Message Text="Creating intermediate PkgDef file." />
 
     <CreatePkgDef AssemblyToProcess="$(TargetPath)"
-              ProductVersion="$(TargetVSVersion)"
-              SDKVersion="$(VsSDKVersion)"
-              OutputFile="$(IntermediateOutputPath)$(TargetName).latest.pkgdef"
-              UseCodebase="$(UseCodebase)"
-              ReferencedAssemblies="@(ReferencePath)"  />
+                  ProductVersion="$(TargetVSVersion)"
+                  OutputFile="$(IntermediateOutputPath)$(TargetName).latest.pkgdef"
+                  UseCodebase="$(UseCodebase)"
+                  ReferencedAssemblies="@(ReferencePath)"  />
     <CopyIfChanged Condition="Exists('$(IntermediateOutputPath)$(TargetName).latest.pkgdef')"
                    SourceFile="$(IntermediateOutputPath)$(TargetName).latest.pkgdef"
                    DestinationFile="$(IntermediateOutputPath)$(TargetName).pkgdef" />
@@ -836,7 +1040,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
   <!--
     =======================================================================================================
-    This target contains 2 tasks to copy the .pkgdef file only when necessary. 
+    This target contains 2 tasks to copy the .pkgdef file only when necessary.
     =======================================================================================================
   -->
 
@@ -850,7 +1054,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
     <!--
       =======================================================================================================
-      This task copies the .pkgdef file to the target directory when the .cto file has changed. 
+      This task copies the .pkgdef file to the target directory when the .cto file has changed.
       Even though the .pkgdef file contents might have not changed, the new timestamp on the .pkgdef file
       will cause Visual Studio to re-merge menus on next launch.
       =======================================================================================================
@@ -891,7 +1095,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       ZipItems;
       $(PrepareForRunDependsOn)
     </PrepareForRunDependsOn>
-    <ZipFilesDependsOn>VsTemplatePathsTarget;GetZipFilesFromVSTemplates;CalculateZipFiles</ZipFilesDependsOn>
+    <ZipFilesDependsOn>GetZipFilesFromVSTemplates;CalculateZipFiles</ZipFilesDependsOn>
   </PropertyGroup>
 
   <!--Make sure that the zip output is set-->
@@ -1036,7 +1240,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
     </Copy>
 
-    <Message Importance="High" Text="$(MSBuildProjectName) -&gt; @(_ZipProjectOutDir->'%(FullPath)')" />
+    <Message Text="$(MSBuildProjectName) -&gt; @(_ZipProjectOutDir->'%(FullPath)')" />
 
   </Target>
 
@@ -1111,7 +1315,7 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
     </Copy>
 
-    <Message Importance="High" Text="$(MSBuildProjectName) -&gt; @(_ZipItemOutDir->'%(FullPath)')" />
+    <Message Text="$(MSBuildProjectName) -&gt; @(_ZipItemOutDir->'%(FullPath)')" />
 
   </Target>
 
@@ -1121,19 +1325,4 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
     <AvailableItemName Include="ZipProject"/>
     <AvailableItemName Include="ZipItem"/>
   </ItemGroup>
-
-  <!--Target to retrive deployment path for vstemplates zip files-->
-  <Target Name="VsTemplatePathsTarget"
-          DependsOnTargets="$(VsTemplatePathsTargetDependsOn)"
-          Condition="'$(DeployVSTemplates)'=='true'">
-
-    <VsTemplatePaths RegistryHive="$(VSSDKTargetPlatformRegRoot)$(VSSDKTargetPlatformRegRootSuffix)">
-      <Output TaskParameter="ProjectTemplates" PropertyName="ZipProjectOutput"/>
-      <Output TaskParameter="ItemTemplates" PropertyName="ZipItemOutput"/>
-    </VsTemplatePaths>
-
-    <!--Make sure those directories exist-->
-    <MakeDir Directories="$(ZipProjectOutput);$(ZipItemOutput)"/>
-  </Target>
-
 </Project>

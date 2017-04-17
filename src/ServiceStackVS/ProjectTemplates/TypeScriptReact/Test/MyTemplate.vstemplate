@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Multi project sample</Name>
-    <Description>My multi project template demo</Description>
+    <Name>ServiceStack.Tests</Name>
+    <Description>ServiceStack.Tests</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
-using NuGet;
 using ServiceStack;
 using ServiceStackVS.Common;
+using NuGet;
 
 namespace ServiceStackVS.ExternalTemplateWizard
 {
