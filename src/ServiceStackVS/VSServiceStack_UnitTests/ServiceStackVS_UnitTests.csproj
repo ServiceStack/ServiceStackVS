@@ -163,10 +163,6 @@
       <Project>{7344da1c-9297-49fd-be37-568a3c4ab544}</Project>
       <Name>ServiceStackVS.NuGetInstallerWizard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ServiceStackVS.TestUtility\ServiceStackVS.TestUtility.csproj">
-      <Project>{36b58306-4474-4519-9ed5-e446ab648a8e}</Project>
-      <Name>ServiceStackVS.TestUtility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.csproj">
       <Project>{05410bd6-c9bc-45da-b0aa-b73047bccf14}</Project>
       <Name>ServiceStackVS</Name>

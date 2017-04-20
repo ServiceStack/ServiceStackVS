@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{524FA14C-C188-4A36-92FB-A92EBB1FA570}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,8 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NuGetInstallerWizard", "ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj", "{7344DA1C-9297-49FD-BE37-568A3C4AB544}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypes", "ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj", "{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.TestUtility", "ServiceStackVS.TestUtility\ServiceStackVS.TestUtility.csproj", "{36B58306-4474-4519-9ED5-E446AB648A8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Tests", "ServiceStackVS.TemplateTests\ServiceStackVS.Tests.csproj", "{1933A6BA-3364-4F94-8015-1F029DCE9383}"
 EndProject
@@ -61,10 +59,6 @@ Global
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36B58306-4474-4519-9ED5-E446AB648A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36B58306-4474-4519-9ED5-E446AB648A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36B58306-4474-4519-9ED5-E446AB648A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36B58306-4474-4519-9ED5-E446AB648A8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1933A6BA-3364-4F94-8015-1F029DCE9383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1933A6BA-3364-4F94-8015-1F029DCE9383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1933A6BA-3364-4F94-8015-1F029DCE9383}.Release|Any CPU.ActiveCfg = Release|Any CPU
