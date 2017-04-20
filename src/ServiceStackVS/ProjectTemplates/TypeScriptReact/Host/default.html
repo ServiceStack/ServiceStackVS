@@ -2,55 +2,32 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <!--build:css lib/css/lib.min.css-->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <title>$safeprojectname$</title>
+
+    <!--build:css /css/lib.min.css-->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
     <!--endbuild-->
     <!--build:css css/app.min.css-->
-    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="/css/app.css" />
     <!-- endbuild -->
-    <title>$safeprojectname$</title>
 </head>
 <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-        <div class="container">
-            <a class="navbar-brand" href="#">$safeprojectname$</a>
 
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Link 1 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link 2</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div id="body"></div>
 
-    <div class="container">
-        <div class="row" style="margin: 10px 0">
-            <div id="content"></div>
-        </div>
-    </div>
+<h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
+    <a href="https://servicestack.net/vs-templates/ReactApp">Learn about this React VS.NET template</a>
+</h4>
 
-    <!-- build:remove -->
-    <script src="/jspm_packages/system.js"></script>
+<!-- build:js /dist/react.min.js -->
+<script src="/node_modules/react/dist/react.js"></script>
+<!-- endbuild -->
+<!-- build:js /dist/react-dom.min.js -->
+<script src="/node_modules/react-dom/dist/react-dom.js"></script>
+<!-- endbuild -->
 
-    <script src="/jspm.config.js"></script>
+<script src="/dist/bundle.js"></script>
 
-    <script src="/deps.lib.js"></script>
-
-    <script>
-        System.import("app").catch(console.error.bind(console));
-    </script>
-    <!-- endbuild -->
-
-    <!-- htmlbuild:appbundle -->
-    <!-- endbuild -->
-
-    <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
-        <a href="https://servicestack.net/vs-templates/ReactApp">Learn about this React VS.NET template</a>
-    </h4>
 </body>
 </html>

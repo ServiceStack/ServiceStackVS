@@ -23,7 +23,8 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,24 +119,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jspm.config.js" />
     <Content Include="default.html" />
-    <Content Include="deps.lib.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
-    <Content Include="css\app.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="webpack.config.js" />
+    <Content Include="dist\bundle.js" />
+    <Content Include="css\app.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
@@ -148,13 +149,15 @@
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\HelloWorld.tsx" />
+    <TypeScriptCompile Include="tests\add.test.ts" />
+    <TypeScriptCompile Include="tests\CheckboxWithLabel.test.tsx" />
+    <TypeScriptCompile Include="tests\CheckboxWithLabel.tsx" />
+    <TypeScriptCompile Include="tests\sum.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
 	<Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
-    <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />
