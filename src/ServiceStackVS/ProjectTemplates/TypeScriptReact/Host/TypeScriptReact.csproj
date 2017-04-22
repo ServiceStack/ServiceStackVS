@@ -119,17 +119,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default.html" />
-    <Content Include="packages.config" />
-    <Content Include="package.json" />
-    <Content Include="tsconfig.json" />
-    <Content Include="gulpfile.js" />
-    <Content Include="webpack.config.js" />
-    <Content Include="dist\bundle.js" />
-    <Content Include="css\app.css" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="AppHost.cs" />
     <Content Include="Global.asax" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,13 +132,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppHost.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\app.tsx" />
@@ -155,8 +143,18 @@
     <TypeScriptCompile Include="tests\sum.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="default.html" />
+    <Content Include="packages.config" />
+    <Content Include="package.json" />
+    <Content Include="tsconfig.json" />
+    <Content Include="gulpfile.js" />
+    <Content Include="webpack.config.js" />
+    <Content Include="dist\bundle.js" />
+    <Content Include="css\app.css" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="img\" />
-	<Folder Include="wwwroot\" />
+	  <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />

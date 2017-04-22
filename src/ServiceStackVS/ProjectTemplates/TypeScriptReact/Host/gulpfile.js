@@ -1,5 +1,8 @@
 /*global require*/
 (function () {
+    var argv = require('yargs').argv;
+    var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
+
     var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
     var COPY_SERVER_FILES = [
         { src: './bin/**/*', dest: 'bin/' },
@@ -36,14 +39,12 @@
     var exec = require('child_process').exec;
     var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
-    var argv = require('yargs').argv;
     var nugetRestore = require('gulp-nuget-restore');
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
     var webpack = require('webpack');
 
     var webRoot = 'wwwroot/';
-    var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
     var configFile = 'config.json';
     var configDir = webBuildDir + 'publish/';
     var configPath = configDir + configFile;
@@ -116,11 +117,16 @@
         return fs.existsSync(process.env["PROGRAMFILES(X86)"] + "/MSBuild/15.0") ?
             15
             : fs.existsSync(process.env["PROGRAMFILES(X86)"] + "/MSBuild/14.0") ?
-            14 :
-            null;
+                14 :
+                null;
     }
 
     // Tasks
+    gulp.task('www-postinstall', done => {
+        runSequence(
+            'webpack-build',
+            done);
+    });
     gulp.task('www-copy-server', done => {
         var completed = 0;
         var COPY_FILES = COPY_SERVER_FILES;
@@ -168,7 +174,7 @@
             .pipe(useref())
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-webpack-build', done => {
+    gulp.task('webpack-build-prod', done => {
         var config = Object.create(webpackConfig);
         config.output.path = __dirname + "/wwwroot/dist";
         config.plugins = (config.plugins || []).concat(
@@ -281,7 +287,7 @@
                 'www-copy-client',
                 'www-bundle-html'
             ],
-            'www-webpack-build',
+            'webpack-build-prod',
             done);
     });
 
