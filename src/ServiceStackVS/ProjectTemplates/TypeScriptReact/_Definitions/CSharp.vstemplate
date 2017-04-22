@@ -5,7 +5,7 @@
   
   <TemplateData>
     <Name>React App</Name>
-    <Description>TypeScript React App</Description>
+    <Description>TypeScript React App configured with Webpack and Jest Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
     <DefaultName>ReactApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>

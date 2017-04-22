@@ -5,7 +5,7 @@
   
   <TemplateData>
     <Name>AngularJS App</Name>
-    <Description>AngularJS App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application.</Description>
+    <Description>AngularJS 1.5 App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application.</Description>
     <DefaultName>AngularJSApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>

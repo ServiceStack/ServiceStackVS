@@ -5,7 +5,7 @@
 
   <TemplateData>
     <Name>React Desktop Apps</Name>
-    <Description>React + TypeScript app with additional projects to produce; an installable CefSharp based WinForms application, Self host console application and ready to deploy IIS Web application.</Description>
+    <Description>TypeScript React Web App with pre-configured scripts to package it inside an auto-updating CefSharp WinForms App, Self Hosting Console App and OSX Cocoa App</Description>
     <DefaultName>ReactDesktopApps</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
