@@ -42,13 +42,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="default.html" />
     <EmbeddedResource Include="css\app.min.css" />
-    <EmbeddedResource Include="app.js" />
-    <EmbeddedResource Include="img\react-logo.png" />
-    <EmbeddedResource Include="lib\css\lib.min.css" />
+    <EmbeddedResource Include="css\lib.min.css" />
+    <EmbeddedResource Include="dist\bundle.js" />
+    <EmbeddedResource Include="dist\react-dom.min.js" />
+    <EmbeddedResource Include="dist\react.min.js" />
+    <EmbeddedResource Include="img\react-desktop-splash.png" />
+    <EmbeddedResource Include="fonts\FontAwesome.otf" />
+    <EmbeddedResource Include="fonts\fontawesome-webfont.eot" />
+    <EmbeddedResource Include="fonts\fontawesome-webfont.svg" />
+    <EmbeddedResource Include="fonts\fontawesome-webfont.ttf" />
+    <EmbeddedResource Include="fonts\fontawesome-webfont.woff" />
+    <EmbeddedResource Include="fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="default.html" />
     <None Include="packages.config" />
     <None Include="App.config" />
   </ItemGroup>

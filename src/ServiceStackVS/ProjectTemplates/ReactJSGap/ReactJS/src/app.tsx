@@ -7,19 +7,21 @@ import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import HelloWorld from './HelloWorld';
 
+declare var nativeHost;
+
 class App extends React.Component<any,any> { 
     constructor(props,context) {
         super(props, context);
     }
 
     handleAbout() {
-        window.nativeHost.showAbout();
+        nativeHost.showAbout();
     }
     handleToggleWindow() {
-        window.nativeHost.toggleFormBorder();
+        nativeHost.toggleFormBorder();
     }
     handleQuit() {
-        window.nativeHost.quit();
+        nativeHost.quit();
     }
 
     render() {
@@ -28,8 +30,8 @@ class App extends React.Component<any,any> {
                 <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="/img/react-logo.png" />
-                            $safeprojectname$
+                            <i className="fa fa-code" aria-hidden="true"></i>
+                            <span style={{ paddingLeft: 5 }}>$safeprojectname$</span>
                         </a>
 
                         <div className="collapse navbar-collapse" style={{ paddingLeft: 15 }}>
@@ -54,4 +56,4 @@ class App extends React.Component<any,any> {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('content'));
+ReactDOM.render(<App />, document.getElementById('body'));

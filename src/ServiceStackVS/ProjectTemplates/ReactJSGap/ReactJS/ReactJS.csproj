@@ -23,7 +23,8 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,36 +92,14 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
-    <ItemGroup>
-    <TypeScriptCompile Include="src\app.tsx" />
-    <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\HelloWorld.tsx" />
-    <TypeScriptCompile Include="platform.ts" />
-  </ItemGroup>
   <ItemGroup>
-    <Content Include="css\app.css" />
-    <Content Include="gulpfile.js" />
-    <Content Include="jspm.config.js" />
-    <Content Include="default.html" />
-    <Content Include="platform.css" />
-    <Content Include="platform.js" />
-    <Content Include="deps.lib.js" />
-    <Content Include="img\react-logo.png" />
-    <Content Include="tests\unit\hello-test.js" />
-    <Content Include="tests\preprocessor.js" />
-    <Content Include="tests\README.txt" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="package.json" />
-    <Content Include="tsconfig.json" />
-    <Folder Include="wwwroot\" />
-    <Content Include="wwwroot_build\00-npm-postinstall.bat" />
-    <Content Include="wwwroot_build\00-install-dependencies.bat" />
-    <Content Include="wwwroot_build\package-deploy-console.bat" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\publish\config.json" />
-    <Content Include="wwwroot_build\tools\ILMerge.exe" />
+    <Compile Include="AppHost.cs" />
+    <Content Include="Global.asax" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -129,15 +108,33 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <TypeScriptCompile Include="src\app.tsx" />
+    <TypeScriptCompile Include="src\dtos.ts" />
+    <TypeScriptCompile Include="src\HelloWorld.tsx" />
+    <TypeScriptCompile Include="tests\add.test.ts" />
+    <TypeScriptCompile Include="tests\CheckboxWithLabel.test.tsx" />
+    <TypeScriptCompile Include="tests\CheckboxWithLabel.tsx" />
+    <TypeScriptCompile Include="tests\sum.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppHost.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="default.html" />
+    <Content Include="packages.config" />
+    <Content Include="package.json" />
+    <Content Include="tsconfig.json" />
+    <Content Include="gulpfile.js" />
+    <Content Include="webpack.config.js" />
+    <Content Include="dist\bundle.js" />
+    <Content Include="css\app.css" />
+    <Content Include="platform.css" />
+    <Content Include="platform.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\react-logo.png" />
+    <Folder Include="wwwroot\" />
+    <Content Include="wwwroot_build\package-deploy-console.bat" />
+    <Content Include="wwwroot_build\deploy\appsettings.txt" />
+    <Content Include="wwwroot_build\publish\config.json" />
+    <Content Include="wwwroot_build\tools\ILMerge.exe" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
@@ -149,11 +146,12 @@
       <Name>$safeprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="img\" />
-  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />  
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

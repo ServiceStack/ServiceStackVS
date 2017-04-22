@@ -2,39 +2,34 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-
-    <!--build:css lib/css/lib.min.css-->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
-    <!--endbuild-->
-    <!--build:css css/app.min.css-->
-    <link rel="stylesheet" href="css/app.css" />
-    <!-- endbuild -->
-    <link rel="stylesheet" href="/platform.css" />
-
     <title>$safeprojectname$</title>
+
+    <!--build:css /css/lib.min.css-->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
+    <!--endbuild-->
+    <!--build:css /css/app.min.css-->
+    <link rel="stylesheet" href="/css/app.css" />
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="/platform.css" />
 </head>
 <body>
-    <div id="content"></div>
-
-    <!-- build:remove -->
-    <script src="/jspm_packages/system.js"></script>
-
-    <script src="/jspm.config.js"></script>
-
-    <script src="/deps.lib.js"></script>
-
-    <script>
-        System.import("app").catch(console.error.bind(console));
-    </script>
-    <!-- endbuild -->
-
-    <!-- htmlbuild:appbundle -->
-    <!-- endbuild -->
-
-    <script src="/platform.js"></script>
+    <div id="body"></div>
 
     <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
         <a href="https://servicestack.net/vs-templates/ReactDesktopApps">Learn about this React Desktop Apps VS.NET template</a>
     </h4>
+
+    <!-- build:js /dist/react.min.js -->
+    <script src="/node_modules/react/dist/react.js"></script>
+    <!-- endbuild -->
+    <!-- build:js /dist/react-dom.min.js -->
+    <script src="/node_modules/react-dom/dist/react-dom.js"></script>
+    <!-- endbuild -->
+
+    <script src="/dist/bundle.js"></script>
+
+    <script src="/platform.js"></script>
 </body>
 </html>
