@@ -3,7 +3,6 @@
   <TemplateData>
     <Name>Test</Name>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <ProvideDefaultName>true</ProvideDefaultName>
