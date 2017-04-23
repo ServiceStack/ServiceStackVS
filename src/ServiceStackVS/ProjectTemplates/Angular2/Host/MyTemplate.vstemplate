@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Angular2 App (Beta)</Name>
-    <Description>Angular2 TypeScript App (Beta)</Description>
+    <Name>Host</Name>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>Angular2App</DefaultName>
