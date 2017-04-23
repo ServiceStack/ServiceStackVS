@@ -129,7 +129,7 @@
     <Content Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\react-logo.png" />
+    <Content Include="img\react-desktop-splash.png" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />

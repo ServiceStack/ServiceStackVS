@@ -145,11 +145,19 @@
 
     // Tasks
     gulp.task('www-postinstall', done => {
-        runSequence('www-copy-files',
+        runSequence('www-clean-client',
+            'www-clean-resources',
+            'www-copy-files',
             'www-bundle-html',
             'webpack-build',
             'webpack-build-prod',
             done);
+    });
+    gulp.task('www-clean-resources', () => {
+        return del([
+            resourcesRoot + '/dist/*',
+            resourcesRoot + '/img/*'
+        ], { force: true });
     });
     gulp.task('www-clean-server', () => {
         var binPath = webRoot + '/bin/';
