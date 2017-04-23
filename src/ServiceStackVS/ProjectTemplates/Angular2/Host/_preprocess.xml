@@ -2,6 +2,6 @@
 <Preprocess>
   <TemplateInfo Path="CSharp\ServiceStack\Angular2"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
-    <add key="ServiceStack.CSharp.TypeScriptReact" value="$saferootprojectname$"/>
+    <add key="ServiceStack.CSharp.Angular2" value="$saferootprojectname$"/>
   </Replacements>
 </Preprocess>
