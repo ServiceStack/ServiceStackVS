@@ -15,7 +15,7 @@
   </TemplateData>
   <TemplateContent>
     <ProjectCollection>
-      <ProjectTemplateLink ProjectName="$safeprojectname$">ReactJS\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$">Host\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.AppWinForms">ReactJSWinForms\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.AppConsole">ReactJSConsole\MyTemplate.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Resources">ReactJSResources\MyTemplate.vstemplate</ProjectTemplateLink>

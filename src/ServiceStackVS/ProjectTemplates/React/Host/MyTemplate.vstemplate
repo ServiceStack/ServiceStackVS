@@ -4,17 +4,12 @@
     <Name>Host</Name>
     <ProjectType>CSharp</ProjectType>  
     <SortOrder>1000</SortOrder>
-    <ProjectSubType>ServiceStack</ProjectSubType>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>ReactApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
-    <LocationField>Enabled</LocationField>
-    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <Icon>__TemplateIcon.png</Icon>
-    <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="TypeScriptReact.csproj" ReplaceParameters="true"></Project>
+    <Project TargetFileName="$safeprojectname$.csproj" File="Host.csproj" ReplaceParameters="true"></Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
@@ -47,7 +42,6 @@
     </NuGetPackages>
     <NodeJS>
         <npm-package id="gulp" />
-        <npm-package id="jspm" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

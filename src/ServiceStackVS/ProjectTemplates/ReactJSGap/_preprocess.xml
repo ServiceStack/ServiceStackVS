@@ -7,8 +7,7 @@
   <TemplateInfo Path="CSharp\Web\Custom\Subcategory"/>
   -->
   <TemplateInfo Path="CSharp\ServiceStack"/>
-  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
-    <add key="ServiceStack.CSharp.ReactJSGap" value="$safeprojectname$"/>
+  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj;*.jpg;*.png;*.ico;templateinfo.xml">
     <!--targetFramework="4.0"-->
     <add key="targetFramework=&quot;4.0&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>
     <!--<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>-->

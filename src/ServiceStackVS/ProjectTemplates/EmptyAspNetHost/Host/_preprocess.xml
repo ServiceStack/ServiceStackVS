@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Preprocess>
-  <TemplateInfo Path="CSharp\ServiceStack\EmptyAspNetHost"/>
-  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">
-    <add key="ServiceStack.CSharp.EmptyAspNetHost" value="$saferootprojectname$"/>
+  <TemplateInfo Path="CSharp\ServiceStack\Host"/>
+  <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj;*.jpg;*.png;*.ico;templateinfo.xml">
   </Replacements>
 </Preprocess>

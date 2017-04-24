@@ -44,7 +44,7 @@
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
-	  <npm-package id="jspm" />
+	    <npm-package id="jspm" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

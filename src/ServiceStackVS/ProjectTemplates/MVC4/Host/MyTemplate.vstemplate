@@ -9,11 +9,9 @@
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <Icon>__TemplateIcon.png</Icon>
-    <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="MVC4.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="Host.csproj" ReplaceParameters="true">
     </Project>
   </TemplateContent>
   <WizardExtension>
