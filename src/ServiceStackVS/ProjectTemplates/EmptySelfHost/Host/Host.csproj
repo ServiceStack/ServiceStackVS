@@ -7,8 +7,8 @@
     <ProjectGuid>{CF36BF58-D08F-425A-9A6A-D0A86C506110}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceStack.CSharp.EmptySelfHost</RootNamespace>
-    <AssemblyName>ServiceStack.CSharp.EmptySelfHost</AssemblyName>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
     <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
