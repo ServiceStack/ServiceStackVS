@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$safeprojectname$</title>
 
     <!--build:css /css/lib.min.css-->
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="/platform.css" />
 </head>
 <body>
+
     <div id="body"></div>
 
     <a href="https://servicestack.net/vs-templates/ReactDesktopApps">
@@ -24,15 +26,10 @@
         </h4>
     </a>
 
-    <!-- build:js /dist/react.min.js -->
-    <script src="/node_modules/react/dist/react.js"></script>
-    <!-- endbuild -->
-    <!-- build:js /dist/react-dom.min.js -->
-    <script src="/node_modules/react-dom/dist/react-dom.js"></script>
-    <!-- endbuild -->
-
-    <script src="/dist/bundle.js"></script>
+    <script src="/dist/vendor.bundle.js"></script>
+    <script src="/dist/app.bundle.js"></script>
 
     <script src="/platform.js"></script>
+
 </body>
 </html>

@@ -215,7 +215,7 @@
                 });
                 gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
 
-                gulp.src(__dirname + "/wwwroot/dist/" + config.output.filename)
+                gulp.src(__dirname + "/wwwroot/dist/*")
                     .pipe(gulp.dest(resourcesRoot + "dist/"))
                     .on('end', done);
             }

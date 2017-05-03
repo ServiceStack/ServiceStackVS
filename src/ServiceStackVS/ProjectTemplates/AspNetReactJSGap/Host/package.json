@@ -20,10 +20,11 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
     "react": "^15.2.1",
     "react-dom": "^15.5.4",
-    "servicestack-client": "^0.0.33"
+    "servicestack-client": "0.0.34"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -46,12 +47,13 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.7",
+    "html-loader": "0.4.4",
     "jest": "^19.0.2",
     "requirejs": "^2.3.2",
     "run-sequence": "^1.2.2",
     "source-map-loader": "^0.2.1",
     "ts-jest": "^19.0.10",
-    "typescript": "^2.2.2",
+    "typescript": "^2.3.2",
     "webpack": "^2.4.1",
     "yargs": "^6.4.0",
     "globule": "^1.1.0"

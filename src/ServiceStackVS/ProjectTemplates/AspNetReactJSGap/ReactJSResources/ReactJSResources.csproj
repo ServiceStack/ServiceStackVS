@@ -45,9 +45,8 @@
     <EmbeddedResource Include="default.html" />
     <EmbeddedResource Include="css\app.min.css" />
     <EmbeddedResource Include="css\lib.min.css" />
-    <EmbeddedResource Include="dist\bundle.js" />
-    <EmbeddedResource Include="dist\react-dom.min.js" />
-    <EmbeddedResource Include="dist\react.min.js" />
+    <EmbeddedResource Include="dist\app.bundle.js" />
+    <EmbeddedResource Include="dist\vendor.bundle.js" />
     <EmbeddedResource Include="img\react-desktop-splash.png" />
     <EmbeddedResource Include="fonts\FontAwesome.otf" />
     <EmbeddedResource Include="fonts\fontawesome-webfont.eot" />
