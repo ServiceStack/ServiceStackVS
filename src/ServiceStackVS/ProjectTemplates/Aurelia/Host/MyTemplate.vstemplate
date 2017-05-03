@@ -7,10 +7,6 @@
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>AureliaApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
-    <LocationField>Enabled</LocationField>
-    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <Icon>__TemplateIcon.png</Icon>
-    <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="$safeprojectname$.csproj" File="Host.csproj" ReplaceParameters="true"></Project>
@@ -46,8 +42,6 @@
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
-	  <npm-package id="jspm" />
-	  <npm-package id="typings" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

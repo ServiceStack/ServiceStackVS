@@ -3,8 +3,8 @@ import {Aurelia} from 'aurelia-framework';
 export function configure(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
-        .feature('src/resources')
+        .feature('resources')
         .developmentLogging();
 
-    aurelia.start().then(x => x.setRoot('src/app'));
+    aurelia.start().then(x => x.setRoot('app'));
 }

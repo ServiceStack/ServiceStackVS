@@ -2,34 +2,21 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$safeprojectname$</title>
 
-    <!--build:css /lib/css/lib.min.css-->
+    <!--build:css /css/lib.min.css-->
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
     <!--endbuild-->
-
     <!--build:css /css/app.min.css-->
     <link rel="stylesheet" href="/css/app.css" />
     <!-- endbuild -->
-
-    <title>$safeprojectname$</title>
 </head>
-<body aurelia-app="src/main">
+<body aurelia-app="main">
 
-    <!-- build:js /system.js -->
-    <script src="/jspm_packages/system.js"></script>
-    <!-- endbuild -->
+    <script src="/dist/vendor.bundle.js"></script>
+    <script src="/dist/app.bundle.js"></script>
 
-    <script src="/jspm.config.js"></script>
-
-    <!-- build:remove -->
-    <script src="/deps.lib.js"></script>
-    <!-- endbuild -->
-
-    <!-- htmlbuild:appbundle -->
-    <!-- endbuild -->
-
-    <script>
-        System.import('aurelia-bootstrapper').catch(console.error.bind(console));
-    </script>
 </body>
 </html>

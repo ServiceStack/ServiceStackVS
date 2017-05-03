@@ -23,7 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,14 +34,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TypeScriptModuleKind>system</TypeScriptModuleKind>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
-    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,14 +42,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TypeScriptModuleKind>system</TypeScriptModuleKind>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
-    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -81,36 +65,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jspm.config.js" />
-    <Content Include="default.html" />
-    <Content Include="deps.lib.js" />
-    <Content Include="packages.config" />
-    <Content Include="package.json" />
-    <Content Include="tsconfig.json" />
-	<Content Include="css\app.css" />
-	<Content Include="gulpfile.js" />
+    <Compile Include="AppHost.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-	<Content Include="wwwroot_build\00-npm-postinstall.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="src\app.html" />
+    <Content Include="src\resources\elements\hello.html" />
+    <Content Include="src\views\home.html" />
+    <Content Include="src\views\view1.html" />
+    <Content Include="src\views\view2.html" />
+    <Folder Include="src\resources\attributes\" />
+    <Folder Include="src\resources\binding-behaviors\" />
+    <Folder Include="src\resources\value-converters\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppHost.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <!--<ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>-->
   <ItemGroup>
     <TypeScriptCompile Include="src\app.ts" />
     <TypeScriptCompile Include="src\resources\elements\hello.ts" />
@@ -120,22 +98,24 @@
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\views\view1.ts" />
     <TypeScriptCompile Include="src\views\view2.ts" />
+    <TypeScriptCompile Include="tests\add.test.ts" />
+    <TypeScriptCompile Include="tests\sum.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\app.html" />
-    <Content Include="src\resources\elements\hello.html" />
-    <Content Include="src\views\home.html" />
-    <Content Include="src\views\view1.html" />
-    <Content Include="src\views\view2.html" />
+    <Content Include="default.html" />
+    <Content Include="packages.config" />
+    <Content Include="package.json" />
+    <Content Include="tsconfig.json" />
+    <Content Include="gulpfile.js" />
+    <Content Include="webpack.config.js" />
+    <Content Include="dist\app.bundle.js" />
+    <Content Include="dist\vendor.bundle.js" />
+    <Content Include="css\app.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
-	<Folder Include="wwwroot\" />
-    <Folder Include="src\resources\attributes\" />
-    <Folder Include="src\resources\binding-behaviors\" />
-    <Folder Include="src\resources\value-converters\" />
+    <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\00-install-dependencies.bat" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />
