@@ -169,9 +169,9 @@
     });
     gulp.task('www-bundle-html', () => {
         return gulp.src('./default.html')
+            .pipe(useref())
             .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
-            .pipe(useref())
             .pipe(gulp.dest(webRoot));
     });
     gulp.task('webpack-build-prod', done => {
