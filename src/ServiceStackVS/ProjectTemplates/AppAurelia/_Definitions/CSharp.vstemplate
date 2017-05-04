@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>AngularJS App</Name>
-    <Description>AngularJS 1.5 App. This template includes the use of NPM, Bower, Grunt, Gulp and Karma to support the development of your single page application.</Description>
-    <DefaultName>AngularJSApp</DefaultName>
+    <Name>Aurelia App</Name>
+    <Description>Aurelia TypeScript App configured with Webpack and Jest Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
+    <DefaultName>AureliaApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
@@ -44,5 +44,8 @@
     <packages>
       <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
     </packages>
+    <minVsVersion>
+      <version>14</version>
+    </minVsVersion>
   </WizardData>
 </VSTemplate>
