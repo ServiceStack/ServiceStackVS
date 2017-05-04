@@ -1,10 +1,8 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { HeaderComponent } from '../../shared/header';
-import { FooterComponent } from '../../shared/footer';
 import { HomeComponent } from './home/home';
 import { HelloComponent } from './home/hello';
 import { ProductsComponent } from './products/products';

@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>Angular2 App</Name>
-    <Description>Angular2 App</Description>
-    <DefaultName>Angular2App</DefaultName>
+    <Name>Angular4 App</Name>
+    <Description>Angular4 App</Description>
+    <DefaultName>Angular4App</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>

@@ -6,7 +6,8 @@ var client = new JsonServiceClient('/');
 
 @Component({
     selector: 'hello',
-    templateUrl: './src/modules/app/home/hello.html'
+    templateUrl: 'hello.html',
+    styleUrls: ['home.css']
 })
 export class HelloComponent {
     result: string;
@@ -18,13 +19,12 @@ export class HelloComponent {
         this.nameChanged(this.routeParam);
     }
 
-    nameChanged(newValue) {
+    async nameChanged(newValue) {
         if (newValue != null && newValue.length > 0) {
             var req = new Hello();
             req.name = newValue;
-            client.get(req).then(r => {
-                this.result = r.result
-            });
+            var r = await client.get(req);
+            this.result = r.result;
         } else {
             this.result = '';
         }

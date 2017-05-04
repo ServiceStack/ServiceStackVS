@@ -6,12 +6,11 @@
     <div class="mdl-textfield mdl-js-textfield" style="width:auto">
 
         <input type="text" class="mdl-textfield__input" id="Name"
-               style="display:inline-block; width:auto; margin:0 10px 0 0"
-               placeholder="Type your name"
+               placeholder="Type your name" autocomplete="off"
                [(ngModel)]="name"
                (ngModelChange)="nameChanged($event)" />
 
-        <span style="font-size:20px; color:#7a1ea1;">{{result}}</span>
+        <span class="result">{{result}}</span>
     </div>
 
 </div>

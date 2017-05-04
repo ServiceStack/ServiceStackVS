@@ -5,12 +5,8 @@
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>Angular2App</DefaultName>
+    <DefaultName>Angular4App</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
-    <LocationField>Enabled</LocationField>
-    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <Icon>__TemplateIcon.png</Icon>
-    <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="$safeprojectname$.csproj" File="Host.csproj" ReplaceParameters="true"></Project>
@@ -44,7 +40,6 @@
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
-	    <npm-package id="jspm" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
   </WizardData>

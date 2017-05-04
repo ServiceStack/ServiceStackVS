@@ -34,7 +34,8 @@
                 </div>
             </div>
         </section>
-    `
+    `,
+    styleUrls: ['products.scss']
 })
 export class ProductsComponent {
     heading: string;

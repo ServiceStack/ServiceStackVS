@@ -26,25 +26,10 @@
     <!--build:css /lib/css/lib.min.css-->
     <link rel="stylesheet" href="/node_modules/material-design-lite/dist/material.deep_purple-pink.min.css">
     <!--endbuild-->
-
     <!--build:css /css/app.min.css-->
     <link rel="stylesheet" href="/css/app.css" />
     <!-- endbuild -->
 
-    <!-- build:remove -->
-    <script src="/jspm_packages/system.js"></script>
-
-    <script src="/jspm.config.js"></script>
-
-    <script src="/deps.lib.js"></script>
-
-    <script>
-        System.import("app").catch(console.error.bind(console));
-    </script>
-    <!-- endbuild -->
-
-    <!-- htmlbuild:appbundle -->
-    <!-- endbuild -->
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 
@@ -53,5 +38,10 @@
     <!--build:js /lib/js/lib.min.js-->
     <script src="/node_modules/material-design-lite/material.min.js"></script>
     <!-- endbuild -->
+
+    <script src="/dist/polyfills.bundle.js"></script>
+    <script src="/dist/vendor.bundle.js"></script>
+    <script src="/dist/app.bundle.js"></script>
+
 </body>
 </html>

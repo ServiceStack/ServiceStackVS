@@ -1,37 +1,9 @@
 /*global require*/
 (function () {
-    var fs = require('fs');
-    var path = require('path');
-    // include gulp
-    var gulp = require('gulp');
-    var gulpUtil = require('gulp-util');
-    // include plug-ins
-    var del = require('del');
-    var uglify = require('gulp-uglify');
-    var newer = require('gulp-newer');
-    var useref = require('gulp-useref');
-    var gulpif = require('gulp-if');
-    var minifyCss = require('gulp-clean-css');
-    var gulpReplace = require('gulp-replace');
-    var htmlBuild = require('gulp-htmlbuild');
-    var eventStream = require('event-stream');
-    var exec = require('child_process').exec;
-    var rename = require('gulp-rename');
-    var runSequence = require('run-sequence');
     var argv = require('yargs').argv;
-    var nugetRestore = require('gulp-nuget-restore');
-    var msbuild = require('gulp-msbuild');
-    var msdeploy = require('gulp-msdeploy');
-
-    var webRoot = 'wwwroot/';
     var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
-    var configFile = 'config.json';
-    var configDir = webBuildDir + 'publish/';
-    var configPath = configDir + configFile;
-    var appSettingsFile = 'appsettings.txt';
-    var appSettingsDir = webBuildDir + 'deploy/';
-    var appSettingsPath = appSettingsDir + appSettingsFile;
 
+    var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
     var COPY_SERVER_FILES = [
         { src: './bin/**/*', dest: 'bin/' },
         { src: './App_Data/**/*', dest: 'App_Data/' },
@@ -48,8 +20,37 @@
 
     var COPY_CLIENT_FILES = [
         { src: './img/**/*', dest: 'img/' },
-        { src: './src/**/*.html', dest: 'src/' }
+        { src: './node_modules/font-awesome/fonts/*', dest: 'fonts/' }
     ];
+
+    var fs = require('fs');
+    var del = require('del');
+    var path = require('path');
+    var gulp = require('gulp');
+    var gulpUtil = require('gulp-util');
+    var uglify = require('gulp-uglify');
+    var newer = require('gulp-newer');
+    var useref = require('gulp-useref');
+    var gulpif = require('gulp-if');
+    var minifyCss = require('gulp-clean-css');
+    var gulpReplace = require('gulp-replace');
+    var htmlBuild = require('gulp-htmlbuild');
+    var eventStream = require('event-stream');
+    var exec = require('child_process').exec;
+    var rename = require('gulp-rename');
+    var runSequence = require('run-sequence');
+    var nugetRestore = require('gulp-nuget-restore');
+    var msbuild = require('gulp-msbuild');
+    var msdeploy = require('gulp-msdeploy');
+    var webpack = require('webpack');
+
+    var webRoot = 'wwwroot/';
+    var configFile = 'config.json';
+    var configDir = webBuildDir + 'publish/';
+    var configPath = configDir + configFile;
+    var appSettingsFile = 'appsettings.txt';
+    var appSettingsDir = webBuildDir + 'deploy/';
+    var appSettingsPath = appSettingsDir + appSettingsFile;
 
     function createConfigsIfMissing() {
         if (!fs.existsSync(configPath)) {
@@ -72,9 +73,10 @@
         }
     }
 
-    // Deployment config
     createConfigsIfMissing();
-    var config = require(configPath);
+    var config = require(configPath); // Deployment config
+
+    var webpackConfig = require('./webpack.config.js');
 
     // htmlbuild replace for CDN references
     function pipeTemplate(block, template) {
@@ -110,9 +112,22 @@
         return copyTask;
     }
 
-    // Tasks
+    function getMSBuildToolsVersion() {
+        fs = fs || require("fs");
+        return fs.existsSync(process.env["PROGRAMFILES(X86)"] + "/MSBuild/15.0") ?
+            15
+            : fs.existsSync(process.env["PROGRAMFILES(X86)"] + "/MSBuild/14.0") ?
+                14 :
+                null;
+    }
 
-    gulp.task('www-copy-server', function (callback) {
+    // Tasks
+    gulp.task('www-postinstall', done => {
+        runSequence(
+            'webpack-build',
+            done);
+    });
+    gulp.task('www-copy-server', done => {
         var completed = 0;
         var COPY_FILES = COPY_SERVER_FILES;
 
@@ -120,12 +135,12 @@
             (function (index) {
                 copyFilesTask(COPY_FILES[index], function () {
                     if (++completed === COPY_FILES.length)
-                        callback();
+                        done();
                 });
             })(i);
         }
     });
-    gulp.task('www-copy-client', function (callback) {
+    gulp.task('www-copy-client', done => {
         var completed = 0;
         var COPY_FILES = COPY_CLIENT_FILES;
 
@@ -133,16 +148,16 @@
             (function (index) {
                 copyFilesTask(COPY_FILES[index], function () {
                     if (++completed === COPY_FILES.length)
-                        callback();
+                        done();
                 });
             })(i);
         }
     });
-    gulp.task('www-clean-server', function () {
+    gulp.task('www-clean-server', () => {
         var binPath = webRoot + '/bin/';
         return del(binPath);
     });
-    gulp.task('www-clean-client', function () {
+    gulp.task('www-clean-client', () => {
         return del([
             webRoot + '**/*.*',
             '!wwwroot/bin/**/*.*', //Don't delete dlls
@@ -152,55 +167,51 @@
             '!wwwroot/appsettings.txt' //Don't delete deploy settings
         ]);
     });
-    gulp.task('www-bundle-html', function () {
+    gulp.task('www-bundle-html', () => {
         return gulp.src('./default.html')
+            .pipe(useref())
             .pipe(gulpif('*.js', uglify()))
             .pipe(gulpif('*.css', minifyCss()))
-            .pipe(useref())
-            .pipe(htmlBuild({
-                appbundle: function (block) {
-                    pipeTemplate(block, '<script src="/app.js"></script>'); // file generated by 'www-jspm-build' task below
-                }
-            }))
             .pipe(gulp.dest(webRoot));
     });
-    gulp.task('www-jspm-build', function (callback) {
-        exec('jspm build ./src/main.js ' + webRoot + 'app.js -minify', function (err, stdout, stderr) {
-            console.log(stdout);
-            console.log(stderr);
-            callback();
+    gulp.task('webpack-build-prod', done => {
+        var config = Object.create(webpackConfig);
+        config.output.path = __dirname + "/wwwroot/dist";
+        config.plugins = (config.plugins || []).concat(
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production')
+                }
+            }),
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.UglifyJsPlugin()
+        );
+        webpack(config).run((err, stats) => {
+            if (err) {
+                gulpUtil.log('Error', err);
+            } else {
+                Object.keys(stats.compilation.assets).forEach(key => {
+                    gulpUtil.log('Webpack: output ', gulpUtil.colors.green(key));
+                });
+                gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
+            }
+            done();
         });
     });
-    gulp.task('www-jspm-deps', function (callback) {
-        var pkg = JSON.parse(fs.readFileSync('./package.json'));
-        var deps = pkg["jspm"]["dependencies"];
-        var modules = Object.keys(deps);
-        var peerDeps = pkg["jspm"]["peerDependencies"];
-        if (peerDeps) {
-            modules = modules.concat(Object.keys(peerDeps));
-        }
-        var include = " + " + modules.join(' + ');
-
-        exec('jspm bundle ./src/main.js ' + include + ' - [./src/**/*] ./deps.lib.js', function (err, stdout, stderr) {
-            console.log(stdout);
-            console.log(stderr);
-            callback();
-        });
-    });
-    gulp.task('www-msbuild', function () {
+    gulp.task('www-msbuild', () => {
         return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
             .pipe(msbuild({
+                toolsVersion: MSBUILD_TOOLS_VERSION,
                 targets: ['Clean', 'Build'],
                 properties: {
                     Configuration: 'Release'
                 },
                 stdout: true,
-                verbosity: 'quiet',
-                toolsVersion: 14.0 //remove to support <= VS 2013 / C# 5
+                verbosity: 'quiet'
             }));
     });
-    gulp.task('www-msdeploy-pack', function () {
+    gulp.task('www-msdeploy-pack', () => {
         return gulp.src('wwwroot/')
             .pipe(msdeploy({
                 verb: 'sync',
@@ -210,7 +221,7 @@
                 }
             }));
     });
-    gulp.task('www-msdeploy-push', function () {
+    gulp.task('www-msdeploy-push', () => {
         return gulp.src('./webdeploy.zip')
             .pipe(msdeploy({
                 verb: 'sync',
@@ -225,42 +236,69 @@
             }));
     });
 
-    gulp.task('default', function (callback) {
+    gulp.task('webpack-build', done => {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec('npm run build');
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    });
+
+    gulp.task('00-webpack-watch', done => {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec('npm run watch');
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    });
+
+    gulp.task('tests-run', done => {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec('npm test');
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    });
+
+    gulp.task('tests-watch', done => {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec('npm test -- --watch');
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    });
+
+    gulp.task('default', done => {
         runSequence('01-package-server', '02-package-client',
-                callback);
+            done);
     });
 
-    gulp.task('00-update-deps', function (callback) {
-        runSequence('www-msbuild', 'www-jspm-deps',
-                callback);
-    });
-
-    gulp.task('01-package-server', function (callback) {
+    gulp.task('01-package-server', done => {
         runSequence('www-msbuild', 'www-clean-server',
             [
                 'www-copy-server'
             ],
-            callback);
+            done);
     });
 
-    gulp.task('02-package-client', function (callback) {
+    gulp.task('02-package-client', done => {
         runSequence('www-clean-client',
             [
                 'www-copy-client',
                 'www-bundle-html'
             ],
-            'www-jspm-build',
-            callback);
+            'webpack-build-prod',
+            done);
     });
 
-    gulp.task('03-deploy-app', function (callback) {
+    gulp.task('03-deploy-app', done => {
         runSequence('www-msdeploy-pack', 'www-msdeploy-push',
-            callback);
+            done);
     });
 
-    gulp.task('package-and-deploy', function (callback) {
+    gulp.task('package-and-deploy', done => {
         runSequence('01-package-server', '02-package-client', '03-deploy-app',
-            callback);
+            done);
     });
 
 })();

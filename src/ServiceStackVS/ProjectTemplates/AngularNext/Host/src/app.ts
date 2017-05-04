@@ -1,7 +1,4 @@
 ﻿import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { HeaderComponent } from './shared/header';
-import { FooterComponent } from './shared/footer';
 
 @Component({
     selector: 'app-root',

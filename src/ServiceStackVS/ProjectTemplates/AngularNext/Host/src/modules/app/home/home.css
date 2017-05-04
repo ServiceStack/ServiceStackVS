@@ -1,0 +1,9 @@
+input[type=text] {
+    display:inline-block; 
+    width:auto; 
+    margin:0 10px 0 0;
+}
+.result {
+    font-size:20px; 
+    color:#7a1ea1;
+}

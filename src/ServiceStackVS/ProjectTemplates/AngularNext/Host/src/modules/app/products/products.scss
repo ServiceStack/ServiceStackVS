@@ -1,0 +1,11 @@
+$dark-background: #512da8;
+$link-color: #ff4081;
+
+div {
+    background: darken($dark-background, 10%);
+    color: #fff;
+}
+
+a {
+    color: lighten($link-color, 10%);
+}
