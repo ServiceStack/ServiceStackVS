@@ -14,7 +14,7 @@
             </div>
 
             <h4 style="text-align: center">
-                <a href="https://servicestack.net/vs-templates/Angular2App">Learn about this Angular2 VS.NET template</a>
+                <a [href]="url">Learn about this Angular2 VS.NET template</a>
             </h4>
 
             <app-footer></app-footer>
@@ -24,7 +24,14 @@
     `
 })
 export class AppComponent {
+    url: string;
+
+    constructor() {
+        this.url = 'https://servicestack.net/vs-templates/Angular2App';
+    }
+
     ngAfterViewInit() {
-        componentHandler.upgradeDom();
+        if (typeof componentHandler !== "undefined") 
+            componentHandler.upgradeDom();
     }
 }

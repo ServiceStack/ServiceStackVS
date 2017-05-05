@@ -1,4 +1,3 @@
-// Helper: root() is defined at the bottom
 var path = require('path');
 var webpack = require('webpack');
 
@@ -8,17 +7,13 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-/**
- * Env
- * Get npm lifecycle event to identify the environment
- */
-var ENV = process.env.npm_lifecycle_event;
+var ENV = process.env.npm_lifecycle_event; //npm script
 var isTestWatch = ENV === 'test-watch';
 var isTest = ENV === 'test' || isTestWatch;
-var isProd = ENV === 'build';
+var NONE = function(){return {}};
 
 module.exports = {
-  entry: {
+  entry: isTest ? NONE : {
     'app': [
         './src/main.ts'
     ],
@@ -42,12 +37,12 @@ module.exports = {
   },
   
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: root('dist'),
     publicPath: '/dist/',
     filename: '[name].bundle.js'
   },
 
-  devtool: "source-map",
+  devtool: isTest ? "inline-source-map" : "source-map",
 
   resolve: {
     extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
@@ -57,8 +52,12 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loaders: ['awesome-typescript-loader', 'angular2-template-loader', '@angularclass/hmr-loader'],
-        exclude: [/\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
+        loaders: [
+          'awesome-typescript-loader' + (isTest ? "?inlineSourceMap=true&sourceMap=false" : ""), 
+          'angular2-template-loader', 
+          '@angularclass/hmr-loader'
+        ],
+        exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
       {
         test: /\.json$/, 
@@ -77,7 +76,14 @@ module.exports = {
       {
         test: /\.html$/, 
         loader: 'raw-loader'
-      }
+      },
+      ...when(isTest, {
+        test: /\.ts$/,
+        enforce: 'post',
+        include: root('src'),
+        loader: 'istanbul-instrumenter-loader',
+        exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
+      })
     ]
   },
 
@@ -91,14 +97,21 @@ module.exports = {
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
       /angular(\\|\/)core(\\|\/)@angular/,
-      root('./src') // location of your src
+      root('src') // location of your src
     ),
-    new CommonsChunkPlugin({
+    ...when(!isTest, new CommonsChunkPlugin({
       name: ['vendor', 'polyfills']
-    }),
+    }))
   ]
 };
 
+//helpers
+function ensureArray(config) {
+  return config && (Array.isArray(config) ? config : [config]) || [];
+}
+function when(condition, config, negativeConfig) {
+  return condition ? ensureArray(config) : ensureArray(negativeConfig);
+}
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return path.join.apply(path, [__dirname].concat(args));
