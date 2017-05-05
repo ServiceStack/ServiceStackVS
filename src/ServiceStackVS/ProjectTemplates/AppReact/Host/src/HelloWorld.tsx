@@ -1,9 +1,7 @@
 ﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { JsonServiceClient } from 'servicestack-client';
+import { client } from './shared';
 import { Hello } from './dtos';
-
-var client = new JsonServiceClient('/');
 
 export default class HelloWorld extends React.Component<any, any> {
     constructor(props, context) {
@@ -11,19 +9,18 @@ export default class HelloWorld extends React.Component<any, any> {
         this.state = { msg: '' };
     }
 
-    update(e: any) {
-        var request = new Hello();
-        request.name = (e.target as HTMLInputElement).value;
-        client.get(request)
-            .then(r => {
-                this.setState({ msg: r.result });
-            });
+    async update(name:string) {
+        let request = new Hello();
+        request.name = name;
+        let r = await client.get(request);
+        this.setState({ msg: r.result });
     }
 
     render() {
         return (
             <div className="form-group">
-                <input type="text" placeholder="Your name" onChange={e => this.update(e)} className="form-control" />
+                <input className="form-control" type="text" placeholder="Your name" 
+                    onChange={e => this.update((e.target as HTMLInputElement).value)} />
                 <h3 style={{ margin: 10 }}>{this.state.msg}</h3>
             </div>);
     }

@@ -96,11 +96,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
+    <TypeScriptCompile Include="src\shared.ts" />
+    <TypeScriptCompile Include="src\HelloWorld.test.tsx" />
     <TypeScriptCompile Include="src\HelloWorld.tsx" />
-    <TypeScriptCompile Include="tests\add.test.ts" />
-    <TypeScriptCompile Include="tests\CheckboxWithLabel.test.tsx" />
-    <TypeScriptCompile Include="tests\CheckboxWithLabel.tsx" />
-    <TypeScriptCompile Include="tests\sum.ts" />
+    <TypeScriptCompile Include="src\sum.test.ts" />
+    <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />

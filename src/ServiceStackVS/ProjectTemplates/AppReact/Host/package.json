@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "gulp www-postinstall",
-    "test": "jest",
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch"
+    "watch": "webpack --config webpack.config.js --watch",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "jest": {
+    "globals": {
+      "BaseUrl": "http://localhost:$iisexpressport$"
+    },
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -32,6 +36,7 @@
     "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.1.2",
     "del": "^2.2.2",
+    "enzyme": "^2.8.2",
     "event-stream": "^3.3.4",
     "gulp": "~3.9.1",
     "gulp-clean-css": "^2.0.13",
@@ -49,6 +54,7 @@
     "gulp-util": "^3.0.7",
     "html-loader": "0.4.4",
     "jest": "^19.0.2",
+    "react-test-renderer": "^15.5.4",
     "requirejs": "^2.3.2",
     "run-sequence": "^1.2.2",
     "source-map-loader": "^0.2.1",

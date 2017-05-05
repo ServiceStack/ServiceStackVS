@@ -72,7 +72,7 @@
                 '# Release App Settings\r\nDebugMode false');
         }
     }
-    
+
     createConfigsIfMissing();
     var config = require(configPath); // Deployment config
 
@@ -202,7 +202,7 @@
         return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
             .pipe(msbuild({
-                toolsVersion: MSBUILD_TOOLS_VERSION,                
+                toolsVersion: MSBUILD_TOOLS_VERSION,
                 targets: ['Clean', 'Build'],
                 properties: {
                     Configuration: 'Release'
@@ -262,7 +262,7 @@
 
     gulp.task('tests-watch', done => {
         process.env.FORCE_COLOR = 1;
-        var proc = exec('npm test -- --watch');
+        var proc = exec('npm run test-watch');
         proc.stdout.pipe(process.stdout);
         proc.stderr.pipe(process.stderr);
         proc.on('exit', done);
@@ -300,4 +300,5 @@
         runSequence('01-package-server', '02-package-client', '03-deploy-app',
             done);
     });
+
 })();
