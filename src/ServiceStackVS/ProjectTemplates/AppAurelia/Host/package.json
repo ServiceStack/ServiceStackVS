@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "gulp www-postinstall",
-    "test": "jest",
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch"
+    "watch": "webpack --config webpack.config.js --watch",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "jest": {
     "transform": {

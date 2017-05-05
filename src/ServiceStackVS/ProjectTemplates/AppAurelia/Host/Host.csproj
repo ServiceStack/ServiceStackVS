@@ -98,8 +98,8 @@
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\views\view1.ts" />
     <TypeScriptCompile Include="src\views\view2.ts" />
-    <TypeScriptCompile Include="tests\add.test.ts" />
-    <TypeScriptCompile Include="tests\sum.ts" />
+    <TypeScriptCompile Include="src\sum.test.ts" />
+    <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />

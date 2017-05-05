@@ -262,7 +262,7 @@
 
     gulp.task('tests-watch', done => {
         process.env.FORCE_COLOR = 1;
-        var proc = exec('npm test -- --watch');
+        var proc = exec('npm run test-watch');
         proc.stdout.pipe(process.stdout);
         proc.stderr.pipe(process.stderr);
         proc.on('exit', done);
