@@ -97,8 +97,8 @@ namespace ServiceStackVS.ExternalTemplateWizard
                         var originalContent = File.ReadAllText(tokenReplaceFile);
                         File.WriteAllText(tokenReplaceFile,
                             originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl.Value));
-                        return;
                     }
+                    return;
                 }
 
                 var devServerPortElement = webProperties?
