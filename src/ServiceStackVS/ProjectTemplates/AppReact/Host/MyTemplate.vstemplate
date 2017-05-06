@@ -44,5 +44,6 @@
         <npm-package id="gulp" />
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
+    <IISExpressAddress Name="package.json"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

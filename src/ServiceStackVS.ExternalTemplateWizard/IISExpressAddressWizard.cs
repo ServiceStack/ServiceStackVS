@@ -15,7 +15,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
     {
         private const string iisPortToken = "$iisexpressport$";
 
-        private string fullPathTokenReplaceFile = null;
+        private List<string> fullPathTokenReplaceFile = new List<string>();
         private string projectName = null;
         private string projectFilePath = null;
 
@@ -29,18 +29,18 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
             string wizardData = replacementsDictionary["$wizarddata$"];
             XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-            XElement iisExpressWizardDataRoot = null;
+            List<XElement> iisExpressWizardDataRoot = null;
             if (element.Descendants().FirstOrDefault(x => x.Name.LocalName == "IISExpressAddress") != null)
             {
                 iisExpressWizardDataRoot =
-                    element.Descendants().First(x => x.Name.LocalName == "IISExpressAddress");
+                    element.Descendants().Where(x => x.Name.LocalName == "IISExpressAddress").ToList();
             }
             if (iisExpressWizardDataRoot == null)
             {
                 return;
             }
 
-            var relativeFilePath = iisExpressWizardDataRoot.GetAttributeValue("Name");
+            var filesToReplaceRelativePath = iisExpressWizardDataRoot.Select(x => x.GetAttributeValue("Name"));
             var solutionPath = Path.GetDirectoryName(replacementsDictionary["$destinationdirectory$"]);
             if (solutionPath == null)
             {
@@ -49,8 +49,10 @@ namespace ServiceStackVS.ExternalTemplateWizard
             var projectPath = Path.Combine(solutionPath, projectName);
             projectFilePath = Path.Combine(projectPath, projectName + ".csproj");
 
-
-            fullPathTokenReplaceFile = Path.Combine(projectPath, relativeFilePath);
+            foreach (var relativeFilePath in filesToReplaceRelativePath)
+            {
+                fullPathTokenReplaceFile.Add(Path.Combine(projectPath, relativeFilePath));
+            }
         }
 
         public void ProjectFinishedGenerating(Project project)
@@ -90,10 +92,13 @@ namespace ServiceStackVS.ExternalTemplateWizard
                     .FirstOrDefault(x => x.Name.LocalName == "IISUrl");
                 if (iisUrl != null)
                 {
-                    var originalContent = File.ReadAllText(fullPathTokenReplaceFile);
-                    File.WriteAllText(fullPathTokenReplaceFile, 
-                        originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl.Value));
-                    return;
+                    foreach (var tokenReplaceFile in fullPathTokenReplaceFile)
+                    {
+                        var originalContent = File.ReadAllText(tokenReplaceFile);
+                        File.WriteAllText(tokenReplaceFile,
+                            originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl.Value));
+                        return;
+                    }
                 }
 
                 var devServerPortElement = webProperties?
@@ -101,9 +106,12 @@ namespace ServiceStackVS.ExternalTemplateWizard
                 if (devServerPortElement != null)
                 {
                     var devPort = devServerPortElement.Value;
-                    var originalContent = File.ReadAllText(fullPathTokenReplaceFile);
-                    File.WriteAllText(fullPathTokenReplaceFile,
-                        originalContent.ReplaceAll(iisPortToken, devPort));
+                    foreach (var tokenReplaceFile in fullPathTokenReplaceFile)
+                    {
+                        var originalContent = File.ReadAllText(tokenReplaceFile);
+                        File.WriteAllText(tokenReplaceFile,
+                            originalContent.ReplaceAll(iisPortToken, devPort));
+                    }
                 }
             });
         }
