@@ -5,7 +5,7 @@
   
   <TemplateData>
     <Name>Angular4 App</Name>
-    <Description>Angular4 TypeScript App configured with Webpack and Karma Unit testing and coverage including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
+    <Description>Angular4 TypeScript Material Design Lite App configured with Webpack and Karma Unit testing and coverage including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
     <DefaultName>Angular4App</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>

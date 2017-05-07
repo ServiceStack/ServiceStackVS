@@ -5,7 +5,7 @@
   
   <TemplateData>
     <Name>Aurelia App</Name>
-    <Description>Aurelia TypeScript App configured with Webpack and Jest Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
+    <Description>Aurelia TypeScript Bootstrap App configured with Webpack and Jest Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
     <DefaultName>AureliaApp</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
