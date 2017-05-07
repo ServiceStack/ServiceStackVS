@@ -1,0 +1,12 @@
+$navbar-background: darken(#00d8ff, 20%);
+$emphasis-text-color: lighten($navbar-background, 5%);
+
+body {
+}
+.navbar {
+    border-radius: 0;
+    background: $navbar-background !important;
+}
+a {
+    color: $emphasis-text-color;
+}

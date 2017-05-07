@@ -1,32 +1,37 @@
-﻿import "es6-shim";
+﻿import 'bootstrap/dist/css/bootstrap.css';
+import "font-awesome/css/font-awesome.css";
+import './app.scss';
+
+import "es6-shim";
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import HelloWorld from './HelloWorld';
 
-var LINKS = ["Link 1", "Link 2", "Link 3"];
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { NavItem } from './shared';
+
+import Home from './home/Home';
+import View1 from './view1/View';
+import View2 from './view2/View';
 
 class App extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = { activeLink: "Link 1" };
     }
     render() {
         return (
+            <Router>
             <div>
                 <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <div className="container">
-                        <a className="navbar-brand" href="#">
+                        <Link to="/" className="navbar-brand"> 
                             <i className="fa fa-code" aria-hidden="true"></i>
                             <span style={{ paddingLeft: 5 }}>$safeprojectname$</span>
-                        </a>
+                        </Link>
                         <div className="collapse navbar-collapse">
                             <ul className="navbar-nav mr-auto">
-                                {LINKS.map(x =>
-                                    (<li key={x} className={"nav-item " + (this.state.activeLink == x ? "active" : "")}
-                                        onClick={e => this.setState({ activeLink: x })}>
-                                        <a className="nav-link" href="#">{x}</a>
-                                    </li>)
-                                )}
+                                <NavItem to="/">Home</NavItem>
+                                <NavItem to="/view1">View1</NavItem>
+                                <NavItem to="/view2">View2</NavItem>
                             </ul>
                         </div>
                     </div>
@@ -35,11 +40,19 @@ class App extends React.Component<any, any> {
                 <div className="container">
                     <div className="row" style={{ margin: "10px 0" }}>
                         <div id="content">
-                            <HelloWorld />
+                            <Route exact path="/" component={Home} activeClassName="active" />
+                            <Route path="/view1" component={View1} activeClassName="active" />
+                            <Route path="/view2" component={View2} activeClassName="active" />
                         </div>
                     </div>
                 </div>
+
+                <h4 style={{position: 'absolute', bottom: 20, width: '100%', textAlign: 'center'}}>
+                    <img src={require('../img/logo.png')} />
+                    <a href="https://servicestack.net/vs-templates/ReactApp">Learn about this React VS.NET template</a>
+                </h4>
             </div>
+            </Router>
         );
     }
 }

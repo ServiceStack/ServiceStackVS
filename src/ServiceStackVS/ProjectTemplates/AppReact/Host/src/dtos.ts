@@ -2,7 +2,7 @@
 Date: 2017-01-01 12:00:00
 Version: 4
 Tip: To override a DTO option, remove "//" prefix before updating
-BaseUrl: http://localhost:$iisexpressport$
+BaseUrl: http://localhost:58783/
 
 //GlobalNamespace:
 //MakePropertiesOptional: True

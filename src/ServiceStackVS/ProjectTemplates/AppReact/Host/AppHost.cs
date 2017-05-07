@@ -19,7 +19,7 @@ namespace $safeprojectname$
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly)
+            : base("$safeprojectname$", typeof(MyServices).GetAssembly())
         {
             var customSettings = new FileInfo(@"~/appsettings.txt".MapHostAbsolutePath());
             AppSettings = customSettings.Exists
