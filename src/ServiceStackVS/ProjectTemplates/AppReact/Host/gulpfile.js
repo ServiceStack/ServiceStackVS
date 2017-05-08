@@ -58,21 +58,6 @@
             'webpack-build',
             done);
     });
-    gulp.task('webpack-build-prod', done => {
-        process.env.npm_lifecycle_event = 'build:prod';
-        var config = require('./webpack.config.js');
-        webpack(config).run((err, stats) => {
-            if (err) {
-                gulpUtil.log('Error', err);
-            } else {
-                Object.keys(stats.compilation.assets).forEach(key => {
-                    gulpUtil.log('Webpack: output ', gulpUtil.colors.green(key));
-                });
-                gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
-            }
-            done();
-        });
-    });
     gulp.task('www-msbuild', () => {
         return gulp.src('../../$safeprojectname$.sln')
             .pipe(nugetRestore())
@@ -110,6 +95,21 @@
                     Password: config.password
                 }
             }));
+    });
+    gulp.task('webpack-build-prod', done => {
+        process.env.npm_lifecycle_event = 'build-prod';
+        var config = require('./webpack.config.js');
+        webpack(config).run((err, stats) => {
+            if (err) {
+                gulpUtil.log('Error', err);
+            } else {
+                Object.keys(stats.compilation.assets).forEach(key => {
+                    gulpUtil.log('Webpack: output ', gulpUtil.colors.green(key));
+                });
+                gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
+            }
+            done();
+        });
     });
 
     gulp.task('webpack-build', done => {

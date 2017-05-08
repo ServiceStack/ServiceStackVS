@@ -7,8 +7,8 @@ var COPY_SERVER_FILES = [
     { from: 'wwwroot_build/deploy/*.*', to: 'wwwroot' },
     { from: 'Web.config',               to: 'wwwroot',
       transform: (content, path) => toString(content).replace(
-          '<compilation debug="true" targetFramework="4.5"',
-          '<compilation targetFramework="4.5"'
+          '<compilation debug="true"',
+          '<compilation'
       )
     }
 ];
@@ -19,9 +19,8 @@ COPY_SERVER_FILES.forEach(x => {
 });
 
 var ENV = process.env.npm_lifecycle_event; // npm script
-var isTest = ENV === 'test' || ENV === 'test-watch';
-var isProd = ENV === 'build:prod';
-var isDev = !isTest && !isProd;
+var isProd = ENV === 'build-prod';
+var isDev = !isProd;
 
 var path = require('path'),
     webpack = require('webpack'),
@@ -115,7 +114,7 @@ module.exports = {
                     }),
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(sass|scss)$/,
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
                         use: ['css-loader?minimize', 'postcss-loader', 'sass-loader'],
@@ -149,9 +148,11 @@ module.exports = {
             filename: '../default.html',
             inject: true
         }),
-        ...when(isProd, new ExtractTextPlugin({ filename: '[name].[chunkhash].css', allChunks: true })),
-        ...when(isProd, new webpack.optimize.UglifyJsPlugin({ sourceMap: true })),
-        ...when(isProd, new CopyWebpackPlugin(COPY_SERVER_FILES)),
+        ...when(isProd, [
+            new ExtractTextPlugin({ filename: '[name].[chunkhash].css', allChunks: true }),            
+            new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
+            new CopyWebpackPlugin(COPY_SERVER_FILES)
+        ]),
     ]
 };
 

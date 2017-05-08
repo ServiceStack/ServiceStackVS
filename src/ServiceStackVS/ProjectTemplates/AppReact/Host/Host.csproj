@@ -124,6 +124,7 @@
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
     <Content Include="img\logo.png" />
+    <Content Include="src\test.fileMock.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\home\Home.test.tsx" />
@@ -144,7 +145,6 @@
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="test\fileMock.js" />
     <Content Include="dist\img\logo.png" />
     <Content Include="dist\app.bundle.js" />
     <Content Include="dist\vendor.bundle.js" />
