@@ -1,5 +1,12 @@
 (function () {
     var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
+    var SCRIPTS = {
+        '00-webpack-watch': 'npm run watch',
+        'webpack-build': 'npm run build',
+        'webpack-build-prod': 'npm run build-prod',
+        'tests-run': 'npm run test',
+        'tests-watch': 'npm run watch',
+    };
 
     var argv = require('yargs').argv;
     var fs = require('fs');
@@ -11,7 +18,6 @@
     var nugetRestore = require('gulp-nuget-restore');
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
-    var webpack = require('webpack');
 
     var webRoot = 'wwwroot/';
     var webBuildDir = './wwwroot_build/';
@@ -52,7 +58,18 @@
                 null;
     }
 
+    function runScript(script, done) {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec(script);
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    }
+
     // Tasks
+    Object.keys(SCRIPTS).forEach(name => {
+        gulp.task(name, done => runScript(SCRIPTS[name], done));
+    });
     gulp.task('www-postinstall', done => {
         runSequence(
             'webpack-build',
@@ -95,53 +112,6 @@
                     Password: config.password
                 }
             }));
-    });
-    gulp.task('webpack-build-prod', done => {
-        process.env.npm_lifecycle_event = 'build-prod';
-        var config = require('./webpack.config.js');
-        webpack(config).run((err, stats) => {
-            if (err) {
-                gulpUtil.log('Error', err);
-            } else {
-                Object.keys(stats.compilation.assets).forEach(key => {
-                    gulpUtil.log('Webpack: output ', gulpUtil.colors.green(key));
-                });
-                gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
-            }
-            done();
-        });
-    });
-
-    gulp.task('webpack-build', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run build');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
-    gulp.task('00-webpack-watch', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run watch');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
-    gulp.task('tests-run', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm test');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
-    gulp.task('tests-watch', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run test-watch');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
     });
 
     gulp.task('default', done => {
