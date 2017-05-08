@@ -1,6 +1,6 @@
 "use strict";
 
-var COPY_SERVER_FILES = [
+var COPY_FILES = [
     { from: 'bin/**/*',                 to: 'wwwroot' },
     { from: 'App_Data/**/*',            to: 'wwwroot' },
     { from: 'Global.asax',              to: 'wwwroot' },
@@ -13,7 +13,7 @@ var COPY_SERVER_FILES = [
     }
 ];
 
-COPY_SERVER_FILES.forEach(x => {
+COPY_FILES.forEach(x => {
     x.from = root(x.from);
     x.to = root(x.to);
 });
@@ -151,7 +151,7 @@ module.exports = {
         ...when(isProd, [
             new ExtractTextPlugin({ filename: '[name].[chunkhash].css', allChunks: true }),            
             new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
-            new CopyWebpackPlugin(COPY_SERVER_FILES)
+            new CopyWebpackPlugin(COPY_FILES)
         ]),
     ]
 };
