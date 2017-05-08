@@ -1,16 +1,16 @@
-﻿import { Component, Input, OnChanges } from '@angular/core';
-import { JsonServiceClient } from 'servicestack-client';
+﻿import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { client } from '../../../shared/utils';
 import { Hello } from '../../../dtos';
-
-var client = new JsonServiceClient('/');
 
 @Component({
     selector: 'hello',
     templateUrl: 'hello.html',
-    styleUrls: ['home.css']
+    styleUrls: ['hello.css']
 })
 export class HelloComponent {
     result: string;
+
+    constructor(private cdref:ChangeDetectorRef){}
 
     @Input() routeParam: string;
     @Input() heading: string;
@@ -20,11 +20,12 @@ export class HelloComponent {
     }
 
     async nameChanged(newValue) {
-        if (newValue != null && newValue.length > 0) {
+        if (newValue) {
             var req = new Hello();
             req.name = newValue;
             var r = await client.get(req);
             this.result = r.result;
+            this.cdref.detectChanges();
         } else {
             this.result = '';
         }

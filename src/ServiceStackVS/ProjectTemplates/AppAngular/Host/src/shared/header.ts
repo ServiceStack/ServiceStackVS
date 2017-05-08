@@ -5,7 +5,7 @@ import { routes } from '../modules/app/app.module';
 @Component({
     selector: 'app-header',
     template: `
-        <header mdl class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
             <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
                 <h3>{{title}}</h3>

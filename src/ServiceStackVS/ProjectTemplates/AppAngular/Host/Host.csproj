@@ -80,9 +80,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\modules\app\home\home.css" />
-    <Content Include="src\modules\app\products\products.scss" />
     <Content Include="src\modules\app\home\hello.html" />
+    <Content Include="src\modules\app\home\hello.css" />
+    <Content Include="src\modules\app\products\products.scss" />
+    <Content Include="src\app.css" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\main.module.ts" />
@@ -91,6 +92,7 @@
     <TypeScriptCompile Include="src\modules\app\app.module.ts" />
     <TypeScriptCompile Include="src\shared\footer.ts" />
     <TypeScriptCompile Include="src\shared\header.ts" />
+    <TypeScriptCompile Include="src\shared\utils.ts" />
     <TypeScriptCompile Include="src\common.d.ts" />
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\modules\app\home\hello.ts" />
@@ -103,15 +105,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
+    <Content Include="default.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
+    <Content Include="dist\app.css" />
     <Content Include="dist\app.bundle.js" />
     <Content Include="dist\polyfills.bundle.js" />
     <Content Include="dist\vendor.bundle.js" />
-    <Content Include="css\app.css" />
     <Content Include="karma.conf.js" />
     <Content Include="karma-shim.js" />
   </ItemGroup>

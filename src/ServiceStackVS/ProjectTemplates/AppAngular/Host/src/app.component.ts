@@ -3,7 +3,7 @@
 @Component({
     selector: 'app-root',
     template: `
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div mdl class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
         <app-header></app-header>
 
@@ -28,10 +28,5 @@ export class AppComponent {
 
     constructor() {
         this.url = 'https://servicestack.net/vs-templates/Angular2App';
-    }
-
-    ngAfterViewInit() {
-        if (typeof componentHandler !== "undefined") 
-            componentHandler.upgradeDom();
     }
 }
