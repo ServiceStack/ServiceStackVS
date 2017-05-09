@@ -14,6 +14,7 @@
             </div>
 
             <h4 style="text-align: center">
+                <img [src]="logoUrl" />
                 <a [href]="url">Learn about this Angular2 VS.NET template</a>
             </h4>
 
@@ -25,8 +26,10 @@
 })
 export class AppComponent {
     url: string;
+    logoUrl: string;
 
     constructor() {
+        this.logoUrl = require("../img/logo.png");
         this.url = 'https://servicestack.net/vs-templates/Angular2App';
     }
 }

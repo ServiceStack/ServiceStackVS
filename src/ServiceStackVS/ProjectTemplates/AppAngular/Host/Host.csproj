@@ -123,6 +123,7 @@
     <Content Include="img\android-desktop.png" />
     <Content Include="img\favicon.png" />
     <Content Include="img\ios-desktop.png" />
+    <Content Include="img\logo.png" />
  	  <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
