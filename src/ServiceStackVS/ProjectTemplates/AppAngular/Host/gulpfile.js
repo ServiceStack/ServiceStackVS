@@ -5,7 +5,7 @@
         'webpack-build': 'npm run build',
         'webpack-build-prod': 'npm run build-prod',
         'tests-run': 'npm run test',
-        'tests-watch': 'npm run watch',
+        'tests-watch': 'npm run test-watch'
     };
 
     var argv = require('yargs').argv;
