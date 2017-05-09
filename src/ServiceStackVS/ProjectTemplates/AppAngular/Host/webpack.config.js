@@ -1,11 +1,11 @@
 "use strict";
 
 var COPY_FILES = [
-    { from: 'bin/**/*',                 to: 'wwwroot' },
-    { from: 'App_Data/**/*',            to: 'wwwroot' },
-    { from: 'Global.asax',              to: 'wwwroot' },
-    { from: 'wwwroot_build/deploy/*.*', to: 'wwwroot' },
-    { from: 'Web.config',               to: 'wwwroot',
+    { from: 'bin/**/*',                  to: 'wwwroot' },
+    { from: 'App_Data/**/*',             to: 'wwwroot' },
+    { from: 'Global.asax',               to: 'wwwroot' },
+    { from: 'wwwroot_build/deploy/**/*', to: 'wwwroot', flatten: true },
+    { from: 'Web.config',                to: 'wwwroot',
       transform: (content, path) => toString(content).replace(
           '<compilation debug="true"',
           '<compilation'
