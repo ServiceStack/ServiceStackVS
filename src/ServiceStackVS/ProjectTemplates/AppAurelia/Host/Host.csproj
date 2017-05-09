@@ -80,9 +80,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\app.css" />
     <Content Include="src\app.html" />
+    <Content Include="src\resources\elements\hello.css" />
     <Content Include="src\resources\elements\hello.html" />
     <Content Include="src\views\home.html" />
+    <Content Include="src\views\view1.css" />
     <Content Include="src\views\view1.html" />
     <Content Include="src\views\view2.html" />
     <Folder Include="src\resources\attributes\" />
@@ -96,6 +99,7 @@
     <TypeScriptCompile Include="src\resources\index.ts" />
     <TypeScriptCompile Include="src\views\home.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\shared.ts" />
     <TypeScriptCompile Include="src\views\view1.ts" />
     <TypeScriptCompile Include="src\views\view2.ts" />
     <TypeScriptCompile Include="src\sum.test.ts" />
@@ -103,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
+    <Content Include="default.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
@@ -110,10 +115,9 @@
     <Content Include="webpack.config.js" />
     <Content Include="dist\app.bundle.js" />
     <Content Include="dist\vendor.bundle.js" />
-    <Content Include="css\app.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="img\" />
+    <Content Include="img\logo.png" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />

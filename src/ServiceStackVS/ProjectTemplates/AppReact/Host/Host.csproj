@@ -123,7 +123,6 @@
     <Content Include="src\Home\home.scss" />
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
-    <Content Include="img\logo.png" />
     <Content Include="src\test.fileMock.js" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +149,7 @@
     <Content Include="dist\vendor.bundle.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="img\" />
+    <Content Include="img\logo.png" />
 	  <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
