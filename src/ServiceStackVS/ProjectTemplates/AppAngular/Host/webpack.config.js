@@ -119,7 +119,11 @@ module.exports = {
                 exclude: root('src', 'modules'),
                 loader: ExtractTextPlugin.extract({
                     fallback: 'raw-loader',
-                    use: ['css-loader' + (isProd ? '?minimize' : ''), 'postcss-loader', 'sass-loader']
+                    use: [
+                        'css-loader' + (isProd ? '?minimize' : ''),
+                        { loader: 'postcss-loader', options: { plugins: () => [ require('precss'), require('autoprefixer')] } },
+                        'sass-loader'
+                    ]
                 })
             },
             ...when(isTest, {
@@ -139,14 +143,6 @@ module.exports = {
             }
         }),
         new Clean([isProd ? root('wwwroot/*') : root('dist')]),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                postcss: [
-                    require('precss'),
-                    require('autoprefixer')
-                ]
-            }
-        }),
         // Workaround needed for angular 2 angular/angular#11580
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
