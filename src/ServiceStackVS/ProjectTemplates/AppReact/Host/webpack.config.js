@@ -29,6 +29,11 @@ var path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     Clean = require('clean-webpack-plugin');
 
+var postcssLoader = {
+    loader: 'postcss-loader',
+    options: { plugins: () => [require('precss'), require('autoprefixer')] }
+};
+
 module.exports = {
     entry: {
         app: [
@@ -98,11 +103,11 @@ module.exports = {
             ...when(isDev, [
                 {
                     test: /\.css$/,
-                    use: [ 'style-loader', 'css-loader', 'postcss-loader' ]
+                    use: [ 'style-loader', 'css-loader', postcssLoader ]
                 },
                 {
                     test: /\.(sass|scss)$/,
-                    use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ] 
+                    use: [ 'style-loader', 'css-loader', postcssLoader, 'sass-loader' ] 
                 },            
             ]),
             ...when(isProd, [
@@ -110,14 +115,14 @@ module.exports = {
                     test: /\.css$/,
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
-                        use: ['css-loader?minimize', 'postcss-loader'],
+                        use: ['css-loader?minimize', postcssLoader],
                     }),
                 },
                 {
                     test: /\.(sass|scss)$/,
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
-                        use: ['css-loader?minimize', 'postcss-loader', 'sass-loader'],
+                        use: ['css-loader?minimize', postcssLoader, 'sass-loader'],
                     }),
                 }
             ])

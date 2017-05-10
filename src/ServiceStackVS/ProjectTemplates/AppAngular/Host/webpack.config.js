@@ -32,6 +32,11 @@ var path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     Clean = require('clean-webpack-plugin');
 
+var postcssLoader = {
+    loader: 'postcss-loader',
+    options: { plugins: () => [require('precss'), require('autoprefixer')] }
+};
+
 module.exports = {
     entry: isTest ? NONE : {
         'app': [
@@ -119,11 +124,7 @@ module.exports = {
                 exclude: root('src', 'modules'),
                 loader: ExtractTextPlugin.extract({
                     fallback: 'raw-loader',
-                    use: [
-                        'css-loader' + (isProd ? '?minimize' : ''),
-                        { loader: 'postcss-loader', options: { plugins: () => [ require('precss'), require('autoprefixer')] } },
-                        'sass-loader'
-                    ]
+                    use: [ 'css-loader' + (isProd ? '?minimize' : ''), postcssLoader, 'sass-loader' ]
                 })
             },
             ...when(isTest, {
