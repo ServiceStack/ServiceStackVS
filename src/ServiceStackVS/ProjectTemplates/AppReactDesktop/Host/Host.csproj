@@ -94,16 +94,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\Home\home.scss" />
+    <Content Include="src\view1\view.css" />
+    <Content Include="src\app.scss" />
+    <Content Include="src\test.fileMock.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\home\Home.test.tsx" />
+    <TypeScriptCompile Include="src\home\Home.tsx" />
+    <TypeScriptCompile Include="src\view1\View.tsx" />
+    <TypeScriptCompile Include="src\view2\View.tsx" />
     <TypeScriptCompile Include="src\app.tsx" />
     <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\shared.ts" />
-    <TypeScriptCompile Include="src\HelloWorld.test.tsx" />
-    <TypeScriptCompile Include="src\HelloWorld.tsx" />
+    <TypeScriptCompile Include="src\shared.tsx" />
     <TypeScriptCompile Include="src\sum.test.ts" />
     <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
+    <Content Include="default.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
@@ -111,13 +120,13 @@
     <Content Include="webpack.config.js" />
     <Content Include="dist\app.bundle.js" />
     <Content Include="dist\vendor.bundle.js" />
-    <Content Include="css\app.css" />
     <Content Include="platform.css" />
     <Content Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\react-desktop-splash.png" />
+    <Content Include="img\logo.png" />
     <Folder Include="wwwroot\" />
+    <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\publish\config.json" />

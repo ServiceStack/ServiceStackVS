@@ -1,15 +1,21 @@
-﻿// A '.tsx' file enables JSX support in the TypeScript compiler, 
-// for more information see the following page on the TypeScript wiki:
-// http://www.typescriptlang.org/docs/handbook/jsx.html
+﻿import 'bootstrap/dist/css/bootstrap.css';
+import "font-awesome/css/font-awesome.css";
+import './app.scss';
 
 import "es6-shim";
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import HelloWorld from './HelloWorld';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { NavItem } from './shared';
+
+import Home from './home/Home';
+import View1 from './view1/View';
+import View2 from './view2/View';
 
 declare var nativeHost;
 
-class App extends React.Component<any,any> { 
+class App extends React.Component<any, any> {
     constructor(props,context) {
         super(props, context);
     }
@@ -26,16 +32,21 @@ class App extends React.Component<any,any> {
 
     render() {
         return (
+            <Router>
             <div>
                 <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <div className="container">
-                        <a className="navbar-brand" href="/">
+                        <Link to="/" className="navbar-brand"> 
                             <i className="fa fa-code" aria-hidden="true"></i>
                             <span style={{ paddingLeft: 5 }}>$safeprojectname$</span>
-                        </a>
-
-                        <div className="collapse navbar-collapse" style={{ paddingLeft: 15 }}>
-                            <ul className="navbar-nav mr-auto">
+                        </Link>
+                        <div className="collapse navbar-collapse">
+                            <ul className="nav navbar-nav mr-auto">
+                                <NavItem to="/">Home</NavItem>
+                                <NavItem to="/view1">View1</NavItem>
+                                <NavItem to="/view2">View2</NavItem>
+                            </ul>
+                            <ul className="nav navbar-nav">
                                 <li className="nav-item"><a className="nav-link" onClick={this.handleAbout}>About</a></li>
                                 <li className="nav-item platform winforms">
                                     <a className="nav-link" onClick={this.handleToggleWindow}>Toggle Window</a>
@@ -47,13 +58,25 @@ class App extends React.Component<any,any> {
                         </div>
                     </div>
                 </nav>
+
                 <div className="container">
                     <div className="row" style={{ margin: "10px 0" }}>
-                        <HelloWorld />
+                        <div id="content">
+                            <Route exact path="/" component={Home} activeClassName="active" />
+                            <Route path="/view1" component={View1} activeClassName="active" />
+                            <Route path="/view2" component={View2} activeClassName="active" />
+                        </div>
                     </div>
                 </div>
-            </div>);
+
+                <h4 style={{position: 'absolute', bottom: 20, width: '100%', textAlign: 'center'}}>
+                    <img src={require('../img/logo.png')} />
+                    <a href="https://servicestack.net/vs-templates/ReactDesktopApps">Learn about this React Desktop Apps VS.NET template</a>
+                </h4>
+            </div>
+            </Router>
+        );
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('body'));
+ReactDOM.render(<App />, document.getElementById("body"));

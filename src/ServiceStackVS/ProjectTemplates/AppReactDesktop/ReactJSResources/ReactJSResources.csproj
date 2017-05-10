@@ -43,17 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="default.html" />
-    <EmbeddedResource Include="css\app.min.css" />
-    <EmbeddedResource Include="css\lib.min.css" />
+    <EmbeddedResource Include="dist\app.css" />
     <EmbeddedResource Include="dist\app.bundle.js" />
     <EmbeddedResource Include="dist\vendor.bundle.js" />
-    <EmbeddedResource Include="img\react-desktop-splash.png" />
-    <EmbeddedResource Include="fonts\FontAwesome.otf" />
-    <EmbeddedResource Include="fonts\fontawesome-webfont.eot" />
-    <EmbeddedResource Include="fonts\fontawesome-webfont.svg" />
-    <EmbeddedResource Include="fonts\fontawesome-webfont.ttf" />
-    <EmbeddedResource Include="fonts\fontawesome-webfont.woff" />
-    <EmbeddedResource Include="fonts\fontawesome-webfont.woff2" />
+    <EmbeddedResource Include="dist\img\fontawesome-webfont.eot" />
+    <EmbeddedResource Include="dist\img\fontawesome-webfont.svg" />
+    <EmbeddedResource Include="dist\img\fontawesome-webfont.ttf" />
+    <EmbeddedResource Include="dist\img\fontawesome-webfont.woff" />
+    <EmbeddedResource Include="dist\img\fontawesome-webfont.woff2" />
+    <EmbeddedResource Include="dist\img\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

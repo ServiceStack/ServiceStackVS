@@ -1,62 +1,37 @@
-﻿/*global require*/
-(function () {
-    var WEB = 'web';
-    var NATIVE = 'native';
+﻿(function () {
+    var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
+    var SCRIPTS = {
+        '00-webpack-watch': 'npm run watch',
+        'webpack-build': 'npm run build',
+        'webpack-build-prod': 'npm run build-prod',
+        'tests-run': 'npm run test',
+        'tests-watch': 'npm run test-watch',
+        'www-exec-package-console': 'cmd /c "cd wwwroot_build && package-deploy-console.bat"'
+    };
 
     var argv = require('yargs').argv;
-    var webBuildDir = argv.serviceStackSettingsDir || './wwwroot_build/';
-
-    var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
-    var COPY_FILES = [
-        { src: './bin/**/*', dest: 'bin/', host: WEB },
-        { src: './img/**/*', dest: 'img/' },
-        { src: './node_modules/font-awesome/fonts/*', dest: 'fonts/' },
-        { src: './App_Data/**/*', dest: 'App_Data/', host: WEB },
-        { src: './Global.asax', host: WEB },
-        { src: ['./platform.js', './platform.css'], host: WEB },
-        { src: webBuildDir + 'deploy/*.*', host: WEB },
-        {
-            src: './web.config',
-            host: [WEB],
-            afterReplace: [{
-                from: '<compilation debug="true" targetFramework="4.5"',
-                to: '<compilation targetFramework="4.5"'
-            }]
-        }
-    ];
-
     var fs = require('fs');
-    var del = require('del');
     var path = require('path');
     var gulp = require('gulp');
     var gulpUtil = require('gulp-util');
-    var uglify = require('gulp-uglify');
-    var newer = require('gulp-newer');
-    var useref = require('gulp-useref');
-    var gulpif = require('gulp-if');
-    var minifyCss = require('gulp-clean-css');
-    var gulpReplace = require('gulp-replace');
-    var htmlBuild = require('gulp-htmlbuild');
-    var eventStream = require('event-stream');
     var exec = require('child_process').exec;
-    var rename = require('gulp-rename');
     var runSequence = require('run-sequence');
     var nugetRestore = require('gulp-nuget-restore');
     var msbuild = require('gulp-msbuild');
     var msdeploy = require('gulp-msdeploy');
-    var webpack = require('webpack');
 
+    var del = require('del');
+    var newer = require('gulp-newer');
     var nugetpack = require('gulp-nuget-pack');
 
     var webRoot = 'wwwroot/';
-    var resourcesLib = '../../lib/';
-    var configFile = 'config.json';
+    var webBuildDir = './wwwroot_build/';
     var configDir = webBuildDir + 'publish/';
-    var configPath = configDir + configFile;
-    var appSettingsFile = 'appsettings.txt';
+    var configPath = configDir + 'config.json';
     var appSettingsDir = webBuildDir + 'deploy/';
-    var appSettingsPath = appSettingsDir + appSettingsFile;
+    var appSettingsPath = appSettingsDir + 'appsettings.txt';
 
+    var resourcesLib = '../../lib/';
     var resourcesRoot = '../$safeprojectname$.Resources/';
     var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
 
@@ -82,57 +57,6 @@
     }
 
     createConfigsIfMissing();
-    var config = require(configPath); // Deployment config
-
-    var webpackConfig = require('./webpack.config.js');
-
-    // htmlbuild replace for CDN references
-    function pipeTemplate(block, template) {
-        eventStream.readArray([
-            template
-        ].map(function (str) {
-            return block.indent + str;
-        })).pipe(block);
-    }
-
-    function copyFilesTask(copy, cb) {
-        var dest = copy.dest || '';
-        var src = copy.src;
-        var copyTask = gulp.src(src);
-        if (copy.afterReplace) {
-            for (var i = 0; i < copy.afterReplace.length; i++) {
-                var replace = copy.afterReplace[i];
-                copyTask = copyTask.pipe(gulpReplace(replace.from, replace.to));
-            }
-        }
-        if (copy.after) {
-            copyTask = copyTask.pipe(copy.after());
-        }
-
-        var hosts = [WEB, NATIVE];
-        if (copy.host) {
-            hosts = typeof copy.host === 'string'
-                ? [copy.host]
-                : copy.host;
-        }
-
-        if (hosts.indexOf(WEB) >= 0) {
-            copyTask = copyTask
-                .pipe(newer(webRoot + dest))
-                .pipe(gulp.dest(webRoot + dest));
-        }
-        if (hosts.indexOf(NATIVE) >= 0) {
-            copyTask = copyTask
-                .pipe(newer(resourcesRoot + dest))
-                .pipe(gulp.dest(resourcesRoot + dest));
-        }
-
-        copyTask.on('finish', function () {
-            gulpUtil.log(gulpUtil.colors.green('Copied ' + copy.src));
-            cb();
-        });
-        return copyTask;
-    }
 
     function getMSBuildToolsVersion() {
         fs = fs || require("fs");
@@ -143,89 +67,41 @@
                 null;
     }
 
+    function runScript(script, done) {
+        process.env.FORCE_COLOR = 1;
+        var proc = exec(script);
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', done);
+    }
+
     // Tasks
+    Object.keys(SCRIPTS).forEach(name => {
+        gulp.task(name, done => runScript(SCRIPTS[name], done));
+    });
     gulp.task('www-postinstall', done => {
-        runSequence('www-clean-client',
-            'www-clean-resources',
-            'www-copy-files',
-            'www-bundle-html',
+        runSequence('www-clean-resources',
             'webpack-build',
             'webpack-build-prod',
+            'www-copy-resources',
             done);
     });
     gulp.task('www-clean-resources', () => {
-        return del([
-            resourcesRoot + '/dist/*',
-            resourcesRoot + '/img/*'
-        ], { force: true });
-    });
-    gulp.task('www-clean-server', () => {
-        var binPath = webRoot + '/bin/';
-        return del(binPath);
-    });
-    gulp.task('www-clean-client', () => {
-        return del([
-            webRoot + '**/*.*',
-            '!wwwroot/bin/**/*.*', //Don't delete dlls
-            '!wwwroot/App_Data/**/*.*', //Don't delete App_Data
-            '!wwwroot/**/*.asax', //Don't delete asax
-            '!wwwroot/**/*.config', //Don't delete config
-            '!wwwroot/appsettings.txt' //Don't delete deploy settings
-        ]);
-    });
-    gulp.task('www-copy-files', done => {
-        var completed = 0;
-
-        for (var i = 0; i < COPY_FILES.length; i++) {
-            (function (index) {
-                copyFilesTask(COPY_FILES[index], function () {
-                    if (++completed === COPY_FILES.length)
-                        done();
-                });
-            })(i);
-        }
-    });
-    gulp.task('www-bundle-html', () => {
-        return gulp.src('./default.html')
-            .pipe(useref())
-            .pipe(gulpif('*.js', uglify()))
-            .pipe(gulpif('*.css', minifyCss()))
-            .pipe(gulp.dest(webRoot))
-            .pipe(gulp.dest(resourcesRoot));
-    });
-    gulp.task('webpack-build-prod', done => {
-        var config = Object.create(webpackConfig);
-        config.output.path = __dirname + "/wwwroot/dist";
-        config.plugins = (config.plugins || []).concat(
-            new webpack.DefinePlugin({
-                'process.env': {
-                    'NODE_ENV': JSON.stringify('production')
-                }
-            }),
-            new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.UglifyJsPlugin()
-        );
-        webpack(config).run((err, stats) => {
-            if (err) {
-                gulpUtil.log('Error', err);
-                done();
-            } else {
-                Object.keys(stats.compilation.assets).forEach(key => {
-                    gulpUtil.log('Webpack: output ', gulpUtil.colors.green(key));
-                });
-                gulpUtil.log('Webpack: ', gulpUtil.colors.blue('finished ', stats.compilation.name));
-
-                gulp.src(__dirname + "/wwwroot/dist/*")
-                    .pipe(gulp.dest(resourcesRoot + "dist/"))
-                    .on('end', done);
-            }
-        });
+        return del([ resourcesRoot + '/dist/*' ], { force: true });
     });
     gulp.task('www-copy-resources-lib', () => {
         return gulp.src('../$safeprojectname$.Resources/bin/Release/$safeprojectname$.Resources.dll')
             .pipe(newer(resourcesLib))
             .pipe(gulp.dest(resourcesLib));
-    })
+    });
+    gulp.task('www-copy-resources', () => {
+        return gulp.src(['./wwwroot/**/*',
+            '!./wwwroot/*.config',
+            '!./wwwroot/*.txt',
+            '!./wwwroot/*.asax',
+            '!./wwwroot/platform.*'])
+            .pipe(gulp.dest('../$safeprojectname$.Resources/'));
+    });
     gulp.task('www-copy-deploy-files', () => {
         return gulp.src(webBuildDir + 'deploy/*.*')
             .pipe(newer(webRoot))
@@ -347,13 +223,6 @@
             callback);
     });
 
-    gulp.task('www-exec-package-console', done => {
-        var proc = exec('cmd /c "cd wwwroot_build && package-deploy-console.bat"');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
     gulp.task('www-exec-package-winforms', done => {
         initWinformsReleaseDirectory();
         var squirrelPath = path.resolve('../../packages/squirrel.windows.1.3.0/tools/');
@@ -372,37 +241,32 @@
             done(err);
         });
     });
-
-    gulp.task('webpack-build', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run build');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
+    
+    gulp.task('www-msdeploy-pack', () => {
+        return gulp.src('wwwroot/')
+            .pipe(msdeploy({
+                verb: 'sync',
+                sourceType: 'iisApp',
+                dest: {
+                    'package': path.resolve('./webdeploy.zip')
+                }
+            }));
     });
 
-    gulp.task('00-webpack-watch', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run watch');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
-    gulp.task('tests-run', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm test');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
-    });
-
-    gulp.task('tests-watch', done => {
-        process.env.FORCE_COLOR = 1;
-        var proc = exec('npm run test-watch');
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', done);
+    gulp.task('www-msdeploy-push', () => {
+        var config = require(configPath);
+        return gulp.src('./webdeploy.zip')
+            .pipe(msdeploy({
+                verb: 'sync',
+                allowUntrusted: 'true',
+                sourceType: 'package',
+                dest: {
+                    iisApp: config.iisApp,
+                    wmsvc: config.serverAddress,
+                    UserName: config.userName,
+                    Password: config.password
+                }
+            }));
     });
 
     gulp.task('default', done => {
@@ -415,13 +279,9 @@
 
     gulp.task('01-bundle-all', done => {
         runSequence(
-            'www-clean-server',
-            'www-clean-client',
             'www-nuget-restore',
             'www-msbuild-web',
-            'www-copy-files',
             'webpack-build-prod',
-            'www-bundle-html',
             'www-msbuild-resources',
             'www-copy-resources-lib',
             done
@@ -448,58 +308,19 @@
     });
 
     gulp.task('01-package-server', done => {
-        runSequence('www-nuget-restore',
-            'www-msbuild-web', 'www-clean-server',
-            [
-                'www-copy-files',
-                'www-copy-deploy-files'
-            ],
-            done);
+        runSequence('www-nuget-restore', 'www-msbuild-web', done);
     });
 
     gulp.task('02-package-client', done => {
-        runSequence('www-clean-client',
-            [
-                'www-copy-files',
-                'www-bundle-html'
-            ],
-            'webpack-build-prod',
-            done);
-    });
-    
-    gulp.task('www-msdeploy-pack', () => {
-        return gulp.src('wwwroot/')
-            .pipe(msdeploy({
-                verb: 'sync',
-                sourceType: 'iisApp',
-                dest: {
-                    'package': path.resolve('./webdeploy.zip')
-                }
-            }));
-    });
-
-    gulp.task('www-msdeploy-push', () => {
-        return gulp.src('./webdeploy.zip')
-            .pipe(msdeploy({
-                verb: 'sync',
-                allowUntrusted: 'true',
-                sourceType: 'package',
-                dest: {
-                    iisApp: config.iisApp,
-                    wmsvc: config.serverAddress,
-                    UserName: config.userName,
-                    Password: config.password
-                }
-            }));
+        runSequence('www-clean-resources', 'webpack-build-prod', 'www-copy-resources', done);
     });
 
     gulp.task('03-deploy-app', done => {
-        runSequence('www-msdeploy-pack', 'www-msdeploy-push',
-            done);
+        runSequence('www-msdeploy-pack', 'www-msdeploy-push', done);
     });
 
     gulp.task('package-and-deploy', done => {
-        runSequence('01-package-server', '02-package-client', '03-deploy-app',
-            done);
+        runSequence('01-package-server', '02-package-client', '03-deploy-app', done);
     });
+
 })();

@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 
-import HelloWorld from './HelloWorld';
+import Home from './Home';
 
-describe('<HelloWorld />', () => {
+describe('<Home />', () => {
 
   it ('Updates heading on setState', done => {
-    const el = shallow(<HelloWorld />);
+    const el = shallow(<Home />);
 
     expect(el.find('h3').text()).toBe("");
 
@@ -18,17 +18,17 @@ describe('<HelloWorld />', () => {
   });
 
   it ('Updates heading on update', async () => {
-    const el = shallow(<HelloWorld />);
+    const el = shallow(<Home />);
 
     expect(el.find('h3').text()).toBe("");
 
-    await (el.instance() as HelloWorld).update('A');
+    await (el.instance() as Home).update('A');
 
     expect(el.find('h3').text()).toBe("Hello, A!");
   });
 
-  it ('Updates heading on INPUT change', done => {
-    const el = shallow(<HelloWorld />);
+  it ('Updates heading on keyDown', done => {
+    const el = shallow(<Home />);
 
     expect(el.find('h3').text()).toBe("");
 
