@@ -40,3 +40,12 @@ The `ExternalTemplateWizard` should be used in a multi-project `*.vstemplate` de
 
 The `Files` xml is to indicate which files should be processed for token replacement.
 
+### IISExpressAddressWizard
+Another wizard in this lib is the IIS Express Address Wizard which captures the port number for IIS and replaces the token `$iisexpressport$` in specified files in wizard _or_ `http://localhost:$iisexpressport$` with full local address. First replacement wins.
+
+If you need to add files for other replacements, just add extra `IISExpressAddress` in WizardData, for example:
+
+```
+<IISExpressAddress Name="package.json"></IISExpressAddress>
+```
+To a project `.vstemplate` file WizardData. `Name` is just relative path to file you want to perform the replacement in. Only reason it is done this kinda awkward way is due to URL info not being available until after generation of everything else is complete.

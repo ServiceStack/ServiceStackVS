@@ -6,7 +6,7 @@ if /i "%~1"=="-?" goto Help
 if /i "%~1"=="/?" goto Help
 
 :: Change this for SxS
-set VSVersion=14.0
+set VSVersion=15.0
 
 set MainRegRoot=HKLM\SOFTWARE\Microsoft\VisualStudio\%VSVersion%
 set OptionalRegRoots=HKCU\SOFTWARE\Microsoft\VisualStudio\%VSVersion%_Config HKCU\SOFTWARE\Microsoft\VisualStudio\%VSVersion%Exp_Config HKLM\SOFTWARE\Microsoft\VSWinExpress\%VSVersion% HKCU\SOFTWARE\Microsoft\VSWinExpress\%VSVersion%_Config HKLM\SOFTWARE\Microsoft\Glass\%VSVersion%

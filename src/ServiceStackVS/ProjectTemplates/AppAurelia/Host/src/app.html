@@ -1,0 +1,31 @@
+<template>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa fa-code" aria-hidden="true"></i>
+                $safeprojectname$
+            </a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
+                        <a class="nav-link" href.bind="row.href">
+                            ${row.title}
+                            <i if.bind="row.settings.icon" class="fa fa-${row.settings.icon}"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <router-view></router-view>
+    </div>
+
+    <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
+        <img src="../img/logo.png" />
+        <a href="https://servicestack.net/vs-templates/AureliaApp">Learn about this Aurelia VS.NET template</a>
+    </h4>
+
+</template>

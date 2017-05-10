@@ -1,0 +1,77 @@
+<VSTemplate Version="2.0.0" Type="ProjectGroup"
+    xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+
+  <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
+
+  <TemplateData>
+    <Name>React Desktop Apps</Name>
+    <Description>React TypeScript Bootstrap Web App with pre-configured scripts to package it inside an auto-updating CefSharp WinForms App, Self Hosting Console App and OSX Cocoa App</Description>
+    <DefaultName>ReactDesktopApps</DefaultName>
+    <Icon>logo.png</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <!-- Indicates how many parent folders this item template should appear in -->
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="$safeprojectname$">Host\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.AppWinForms">ReactJSWinForms\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.AppConsole">ReactJSConsole\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Resources">ReactJSResources\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceModel">ServiceModel\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.ServiceInterface">ServiceInterface\MyTemplate.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Tests">Test\MyTemplate.vstemplate</ProjectTemplateLink>
+    </ProjectCollection>
+    <CustomParameters>
+      <CustomParameter Name="$slnname$" Value="$safeprojectname$Orig"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>TemplateBuilder.RootWizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NPMInstallerWizard.NodeJsRequiredWizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NPMInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NPMInstallerWizard.GitRequiredWizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
+    <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerMultiProjectWizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.ExternalTemplateWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.ExternalTemplateWizard.ExternalTemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages>
+      <package id="ServiceStack.Interfaces" version="latest" rootPackage="true" />
+    </packages>
+    <ExternalTemplate name="ReactJSMac" projFile="ReactJSMac.csproj" solutionFile="ReactJSMac.sln"
+                      safeProjectNameReplace="$safeprojectname$.AppMac"
+                      outputSolutionName="$saferootprojectname$Mac.sln" 
+                      outputProjectName="$saferootprojectname$.AppMac.csproj"
+                      >
+      <Files>
+        <File name="AppDelegate.cs" />
+        <File name="AppDelegate.designer.cs" />
+        <File name="AppHost.cs" />
+        <File name="Info.plist" />
+        <File name="Program.cs" />
+        <File name="MainMenu.xib" />
+        <File name="MainWindow.cs" />
+        <File name="MainWindow.designer.cs" />
+        <File name="MainWindow.xib" />
+        <File name="MainWindowController.cs" />
+        <File name="platform.css" />
+        <File name="platform.js" />
+        <File name="packages.config" />
+        <File name="logo.icns" dest="Resources"/>
+      </Files>
+    </ExternalTemplate>
+  </WizardData>
+</VSTemplate>

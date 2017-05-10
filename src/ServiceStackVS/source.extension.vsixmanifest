@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="1.0.31" Language="en-US" Publisher="ServiceStack" />
+    <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="1.1.0" Language="en-US" Publisher="ServiceStack" />
     <DisplayName>ServiceStackVS</DisplayName>
     <Description>Templates and tools for use with the ServiceStack framework.</Description>
     <MoreInfo>https://github.com/ServiceStack/ServiceStackVS</MoreInfo>
@@ -14,9 +14,9 @@
   </Metadata>
 
   <Installation InstalledByMsi="false">
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,14.0)" />
-    <InstallationTarget Version="[11.0,14.0)" Id="Microsoft.VisualStudio.Ultimate" />
-    <InstallationTarget Version="[14.0]" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0,15.1)" />
+    <InstallationTarget Version="[12.0,15.1)" Id="Microsoft.VisualStudio.Ultimate" />
+    <InstallationTarget Version="[14.0,15.1)" Id="Microsoft.VisualStudio.Community" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
@@ -34,4 +34,7 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.BuildConfigWizard" Path="|ServiceStackVS.BuildConfigWizard|" AssemblyName="|ServiceStackVS.BuildConfigWizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" Path="|ServiceStackVS.Common|" AssemblyName="|ServiceStackVS.Common;AssemblyName|" d:ProjectName="%CurrentProject%.Common" />
   </Assets>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.Net.Component.4.5.TargetingPack" Version="[12.0.26208.0,16.0)" DisplayName=".NET Framework 4.5 targeting pack" />
+  </Prerequisites>
 </PackageManifest>

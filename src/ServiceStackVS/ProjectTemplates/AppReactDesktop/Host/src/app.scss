@@ -1,0 +1,22 @@
+$navbar-background: darken(#00d8ff, 20%);
+$emphasis-text-color: lighten($navbar-background, 5%);
+
+body {
+}
+.platform, ul > li.platform {
+    display: none;
+}
+a {
+    cursor: pointer;
+    color: $emphasis-text-color;
+}
+.navbar {
+    border-radius: 0;
+    background: $navbar-background !important;
+}
+.navbar-brand {
+    line-height: 24px;
+}
+.navbar-brand  img {
+    float: left;
+}
