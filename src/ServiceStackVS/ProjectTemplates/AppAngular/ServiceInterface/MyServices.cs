@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using ServiceStack;
 using ServiceStack.DataAnnotations;
 using $saferootprojectname$.ServiceModel;
@@ -14,15 +17,12 @@ namespace $safeprojectname$
 
     public class MyServices : Service
     {
-        public object Any(FallbackForClientRoutes request)
-        {
-            //Return default.html for unmatched requests so routing is handled on client
-            return new HttpResult(VirtualFileSources.GetFile("default.html"));
-        }
+        //Return default.html for unmatched requests so routing is handled on client
+        public object Any(FallbackForClientRoutes request) => new HttpResult(VirtualFileSources.GetFile("default.html"));
 
         public object Any(Hello request)
         {
-            return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
+            return new HelloResponse { Result = $"Hello, {request.Name}!" };
         }
     }
 }

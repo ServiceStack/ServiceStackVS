@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ServiceStack;
+using ServiceStack.DataAnnotations;
 using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
 {
-    public class MyServices : Service
-    {
-        public object Any(Hello request)
-        {
-            return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
-        }
-        
-        private static string defaultHtml = null;
-        
-        public object Any(FallbackForClientRoutes request)
-        {
-            return defaultHtml ?? 
-                (defaultHtml = HostContext.ResolveVirtualFile("/default.html", Request).ReadAllText());
-        }
-    }
-
+    [Exclude(Feature.Metadata)]
     [FallbackRoute("/{PathInfo*}")]
     public class FallbackForClientRoutes
     {
         public string PathInfo { get; set; }
+    }
+
+    public class MyServices : Service
+    {
+        //Return default.html for unmatched requests so routing is handled on client
+        public object Any(FallbackForClientRoutes request) => new HttpResult(VirtualFileSources.GetFile("default.html"));
+
+        public object Any(Hello request)
+        {
+            return new HelloResponse { Result = $"Hello, {request.Name}!" };
+        }
     }
 }
