@@ -5,6 +5,7 @@ export class App {
 
     configureRouter(config, router: Router) {
         config.title = 'Aurelia';
+        config.options.pushState = true;
         config.map([
             { route: ['', 'home'], name: 'home', moduleId: './views/home', nav: true, title: 'Home' },
             { route: ['/view1', 'view1'], name: 'view1', moduleId: './views/view1', nav: true, title: 'View 1' },
