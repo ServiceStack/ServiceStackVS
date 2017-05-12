@@ -136,14 +136,6 @@ module.exports = {
             }
         }),
         new Clean([isProd ? root('wwwroot/*') : root('dist')]),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                postcss: [ 
-                    require('precss'),
-                    require('autoprefixer')
-                ]
-            }
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: isProd ? 'vendor.[chunkhash].bundle.js' : 'vendor.bundle.js'
