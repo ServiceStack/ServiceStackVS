@@ -34,7 +34,7 @@ var path = require('path'),
 
 var postcssLoader = {
     loader: 'postcss-loader',
-    options: { plugins: () => [require('precss'), require('autoprefixer')] }
+    options: { plugins: [require('precss'), require('autoprefixer')] }
 };
 
 module.exports = {
