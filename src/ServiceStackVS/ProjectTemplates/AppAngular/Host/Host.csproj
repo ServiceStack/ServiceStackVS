@@ -80,6 +80,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\assets\img\android-desktop.png" />
+    <Content Include="src\assets\img\favicon.png" />
+    <Content Include="src\assets\img\ios-desktop.png" />
+    <Content Include="src\assets\img\logo.png" />
     <Content Include="src\modules\app\home\hello.html" />
     <Content Include="src\modules\app\home\hello.css" />
     <Content Include="src\modules\app\products\products.scss" />
@@ -119,11 +123,6 @@
     <Content Include="karma-shim.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="img\" />
-    <Content Include="img\android-desktop.png" />
-    <Content Include="img\favicon.png" />
-    <Content Include="img\ios-desktop.png" />
-    <Content Include="img\logo.png" />
  	  <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />

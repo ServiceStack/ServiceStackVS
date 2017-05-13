@@ -80,6 +80,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\assets\img\logo.png" />
     <Content Include="src\app.css" />
     <Content Include="src\app.html" />
     <Content Include="src\resources\elements\hello.css" />
@@ -117,7 +118,6 @@
     <Content Include="dist\vendor.bundle.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\logo.png" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />

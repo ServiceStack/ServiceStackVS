@@ -120,6 +120,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\assets\img\logo.png" />
     <Content Include="src\Home\home.scss" />
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
@@ -149,7 +150,6 @@
     <Content Include="dist\vendor.bundle.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\logo.png" />
 	  <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />

@@ -29,7 +29,7 @@ export class AppComponent {
     logoUrl: string;
 
     constructor() {
-        this.logoUrl = require("../img/logo.png");
+        this.logoUrl = require("./assets/img/logo.png");
         this.url = 'https://servicestack.net/vs-templates/Angular2App';
     }
 }

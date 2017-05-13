@@ -48,7 +48,7 @@ class App extends React.Component<any, any> {
                 </div>
 
                 <h4 style={{position: 'absolute', bottom: 20, width: '100%', textAlign: 'center'}}>
-                    <img src={require('../img/logo.png')} />
+                    <img src={require('./assets/img/logo.png')} />
                     <a href="https://servicestack.net/vs-templates/ReactApp">Learn about this React VS.NET template</a>
                 </h4>
             </div>
