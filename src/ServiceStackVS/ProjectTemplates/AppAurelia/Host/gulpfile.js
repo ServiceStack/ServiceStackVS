@@ -60,7 +60,7 @@
 
     function runScript(script, done) {
         process.env.FORCE_COLOR = 1;
-        var proc = exec(script);
+        var proc = exec(script + (script.indexOf("npm") === 0 ? " --silent" : ""));
         proc.stdout.pipe(process.stdout);
         proc.stderr.pipe(process.stderr);
         proc.on('exit', done);
