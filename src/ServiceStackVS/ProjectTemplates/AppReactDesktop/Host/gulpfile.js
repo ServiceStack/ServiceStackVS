@@ -9,7 +9,6 @@
         'www-exec-package-console': 'cmd /c "cd wwwroot_build && package-deploy-console.bat"'
     };
 
-    var argv = require('yargs').argv;
     var fs = require('fs');
     var path = require('path');
     var gulp = require('gulp');

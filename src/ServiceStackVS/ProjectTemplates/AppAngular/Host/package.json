@@ -87,7 +87,6 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.3.2",
-    "webpack": "^2.4.1",
-    "yargs": "^6.4.0"
+    "webpack": "^2.4.1"
   }
 }

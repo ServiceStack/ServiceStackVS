@@ -8,7 +8,6 @@
         'tests-watch': 'npm run test-watch'
     };
 
-    var argv = require('yargs').argv;
     var fs = require('fs');
     var path = require('path');
     var gulp = require('gulp');
