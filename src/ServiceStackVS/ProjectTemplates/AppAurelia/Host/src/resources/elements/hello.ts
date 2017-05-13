@@ -9,10 +9,10 @@ export class HelloCustomElement {
     result: string;
     @bindable name: string;
 
-    async nameChanged(newValue) {
-        if (newValue.length > 0) {
+    async nameChanged(name:string) {
+        if (name) {
             var req = new Hello();
-            req.name = newValue;
+            req.name = name;
             const r = await client.get(req);
             this.result = r.result;            
         } else {

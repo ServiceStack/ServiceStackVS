@@ -11,18 +11,22 @@ export default class Home extends React.Component<any, any> {
         this.state = { msg: '' };
     }
 
-    async update(name:string) {
-        let request = new Hello();
-        request.name = name;
-        let r = await client.get(request);
-        this.setState({ msg: r.result });
+    async nameChanged(name:string) {
+        if (name) {
+            let request = new Hello();
+            request.name = name;
+            let r = await client.get(request);
+            this.setState({ msg: r.result });
+        } else {
+            this.setState({ msg: '' });
+        }
     }
 
     render() {
         return (
             <div className="form-group">
                 <input className="form-control" type="text" placeholder="Your name" 
-                    onChange={e => this.update((e.target as HTMLInputElement).value)} />
+                    onChange={e => this.nameChanged((e.target as HTMLInputElement).value)} />
                 <h3 className="result">{this.state.msg}</h3>
             </div>);
     }

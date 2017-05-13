@@ -22,7 +22,7 @@ describe('<Home />', () => {
 
     expect(el.find('h3').text()).toBe("");
 
-    await (el.instance() as Home).update('A');
+    await (el.instance() as Home).nameChanged('A');
 
     expect(el.find('h3').text()).toBe("Hello, A!");
   });

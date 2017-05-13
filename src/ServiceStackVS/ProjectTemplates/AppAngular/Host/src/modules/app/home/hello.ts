@@ -19,10 +19,10 @@ export class HelloComponent {
         this.nameChanged(this.routeParam);
     }
 
-    async nameChanged(newValue) {
-        if (newValue) {
+    async nameChanged(name:string) {
+        if (name) {
             var req = new Hello();
-            req.name = newValue;
+            req.name = name;
             var r = await client.get(req);
             this.result = r.result;
             this.cdref.detectChanges();
