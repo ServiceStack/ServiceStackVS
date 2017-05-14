@@ -124,7 +124,7 @@ module.exports = {
                 exclude: root('src', 'modules'),
                 loader: ExtractTextPlugin.extract({
                     fallback: 'raw-loader',
-                    use: [ 'css-loader' + (isProd ? '?minimize' : ''), postcssLoader, 'sass-loader' ]
+                    use: ['css-loader' + (isProd ? '?minimize' : ''), postcssLoader, 'sass-loader']
                 })
             },
             ...when(isTest, {
@@ -140,25 +140,27 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify(isProd ? 'production' : 'development')
+                'NODE_ENV': JSON.stringify(isProd ? 'production' : isTest ? 'testing' : 'development')
             }
         }),
-        new Clean([isProd ? root('wwwroot/*') : root('dist')]),
-        // Workaround needed for angular 2 angular/angular#11580
-        new webpack.ContextReplacementPlugin(
-            // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)@angular/,
-            root('src') // location of your src
-        ),
-        ...when(!isTest, new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: isProd ? 'vendor.[chunkhash].bundle.js' : 'vendor.bundle.js'
-        })),
-        new HtmlWebpackPlugin({
-            template: 'default.template.ejs',
-            filename: '../default.html',
-            inject: true
-        }),
+        ...when(!isTest, [
+            // Workaround needed for angular 2 angular/angular#11580
+            new webpack.ContextReplacementPlugin(
+                // The (\\|\/) piece accounts for path separators in *nix and Windows
+                /angular(\\|\/)core(\\|\/)@angular/,
+                root('src') // location of your src
+            ),
+            new Clean([isProd ? root('wwwroot/*') : root('dist')]),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: isProd ? 'vendor.[chunkhash].bundle.js' : 'vendor.bundle.js'
+            }),
+            new HtmlWebpackPlugin({
+                template: 'default.template.ejs',
+                filename: '../default.html',
+                inject: true
+            }),
+        ]),
         ...when(isDev, [
             new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
         ]),

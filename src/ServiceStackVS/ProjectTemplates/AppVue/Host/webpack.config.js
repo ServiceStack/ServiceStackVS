@@ -155,7 +155,7 @@ module.exports = {
                 'NODE_ENV': JSON.stringify(isProd ? 'production' : isTest ? 'testing' : 'development')
             }
         }),
-        ...when(isProd || isDev, [
+        ...when(!isTest, [
             new Clean([isProd ? root('wwwroot/*') : root('dist')]),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
