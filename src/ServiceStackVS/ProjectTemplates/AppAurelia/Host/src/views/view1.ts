@@ -6,6 +6,6 @@ export class View1 {
     message: string;
 
     constructor() {
-        this.message = "View 1";
+        this.message = "This is View 1";
     }
 }

@@ -11,6 +11,9 @@
     "test-coverage": "jest --coverage"
   },
   "jest": {
+    "globals": {
+      "BaseUrl": "http://localhost:$iisexpressport$"
+    },
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },

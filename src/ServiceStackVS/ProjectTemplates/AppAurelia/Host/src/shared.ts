@@ -1,3 +1,5 @@
 import { JsonServiceClient } from "servicestack-client";
 
-export const client = new JsonServiceClient('/');
+declare var global; //populated from package.json/jest
+
+export var client = new JsonServiceClient(global.BaseUrl || '/');
