@@ -9,6 +9,9 @@ export default class HelloComponent extends React.Component<any, any> {
     constructor(props, context) {
         super(props, context);
         this.state = { result: '' };
+    }
+
+    componentDidMount() {
         this.nameChanged(this.props.name);
     }
 
