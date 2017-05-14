@@ -14,7 +14,7 @@ import { routes } from '../modules/app/app.module';
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
 
                 <span *ngFor="let route of routes">
-                    <a class="mdl-layout__tab" [class.is-active]="isActive(route.path)"
+                    <a *ngIf="route.data" class="mdl-layout__tab" [class.is-active]="isActive(route.path)"
                         routerLink="{{route.path}}">{{route.data.title}}</a>
                 </span>
 

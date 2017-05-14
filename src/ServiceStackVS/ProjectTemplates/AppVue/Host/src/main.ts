@@ -13,8 +13,9 @@ import View2 from './view2/View2.vue';
 const routes = [
   { path: '/', component: Home, props: { name: "Vue" } },
   { path: '/view1', component: View1 },
-  { path: '/view2', component: View2 }
-]
+  { path: '/view2', component: View2 },
+  { path: '*', redirect: '/' },
+];
 
 const router = new VueRouter({
     mode: 'history',

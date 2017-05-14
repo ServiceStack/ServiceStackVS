@@ -12,6 +12,8 @@ export class App {
             { route: ['/view2', 'view2'], name: 'view2', moduleId: './views/view2', nav: true, title: 'View 2' }
         ]);
 
+        config.mapUnknownRoutes({ redirect: '' });
+
         this.router = router;
     }
 }
