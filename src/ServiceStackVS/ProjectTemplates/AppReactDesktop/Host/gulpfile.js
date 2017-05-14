@@ -6,6 +6,7 @@
         'webpack-build-prod': 'npm run build-prod',
         'tests-run': 'npm run test',
         'tests-watch': 'npm run test-watch',
+        'tests-coverage': 'npm run test-coverage',
         'www-exec-package-console': 'cmd /c "cd wwwroot_build && package-deploy-console.bat"'
     };
 

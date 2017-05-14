@@ -9,6 +9,11 @@
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch"
   },
+  "karma": {
+    "globals": {
+      "BaseUrl": "http://localhost:$iisexpressport$"
+    }
+  },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "es6-shim": "^0.35.3",
