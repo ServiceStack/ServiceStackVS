@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import "font-awesome/css/font-awesome.css";
 import './app.scss';
+import 'es6-shim';
 
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
@@ -10,7 +11,7 @@ import View1 from './view1/View1.vue';
 import View2 from './view2/View2.vue';
 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', component: Home, props: { name: "Vue" } },
   { path: '/view1', component: View1 },
   { path: '/view2', component: View2 }
 ]
@@ -28,8 +29,3 @@ const app = new Vue({
     router,
     mixins: [VueRouter],
 });
-
-// new Vue({
-//     el: '#app',
-//     render: h => h(App)
-// });

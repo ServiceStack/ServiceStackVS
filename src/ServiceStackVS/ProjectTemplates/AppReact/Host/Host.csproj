@@ -121,13 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\logo.png" />
-    <Content Include="src\Home\home.scss" />
+    <Content Include="src\home\hello.scss" />
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
     <Content Include="src\test.fileMock.js" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\home\Home.test.tsx" />
+    <TypeScriptCompile Include="src\home\Hello.test.tsx" />
+    <TypeScriptCompile Include="src\home\Hello.tsx" />
     <TypeScriptCompile Include="src\home\Home.tsx" />
     <TypeScriptCompile Include="src\view1\View.tsx" />
     <TypeScriptCompile Include="src\view2\View.tsx" />

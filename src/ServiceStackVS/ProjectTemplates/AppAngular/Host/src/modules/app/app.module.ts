@@ -14,7 +14,7 @@ export const routes: Routes = [
         redirectTo: '/home',
         pathMatch: 'full'
     },
-    { path: 'home', component: HomeComponent, data: { title: 'Home', routeParam: 'Welcome' } },
+    { path: 'home', component: HomeComponent, data: { title: 'Home', name: 'Angular4' } },
     { path: 'products', component: ProductsComponent, data: { title: 'Products' } },
     { path: 'technology', component: TechnologyComponent, data: { title: 'Technology' } }
 ];

@@ -1,7 +1,6 @@
 ﻿<template>
     <div class="form-group">
-        <input class="form-control" type="text" placeholder="Your name"
-               v-on:keyup="nameChanged($event.target.value)" />
+        <input class="form-control" type="text" placeholder="Your name" v-model="txtName" />
         <h3 class="result">{{ result }}</h3>
     </div>
 </template>
@@ -12,22 +11,28 @@ import { client } from '../shared';
 import { Hello } from '../dtos';
 
 export default Vue.extend({
-  props: ['initResult'],
-  data: function() {
-    return { result: this.initResult }
-  },
-  methods: {
-    async nameChanged(name:string) {
-        if (name) {
-            let request = new Hello();
-            request.name = name;
-            let r = await client.get(request);
-            this.result = r.result;
-        } else {
-            this.result = '';
+    props: ['name'],
+    data() {
+        return { result: '', txtName: this.name }
+    },
+    created() {
+        this.nameChanged(this.txtName)
+    },
+    watch: {
+        txtName(val) { this.nameChanged(val) }
+    },
+    methods: {
+        async nameChanged(name: string) {
+            if (name) {
+                let request = new Hello();
+                request.name = name;
+                let r = await client.get(request);
+                this.result = r.result;
+            } else {
+                this.result = '';
+            }
         }
     }
-  }
 });
 </script>
 

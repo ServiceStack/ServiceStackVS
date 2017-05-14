@@ -10,24 +10,23 @@ import { Hello } from '../../../dtos';
 export class HelloComponent {
     result: string;
 
-    constructor(private cdref:ChangeDetectorRef){}
+    constructor(private cdref: ChangeDetectorRef) { }
 
-    @Input() routeParam: string;
-    @Input() heading: string;
+    @Input() name: string;
 
     ngOnInit() {
-        this.nameChanged(this.routeParam);
+        this.nameChanged(this.name);
     }
 
-    async nameChanged(name:string) {
+    async nameChanged(name: string) {
         if (name) {
             var req = new Hello();
             req.name = name;
             var r = await client.get(req);
             this.result = r.result;
-            this.cdref.detectChanges();
         } else {
             this.result = '';
         }
+        this.cdref.detectChanges();
     }
 }

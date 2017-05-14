@@ -1,9 +1,8 @@
 ﻿import {} from "aurelia-framework";
 
 export class Home {
-    message: string;
-
-    constructor() {
-        this.message = "Home";
+    name: string;
+    activate(params, routeConfig, $navigationInstruction) {
+        this.name = routeConfig.settings.name;
     }
 }

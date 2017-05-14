@@ -8,7 +8,7 @@ describe('/view1 View.vue', () => {
 
     it ('should render correct contents', () => {
         const vm = ctor();
-        expect(vm.$el.querySelector('h3').textContent).eq('This is View1');
+        expect(vm.$el.querySelector('h3').textContent).eq('This is View 1');
     })
 
 })

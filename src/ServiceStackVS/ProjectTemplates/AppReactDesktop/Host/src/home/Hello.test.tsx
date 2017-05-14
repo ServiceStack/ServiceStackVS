@@ -2,33 +2,33 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 
-import Home from './Home';
+import Hello from './Hello';
 
-describe('<Home />', () => {
+describe('<Hello />', () => {
 
   it ('Updates heading on setState', done => {
-    const el = shallow(<Home />);
+    const el = shallow(<Hello />);
 
     expect(el.find('h3').text()).toBe("");
 
-    el.setState({ msg: 'A' }, () => {
+    el.setState({ result: 'A' }, () => {
       expect(el.find('h3').text()).toBe("A");
       done();
     });
   });
 
   it ('Updates heading on update', async () => {
-    const el = shallow(<Home />);
+    const el = shallow(<Hello />);
 
     expect(el.find('h3').text()).toBe("");
 
-    await (el.instance() as Home).nameChanged('A');
+    await (el.instance() as Hello).nameChanged('A');
 
     expect(el.find('h3').text()).toBe("Hello, A!");
   });
 
   it ('Updates heading on keyDown', done => {
-    const el = shallow(<Home />);
+    const el = shallow(<Hello />);
 
     expect(el.find('h3').text()).toBe("");
 

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-toggleable-md navbar-inverse">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <i class="fa fa-code" aria-hidden="true"></i>
                 $safeprojectname$
             </a>
@@ -20,7 +20,11 @@
     </nav>
 
     <div class="container">
-        <router-view></router-view>
+        <div class="row" style="margin:10px 0">
+            <div id="content">
+                <router-view></router-view>
+            </div>
+        </div>
     </div>
 
     <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">

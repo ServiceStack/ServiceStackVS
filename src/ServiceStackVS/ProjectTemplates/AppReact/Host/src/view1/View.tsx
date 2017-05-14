@@ -2,8 +2,10 @@ import './view.css';
 
 import * as React from 'react';
 
-export default () => (
+const View = (props) => (
     <div id="view1">
-        <h3>This is View1</h3>
+        <h3>{props.message}</h3>
     </div>
 );
+
+export default () => <View message="This is View 1" />;

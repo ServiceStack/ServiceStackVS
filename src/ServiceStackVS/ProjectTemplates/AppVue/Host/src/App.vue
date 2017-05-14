@@ -2,10 +2,10 @@
 <div>
     <nav class="navbar navbar-toggleable-md navbar-inverse">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <router-link class="navbar-brand" to="/" exact="">
                 <i class="fa fa-code" aria-hidden="true"></i>
                 $safeprojectname$
-            </a>
+            </router-link>
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
@@ -13,10 +13,10 @@
                     <a class="nav-link">Home</a>
                   </router-link>
                   <router-link tag="li" class="nav-item" to="/view1">
-                    <a class="nav-link">View1</a>
+                    <a class="nav-link">View 1</a>
                   </router-link>
                   <router-link tag="li" class="nav-item" to="/view2">
-                    <a class="nav-link">View2</a>
+                    <a class="nav-link">View 2</a>
                   </router-link>
                 </ul>
             </div>

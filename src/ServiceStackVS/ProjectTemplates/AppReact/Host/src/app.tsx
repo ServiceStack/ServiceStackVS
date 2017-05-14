@@ -30,8 +30,8 @@ class App extends React.Component<any, any> {
                         <div className="collapse navbar-collapse">
                             <ul className="navbar-nav mr-auto">
                                 <NavItem to="/">Home</NavItem>
-                                <NavItem to="/view1">View1</NavItem>
-                                <NavItem to="/view2">View2</NavItem>
+                                <NavItem to="/view1">View 1</NavItem>
+                                <NavItem to="/view2">View 2</NavItem>
                             </ul>
                         </div>
                     </div>
@@ -40,7 +40,7 @@ class App extends React.Component<any, any> {
                 <div className="container">
                     <div className="row" style={{ margin: "10px 0" }}>
                         <div id="content">
-                            <Route exact path="/" component={Home} activeClassName="active" />
+                            <Route exact path="/" render={props => <Home name="React" />} activeClassName="active" />
                             <Route path="/view1" component={View1} activeClassName="active" />
                             <Route path="/view2" component={View2} activeClassName="active" />
                         </div>

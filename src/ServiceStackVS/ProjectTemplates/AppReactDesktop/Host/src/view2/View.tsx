@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-export default () => (
+const View = (props) => (
     <div>
-        <h3>This is View2</h3>
+        <h3>{props.message}</h3>
     </div>
 );
+
+export default () => <View message="This is View 2" />;
