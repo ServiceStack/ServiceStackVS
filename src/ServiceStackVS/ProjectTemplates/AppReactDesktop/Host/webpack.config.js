@@ -57,7 +57,7 @@ module.exports = {
         chunkFilename: '[name].js',
     },
 
-    devtool: "source-map",
+    devtool: isProd ? "source-map" : "inline-source-map",
 
     resolve: {
         extensions: [

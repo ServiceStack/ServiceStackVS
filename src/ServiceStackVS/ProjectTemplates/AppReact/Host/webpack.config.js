@@ -56,7 +56,7 @@ module.exports = {
         chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js',
     },
 
-    devtool: "source-map",
+    devtool: isProd ? "source-map" : "inline-source-map",
 
     resolve: {
         extensions: [
