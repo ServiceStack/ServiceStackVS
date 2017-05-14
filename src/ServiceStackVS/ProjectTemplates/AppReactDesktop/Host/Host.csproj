@@ -120,12 +120,11 @@
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="dist\app.bundle.js" />
-    <Content Include="dist\vendor.bundle.js" />
     <Content Include="platform.css" />
     <Content Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="dist\" />
     <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-deploy-console.bat" />

@@ -115,15 +115,12 @@
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="dist\app.css" />
-    <Content Include="dist\app.bundle.js" />
-    <Content Include="dist\polyfills.bundle.js" />
-    <Content Include="dist\vendor.bundle.js" />
     <Content Include="karma.conf.js" />
     <Content Include="karma-shim.js" />
   </ItemGroup>
   <ItemGroup>
- 	  <Folder Include="wwwroot\" />
+    <Folder Include="dist\" />
+    <Folder Include="wwwroot\" />
     <Content Include="wwwroot_build\README.txt" />
     <Content Include="wwwroot_build\package-and-deploy.bat" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
