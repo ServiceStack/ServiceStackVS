@@ -15,7 +15,7 @@
 
             <h4 style="text-align: center">
                 <img [src]="logoUrl" />
-                <a [href]="url">Learn about this Angular2 VS.NET template</a>
+                <a [href]="url">Learn about this Angular4 VS.NET template</a>
             </h4>
 
             <app-footer></app-footer>
@@ -30,6 +30,6 @@ export class AppComponent {
 
     constructor() {
         this.logoUrl = require("./assets/img/logo.png");
-        this.url = 'https://servicestack.net/vs-templates/Angular2App';
+        this.url = 'https://servicestack.net/vs-templates/AngularApp';
     }
 }
