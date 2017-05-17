@@ -86,19 +86,11 @@ module.exports = {
                 loader: "source-map-loader"
             },
             {
-                test: /\.(jpe?g|gif|png|ico|svg|woff|ttf|wav|mp3)$/i,
+                test: /\.(jpe?g|gif|png|ico|svg|wav|mp3)$/i,
                 loader: 'file-loader?name=img/[name].[ext]'
             },
             {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?name=img/[name].[ext]'
-            },
-            {
-                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?name=img/[name].[ext]'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file-loader?name=img/[name].[ext]'
             },
             ...when(isDev, [
