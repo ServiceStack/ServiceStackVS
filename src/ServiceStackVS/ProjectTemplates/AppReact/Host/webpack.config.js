@@ -85,20 +85,12 @@ module.exports = {
                 loader: "source-map-loader"
             },
             {
-                test: /\.(jpe?g|gif|png|ico|svg|woff|ttf|wav|mp3)$/i,
+                test: /\.(jpe?g|gif|png|ico|svg|wav|mp3)$/i,
                 loader: 'file-loader' + (isProd ? '?hash=sha512&digest=hex&name=img/[name].[hash].[ext]' : '?name=img/[name].[ext]')
             },
             {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader' + (isProd ? '?hash=sha512&digest=hex&name=img/[name].[hash].[ext]' : '?name=img/[name].[ext]')
-            },
-            {
-                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: isProd ? 'url-loader?limit=10000&mimetype=application/font-woff&name=img/[name].[hash].[ext]' : 'file-loader?name=img/[name].[ext]'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: isProd ? 'url-loader?limit=10000&mimetype=application/octet-stream&name=img/[name].[hash].[ext]' : 'file-loader?name=img/[name].[ext]'
+                test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: isProd ? 'url-loader?limit=10000&name=img/[name].[hash].[ext]' : 'file-loader?name=img/[name].[ext]'
             },
             ...when(isDev, [
                 {

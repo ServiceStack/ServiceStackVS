@@ -39,6 +39,7 @@
     "servicestack-client": "0.0.35"
   },
   "devDependencies": {
+    "@types/classnames": "2.2.0",
     "@types/jest": "^19.2.3",
     "@types/node": "^7.0.18",
     "@types/react": "^15.0.24",
@@ -69,7 +70,6 @@
     "null-loader": "^0.1.1",
     "postcss-loader": "^2.0.5",
     "precss": "^1.4.0",
-    "react-addons-test-utils": "^15.5.1",
     "react-test-renderer": "^15.5.4",
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.5",
