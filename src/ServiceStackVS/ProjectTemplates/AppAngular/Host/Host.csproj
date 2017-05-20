@@ -108,8 +108,8 @@
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default.html" />
-    <Content Include="default.template.ejs" />
+    <Content Include="index.html" />
+    <Content Include="index.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />

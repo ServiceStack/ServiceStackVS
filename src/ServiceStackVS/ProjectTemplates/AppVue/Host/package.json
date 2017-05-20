@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "gulp www-postinstall",
+    "dev": "webpack-dev-server",
+    "watch": "webpack --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch",
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch"
   },
@@ -77,6 +78,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "2.2.1",
     "vue-ts-loader": "^0.0.3",
-    "webpack": "^2.5.1"
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

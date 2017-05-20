@@ -1,6 +1,7 @@
 (function () {
     var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
     var SCRIPTS = {
+        '00-webpack-dev': 'npm run dev',
         '00-webpack-watch': 'npm run watch',
         'webpack-build': 'npm run build',
         'webpack-build-prod': 'npm run build-prod',
@@ -112,10 +113,6 @@
                     Password: config.password
                 }
             }));
-    });
-
-    gulp.task('default', done => {
-        runSequence('01-package-server', '02-package-client', done);
     });
 
     gulp.task('01-package-server', done => {

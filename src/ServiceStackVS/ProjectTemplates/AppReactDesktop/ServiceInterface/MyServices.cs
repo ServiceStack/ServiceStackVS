@@ -18,7 +18,7 @@ namespace $safeprojectname$
     {
         //Return default.html for unmatched requests so routing is handled on client
         public object Any(FallbackForClientRoutes request) => 
-            new HttpResult(VirtualFileSources.GetFile("default.html"));
+            new HttpResult(VirtualFileSources.GetFile("index.html"));
 
         public object Any(Hello request)
         {

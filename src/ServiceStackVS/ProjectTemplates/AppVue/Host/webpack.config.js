@@ -25,7 +25,8 @@ var isProd = ENV === 'build-prod';
 var isDev = !isTest && !isProd;
 var NONE = function () { return {} };
 
-var path = require('path'),
+var packageConfig = require("./package.json"),
+    path = require('path'),
     webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -34,7 +35,7 @@ var path = require('path'),
 
 var postcssLoader = {
     loader: 'postcss-loader',
-    options: { plugins: () => [require('precss'), require('autoprefixer')] }
+    options: { plugins: [require('precss'), require('autoprefixer')] }
 };
 
 module.exports = {
@@ -55,6 +56,15 @@ module.exports = {
         publicPath: '/dist/',
         filename: isProd ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
         chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js',
+    },
+
+    devServer: {
+        port: 3000,
+        historyApiFallback: true,
+        inline: true,
+        proxy: {
+            "/": packageConfig["karma"]["globals"]["BaseUrl"]
+        }
     },
 
     devtool: isProd ? "source-map" : "inline-source-map",
@@ -154,8 +164,8 @@ module.exports = {
                 filename: isProd ? 'vendor.[chunkhash].bundle.js' : 'vendor.bundle.js'
             }),
             new HtmlWebpackPlugin({
-                template: 'default.template.ejs',
-                filename: '../default.html',
+                template: 'index.template.ejs',
+                filename: '../index.html',
                 inject: true
             }),
         ]),

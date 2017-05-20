@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "gulp www-postinstall",
+    "dev": "webpack-dev-server",
+    "watch": "webpack --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage"
@@ -79,6 +80,7 @@
     "ts-jest": "^20.0.3",
     "typescript": "^2.3.2",
     "url-loader": "^0.5.8",
-    "webpack": "^2.5.1"
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

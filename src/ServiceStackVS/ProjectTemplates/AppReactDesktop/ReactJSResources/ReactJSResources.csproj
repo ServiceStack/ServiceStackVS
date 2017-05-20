@@ -42,7 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="default.html" />
+    <EmbeddedResource Include="index.html" />
     <EmbeddedResource Include="dist\app.css" />
     <EmbeddedResource Include="dist\app.bundle.js" />
     <EmbeddedResource Include="dist\vendor.bundle.js" />

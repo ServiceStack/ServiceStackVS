@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "gulp www-postinstall",
+    "dev": "webpack-dev-server",
+    "watch": "webpack --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch",
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch",
     "test-coverage": "start coverage\\html\\index.html",
@@ -92,6 +93,7 @@
     "style-loader": "^0.17.0",
     "ts-loader": "^2.0.3",
     "typescript": "^2.3.2",
-    "webpack": "^2.5.1"
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
