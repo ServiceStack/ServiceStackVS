@@ -9,25 +9,34 @@ namespace ServiceStackVS.Common
 {
     public static class Analytics
     {
-        private const string serviceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?Name={1}";
-        private const string serviceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?Name={0}";
-        private const string serviceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?Name={0}";
+        private const string VERSION = "1.0.31";
+        private const string ServiceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?name={1}&source=ssvs&version=" + VERSION;
+        private const string ServiceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?name={0}&source=ssvs&version=" + VERSION;
+        private const string ServiceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?name={0}&source=ssvs&version=" + VERSION;
 
         static readonly Dictionary<int, string> VersionAlias = new Dictionary<int, string>
-                {
-                    {11,"2012"},
-                    {12,"2013"},
-                    {14,""},
-                };
+        {
+            { 11, "2012" },
+            { 12, "2013" },
+            { 14, "2015" },
+            { 15, "2017" },
+        };
+
+        static string GetVersion(int vsVersion)
+        {
+            string version;
+            return VersionAlias.TryGetValue(vsVersion, out version) ? version : "";
+        }
 
         public static void SubmitAnonymousTemplateUsage(int vsVersion, string templatePath)
         {
+            if (Environment.GetEnvironmentVariable("SERVICESTACK_TELEMETRY_OPTOUT") == "1") return;
             Task.Run(() =>
             {
                 try
                 {
                     var templateName = WizardHelpers.GetTemplateNameFromPath(templatePath);
-                    serviceStackStatsUrl.Fmt(VersionAlias[vsVersion], templateName).GetStringFromUrl();
+                    ServiceStackStatsUrl.Fmt(GetVersion(vsVersion), templateName).GetStringFromUrl();
                 }
                 catch (Exception e)
                 {
@@ -38,15 +47,13 @@ namespace ServiceStackVS.Common
 
         public static void SubmitAnonymousAddReferenceUsage(string languageName)
         {
-            if (languageName == null)
-            {
-                return;
-            }
+            if (Environment.GetEnvironmentVariable("SERVICESTACK_TELEMETRY_OPTOUT") == "1") return;
+            if (languageName == null) return;
             Task.Run(() =>
             {
                 try
                 {
-                    serviceStackStatsAddRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
+                    ServiceStackStatsAddRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
                 catch (Exception e)
                 {
@@ -57,15 +64,13 @@ namespace ServiceStackVS.Common
 
         public static void SubmitAnonymousUpdateReferenceUsage(string languageName)
         {
-            if (languageName == null)
-            {
-                return;
-            }
+            if (Environment.GetEnvironmentVariable("SERVICESTACK_TELEMETRY_OPTOUT") == "1") return;
+            if (languageName == null) return;
             Task.Run(() =>
             {
                 try
                 {
-                    serviceStackStatsUpdateRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
+                    ServiceStackStatsUpdateRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
                 catch (Exception e)
                 {
