@@ -9,7 +9,8 @@
     "build-prod": "webpack --config webpack.config.js",
     "test": "jest",
     "test-watch": "jest --watch",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "typescript-ref": "cd src && typescript-ref"
   },
   "jest": {
     "globals": {
@@ -66,6 +67,7 @@
     "jest": "^20.0.1",
     "raw-loader": "^0.5.1",
     "run-sequence": "^1.2.2",
+    "servicestack-cli": "0.0.5",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.17.0",
     "ts-jest": "^20.0.3",

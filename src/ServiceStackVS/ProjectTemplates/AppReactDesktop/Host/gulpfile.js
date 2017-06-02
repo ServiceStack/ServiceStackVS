@@ -8,6 +8,7 @@
         'tests-run': 'npm run test',
         'tests-watch': 'npm run test-watch',
         'tests-coverage': 'npm run test-coverage',
+        'update-dtos': 'npm run typescript-ref',
         'www-exec-package-console': 'cmd /c "cd wwwroot_build && package-deploy-console.bat"'
     };
 

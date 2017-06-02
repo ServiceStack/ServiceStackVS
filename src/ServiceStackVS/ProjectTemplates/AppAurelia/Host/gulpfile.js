@@ -7,7 +7,8 @@
         'webpack-build-prod': 'npm run build-prod',
         'tests-run': 'npm run test',
         'tests-watch': 'npm run test-watch',
-        'tests-coverage': 'npm run test-coverage'
+        'tests-coverage': 'npm run test-coverage',
+        'update-dtos': 'npm run typescript-ref'
     };
 
     var fs = require('fs');

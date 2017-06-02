@@ -8,7 +8,8 @@
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.js",
     "test": "karma start",
-    "test-watch": "karma start --no-single-run --auto-watch"
+    "test-watch": "karma start --no-single-run --auto-watch",
+    "typescript-ref": "cd src && typescript-ref"
   },
   "karma": {
     "globals": {
@@ -67,6 +68,7 @@
     "rimraf": "^2.6.1",
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.5",
+    "servicestack-cli": "0.0.5",
     "sinon": "^2.2.0",
     "sinon-chai": "^2.10.0",
     "source-map-loader": "^0.2.1",
