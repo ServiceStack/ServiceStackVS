@@ -3,11 +3,22 @@ for updates, or [StackOverflow](http://stackoverflow.com/questions/ask) or the [
 
 # [ServiceStack VS.NET Templates](https://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
-ServiceStackVS supports Visual Studio 2015, 2013 and 2012* and can be [downloaded from the Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
+ServiceStackVS supports Visual Studio 2017, 2015, 2013 and 2012 and can be installed from within VS.NET:
+
+## Install ServiceStackVS 
+
+Install the ServiceStackVS VS.NET Extension by going to `Tools > Extensions and Updates...` then searching the Visual Studio Gallery for **ServiceStack**:
+
+[![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png)](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png)
+
+[![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)
+
+Optionally it can be downloaded and installed from the [VS.NET Gallery](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
 [![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
 ### Recommended Plugins and Tools
+
 To take advantage of all the templates and to improve the development workflow, it's best to get the following Visual Studio plugins/extensions for all available versions of Visual Studio.
 
 - [Node Tools for Visual Stuido](https://github.com/Microsoft/nodejstools/releases/tag/v1.1.1)
