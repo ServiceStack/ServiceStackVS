@@ -7,11 +7,11 @@ ServiceStackVS supports Visual Studio 2017, 2015, 2013 and 2012 and can be insta
 
 ## Install ServiceStackVS 
 
-Install the ServiceStackVS VS.NET Extension by going to `Tools > Extensions and Updates...`:
+Install the ServiceStackVS VS.NET Extension by going to `Tools > Extensions and Updates...`
 
 [![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png)](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/tools_extensions.png)
 
-Then searching the Visual Studio Gallery for **ServiceStack**:
+Then searching the Visual Studio Gallery for **ServiceStack**
 
 [![](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)](https://raw.githubusercontent.com/ServiceStack/ServiceStackVS/master/Images/search_download.png)
 
