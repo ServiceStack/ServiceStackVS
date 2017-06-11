@@ -13,7 +13,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStack.CSharp.MVC.ServiceInterface.csproj" ReplaceParameters="true"></Project>
+    <Project TargetFileName="$safeprojectname$.csproj" File="ProjectName.ServiceInterface.csproj" ReplaceParameters="true"></Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>

@@ -13,7 +13,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStackAngularJS.ServiceInterface.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="ProjectName.ServiceInterface.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="MyServices.cs">MyServices.cs</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>

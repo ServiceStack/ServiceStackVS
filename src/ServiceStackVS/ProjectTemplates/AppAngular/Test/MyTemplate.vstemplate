@@ -14,7 +14,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.csproj" File="ServiceStackAngularJS.Test.csproj" ReplaceParameters="true">
+    <Project TargetFileName="$safeprojectname$.csproj" File="ProjectName.Test.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="UnitTests.cs">UnitTests.cs</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
