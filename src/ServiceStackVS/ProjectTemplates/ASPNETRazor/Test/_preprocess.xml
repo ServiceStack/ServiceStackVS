@@ -2,6 +2,5 @@
 <Preprocess>
   <TemplateInfo Path="CSharp\ServiceStack\ServiceModel"/>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.csproj*.jpg;*.png;*.ico;templateinfo.xml">   
-    <add key="ServiceStack.CSharp.RazorSeed" value="$saferootprojectname$"/>
   </Replacements>
 </Preprocess>

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Funq;
-using ServiceStack.CSharp.RazorSeed.ServiceInterface;
+using $safeprojectname$.ServiceInterface;
 using ServiceStack.Razor;
 using ServiceStack;
 
-namespace ServiceStack.CSharp.RazorSeed
+namespace $safeprojectname$
 {
     public class AppHost : AppHostBase
     {

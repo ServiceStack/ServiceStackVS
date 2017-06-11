@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
-namespace ServiceStack.CSharp.RazorSeed
+namespace $safeprojectname$
 {
     public class Global : System.Web.HttpApplication
     {
