@@ -6,7 +6,7 @@
   <TemplateData>
     <Name>ServiceStack ASP.NET with Bootstrap</Name>
     <Description>A project to kickstart your ServiceStack ASPNET with Razor and Bootstrap application.</Description>
-    <DefaultName>BootstrapWebApp</DefaultName>
+    <DefaultName>Bootstrap</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
