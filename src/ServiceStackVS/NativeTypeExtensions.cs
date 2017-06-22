@@ -15,7 +15,7 @@ namespace ServiceStackVS
         {
             if (handler.TypesLanguage == NativeTypesLanguage.CSharp)
             {
-                return new List<string> { VsHelperGuids.CSharpProjectKind };
+                return new List<string> { VsHelperGuids.CSharpProjectKind, VsHelperGuids.CSharpDotNetCore };
             }
 
             if (handler.TypesLanguage == NativeTypesLanguage.FSharp)
@@ -34,6 +34,7 @@ namespace ServiceStackVS
                 return new List<string> 
                 { 
                     VsHelperGuids.CSharpProjectKind,
+                    VsHelperGuids.CSharpDotNetCore,
                     VsHelperGuids.FSharpProjectKind,
                     VsHelperGuids.VbNetProjectKind 
                 };
