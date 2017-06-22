@@ -83,6 +83,10 @@ namespace ServiceStackVS
                 return false;
             }
             string folderFullPath = projectItem.GetFullPath();
+            if(string.IsNullOrEmpty(folderFullPath))
+            {
+                return false;
+            }
             var folderDirectoryInfo = new DirectoryInfo(folderFullPath);
             bool isProjectItemAFolder = folderDirectoryInfo.Exists;
             return isProjectItemAFolder;

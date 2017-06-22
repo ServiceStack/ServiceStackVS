@@ -48,7 +48,7 @@ namespace ServiceStackVS
         public const string FSharpProjectKind = "{F2A71F9B-5D33-465A-A702-920D77279786}";
         public const string VbNetProjectKind = "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}";
 
-        public const string CSharpDotNetCore = "{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}";
+        public const string CSharpDotNetCore = "{9A19103F-16F7-4668-BE54-9A1E7A4F7556}";
 
         public const string ProjectUnloaded = "{67294A52-A4F0-11D2-AA88-00C04F688DDE}";
 
