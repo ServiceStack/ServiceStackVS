@@ -4,7 +4,7 @@
         Title="Add ServiceStack Reference"  Height="320" Width="660"
         Icon="Resources/favicon.ico" MinHeight="300" MinWidth="500"
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxErrorTemplate" TargetType="Control">
             <Grid ClipToBounds="False" >
@@ -23,9 +23,9 @@
                        VerticalAlignment="Top">
             </TextBlock>
 
-            <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="0,59,0,0"/>
+            <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="1,64,0,0"/>
             <TextBox x:Name="UrlTextBox" 
-                     Height="23" Margin="0,90,10,0" 
+                     Height="23" Margin="6,90,10.333,0" 
                      TextWrapping="Wrap" 
                      VerticalAlignment="Top" 
                      TextChanged="UrlTextBox_OnTextChanged" 
@@ -33,9 +33,9 @@
                      Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
             </TextBox>
 
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="0,110,0,0"/>
-            <TextBox x:Name="FileNameTextBox" Height="24" Margin="0,140,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ServiceReference1"
-                     x:FieldModifier="public" />
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" FontSize="13.333" Margin="1,114,0,0"/>
+            <TextBox x:Name="FileNameTextBox" Height="24" Margin="6,140,10.333,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ServiceReference"
+                     x:FieldModifier="public" GotFocus="FileNameTextBox_GotFocus" />
 
             <CheckBox Content="Only TypeScript definitions"
                       ToolTip="Include only interface definitions, untick to include exported classes as well."

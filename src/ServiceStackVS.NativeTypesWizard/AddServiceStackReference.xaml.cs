@@ -218,5 +218,15 @@ namespace ServiceStackVS.NativeTypesWizard
         {
             TypeScriptOnlyDefinitions = checkBox.IsChecked ?? false;
         }
+
+        private void FileNameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            FileNameTextBox.SelectAll();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UrlTextBox.Focus();
+        }
     }
 }
