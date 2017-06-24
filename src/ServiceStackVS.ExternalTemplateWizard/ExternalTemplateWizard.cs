@@ -21,6 +21,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
         private string externalSolutionPath;
         private string projectName;
         private string safeProjectNameReplace;
+        private string targetFrameworkMoniker;
 
         private string slnOutputName;
         private string projOutputName;
@@ -66,7 +67,16 @@ namespace ServiceStackVS.ExternalTemplateWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             projectName = replacementsDictionary["$safeprojectname$"];
-            localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary);
+
+            replacementsDictionary.TryGetValue("$targetframeworkversion$", out targetFrameworkMoniker);
+            targetFrameworkMoniker = targetFrameworkMoniker == null
+                ? "net45"
+                : "net" + targetFrameworkMoniker.Replace(".", "");
+
+            localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary)
+            {
+                { "$targetframeworkmoniker$", targetFrameworkMoniker },
+            };
 
             string latestVersion = GetLatestVersionOfPackage("ServiceStack.Interfaces");
             localReplacementsDictionary.Add("$currentServiceStackVersion$",latestVersion);
