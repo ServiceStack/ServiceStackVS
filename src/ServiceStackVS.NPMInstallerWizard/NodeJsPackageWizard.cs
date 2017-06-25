@@ -34,6 +34,7 @@ namespace ServiceStackVS.NPMInstallerWizard
         private OutputWindowWriter serviceStackOutputWindowWriter;
         private IVsExtensionManager extensionManager;
         private bool skipTypings = false;
+        private string projectName = null;
 
         private OutputWindowWriter OutputWindowWriter
         {
@@ -84,6 +85,9 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
             dte = (DTE) automationObject;
 
+            projectName = replacementsDictionary["$safeprojectname$"];
+            replacementsDictionary["$safeprojectnamelower$"] = projectName.ToLower();
+
             using (var serviceProvider = new ServiceProvider((IServiceProvider)automationObject))
             {
                 var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
@@ -121,6 +125,17 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
             var projectPath = project.FullName.Substring(0,
                 project.FullName.LastIndexOf("\\", StringComparison.Ordinal));
+
+            //npm package.json validation requires lower-case names:
+            var packageJsonPath = Path.Combine(projectPath, "package.json");
+            if (projectName != null && File.Exists(packageJsonPath))
+            {
+                var originalContent = File.ReadAllText(packageJsonPath);
+                var proectNameKebab = projectName.SplitCamelCase().Replace(" ", "-").ToLower();
+
+                File.WriteAllText(packageJsonPath, originalContent
+                    .ReplaceAll($"\"{projectName}\"", $"\"{proectNameKebab}\""));
+            }
 
             Task.Run(() => { StartRequiredPackageInstallations(); }).Wait();
             // Typings isn't supported by any built in VS features.. yet.., run manually and wait

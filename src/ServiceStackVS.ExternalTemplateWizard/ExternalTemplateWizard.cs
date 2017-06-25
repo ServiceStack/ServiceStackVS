@@ -83,7 +83,6 @@ namespace ServiceStackVS.ExternalTemplateWizard
 
             templatesRootDir = Path.GetDirectoryName(customParams[0] as string);
             localReplacementsDictionary.Add("$saferootprojectname$", projectName);
-            localReplacementsDictionary.Add("$saferootprojectnamekebab$", projectName.ToLower().SplitCamelCase().Replace(" ","-"));
             if (templatesRootDir == null)
             {
                 throw new WizardBackoutException("Failed to create project, 'customParams' does not contain extension template path.");
