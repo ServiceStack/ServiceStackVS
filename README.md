@@ -19,6 +19,12 @@ Optionally it can be downloaded and installed from the [VS.NET Gallery](http://v
 
 [![VS.NET Gallery Download](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/servicestackvs/vsgallery-download.png)](http://visualstudiogallery.msdn.microsoft.com/5bd40817-0986-444d-a77d-482e43a48da7)
 
+Once installed you can create a new ServiceStack Project from the new VS.NET Projects dialog:
+
+![ServiceStack VS.NET Templates Dialog](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/ssvs/new-projects-dialog.png)
+
+Most of ServiceStack Templates follow our [multi-project recommended projects structure](http://docs.servicestack.net/physical-project-structure).
+
 ### Recommended Plugins and Tools
 
 To take advantage of all the templates and to improve the development workflow, it's best to get the following Visual Studio 
