@@ -78,7 +78,7 @@ that new TypeScript releases will break existing Apps.
 
 The F# Project templates included in ServiceStackVS extension:
 
-![F# templates](https://github.com/ServiceStack/Assets/raw/master/img/servicestackvs/fhsarp-templates.png)
+![F# templates](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/ssvs/new-projects-fsharp-dialog.png)
 
 These F# templates follow the same recommended multi-project structure used in the C# templates. 
 There's also a community created [F# ServiceStack](http://visualstudiogallery.msdn.microsoft.com/278caff1-917a-4ac1-a552-e5a2ce0f6e1f) 
