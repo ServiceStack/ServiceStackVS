@@ -38,7 +38,7 @@
     "react": "^15.2.1",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "servicestack-client": "0.0.35"
+    "servicestack-client": "0.0.38"
   },
   "devDependencies": {
     "@types/classnames": "2.2.0",

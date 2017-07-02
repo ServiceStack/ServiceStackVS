@@ -20,7 +20,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
-    "servicestack-client": "0.0.35",
+    "servicestack-client": "0.0.38",
     "vue": "https://github.com/DanielRosenwasser/vue#540a38fb21adb7a7bc394c65e23e6cffb36cd867",
     "vue-router": "https://github.com/DanielRosenwasser/vue-router#01b8593cf69c2a5077df45e37e2b24d95bf35ce3"
   },
