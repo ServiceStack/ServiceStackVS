@@ -16,7 +16,7 @@ namespace $safeprojectname$
 
     public class MyServices : Service
     {
-        //Return default.html for unmatched requests so routing is handled on client
+        //Return index.html for unmatched requests so routing is handled on client
         public object Any(FallbackForClientRoutes request) => 
             new HttpResult(VirtualFileSources.GetFile("index.html"));
 
