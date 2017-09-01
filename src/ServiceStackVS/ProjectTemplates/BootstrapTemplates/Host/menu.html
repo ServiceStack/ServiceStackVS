@@ -1,0 +1,11 @@
+{{ { '/':         'Home',
+     '/about':    'About',
+     '/services': 'Services',
+     '/contact':  'Contact',
+   } | toList | assignTo: links }}
+
+<div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+        {{ links | select: <li class="nav-item { 'active' | ifMatchesPathInfo(it.Key) }"><a class="nav-link" href="{ it.Key }">{ it.Value }</a></li> }}
+    </ul>
+</div>
