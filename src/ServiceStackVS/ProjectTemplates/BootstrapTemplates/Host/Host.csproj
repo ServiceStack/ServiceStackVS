@@ -54,9 +54,6 @@
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>$(SolutionDir)\packages\ServiceStack.OrmLite.4.0.32\lib\net40\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Razor">
-      <HintPath>$(SolutionDir)\packages\ServiceStack.Razor.4.0.32\lib\net45\ServiceStack.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Redis">
       <HintPath>$(SolutionDir)\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
     </Reference>
@@ -90,6 +87,7 @@
     <Content Include="contact.html" />
     <Content Include="menu.html" />
     <Content Include="services.html" />
+    <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
