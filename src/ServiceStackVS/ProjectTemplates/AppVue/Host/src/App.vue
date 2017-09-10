@@ -1,13 +1,13 @@
 ﻿<template>
 <div>
-    <nav class="navbar navbar-toggleable-md navbar-inverse">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <router-link class="navbar-brand" to="/" exact="">
                 <i class="fa fa-code" aria-hidden="true"></i>
                 $safeprojectname$
             </router-link>
-
-            <div class="collapse navbar-collapse">
+          
+            <div class="navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                   <router-link tag="li" class="nav-item" to="/" exact>
                     <a class="nav-link">Home</a>

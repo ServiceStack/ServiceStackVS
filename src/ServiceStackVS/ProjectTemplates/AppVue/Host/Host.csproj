@@ -133,6 +133,7 @@
     <TypeScriptCompile Include="src\dtos.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\shared.ts" />
+    <TypeScriptCompile Include="src\shared.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="karma-shim.js" />

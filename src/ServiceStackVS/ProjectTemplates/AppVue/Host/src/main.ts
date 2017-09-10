@@ -1,10 +1,12 @@
+/// <reference path="shared.d.ts" />
+
 import 'bootstrap/dist/css/bootstrap.css';
 import "font-awesome/css/font-awesome.css";
 import './app.scss';
 import 'es6-shim';
 
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import Router from 'vue-router';
 import App from './App.vue';
 import Home from './home/Home.vue';
 import View1 from './view1/View1.vue';
@@ -17,16 +19,15 @@ const routes = [
   { path: '*', redirect: '/' },
 ];
 
-const router = new VueRouter({
+const router = new Router ({
     mode: 'history',
     linkActiveClass: 'active',
     routes,
 });
 
-Vue.use(VueRouter);
+Vue.use(Router);
 const app = new Vue({
     el: '#app',
     render: h => h(App),
     router,
-    mixins: [VueRouter],
 });

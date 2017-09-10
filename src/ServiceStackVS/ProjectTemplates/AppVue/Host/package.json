@@ -17,12 +17,12 @@
     }
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "4.0.0-beta",
     "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
     "servicestack-client": "0.0.38",
-    "vue": "https://github.com/DanielRosenwasser/vue#540a38fb21adb7a7bc394c65e23e6cffb36cd867",
-    "vue-router": "https://github.com/DanielRosenwasser/vue-router#01b8593cf69c2a5077df45e37e2b24d95bf35ce3"
+    "vue": "2.4.2",
+    "vue-router": "2.7.0"
   },
   "devDependencies": {
     "@types/chai": "^3.5.2",
@@ -74,7 +74,7 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.17.0",
     "ts-loader": "^2.0.3",
-    "typescript": "^2.3.2",
+    "typescript": "^2.5.2",
     "url-loader": "^0.5.8",
     "vue-loader": "^12.0.4",
     "vue-style-loader": "^3.0.1",
