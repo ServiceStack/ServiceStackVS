@@ -5,6 +5,7 @@
     "noEmitHelpers": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
+    "noStrictGenericChecks": true,
     "removeComments": false,
     "sourceMap": true,
     "target": "es5",

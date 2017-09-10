@@ -35,10 +35,10 @@
     "classnames": "^2.2.5",
     "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
-    "react": "^15.2.1",
-    "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1",
-    "servicestack-client": "0.0.39"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "servicestack-client": "^0.0.39"
   },
   "devDependencies": {
     "@types/classnames": "2.2.0",
@@ -76,7 +76,7 @@
     "react-test-renderer": "^15.5.4",
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.5",
-    "servicestack-cli": "0.0.5",
+    "servicestack-cli": "^0.0.5",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.17.0",
     "ts-jest": "^20.0.3",
