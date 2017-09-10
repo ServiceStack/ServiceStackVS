@@ -42,7 +42,7 @@
     "bootstrap": "4.0.0-beta",
     "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
-    "servicestack-client": "0.0.38"
+    "servicestack-client": "0.0.39"
   },
   "devDependencies": {
     "@types/jest": "^19.2.3",
