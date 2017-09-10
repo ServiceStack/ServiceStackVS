@@ -34,13 +34,13 @@ class App extends React.Component<any, any> {
         return (
             <Router>
             <div>
-                <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+                <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container">
                         <Link to="/" className="navbar-brand"> 
                             <i className="fa fa-code" aria-hidden="true"></i>
                             <span style={{ paddingLeft: 5 }}>$safeprojectname$</span>
                         </Link>
-                        <div className="collapse navbar-collapse">
+                        <div className="navbar-collapse">
                             <ul className="nav navbar-nav mr-auto">
                                 <NavItem to="/">Home</NavItem>
                                 <NavItem to="/view1">View 1</NavItem>

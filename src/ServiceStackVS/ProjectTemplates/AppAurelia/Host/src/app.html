@@ -1,12 +1,12 @@
 <template>
-    <nav class="navbar navbar-toggleable-md navbar-inverse">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <i class="fa fa-code" aria-hidden="true"></i>
                 $safeprojectname$
             </a>
 
-            <div class="collapse navbar-collapse">
+            <div class="navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
                         <a class="nav-link" href.bind="row.href">
