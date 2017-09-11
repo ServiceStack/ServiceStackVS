@@ -9,12 +9,12 @@ describe('Home.vue', () => {
 
     it ('should have correct data', function () {
         const vm = ctor();
-        expect(vm.result).eq('');
+        expect(vm.result).undefined;
     })
 
     it ('should render correct contents', done => {
         const vm = ctor({ name: 'Vue' });
-        expect(vm.txtName).eq('Vue');
+        expect(vm.name).eq('Vue');
         expect(vm.$el.querySelector('input').type).eq('text');
         expect(vm.$el.querySelector('h3.result').textContent).eq('');
 

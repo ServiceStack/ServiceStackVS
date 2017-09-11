@@ -40,11 +40,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
 
-export default Vue.extend({
-  name: 'app-root',
-  data() {
-    return { url: "https://servicestack.net/vs-templates/VueApp" }
-  }
-});
+@Component
+export default class AppComponent extends Vue {
+    @Prop({ default: "https://servicestack.net/vs-templates/VueApp" }) url: string;
+}
 </script>

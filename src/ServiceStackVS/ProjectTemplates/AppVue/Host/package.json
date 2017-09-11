@@ -22,6 +22,7 @@
     "font-awesome": "^4.7.0",
     "servicestack-client": "^0.0.39",
     "vue": "^2.4.2",
+    "vue-property-decorator": "^5.3.0",
     "vue-router": "2.7.0"
   },
   "devDependencies": {

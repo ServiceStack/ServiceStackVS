@@ -6,11 +6,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-export default Vue.extend({
-  data() {
-    return { message: "This is View 1" }
-  }
-});
+import { Component, Prop } from 'vue-property-decorator';
+
+@Component
+export default class View1Component extends Vue {
+    @Prop({ default: "This is View 1" }) message: string;
+}
 </script>
 
 <style lang="scss">
