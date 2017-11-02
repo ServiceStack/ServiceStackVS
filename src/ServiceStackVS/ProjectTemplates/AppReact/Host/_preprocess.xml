@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Preprocess>
   <Replacements Include="*.*" Exclude="*.vstemplate;*.jpg;*.png;*.gif;*.ico;templateinfo.xml;*.cs">
-    <add key="wwwroot Include=&quot;wwwroot&quot;" value="wwwroot Include=&quot;wwwroot/**/*&quot;"/>
   </Replacements>
 </Preprocess>
