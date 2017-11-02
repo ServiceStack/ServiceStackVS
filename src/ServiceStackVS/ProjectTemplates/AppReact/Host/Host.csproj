@@ -143,12 +143,10 @@
       $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
     </CopyAllFilesToSingleFolderForMSDeployDependsOn>
   </PropertyGroup>
-  <ItemGroup>
-    <wwwroot Include="wwwroot/**/*" />
-  </ItemGroup>
   <Target Name="OnPublish">
     <ItemGroup>
-      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
+      <_WWWRootFiles Include="wwwroot/**/*" />
+      <FilesForPackagingFromProject Include="%(_WWWRootFiles.Identity)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
