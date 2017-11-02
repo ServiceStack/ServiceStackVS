@@ -4,9 +4,9 @@ using System.Linq;
 using ServiceStack;
 using ServiceStack.Templates;
 using ServiceStack.DataAnnotations;
-using $safeprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceModel;
 
-namespace $safeprojectname$.ServiceInterface
+namespace $safeprojectname$
 {
     [Exclude(Feature.Metadata)]
     [FallbackRoute("/{PathInfo*}")]

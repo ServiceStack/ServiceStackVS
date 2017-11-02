@@ -3,10 +3,10 @@ using System;
 using NUnit.Framework;
 using ServiceStack;
 using ServiceStack.Testing;
-using $safeprojectname$.ServiceModel;
-using $safeprojectname$.ServiceInterface;
+using $saferootprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceInterface;
 
-namespace $safeprojectname$.Tests
+namespace $safeprojectname$
 {
     [TestFixture]
     public class UnitTests

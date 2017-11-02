@@ -1,10 +1,10 @@
 using Funq;
 using ServiceStack;
 using NUnit.Framework;
-using $safeprojectname$.ServiceInterface;
-using $safeprojectname$.ServiceModel;
+using $saferootprojectname$.ServiceInterface;
+using $saferootprojectname$.ServiceModel;
 
-namespace $safeprojectname$.Tests
+namespace $safeprojectname$
 {
     public class IntegrationTest
     {
