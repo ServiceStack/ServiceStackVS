@@ -137,17 +137,20 @@
     <Content Include="webpack.config.js" />
     <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
+  <ItemGroup>
+    <PublishFiles Include="wwwroot\**\*" />
+  </ItemGroup>
   <PropertyGroup>
     <CopyAllFilesToSingleFolderForMSDeployDependsOn>
       CustomCollectFiles;
-      $(CopyAllFilesToSingleFolderForPackageDependsOn);
+      $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
     </CopyAllFilesToSingleFolderForMSDeployDependsOn>
   </PropertyGroup>
   <Target Name="CustomCollectFiles">
     <ItemGroup>
-      <_CustomFiles Include="wwwroot\**\*" />
+      <_CustomFiles Include="@(PublishFiles)" />
 
-      <FilesForPackagingFromProject  Include="%(_CustomFiles.Identity)">
+      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
