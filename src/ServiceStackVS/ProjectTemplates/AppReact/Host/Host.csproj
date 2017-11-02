@@ -138,10 +138,10 @@
     <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <PropertyGroup>
-    <CopyAllFilesToSingleFolderForPackageDependsOn>
+    <CopyAllFilesToSingleFolderForMSDeployDependsOn>
       CustomCollectFiles;
       $(CopyAllFilesToSingleFolderForPackageDependsOn);
-    </CopyAllFilesToSingleFolderForPackageDependsOn>
+    </CopyAllFilesToSingleFolderForMSDeployDependsOn>
   </PropertyGroup>
   <Target Name="CustomCollectFiles">
     <ItemGroup>
