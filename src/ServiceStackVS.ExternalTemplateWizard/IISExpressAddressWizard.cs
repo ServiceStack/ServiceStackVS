@@ -86,7 +86,8 @@ namespace ServiceStackVS.ExternalTemplateWizard
                 var projContents = File.ReadAllText(projectFilePath);
                 if (projContents.IndexOf("<wwwroot />", StringComparison.Ordinal) >= 0)
                 {
-                    var replacedContents = projContents.Replace("<wwwroot />", "<wwwroot Include=\"wwwroot/**/*\" />");
+                    var replacedContents = projContents.Replace("<wwwroot />", "<wwwroot Include=\"wwwroot/**/*\" />")
+                        .Replace("<FilesForPackagingFromProject>", "<FilesForPackagingFromProject Include=\"%(wwwroot.Identity)\">");
                     File.WriteAllText(projectFilePath, replacedContents);
                 }
 
