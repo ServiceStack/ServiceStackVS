@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ServiceStack;
+using ServiceStack.Templates;
 using ServiceStack.DataAnnotations;
-using $saferootprojectname$.ServiceModel;
+using $safeprojectname$.ServiceModel;
 
-namespace $safeprojectname$
+namespace $safeprojectname$.ServiceInterface
 {
     [Exclude(Feature.Metadata)]
     [FallbackRoute("/{PathInfo*}")]
@@ -18,7 +19,8 @@ namespace $safeprojectname$
     {
         //Return index.html for unmatched requests so routing is handled on client
         public object Any(FallbackForClientRoutes request) => 
-            new HttpResult(VirtualFileSources.GetFile("index.html"));
+            new PageResult(Request.GetPage("/"));
+            //new HttpResult(VirtualFileSources.GetFile("index.html")); //Use instead if index.html is just static HTML
 
         public object Any(Hello request)
         {

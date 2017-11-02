@@ -65,10 +65,6 @@
       <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.52\lib\net45\ServiceStack.OrmLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ServiceStack.Razor, Version=4.0.52.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.52\lib\net45\ServiceStack.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ServiceStack.Redis, Version=4.0.52.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ServiceStack.Redis.4.0.52\lib\net40\ServiceStack.Redis.dll</HintPath>
       <Private>True</Private>
@@ -86,10 +82,6 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.52\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -112,9 +104,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,22 +128,29 @@
     <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="index.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
+    <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dist\" />
-    <Folder Include="wwwroot\" />
-    <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\package-and-deploy.bat" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\publish\config.json" />
-  </ItemGroup>
+  <PropertyGroup>
+    <CopyAllFilesToSingleFolderForMSDeployDependsOn>
+      OnPublish;
+      $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
+    </CopyAllFilesToSingleFolderForMSDeployDependsOn>
+  </PropertyGroup>
+  <Target Name="OnPublish">
+    <ItemGroup>
+      <Exec Command="npm run publish" />
+      <wwwroot Include="wwwroot\**\*" />
+      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
+        <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+  </Target>  
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
