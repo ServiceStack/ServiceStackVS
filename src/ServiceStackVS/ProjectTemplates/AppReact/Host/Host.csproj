@@ -145,8 +145,8 @@
   </PropertyGroup>
   <Target Name="OnPublish">
     <ItemGroup>
-      <wwwroot Include="*" />
-      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
+      <wwwroot />
+      <FilesForPackagingFromProject Include="@(wwwroot)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>

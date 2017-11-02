@@ -81,6 +81,15 @@ namespace ServiceStackVS.ExternalTemplateWizard
             {
                 // IIS express auto assigned port is not ready until project has been opened so a delay is needed.
                 System.Threading.Thread.Sleep(5000);
+
+                //VS.NET project dialog throws errors on valid paths, trying to replace after project is created
+                var projContents = File.ReadAllText(projectFilePath);
+                if (projContents.IndexOf("<wwwroot />", StringComparison.Ordinal) >= 0)
+                {
+                    var replacedContents = projContents.Replace("<wwwroot />", "<wwwroot Include=\"wwwroot/**/*\" />");
+                    File.WriteAllText(projectFilePath, replacedContents);
+                }
+
                 // Read port from csproj
                 XElement element = XElement.Parse(File.ReadAllText(projectFilePath));
                 var webProperties = element.Descendants()
