@@ -138,6 +138,20 @@
     <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <PropertyGroup>
+    <CopyAllFilesToSingleFolderForMSDeployDependsOn>
+      OnPublish;
+      $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
+    </CopyAllFilesToSingleFolderForMSDeployDependsOn>
+  </PropertyGroup>
+  <Target Name="OnPublish">
+    <ItemGroup>
+      <wwwroot Include="wwwroot" />
+      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
+        <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+  </Target>  
+  <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
@@ -168,18 +182,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <CopyAllFilesToSingleFolderForMSDeployDependsOn>
-      OnPublish;
-      $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
-    </CopyAllFilesToSingleFolderForMSDeployDependsOn>
-  </PropertyGroup>
-  <Target Name="OnPublish">
-    <ItemGroup>
-      <wwwroot Include="wwwroot/**/*" />
-      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
-        <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
-      </FilesForPackagingFromProject>
-    </ItemGroup>
-  </Target>  
 </Project>
