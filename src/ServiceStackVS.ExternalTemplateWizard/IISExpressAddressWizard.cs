@@ -79,15 +79,6 @@ namespace ServiceStackVS.ExternalTemplateWizard
         {
             Task.Run(() =>
             {
-                //VS.NET project dialog throws errors on valid paths, trying to replace after project is created
-                var projContents = File.ReadAllText(projectFilePath);
-                if (projContents.IndexOf("<wwwroot />", StringComparison.Ordinal) >= 0)
-                {
-                    var replacedContents = projContents.Replace("<wwwroot />", "<wwwroot Include=\"wwwroot/**/*\" />")
-                        .Replace("<FilesForPackagingFromProject>", "<FilesForPackagingFromProject Include=\"%(wwwroot.Identity)\">");
-                    File.WriteAllText(projectFilePath, replacedContents);
-                }
-
                 // IIS express auto assigned port is not ready until project has been opened so a delay is needed.
                 System.Threading.Thread.Sleep(5000);
 

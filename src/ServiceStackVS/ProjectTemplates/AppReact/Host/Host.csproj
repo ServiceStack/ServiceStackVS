@@ -143,14 +143,16 @@
       $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
     </CopyAllFilesToSingleFolderForMSDeployDependsOn>
   </PropertyGroup>
+  <ItemGroup>
+    <wwwroot Include="wwwroot/**/*" />
+  </ItemGroup>
   <Target Name="OnPublish">
     <ItemGroup>
-      <wwwrootFiles Include="wwwroot/**/*" />
-      <FilesForPackagingFromProject Include="%(wwwrootFiles.Identity)">
+      <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
-  </Target>  
+  </Target>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
