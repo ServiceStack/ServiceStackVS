@@ -20,7 +20,7 @@ namespace $safeprojectname$
         //Return index.html for unmatched requests so routing is handled on client
         public object Any(FallbackForClientRoutes request) => 
             new PageResult(Request.GetPage("/"));
-            //new HttpResult(VirtualFileSources.GetFile("index.html")); //Use instead if index.html is just static HTML
+            //new HttpResult(VirtualFileSources.GetFile("index.html")); //Use instead if index.html contains just static HTML
 
         public object Any(Hello request)
         {
