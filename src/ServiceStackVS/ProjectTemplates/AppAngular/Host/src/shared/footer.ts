@@ -51,7 +51,7 @@
                     More Information
                 </div>
                 <ul class="mdl-mega-footer--link-list">
-                    <li><a href="https://github.com/ServiceStack/ServiceStackVS">ServiceStack VS.NET Templates</a></li>
+                    <li><a href="https://servicestack.net/vs-templates/AngularApp">Learn about this Angular VS.NET template</a></li>
                 </ul>
             </div>
         </footer>
