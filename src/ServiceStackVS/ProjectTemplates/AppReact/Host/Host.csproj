@@ -176,7 +176,7 @@
   </PropertyGroup>
   <Target Name="OnPublish">
     <ItemGroup>
-      <!-- <wwwroot Include="wwwroot\**\*" /> -->
+      <wwwroot Include="wwwroot/**/*" />
       <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
