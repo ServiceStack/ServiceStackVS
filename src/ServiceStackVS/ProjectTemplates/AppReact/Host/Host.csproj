@@ -179,7 +179,7 @@
       <Exec Command="npm run publish" />
       <wwwroot Include="wwwroot\**\*" />
       <FilesForPackagingFromProject Include="%(wwwroot.Identity)">
-        <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+        <!-- <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath> -->
       </FilesForPackagingFromProject>
     </ItemGroup>
   </Target>  
