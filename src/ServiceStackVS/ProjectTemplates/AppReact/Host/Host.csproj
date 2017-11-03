@@ -137,9 +137,6 @@
     <Content Include="webpack.config.js" />
     <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
-  <ItemGroup>
-    <PublishFiles Include="wwwroot\**\*" />
-  </ItemGroup>
   <PropertyGroup>
     <CopyAllFilesToSingleFolderForMSDeployDependsOn>
       CustomCollectFiles;
@@ -148,9 +145,9 @@
   </PropertyGroup>
   <Target Name="CustomCollectFiles">
     <ItemGroup>
-      <_CustomFiles Include="@(PublishFiles)" />
+      <PublishFiles Include="$(ProjectDir)\wwwroot\**\*.*" />
 
-      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
+      <FilesForPackagingFromProject Include="@(PublishFiles)">
         <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
