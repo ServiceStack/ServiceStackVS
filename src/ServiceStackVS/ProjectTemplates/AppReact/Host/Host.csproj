@@ -138,21 +138,6 @@
     <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <PropertyGroup>
-    <CopyAllFilesToSingleFolderForMSDeployDependsOn>
-      CustomCollectFiles;
-      $(CopyAllFilesToSingleFolderForMSDeployDependsOn);
-    </CopyAllFilesToSingleFolderForMSDeployDependsOn>
-  </PropertyGroup>
-  <Target Name="CustomCollectFiles">
-    <ItemGroup>
-      <PublishFiles Include="$(ProjectDir)\wwwroot\**\*.*" />
-
-      <FilesForPackagingFromProject Include="@(PublishFiles)">
-        <DestinationRelativePath>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
-      </FilesForPackagingFromProject>
-    </ItemGroup>
-  </Target>
-  <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
