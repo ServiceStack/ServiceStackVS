@@ -107,6 +107,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\logo.png" />
