@@ -1,6 +1,4 @@
-var ENV = process.env.npm_lifecycle_event;
-var isTestWatch = ENV === 'test-watch';
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.config')();
 
 module.exports = function (config) {
   config.set({
