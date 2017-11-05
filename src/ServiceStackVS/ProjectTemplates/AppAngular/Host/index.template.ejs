@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
     <title>$safeprojectname$</title>
+	{{ ifDebug | select: <script>{ '/js/hot-fileloader.js' | includeFile }</script> }}
     <base href="/">
 
     <!-- Add to homescreen for Chrome on Android -->

@@ -19,7 +19,7 @@
     "useWebpackText": true
   },
   "exclude": [
-    "dist",
+    "bin",
     "node_modules",
     "wwwroot",
     "**/*-aot.ts"
