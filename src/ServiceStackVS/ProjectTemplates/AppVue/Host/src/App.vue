@@ -4,7 +4,7 @@
         <div class="container">
             <router-link class="navbar-brand" to="/" exact="">
                 <i class="fa fa-code" aria-hidden="true"></i>
-                $safeprojectname$
+                MyApp
             </router-link>
           
             <div class="navbar-collapse">
@@ -30,11 +30,6 @@
             </div>
         </div>
     </div>
-
-    <h4 style="position: absolute; bottom: 20px; width: 100%; text-align: center">
-        <img src="./assets/img/logo.png" />
-        <a :href="url">Learn about this Vue VS.NET template</a>
-    </h4>
 </div>
 </template>
 
@@ -44,6 +39,5 @@ import { Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class AppComponent extends Vue {
-    @Prop({ default: "https://servicestack.net/vs-templates/VueApp" }) url: string;
 }
 </script>
