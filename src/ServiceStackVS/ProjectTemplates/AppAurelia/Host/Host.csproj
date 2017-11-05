@@ -64,17 +64,15 @@
       <Name>$safeprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
+ <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Global.asax" />
+    <None Include="packages.config" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,9 +87,6 @@
     <Content Include="src\views\view1.css" />
     <Content Include="src\views\view1.html" />
     <Content Include="src\views\view2.html" />
-    <Folder Include="src\resources\attributes\" />
-    <Folder Include="src\resources\binding-behaviors\" />
-    <Folder Include="src\resources\value-converters\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\app.ts" />
@@ -107,21 +102,19 @@
     <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
+    <Content Include="wwwroot\index.html" />
     <Content Include="index.template.ejs" />
-    <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
+    <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dist\" />
-    <Folder Include="wwwroot\" />
-    <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\package-and-deploy.bat" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\publish\config.json" />
+    <Folder Include="src\resources\attributes\" />
+    <Folder Include="src\resources\binding-behaviors\" />
+    <Folder Include="src\resources\value-converters\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

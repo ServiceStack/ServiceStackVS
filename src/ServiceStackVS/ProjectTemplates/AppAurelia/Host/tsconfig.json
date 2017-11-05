@@ -6,11 +6,12 @@
     "sourceMap": true,
     "target": "es5",
     "module": "commonjs",
+    "jsx": "react",
     "experimentalDecorators": true,
     "lib": [ "es2015", "dom" ]
   },
   "exclude": [
-    "dist",
+    "bin",
     "node_modules",
     "wwwroot"
   ]
