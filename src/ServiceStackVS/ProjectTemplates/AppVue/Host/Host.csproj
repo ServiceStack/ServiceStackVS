@@ -128,18 +128,18 @@
     <TypeScriptCompile Include="src\shared.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="webpack.config.vendor.js" />
     <Content Include="wwwroot\index.html" />
-    <Content Include="package-lock.json" />
+    <Content Include="index.template.ejs" />
     <Content Include="karma-shim.js" />
     <Content Include="karma.conf.js" />
     <Content Include="index.html" />
-    <Content Include="index.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
+    <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

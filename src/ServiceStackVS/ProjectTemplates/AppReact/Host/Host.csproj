@@ -103,12 +103,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +135,7 @@
     <Content Include="index.template.ejs" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
