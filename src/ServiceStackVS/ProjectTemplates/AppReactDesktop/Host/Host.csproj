@@ -85,6 +85,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Web.config" />
     <Content Include="package-lock.json" />
     <None Include="packages.config" />

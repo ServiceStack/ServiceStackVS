@@ -69,8 +69,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Global.asax" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
