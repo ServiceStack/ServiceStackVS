@@ -25,6 +25,7 @@
   </WizardExtension>
   <WizardData>
     <packages>
+      <package id="ILRepack" version="2.0.13" />
       <package id="ServiceStack" version="latest" />
       <package id="ServiceStack.Client" version="latest" />
       <package id="ServiceStack.Common" version="latest" />

@@ -86,9 +86,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="package-lock.json" />
+    <None Include="packages.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -99,6 +98,8 @@
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
     <Content Include="src\test.fileMock.js" />
+    <Content Include="src\test.setup.js" />
+    <Content Include="src\test.shim.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\home\Hello.test.tsx" />
@@ -113,24 +114,17 @@
     <TypeScriptCompile Include="src\sum.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="index.template.ejs" />
-    <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="platform.css" />
-    <Content Include="platform.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dist\" />
-    <Folder Include="wwwroot\" />
-    <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\package-deploy-console.bat" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\publish\config.json" />
-    <Content Include="wwwroot_build\tools\ILMerge.exe" />
+    <Content Include="webpack.config.vendor.js" />
+    <Content Include="wwwroot\index.html" />
+    <Content Include="wwwroot\platform.css" />
+    <Content Include="wwwroot\platform.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">

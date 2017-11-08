@@ -1,15 +1,14 @@
-﻿(function () {
+(function () {
     var MSBUILD_TOOLS_VERSION = getMSBuildToolsVersion();
     var SCRIPTS = {
-        '00-webpack-dev': 'npm run dev',
-        '00-webpack-watch': 'npm run watch',
+        'dev': 'npm run dev',
         'webpack-build': 'npm run build',
         'webpack-build-prod': 'npm run build-prod',
+        'webpack-build-vendor': 'npm run build-vendor',
         'tests-run': 'npm run test',
         'tests-watch': 'npm run test-watch',
         'tests-coverage': 'npm run test-coverage',
-        'update-dtos': 'npm run typescript-ref',
-        'www-exec-package-console': 'cmd /c "cd wwwroot_build && package-deploy-console.bat"'
+        'dtos-update': 'npm run dtos-update'
     };
 
     var fs = require('fs');
@@ -18,47 +17,21 @@
     var gulpUtil = require('gulp-util');
     var exec = require('child_process').exec;
     var runSequence = require('run-sequence');
-    var nugetRestore = require('gulp-nuget-restore');
     var msbuild = require('gulp-msbuild');
-    var msdeploy = require('gulp-msdeploy');
-
+    
     var del = require('del');
     var newer = require('gulp-newer');
     var nugetpack = require('gulp-nuget-pack');
 
     var webRoot = 'wwwroot/';
     var webBuildDir = './wwwroot_build/';
-    var configDir = webBuildDir + 'publish/';
-    var configPath = configDir + 'config.json';
-    var appSettingsDir = webBuildDir + 'deploy/';
-    var appSettingsPath = appSettingsDir + 'appsettings.txt';
+    var winformsInstallerDir = webBuildDir + 'winforms-installer/';
 
     var resourcesLib = '../../lib/';
-    var resourcesRoot = '../$safeprojectname$.Resources/';
+    var resourcesDir = '../$safeprojectname$.Resources/';
     var winFormsAssemblyInfoPath = '../$safeprojectname$.AppWinForms/Properties/AssemblyInfo.cs';
-
-    function createConfigsIfMissing() {
-        if (!fs.existsSync(configPath)) {
-            if (!fs.existsSync(configDir)) {
-                fs.mkdirSync(configDir);
-            }
-            fs.writeFileSync(configPath, JSON.stringify({
-                "iisApp": "$safeprojectname$",
-                "serverAddress": "deploy-server.example.com",
-                "userName": "{WebDeployUserName}",
-                "password": "{WebDeployPassword}"
-            }, null, 4));
-        }
-        if (!fs.existsSync(appSettingsPath)) {
-            if (!fs.existsSync(appSettingsDir)) {
-                fs.mkdirSync(appSettingsDir);
-            }
-            fs.writeFileSync(appSettingsPath,
-                '# Release App Settings\r\nDebugMode false');
-        }
-    }
-
-    createConfigsIfMissing();
+    var consoleDir = '../$safeprojectname$.AppConsole/bin/Release/';
+    var consoleExeName = '$safeprojectname$-console.exe';
 
     function getMSBuildToolsVersion() {
         fs = fs || require("fs");
@@ -69,12 +42,21 @@
                 null;
     }
 
+    function resolvePackagesDir() {
+        var check = ['../packages', '../../packages', '../../../packages'];
+        for (var i = 0; i < check.length; i++) {
+            if (fs.existsSync(check[i]))
+                return check[i];
+        }
+        throw new Error("Could not find NuGet packages folder");
+    }
+
     function runScript(script, done) {
         process.env.FORCE_COLOR = 1;
         var proc = exec(script + (script.startsWith("npm") ? " --silent" : ""));
         proc.stdout.pipe(process.stdout);
         proc.stderr.pipe(process.stderr);
-        proc.on('exit', () => done());
+        proc.on('exit', err => done(err));
     }
 
     // Tasks
@@ -89,7 +71,7 @@
             done);
     });
     gulp.task('www-clean-resources', () => {
-        return del([ resourcesRoot + '/dist/*' ], { force: true });
+        return del([ resourcesDir + '/dist/*' ], { force: true });
     });
     gulp.task('www-copy-resources-lib', () => {
         return gulp.src('../$safeprojectname$.Resources/bin/Release/$safeprojectname$.Resources.dll')
@@ -98,9 +80,6 @@
     });
     gulp.task('www-copy-resources', () => {
         return gulp.src(['./wwwroot/**/*',
-            '!./wwwroot/*.config',
-            '!./wwwroot/*.txt',
-            '!./wwwroot/*.asax',
             '!./wwwroot/platform.*'])
             .pipe(gulp.dest('../$safeprojectname$.Resources/'));
     });
@@ -158,11 +137,6 @@
             }));
     });
 
-    gulp.task('www-nuget-restore', () => {
-        return gulp.src('../../$safeprojectname$.sln')
-            .pipe(nugetRestore());
-    });
-
     function extractAssemblyAttribute(filePath, attrName) {
         var assemblyInfoContents = fs.readFileSync(filePath, { encoding: 'utf8' });
         var lines = assemblyInfoContents.split('\n');
@@ -186,20 +160,21 @@
         return result;
     }
 
-    function initWinformsReleaseDirectory() {
-        var appsDir = webBuildDir + 'apps/';
-        var winFormsInstall = appsDir + 'winforms-installer/';
-        if (!fs.existsSync(appsDir)) {
-            fs.mkdirSync(appsDir);
-        }
-        if (!fs.existsSync(winFormsInstall)) {
-            fs.mkdirSync(winFormsInstall);
-        }
-    }
+    function mkdirp(dirPath) {
+        var sep = '/';
+        var initDir = path.isAbsolute(dirPath) ? sep : '';
+        dirPath.split(sep).reduce(function (parentDir, childDir) {
+            var curDir = path.resolve(parentDir, childDir);
+            if (!fs.existsSync(curDir)) {
+                fs.mkdirSync(curDir);
+            }
+            return curDir;
+        }, initDir);
+    };
 
     gulp.task('www-nuget-pack-winforms', function (callback) {
         var globule = require('globule');
-        initWinformsReleaseDirectory();
+        mkdirp(winformsInstallerDir);
         var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
         var title = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
         var description = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyDescription') || 'Test';
@@ -219,102 +194,77 @@
                 description: description,
                 excludes: excludes,
                 iconUrl: 'https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-100sq.png',
-                outputDir: 'wwwroot_build/apps/winforms-installer/'
+                outputDir: winformsInstallerDir
             },
             includes,
             callback);
     });
 
     gulp.task('www-exec-package-winforms', done => {
-        initWinformsReleaseDirectory();
-        var squirrelPath = path.resolve('../../packages/squirrel.windows.1.3.0/tools/');
+        mkdirp(winformsInstallerDir);
+        var squirrelExe = path.resolve(resolvePackagesDir() + '/squirrel.windows.1.7.8/tools/Squirrel.exe');
         var appName = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyTitle');
         var version = extractAssemblyAttribute(winFormsAssemblyInfoPath, 'AssemblyVersion');
-        var rootDir = 'wwwroot_build\\apps\\winforms-installer\\';
-        var nugetPkg = rootDir + appName + '.' + version + '.nupkg';
-        var releaseDir = rootDir + 'Releases';
+        var nugetPkg = winformsInstallerDir + appName + '.' + version + '.nupkg';
+        var releaseDir = winformsInstallerDir + 'Releases';
         gulpUtil.log(gulpUtil.colors.green('Packaging using Squirrel: ') + gulpUtil.colors.white(nugetPkg));
-        exec('Squirrel.exe --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir + ' --no-msi', { env: { 'PATH': squirrelPath + ';' } }, function (err, stdout, stderr) {
-            console.log(stdout);
-            console.log(stderr);
+
+        runScript(squirrelExe + ' --releasify ' + nugetPkg + ' --releaseDir ' + releaseDir + ' --no-msi', err => {
             if (!err) {
-                gulpUtil.log(gulpUtil.colors.green('Package created/updated at: ') + gulpUtil.colors.white(releaseDir));
+                gulpUtil.log(gulpUtil.colors.green('Package created/updated at: ') + gulpUtil.colors.white(path.resolve(releaseDir)));
             }
             done(err);
         });
     });
-    
-    gulp.task('www-msdeploy-pack', () => {
-        return gulp.src('wwwroot/')
-            .pipe(msdeploy({
-                verb: 'sync',
-                sourceType: 'iisApp',
-                dest: {
-                    'package': path.resolve('./webdeploy.zip')
-                }
-            }));
+
+    gulp.task('www-exec-package-console', done => {
+        mkdirp(webBuildDir);
+        var ilmergeExe = path.resolve(resolvePackagesDir() + '/ILRepack.2.0.13/tools/ILRepack.exe');
+        var files = fs.readdirSync(consoleDir);
+        var exeName = null;
+        var dlls = [];
+        files.forEach(file => {
+            if (file.endsWith('.exe'))
+                exeName = file;
+            else if (file.endsWith('.dll'))
+                dlls.push(file);
+        });
+
+        var outputPath = webBuildDir + consoleExeName;
+        del(outputPath);
+        dlls.unshift(exeName);
+        var inputs = dlls.map(dll => path.resolve(consoleDir + dll)).join(' ');
+
+        var cmd = `${ilmergeExe} /target:exe /targetplatform:v4,"C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.5" /lib:${path.resolve(consoleDir)} /out:"${path.resolve(outputPath)}" /ndebug ${inputs}`;
+        runScript(cmd, err => {
+            if (!err) {
+                gulpUtil.log(gulpUtil.colors.green('Package created/updated at: ') + gulpUtil.colors.white(path.resolve(webBuildDir)));
+            }
+            done(err);
+        });
     });
 
-    gulp.task('www-msdeploy-push', () => {
-        var config = require(configPath);
-        return gulp.src('./webdeploy.zip')
-            .pipe(msdeploy({
-                verb: 'sync',
-                allowUntrusted: 'true',
-                sourceType: 'package',
-                dest: {
-                    iisApp: config.iisApp,
-                    wmsvc: config.serverAddress,
-                    UserName: config.userName,
-                    Password: config.password
-                }
-            }));
+    gulp.task('www-npm-publish', done => runScript('npm run publish', done));
+
+    gulp.task('publish', done => {
+        runSequence('www-clean-resources', 'www-msbuild-web', 'www-npm-publish', 'www-copy-resources', 'www-msbuild-resources', 'www-copy-resources-lib', done);
     });
 
-    gulp.task('01-bundle-all', done => {
+    gulp.task('publish-console', done => {
         runSequence(
-            'www-nuget-restore',
             'www-msbuild-web',
-            'webpack-build-prod',
-            'www-msbuild-resources',
-            'www-copy-resources-lib',
-            done
-        );
-    });
-
-    gulp.task('02-package-console', done => {
-        runSequence(
-            'www-nuget-restore',
-            '01-bundle-all',
             'www-msbuild-console',
             'www-exec-package-console',
             done);
     });
     
-    gulp.task('02-package-winforms', done => {
+    gulp.task('publish-winforms', done => {
         runSequence(
-            'www-nuget-restore',
-            '01-bundle-all',
+            'www-msbuild-web',
             'www-msbuild-winforms',
             'www-nuget-pack-winforms',
             'www-exec-package-winforms',
             done);
-    });
-
-    gulp.task('01-package-server', done => {
-        runSequence('www-nuget-restore', 'www-msbuild-web', done);
-    });
-
-    gulp.task('02-package-client', done => {
-        runSequence('www-clean-resources', 'webpack-build-prod', 'www-copy-resources', done);
-    });
-
-    gulp.task('03-deploy-app', done => {
-        runSequence('www-msdeploy-pack', 'www-msdeploy-push', done);
-    });
-
-    gulp.task('package-and-deploy', done => {
-        runSequence('01-package-server', '02-package-client', '03-deploy-app', done);
     });
 
 })();
