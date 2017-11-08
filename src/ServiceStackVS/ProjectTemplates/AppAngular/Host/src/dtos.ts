@@ -1,11 +1,10 @@
 /* Options:
-Date: 2017-01-01 12:00:00
-Version: 4
+Date: 2017-11-08 04:44:10
+Version: 5.00
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://localhost:$iisexpressport$
 
 //GlobalNamespace: 
-ExportAsTypes: True
 //MakePropertiesOptional: True
 //AddServiceStackTypes: True
 //AddResponseStatus: False
@@ -17,10 +16,18 @@ ExportAsTypes: True
 */
 
 
-export interface IReturn<T> {
+export interface IReturn<T>
+{
+    createResponse() : T;
 }
 
-export class HelloResponse {
+export interface IReturnVoid
+{
+    createResponse() : void;
+}
+
+export class HelloResponse
+{
     result: string;
 }
 
