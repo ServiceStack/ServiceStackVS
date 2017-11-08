@@ -1,4 +1,4 @@
-﻿import { Component, Injectable, Inject } from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routes } from '../modules/app/app.module';
 

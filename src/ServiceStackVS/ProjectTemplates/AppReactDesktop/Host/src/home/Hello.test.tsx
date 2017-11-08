@@ -12,8 +12,8 @@ describe('<Hello />', () => {
     expect(el.find('h3').text()).toBe("");
 
     el.setState({ result: 'A' }, () => {
-      expect(el.find('h3').text()).toBe("A");
-      done();
+        expect(el.update().find('h3.result').text()).toBe("A");
+        done();
     });
   });
 
@@ -24,7 +24,7 @@ describe('<Hello />', () => {
 
     await (el.instance() as Hello).nameChanged('A');
 
-    expect(el.find('h3').text()).toBe("Hello, A!");
+    expect(el.update().find('h3').text()).toBe("Hello, A!");
   });
 
   it ('Updates heading on keyDown', done => {
@@ -35,7 +35,7 @@ describe('<Hello />', () => {
     el.find('input').simulate('change', { target: { value: 'A' } });
 
     setTimeout(() => {
-      expect(el.find('h3').text()).toBe("Hello, A!");
+      expect(el.update().find('h3').text()).toBe("Hello, A!");
       done();
     }, 100);
   });
