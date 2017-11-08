@@ -183,6 +183,12 @@ namespace ServiceStackVS.NuGetInstallerWizard
 
         private bool TryInstallPackageFromCache(Project project, string packageId, string version)
         {
+            var envVersion = Environment.GetEnvironmentVariable("SERVICESTACK_PACKAGE_VERSION");
+            if (!string.IsNullOrEmpty(envVersion))
+            {
+                version = envVersion;
+            }
+
             string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
             bool cacheExists = Directory.Exists(cachePath);
