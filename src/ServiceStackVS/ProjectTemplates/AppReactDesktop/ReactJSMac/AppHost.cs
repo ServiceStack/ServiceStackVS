@@ -27,6 +27,8 @@ namespace $safeprojectname$
                 UseCamelCase = true,
             });
 
+            Plugins.Add(new TemplatePagesFeature());
+
             Routes.Add<NativeHostAction>("/nativehost/{Action}");
             ServiceController.RegisterService(typeof(NativeHostService));
         }

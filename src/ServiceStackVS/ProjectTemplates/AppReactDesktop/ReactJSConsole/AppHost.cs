@@ -21,6 +21,8 @@ namespace $safeprojectname$
                 UseCamelCase = true,
             });
 
+            Plugins.Add(new TemplatePagesFeature());
+
             // This route is added using Routes.Add and ServiceController.RegisterService due to
             // using ILMerge limiting our AppHost : base() call to one assembly.
             // If two assemblies are used, the base() call searchs the same assembly twice due to the ILMerged result.

@@ -21,6 +21,8 @@ namespace $safeprojectname$
                 EmbeddedResourceBaseTypes = { typeof(AppHost), typeof(SharedEmbeddedResources) },
                 UseCamelCase = true,
             });
+
+            Plugins.Add(new TemplatePagesFeature());
         }
     }
 }
