@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
-<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
       <Project>{582dfb0f-f84d-4e43-9bca-2a5a86600b7a}</Project>
       <Name>$safeprojectname$.ServiceInterface</Name>
@@ -72,12 +72,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\android-desktop.png" />
@@ -108,23 +106,16 @@
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
+    <Content Include="wwwroot\index.html" />
     <Content Include="index.template.ejs" />
-    <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
-    <Content Include="webpack.config.js" />
     <Content Include="karma.conf.js" />
     <Content Include="karma-shim.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dist\" />
-    <Folder Include="wwwroot\" />
-    <Content Include="wwwroot_build\README.txt" />
-    <Content Include="wwwroot_build\package-and-deploy.bat" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\publish\config.json" />
+    <Content Include="webpack.config.js" />
+    <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

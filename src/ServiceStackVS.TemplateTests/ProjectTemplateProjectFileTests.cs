@@ -105,8 +105,8 @@ namespace ServiceStackVS.Tests
                 Console.WriteLine(rootPath.FullName);
                 Console.WriteLine(fullPath);
             }
-            Assert.That(fullPath,Is.Not.Null);
-            Assert.That(File.Exists(fullPath),Is.True);
+            Assert.That(fullPath, Is.Not.Null);
+            Assert.That(File.Exists(fullPath), Is.True, $"{fullPath} does not exist");
         }
     }
 }

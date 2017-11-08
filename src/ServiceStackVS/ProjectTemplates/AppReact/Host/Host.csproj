@@ -106,6 +106,8 @@
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="src\test.setup.js" />
+    <Content Include="src\test.shim.js" />
     <Content Include="Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -117,6 +119,8 @@
     <Content Include="src\view1\view.css" />
     <Content Include="src\app.scss" />
     <Content Include="src\test.fileMock.js" />
+    <Content Include="src\test.setup.js" />
+    <Content Include="src\test.shim.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\home\Hello.test.tsx" />

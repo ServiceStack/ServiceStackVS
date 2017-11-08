@@ -64,18 +64,18 @@
       <Name>$safeprojectname$.ServiceModel</Name>
     </ProjectReference>
   </ItemGroup>
- <ItemGroup>
+  <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Global.asax" />
-    <None Include="packages.config" />
     <Content Include="Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\logo.png" />

@@ -110,6 +110,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\logo.png" />
@@ -132,8 +133,6 @@
     <Content Include="index.template.ejs" />
     <Content Include="karma-shim.js" />
     <Content Include="karma.conf.js" />
-    <Content Include="index.html" />
-    <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
