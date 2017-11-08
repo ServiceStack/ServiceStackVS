@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "postinstall": "npm run build-vendor && npm run build",
-    "dev": "webpack-dev-server",
-    "watch": "webpack --config webpack.config.js --watch",
+    "dev": "webpack --config webpack.config.js --watch",
+    "dev-server": "webpack-dev-server",
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.js --env.prod",
     "build-vendor": "webpack --config webpack.config.vendor.js",
@@ -13,7 +13,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
-    "typescript-ref": "cd src && typescript-ref"
+    "dtos-update": "cd src && typescript-ref"
   },
   "jest": {
     "globals": {
