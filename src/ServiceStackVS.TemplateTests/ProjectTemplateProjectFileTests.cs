@@ -76,7 +76,11 @@ namespace ServiceStackVS.Tests
             {
                 try
                 {
-                    var tmpObj = JsonValue.Parse(Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully()));
+                    var json = Encoding.UTF8.GetString(jsonFile.OpenRead().ReadFully());
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        var tmpObj = JsonValue.Parse(json);
+                    }
                 }
                 catch (FormatException fex)
                 {
