@@ -1,14 +1,14 @@
 (function () {
     var SCRIPTS = {
-        '00-webpack-watch': 'npm run watch',
+        'dev': 'npm run dev',
+        'dtos-update': 'npm run dtos-update',
         'webpack-build': 'npm run build',
         'webpack-build-prod': 'npm run build-prod',
         'webpack-build-vendor': 'npm run build-vendor',
         'publish': 'npm run publish',
         'tests-run': 'npm run test',
         'tests-watch': 'npm run test-watch',
-        'tests-coverage': 'npm run test-coverage',
-        'update-dtos': 'npm run typescript-ref'
+        'tests-coverage': 'npm run test-coverage'
     };
 
     var gulp = require('gulp');
