@@ -5,16 +5,13 @@ using $safeprojectname$.ServiceInterface;
 namespace $safeprojectname$
 {
     //VS.NET Template Info: https://servicestack.net/vs-templates/EmptyWindowService
-    public class AppHost : AppHostHttpListenerBase
+    public class AppHost : AppSelfHostBase
     {
         /// <summary>
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly)
-        {
-
-        }
+            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
 
         /// <summary>
         /// Application specific configuration

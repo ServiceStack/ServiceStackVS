@@ -32,7 +32,7 @@
       <package id="ServiceStack.Common" version="latest" />
       <package id="ServiceStack.Interfaces" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
-      <package id="NUnit" version="3.5.0" />
+      <package id="NUnit" version="3.9.0" />
     </packages>
   </WizardData>
 </VSTemplate>
