@@ -30,16 +30,26 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-5">
-        <hr />
-        <h2>ServiceStack Hello World</h2>
 
-        <form action="/api@(new Hello().ToPostUrl())">
-            <div class="form-group">
-                <input class="form-control input-lg" id="Name" name="Name" type="text" placeholder="Type your name" value="World">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+<div class="row">
+    <div class="col-md-12">
+        <h2 style="line-height: 80px;">ServiceStack + ASP.NET MVC Example:</h2>
+
+        <form>
+            <label>Name: </label>
+            <input type="text" id="txtName" name="Name" style="margin: 0 10px" autocomplete="off" placeholder="Enter Name..." />
+            <span id="result"></span>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $("#txtName").keyup(function () {
+            $.getJSON("/api/hello/" + this.value)
+                .then(function (r) {
+                    $("#result").html(r.Result);
+                });
+        });
+    </script>
+}
