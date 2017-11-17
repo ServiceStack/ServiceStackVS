@@ -22,10 +22,14 @@ namespace $safeprojectname$
         /// </summary>
         public override void Configure(Container container)
         {
-            //Config examples
-            //Plugins.Add(new PostmanFeature());
-            //Plugins.Add(new CorsFeature());
-            
+            SetConfig(new HostConfig
+            {
+                DebugMode = AppSettings.Get("DebugMode", false),
+                WebHostPhysicalPath = MapProjectPath("~/wwwroot"),
+                AddRedirectParamsToQueryString = true,
+                UseCamelCase = true,
+            });
+
             Plugins.Add(new TemplatePagesFeature());
         }
     }
