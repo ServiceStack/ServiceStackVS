@@ -99,7 +99,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml" />
-    <Content Include="Properties\PublishProfiles\PublishToIIS.pubxml.user" />
     <Content Include="Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
