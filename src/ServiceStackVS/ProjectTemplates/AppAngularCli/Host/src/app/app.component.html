@@ -1,0 +1,32 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+          <a routerLink="/" class="navbar-brand">
+              <i class="fa fa-code" aria-hidden="true"></i>
+              MyApp
+          </a>
+        
+          <div class="navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li routerLink="/" class="nav-item">
+                  <a class="nav-link">Home</a>
+                </li>
+                <li routerLink="/view1" class="nav-item">
+                  <a class="nav-link">View 1</a>
+                </li>
+                <li routerLink="/view2" class="nav-item">
+                  <a class="nav-link">View 2</a>
+                </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <div class="container">
+      <div class="row" style="margin:10px 0">
+          <div id="content">
+            <router-outlet></router-outlet>
+          </div>
+      </div>
+  </div>
+</div>

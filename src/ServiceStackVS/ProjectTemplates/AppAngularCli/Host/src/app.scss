@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+$navbar-background: darken(#e2373d, 5%);
+$emphasis-text-color: lighten($navbar-background, 5%);
+
+body {
+}
+.navbar {
+    border-radius: 0;
+    background: $navbar-background !important;
+}
+a {
+    color: $emphasis-text-color;
+}
+a.nav-link:hover {
+    cursor: pointer;
+}
+*:focus {
+    outline: none !important;
+}
