@@ -6,7 +6,7 @@ title: Bootstrap Templates Starter
   Complete with page layout, menu partial and responsive navigation!
 </p>
 <ul class="list-unstyled">
-  <li>Bootstrap 4.0.0-beta</li>
+  <li>Bootstrap 4.0.0-beta.2</li>
   <li>jQuery 3.2.1</li>
 </ul>
 
@@ -30,7 +30,7 @@ $('#Name').keyup(function () {
   var name = $('#Name').val();
   if (name) {
     $.getJSON('/hello/' + name, function (r) {
-      $('#result').html(r.Result);
+      $('#result').html(r.result);
     });
   } else {
     $('#result').html('');

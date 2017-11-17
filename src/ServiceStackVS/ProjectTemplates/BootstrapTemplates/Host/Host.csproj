@@ -73,20 +73,20 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\css\bootstrap.css" />
-    <Content Include="assets\css\default.css" />
-    <Content Include="assets\img\logo.png" />
-    <Content Include="assets\js\bootstrap.min.js" />
-    <Content Include="assets\js\jquery.min.js" />
-    <Content Include="assets\js\default.js" />
+    <Content Include="wwwroot\about.html" />
+    <Content Include="wwwroot\assets\css\bootstrap.css" />
+    <Content Include="wwwroot\assets\css\default.css" />
+    <Content Include="wwwroot\assets\img\logo.png" />
+    <Content Include="wwwroot\assets\js\bootstrap.min.js" />
+    <Content Include="wwwroot\assets\js\default.js" />
+    <Content Include="wwwroot\assets\js\jquery.min.js" />
+    <Content Include="wwwroot\contact.html" />
+    <Content Include="wwwroot\index.html" />
+    <Content Include="wwwroot\menu.html" />
+    <Content Include="wwwroot\services.html" />
+    <Content Include="wwwroot\_layout.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_layout.html" />
-    <Content Include="index.html" />
-    <Content Include="about.html" />
-    <Content Include="contact.html" />
-    <Content Include="menu.html" />
-    <Content Include="services.html" />
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
@@ -97,11 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\PublishToIIS.pubxml" />
+    <Content Include="Properties\PublishProfiles\PublishToIIS.pubxml.user" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
