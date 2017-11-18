@@ -4,8 +4,8 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>Angular4 App</Name>
-    <Description>Angular 5 Bootstrap App configured with angular-cli including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
+    <Name>Angular5 App</Name>
+    <Description>Angular 5 Bootstrap App created using cli.angular.io including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy</Description>
     <DefaultName>Angular5App</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
