@@ -4,9 +4,9 @@
   <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
   
   <TemplateData>
-    <Name>ServiceStack.Razor ASP.NET with Bootstrap</Name>
+    <Name>ServiceStack ASP.NET Razor with Bootstrap</Name>
     <Description>A project to kickstart your ASPNET with ServiceStack.Razor and Bootstrap App.</Description>
-    <DefaultName>Bootstrap</DefaultName>
+    <DefaultName>Razor</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
