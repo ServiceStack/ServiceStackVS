@@ -1,37 +1,29 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ServiceStack;
 using ServiceStack.Testing;
-using $saferootprojectname$.ServiceModel;
 using $saferootprojectname$.ServiceInterface;
+using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
 {
-    [TestFixture]
-    public class UnitTests
+    public class UnitTest
     {
         private readonly ServiceStackHost appHost;
 
-        public UnitTests()
+        public UnitTest()
         {
-            appHost = new BasicAppHost(typeof(MyServices).Assembly)
-            {
-                ConfigureContainer = container =>
-                {
-                    //Add your IoC dependencies here
-                }
-            }
-            .Init();
+            appHost = new BasicAppHost().Init();
+            appHost.Container.AddTransient<MyServices>();
         }
 
         [OneTimeTearDown]
-        public void TestFixtureTearDown()
+        public void OneTimeTearDown()
         {
             appHost.Dispose();
         }
 
         [Test]
-        public void Test_Method1()
+        public void Can_call_MyServices()
         {
             var service = appHost.Container.Resolve<MyServices>();
 
