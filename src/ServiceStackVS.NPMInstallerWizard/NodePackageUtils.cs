@@ -42,9 +42,15 @@ namespace ServiceStackVS.NPMInstallerWizard
 
         public static void InstallNpmPackageGlobally(string packageId,Action<object, DataReceivedEventArgs> output = null, Action<object, DataReceivedEventArgs> error = null, bool forceReinstall = false, int timeoutSeconds = 60)
         {
-            if (!HasNpmPackageInstalledGlobally(packageId) || forceReinstall)
+            try
             {
-                CommandUtils.StartCommand("npm install -g " + packageId, null, output, error, timeoutSeconds);
+                if (!HasNpmPackageInstalledGlobally(packageId) || forceReinstall)
+                {
+                    CommandUtils.StartCommand("npm install -g " + packageId, null, output, error, timeoutSeconds);
+                }
+            }
+            catch (ProcessException ignore) //Prevent errors like "npm ERR! peer dep missing:" from throwing modal error dialog and breaking installs
+            {
             }
         }
 
