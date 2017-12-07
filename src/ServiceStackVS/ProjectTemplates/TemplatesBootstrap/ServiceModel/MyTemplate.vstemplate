@@ -3,6 +3,7 @@
   <TemplateData>
     <Name>ServiceModel</Name>
     <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>ServiceStackBootstrap.ServiceModel</DefaultName>

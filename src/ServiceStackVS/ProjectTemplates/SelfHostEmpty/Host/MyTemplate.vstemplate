@@ -4,6 +4,7 @@
     <Name>Host</Name>
     <DefaultName>$safeprojectname$</DefaultName>
     <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <ProvideDefaultName>true</ProvideDefaultName>
