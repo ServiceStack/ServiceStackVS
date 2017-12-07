@@ -7,9 +7,9 @@
     <Name>ServiceStack Windows Service Empty</Name>
     <Description>ServiceStack Windows Service Empty</Description>
     <DefaultName>WindowsService</DefaultName>
+    <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
-    <Icon>logo.png</Icon>
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
