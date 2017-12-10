@@ -46,7 +46,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
-    "servicestack-client": "0.0.40"
+    "@servicestack/client": "^1.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -75,7 +75,7 @@
     "precss": "^2.0.0",
     "react-test-renderer": "^16.0.0",
     "sass-loader": "^6.0.6",
-    "servicestack-cli": "0.0.7",
+    "@servicestack/cli": "^1.0.0",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.0",
     "ts-jest": "^21.1.4",
