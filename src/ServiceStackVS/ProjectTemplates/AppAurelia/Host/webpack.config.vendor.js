@@ -18,7 +18,7 @@ const VENDOR = [
     'aurelia-templating-router',
     'aurelia-templating-resources',
     'es6-shim',
-    'servicestack-client'
+    '@servicestack/client'
 ];
 
 const path = require('path'),

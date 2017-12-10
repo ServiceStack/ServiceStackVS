@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { createUrl } from 'servicestack-client';
+import { createUrl } from '@servicestack/client';
 
 @Component({
     templateUrl: 'home.html',

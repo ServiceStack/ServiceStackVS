@@ -3,6 +3,17 @@
   "version": "0.0.1",
   "lockfileVersion": 1,
   "dependencies": {
+    "@servicestack/cli": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/@servicestack/cli/-/cli-1.0.0.tgz",
+      "integrity": "sha512-d43HU4RhNQ8dfiImUPifuJt1SEGweiAlIynEtKoAj95UQzlgZJDVEaOsKgeYa+b4DunOG5UgGbOOSKqKsHPzlw==",
+      "dev": true
+    },
+    "@servicestack/client": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/@servicestack/client/-/client-1.0.0.tgz",
+      "integrity": "sha512-T85XKaKsF7pjiYUHLYXm7SMWVacl25r5dTzyi5xA23KiGCCuFay29ucJlEz1sOYSU9TxKRiDgPXgbhXOl1YA7g=="
+    },
     "@types/jest": {
       "version": "21.1.5",
       "resolved": "https://registry.npmjs.org/@types/jest/-/jest-21.1.5.tgz",
@@ -7813,17 +7824,6 @@
       "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.13.1.tgz",
       "integrity": "sha512-hSMUZrsPa/I09VYFJwa627JJkNs0NrfL1Uzuup+GqHfToR2KcsXFymXSV90hoyw3M+msjFuQly+YzIH/q0MGlQ==",
       "dev": true
-    },
-    "servicestack-cli": {
-      "version": "0.0.7",
-      "resolved": "https://registry.npmjs.org/servicestack-cli/-/servicestack-cli-0.0.7.tgz",
-      "integrity": "sha512-zMPXron4YSko4EI6xchgGwRwlHBWxAnQiKkcpFBnWl0yrkAGXWf/bFzuuE/U6yvyTKXZwwmWHSUxAfguZexMTQ==",
-      "dev": true
-    },
-    "servicestack-client": {
-      "version": "0.0.40",
-      "resolved": "https://registry.npmjs.org/servicestack-client/-/servicestack-client-0.0.40.tgz",
-      "integrity": "sha512-FjqN62eCTqky2rnaWp6f3jrL4BzbtwryUFFK2CRTcimbSIhkFFJjhm+kU0Z+RKqF5JKoSwuuvRSu7mT4XA6EOQ=="
     },
     "set-blocking": {
       "version": "2.0.0",

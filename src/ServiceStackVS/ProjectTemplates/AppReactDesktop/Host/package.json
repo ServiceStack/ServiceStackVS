@@ -38,16 +38,17 @@
     ]
   },
   "dependencies": {
+    "@servicestack/client": "^1.0.0",
     "bootstrap": "^4.0.0-beta.2",
     "classnames": "^2.2.5",
     "es6-shim": "^0.35.3",
     "font-awesome": "^4.7.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2",
-    "servicestack-client": "0.0.40"
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "@servicestack/cli": "^1.0.0",
     "@types/classnames": "^2.2.3",
     "@types/jest": "^21.1.5",
     "@types/node": "^8.0.47",
@@ -85,7 +86,6 @@
     "react-test-renderer": "^16.0.0",
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.6",
-    "servicestack-cli": "0.0.7",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.0",
     "ts-jest": "^21.1.4",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as cls from 'classnames';
 import { Route, Link, withRouter } from 'react-router-dom';
-import { JsonServiceClient } from 'servicestack-client';
+import { JsonServiceClient } from '@servicestack/client';
 
 declare var global; //populated from package.json/jest
 

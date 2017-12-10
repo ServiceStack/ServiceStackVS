@@ -10,7 +10,7 @@ const VENDOR = [
     '@angular/router',
     'rxjs',
     '@angularclass/hmr',
-    'servicestack-client',
+    '@servicestack/client',
     'core-js/client/shim',
     'reflect-metadata',
     'ts-helpers',

@@ -8,7 +8,7 @@ const VENDOR = [
     'react',
     'react-dom',
     'react-router-dom',
-    'servicestack-client'
+    '@servicestack/client'
 ];
 
 const path = require('path'),
