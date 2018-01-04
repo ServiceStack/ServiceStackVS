@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home';
 import { View1Component } from './view1/view1';
 import { View2Component } from './view2/view2';
 
+import { JsonServiceClient } from '@servicestack/client';
+
 export const routes: Routes = [
   {
       path: '',
@@ -20,7 +22,6 @@ export const routes: Routes = [
   { path: 'view2', component: View2Component },
   { path: '**', redirectTo: '/' },
 ];
-
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ export const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [{provide:JsonServiceClient, useValue: new JsonServiceClient("/")}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
