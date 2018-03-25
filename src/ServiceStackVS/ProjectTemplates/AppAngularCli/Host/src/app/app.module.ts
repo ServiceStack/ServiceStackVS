@@ -36,7 +36,7 @@ export const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [{provide:JsonServiceClient, useValue: new JsonServiceClient("/")}],
+  providers: [{provide: JsonServiceClient, useValue: new JsonServiceClient('/')}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
