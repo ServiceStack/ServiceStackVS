@@ -224,6 +224,14 @@
     <Content Include="ItemTemplates\Razor\CSharpRazor\Definitions\CSharp.vstemplate" />
     <Resource Include="ItemTemplates\Razor\CSharpRazor\_preprocess.xml" />
     <Resource Include="ItemTemplates\Razor\CSharpRazor\logo.png" />
+    <Content Include="logo-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="logo-32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="ServiceStack.Text.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

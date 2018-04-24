@@ -7,6 +7,7 @@
     <ItemTemplate Path="ItemTemplates\NativeTypes\VbNetTypeScriptRef\Definitions\VB.vstemplate" Name="TypeScript Reference" Description="TypeScript reference from a ServiceStack server." ProjectType="VisualBasic" ProjectSubType="" />
   </ItemTemplates>
   <ProjectTemplates>
+    <ProjectTemplate Path="ProjectTemplates\AppVue\_Definitions\CSharp.vstemplate" Name="A Vue App" Description="Vue TypeScript Bootstrap App configured with Webpack and Karma Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AppAngular\_Definitions\CSharp.vstemplate" Name="Angular4 App" Description="Angular 4 TypeScript Material Design Lite App configured with Webpack and Karma Unit testing and coverage including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AppAngularCli\_Definitions\CSharp.vstemplate" Name="Angular5 App" Description="Angular 5 Bootstrap App created using cli.angular.io including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy" ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AppAurelia\_Definitions\CSharp.vstemplate" Name="Aurelia App" Description="Aurelia TypeScript Bootstrap App configured with Webpack and Jest Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy" ProjectType="CSharp" ProjectSubType="" />
@@ -18,10 +19,9 @@
     <ProjectTemplate Path="ProjectTemplates\AspNetMVC5\_Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET MVC5 Empty" Description="A project to kickstart your ASPNET MVC5 application with ServiceStack services." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AspNetRazor\_Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET Razor with Bootstrap" Description="A project to kickstart your ASPNET with ServiceStack.Razor and Bootstrap App." ProjectType="CSharp" ProjectSubType="" />
     <ProjectTemplate Path="ProjectTemplates\AspNetTemplatesBootstrap\_Definitions\CSharp.vstemplate" Name="ServiceStack ASP.NET Templates with Bootstrap" Description="A project to kickstart your ASP.NET ServiceStack Templates with Bootstrap App." ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="ProjectTemplates\SelfHostEmpty\_Definitions\CSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="ProjectTemplates\SelfHostRazor\_Definitions\CSharp.vstemplate" Name="ServiceStack Self Host with Razor" Description="ServiceStack Self Host with Razor" ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="ProjectTemplates\WinServiceEmpty\_Definitions\CSharp.vstemplate" Name="ServiceStack Windows Service Empty" Description="ServiceStack Windows Service Empty" ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="ProjectTemplates\AppVue\_Definitions\CSharp.vstemplate" Name="Vue App" Description="Vue TypeScript Bootstrap App configured with Webpack and Karma Unit testing including all Gulp tasks needed to develop, watch, bundle and deploy your App using MS Deploy" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ConsoleSelfHostEmpty\_Definitions\CSharp.vstemplate" Name="ServiceStack Self Host Empty" Description="ServiceStack Self Host Empty" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ConsoleSelfHostRazor\_Definitions\CSharp.vstemplate" Name="ServiceStack Self Host with Razor" Description="ServiceStack Self Host with Razor" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="ProjectTemplates\ConsoleWinServiceEmpty\_Definitions\CSharp.vstemplate" Name="ServiceStack Windows Service Empty" Description="ServiceStack Windows Service Empty" ProjectType="CSharp" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />
 </TemplateReport>
