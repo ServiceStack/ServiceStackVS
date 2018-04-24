@@ -9,7 +9,7 @@ namespace ServiceStackVS.Common
 {
     public static class Analytics
     {
-        private const string VERSION = "1.0.41";
+        private const string VERSION = "1.0.42";
         private const string ServiceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?name={1}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?name={0}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?name={0}&source=ssvs&version=" + VERSION;
@@ -22,11 +22,7 @@ namespace ServiceStackVS.Common
             { 15, "2017" },
         };
 
-        static string GetVersion(int vsVersion)
-        {
-            string version;
-            return VersionAlias.TryGetValue(vsVersion, out version) ? version : "";
-        }
+        static string GetVersion(int vsVersion) => VersionAlias.TryGetValue(vsVersion, out var version) ? version : "";
 
         public static void SubmitAnonymousTemplateUsage(int vsVersion, string templatePath)
         {

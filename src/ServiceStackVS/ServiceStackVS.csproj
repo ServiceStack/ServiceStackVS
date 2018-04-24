@@ -220,6 +220,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\Definitions\CSharp.vstemplate" />
     <Content Include="ItemTemplates\Razor\CSharpRazor\Definitions\CSharp.vstemplate" />
     <Resource Include="ItemTemplates\Razor\CSharpRazor\_preprocess.xml" />
@@ -229,6 +233,10 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="logo-32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="preview-image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
