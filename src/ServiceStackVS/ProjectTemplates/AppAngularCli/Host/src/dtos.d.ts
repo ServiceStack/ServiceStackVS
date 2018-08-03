@@ -1,6 +1,6 @@
 /* Options:
-Date: 2018-03-24 23:20:36
-Version: 5.03
+Date: 2018-07-30 03:35:45
+Version: 5.11
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://localhost:$iisexpressport$
 
@@ -35,3 +35,4 @@ interface Hello extends IReturn<HelloResponse>
 {
     name?: string;
 }
+

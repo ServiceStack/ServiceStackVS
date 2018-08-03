@@ -1,12 +1,13 @@
+
 (function () {
     var SCRIPTS = {
         'dev': 'npm run dev',
+        'start': 'npm run start',
         'dtos': 'npm run dtos',
-        'ng-build': 'npm run build',
-        'ng-build-prod': 'npm run build-prod',
-        'ng-lint': 'npm run lint',
+        'build': 'npm run build',
         'publish': 'npm run publish',
-        'tests-run': 'npm run test',
+        'lint': 'npm run lint',
+        'tests': 'npm run test',
         'tests-e2e': 'npm run e2e'
     };
 

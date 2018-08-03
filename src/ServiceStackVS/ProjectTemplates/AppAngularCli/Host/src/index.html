@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>$safeprojectname$</title>
-  <script>{{ '/js/hot-fileloader.js' | onlyIf(debug) | includeFile }}</script>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <i hidden>{{ '/js/hot-fileloader.js' | ifDebugIncludeScript }}</i>
+
   <app-root></app-root>
 
   <div id="footer" style="text-align:center; position:absolute; bottom:50px; width:100%;">

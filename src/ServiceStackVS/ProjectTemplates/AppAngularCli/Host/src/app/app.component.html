@@ -8,13 +8,13 @@
         
           <div class="navbar-collapse">
               <ul class="navbar-nav mr-auto">
-                <li routerLink="/" class="nav-item">
+                <li class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                   <a class="nav-link">Home</a>
                 </li>
-                <li routerLink="/view1" class="nav-item">
+                <li class="nav-item" routerLink="/view1" routerLinkActive="active">
                   <a class="nav-link">View 1</a>
                 </li>
-                <li routerLink="/view2" class="nav-item">
+                <li class="nav-item" routerLink="/view2" routerLinkActive="active">
                   <a class="nav-link">View 2</a>
                 </li>
               </ul>
