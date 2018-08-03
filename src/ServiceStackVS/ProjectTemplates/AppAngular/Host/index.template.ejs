@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
     <title>$safeprojectname$</title>
-    {{ ifDebug | select: <script>{ '/js/hot-fileloader.js' | includeFile }</script> }}
     <base href="/">
 
     <!-- Add to homescreen for Chrome on Android -->
@@ -24,7 +23,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-
+    <i hidden>{{ '/js/hot-fileloader.js' | ifDebugIncludeScript }}</i>
+    
     <app-root>loading...</app-root>
 
 </body>
