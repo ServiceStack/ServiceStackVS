@@ -69,31 +69,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="e2e\protractor.conf.js" />
+    <Content Include="e2e\tsconfig.e2e.json" />
     <Content Include="Global.asax" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="e2e\tsconfig.e2e.json" />
-    <Content Include=".angular-cli.json" />
     <Content Include=".editorconfig" />
     <Content Include="npm-shrinkwrap.json" />
+    <Content Include="angular.json" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="karma.conf.js" />
-    <Content Include="protractor.conf.js" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\app.component.scss" />
     <Content Include="src\app\home\home.html" />
+    <Content Include="src\app\home\home.scss" />
+    <Content Include="src\app\view1\view1.scss" />
     <Content Include="src\assets\img\logo.png" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
+    <Content Include="src\karma.conf.js" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
     <Content Include="Web.config" />
     <Content Include="proxy.config.json" />
     <Content Include="tslint.json" />
-    <Content Include="src\app.scss" />
-    <Content Include="src\app\app.component.scss" />
-    <Content Include="src\app\home\home.scss" />
-    <Content Include="src\app\view1\view1.scss" />
-    <Content Include="src\tsconfig.app.json" />
-    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\browserslist" />
+    <Content Include="src\styles.scss" />
+    <Content Include="src\tslint.json" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,6 +104,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="e2e\app.e2e-spec.ts" />
     <TypeScriptCompile Include="e2e\app.po.ts" />
+    <TypeScriptCompile Include="e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="e2e\src\app.po.ts" />
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
