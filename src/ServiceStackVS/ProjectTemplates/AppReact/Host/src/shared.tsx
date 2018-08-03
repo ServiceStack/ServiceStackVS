@@ -1,17 +1,16 @@
 import * as React from 'react';
 import * as cls from 'classnames';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { JsonServiceClient } from '@servicestack/client';
 
-declare var global; //populated from package.json/jest
+declare var global: any; // populated from package.json/jest
 
-export var client = new JsonServiceClient(global.BaseUrl || '/');
+export const client = new JsonServiceClient(global.BaseUrl || '/');
 
-@withRouter
-export class NavItem extends React.Component<any,any> {
+class NavItemImpl extends React.Component<any,any> {
 
-  render () {
-    const { to, location, children, ...props } = this.props;
+  public render () {
+    const { to, location, children } = this.props;
     const active = location.pathname === to;
 
     return (
@@ -21,3 +20,5 @@ export class NavItem extends React.Component<any,any> {
     )
   }
 }
+
+export const NavItem = withRouter(NavItemImpl);
