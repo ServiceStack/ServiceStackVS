@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ServiceStack.Mvc;
 
-namespace $safeprojectname$.Controllers
+namespace MyApp.Controllers
 {
     public class HomeController : ServiceStackController
     {
