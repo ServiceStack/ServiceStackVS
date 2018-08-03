@@ -37,10 +37,6 @@
       <package id="ServiceStack.Redis" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
       <package id="ServiceStack.Text" version="latest" />
-      <package id="System.Buffers" version="4.5.0" />
-      <package id="System.Memory" version="4.5.1" />
-      <package id="System.Numerics.Vectors" version="4.5.0" />
-      <package id="System.Runtime.CompilerServices.Unsafe" version="4.5.1" />
     </NuGetPackages>
     <NodeJS>
       <npm-package id="gulp" />
