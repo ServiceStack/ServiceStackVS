@@ -54,70 +54,95 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="aurelia_project\aurelia.json" />
+    <Content Include="aurelia_project\generators\attribute.json" />
+    <Content Include="aurelia_project\generators\binding-behavior.json" />
+    <Content Include="aurelia_project\generators\component.json" />
+    <Content Include="aurelia_project\generators\element.json" />
+    <Content Include="aurelia_project\generators\generator.json" />
+    <Content Include="aurelia_project\generators\task.json" />
+    <Content Include="aurelia_project\generators\value-converter.json" />
+    <Content Include="aurelia_project\tasks\build.json" />
+    <Content Include="aurelia_project\tasks\jest.json" />
+    <Content Include="aurelia_project\tasks\karma.json" />
+    <Content Include="aurelia_project\tasks\run.json" />
+    <Content Include="npm-shrinkwrap.json" />
+    <Content Include=".editorconfig" />
+    <Content Include="index.ejs" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Web.config" />
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\assets\img\logo.png" />
+    <Content Include="package-scripts.js" />
     <Content Include="src\app.css" />
     <Content Include="src\app.html" />
+    <Content Include="src\assets\img\logo.png" />
     <Content Include="src\resources\elements\hello.css" />
     <Content Include="src\resources\elements\hello.html" />
     <Content Include="src\views\home.html" />
     <Content Include="src\views\view1.css" />
     <Content Include="src\views\view1.html" />
     <Content Include="src\views\view2.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\app.ts" />
-    <TypeScriptCompile Include="src\resources\elements\hello.ts" />
-    <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\resources\index.ts" />
-    <TypeScriptCompile Include="src\views\home.ts" />
-    <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\shared.ts" />
-    <TypeScriptCompile Include="src\views\view1.ts" />
-    <TypeScriptCompile Include="src\views\view2.ts" />
-    <TypeScriptCompile Include="src\sum.test.ts" />
-    <TypeScriptCompile Include="src\sum.ts" />
+    <Content Include="static\favicon.ico" />
+    <Content Include="test\karma-bundle.js" />
+    <Content Include="test\karma.conf.js" />
+    <Content Include="Web.config" />
+    <Content Include="tslint.json" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\index.html" />
-    <Content Include="index.template.ejs" />
     <Content Include="package.json" />
-    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="webpack.config.vendor.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\resources\attributes\" />
     <Folder Include="src\resources\binding-behaviors\" />
     <Folder Include="src\resources\value-converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="aurelia_project\environments\dev.ts" />
+    <TypeScriptCompile Include="aurelia_project\environments\prod.ts" />
+    <TypeScriptCompile Include="aurelia_project\environments\stage.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\attribute.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\binding-behavior.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\component.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\element.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\generator.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\task.ts" />
+    <TypeScriptCompile Include="aurelia_project\generators\value-converter.ts" />
+    <TypeScriptCompile Include="aurelia_project\tasks\build.ts" />
+    <TypeScriptCompile Include="aurelia_project\tasks\environment.ts" />
+    <TypeScriptCompile Include="aurelia_project\tasks\jest.ts" />
+    <TypeScriptCompile Include="aurelia_project\tasks\karma.ts" />
+    <TypeScriptCompile Include="aurelia_project\tasks\run.ts" />
+    <TypeScriptCompile Include="custom_typings\fetch.d.ts" />
+    <TypeScriptCompile Include="custom_typings\system.d.ts" />
+    <TypeScriptCompile Include="src\app.ts" />
+    <TypeScriptCompile Include="src\dtos.ts" />
+    <TypeScriptCompile Include="src\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\resources\elements\hello.ts" />
+    <TypeScriptCompile Include="src\resources\index.ts" />
+    <TypeScriptCompile Include="src\shared.ts" />
+    <TypeScriptCompile Include="src\views\home.ts" />
+    <TypeScriptCompile Include="src\views\view1.ts" />
+    <TypeScriptCompile Include="src\views\view2.ts" />
+    <TypeScriptCompile Include="test\jest-pretest.ts" />
+    <TypeScriptCompile Include="test\unit\sum.spec.ts" />
+    <TypeScriptCompile Include="test\unit\sum.ts" />
+    <TypeScriptCompile Include="test\unit\view1.spec.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
