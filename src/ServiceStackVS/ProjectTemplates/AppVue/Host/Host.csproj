@@ -103,42 +103,48 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="npm-shrinkwrap.json" />
+    <Content Include="cypress.json" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Web.config" />
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="public\favicon.ico" />
+    <Content Include="public\index.html" />
     <Content Include="src\assets\img\logo.png" />
+    <Content Include="tests\e2e\plugins\index.js" />
+    <Content Include="tests\e2e\specs\test.js" />
+    <Content Include="tests\e2e\support\commands.js" />
+    <Content Include="tests\e2e\support\index.js" />
+    <Content Include="vue.config.js" />
+    <Content Include="Web.config" />
+    <Content Include="tslint.json" />
+    <Content Include="src\app.scss" />
+    <Content Include="src\App.vue" />
     <Content Include="src\home\Home.vue" />
     <Content Include="src\view1\View1.vue" />
     <Content Include="src\view2\View2.vue" />
-    <Content Include="src\app.scss" />
-    <Content Include="src\App.vue" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\home\Home.spec.ts" />
-    <TypeScriptCompile Include="src\view1\View1.spec.ts" />
-    <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\shared.ts" />
-    <TypeScriptCompile Include="src\shared.d.ts" />
+    <Content Include="src\views\About.vue" />
+    <Content Include="src\views\Home.vue" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\index.html" />
-    <Content Include="index.template.ejs" />
-    <Content Include="karma-shim.js" />
-    <Content Include="karma.conf.js" />
     <Content Include="package.json" />
-    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
-    <Content Include="webpack.config.js" />
-    <Content Include="webpack.config.vendor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\dtos.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\router.ts" />
+    <TypeScriptCompile Include="src\shared.ts" />
+    <TypeScriptCompile Include="src\shims-tsx.d.ts" />
+    <TypeScriptCompile Include="src\shims-vue.d.ts" />
+    <TypeScriptCompile Include="tests\unit\Home.spec.ts" />
+    <TypeScriptCompile Include="tests\unit\View1.spec.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
