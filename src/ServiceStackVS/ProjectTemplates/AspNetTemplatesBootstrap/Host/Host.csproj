@@ -76,6 +76,7 @@
     <Content Include="wwwroot\about.html" />
     <Content Include="wwwroot\assets\css\bootstrap.css" />
     <Content Include="wwwroot\assets\css\default.css" />
+    <Content Include="wwwroot\assets\img\favicon.ico" />
     <Content Include="wwwroot\assets\img\logo.png" />
     <Content Include="wwwroot\assets\js\bootstrap.min.js" />
     <Content Include="wwwroot\assets\js\default.js" />

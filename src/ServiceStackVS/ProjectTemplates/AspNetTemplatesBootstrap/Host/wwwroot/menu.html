@@ -6,6 +6,10 @@
 
 <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto">
-        {{ links | select: <li class="nav-item { 'active' | ifMatchesPathInfo(it.Key) }"><a class="nav-link" href="{ it.Key }">{ it.Value }</a></li> }}
+        {{#each links}}
+        <li {{ {active: matchesPathInfo(Key)} | htmlClass }}>
+            <a class="nav-link" href="{{Key}}">{{Value}}</a>
+        </li>
+        {{/each}}
     </ul>
 </div>

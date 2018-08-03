@@ -1,13 +1,13 @@
 <!--
-title: Bootstrap Templates Starter
+title: Bootstrap Templates
 -->
 
 <p class="lead">
   Complete with page layout, menu partial and responsive navigation!
 </p>
 <ul class="list-unstyled">
-  <li>Bootstrap 4.0.0-beta.2</li>
-  <li>jQuery 3.2.1</li>
+  <li>Bootstrap v4.1.2</li>
+  <li>jQuery v3.3.1</li>
 </ul>
 
 <div class="container" style="padding:60px 0 0 250px">
@@ -25,7 +25,8 @@ title: Bootstrap Templates Starter
   </div>
 </div>
 
-{{ `<script>
+{{#raw appendTo scripts}}
+<script>
 $('#Name').keyup(function () {
   var name = $('#Name').val();
   if (name) {
@@ -36,4 +37,5 @@ $('#Name').keyup(function () {
     $('#result').html('');
   }
 });
-</script>` | appendTo: scripts }}
+</script>
+{{/raw}}
