@@ -80,9 +80,20 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
+      <Project>{3ADA98B6-22EF-40B2-8D28-F8B21D90A719}</Project>
+      <Name>$safeprojectname$.ServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
+      <Project>{3B964640-9CA0-4868-A11B-8924C02A99CB}</Project>
+      <Name>$safeprojectname$.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="wwwroot\assets\css\bootstrap.css" />
     <Content Include="wwwroot\assets\css\default.css" />
+    <Content Include="wwwroot\assets\img\favicon.ico" />
     <Content Include="wwwroot\assets\img\logo.png" />
     <Content Include="wwwroot\assets\js\bootstrap.min.js" />
     <Content Include="wwwroot\assets\js\default.js" />
@@ -115,16 +126,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
-      <Project>{3ADA98B6-22EF-40B2-8D28-F8B21D90A719}</Project>
-      <Name>$safeprojectname$.ServiceInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
-      <Project>{3B964640-9CA0-4868-A11B-8924C02A99CB}</Project>
-      <Name>$safeprojectname$.ServiceModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
