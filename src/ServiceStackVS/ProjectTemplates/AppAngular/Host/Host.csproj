@@ -23,7 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,17 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
       <Project>{582dfb0f-f84d-4e43-9bca-2a5a86600b7a}</Project>
       <Name>$safeprojectname$.ServiceInterface</Name>
@@ -65,12 +54,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="Global.asax" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="npm-shrinkwrap.json" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -78,7 +81,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\img\android-desktop.png" />
@@ -112,7 +114,6 @@
     <Content Include="wwwroot\index.html" />
     <Content Include="index.template.ejs" />
     <Content Include="package.json" />
-    <Content Include="package-lock.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
     <Content Include="karma.conf.js" />

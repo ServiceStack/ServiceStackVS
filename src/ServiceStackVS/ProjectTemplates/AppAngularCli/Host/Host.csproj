@@ -44,6 +44,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
+      <Project>{582dfb0f-f84d-4e43-9bca-2a5a86600b7a}</Project>
+      <Name>$safeprojectname$.ServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
+      <Project>{08bef328-ab7d-48d3-800d-48acc75c7914}</Project>
+      <Name>$safeprojectname$.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -53,16 +63,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.ServiceInterface\$safeprojectname$.ServiceInterface.csproj">
-      <Project>{582dfb0f-f84d-4e43-9bca-2a5a86600b7a}</Project>
-      <Name>$safeprojectname$.ServiceInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\$safeprojectname$.ServiceModel\$safeprojectname$.ServiceModel.csproj">
-      <Project>{08bef328-ab7d-48d3-800d-48acc75c7914}</Project>
-      <Name>$safeprojectname$.ServiceModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
