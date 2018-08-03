@@ -43,5 +43,6 @@
     </NodeJS>
     <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
     <IISExpressAddress Name="package.json"></IISExpressAddress>
+    <IISExpressAddress Name="vue.config.js"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

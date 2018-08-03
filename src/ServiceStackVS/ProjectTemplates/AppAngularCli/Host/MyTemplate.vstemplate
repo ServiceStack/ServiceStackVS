@@ -43,5 +43,6 @@
     </NodeJS>
     <IISExpressAddress Name="src\dtos.d.ts"></IISExpressAddress>
     <IISExpressAddress Name="package.json"></IISExpressAddress>
+    <IISExpressAddress Name="proxy.config.json"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

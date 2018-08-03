@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
     "dev": "rimraf wwwroot/ && node scripts/dev.js",
     "start": "react-scripts-ts start",
     "dtos": "cd src && typescript-ref",

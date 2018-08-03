@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
+    "postinstall": "npm run build",
     "dev": "au build --env stage --watch",
     "start": "nps",
     "dtos": "cd src && typescript-ref",
