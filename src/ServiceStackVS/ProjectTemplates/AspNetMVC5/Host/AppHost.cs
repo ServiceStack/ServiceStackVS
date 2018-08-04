@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -18,7 +18,7 @@ namespace $safeprojectname$
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
+            : base("$safeprojectname$", typeof(MyServices).Assembly) { }
 
         /// <summary>
         /// Application specific configuration

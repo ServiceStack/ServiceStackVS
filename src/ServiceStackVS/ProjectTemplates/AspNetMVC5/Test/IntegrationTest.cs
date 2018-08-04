@@ -1,4 +1,4 @@
-﻿using Funq;
+using Funq;
 using ServiceStack;
 using NUnit.Framework;
 using $saferootprojectname$.ServiceInterface;

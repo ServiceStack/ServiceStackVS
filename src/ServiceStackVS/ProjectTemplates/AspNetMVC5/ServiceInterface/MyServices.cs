@@ -1,4 +1,4 @@
-﻿using ServiceStack;
+using ServiceStack;
 using $saferootprojectname$.ServiceModel;
 
 namespace $safeprojectname$
