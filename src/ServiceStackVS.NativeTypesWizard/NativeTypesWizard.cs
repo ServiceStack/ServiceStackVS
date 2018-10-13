@@ -102,11 +102,7 @@ namespace ServiceStackVS.NativeTypesWizard
             try
             {
                 string updatedCode = currentNativeTypesHandle.GetUpdatedCode(baseUrl, null);
-                using (var streamWriter = File.CreateText(fullItemPath))
-                {
-                    streamWriter.Write(updatedCode);
-                    streamWriter.Flush();
-                }
+                File.WriteAllText(fullItemPath, updatedCode);
             }
             catch (Exception ex)
             {

@@ -157,8 +157,8 @@ namespace ServiceStackVS.FileHandlers
                 fullPath.Substring(fullPath.LastIndexOf("\\", StringComparison.Ordinal) + 1) +
                 "' ---");
             var existingGeneratedCode = File.ReadAllLines(fullPath).Join(Environment.NewLine);
-            string baseUrl;
-            if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
+
+            if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out var baseUrl))
             {
                 outputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unabled to find BaseUrl");
                 return;
@@ -172,13 +172,10 @@ namespace ServiceStackVS.FileHandlers
                 //Overwriting the file inconsistently prompts the user that file has changed.
                 //Sometimes old code persists even though file has changed.
                 document.Close();
-                using (var streamWriter = File.CreateText(fullPath))
-                {
-                    streamWriter.Write(updatedCode);
-                    streamWriter.Flush();
-                }
+
                 try
                 {
+                    File.WriteAllText(fullPath, updatedCode);
                     bool optOutOfStats = Dte.GetOptOutStatsSetting();
                     if (!optOutOfStats)
                     {
@@ -190,8 +187,12 @@ namespace ServiceStackVS.FileHandlers
                 {
                     // Ignore errors
                 }
+
                 //HACK to ensure new file is loaded
-                Task.Run(() => { document.DTE.ItemOperations.OpenFile(fullPath); });
+                Task.Run(() =>
+                {
+                    var file = document.DTE.ItemOperations.OpenFile(fullPath);
+                });
             }
             catch (Exception e)
             {

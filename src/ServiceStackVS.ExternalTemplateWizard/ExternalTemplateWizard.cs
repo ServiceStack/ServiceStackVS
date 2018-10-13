@@ -161,8 +161,7 @@ namespace ServiceStackVS.ExternalTemplateWizard
                     string fileOutputPath = projPath.FullName;
                     if (templatedFile.Dest != null)
                     {
-                        fileOutputPath =
-                            Directory.CreateDirectory(Path.Combine(projPath.FullName, templatedFile.Dest)).FullName;
+                        fileOutputPath = Directory.CreateDirectory(Path.Combine(projPath.FullName, templatedFile.Dest)).FullName;
                     }
                     File.Copy(Path.Combine(externalTemplateDir, templatedFile.Name), Path.Combine(fileOutputPath, templatedFile.Name));
                 }

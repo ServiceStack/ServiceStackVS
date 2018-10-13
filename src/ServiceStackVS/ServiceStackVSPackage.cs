@@ -532,8 +532,7 @@ namespace ServiceStackVS
                 string filePath = projectItemPath;
                 var existingGeneratedCode = File.ReadAllLines(filePath).Join(Environment.NewLine);
 
-                string baseUrl;
-                if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
+                if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out var baseUrl))
                 {
                     OutputWindowWriter.WriterWindow.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
                     return;
@@ -550,19 +549,17 @@ namespace ServiceStackVS
                         ServicePointManager.ServerCertificateValidationCallback =
                             (sender, certificate, chain, errors) => true;
                     }
+
                     string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
                     if (setSslValidationCallback)
                     {
                         //If callback was set to return true, reset back to null.
                         ServicePointManager.ServerCertificateValidationCallback = null;
                     }
-                    using (var streamWriter = File.CreateText(filePath))
-                    {
-                        streamWriter.Write(updatedCode);
-                        streamWriter.Flush();
-                    }
+
                     try
                     {
+                        File.WriteAllText(filePath, updatedCode);
                         bool optOutOfStats = dte.GetOptOutStatsSetting();
                         if (!optOutOfStats)
                         {
@@ -601,11 +598,8 @@ namespace ServiceStackVS
 
             var path = VSIXUtils.GetSelectedProjectPath() ?? VSIXUtils.GetSelectedFolderPath();
             string fullPath = Path.Combine(path, fileName);
-            using (var streamWriter = File.CreateText(fullPath))
-            {
-                streamWriter.Write(templateCode);
-                streamWriter.Flush();
-            }
+            File.WriteAllText(fullPath, templateCode);
+            
             // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
             Thread.Sleep(20);
             var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
