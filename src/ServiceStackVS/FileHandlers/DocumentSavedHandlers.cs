@@ -168,10 +168,17 @@ namespace ServiceStackVS.FileHandlers
                 var options = typesHandler.ParseComments(existingGeneratedCode);
                 string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
 
-                //Can't work out another way that ensures UI is updated.
-                //Overwriting the file inconsistently prompts the user that file has changed.
-                //Sometimes old code persists even though file has changed.
-                document.Close();
+                try
+                {
+                    //Can't work out another way that ensures UI is updated.
+                    //Overwriting the file inconsistently prompts the user that file has changed.
+                    //Sometimes old code persists even though file has changed.
+                    document.Close();
+                }
+                catch (Exception ex)
+                {
+                    outputWindowWriter.WriteLine("ServiceStack Reference: document.Close() - " + ex.Message);
+                }
 
                 try
                 {
@@ -183,15 +190,22 @@ namespace ServiceStackVS.FileHandlers
                         Analytics.SubmitAnonymousUpdateReferenceUsage(langName);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // Ignore errors
+                    outputWindowWriter.WriteLine("ServiceStack Reference: File.WriteAllText() - " + ex.Message);
                 }
 
                 //HACK to ensure new file is loaded
                 Task.Run(() =>
                 {
-                    var file = document.DTE.ItemOperations.OpenFile(fullPath);
+                    try
+                    {
+                        var file = document.DTE.ItemOperations.OpenFile(fullPath);
+                    }
+                    catch (Exception e)
+                    {
+                        outputWindowWriter.WriteLine("ServiceStack Reference: document.DTE.ItemOperations.OpenFile() - " + e.Message);
+                    }
                 });
             }
             catch (Exception e)

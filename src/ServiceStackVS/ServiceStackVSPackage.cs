@@ -546,8 +546,7 @@ namespace ServiceStackVS
                     {
                         //Temp set validation callback to return true to avoid common dev server ssl certificate validation issues.
                         setSslValidationCallback = true;
-                        ServicePointManager.ServerCertificateValidationCallback =
-                            (sender, certificate, chain, errors) => true;
+                        ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
                     }
 
                     string updatedCode = typesHandler.GetUpdatedCode(baseUrl, options);
@@ -567,11 +566,11 @@ namespace ServiceStackVS
                             Analytics.SubmitAnonymousUpdateReferenceUsage(langName);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        // Ignore errors
+                        OutputWindowWriter.WriterWindow.WriteLine("ServiceStack Reference: File.WriteAllText() - " + ex.Message);
                     }
-                    
+
                 }
                 catch (Exception e)
                 {

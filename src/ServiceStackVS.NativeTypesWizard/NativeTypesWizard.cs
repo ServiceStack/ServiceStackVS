@@ -109,8 +109,15 @@ namespace ServiceStackVS.NativeTypesWizard
                 OutputWindowWriter.WriterWindow.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + ex.Message);
             }
 
-            projectItem.Open();
-            projectItem.Save();
+            try
+            {
+                projectItem.Open();
+                projectItem.Save();
+            }
+            catch (Exception ex)
+            {
+                OutputWindowWriter.WriterWindow.WriteLine("ServiceStack Reference: projectItem.Save() " + ex.Message);
+            }
         }
 
         public void RunFinished()
