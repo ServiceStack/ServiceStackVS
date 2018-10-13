@@ -591,42 +591,34 @@ namespace ServiceStackVS
             
             var project = VSIXUtils.GetSelectedProject() ?? VSIXUtils.GetSelectObject<ProjectItem>().ContainingProject;
 
-            // This is a temporary work around for ServiceStack *.Core packages whilst they are separate/in beta. 
-            // This is to be removed/updated once the Text, Client and/or Interfaces NuGet packages support NetCore by default.
-            nugetPackages = ApplyNetCoreNuGetPackages(nugetPackages, project);
-
             var path = VSIXUtils.GetSelectedProjectPath() ?? VSIXUtils.GetSelectedFolderPath();
             string fullPath = Path.Combine(path, fileName);
             File.WriteAllText(fullPath, templateCode);
-            
-            // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
-            Thread.Sleep(20);
-            var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
-            newDtoFile.Open(EnvDteConstants.vsViewKindCode);
-            newDtoFile.Save();
-            foreach (var nugetPackage in nugetPackages)
-            {
-                AddNuGetDependencyIfMissing(project, nugetPackage);
-            }
-            
-            project.Save();
-        }
 
-        private List<string> ApplyNetCoreNuGetPackages(List<string> nugetPackages, EnvDTE.Project project)
-        {
-            List<string> result = new List<string>();
-            if (//Project is Csharp (dotnetcore)
-                string.Equals(project.Kind, VsHelperGuids.CSharpDotNetCore,
-                    StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                nugetPackages.ForEach(x => result.Add(x + ".Core"));
+                // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
+                Thread.Sleep(50);
+                var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
+                newDtoFile.Open(EnvDteConstants.vsViewKindCode);
+                newDtoFile.Save();
             }
-            else
-            {
-                return nugetPackages;
-            }
+            catch (Exception) {}
 
-            return result;
+            try
+            {
+                foreach (var nugetPackage in nugetPackages)
+                {
+                    AddNuGetDependencyIfMissing(project, nugetPackage);
+                }
+            }
+            catch (Exception) {}
+
+            try
+            {
+                project.Save();
+            }
+            catch (Exception) {}
         }
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)
