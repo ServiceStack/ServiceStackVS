@@ -5,9 +5,9 @@ namespace ServiceStackVS.NativeTypes.Handlers
 {
     public class FSharpNativeTypesHandler : BaseNativeTypesHandler, INativeTypesHandler
     {
-        public override NativeTypesLanguage TypesLanguage { get { return NativeTypesLanguage.FSharp; } }
-        public override string CodeFileExtension { get { return ".dtos.fs"; } }
-        public override string RelativeTypesUrl { get { return "types/fsharp"; } }
+        public override NativeTypesLanguage TypesLanguage => NativeTypesLanguage.FSharp;
+        public override string CodeFileExtension => ".dtos.fs";
+        public override string RelativeTypesUrl => "types/fsharp";
 
         public override bool IsHandledFileType(string fileName)
         {
@@ -18,10 +18,6 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EndsWith(".dto.fs");
         }
 
-        private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" };
-        public override List<string> RequiredNuGetPackages
-        {
-            get { return requiredNuGetPackages; }
-        }
+        public override List<string> RequiredNuGetPackages { get; } = new List<string> { "ServiceStack.Text", "ServiceStack.Client" };
     }
 }

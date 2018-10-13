@@ -2,8 +2,8 @@
 {
     public class KotlinNativeTypesHandler : BaseNativeTypesHandler, INativeTypesHandler
     {
-        public override NativeTypesLanguage TypesLanguage { get { return NativeTypesLanguage.Kotlin; } }
-        public override string CodeFileExtension { get { return ".kt"; } }
-        public override string RelativeTypesUrl { get { return "types/kotlin"; } }
+        public override NativeTypesLanguage TypesLanguage => NativeTypesLanguage.Kotlin;
+        public override string CodeFileExtension => ".kt";
+        public override string RelativeTypesUrl => "types/kotlin";
     }
 }

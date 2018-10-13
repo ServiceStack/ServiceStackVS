@@ -25,14 +25,10 @@ namespace ServiceStackVS.NativeTypes.Handlers
             return overriddenProperties;
         }
 
-        public override NativeTypesLanguage TypesLanguage { get { return NativeTypesLanguage.VbNet; } }
-        public override string CodeFileExtension { get { return ".dtos.vb"; } }
-        public override string RelativeTypesUrl { get { return "types/vbnet"; } }
+        public override NativeTypesLanguage TypesLanguage => NativeTypesLanguage.VbNet;
+        public override string CodeFileExtension => ".dtos.vb";
+        public override string RelativeTypesUrl => "types/vbnet";
 
-        private readonly List<string> requiredNuGetPackages = new List<string> { "ServiceStack.Text", "ServiceStack.Client" }; 
-        public override List<string> RequiredNuGetPackages
-        {
-            get { return requiredNuGetPackages; }
-        }
+        public override List<string> RequiredNuGetPackages { get; } = new List<string> { "ServiceStack.Text", "ServiceStack.Client" };
     }
 }

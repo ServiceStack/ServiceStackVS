@@ -96,8 +96,7 @@ namespace ServiceStackVS.NativeTypesWizard
             string fullItemPath = Path.Combine(projectPath, finalProjectItemName);
             var existingGeneratedCode = File.ReadAllLines(fullItemPath).Join(Environment.NewLine);
 
-            string baseUrl;
-            if (!currentNativeTypesHandle.TryExtractBaseUrl(existingGeneratedCode, out baseUrl))
+            if (!currentNativeTypesHandle.TryExtractBaseUrl(existingGeneratedCode, out var baseUrl))
                 throw new WizardBackoutException("Failed to read from template base url");
 
             try
