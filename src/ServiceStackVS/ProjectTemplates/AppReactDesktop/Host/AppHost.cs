@@ -29,7 +29,7 @@ namespace $safeprojectname$
                 UseCamelCase = true,
             });
 
-            Plugins.Add(new TemplatePagesFeature());
+            Plugins.Add(new SharpPagesFeature());
         }
     }
 }

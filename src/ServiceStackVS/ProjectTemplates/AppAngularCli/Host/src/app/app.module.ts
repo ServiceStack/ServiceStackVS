@@ -17,7 +17,7 @@ export const routes: Routes = [
       redirectTo: '/',
       pathMatch: 'full'
   },
-  { path: '', component: HomeComponent, data: { title: 'Home', name: 'Angular 6.1' } },
+  { path: '', component: HomeComponent, data: { title: 'Home', name: 'Angular 7' } },
   { path: 'view1', component: View1Component },
   { path: 'view2', component: View2Component },
   { path: '**', redirectTo: '/' },
