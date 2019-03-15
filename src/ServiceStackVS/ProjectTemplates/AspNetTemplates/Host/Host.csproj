@@ -81,10 +81,11 @@
     <Content Include="wwwroot\assets\js\bootstrap.min.js" />
     <Content Include="wwwroot\assets\js\default.js" />
     <Content Include="wwwroot\assets\js\jquery.min.js" />
-    <Content Include="wwwroot\contact.html" />
+    <Content Include="wwwroot\about\contact.html" />
+    <Content Include="wwwroot\about\index.html" />
     <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\menu.html" />
     <Content Include="wwwroot\services.html" />
+    <Content Include="wwwroot\_menu-partial.html" />
     <Content Include="wwwroot\_layout.html" />
   </ItemGroup>
   <ItemGroup>
