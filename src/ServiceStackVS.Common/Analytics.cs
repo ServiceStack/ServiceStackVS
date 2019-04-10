@@ -34,7 +34,7 @@ namespace ServiceStackVS.Common
                     var templateName = WizardHelpers.GetTemplateNameFromPath(templatePath);
                     ServiceStackStatsUrl.Fmt(GetVersion(vsVersion), templateName).GetStringFromUrl();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //do nothing
                 }
@@ -51,7 +51,7 @@ namespace ServiceStackVS.Common
                 {
                     ServiceStackStatsAddRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //do nothing
                 }
@@ -68,7 +68,7 @@ namespace ServiceStackVS.Common
                 {
                     ServiceStackStatsUpdateRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //do nothing
                 }

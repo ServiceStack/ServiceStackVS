@@ -51,10 +51,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
         }
 
         private IVsStatusbar _bar;
-        private IVsStatusbar StatusBar
-        {
-            get { return _bar ?? (_bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar); }
-        }
+        private IVsStatusbar StatusBar => _bar ?? (_bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar);
 
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private OutputWindowWriter _serviceStackOutputWindowWriter;

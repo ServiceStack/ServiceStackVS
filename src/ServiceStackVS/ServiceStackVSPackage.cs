@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -8,33 +7,23 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.Shell.Events;
-using Microsoft.Win32;
 using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
 using NuGet.VisualStudio;
 using ServiceStack;
-using ServiceStack.Text;
 using ServiceStackVS.Common;
-using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NativeTypes.Handlers;
 using ServiceStackVS.NativeTypesWizard;
-using ServiceStackVS.NPMInstallerWizard;
 using ServiceStackVS.Settings;
-using VSLangProj;
-using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
-using MessageBox = System.Windows.MessageBox;
+using Task = System.Threading.Tasks.Task;
 using Thread = System.Threading.Thread;
 
 namespace ServiceStackVS
@@ -60,9 +49,8 @@ namespace ServiceStackVS
     [Guid(GuidList.guidVSServiceStackPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [ProvideAutoLoad(UIContextGuids80.NoSolution)]
-    [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid),
-    "ServiceStack", "General", 0, 0, true)]
-    public sealed class ServiceStackVSPackage : Package
+    [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid), "ServiceStack", "General", 0, 0, true)]
+    public sealed class ServiceStackVSPackage : AsyncPackage
     {
         /// <summary>
         /// Default constructor of the package.
@@ -77,11 +65,11 @@ namespace ServiceStackVS
         }
 
         public readonly Dictionary<int, List<string>> TemplateCleanupByVsVersion = new Dictionary<int, List<string>>
-                {
-                    {11,new List<string> { "Aurelia.csharp", "ReactJSGap.csharp", "TypeScriptReact.csharp","Angular2.csharp" } },
-                    {12,new List<string> { "Aurelia.csharp","Angular2.csharp" }},
-                    {14,new List<string>()}
-                };
+        {
+            {11,new List<string> { "Aurelia.csharp", "ReactJSGap.csharp", "TypeScriptReact.csharp","Angular2.csharp" } },
+            {12,new List<string> { "Aurelia.csharp","Angular2.csharp" }},
+            {14,new List<string>()}
+        };
 
         private IComponentModel componentModel;
         public IComponentModel ComponentModel => 
@@ -97,13 +85,7 @@ namespace ServiceStackVS
         public IVsPackageInstallerServices PackageInstallerServices
             => pkgInstallerServices ?? (pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>());
 
-        public IVsMonitorSelection MonitorSelection
-        {
-            get
-            {
-                return (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
-            }
-        }
+        public IVsMonitorSelection MonitorSelection => (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
 
         private SVsServiceProvider svcProvider;
 
@@ -124,11 +106,7 @@ namespace ServiceStackVS
         // Overridden Package Implementation
         #region Package Members
 
-        /// <summary>
-        /// Initialization of the package; this method is called right after the package is sited, so this is the place
-        /// where you can put all the initialization code that rely on services provided by VisualStudio.
-        /// </summary>
-        protected override void Initialize()
+        protected override Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             packageInstaller = ComponentModel.GetService<IVsPackageInstaller>();
@@ -136,8 +114,7 @@ namespace ServiceStackVS
             base.Initialize();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if ( null != mcs )
+            if (GetService(typeof(IMenuCommandService)) is OleMenuCommandService mcs)
             {
                 // Create the command for the menu item.
                 var cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpAddServiceStackReference);
@@ -171,6 +148,8 @@ namespace ServiceStackVS
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
 
             RegisterStartupEvents();
+
+            return TaskResult.Finished;
         }
 
         DTEEvents dte_events;
@@ -201,7 +180,7 @@ namespace ServiceStackVS
                 // When updating from VSIX file, two dlls might exist.
                 foreach (var fileInfo in ssvsDllPath)
                 {
-                    DirectoryInfo ssvsExtensionDirInfo = fileInfo.Directory;
+                    var ssvsExtensionDirInfo = fileInfo.Directory;
 
                     if (ssvsExtensionDirInfo == null)
                     {
@@ -381,10 +360,8 @@ namespace ServiceStackVS
             var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
-            uint contextCookie;
-            int pfActive;
-            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
-            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
             var project = VSIXUtils.GetSelectedProject();
 
@@ -413,10 +390,9 @@ namespace ServiceStackVS
             {
                 guid = VSConstants.UICONTEXT.SolutionExistsAndFullyLoaded_guid;
             }
-            uint contextCookie;
-            int pfActive;
-            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
-            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+
+            monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
 
             var isProjectItemAFolder = VSIXUtils.IsSelectProjectItemAFolder();
