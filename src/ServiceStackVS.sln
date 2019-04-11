@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{524FA14C-C188-4A36-92FB-A92EBB1FA570}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS_UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NPMInstallerWizard", "ServiceStackVS.NPMInstallerWizard\ServiceStackVS.NPMInstallerWizard.csproj", "{F15D55C1-633A-4344-84E5-CE9C95988507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NuGetInstallerWizard", "ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj", "{7344DA1C-9297-49FD-BE37-568A3C4AB544}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NativeTypes", "ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj", "{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Tests", "ServiceStackVS.TemplateTests\ServiceStackVS.Tests.csproj", "{1933A6BA-3364-4F94-8015-1F029DCE9383}"
@@ -30,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.BuildConfigWizard", "ServiceStackVS.BuildConfigWizard\ServiceStackVS.BuildConfigWizard.csproj", "{93DF1A6F-3981-42DF-8100-0692A3B0FF71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Common", "ServiceStackVS.Common\ServiceStackVS.Common.csproj", "{05BF0855-569E-46D9-93BB-0A89E3866745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NuGetInstallerWizard", "ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj", "{7344DA1C-9297-49FD-BE37-568A3C4AB544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,6 @@ Global
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F15D55C1-633A-4344-84E5-CE9C95988507}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F59CBF-DCF5-4C5A-83AB-0B7FD2576AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,8 +75,15 @@ Global
 		{05BF0855-569E-46D9-93BB-0A89E3866745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BF0855-569E-46D9-93BB-0A89E3866745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BF0855-569E-46D9-93BB-0A89E3866745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7205AC9F-2144-4E16-8C27-FC5CCC9B9449}
 	EndGlobalSection
 EndGlobal

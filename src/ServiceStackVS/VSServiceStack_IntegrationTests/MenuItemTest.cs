@@ -6,7 +6,7 @@ using Microsoft.VSSDK.Tools.VsIdeTesting;
 
 namespace ServiceStackVS_IntegrationTests
 {
-    [TestClass]
+    [TestClass()]
     public class MenuItemTest
     {
         private delegate void ThreadInvoker();

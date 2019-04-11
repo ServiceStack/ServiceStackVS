@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -7,22 +8,35 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell.Events;
+using Microsoft.Win32;
 using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Settings;
+using Microsoft.VisualStudio.Threading;
 using NuGet.VisualStudio;
 using ServiceStack;
+using ServiceStack.Text;
 using ServiceStackVS.Common;
+using ServiceStackVS.FileHandlers;
 using ServiceStackVS.NativeTypes;
 using ServiceStackVS.NativeTypes.Handlers;
 using ServiceStackVS.NativeTypesWizard;
+using ServiceStackVS.NPMInstallerWizard;
 using ServiceStackVS.Settings;
+using VSLangProj;
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+using MessageBox = System.Windows.MessageBox;
 using Task = System.Threading.Tasks.Task;
 using Thread = System.Threading.Thread;
 
@@ -40,15 +54,15 @@ namespace ServiceStackVS
     /// </summary>
     // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
     // a package.
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", Analytics.VERSION, IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [ProvideAutoLoad(UIContextGuids80.NoSolution)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid), "ServiceStack", "General", 0, 0, true)]
     public sealed class ServiceStackVSPackage : AsyncPackage
     {
@@ -71,26 +85,15 @@ namespace ServiceStackVS
             {14,new List<string>()}
         };
 
-        private IComponentModel componentModel;
-        public IComponentModel ComponentModel => 
-            componentModel ?? (componentModel = (IComponentModel)GetService(typeof(SComponentModel)));
-
-        private IVsPackageInstaller packageInstaller;
-
-        public IVsPackageInstaller PackageInstaller => 
-            packageInstaller ?? (packageInstaller = ComponentModel.GetService<IVsPackageInstaller>());
-
-        private IVsPackageInstallerServices pkgInstallerServices;
-
-        public IVsPackageInstallerServices PackageInstallerServices
-            => pkgInstallerServices ?? (pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>());
+        private T GetComponentService<T>() where T : class => ((IComponentModel)GetService(typeof(SComponentModel))).GetService<T>();
+        public async Task<IComponentModel> GetComponentModelAsync() => 
+            (IComponentModel)await GetServiceAsync(typeof(SComponentModel));
 
         public IVsMonitorSelection MonitorSelection => (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
 
         private SVsServiceProvider svcProvider;
-
-        public SVsServiceProvider ServiceProvider
-            => svcProvider ?? (svcProvider = ComponentModel.GetService<SVsServiceProvider>());
+        public async Task<SVsServiceProvider> GetServiceProviderAsync() => 
+            svcProvider ?? (svcProvider = (await GetComponentModelAsync()).GetService<SVsServiceProvider>());
 
         private SolutionEventsListener solutionEventsListener;
 
@@ -105,16 +108,21 @@ namespace ServiceStackVS
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
         #region Package Members
-
-        protected override Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        // https://github.com/Microsoft/VSSDK-Extensibility-Samples/tree/master/AsyncPackageMigration
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            await base.InitializeAsync(cancellationToken, progress);
+
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
-            packageInstaller = ComponentModel.GetService<IVsPackageInstaller>();
-            pkgInstallerServices = ComponentModel.GetService<IVsPackageInstallerServices>();
-            base.Initialize();
+            var packageInstaller = (await GetComponentModelAsync()).GetService<IVsPackageInstaller>();
+            var pkgInstallerServices = (await GetComponentModelAsync()).GetService<IVsPackageInstallerServices>();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            if (GetService(typeof(IMenuCommandService)) is OleMenuCommandService mcs)
+            var mcs = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+
+            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
+            if (mcs != null)
             {
                 // Create the command for the menu item.
                 var cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpAddServiceStackReference);
@@ -147,34 +155,23 @@ namespace ServiceStackVS
             solutionEventsListener = new SolutionEventsListener();
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
 
-            RegisterStartupEvents();
-
-            return TaskResult.Finished;
-        }
-
-        DTEEvents dte_events;
-
-        private void RegisterStartupEvents()
-        {
-            if(dte == null)
-                dte = (DTE)GetService(typeof(DTE));
-            
-
-            if (dte != null)
+            if (await GetServiceAsync(typeof(EnvDTE.DTE)) is DTE dte)
             {
                 dte_events = dte.Events.DTEEvents;
                 dte_events.OnStartupComplete += OnStartupComplete;
             }
         }
 
+        DTEEvents dte_events;
+
         private void OnStartupComplete()
         {
             dte_events.OnStartupComplete -= OnStartupComplete;
             dte_events = null;
             var cleanupList = TemplateCleanupByVsVersion[MajorVisualStudioVersion];
+            var localVsDir = new DirectoryInfo(Path.Combine(UserLocalDataPath,"Extensions"));
             foreach (var deleteTemplate in cleanupList)
             {
-                DirectoryInfo localVsDir = new DirectoryInfo(Path.Combine(UserLocalDataPath,"Extensions"));
                 var ssvsDllPath = localVsDir.GetFiles("ServiceStackVS.dll", SearchOption.AllDirectories);
 
                 // When updating from VSIX file, two dlls might exist.
@@ -208,7 +205,13 @@ namespace ServiceStackVS
                     }
                 }
             }
-            ServiceProvider.GetWritableSettingsStore().SetPackageReady(true);
+
+            UIThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                GetComponentService<SVsServiceProvider>().GetWritableSettingsStore().SetPackageReady(true);
+            });
         }
 
         private void SolutionLoaded()
@@ -243,10 +246,8 @@ namespace ServiceStackVS
             var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
-            uint contextCookie;
-            int pfActive;
-            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
-            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
             Project project = VSIXUtils.GetSelectedProject();
 
@@ -275,10 +276,8 @@ namespace ServiceStackVS
             var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
-            uint contextCookie;
-            int pfActive;
-            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
-            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
             var ready = result == VSConstants.S_OK && pfActive > 0;
             Project project = VSIXUtils.GetSelectedProject();
 
@@ -301,10 +300,8 @@ namespace ServiceStackVS
         {
             var monitorSelection = MonitorSelection;
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
-            uint contextCookie;
-            int pfActive;
-            monitorSelection.GetCmdUIContextCookie(ref guid, out contextCookie);
-            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out pfActive);
+            monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
+            var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
             return result == VSConstants.S_OK && pfActive > 0;
         }
 
@@ -599,27 +596,61 @@ namespace ServiceStackVS
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)
         {
-            //Once the generated code has been added, we need to ensure that  
-            //the required ServiceStack.Interfaces package is installed.
-            var installedPackages = PackageInstallerServices.GetInstalledPackages(project);
-
-            //TODO check project references incase ServiceStack.Interfaces is referenced via local file.
-            //VS has different ways to check different types of projects for refs, need to find method to check all.
-
-            //Check if existing nuget reference exists
-            if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
+            UIThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                PackageInstaller.InstallPackage("https://www.nuget.org/api/v2/",
-                         project,
-                         packageId,
-                         version: (string)null, //Latest version of packageId
-                         ignoreDependencies: false);
-            }
+                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                //Once the generated code has been added, we need to ensure that  
+                //the required ServiceStack.Interfaces package is installed.
+                var installedPackages = GetComponentService<IVsPackageInstallerServices>().GetInstalledPackages(project);
+
+                //TODO check project references in-case ServiceStack.Interfaces is referenced via local file.
+                //VS has different ways to check different types of projects for refs, need to find method to check all.
+
+                //Check if existing nuget reference exists
+                if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
+                {
+                    GetComponentService<IVsPackageInstaller>().InstallPackage("https://www.nuget.org/api/v2/",
+                        project,
+                        packageId,
+                        version: (string)null, //Latest version of packageId
+                        ignoreDependencies: false);
+                }
+            });
         }
 
         private void DocumentEventsOnDocumentSaved(Document document)
         {
             document.HandleDocumentSaved(OutputWindowWriter.WriterWindow);
+        }
+    }
+
+    // https://github.com/NuGet/NuGet.Client/blob/dev/src/NuGet.Clients/NuGet.VisualStudio.Common/NuGetUIThreadHelper.cs
+    public static class UIThreadHelper
+    {
+        /// <summary>
+        /// Initially it will be null and will be initialized to CPS JTF when there is CPS
+        /// based project is being created.
+        /// </summary>
+        private static Lazy<JoinableTaskFactory> _joinableTaskFactory;
+
+        /// <summary>
+        /// Returns the static instance of JoinableTaskFactory set by SetJoinableTaskFactoryFromService.
+        /// If this has not been set yet the shell JTF will be used.
+        /// During MEF composition some components will immediately call into the thread helper before
+        /// it can be initialized. For this reason we need to fall back to the default shell JTF
+        /// to provide basic threading support.
+        /// </summary>
+        public static JoinableTaskFactory JoinableTaskFactory
+        {
+            get { return _joinableTaskFactory?.Value ?? GetThreadHelperJoinableTaskFactorySafe(); }
+        }
+
+        private static JoinableTaskFactory GetThreadHelperJoinableTaskFactorySafe()
+        {
+            // Static getter ThreadHelper.JoinableTaskContext, throws NullReferenceException if VsTaskLibraryHelper.ServiceInstance is null
+            // And, ThreadHelper.JoinableTaskContext is simply 'ThreadHelper.JoinableTaskContext?.Factory'. Hence, this helper
+            return VsTaskLibraryHelper.ServiceInstance != null ? ThreadHelper.JoinableTaskFactory : null;
         }
     }
 }

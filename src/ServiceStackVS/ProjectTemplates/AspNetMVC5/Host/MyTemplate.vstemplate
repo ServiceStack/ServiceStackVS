@@ -26,6 +26,7 @@
   </WizardExtension>
   <WizardData>
     <packages>
+      <package id="System.Buffers" version="latest" />
       <package id="Antlr" version="3.5.0.2" />
       <package id="bootstrap" version="3.3.7" />
       <package id="jQuery" version="3.2.1" />
@@ -39,15 +40,8 @@
       <package id="Modernizr" version="2.8.3" />
       <package id="Newtonsoft.Json" version="10.0.3" />
       <package id="Respond" version="1.4.2" />
-      <package id="ServiceStack" version="latest" />
-      <package id="ServiceStack.Client" version="latest" />
-      <package id="ServiceStack.Common" version="latest" />
-      <package id="ServiceStack.Interfaces" version="latest" />
-      <package id="ServiceStack.Mvc" version="latest" />
-      <package id="ServiceStack.Text" version="latest" />
-      <package id="ServiceStack.OrmLite" version="latest" />
-      <package id="ServiceStack.Redis" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
+      <package id="ServiceStack.Mvc" version="latest" />
     </packages>
   </WizardData>
 </VSTemplate>

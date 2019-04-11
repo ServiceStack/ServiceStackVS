@@ -9,7 +9,7 @@ namespace ServiceStackVS.Common
 {
     public static class Analytics
     {
-        private const string VERSION = "1.0.46";
+        public const string VERSION = "1.0.47";
         private const string ServiceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?name={1}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?name={0}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?name={0}&source=ssvs&version=" + VERSION;
@@ -20,6 +20,7 @@ namespace ServiceStackVS.Common
             { 12, "2013" },
             { 14, "2015" },
             { 15, "2017" },
+            { 16, "2019" },
         };
 
         static string GetVersion(int vsVersion) => VersionAlias.TryGetValue(vsVersion, out var version) ? version : "";
@@ -34,7 +35,7 @@ namespace ServiceStackVS.Common
                     var templateName = WizardHelpers.GetTemplateNameFromPath(templatePath);
                     ServiceStackStatsUrl.Fmt(GetVersion(vsVersion), templateName).GetStringFromUrl();
                 }
-                catch (Exception)
+                catch
                 {
                     //do nothing
                 }
@@ -51,7 +52,7 @@ namespace ServiceStackVS.Common
                 {
                     ServiceStackStatsAddRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
-                catch (Exception)
+                catch
                 {
                     //do nothing
                 }
@@ -68,7 +69,7 @@ namespace ServiceStackVS.Common
                 {
                     ServiceStackStatsUpdateRefUrl.Fmt(languageName.ToLower()).GetStringFromUrl();
                 }
-                catch (Exception)
+                catch
                 {
                     //do nothing
                 }

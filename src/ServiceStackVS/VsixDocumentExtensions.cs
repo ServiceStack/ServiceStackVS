@@ -51,8 +51,7 @@ namespace ServiceStackVS
             if (settingsFilePath.FileExists())
             {
                 var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
-                string disableNpmInstallOnSave;
-                if (settings.TryGetValue("DisableNpmInstallOnSave", out disableNpmInstallOnSave))
+                if (settings.TryGetValue("DisableNpmInstallOnSave", out var disableNpmInstallOnSave))
                 {
                     npmInstallDisabled = disableNpmInstallOnSave.EqualsIgnoreCase("true");
                 }
@@ -68,8 +67,7 @@ namespace ServiceStackVS
             if (settingsFilePath.FileExists())
             {
                 var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
-                string disableBowerInstallOnSave;
-                if (settings.TryGetValue("DisableBowerInstallOnSave", out disableBowerInstallOnSave))
+                if (settings.TryGetValue("DisableBowerInstallOnSave", out var disableBowerInstallOnSave))
                 {
                     bowerInstallDisabled = disableBowerInstallOnSave.EqualsIgnoreCase("true");
                 }
@@ -85,8 +83,7 @@ namespace ServiceStackVS
             if (settingsFilePath.FileExists())
             {
                 var settings = File.ReadAllText(settingsFilePath).ParseKeyValueText(" ");
-                string disableUpdateOnSave;
-                if (settings.TryGetValue("DisableUpdateReferenceOnSave", out disableUpdateOnSave))
+                if (settings.TryGetValue("DisableUpdateReferenceOnSave", out var disableUpdateOnSave))
                 {
                     updateReferenceOnSaveDisabled = disableUpdateOnSave.EqualsIgnoreCase("true");
                 }

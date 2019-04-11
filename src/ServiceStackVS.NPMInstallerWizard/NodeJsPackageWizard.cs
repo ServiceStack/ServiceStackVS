@@ -36,20 +36,33 @@ namespace ServiceStackVS.NPMInstallerWizard
         private bool skipTypings = false;
         private string projectName = null;
 
-        private OutputWindowWriter OutputWindowWriter =>
-            serviceStackOutputWindowWriter ??
-            (serviceStackOutputWindowWriter =
-                new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+        private OutputWindowWriter OutputWindowWriter
+        {
+            get
+            {
+                return serviceStackOutputWindowWriter ??
+                       (serviceStackOutputWindowWriter =
+                           new OutputWindowWriter(ServiceStackVsOutputWindowPane, "ServiceStackVS"));
+            }
+        }
 
         [Import]
         public SVsServiceProvider ServiceProvider { get; set; }
 
-        public IVsExtensionManager ExtensionManager => extensionManager ?? 
-            (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager)));
+        public IVsExtensionManager ExtensionManager
+        {
+            get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
+        }
 
-        public int MajorVisualStudioVersion => int.Parse(dte.Version.Substring(0, 2));
+        public int MajorVisualStudioVersion
+        {
+            get { return int.Parse(dte.Version.Substring(0, 2)); }
+        }
 
-        private IVsStatusbar StatusBar => bar ?? (bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar);
+        private IVsStatusbar StatusBar
+        {
+            get { return bar ?? (bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
+        }
 
         /// <summary>
         ///     Parses XML from WizardData and installs required npm packages

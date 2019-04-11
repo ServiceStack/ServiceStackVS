@@ -28,21 +28,15 @@
     <FullClassName>ServiceStackVS.ExternalTemplateWizard.IisExpressAddressWizard</FullClassName>
   </WizardExtension>
   <WizardData>
-    <NuGetPackages>
-      <package id="ServiceStack" version="latest" />
-      <package id="ServiceStack.Client" version="latest" />
-      <package id="ServiceStack.Common" version="latest" />
-      <package id="ServiceStack.Interfaces" version="latest" />
-      <package id="ServiceStack.OrmLite" version="latest" />
-      <package id="ServiceStack.Redis" version="latest" />
+    <packages>
+      <package id="System.Buffers" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
-      <package id="ServiceStack.Text" version="latest" />
-    </NuGetPackages>
+    </packages>
     <NodeJS>
-        <npm-package id="gulp" />
+      <npm-package id="gulp" />
     </NodeJS>
-    <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
+    <IISExpressAddress Name="src\dtos.d.ts"></IISExpressAddress>
     <IISExpressAddress Name="package.json"></IISExpressAddress>
-    <IISExpressAddress Name="vue.config.js"></IISExpressAddress>
+    <IISExpressAddress Name="proxy.config.json"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

@@ -1,7 +1,7 @@
 <VSTemplate Version="2.0.0" Type="ProjectGroup"
     xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
 
-  <!-- Fore more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
+  <!-- For more info on multi project templates visit: http://msdn.microsoft.com/en-us/library/ms185308(v=vs.90).aspx -->
 
   <TemplateData>
     <Name>ServiceStack ASP.NET Empty</Name>
@@ -9,7 +9,8 @@
     <DefaultName>WebApplication</DefaultName>
     <Icon>logo.png</Icon>
     <ProjectType>CSharp</ProjectType>
-    <SortOrder>1000</SortOrder>
+    <ProjectSubType>Web</ProjectSubType>
+    <SortOrder>1</SortOrder>
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>

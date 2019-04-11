@@ -26,18 +26,12 @@ This wizard can also be used in individual project `vstemplate`s. The `WizardDat
 
 ``` xml
 <WizardData>
-  <NuGetPackages>
-      <package id="ServiceStack" version="latest" />
-      <package id="ServiceStack.Client" version="latest" />
-      <package id="ServiceStack.Common" version="latest" />
-      <package id="ServiceStack.Interfaces" version="latest" />
-      <package id="ServiceStack.OrmLite" version="latest" />
-      <package id="ServiceStack.Text" version="latest" />
+    <packages>
       <package id="ServiceStack.Server" version="latest" />
       <package id="CefSharp.Common" version="51.0.0" />
       <package id="CefSharp.WinForms" version="51.0.0" />
       <package id="squirrel.windows" version="1.3.0" />
-    </NuGetPackages>
+    </packages>
   </WizardData>
 ```
 
