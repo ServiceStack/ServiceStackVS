@@ -85,7 +85,6 @@ namespace ServiceStackVS
             {14,new List<string>()}
         };
 
-        private T GetComponentService<T>() where T : class => ((IComponentModel)GetService(typeof(SComponentModel))).GetService<T>();
         public async Task<IComponentModel> GetComponentModelAsync() => 
             (IComponentModel)await GetServiceAsync(typeof(SComponentModel));
 
@@ -210,7 +209,8 @@ namespace ServiceStackVS
             {
                 await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                GetComponentService<SVsServiceProvider>().GetWritableSettingsStore().SetPackageReady(true);
+                (await GetComponentModelAsync()).GetService<SVsServiceProvider>()
+                    .GetWritableSettingsStore().SetPackageReady(true);
             });
         }
 
@@ -602,7 +602,8 @@ namespace ServiceStackVS
 
                 //Once the generated code has been added, we need to ensure that  
                 //the required ServiceStack.Interfaces package is installed.
-                var installedPackages = GetComponentService<IVsPackageInstallerServices>().GetInstalledPackages(project);
+                var installedPackages = (await GetComponentModelAsync()).GetService<IVsPackageInstallerServices>()
+                    .GetInstalledPackages(project);
 
                 //TODO check project references in-case ServiceStack.Interfaces is referenced via local file.
                 //VS has different ways to check different types of projects for refs, need to find method to check all.
@@ -610,7 +611,8 @@ namespace ServiceStackVS
                 //Check if existing nuget reference exists
                 if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
                 {
-                    GetComponentService<IVsPackageInstaller>().InstallPackage("https://www.nuget.org/api/v2/",
+                    (await GetComponentModelAsync()).GetService<IVsPackageInstaller>()
+                        .InstallPackage("https://www.nuget.org/api/v2/",
                         project,
                         packageId,
                         version: (string)null, //Latest version of packageId

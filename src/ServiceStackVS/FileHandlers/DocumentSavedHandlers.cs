@@ -160,7 +160,7 @@ namespace ServiceStackVS.FileHandlers
 
             if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out var baseUrl))
             {
-                outputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unabled to find BaseUrl");
+                outputWindowWriter.WriteLine("Failed to update ServiceStack Reference: Unable to find BaseUrl");
                 return;
             }
             try
