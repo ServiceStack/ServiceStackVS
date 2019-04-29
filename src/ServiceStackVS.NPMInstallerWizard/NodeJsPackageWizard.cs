@@ -13,7 +13,6 @@ using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
-using ServiceStack;
 using ServiceStackVS.Common;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using Task = System.Threading.Tasks.Task;
@@ -102,11 +101,11 @@ namespace ServiceStackVS.NPMInstallerWizard
             var element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
             npmPackages =
                 element.Descendants()
-                    .Where(x => x.Name.LocalName.EqualsIgnoreCase("npm-package"))
+                    .Where(x => x.Name.LocalName.Equals("npm-package", StringComparison.OrdinalIgnoreCase))
                     .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
                     .ToList();
             var skipTypingsValue = element.Descendants()
-                .Where(x => x.Name.LocalName.EqualsIgnoreCase("skip-typings-install"))
+                .Where(x => x.Name.LocalName.Equals("skip-typings-install", StringComparison.OrdinalIgnoreCase))
                 .Select(x => x.Value)
                 .FirstOrDefault();
             skipTypings = skipTypingsValue != null && skipTypingsValue == "true";
@@ -382,4 +381,25 @@ namespace ServiceStackVS.NPMInstallerWizard
             OutputWindowWriter.WriteLine("--- NPM install complete ---");
         }
     }
+
+    internal static class ServiceStackExtensions
+    {
+        private static readonly Regex SplitCamelCaseRegex = new Regex("([A-Z]|[0-9]+)", RegexOptions.Compiled);
+        public static string SplitCamelCase(this string value) => SplitCamelCaseRegex.Replace(value, " $1").TrimStart();
+
+        public static string ReplaceAll(this string haystack, string needle, string replacement)
+        {
+            int pos;
+            // Avoid a possible infinite loop
+            if (needle == replacement) return haystack;
+            while ((pos = haystack.IndexOf(needle, StringComparison.Ordinal)) > 0)
+            {
+                haystack = haystack.Substring(0, pos)
+                           + replacement
+                           + haystack.Substring(pos + needle.Length);
+            }
+            return haystack;
+        }
+    }
+
 }
