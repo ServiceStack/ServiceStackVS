@@ -25,6 +25,12 @@ Once installed you can create a new ServiceStack Project from the new VS.NET Pro
 
 Most of ServiceStack Templates follow our [multi-project recommended projects structure](http://docs.servicestack.net/physical-project-structure).
 
+### Visual Studio 2015 or 2013
+
+If you're still using VS.NET 2015 or 2013 you can install the previous VS.NET ServiceStackVS extension:
+
+ - [ServiceStackVS.vsix](https://github.com/ServiceStack/ServiceStackVS/raw/master/dist/2018/ServiceStackVS.vsix)
+
 ### Recommended Plugins and Tools
 
 To take advantage of all the templates and to improve the development workflow, it's best to get the following Visual Studio 
