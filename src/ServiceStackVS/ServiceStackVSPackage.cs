@@ -113,13 +113,14 @@ namespace ServiceStackVS
             await base.InitializeAsync(cancellationToken, progress);
 
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
+            await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             var packageInstaller = (await GetComponentModelAsync()).GetService<IVsPackageInstaller>();
             var pkgInstallerServices = (await GetComponentModelAsync()).GetService<IVsPackageInstallerServices>();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
             var mcs = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
 
-            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            //await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (mcs != null)
             {
