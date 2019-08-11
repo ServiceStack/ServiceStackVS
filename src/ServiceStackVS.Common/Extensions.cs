@@ -42,8 +42,8 @@ namespace ServiceStackVS.Common
         
         public static bool GetOptOutStatsSetting(this EnvDTE.DTE dte)
         {
-            var props = dte.get_Properties(CategoryName, PageName);
-            return (bool) props.Item(OptOutPropertyName).Value;
+            var props = dte?.get_Properties(CategoryName, PageName);
+            return props?.Item(OptOutPropertyName)?.Value is bool b && b;
         }
 
         public static WritableSettingsStore GetWritableSettingsStore(this SVsServiceProvider vsServiceProvider)

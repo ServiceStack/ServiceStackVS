@@ -1,42 +1,29 @@
-﻿using System;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Threading;
+using NuGet.VisualStudio;
+using ServiceStack;
+using ServiceStackVS.Common;
+using ServiceStackVS.NativeTypes;
+using ServiceStackVS.NativeTypes.Handlers;
+using ServiceStackVS.NativeTypesWizard;
+using ServiceStackVS.Settings;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
-using System.Reflection;
-using System.Text.RegularExpressions;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using EnvDTE;
-using EnvDTE80;
-using Microsoft.Internal.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.Shell.Events;
-using Microsoft.Win32;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Threading;
-using NuGet.VisualStudio;
-using ServiceStack;
-using ServiceStack.Text;
-using ServiceStackVS.Common;
-using ServiceStackVS.FileHandlers;
-using ServiceStackVS.NativeTypes;
-using ServiceStackVS.NativeTypes.Handlers;
-using ServiceStackVS.NativeTypesWizard;
-using ServiceStackVS.NPMInstallerWizard;
-using ServiceStackVS.Settings;
-using VSLangProj;
-using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
-using MessageBox = System.Windows.MessageBox;
 using Task = System.Threading.Tasks.Task;
 using Thread = System.Threading.Thread;
 
@@ -145,8 +132,7 @@ namespace ServiceStackVS
                 mcs.AddCommand(typeScriptProjectContextOleMenuCommand);
 
                 var updateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidUpdateServiceStackReference);
-                var updateReferenceMenuCommand = new OleMenuCommand(UpdateReferenceCallback,
-                    updateReferenceCommandId);
+                var updateReferenceMenuCommand = new OleMenuCommand(UpdateReferenceCallback, updateReferenceCommandId);
                 updateReferenceMenuCommand.BeforeQueryStatus += QueryUpdateMenuItem;
                 mcs.AddCommand(updateReferenceMenuCommand);
             }
@@ -199,7 +185,7 @@ namespace ServiceStackVS
                         }
                         catch (Exception e)
                         {
-                            OutputWindowWriter.WriterWindow.WriteLine("ServiceStackVS had trouble starting. \n\n" + e.Message + "\n" + e.StackTrace);
+                            HandleException(e, "ServiceStackVS had trouble starting.");
                         }
                     }
                 }
@@ -315,11 +301,8 @@ namespace ServiceStackVS
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
             var selectedItems = selectedFiles as IList<SelectedItem> ?? selectedFiles.ToList();
 
-            bool visible = projectItem.ContainingProject != null &&
-                           projectItem.ContainingProject.Kind != null &&
-                           //Project is not unloaded
-                           !string.Equals(projectItem.ContainingProject.Kind, VsHelperGuids.ProjectUnloaded,
-                               StringComparison.InvariantCultureIgnoreCase);
+            bool visible = projectItem.ContainingProject?.Kind != null && 
+                !string.Equals(projectItem.ContainingProject.Kind, VsHelperGuids.ProjectUnloaded, StringComparison.InvariantCultureIgnoreCase);
 
             if (!visible)
             {
@@ -344,7 +327,7 @@ namespace ServiceStackVS
                             StringComparison.InvariantCultureIgnoreCase)) != null;
 
 
-            // Ensure update button is visable and project is 'ready' (of right type and not building) or item clicked is typescript dtos file.
+            // Ensure update button is visible and project is 'ready' (of right type and not building) or item clicked is typescript DTOs file.
             bool enabled = ready || (typeHandler.GetType() == typeof(TypeScriptNativeTypesHandler) || 
                 typeHandler.GetType() == typeof(TypeScriptConcreteNativeTypesHandler));
 
@@ -406,18 +389,80 @@ namespace ServiceStackVS
 
         #endregion
 
+        private void HandleException(Exception ex, string prefix=null, bool ignoreOutputWindow=false)
+        {
+            var sb = new StringBuilder();
+            if (!string.IsNullOrEmpty(prefix))
+                sb.AppendLine($"[{prefix}]");
+
+            sb.AppendLine(ex.Message + ":");
+            sb.AppendLine(ex.ToString());
+
+            try
+            {
+                if (!ignoreOutputWindow)
+                {
+                    OutputWindowWriter.WriterWindow.Show();
+                    OutputWindowWriter.WriterWindow.ShowOutputPane(dte);
+                    OutputWindowWriter.WriterWindow.WriteLine(sb.ToString());
+                }
+            }
+            catch (Exception showEx)
+            {
+                sb.AppendLine("OutputWindowWriter.WriterWindow.Show(): " + showEx.Message);
+                sb.AppendLine(showEx.ToString());
+            }
+
+            try
+            {
+                ActivityLog.TryLogError("ServiceStackVS", sb.ToString());
+            }
+            catch (Exception activityLogEx)
+            {
+                sb.AppendLine("ActivityLog.TryLogError(): " + activityLogEx.Message);
+                sb.AppendLine(activityLogEx.ToString());
+            }
+
+            var debugLogPath = "C:\\src\\ServiceStackVS.debug.log";
+            if (File.Exists(debugLogPath))
+            {
+                File.AppendAllText(debugLogPath, sb.ToString());
+            }
+        }
+
+        private void LogOutputWindow(string message, bool showPane=false)
+        {
+            try
+            {
+                OutputWindowWriter.WriterWindow.Show();
+                OutputWindowWriter.WriterWindow.ShowOutputPane(dte);
+                OutputWindowWriter.WriterWindow.WriteLine(message);
+                ActivityLog.TryLogInformation("ServiceStackVS", message);
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(LogOutputWindow), ignoreOutputWindow:true);
+            }
+        }
+
         private void UpdateReferenceCallback(object sender, EventArgs e)
         {
-            var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
-            var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
-            var selectedItems = selectedFiles as IList<SelectedItem> ?? selectedFiles.ToList();
-            var typeHandlers = selectedItems.GetTypeHandlerForSelectedFiles();
-            if (typeHandlers.Count == 0)
+            try
             {
-                return;
+                var projectItem = VSIXUtils.GetSelectObject<ProjectItem>();
+                var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>();
+                var selectedItems = selectedFiles as IList<SelectedItem> ?? selectedFiles.ToList();
+                var typeHandlers = selectedItems.GetTypeHandlerForSelectedFiles();
+                if (typeHandlers.Count == 0)
+                    return;
+
+                var typesHandler = typeHandlers.First();
+                UpdateGeneratedDtos(projectItem, typesHandler);
             }
-            var typesHandler = typeHandlers.First();
-            UpdateGeneratedDtos(projectItem, typesHandler);
+            catch (Exception ex)
+            {
+                HandleException(ex, nameof(UpdateReferenceCallback));
+            }
         }
 
         /// <summary>
@@ -464,7 +509,7 @@ namespace ServiceStackVS
         {
             int fileNameNumber = 1;
             //Find a version of the default name that doesn't already exist, 
-            //mimicing VS default file name behaviour.
+            //mimicking VS default file name behaviour.
             while (File.Exists(Path.Combine(folderPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
             {
                 fileNameNumber++;
@@ -483,9 +528,7 @@ namespace ServiceStackVS
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
         {
-            OutputWindowWriter.WriterWindow.Show();
-            OutputWindowWriter.WriterWindow.ShowOutputPane(dte);
-            OutputWindowWriter.WriterWindow.WriteLine("--- Updating ServiceStack Reference '" + projectItem.Name + "' ---");
+            LogOutputWindow($"--- Updating ServiceStack Reference '{projectItem.Name}' ---", showPane:true);
             string projectItemPath = projectItem.GetFullPath();
             var selectedFiles = projectItem.DTE.SelectedItems.Cast<SelectedItem>().ToList();
             bool isDtoSelected = false;
@@ -507,7 +550,7 @@ namespace ServiceStackVS
 
                 if (!typesHandler.TryExtractBaseUrl(existingGeneratedCode, out var baseUrl))
                 {
-                    OutputWindowWriter.WriterWindow.WriteLine("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
+                    LogOutputWindow("Unable to read URL from DTO file. Please ensure the file was generated correctly from a ServiceStack server.");
                     return;
                 }
                 try
@@ -541,20 +584,20 @@ namespace ServiceStackVS
                     }
                     catch (Exception ex)
                     {
-                        OutputWindowWriter.WriterWindow.WriteLine("ServiceStack Reference: File.WriteAllText() - " + ex.Message);
+                        HandleException(ex, "ServiceStack Reference: File.WriteAllText()");
                     }
 
                 }
                 catch (Exception e)
                 {
-                    OutputWindowWriter.WriterWindow.WriteLine("Failed to update ServiceStack Reference: Unhandled error - " + e.Message);
+                    HandleException(e, "Failed to update ServiceStack Reference: Unhandled error");
                 }
 
-                OutputWindowWriter.WriterWindow.WriteLine("--- Update ServiceStack Reference Complete ---");
+                LogOutputWindow("--- Update ServiceStack Reference Complete ---");
             }
             else
             {
-                OutputWindowWriter.WriterWindow.WriteLine("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
+                LogOutputWindow("--- Valid file not found ServiceStack Reference '" + projectItem.Name + "' ---");
             }
         }
 
