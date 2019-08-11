@@ -18,7 +18,7 @@ namespace $safeprojectname$
             {
                 new NavItem { Href = "/", Label = "Home", Exact = true },
                 new NavItem { Href = "/about", Label = "About" },
-                new NavItem { Href = "/login", Label = "Sign In", Hide = "auth" },
+                new NavItem { Href = "/signin", Label = "Sign In", Hide = "auth" },
                 new NavItem { Href = "/profile", Label = "Profile", Show = "auth" },
                 new NavItem { Href = "/admin", Label = "Admin", Show = "role:Admin" },
             });
