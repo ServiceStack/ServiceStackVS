@@ -9,7 +9,7 @@ namespace ServiceStackVS.Common
 {
     public static class Analytics
     {
-        public const string VERSION = "2.0.1";
+        public const string VERSION = "2.0.2";
         private const string ServiceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?name={1}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?name={0}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?name={0}&source=ssvs&version=" + VERSION;
