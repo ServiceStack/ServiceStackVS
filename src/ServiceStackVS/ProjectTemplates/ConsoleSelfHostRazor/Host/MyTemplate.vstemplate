@@ -18,6 +18,7 @@
     <packages>
       <package id="System.Buffers" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
+      <package id="ServiceStack.Razor" version="latest" />
     </packages>
   </WizardData>
 </VSTemplate>
