@@ -1,0 +1,20 @@
+{{ 'requires-auth' | partial({ role: 'Admin' }) }}
+
+<div id="admin" class="text-center">
+    <div class="svg-female-business svg-8x ml-2"></div>
+    <p class="my-2">
+        {{userSession.displayName}}
+    </p>
+
+    <p>
+        {{userSession.userName ?? userSession.email}}
+    </p>
+
+    <p>
+    {{#each role in userSession.roles}}
+        <mark>{{role}}</mark>        
+    {{/each}}
+    </p>
+
+    <h3 class="mt-5">Admin Page</h3>
+</div>

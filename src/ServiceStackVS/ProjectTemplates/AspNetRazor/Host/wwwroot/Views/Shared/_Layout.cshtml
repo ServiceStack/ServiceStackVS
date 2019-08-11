@@ -1,58 +1,103 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+  var debug = DebugMode;
+  var min = debug ? "" : "[hash].min";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewBag.Title</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <title>@ViewBag.Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    @if (DebugMode)
-    {
-        <script>
-            @Html.IncludeFile("js/hot-fileloader.js")
-        </script>
-    }
-    <link rel="stylesheet" href="/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/default.css">
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    @Html.BundleCss(new BundleOptions {
+        Sources = {
+            "!/assets/css/default.css",
+            "/assets/css/",
+            "/css/buttons.css",
+            "/css/svg-auth.css",
+            "/css/svg-icons.css",
+            "/css/app.css",
+        },
+        SaveToDisk = !debug,
+        OutputTo = string.Format("/css/lib.bundle{0}.css", min)
+    })
+
+    @Html.BundleCss(new BundleOptions {
+        Sources = {
+            "/assets/css/default.css",
+        },
+        Minify = !debug,
+        Cache = !debug,
+        SaveToDisk = !debug,
+        OutputTo = string.Format("/css/bundle{0}.css", min)
+    })
+
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
 </head>
 <body>
+  @if (DebugMode) {
+      <script>@Html.IncludeFile("js/hot-fileloader.js")</script>
+  }
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a title="ServiceStack WebApp Starter" class="navbar-brand" href="/" style="width:220px;">
-                <img src="/assets/img/logo.png" width="42" height="32" class="d-inline-block align-top" alt="" style="float:left;margin:0 10px 0 0">
-                <h3>MyApp</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          @Html.Partial("MenuPartial")
-        </div>
-    </nav>
+  <div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
+              <a class="navbar-brand" href="/">
+                  <i class="svg-logo svg-lg mr-1"></i>
+                  <span class="align-middle">MyApp</span>
+              </a>
 
-    <!-- Page Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h1 class="mt-5">@ViewBag.Title</h1>
-          @RenderBody()
-        </div>
+              @Html.Navbar()
+          </div>
+      </nav>
+
+      <div id="content" class="container mt-4">
+        @RenderBody()
       </div>
-    </div>
+  </div>
 
-    <h4 style="position:absolute; bottom: 20px; width: 100%; text-align: center">
-      <a href="http://razor.servicestack.net">Learn about ServiceStack Razor</a>
+  <div id="footer" style="text-align:center; position:absolute; bottom:50px; width:100%;">
+    <h4>
+      <img style="height:42px" src="@Html.SvgDataUri("servicestack","#343a40")">
+      <a href="http://razor.netcore.io">Learn about ServiceStack Razor</a>
     </h4>
+    <div>Copyright &copy; @string.Format("{0:yyyy}", DateTime.Now)</div>
+  </div>
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/default.js"></script>
+  <script>exports = window</script>
+  @Html.BundleJs(new BundleOptions {
+      Sources = {
+          "!/assets/js/dtos.js",
+          "!/assets/js/default.js",
+          "/assets/js/jquery.min.js",
+          "/assets/js/",
+      },
+      SaveToDisk = !debug,
+      OutputTo = string.Format("/js/lib.bundle{0}.js", min)
+  })
+    
+  @Html.BundleJs(new BundleOptions {
+      Sources = {
+          "/assets/js/dtos.js",
+          "/assets/js/default.js",
+      },
+      Minify = !debug,
+      Cache = !debug,
+      SaveToDisk = !debug,
+      OutputTo = string.Format("/js/bundle{0}.js", min)
+  })
 
-    @RenderSection("scripts", required: false)
+  <script>
+    lib = window["@@servicestack/client"];
+    for (var k in lib) { window[k] = lib[k] }
+    client = new JsonServiceClient('/');
+    // regen dtos: `web ts && tsc wwwroot/assets/js/dtos.ts`
+  </script>
+
+  @RenderSection("scripts", required: false)
 
 </body>
 </html>

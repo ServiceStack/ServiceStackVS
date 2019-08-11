@@ -6,7 +6,7 @@
     "postinstall": "npm run build",
     "dev": "vue-cli-service build --watch",
     "serve": "vue-cli-service serve",
-    "dtos": "cd src && typescript-ref",
+    "dtos": "typescript-ref",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "publish": "vue-cli-service build",
@@ -15,29 +15,29 @@
     "e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "@servicestack/client": "^1.0.20",
+    "@servicestack/client": "^1.0.31",
+    "@servicestack/vue": "^1.0.8",
     "bootstrap": "^4.3.1",
     "es6-shim": "^0.35.5",
-    "font-awesome": "^4.7.0",
     "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
-    "vue-property-decorator": "^8.1.0",
-    "vue-router": "^3.0.6"
+    "vue-class-component": "^7.1.0",
+    "vue-property-decorator": "^8.2.1",
+    "vue-router": "^3.0.7"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@vue/cli-plugin-babel": "^3.7.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.7.0",
-    "@vue/cli-plugin-typescript": "^3.7.0",
-    "@vue/cli-plugin-unit-jest": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
+    "@types/jest": "^24.0.15",
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-plugin-e2e-cypress": "^3.9.0",
+    "@vue/cli-plugin-typescript": "^3.9.0",
+    "@vue/cli-plugin-unit-jest": "^3.9.0",
+    "@vue/cli-service": "^3.9.3",
     "@vue/test-utils": "^1.0.0-beta.28",
     "babel-core": "7.0.0-bridge.0",
-    "gulp": "^4.0.1",
+    "gulp": "^4.0.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.5",
+    "typescript": "^3.5.3",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {
@@ -51,6 +51,10 @@
     "not ie <= 8"
   ],
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/bin/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -62,8 +66,12 @@
     "transform": {
       "^.+\\.vue$": "vue-jest",
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
-      "^.+\\.tsx?$": "ts-jest"
+      "^.+\\.tsx?$": "ts-jest",
+      "^@servicestack/vue$": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(babel-jest|jest-vue-preprocessor)/)"
+    ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
     },
@@ -73,6 +81,6 @@
     "testMatch": [
       "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
     ],
-    "testURL": "http://localhost:$iisexpressport$/"
+    "testURL": "https://localhost:5001/"
   }
 }

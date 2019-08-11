@@ -18,8 +18,7 @@ namespace $safeprojectname$
     public class MyServices : Service
     {
         //Return index.html for unmatched requests so routing is handled on client
-        public object Any(FallbackForClientRoutes request) => 
-            new PageResult(Request.GetPage("/"));
+        public object Any(FallbackForClientRoutes request) => Request.GetPageResult("/");
 
         public object Any(Hello request)
         {

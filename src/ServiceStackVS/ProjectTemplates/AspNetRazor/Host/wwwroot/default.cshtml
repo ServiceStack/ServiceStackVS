@@ -1,43 +1,57 @@
 @{
     ViewBag.Title = "ServiceStack Razor";
+    var UserSession = base.GetSession();
 }
 
-<p class="lead">
-  Complete with page layout, menu partial and responsive navigation!
-</p>
-<ul class="list-unstyled">
-  <li>Bootstrap v4.1.3</li>
-  <li>jQuery v3.3.1</li>
-</ul>
-
-<div class="container" style="padding:60px 0 0 250px">
-  <div class="form-group row">
-    <label for="host" class="col-sm-2 col-form-label">Name</label>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" value="" autocomplete="off">
+<div class="row justify-content-between">
+  <div class="col col-1">
+    <i class="svg-home svg-9x"></i>
+  </div>
+  <div class="col col-4 mt-4">
+    <div class="form-group">
+      <input placeholder="Your name" id="txtName" class="form-control form-control-lg">
+      <h3 class="result"></h3>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label"></label>
-    <div class="col-sm-4">
-      <h4 id="result"></h4>
-    </div>
+  <div class="col-md-auto"></div>
+  <div class="col col-4">
+    @if (IsAuthenticated)
+    {
+      <div class="text-right">
+        <p class="pt-3">Hi @UserSession.DisplayName!</p>
+        <a href="/auth/logout?continue=/" class="btn btn-sm btn-primary">Sign Out</a>
+      </div>
+    }
+    else
+    {
+      <div class="text-right">
+        <p class="pt-3">You are not authenticated.</p>
+        <a href="/login" class="btn btn-sm btn-primary">Sign In</a>
+        <a href="/signup" class="ml-2 btn btn-sm btn-outline-secondary">Register New User</a>
+      </div>
+    }
   </div>
 </div>
 
 @section scripts {
-
 <script>
-  $('#Name').keyup(function () {
-    var name = $('#Name').val();
+  var txtName = document.querySelector('#txtName'),
+       result = document.querySelector('.result');
+      
+  function callApi() {
+    var name = txtName.value;
     if (name) {
-      $.getJSON('/hello/' + name, function (r) {
-        $('#result').html(r.result);
-      });
+      client.get(new Hello({ name: name }))
+        .then(function(r) {
+          result.innerHTML = r.result;
+        });
     } else {
-      $('#result').html('');
+      result.innerHTML = '';
     }
-  });
+  }
+  txtName.addEventListener('keyup', callApi);
+
+  txtName.value = 'Razor';
+  callApi();
 </script>
-    
 }

@@ -1,0 +1,26 @@
+<div class="forbidden">
+    <h3>
+        You are not authorized to access
+        @if (Html.Query("path") != null)
+        {
+            <code>@Html.Query("path")</code>
+        }
+        else
+        {
+            <span>this page</span>
+        }
+    </h3>
+
+    @if (Html.Query("message") != null)
+    {
+        <p>@Html.Query("message")</p>
+    }
+    else if (Html.Query("role") != null)
+    {
+        <p>Missing role <code>@Html.Query("role")</code></p>
+    }
+    else if (Html.Query("permission") != null)
+    {
+        <p>Missing permission <code>@Html.Query("permission")</code></p>
+    }
+</div>

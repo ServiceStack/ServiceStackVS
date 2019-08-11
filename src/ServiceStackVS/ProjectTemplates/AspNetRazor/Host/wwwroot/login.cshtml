@@ -1,0 +1,72 @@
+@{
+    ViewBag.Title = "Sign In";
+
+    if (IsAuthenticated)
+    {
+        Response.Redirect(Html.Query("redirect") ?? "/");
+        return;
+    }
+}
+
+<div class="row">
+    <div class="col-4">
+        <h3>@ViewBag.Title</h3>
+        
+        <form action="/auth/credentials" method="post">
+            <div class="form-group">
+                <div class="form-group" data-validation-summary="userName,password"></div>
+                @Html.HiddenInputs(new { redirect = Html.Query("redirect") })
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-lg" name="userName" type="text" placeholder="UserName">
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-lg" name="password" type="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="rememberMe" name="rememberMe" value="true">
+                <label for="rememberMe">Remember Me</label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                <a href="/signup" class="btn btn-lg btn-outline-secondary ml-2">Register New User</a>
+            </div>
+        </form>
+        
+        <div class="pt-3">
+            <h5>Quick Login:</h5>
+            <p class="btn-group">
+                <a class="btn btn-outline-info btn-sm" href="javascript:void(0)" data-click="switchUser:admin@@email.com">admin@@email.com</a>
+                <a class="btn btn-outline-info btn-sm" href="javascript:void(0)" data-click="switchUser:new@@user.com">new@@user.com</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="row justify-content-end mt-5">
+            <div class="col col-8">
+                @Html.NavButtonGroup(Html.GetNavItems("auth"), new NavOptions {
+                    NavClass = "",
+                    NavItemClass = "btn btn-block btn-lg",
+                })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+bootstrapForm(document.querySelector('form'), {
+    success: function(r) {
+        location.href = document.querySelector('[name=redirect]').value || '/';
+    }
+});
+
+bindHandlers({
+    switchUser: function(u) {
+        document.querySelector("[name=userName]").value = u;
+        document.querySelector("[name=password]").value = 'p@@55wOrd';
+    }
+});
+</script>
+}

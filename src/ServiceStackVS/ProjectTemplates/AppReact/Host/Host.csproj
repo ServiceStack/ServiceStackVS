@@ -67,6 +67,9 @@
   <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Content Include="Global.asax" />
+    <Compile Include="Configure.Auth.cs" />
+    <Compile Include="Configure.AuthRepository.cs" />
+    <Compile Include="Configure.Ui.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -78,12 +81,13 @@
     </None>
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
+    <Content Include="public\svg\app\logo.svg" />
+    <Content Include="public\svg\svg-icons\home.svg" />
     <Content Include="scripts\dev.js" />
     <Content Include="src\app.css" />
-    <Content Include="src\assets\img\logo.png" />
-    <Content Include="src\home\hello.css" />
+    <Content Include="src\components\About\about.css" />
+    <Content Include="src\components\Home\hello.css" />
     <Content Include="src\logo.svg" />
-    <Content Include="src\view1\view.css" />
     <Content Include="Web.config" />
     <Content Include="tsconfig.prod.json" />
     <Content Include="tsconfig.test.json" />
@@ -101,18 +105,27 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\App.tsx" />
-    <TypeScriptCompile Include="src\dtos.ts" />
-    <TypeScriptCompile Include="src\home\Hello.test.tsx" />
-    <TypeScriptCompile Include="src\home\Hello.tsx" />
-    <TypeScriptCompile Include="src\home\Home.tsx" />
+    <TypeScriptCompile Include="src\components\About\index.tsx" />
+    <TypeScriptCompile Include="src\components\Admin\index.tsx" />
+    <TypeScriptCompile Include="src\components\Home\Hello.test.tsx" />
+    <TypeScriptCompile Include="src\components\Home\HelloApi.tsx" />
+    <TypeScriptCompile Include="src\components\Home\index.tsx" />
+    <TypeScriptCompile Include="src\components\Profile.tsx" />
+    <TypeScriptCompile Include="src\components\SignIn.tsx" />
+    <TypeScriptCompile Include="src\components\SignUp.tsx" />
     <TypeScriptCompile Include="src\index.tsx" />
-    <TypeScriptCompile Include="src\registerServiceWorker.ts" />
+    <TypeScriptCompile Include="src\serviceWorker.ts" />
     <TypeScriptCompile Include="src\setupTests.ts" />
-    <TypeScriptCompile Include="src\shared.tsx" />
+    <TypeScriptCompile Include="src\shared\dtos.ts" />
+    <TypeScriptCompile Include="src\shared\index.tsx" />
     <TypeScriptCompile Include="src\sum.spec.ts" />
     <TypeScriptCompile Include="src\sum.ts" />
-    <TypeScriptCompile Include="src\view1\View.tsx" />
-    <TypeScriptCompile Include="src\view2\View.tsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\assets\img\" />
+    <Folder Include="src\home\" />
+    <Folder Include="src\view1\" />
+    <Folder Include="src\view2\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

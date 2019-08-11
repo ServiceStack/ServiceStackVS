@@ -1,0 +1,62 @@
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+<div class="row">
+    <div class="col-4">
+    <h3>Register New User</h3>
+
+    <form action="/register" method="post">
+        <div class="form-group">
+            <div class="form-group" data-validation-summary="displayName,email,password,confirmPassword"></div>
+            @Html.HiddenInputs(new { @continue = Html.Query("redirect") })
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-lg" name="displayName" type="text" placeholder="Display Name">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-lg" name="email" type="text" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-lg" name="password" type="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-lg" name="confirmPassword" type="password" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="autoLogin" name="autoLogin" value="true" checked>
+            <label for="autoLogin" class="form-check-label">Auto Login</label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary" type="submit">Register</button>
+            <a href="/login" class="btn">Sign In</a>
+        </div>
+
+        <div class="form-group">
+            <h5>Quick Populate:</h5>
+            <p class="pt-1">
+                <a href="javascript:void(0)" class="btn btn-outline-info btn-sm" data-click="newUser:new@user.com">new@user.com</a>
+            </p>
+        </div>
+    </form>
+    </div>
+</div>
+
+@section scripts {
+<script>
+bootstrapForm(document.querySelector('form'), {
+    success: function(r) {
+        location.href = document.querySelector('[name=continue]').value || '/';
+    }
+});
+
+bindHandlers({
+    newUser: function(u) {
+        var names = u.split('@@');
+        document.querySelector("[name=displayName]").value = toPascalCase(names[0]) + " " + toPascalCase(splitOnFirst(names[1],'.')[0]); 
+        document.querySelector("[name=email]").value = u;
+        document.querySelector("[name=password]").value = document.querySelector("[name=confirmPassword]").value = 'p@55wOrd';
+    }
+});
+</script>
+}

@@ -1,0 +1,33 @@
+<!--
+title: Profile
+-->
+
+{{ 'requires-auth' | partial }}
+
+<div id="profile" class="text-center">
+
+    <img src="{{ userProfileUrl }}" class="svg-8x" />
+
+    <p class="my-2">
+        {{userSession.displayName}} <span>#{{userSession.userAuthId}}</span>
+    </p>
+    <p>
+        {{userSession.userName ?? userSession.email}}
+    </p>
+
+    <p>
+    {{#each role in userSession.roles}}
+        <mark>{{role}}</mark>        
+    {{/each}}
+    </p>
+
+    <p>
+    {{#each permission in userSession.permissions}}
+        <mark>{{permission}}</mark>        
+    {{/each}}
+    </p>
+    
+    <p>
+        <a href="/auth/logout" class="btn btn-primary">Sign Out</a>
+    </p>
+</div>

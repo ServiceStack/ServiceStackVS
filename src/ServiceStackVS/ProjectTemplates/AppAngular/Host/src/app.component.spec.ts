@@ -19,7 +19,7 @@ describe('App', () => {
   it('Should have a URL', () => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    expect(fixture.debugElement.componentInstance.url).toEqual('https://servicestack.net/vs-templates/AngularApp');
+    expect(fixture.debugElement.componentInstance.url).toEqual('https://github.com/NetCoreTemplates/angular-lite-spa');
   });
 
 });

@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~font-awesome/css/font-awesome.css";
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -10,11 +9,15 @@ $emphasis-text-color: lighten($navbar-background, 5%);
 
 body {
 }
+.form-check.form-control {
+    padding-left: 1.75rem;
+    height: auto;
+}
 .navbar {
     border-radius: 0;
     background: $navbar-background !important;
 }
-a {
+a:not(.btn) {
     color: $emphasis-text-color;
 }
 a.nav-link:hover {
@@ -22,4 +25,7 @@ a.nav-link:hover {
 }
 *:focus {
     outline: none !important;
+}
+.form-check.form-control {
+    padding-left: 1.75rem;
 }

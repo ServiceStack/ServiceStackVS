@@ -14,8 +14,8 @@ import { Component } from '@angular/core';
             </div>
 
             <h4 style="text-align: center">
-                <img [src]="logoUrl" />
-                <a [href]="url">Learn about this Angular4 VS.NET template</a>
+                <i class="svg-logo svg-2x"></i>
+                <a [href]="url">Learn about this Angular4 template</a>
             </h4>
 
             <app-footer></app-footer>
@@ -29,7 +29,6 @@ export class AppComponent {
     logoUrl: string;
 
     constructor() {
-        this.logoUrl = require("./assets/img/logo.png");
-        this.url = 'https://servicestack.net/vs-templates/AngularApp';
+        this.url = 'https://github.com/NetCoreTemplates/angular-lite-spa';
     }
 }

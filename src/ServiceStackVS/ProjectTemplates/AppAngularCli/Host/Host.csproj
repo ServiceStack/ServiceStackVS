@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
+    <Compile Include="Configure.Auth.cs" />
+    <Compile Include="Configure.AuthRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -73,9 +75,10 @@
     <Content Include="e2e\tsconfig.e2e.json" />
     <Content Include="Global.asax" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include=".editorconfig" />
     <Content Include="npm-shrinkwrap.json" />
     <Content Include="angular.json" />
+    <Content Include=".editorconfig" />
+    <Compile Include="Configure.Ui.cs" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml">
       <SubType>Designer</SubType>
@@ -83,9 +86,9 @@
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\app.component.scss" />
     <Content Include="src\app\home\home.html" />
-    <Content Include="src\app\home\home.scss" />
-    <Content Include="src\app\view1\view1.scss" />
     <Content Include="src\assets\img\logo.png" />
+    <Content Include="src\assets\svg\svg-auth\logo.svg" />
+    <Content Include="src\assets\svg\svg-icons\home.svg" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
     <Content Include="src\karma.conf.js" />
@@ -98,6 +101,7 @@
     <Content Include="src\styles.scss" />
     <Content Include="src\tslint.json" />
     <Content Include="README.md" />
+    <Content Include="src\app\home\HelloApi.scss" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -105,12 +109,19 @@
   <ItemGroup>
     <TypeScriptCompile Include="e2e\src\app.e2e-spec.ts" />
     <TypeScriptCompile Include="e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="src\app\about\index.ts" />
+    <TypeScriptCompile Include="src\app\admin\index.ts" />
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
-    <TypeScriptCompile Include="src\app\home\home.ts" />
-    <TypeScriptCompile Include="src\app\view1\view1.ts" />
-    <TypeScriptCompile Include="src\app\view2\view2.ts" />
+    <TypeScriptCompile Include="src\app\home\HelloApi.ts" />
+    <TypeScriptCompile Include="src\app\home\index.ts" />
+    <TypeScriptCompile Include="src\app\profile\index.ts" />
+    <TypeScriptCompile Include="src\app\shared\dtos.ts" />
+    <TypeScriptCompile Include="src\app\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\shared\store.ts" />
+    <TypeScriptCompile Include="src\app\signin\index.ts" />
+    <TypeScriptCompile Include="src\app\signup\index.ts" />
     <TypeScriptCompile Include="src\dtos.d.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />

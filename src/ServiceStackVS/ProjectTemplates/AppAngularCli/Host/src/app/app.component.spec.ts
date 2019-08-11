@@ -6,9 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { routes } from './app.module';
-import { HomeComponent } from './home/home';
-import { View1Component } from './view1/view1';
-import { View2Component } from './view2/view2';
+import { HomeComponent } from './home';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,8 +14,6 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HomeComponent,
-        View1Component,
-        View2Component
       ],
       imports: [
         FormsModule,

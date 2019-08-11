@@ -1,0 +1,9 @@
+{{ redirectIfNotAuthenticated }}
+
+{{#if role}}
+    {{ assertRole(role) }}
+{{/if}}
+
+{{#if permission}}
+    {{ assertPermission(permission) }}
+{{/if}}

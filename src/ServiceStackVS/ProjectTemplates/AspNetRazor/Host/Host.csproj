@@ -60,13 +60,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="wwwroot\about.cshtml" />
     <Content Include="wwwroot\assets\css\bootstrap.css" />
     <Content Include="wwwroot\assets\css\default.css" />
     <Content Include="wwwroot\assets\img\favicon.ico" />
     <Content Include="wwwroot\assets\img\logo.png" />
     <Content Include="wwwroot\assets\js\bootstrap.min.js" />
     <Content Include="wwwroot\assets\js\default.js" />
+    <Content Include="wwwroot\assets\js\dtos.js" />
     <Content Include="wwwroot\assets\js\jquery.min.js" />
+    <Content Include="wwwroot\assets\js\servicestack-client.min.js" />
+    <Content Include="wwwroot\assets\svg\app\logo.svg" />
+    <Content Include="wwwroot\assets\svg\svg-icons\home.svg" />
+    <Content Include="wwwroot\default.cshtml" />
+    <Content Include="wwwroot\notfound.cshtml" />
     <None Include="Properties\PublishProfiles\PublishToIIS.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -74,13 +81,14 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="wwwroot\about.cshtml" />
-    <Content Include="wwwroot\contact.cshtml" />
-    <Content Include="wwwroot\default.cshtml" />
-    <Content Include="wwwroot\notfound.cshtml" />
-    <Content Include="wwwroot\services.cshtml" />
-    <Content Include="wwwroot\Views\Hello.cshtml" />
-    <Content Include="wwwroot\Views\Shared\MenuPartial.cshtml" />
+    <Content Include="wwwroot\admin\default.cshtml" />
+    <Content Include="wwwroot\forbidden.cshtml" />
+    <Content Include="wwwroot\login.cshtml" />
+    <Content Include="wwwroot\profile.cshtml" />
+    <Content Include="wwwroot\signup.cshtml" />
+    <Content Include="wwwroot\Views\Shared\RequiresAuth.cshtml" />
+    <Content Include="wwwroot\Views\Shared\RequiresPermission.cshtml" />
+    <Content Include="wwwroot\Views\Shared\RequiresRole.cshtml" />
     <Content Include="wwwroot\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -91,10 +99,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
+    <Compile Include="Configure.Auth.cs" />
+    <Compile Include="Configure.AuthRepository.cs" />
+    <Compile Include="Configure.Ui.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\assets\js\dtos.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

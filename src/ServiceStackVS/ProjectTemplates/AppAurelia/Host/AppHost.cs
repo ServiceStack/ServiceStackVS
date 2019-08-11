@@ -1,8 +1,13 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using Funq;
 using $safeprojectname$.ServiceInterface;
 using ServiceStack;
+using ServiceStack.Auth;
 using ServiceStack.Configuration;
+using ServiceStack.FluentValidation;
+using ServiceStack.Web;
 
 namespace $safeprojectname$
 {
@@ -12,7 +17,7 @@ namespace $safeprojectname$
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
+            : base("$safeprojectname$", typeof(MyServices).Assembly) { }
 
         /// <summary>
         /// Application specific configuration
@@ -25,10 +30,12 @@ namespace $safeprojectname$
                 DebugMode = AppSettings.Get("DebugMode", false),
                 WebHostPhysicalPath = MapProjectPath("~/wwwroot"),
                 AddRedirectParamsToQueryString = true,
+                UseSecureCookies = true,
                 UseCamelCase = true,
             });
 
             Plugins.Add(new SharpPagesFeature());
         }
     }
+
 }

@@ -1,8 +1,16 @@
 body {
-    padding-top: 54px;
 }
-@media (min-width: 992px) {
-    body {
-        padding-top: 56px;
-    }
+.navbar {
+    border-radius: 0;
+}
+a {
+    color: #333;
+}
+.form-check.form-control {
+    padding-left: 1.75rem;
+    height: auto;
+}
+.result {
+    margin: 10px;
+    color: #333;
 }

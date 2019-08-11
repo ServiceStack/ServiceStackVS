@@ -2,6 +2,6 @@
 module.exports = {
     outputDir: 'wwwroot',
     devServer: {
-        proxy: 'http://localhost:$iisexpressport$'
-    }    
+        proxy: 'https://localhost:5001'
+    }
 };

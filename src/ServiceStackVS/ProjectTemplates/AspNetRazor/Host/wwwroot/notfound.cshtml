@@ -1,6 +1,6 @@
 @{
     Layout = "";
-    var search = (@Request.PathInfo ?? "").SplitOnLast("/").Last().Trim();
+    var search = (@Request.PathInfo ?? "").LastRightPart('/');
 }
 <!DOCTYPE HTML>
 <html>
@@ -8,13 +8,13 @@
         <title>Page Not Found</title>
         <link rel="stylesheet" href="/assets/css/bootstrap.css">
         <style>
-        BODY {
+        body {
             margin: 0;
             padding: 0;
             font-size: 18px;
             text-align: center;
         }
-        H1 {
+        h1 {
             background-color: #c30;
             color: #FFF;
             font-size: 26px;
