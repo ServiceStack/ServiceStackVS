@@ -18,10 +18,15 @@
     <Assembly>ServiceStackVS.NuGetInstallerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5020d645716c0b0b</Assembly>
     <FullClassName>ServiceStackVS.NuGetInstallerWizard.NuGetPackageInstallerWizard</FullClassName>
   </WizardExtension>
+  <WizardExtension>
+    <Assembly>ServiceStackVS.ExternalTemplateWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b5de165d076e49f5</Assembly>
+    <FullClassName>ServiceStackVS.ExternalTemplateWizard.IisExpressAddressWizard</FullClassName>
+  </WizardExtension>
   <WizardData>
     <packages>
       <package id="System.Buffers" version="latest" />
       <package id="ServiceStack.Server" version="latest" />
     </packages>
+    <IISExpressAddress Name="Web.config"></IISExpressAddress>
   </WizardData>
 </VSTemplate>

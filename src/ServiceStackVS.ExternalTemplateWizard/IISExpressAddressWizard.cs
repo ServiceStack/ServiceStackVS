@@ -90,14 +90,14 @@ namespace ServiceStackVS.ExternalTemplateWizard
                     .FirstOrDefault(x => x.Name.LocalName == "WebProjectProperties")?.Descendants();
 
                 var iisUrl = webProperties?
-                    .FirstOrDefault(x => x.Name.LocalName == "IISUrl");
+                    .FirstOrDefault(x => x.Name.LocalName == "IISUrl")?.Value.TrimEnd('/');
                 if (iisUrl != null)
                 {
                     foreach (var tokenReplaceFile in fullPathTokenReplaceFile)
                     {
                         var originalContent = File.ReadAllText(tokenReplaceFile);
                         File.WriteAllText(tokenReplaceFile,
-                            originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl.Value));
+                            originalContent.ReplaceAll("http://localhost:$iisexpressport$", iisUrl));
                     }
                     return;
                 }
