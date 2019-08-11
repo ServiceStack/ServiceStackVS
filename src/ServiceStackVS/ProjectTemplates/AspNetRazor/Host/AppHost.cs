@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Web;
 using Funq;
 using $safeprojectname$.ServiceInterface;
 using ServiceStack.Razor;
@@ -34,9 +30,6 @@ namespace $safeprojectname$
             });
 
             Plugins.Add(new RazorFormat());
-
-            CustomErrorHttpHandlers[HttpStatusCode.NotFound] = new RazorHandler("/notfound");
-            CustomErrorHttpHandlers[HttpStatusCode.Forbidden] = new RazorHandler("/forbidden");
 
             if (Config.DebugMode)
             {
