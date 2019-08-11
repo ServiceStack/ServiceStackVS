@@ -85,23 +85,22 @@
     </None>
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\app.component.scss" />
+    <Content Include="src\app\home\HelloApi.scss" />
     <Content Include="src\app\home\home.html" />
-    <Content Include="src\assets\img\logo.png" />
     <Content Include="src\assets\svg\svg-auth\logo.svg" />
     <Content Include="src\assets\svg\svg-icons\home.svg" />
+    <Content Include="src\browserslist" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
     <Content Include="src\karma.conf.js" />
+    <Content Include="src\styles.scss" />
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\tslint.json" />
     <Content Include="Web.config" />
     <Content Include="proxy.config.json" />
     <Content Include="tslint.json" />
-    <Content Include="src\browserslist" />
-    <Content Include="src\styles.scss" />
-    <Content Include="src\tslint.json" />
     <Content Include="README.md" />
-    <Content Include="src\app\home\HelloApi.scss" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -134,13 +133,6 @@
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="gulpfile.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\resources\attributes\" />
-    <Folder Include="src\resources\binding-behaviors\" />
-    <Folder Include="src\resources\elements\" />
-    <Folder Include="src\resources\value-converters\" />
-    <Folder Include="src\views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
