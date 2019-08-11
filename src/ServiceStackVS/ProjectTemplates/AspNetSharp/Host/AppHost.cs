@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net;
 using Funq;
 using ServiceStack;
-using $saferootprojectname$.ServiceInterface;
+using $safeprojectname$.ServiceInterface;
 
 namespace $safeprojectname$
 {
@@ -14,7 +11,7 @@ namespace $safeprojectname$
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("$safeprojectname$", typeof(MyServices).Assembly) {}
+            : base("$safeprojectname$", typeof(MyServices).Assembly) { }
 
         /// <summary>
         /// Application specific configuration
@@ -22,6 +19,8 @@ namespace $safeprojectname$
         /// </summary>
         public override void Configure(Container container)
         {
+            Plugins.Add(new SharpPagesFeature());
+
             SetConfig(new HostConfig
             {
                 DebugMode = AppSettings.Get("DebugMode", false),
@@ -29,8 +28,6 @@ namespace $safeprojectname$
                 AddRedirectParamsToQueryString = true,
                 UseCamelCase = true,
             });
-
-            Plugins.Add(new TemplatePagesFeature());
         }
     }
 }
