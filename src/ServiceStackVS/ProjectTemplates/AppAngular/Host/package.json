@@ -78,7 +78,7 @@
     "karma-webpack": "^2.0.13",
     "lodash": "^4.17.11",
     "mocha": "^4.1.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "null-loader": "^0.1.1",
     "phantomjs-prebuilt": "^2.1.15",
     "postcss-loader": "^2.1.3",
