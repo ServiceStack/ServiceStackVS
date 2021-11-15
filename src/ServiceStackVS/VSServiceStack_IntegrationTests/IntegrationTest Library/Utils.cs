@@ -9,10 +9,8 @@ using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
-using EnvDTE;
 using EnvDTE80;
 using Microsoft.Win32;
-using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
 using Microsoft.VisualStudio;
@@ -293,7 +291,7 @@ namespace Microsoft.VsSDK.IntegrationTestLibrary
             if (name == null)
                 throw new ArgumentException("name");
 
-            DTE dte = (DTE)VsIdeTestHostContext.ServiceProvider.GetService(typeof(DTE));
+            EnvDTE80.DTE2 dte = (EnvDTE80.DTE2)VsIdeTestHostContext.ServiceProvider.GetService(typeof(EnvDTE80.DTE2));
 
             Solution2 sol = dte.Solution as Solution2;
 

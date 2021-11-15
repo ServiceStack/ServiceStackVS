@@ -89,7 +89,7 @@ namespace ServiceStackVS
         private DocumentEvents documentEvents;
         private ProjectItemsEvents projectItemsEvents;
 
-        private DTE dte;
+        private EnvDTE80.DTE2 dte;
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
@@ -139,15 +139,9 @@ namespace ServiceStackVS
 
             solutionEventsListener = new SolutionEventsListener();
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
-
-            if (await GetServiceAsync(typeof(EnvDTE.DTE)) is DTE dte)
-            {
-                dte_events = dte.Events.DTEEvents;
-                dte_events.OnStartupComplete += OnStartupComplete;
-            }
         }
 
-        DTEEvents dte_events;
+        EnvDTE.DTEEvents dte_events;
 
         private void OnStartupComplete()
         {
@@ -191,9 +185,9 @@ namespace ServiceStackVS
                 }
             }
 
-            UIThreadHelper.JoinableTaskFactory.Run(async () =>
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
                 (await GetComponentModelAsync()).GetService<SVsServiceProvider>()
                     .GetWritableSettingsStore().SetPackageReady(true);
@@ -202,7 +196,7 @@ namespace ServiceStackVS
 
         private void SolutionLoaded()
         {
-            dte = (DTE)GetService(typeof(DTE));
+            dte = (EnvDTE80.DTE2)GetService(typeof(EnvDTE80.DTE2));
             if (dte == null)
             {
                 Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
@@ -639,9 +633,9 @@ namespace ServiceStackVS
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)
         {
-            UIThreadHelper.JoinableTaskFactory.Run(async () =>
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
                 //Once the generated code has been added, we need to ensure that  
                 //the required ServiceStack.Interfaces package is installed.
@@ -654,8 +648,9 @@ namespace ServiceStackVS
                 //Check if existing nuget reference exists
                 if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
                 {
+                    var service = (await GetComponentModelAsync()).GetService<IVsPackageInstaller>();
                     (await GetComponentModelAsync()).GetService<IVsPackageInstaller>()
-                        .InstallPackage("https://www.nuget.org/api/v2/",
+                        .InstallPackage(null,
                         project,
                         packageId,
                         version: (string)null, //Latest version of packageId
@@ -667,35 +662,6 @@ namespace ServiceStackVS
         private void DocumentEventsOnDocumentSaved(Document document)
         {
             document.HandleDocumentSaved(OutputWindowWriter.WriterWindow);
-        }
-    }
-
-    // https://github.com/NuGet/NuGet.Client/blob/dev/src/NuGet.Clients/NuGet.VisualStudio.Common/NuGetUIThreadHelper.cs
-    public static class UIThreadHelper
-    {
-        /// <summary>
-        /// Initially it will be null and will be initialized to CPS JTF when there is CPS
-        /// based project is being created.
-        /// </summary>
-        private static Lazy<JoinableTaskFactory> _joinableTaskFactory;
-
-        /// <summary>
-        /// Returns the static instance of JoinableTaskFactory set by SetJoinableTaskFactoryFromService.
-        /// If this has not been set yet the shell JTF will be used.
-        /// During MEF composition some components will immediately call into the thread helper before
-        /// it can be initialized. For this reason we need to fall back to the default shell JTF
-        /// to provide basic threading support.
-        /// </summary>
-        public static JoinableTaskFactory JoinableTaskFactory
-        {
-            get { return _joinableTaskFactory?.Value ?? GetThreadHelperJoinableTaskFactorySafe(); }
-        }
-
-        private static JoinableTaskFactory GetThreadHelperJoinableTaskFactorySafe()
-        {
-            // Static getter ThreadHelper.JoinableTaskContext, throws NullReferenceException if VsTaskLibraryHelper.ServiceInstance is null
-            // And, ThreadHelper.JoinableTaskContext is simply 'ThreadHelper.JoinableTaskContext?.Factory'. Hence, this helper
-            return VsTaskLibraryHelper.ServiceInstance != null ? ThreadHelper.JoinableTaskFactory : null;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using EnvDTE;
+using Microsoft.VisualStudio.Shell;
 using ServiceStack;
 using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
@@ -48,6 +49,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
         private void ListenForShortcutKeys(object sender, KeyEventArgs keyEventArgs)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             if (keyEventArgs.Key == Key.Enter)
             {
                 Dispatcher.InvokeAsync(CreateServiceReference);
@@ -73,14 +75,14 @@ namespace ServiceStackVS.NativeTypesWizard
             bool success = false;
             string url = UrlTextBox.Text;
             string errorMessage = "";
-            Task.Run(() =>
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
                 bool setSslValidationCallback = false;
                 try
                 {
                     string serverUrl = CreateUrl(url);
                     ServerUrl = serverUrl;
-                    
+
                     //Don't set validation callback if one has already been set for VS.
                     if (ServicePointManager.ServerCertificateValidationCallback == null)
                     {
@@ -92,7 +94,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
                     var webRequest = WebRequest.Create(serverUrl);
                     webRequest.Credentials = CredentialCache.DefaultCredentials;
-                    string result = webRequest.GetResponse().ReadToEnd();
+                    string result = (await webRequest.GetResponseAsync()).ReadToEnd();
 
                     if (typesHandler.IsValidResponse(result))
                     {
@@ -116,34 +118,33 @@ namespace ServiceStackVS.NativeTypesWizard
                 }
                 finally
                 {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
                     if (setSslValidationCallback)
                     {
                         //If callback was set to return true, reset back to null.
                         ServicePointManager.ServerCertificateValidationCallback = null;
                     }
+                    if (success)
+                    {
+                        AddReferenceSucceeded = true;
+                        SubmitAddRefStats();
+                        Close();
+                    }
+                    else
+                    {
+                        OkButton.IsEnabled = true;
+                        ReferenceProgressBar.Visibility = Visibility.Hidden;
+                        ErrorMessageBox.Visibility = Visibility.Visible;
+                        ErrorMessage.Text = errorMessage;
+                        UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                    }
                 }
-            }).ContinueWith(task =>
-            {
-                if (success)
-                {
-                    AddReferenceSucceeded = true;
-                    SubmitAddRefStats();
-                    Close();
-                }
-                else
-                {
-                    OkButton.IsEnabled = true;
-                    ReferenceProgressBar.Visibility = Visibility.Hidden;
-                    ErrorMessageBox.Visibility = Visibility.Visible;
-                    ErrorMessage.Text = errorMessage;
-                    UrlTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            });
         }
 
         private void SubmitAddRefStats()
         {
-            DTE dte = Package.GetGlobalService(typeof(DTE)) as DTE;
+            EnvDTE80.DTE2 dte = Package.GetGlobalService(typeof(EnvDTE80.DTE2)) as EnvDTE80.DTE2;
             if (dte != null)
             {
                 bool optOutOfStats = dte.GetOptOutStatsSetting();

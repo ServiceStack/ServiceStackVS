@@ -48,13 +48,17 @@ namespace ServiceStackVS.NuGetInstallerWizard
         public void ProjectFinishedGenerating(Project project)
         {
             var componentModel = (IComponentModel)Package.GetGlobalService(typeof(SComponentModel));
-            var _installer = componentModel.GetService<IVsPackageInstaller2>();
+            var _installer = componentModel.GetService<IVsPackageInstaller>();
 
             foreach (var package in _packages)
             {
                 try
                 {
-                    _installer.InstallLatestPackage(null, project, package, false, false);
+                    _installer.InstallPackage("https://www.nuget.org/api/v3/",
+                        project,
+                        package,
+                        version: (string)null, //Latest version of packageId
+                        ignoreDependencies: false);
                 }
                 catch {}
             }

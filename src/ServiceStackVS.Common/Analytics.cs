@@ -39,7 +39,7 @@ namespace ServiceStackVS.Common
                 {
                     //do nothing
                 }
-            });
+            }).ConfigureAwait(false);
         }
 
         public static void SubmitAnonymousAddReferenceUsage(string languageName)

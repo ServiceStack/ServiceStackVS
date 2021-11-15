@@ -23,6 +23,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             dte = automationObject as DTE;
             solution = dte.Solution;
             string wizardData = replacementsDictionary["$wizarddata$"];
@@ -45,6 +46,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void ProjectFinishedGenerating(Project project)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             foreach (SolutionConfiguration solConfig in solution.SolutionBuild.SolutionConfigurations)
             {
                 foreach (SolutionContext solutionContext in solConfig.SolutionContexts)
@@ -77,6 +79,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void RunFinished()
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             if (projSolutionContext != null)
             {
                 solutionConfig.Activate();

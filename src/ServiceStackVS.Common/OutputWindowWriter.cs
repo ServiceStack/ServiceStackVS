@@ -17,6 +17,7 @@ namespace ServiceStackVS.Common
 
         public OutputWindowWriter(string outputWindowPaneGuid, string outputWindowPaneName)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             var outputWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
             if (outputWindow == null) throw new Exception("Unable to create an output pane.");
             var paneGuid = new Guid(outputWindowPaneGuid);
@@ -35,6 +36,17 @@ namespace ServiceStackVS.Common
 
         public void ShowOutputPane(DTE dte)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            var outputWindow = dte?.Windows?.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");
+            if (outputWindow != null)
+            {
+                outputWindow.Visible = true;
+            }
+        }
+
+        public void ShowOutputPane(EnvDTE80.DTE2 dte)
+        {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             var outputWindow = dte?.Windows?.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");
             if (outputWindow != null)
             {

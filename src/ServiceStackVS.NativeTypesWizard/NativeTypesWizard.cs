@@ -68,6 +68,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
             
             if (!finalUserProvidedName.EndsWith(currentNativeTypesHandle.CodeFileExtension))
@@ -91,6 +92,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             projectItem.ContainingProject.Save();
             string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
             string fullItemPath = Path.Combine(projectPath, finalProjectItemName);

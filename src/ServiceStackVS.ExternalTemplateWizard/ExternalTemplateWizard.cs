@@ -7,7 +7,7 @@ using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
 using ServiceStackVS.Common;
-using NuGet;
+using NuGet.VisualStudio;
 
 namespace ServiceStackVS.ExternalTemplateWizard
 {
@@ -28,21 +28,21 @@ namespace ServiceStackVS.ExternalTemplateWizard
         private List<TemplatedFile> allTemplatedFiles = new List<TemplatedFile>();
         private Dictionary<string, string> localReplacementsDictionary;
 
-        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
+        private const string nugetV3Url = "https://packages.nuget.org/api/v3";
 
-        private IPackageRepository nuGetPackageRepository;
-        private IPackageRepository NuGetPackageRepository
+        private IVsPackageRestorer nuGetPackageRepository;
+        private IVsPackageRestorer NuGetPackageRepository
         {
             get
             {
                 return nuGetPackageRepository ??
                        (nuGetPackageRepository =
-                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
+                           PackageRepositoryFactory.Default.CreateRepository(nugetV3Url));
             }
         }
 
-        private IPackageRepository _cachedRepository;
-        private IPackageRepository CachedRepository
+        private IVsPackageRestorer _cachedRepository;
+        private IVsPackageRestorer CachedRepository
         {
             get
             {

@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
-using NuGet;
+using NuGet.VisualStudio;
 
 namespace ServiceStackVS.Common
 {
     public static class NuGetCoreExtensions
     {
-        public static string GetLatestVersionOfPackage(this IPackageRepository packageRepository, string packageId)
+        public static string GetLatestVersionOfPackage(this IVsPackageRestorer packageRepository, string packageId)
         {
-            var package = packageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
-            return package.Version.ToString();
+            var package = packageRepository.GetLatestVersionOfPackage(packageId);
+            return package;
         }
     }
 
@@ -40,7 +40,7 @@ namespace ServiceStackVS.Common
         public const string PackageSettingsCategory = "ServiceStackSettings";
         public const string PackageReadyPropertyName = "PackageReady";
         
-        public static bool GetOptOutStatsSetting(this EnvDTE.DTE dte)
+        public static bool GetOptOutStatsSetting(this EnvDTE80.DTE2 dte)
         {
             var props = dte?.get_Properties(CategoryName, PageName);
             return props?.Item(OptOutPropertyName)?.Value is bool b && b;
