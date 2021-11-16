@@ -34,7 +34,6 @@
     <PackageReference Include="ServiceStack.Text.Signed" Version="4.5.12" />
     <PackageReference Include="NUnit" Version="2.6.3" />
     <PackageReference Include="System.Json" Version="4.0.20126.16343" />
-    <PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="16.10.31320.204" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,9 +51,6 @@
     <Compile Include="NuGetWizardTests.cs" />
     <Compile Include="ProjectTemplateProjectFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServiceStackVS.NativeTypes\ServiceStackVS.NativeTypes.csproj">

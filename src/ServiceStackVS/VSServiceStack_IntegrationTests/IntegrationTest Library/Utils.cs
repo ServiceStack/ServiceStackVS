@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
 using Microsoft.VisualStudio;
+using EnvDTE;
 
 namespace Microsoft.VsSDK.IntegrationTestLibrary
 {
@@ -291,7 +292,7 @@ namespace Microsoft.VsSDK.IntegrationTestLibrary
             if (name == null)
                 throw new ArgumentException("name");
 
-            EnvDTE80.DTE2 dte = (EnvDTE80.DTE2)VsIdeTestHostContext.ServiceProvider.GetService(typeof(EnvDTE80.DTE2));
+            DTE dte = (DTE)VsIdeTestHostContext.ServiceProvider.GetService(typeof(DTE));
 
             Solution2 sol = dte.Solution as Solution2;
 

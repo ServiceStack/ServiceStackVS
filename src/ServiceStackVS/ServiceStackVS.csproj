@@ -63,12 +63,19 @@
     <DeployExtension>True</DeployExtension>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Sdk" Version="16.0.206" />
-    <PackageReference Include="StreamJsonRpc" Version="1.5.43" />
+    <PackageReference Include="Microsoft.VisualStudio.Sdk" Version="17.0.31902.203" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools">
+      <Version>17.0.5232</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="StreamJsonRpc" Version="2.8.28" />
     <PackageReference Include="NuGet.VisualStudio" Version="5.11.0" />
     <PackageReference Include="Microsoft.Web.Xdt" Version="3.0.0" />
     <PackageReference Include="ServiceStack.Text.Signed" Version="4.5.12" />
-    <!--<PackageReference Include="TemplateBuilder" Version="1.1.5-beta" />-->
+    <PackageReference Include="TemplateBuilder">
+      <Version>1.1.6.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -119,9 +126,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\ServiceStack.Text.Signed.4.5.12\lib\net45\ServiceStack.Text.dll">
+    <!--<Content Include="..\packages\ServiceStack.Text.Signed.4.5.12\lib\net45\ServiceStack.Text.dll">
       <Link>ServiceStack.Text.dll</Link>
-    </Content>
+    </Content>-->
     <Content Include="icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -142,7 +149,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <None Include="app.config" />
     <None Include="ItemTemplates\Razor\CSharpRazor\razor.cshtml" />
     <Resource Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\_preprocess.xml" />
     <Resource Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\logo.png" />
@@ -235,17 +241,6 @@
     <TypeScriptCompile Include="ItemTemplates\NativeTypes\FSharpTypeScriptRef\template.ts" />
     <TypeScriptCompile Include="ItemTemplates\NativeTypes\VbNetTypeScriptRef\template.ts" />
   </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.209\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.209\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
-  </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
@@ -259,8 +254,6 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.27\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.27\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets')" />
-  <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.209\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.209\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

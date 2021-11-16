@@ -42,11 +42,11 @@ namespace ServiceStackVS.Common
             }).ConfigureAwait(false);
         }
 
-        public static void SubmitAnonymousAddReferenceUsage(string languageName)
+        public static async Task SubmitAnonymousAddReferenceUsage(string languageName)
         {
             if (Environment.GetEnvironmentVariable("SERVICESTACK_TELEMETRY_OPTOUT") == "1") return;
             if (languageName == null) return;
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 try
                 {

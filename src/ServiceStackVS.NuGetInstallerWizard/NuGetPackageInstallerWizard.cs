@@ -54,7 +54,7 @@ namespace ServiceStackVS.NuGetInstallerWizard
             {
                 try
                 {
-                    _installer.InstallPackage("https://www.nuget.org/api/v3/",
+                    _installer.InstallPackage(null,
                         project,
                         package,
                         version: (string)null, //Latest version of packageId

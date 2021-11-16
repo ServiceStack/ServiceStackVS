@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
@@ -40,10 +41,16 @@ namespace ServiceStackVS.Common
         public const string PackageSettingsCategory = "ServiceStackSettings";
         public const string PackageReadyPropertyName = "PackageReady";
         
-        public static bool GetOptOutStatsSetting(this EnvDTE80.DTE2 dte)
+        public static bool GetOptOutStatsSetting(this DTE dte)
         {
             var props = dte?.get_Properties(CategoryName, PageName);
             return props?.Item(OptOutPropertyName)?.Value is bool b && b;
+        }
+
+        public static bool GetOptOutStatsSetting(this SVsServiceProvider vsServiceProvider)
+        {
+            var shellSettingsManager = new ShellSettingsManager(vsServiceProvider);
+            return shellSettingsManager.GetReadOnlySettingsStore(SettingsScope.UserSettings).GetBoolean(CategoryName, OptOutPropertyName);
         }
 
         public static WritableSettingsStore GetWritableSettingsStore(this SVsServiceProvider vsServiceProvider)

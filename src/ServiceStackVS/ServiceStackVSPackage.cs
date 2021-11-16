@@ -89,7 +89,7 @@ namespace ServiceStackVS
         private DocumentEvents documentEvents;
         private ProjectItemsEvents projectItemsEvents;
 
-        private EnvDTE80.DTE2 dte;
+        private DTE dte;
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
@@ -196,24 +196,27 @@ namespace ServiceStackVS
 
         private void SolutionLoaded()
         {
-            dte = (EnvDTE80.DTE2)GetService(typeof(EnvDTE80.DTE2));
-            if (dte == null)
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
-                return;
-            }
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
+                if (dte == null)
+                {
+                    Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
+                    return;
+                }
+                var events = dte.Events as Events2;
+                if (events == null)
+                {
+                    Debug.WriteLine("Unable to get the Events2.");
+                    return;
+                }
 
-            var events = dte.Events as Events2;
-            if (events == null)
-            {
-                Debug.WriteLine("Unable to get the Events2.");
-                return;
-            }
-
-            documentEvents = events.get_DocumentEvents();
-            projectItemsEvents = events.ProjectItemsEvents;
-            projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
-            documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+                documentEvents = events.get_DocumentEvents();
+                projectItemsEvents = events.ProjectItemsEvents;
+                projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
+                documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+            });
         }
 
         private void ProjectItemsEventsOnItemAdded(ProjectItem projectItem)
@@ -499,7 +502,7 @@ namespace ServiceStackVS
             AddServiceStackReference(finalPath, typesHandler);
         }
 
-        private void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
+        private async void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
         {
             int fileNameNumber = 1;
             //Find a version of the default name that doesn't already exist, 
@@ -517,7 +520,30 @@ namespace ServiceStackVS
             // Change native types handler for TypeScript switching concrete.
             typesHandler = dialog.GetLastNativeTypesHandler();
             string templateCode = dialog.CodeTemplate;
-            AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+            var result = AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+            if(result && dialog.AddReferenceSucceeded == true)
+            {
+                await SubmitAddRefStatsAsync(typesHandler);
+            }
+        }
+
+        private async Task SubmitAddRefStatsAsync(INativeTypesHandler typesHandler)
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
+            if (dte != null)
+            {
+                bool optOutOfStats = dte.GetOptOutStatsSetting();
+                if (!optOutOfStats)
+                {
+                    var langName = typesHandler.RelativeTypesUrl.Substring(6);
+                    await Analytics.SubmitAnonymousAddReferenceUsage(langName);
+                }
+            }
+            else
+            {
+                OutputWindowWriter.WriterWindow.WriteLine("Warning: Failed to resolve DTE");
+            }
         }
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
@@ -595,7 +621,7 @@ namespace ServiceStackVS
             }
         }
 
-        private void AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
+        private bool AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
             nugetPackages = nugetPackages ?? new List<string>();
             
@@ -605,6 +631,7 @@ namespace ServiceStackVS
             string fullPath = Path.Combine(path, fileName);
             File.WriteAllText(fullPath, templateCode);
 
+            bool success = true;
             try
             {
                 // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
@@ -613,7 +640,9 @@ namespace ServiceStackVS
                 newDtoFile.Open(EnvDteConstants.vsViewKindCode);
                 newDtoFile.Save();
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
 
             try
             {
@@ -622,13 +651,19 @@ namespace ServiceStackVS
                     AddNuGetDependencyIfMissing(project, nugetPackage);
                 }
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
 
             try
             {
                 project.Save();
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
+
+            return success;
         }
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)

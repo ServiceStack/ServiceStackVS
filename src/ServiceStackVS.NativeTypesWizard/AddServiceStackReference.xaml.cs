@@ -25,6 +25,7 @@ namespace ServiceStackVS.NativeTypesWizard
         public string CodeTemplate { get; set; }
         public string ServerUrl { get; private set; }
         private INativeTypesHandler typesHandler;
+        private readonly SVsServiceProvider serviceProvider;
 
         protected bool IsTypedScriptReference { get; set; }
         protected bool TypeScriptOnlyDefinitions { get; set; }
@@ -40,6 +41,7 @@ namespace ServiceStackVS.NativeTypesWizard
             FileNameTextBox.Text = fileName;
             KeyDown += ListenForShortcutKeys;
             typesHandler = nativeTypesHandler;
+            this.serviceProvider = serviceProvider;
             IsTypedScriptReference = nativeTypesHandler is TypeScriptConcreteNativeTypesHandler ||
                                      nativeTypesHandler is TypeScriptNativeTypesHandler;
 
@@ -127,7 +129,6 @@ namespace ServiceStackVS.NativeTypesWizard
                     if (success)
                     {
                         AddReferenceSucceeded = true;
-                        SubmitAddRefStats();
                         Close();
                     }
                     else
@@ -140,24 +141,6 @@ namespace ServiceStackVS.NativeTypesWizard
                     }
                 }
             });
-        }
-
-        private void SubmitAddRefStats()
-        {
-            EnvDTE80.DTE2 dte = Package.GetGlobalService(typeof(EnvDTE80.DTE2)) as EnvDTE80.DTE2;
-            if (dte != null)
-            {
-                bool optOutOfStats = dte.GetOptOutStatsSetting();
-                if (!optOutOfStats)
-                {
-                    var langName = typesHandler.RelativeTypesUrl.Substring(6);
-                    Analytics.SubmitAnonymousAddReferenceUsage(langName);
-                }
-            }
-            else
-            {
-                OutputWindowWriter.WriterWindow.WriteLine("Warning: Failed to resolve DTE");
-            }
         }
 
         private void UrlTextBox_OnTextChanged(object sender, TextChangedEventArgs e)

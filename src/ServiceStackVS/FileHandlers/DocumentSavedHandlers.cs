@@ -21,10 +21,10 @@ namespace ServiceStackVS.FileHandlers
             get { return int.Parse(Dte.Version.Substring(0, 2)); }
         }
 
-        private static EnvDTE80.DTE2 _dte;
-        public static EnvDTE80.DTE2 Dte
+        private static DTE _dte;
+        public static DTE Dte
         {
-            get { return _dte ?? (_dte = (EnvDTE80.DTE2)Package.GetGlobalService(typeof (EnvDTE80.DTE2))); }
+            get { return _dte ?? (_dte = (DTE)Package.GetGlobalService(typeof (DTE))); }
         }
 
         private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FileWatchers =

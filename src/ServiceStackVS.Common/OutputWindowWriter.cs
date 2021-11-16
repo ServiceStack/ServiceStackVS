@@ -44,16 +44,6 @@ namespace ServiceStackVS.Common
             }
         }
 
-        public void ShowOutputPane(EnvDTE80.DTE2 dte)
-        {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
-            var outputWindow = dte?.Windows?.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");
-            if (outputWindow != null)
-            {
-                outputWindow.Visible = true;
-            }
-        }
-
         private static OutputWindowWriter serviceStackOutputWindowWriter;
 
         public static OutputWindowWriter WriterWindow
