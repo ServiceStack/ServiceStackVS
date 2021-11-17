@@ -73,8 +73,8 @@
     <PackageReference Include="NuGet.VisualStudio" Version="5.11.0" />
     <PackageReference Include="Microsoft.Web.Xdt" Version="3.0.0" />
     <PackageReference Include="ServiceStack.Text.Signed" Version="4.5.12" />
-    <PackageReference Include="TemplateBuilder">
-      <Version>1.1.6.1</Version>
+    <PackageReference Include="TemplateBuilder" GeneratePathProperty="true">
+      <Version>1.1.5-beta</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +235,12 @@
       <Project>{7344da1c-9297-49fd-be37-568a3c4ab544}</Project>
       <Name>ServiceStackVS.NuGetInstallerWizard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceStackVS.ExternalTemplateWizard\ServiceStackVS.ExternalTemplateWizard.csproj">
+      <Project>{E803E797-51CD-4ADE-87A3-27FBA70609C4}</Project>
+      <Name>ServiceStackVS.ExternalTemplateWizard</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ItemTemplates\NativeTypes\CSharpTypeScriptRef\template.ts" />
@@ -245,7 +251,7 @@
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
   <PropertyGroup Label="TemplateBuilder">
-    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.1.5-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(PkgTemplateBuilder)\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -35,7 +35,7 @@
     <NodeJS>
         <npm-package id="gulp" />
     </NodeJS>
-    <IISExpressAddress Name="src\dtos.ts"></IISExpressAddress>
+    <IISExpressAddress Name="src\shared\dtos.ts"></IISExpressAddress>
     <IISExpressAddress Name="package.json"></IISExpressAddress>
     <IISExpressAddress Name="Web.config"></IISExpressAddress>
   </WizardData>

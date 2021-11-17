@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.Common", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.NuGetInstallerWizard", "ServiceStackVS.NuGetInstallerWizard\ServiceStackVS.NuGetInstallerWizard.csproj", "{7344DA1C-9297-49FD-BE37-568A3C4AB544}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackVS.ExternalTemplateWizard", "ServiceStackVS.ExternalTemplateWizard\ServiceStackVS.ExternalTemplateWizard.csproj", "{E803E797-51CD-4ADE-87A3-27FBA70609C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7344DA1C-9297-49FD-BE37-568A3C4AB544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E803E797-51CD-4ADE-87A3-27FBA70609C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

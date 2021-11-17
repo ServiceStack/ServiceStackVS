@@ -38,16 +38,4 @@ namespace $safeprojectname$
             }
         }
     }
-
-    //TODO: remove from v5.6.1
-    public static class HtmlExtensions
-    {
-        public static HtmlString Navbar(this HtmlHelper html) => html.NavBar(ViewUtils.NavItems, null);
-        
-        public static HtmlString BundleJs(this HtmlHelper html, BundleOptions options) => ViewUtils.BundleJs(
-            nameof(BundleJs), HostContext.VirtualFileSources, HostContext.VirtualFiles, Minifiers.JavaScript, options).ToHtmlString();
-
-        public static HtmlString BundleCss(this HtmlHelper html, BundleOptions options) => ViewUtils.BundleCss(
-            nameof(BundleCss), HostContext.VirtualFileSources, HostContext.VirtualFiles, Minifiers.Css, options).ToHtmlString();
-    }
 }

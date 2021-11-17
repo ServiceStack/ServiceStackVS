@@ -25,7 +25,6 @@ namespace ServiceStackVS.NativeTypesWizard
         public string CodeTemplate { get; set; }
         public string ServerUrl { get; private set; }
         private INativeTypesHandler typesHandler;
-        private readonly SVsServiceProvider serviceProvider;
 
         protected bool IsTypedScriptReference { get; set; }
         protected bool TypeScriptOnlyDefinitions { get; set; }
@@ -41,7 +40,6 @@ namespace ServiceStackVS.NativeTypesWizard
             FileNameTextBox.Text = fileName;
             KeyDown += ListenForShortcutKeys;
             typesHandler = nativeTypesHandler;
-            this.serviceProvider = serviceProvider;
             IsTypedScriptReference = nativeTypesHandler is TypeScriptConcreteNativeTypesHandler ||
                                      nativeTypesHandler is TypeScriptNativeTypesHandler;
 

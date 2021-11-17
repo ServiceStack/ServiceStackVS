@@ -50,6 +50,8 @@ namespace ServiceStackVS.NuGetInstallerWizard
             var componentModel = (IComponentModel)Package.GetGlobalService(typeof(SComponentModel));
             var _installer = componentModel.GetService<IVsPackageInstaller>();
 
+            if (project == null) return;
+
             foreach (var package in _packages)
             {
                 try

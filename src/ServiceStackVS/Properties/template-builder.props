@@ -12,7 +12,7 @@
    -->
   <PropertyGroup>
     <!-- This is the subfolder name where the templates will show up in Visual Studio. -->
-    <ls-TemplateSubFolder>My Custom Templates</ls-TemplateSubFolder>
+    <ls-TemplateSubFolder>ServiceStack</ls-TemplateSubFolder>
 
     <!---
     You can set the following property to false to disable creating the template report
