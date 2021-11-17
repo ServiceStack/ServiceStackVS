@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.ExtensionManager;
 using static System.StringComparison;
 
 namespace ServiceStackVS.NPMInstallerWizard
@@ -319,20 +318,6 @@ namespace ServiceStackVS.NPMInstallerWizard
             {
                 Environment.SetEnvironmentVariable("PATH", processPathValue + ";" + pathValue);
             }
-        }
-
-        public static bool HasExtension(this IVsExtensionManager extensionManager, string name)
-        {
-            IInstalledExtension first = null;
-            foreach (var x in extensionManager.GetInstalledExtensions())
-            {
-                if (x.Header.Name == name)
-                {
-                    first = x;
-                    break;
-                }
-            }
-            return first != null;
         }
     }
 

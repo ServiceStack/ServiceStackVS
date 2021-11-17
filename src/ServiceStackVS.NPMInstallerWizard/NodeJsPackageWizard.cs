@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
@@ -31,7 +30,6 @@ namespace ServiceStackVS.NPMInstallerWizard
         private uint progressRef;
 
         private OutputWindowWriter serviceStackOutputWindowWriter;
-        private IVsExtensionManager extensionManager;
         private bool skipTypings = false;
         private string projectName = null;
 
@@ -48,19 +46,18 @@ namespace ServiceStackVS.NPMInstallerWizard
         [Import]
         public SVsServiceProvider ServiceProvider { get; set; }
 
-        public IVsExtensionManager ExtensionManager
-        {
-            get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
-        }
-
         public int MajorVisualStudioVersion
         {
-            get { return int.Parse(dte.Version.Substring(0, 2)); }
+            get
+            {
+                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+                return int.Parse(dte.Version.Substring(0, 2));
+            }
         }
 
         private IVsStatusbar StatusBar
         {
-            get { return bar ?? (bar = Package.GetGlobalService(typeof (SVsStatusbar)) as IVsStatusbar); }
+            get { return bar ?? (bar = Package.GetGlobalService(typeof(SVsStatusbar)) as IVsStatusbar); }
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace ServiceStackVS.NPMInstallerWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary,
             WizardRunKind runKind, object[] customParams)
         {
-            dte = (DTE) automationObject;
+            dte = (DTE)automationObject;
 
             projectName = replacementsDictionary["$safeprojectname$"];
             replacementsDictionary["$safeprojectnamelower$"] = projectName.ToLower();
@@ -102,7 +99,7 @@ namespace ServiceStackVS.NPMInstallerWizard
             npmPackages =
                 element.Descendants()
                     .Where(x => x.Name.LocalName.Equals("npm-package", StringComparison.OrdinalIgnoreCase))
-                    .Select(x => new NpmPackage {Id = x.Attribute("id").Value})
+                    .Select(x => new NpmPackage { Id = x.Attribute("id").Value })
                     .ToList();
             var skipTypingsValue = element.Descendants()
                 .Where(x => x.Name.LocalName.Equals("skip-typings-install", StringComparison.OrdinalIgnoreCase))
@@ -136,23 +133,11 @@ namespace ServiceStackVS.NPMInstallerWizard
                     .ReplaceAll($"\"{projectName}\"", $"\"{proectNameKebab}\""));
             }
 
-            Task.Run(() => { StartRequiredPackageInstallations(); }).Wait();
+            ThreadHelper.JoinableTaskFactory.Run(async () => { await StartRequiredPackageInstallationsAsync(); });
             // Typings isn't supported by any built in VS features.. yet.., run manually and wait
             // This is due to problem with TSX intellisense which is fixed if project reloaded.
             // This is to ensure *.d.ts files are ready when template first loads
-            Task.Run(() => { ProcessTypingsInstall(projectPath); }).Wait();
-            //Only run Bower/NPM install via SSVS for VS 2012/2013
-            //VS2015 built in Task Runner detects and runs required installs.
-            //VS2013 Update 5 also does package restore on load.
-            if (MajorVisualStudioVersion == 12 && !ExtensionManager.HasExtension("Package Intellisense") || MajorVisualStudioVersion == 11)
-            {
-                Task.Run(() => { ProcessBowerInstall(projectPath); }).Wait();
-
-                UpdateStatusMessage("Downloading NPM depedencies...");
-                OutputWindowWriter.ShowOutputPane(dte);
-
-                Task.Run(() => { ProcessNpmInstall(projectPath); });
-            }
+            ThreadHelper.JoinableTaskFactory.Run(async () => { await ProcessTypingsInstallAsync(projectPath); });
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
@@ -172,10 +157,11 @@ namespace ServiceStackVS.NPMInstallerWizard
         {
         }
 
-        private void StartRequiredPackageInstallations()
+        private async Task StartRequiredPackageInstallationsAsync()
         {
             try
             {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
                 // Initialize the progress _bar.
                 StatusBar.Progress(ref progressRef, 1, "", 0, 0);
                 OutputWindowWriter.Show();
@@ -255,51 +241,9 @@ namespace ServiceStackVS.NPMInstallerWizard
             }
         }
 
-        private void ProcessBowerInstall(string projectPath)
+        private async Task ProcessTypingsInstallAsync(string projectPath)
         {
-            try
-            {
-                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                if (!File.Exists(Path.Combine(projectPath, "bower.json")))
-                {
-                    return;
-                }
-                if (!NodePackageUtils.HasBowerOnPath())
-                {
-                    var npmFolder = Path.Combine(appDataFolder, "npm");
-                    npmFolder.AddToPathEnvironmentVariable();
-                }
-                UpdateStatusMessage("Downloading bower depedencies...");
-                NodePackageUtils.RunBowerInstall(projectPath, (sender, args) =>
-                {
-                    if (!string.IsNullOrEmpty(args.Data))
-                    {
-                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                        OutputWindowWriter.WriteLine(s);
-                    }
-                }, (sender, args) =>
-                {
-                    if (!string.IsNullOrEmpty(args.Data))
-                    {
-                        var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                        OutputWindowWriter.WriteLine(s);
-                    }
-                });
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(@"Bower install failed: " + exception.Message,
-                    @"An error has occurred during a Bower install.",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly,
-                    false);
-            }
-        }
-
-        private void ProcessTypingsInstall(string projectPath)
-        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             if (skipTypings)
                 return;
             try
@@ -344,44 +288,7 @@ namespace ServiceStackVS.NPMInstallerWizard
                     false);
             }
         }
-
-        private void ProcessNpmInstall(string projectPath)
-        {
-            try
-            {
-                UpdateStatusMessage("Clearing NPM cache...");
-                NodePackageUtils.NpmClearCache(projectPath);
-                UpdateStatusMessage("Running NPM install...");
-                OutputWindowWriter.WriteLine("--- NPM install started ---");
-                NodePackageUtils.RunNpmInstall(projectPath,
-                    (sender, args) =>
-                    {
-                        if (!string.IsNullOrEmpty(args.Data))
-                        {
-                            var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                            OutputWindowWriter.WriteLine(s);
-                        }
-                    },
-                    (sender, args) =>
-                    {
-                        if (!string.IsNullOrEmpty(args.Data))
-                        {
-                            var s = Regex.Replace(args.Data, @"[^\u0000-\u007F]", string.Empty);
-                            OutputWindowWriter.WriteLine(s);
-                        }
-                    }, 600);
-                UpdateStatusMessage("Ready");
-                StatusBar.Clear();
-            }
-            catch (Exception exception)
-            {
-                OutputWindowWriter.WriteLine("An error has occurred during an NPM install");
-                OutputWindowWriter.WriteLine("NPM install failed: " + exception.Message);
-            }
-            OutputWindowWriter.WriteLine("--- NPM install complete ---");
-        }
     }
-
     internal static class ServiceStackExtensions
     {
         private static readonly Regex SplitCamelCaseRegex = new Regex("([A-Z]|[0-9]+)", RegexOptions.Compiled);

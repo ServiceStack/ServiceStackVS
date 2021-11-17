@@ -7,7 +7,13 @@ using EnvDTE;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
 using ServiceStackVS.Common;
-using NuGet;
+using NuGet.VisualStudio;
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell;
+using NuGet.Protocol.Core.Types;
+using static NuGet.Protocol.Core.Types.Repository;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ServiceStackVS.ExternalTemplateWizard
 {
@@ -28,31 +34,6 @@ namespace ServiceStackVS.ExternalTemplateWizard
         private List<TemplatedFile> allTemplatedFiles = new List<TemplatedFile>();
         private Dictionary<string, string> localReplacementsDictionary;
 
-        private const string nugetV2Url = "https://packages.nuget.org/api/v2";
-
-        private IPackageRepository nuGetPackageRepository;
-        private IPackageRepository NuGetPackageRepository
-        {
-            get
-            {
-                return nuGetPackageRepository ??
-                       (nuGetPackageRepository =
-                           PackageRepositoryFactory.Default.CreateRepository(nugetV2Url));
-            }
-        }
-
-        private IPackageRepository _cachedRepository;
-        private IPackageRepository CachedRepository
-        {
-            get
-            {
-                string userAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                string cachePath = Path.Combine(userAppData, "NuGet\\Cache");
-                return _cachedRepository ??
-                       (_cachedRepository = PackageRepositoryFactory.Default.CreateRepository(cachePath));
-            }
-        }
-
         private const string ServiceStackVsOutputWindowPane = "5e5ab647-6a69-44a8-a2db-6a324b7b7e6d";
         private OutputWindowWriter _serviceStackOutputWindowWriter;
         private OutputWindowWriter OutputWindowWriter
@@ -64,53 +45,60 @@ namespace ServiceStackVS.ExternalTemplateWizard
             }
         }
 
-        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
+        public async void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            projectName = replacementsDictionary["$safeprojectname$"];
+            try
+            {
+                projectName = replacementsDictionary["$safeprojectname$"];
 
-            replacementsDictionary.TryGetValue("$targetframeworkversion$", out targetFrameworkMoniker);
-            targetFrameworkMoniker = targetFrameworkMoniker == null
-                ? "net45"
-                : "net" + targetFrameworkMoniker.Replace(".", "");
+                replacementsDictionary.TryGetValue("$targetframeworkversion$", out targetFrameworkMoniker);
+                targetFrameworkMoniker = targetFrameworkMoniker == null
+                    ? "net45"
+                    : "net" + targetFrameworkMoniker.Replace(".", "");
 
-            localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary)
+                localReplacementsDictionary = new Dictionary<string, string>(replacementsDictionary)
             {
                 { "$targetframeworkmoniker$", targetFrameworkMoniker },
             };
 
-            string latestVersion = GetLatestVersionOfPackage("ServiceStack.Interfaces");
-            localReplacementsDictionary.Add("$currentServiceStackVersion$",latestVersion);
+                string latestVersion = await GetLatestVersionOfPackageAsync("ServiceStack.Interfaces").ConfigureAwait(false);
+                localReplacementsDictionary.Add("$currentServiceStackVersion$", latestVersion);
 
-            templatesRootDir = Path.GetDirectoryName(customParams[0] as string);
-            localReplacementsDictionary.Add("$saferootprojectname$", projectName);
-            if (templatesRootDir == null)
-            {
-                throw new WizardBackoutException("Failed to create project, 'customParams' does not contain extension template path.");
-            }
-            solutionDir = Path.GetDirectoryName(localReplacementsDictionary["$destinationdirectory$"]);
-            string wizardData = localReplacementsDictionary["$wizarddata$"];
-            XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
-            XElement externalTemplateRoot = null;
-            if (element.Descendants().FirstOrDefault(x => x.Name.LocalName == "ExternalTemplate") != null)
-            {
-                externalTemplateRoot =
-                    element.Descendants().First(x => x.Name.LocalName == "ExternalTemplate");
-            }
-            if (externalTemplateRoot == null)
-            {
-                return;
-            }
-            safeProjectNameReplace = externalTemplateRoot.GetAttributeValue("safeProjectNameReplace");
-            externalTemplateName = externalTemplateRoot.GetExternalTemplateName();
-            externalTemplateDir = Path.Combine(templatesRootDir, externalTemplateName);
-            externalSolutionPath = Path.Combine(externalTemplateDir,
-                externalTemplateRoot.GetExternalTemplateSolutionFileName());
-            externalProjectPath = Path.Combine(externalTemplateDir,
-                externalTemplateRoot.GetExternalTemplateProjectFileName());
-            allTemplatedFiles = externalTemplateRoot.GetListOfTemplatedFiles();
+                templatesRootDir = Path.GetDirectoryName(customParams[0] as string);
+                localReplacementsDictionary.Add("$saferootprojectname$", projectName);
+                if (templatesRootDir == null)
+                {
+                    throw new WizardBackoutException("Failed to create project, 'customParams' does not contain extension template path.");
+                }
+                solutionDir = Path.GetDirectoryName(localReplacementsDictionary["$destinationdirectory$"]);
+                string wizardData = localReplacementsDictionary["$wizarddata$"];
+                XElement element = XElement.Parse("<WizardData>" + wizardData + "</WizardData>");
+                XElement externalTemplateRoot = null;
+                if (element.Descendants().FirstOrDefault(x => x.Name.LocalName == "ExternalTemplate") != null)
+                {
+                    externalTemplateRoot =
+                        element.Descendants().First(x => x.Name.LocalName == "ExternalTemplate");
+                }
+                if (externalTemplateRoot == null)
+                {
+                    return;
+                }
+                safeProjectNameReplace = externalTemplateRoot.GetAttributeValue("safeProjectNameReplace");
+                externalTemplateName = externalTemplateRoot.GetExternalTemplateName();
+                externalTemplateDir = Path.Combine(templatesRootDir, externalTemplateName);
+                externalSolutionPath = Path.Combine(externalTemplateDir,
+                    externalTemplateRoot.GetExternalTemplateSolutionFileName());
+                externalProjectPath = Path.Combine(externalTemplateDir,
+                    externalTemplateRoot.GetExternalTemplateProjectFileName());
+                allTemplatedFiles = externalTemplateRoot.GetListOfTemplatedFiles();
 
-            slnOutputName = externalTemplateRoot.GetAttributeValue("outputSolutionName");
-            projOutputName = externalTemplateRoot.GetAttributeValue("outputProjectName");
+                slnOutputName = externalTemplateRoot.GetAttributeValue("outputSolutionName");
+                projOutputName = externalTemplateRoot.GetAttributeValue("outputProjectName");
+            }
+            catch (Exception ex)
+            {
+                OutputWindowWriter.WriteLine($"ExternalTemplateWizard Failed: {ex.Message}\n{ex.StackTrace}");
+            }
         }
 
         public void ProjectFinishedGenerating(Project project)
@@ -169,22 +157,18 @@ namespace ServiceStackVS.ExternalTemplateWizard
             }
         }
 
-        private string GetLatestVersionOfPackage(string packageId)
+        private async Task<string> GetLatestVersionOfPackageAsync(string packageId)
         {
-            string packageVersion;
-            try
-            {
-                var package = NuGetPackageRepository.FindPackagesById(packageId).First(x => x.IsLatestVersion);
-                packageVersion = package.Version.ToString();
-            }
-            catch (Exception)
-            {
-                OutputWindowWriter.WriteLine("Unable to get latest version number of '{0}' from NuGet. Falling back to cache.".Fmt(packageId));
-                var cachedPackage = CachedRepository.FindPackagesById(packageId).OrderByDescending(x => x.Version).First(x => x.IsLatestVersion);
-                packageVersion = cachedPackage.Version.ToString();
-            }
-            
-            return packageVersion;
+            var componentModel = (IComponentModel)Package.GetGlobalService(typeof(SComponentModel));
+            var _installer = componentModel.GetService<IVsPackageInstallerServices>();
+            var providerFactory = new ProviderFactory();
+            var sourceRepository = Repository.CreateSource(providerFactory.GetCoreV3(), "https://api.nuget.org/v3/index.json");
+            var packageMetadataResource = await sourceRepository.GetResourceAsync<FindPackageByIdResource>();
+            var sourceCache = new SourceCacheContext();
+
+            var versions = await packageMetadataResource.GetAllVersionsAsync(packageId, sourceCache, new NuGet.Common.NullLogger(), CancellationToken.None);
+
+            return versions.First().OriginalVersion;
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)

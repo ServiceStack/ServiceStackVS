@@ -139,15 +139,9 @@ namespace ServiceStackVS
 
             solutionEventsListener = new SolutionEventsListener();
             solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
-
-            if (await GetServiceAsync(typeof(EnvDTE.DTE)) is DTE dte)
-            {
-                dte_events = dte.Events.DTEEvents;
-                dte_events.OnStartupComplete += OnStartupComplete;
-            }
         }
 
-        DTEEvents dte_events;
+        EnvDTE.DTEEvents dte_events;
 
         private void OnStartupComplete()
         {
@@ -191,9 +185,9 @@ namespace ServiceStackVS
                 }
             }
 
-            UIThreadHelper.JoinableTaskFactory.Run(async () =>
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
                 (await GetComponentModelAsync()).GetService<SVsServiceProvider>()
                     .GetWritableSettingsStore().SetPackageReady(true);
@@ -202,24 +196,27 @@ namespace ServiceStackVS
 
         private void SolutionLoaded()
         {
-            dte = (DTE)GetService(typeof(DTE));
-            if (dte == null)
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
-                return;
-            }
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
+                if (dte == null)
+                {
+                    Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
+                    return;
+                }
+                var events = dte.Events as Events2;
+                if (events == null)
+                {
+                    Debug.WriteLine("Unable to get the Events2.");
+                    return;
+                }
 
-            var events = dte.Events as Events2;
-            if (events == null)
-            {
-                Debug.WriteLine("Unable to get the Events2.");
-                return;
-            }
-
-            documentEvents = events.get_DocumentEvents();
-            projectItemsEvents = events.ProjectItemsEvents;
-            projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
-            documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+                documentEvents = events.get_DocumentEvents();
+                projectItemsEvents = events.ProjectItemsEvents;
+                projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
+                documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
+            });
         }
 
         private void ProjectItemsEventsOnItemAdded(ProjectItem projectItem)
@@ -505,7 +502,7 @@ namespace ServiceStackVS
             AddServiceStackReference(finalPath, typesHandler);
         }
 
-        private void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
+        private async void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
         {
             int fileNameNumber = 1;
             //Find a version of the default name that doesn't already exist, 
@@ -523,7 +520,30 @@ namespace ServiceStackVS
             // Change native types handler for TypeScript switching concrete.
             typesHandler = dialog.GetLastNativeTypesHandler();
             string templateCode = dialog.CodeTemplate;
-            AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+            var result = AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+            if(result && dialog.AddReferenceSucceeded == true)
+            {
+                await SubmitAddRefStatsAsync(typesHandler);
+            }
+        }
+
+        private async Task SubmitAddRefStatsAsync(INativeTypesHandler typesHandler)
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
+            if (dte != null)
+            {
+                bool optOutOfStats = dte.GetOptOutStatsSetting();
+                if (!optOutOfStats)
+                {
+                    var langName = typesHandler.RelativeTypesUrl.Substring(6);
+                    await Analytics.SubmitAnonymousAddReferenceUsage(langName);
+                }
+            }
+            else
+            {
+                OutputWindowWriter.WriterWindow.WriteLine("Warning: Failed to resolve DTE");
+            }
         }
 
         private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
@@ -601,7 +621,7 @@ namespace ServiceStackVS
             }
         }
 
-        private void AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
+        private bool AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
             nugetPackages = nugetPackages ?? new List<string>();
             
@@ -611,6 +631,7 @@ namespace ServiceStackVS
             string fullPath = Path.Combine(path, fileName);
             File.WriteAllText(fullPath, templateCode);
 
+            bool success = true;
             try
             {
                 // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
@@ -619,7 +640,9 @@ namespace ServiceStackVS
                 newDtoFile.Open(EnvDteConstants.vsViewKindCode);
                 newDtoFile.Save();
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
 
             try
             {
@@ -628,20 +651,26 @@ namespace ServiceStackVS
                     AddNuGetDependencyIfMissing(project, nugetPackage);
                 }
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
 
             try
             {
                 project.Save();
             }
-            catch (Exception) {}
+            catch (Exception) {
+                success = false;
+            }
+
+            return success;
         }
 
         private void AddNuGetDependencyIfMissing(Project project,string packageId)
         {
-            UIThreadHelper.JoinableTaskFactory.Run(async () =>
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
             {
-                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
                 //Once the generated code has been added, we need to ensure that  
                 //the required ServiceStack.Interfaces package is installed.
@@ -654,8 +683,9 @@ namespace ServiceStackVS
                 //Check if existing nuget reference exists
                 if (installedPackages.FirstOrDefault(x => x.Id == packageId) == null)
                 {
+                    var service = (await GetComponentModelAsync()).GetService<IVsPackageInstaller>();
                     (await GetComponentModelAsync()).GetService<IVsPackageInstaller>()
-                        .InstallPackage("https://www.nuget.org/api/v2/",
+                        .InstallPackage(null,
                         project,
                         packageId,
                         version: (string)null, //Latest version of packageId
@@ -667,35 +697,6 @@ namespace ServiceStackVS
         private void DocumentEventsOnDocumentSaved(Document document)
         {
             document.HandleDocumentSaved(OutputWindowWriter.WriterWindow);
-        }
-    }
-
-    // https://github.com/NuGet/NuGet.Client/blob/dev/src/NuGet.Clients/NuGet.VisualStudio.Common/NuGetUIThreadHelper.cs
-    public static class UIThreadHelper
-    {
-        /// <summary>
-        /// Initially it will be null and will be initialized to CPS JTF when there is CPS
-        /// based project is being created.
-        /// </summary>
-        private static Lazy<JoinableTaskFactory> _joinableTaskFactory;
-
-        /// <summary>
-        /// Returns the static instance of JoinableTaskFactory set by SetJoinableTaskFactoryFromService.
-        /// If this has not been set yet the shell JTF will be used.
-        /// During MEF composition some components will immediately call into the thread helper before
-        /// it can be initialized. For this reason we need to fall back to the default shell JTF
-        /// to provide basic threading support.
-        /// </summary>
-        public static JoinableTaskFactory JoinableTaskFactory
-        {
-            get { return _joinableTaskFactory?.Value ?? GetThreadHelperJoinableTaskFactorySafe(); }
-        }
-
-        private static JoinableTaskFactory GetThreadHelperJoinableTaskFactorySafe()
-        {
-            // Static getter ThreadHelper.JoinableTaskContext, throws NullReferenceException if VsTaskLibraryHelper.ServiceInstance is null
-            // And, ThreadHelper.JoinableTaskContext is simply 'ThreadHelper.JoinableTaskContext?.Factory'. Hence, this helper
-            return VsTaskLibraryHelper.ServiceInstance != null ? ThreadHelper.JoinableTaskFactory : null;
         }
     }
 }

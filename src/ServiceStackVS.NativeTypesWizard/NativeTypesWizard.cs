@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TemplateWizard;
 using ServiceStack;
 using ServiceStackVS.Common;
@@ -68,6 +70,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
             
             if (!finalUserProvidedName.EndsWith(currentNativeTypesHandle.CodeFileExtension))
@@ -91,6 +94,7 @@ namespace ServiceStackVS.NativeTypesWizard
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             projectItem.ContainingProject.Save();
             string projectPath = projectItem.ContainingProject.Properties.Item("FullPath").Value.ToString();
             string fullItemPath = Path.Combine(projectPath, finalProjectItemName);

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using EnvDTE;
-using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
 
 namespace ServiceStackVS.BuildConfigWizard
@@ -23,6 +21,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             dte = automationObject as DTE;
             solution = dte.Solution;
             string wizardData = replacementsDictionary["$wizarddata$"];
@@ -45,6 +44,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void ProjectFinishedGenerating(Project project)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             foreach (SolutionConfiguration solConfig in solution.SolutionBuild.SolutionConfigurations)
             {
                 foreach (SolutionContext solutionContext in solConfig.SolutionContexts)
@@ -77,6 +77,7 @@ namespace ServiceStackVS.BuildConfigWizard
 
         public void RunFinished()
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             if (projSolutionContext != null)
             {
                 solutionConfig.Activate();

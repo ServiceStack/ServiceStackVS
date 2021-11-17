@@ -1,41 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-  <Metadata>
-    <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="2.0.2" Language="en-US" Publisher="ServiceStack" />
-    <DisplayName>ServiceStackVS</DisplayName>
-    <Description xml:space="preserve">Templates and tools for use with the ServiceStack framework.</Description>
-    <MoreInfo>https://github.com/ServiceStack/ServiceStackVS</MoreInfo>
-    <License>license.txt</License>
-    <GettingStartedGuide>https://github.com/ServiceStack/ServiceStackVS</GettingStartedGuide>
-    <ReleaseNotes>https://github.com/ServiceStack/ServiceStackVS</ReleaseNotes>
-    <Icon>preview-image.png</Icon>
-    <PreviewImage>preview-image.png</PreviewImage>
-    <Tags>ServiceStack, Service Stack</Tags>
-  </Metadata>
+    <Metadata>
+        <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="2.2" Language="en-US" Publisher="ServiceStack" />
+        <DisplayName>ServiceStackVS</DisplayName>
+        <Description xml:space="preserve">Templates and tools for use with the ServiceStack framework.</Description>
+        <MoreInfo>https://github.com/ServiceStack/ServiceStackVS</MoreInfo>
+        <License>license.txt</License>
+        <GettingStartedGuide>https://github.com/ServiceStack/ServiceStackVS</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/ServiceStack/ServiceStackVS</ReleaseNotes>
+        <Icon>preview-image.png</Icon>
+        <PreviewImage>preview-image.png</PreviewImage>
+        <Tags>ServiceStack, Service Stack</Tags>
+    </Metadata>
 
-  <Installation InstalledByMsi="false">
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0,17.0)" />
-    <InstallationTarget Version="[14.0,17.0)" Id="Microsoft.VisualStudio.Ultimate" />
-    <InstallationTarget Version="[14.0,17.0)" Id="Microsoft.VisualStudio.Community" />
-  </Installation>
-  <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-  </Dependencies>
-  <Assets>
-    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="TemplateBuilder.dll" AssemblyName="TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Output\ItemTemplates"/>
-    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NPMInstallerWizard" Path="|ServiceStackVS.NPMInstallerWizard|" AssemblyName="|ServiceStackVS.NPMInstallerWizard;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NuGetInstallerWizard" Path="|ServiceStackVS.NuGetInstallerWizard|" AssemblyName="|ServiceStackVS.NuGetInstallerWizard;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.ExternalTemplateWizard" Path="|ServiceStackVS.ExternalTemplateWizard|" AssemblyName="|ServiceStackVS.ExternalTemplateWizard;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.BuildConfigWizard" Path="|ServiceStackVS.BuildConfigWizard|" AssemblyName="|ServiceStackVS.BuildConfigWizard;AssemblyName|" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" Path="|ServiceStackVS.Common|" AssemblyName="|ServiceStackVS.Common;AssemblyName|" d:ProjectName="%CurrentProject%.Common" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="logo-200.png" Addressable="true" d:Source="File" />
-  </Assets>
-  <Prerequisites>
-    <Prerequisite Id="Microsoft.Net.Component.4.5.TargetingPack" Version="[14.0.26208.0,17.0)" DisplayName=".NET Framework 4.5 targeting pack" />
-  </Prerequisites>
+    <Installation InstalledByMsi="false">
+        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[17.0,18.0)">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Ultimate">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Pro">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="TemplateBuilder.dll" AssemblyName="TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Output\ItemTemplates"/>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="ServiceStack.Text.dll" AssemblyName="ServiceStack.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NPMInstallerWizard" Path="|ServiceStackVS.NPMInstallerWizard|" AssemblyName="|ServiceStackVS.NPMInstallerWizard;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NuGetInstallerWizard" Path="|ServiceStackVS.NuGetInstallerWizard|" AssemblyName="|ServiceStackVS.NuGetInstallerWizard;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.NativeTypes" Path="|ServiceStackVS.NativeTypes|" AssemblyName="|ServiceStackVS.NativeTypes;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.BuildConfigWizard" Path="|ServiceStackVS.BuildConfigWizard|" AssemblyName="|ServiceStackVS.BuildConfigWizard;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" Path="|ServiceStackVS.Common|" AssemblyName="|ServiceStackVS.Common;AssemblyName|" d:ProjectName="%CurrentProject%.Common" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="logo-200.png" Addressable="true" d:Source="File" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.ExternalTemplateWizard" Path="|ServiceStackVS.ExternalTemplateWizard|" AssemblyName="|ServiceStackVS.ExternalTemplateWizard;AssemblyName|" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.Net.Component.4.7.2.TargetingPack" Version="[17.0,18.0)" DisplayName=".NET Framework 4.7.2 targeting pack" />
+    </Prerequisites>
 </PackageManifest>

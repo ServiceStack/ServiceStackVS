@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using EnvDTE;
-using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
 using ServiceStack;
 using ServiceStackVS.Common;
@@ -28,12 +27,6 @@ namespace ServiceStackVS.FileHandlers
             get { return _dte ?? (_dte = (DTE)Package.GetGlobalService(typeof (DTE))); }
         }
 
-        private static IVsExtensionManager extensionManager;
-        public static IVsExtensionManager ExtensionManager
-        {
-            get { return extensionManager ?? (extensionManager = (IVsExtensionManager)Package.GetGlobalService(typeof(SVsExtensionManager))); }
-        }
-
         private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FileWatchers =
             new Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>>
             {
@@ -57,7 +50,7 @@ namespace ServiceStackVS.FileHandlers
 
         private static void NpmDocumentHandler(Document document, OutputWindowWriter windowWriter)
         {
-            if (document.IsNpmUpdateDisable() || MajorVisualStudioVersion == 14 || (MajorVisualStudioVersion == 12 && ExtensionManager.HasExtension("Package Intellisense")))
+            if (document.IsNpmUpdateDisable() || MajorVisualStudioVersion == 14)
             {
                 return;
             }

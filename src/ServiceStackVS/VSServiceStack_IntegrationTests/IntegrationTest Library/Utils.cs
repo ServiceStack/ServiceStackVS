@@ -9,13 +9,12 @@ using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
-using EnvDTE;
 using EnvDTE80;
 using Microsoft.Win32;
-using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
 using Microsoft.VisualStudio;
+using EnvDTE;
 
 namespace Microsoft.VsSDK.IntegrationTestLibrary
 {
