@@ -498,7 +498,7 @@ namespace ServiceStackVS
             var projectPath = VSIXUtils.GetSelectedProjectPath();
             var folderPath = VSIXUtils.GetSelectedFolderPath();
             string finalPath = projectPath ?? folderPath;
-            var typesHandler = NativeTypeHandlers.TypeScriptNativeTypesHandler;
+            var typesHandler = NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler;
             await AddServiceStackReferenceAsync(finalPath, typesHandler).ConfigureAwait(false);
         }
 
@@ -506,14 +506,28 @@ namespace ServiceStackVS
         {
             try
             {
-                int fileNameNumber = 1;
+                
                 //Find a version of the default name that doesn't already exist, 
                 //mimicking VS default file name behaviour.
-                while (File.Exists(Path.Combine(folderPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
+
+                var baseFileName = "dtos";
+
+                string FindInitialFilename(string fname)
                 {
-                    fileNameNumber++;
+                    if (fname == baseFileName && !File.Exists(Path.Combine(folderPath,typesHandler.CodeFileExtension.Substring(1)))) {
+                        return fname;
+                    }
+                    int fileNameNumber = 1;
+                    
+                    while(File.Exists(Path.Combine(folderPath,
+                    fname + fileNameNumber + typesHandler.CodeFileExtension))) {
+                        fileNameNumber++;
+                    }
+                    return fname + fileNameNumber;
                 }
-                var dialog = new AddServiceStackReference("ServiceReference" + fileNameNumber, typesHandler);
+
+                var initFileName = FindInitialFilename(baseFileName);
+                var dialog = new AddServiceStackReference(initFileName, typesHandler);
                 dialog.ShowDialog();
                 if (!dialog.AddReferenceSucceeded)
                 {
@@ -521,8 +535,17 @@ namespace ServiceStackVS
                 }
                 // Change native types handler for TypeScript switching concrete.
                 typesHandler = dialog.GetLastNativeTypesHandler();
-                string templateCode = dialog.CodeTemplate;
-                var result = await AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+
+                var fileName = dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension;
+                // Handle "dtos" default filename.
+                if (dialog.FileNameTextBox.Text == baseFileName)
+                    fileName = typesHandler.CodeFileExtension.Substring(1);
+                // Handle user providing full filename (must still include dtos.{ext}).
+                if (dialog.FileNameTextBox.Text.EndsWithIgnoreCase(typesHandler.CodeFileExtension))
+                    fileName = dialog.FileNameTextBox.Text;
+
+                var templateCode = dialog.CodeTemplate;
+                var result = await AddNewDtoFileToProject(fileName, templateCode, typesHandler.RequiredNuGetPackages);
                 if (result && dialog.AddReferenceSucceeded == true)
                 {
                     await SubmitAddRefStatsAsync(typesHandler);

@@ -56,7 +56,8 @@ namespace ServiceStackVS.NativeTypes.Handlers
             {
                 return false;
             }
-            return fileName.EndsWithIgnoreCase(CodeFileExtension);
+            return fileName.EndsWithIgnoreCase(CodeFileExtension) || 
+                fileName.EndsWithIgnoreCase(CodeFileExtension.Substring(1));
         }
 
         public virtual List<string> RequiredNuGetPackages
