@@ -6,16 +6,12 @@ using Microsoft.VisualStudio.Shell;
 using ServiceStack;
 using ServiceStackVS.Common;
 using ServiceStackVS.NativeTypes;
-using ServiceStackVS.NPMInstallerWizard;
 using Task = System.Threading.Tasks.Task;
 
 namespace ServiceStackVS.FileHandlers
 {
     public class DocumentSavedHandlers
     {
-        private static bool _hasBowerInstalled;
-        private static bool _hasNpmInstalled;
-
         public static int MajorVisualStudioVersion
         {
             get { return int.Parse(Dte.Version.Substring(0, 2)); }
@@ -30,10 +26,6 @@ namespace ServiceStackVS.FileHandlers
         private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FileWatchers =
             new Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>>
             {
-                //NPM
-                {NpmDocumentPredicate, NpmDocumentHandler},
-                //Bower
-                {BowerDocumentPredicate, BowerDocumentHandler},
                 //CSharp DTO
                 {CSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.CSharpNativeTypesHandler, writer)},
                 //FSharp DTO
@@ -41,57 +33,6 @@ namespace ServiceStackVS.FileHandlers
                 //VbNet DTO
                 {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.VbNetNativeTypesHandler, writer)}
             };
-
-        private static bool NpmDocumentPredicate(Document document)
-        {
-            string path = document.GetProjectPath();
-            return document.Name.EqualsIgnoreCase("package.json") && document.Path.EqualsIgnoreCase(path);
-        }
-
-        private static void NpmDocumentHandler(Document document, OutputWindowWriter windowWriter)
-        {
-            if (document.IsNpmUpdateDisable() || MajorVisualStudioVersion == 14)
-            {
-                return;
-            }
-
-            _hasNpmInstalled = _hasNpmInstalled
-                ? _hasNpmInstalled
-                : NodePackageUtils.TryRegisterNpmFromDefaultLocation();
-
-            if (!_hasNpmInstalled)
-            {
-                windowWriter.Show();
-                windowWriter.WriteLine("Node.js Installation not detected. Visit http://nodejs.org/ to download.");
-                return;
-            }
-            document.TryRunNpmInstall(windowWriter);
-        }
-
-        private static bool BowerDocumentPredicate(Document document)
-        {
-            string path = document.GetProjectPath();
-            return document.Name.EqualsIgnoreCase("bower.json") && document.Path.EqualsIgnoreCase(path);
-        }
-
-        private static void BowerDocumentHandler(Document document, OutputWindowWriter windowWriter)
-        {
-            if (document.IsBowerUpdateDisabled())
-            {
-                return;
-            }
-
-            _hasBowerInstalled = _hasBowerInstalled ? _hasBowerInstalled : NodePackageUtils.HasBowerOnPath();
-
-            if (!_hasBowerInstalled)
-            {
-                windowWriter.Show();
-                windowWriter.WriteLine(
-                    "Bower Installation not detected. Run npm install bower -g to install if Node.js/NPM already installed.");
-                return;
-            }
-            document.TryBowerInstall(windowWriter);
-        }
 
         public static void HandleDocumentSaved(Document document, OutputWindowWriter windowWriter)
         {

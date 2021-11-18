@@ -77,10 +77,6 @@
       <Project>{73f59cbf-dcf5-4c5a-83ab-0b7fd2576ac5}</Project>
       <Name>ServiceStackVS.NativeTypes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ServiceStackVS.NPMInstallerWizard\ServiceStackVS.NPMInstallerWizard.csproj">
-      <Project>{f15d55c1-633a-4344-84e5-ce9c95988507}</Project>
-      <Name>ServiceStackVS.NPMInstallerWizard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServiceStackVS.csproj">
       <Project>{05410bd6-c9bc-45da-b0aa-b73047bccf14}</Project>
       <Name>ServiceStackVS</Name>
