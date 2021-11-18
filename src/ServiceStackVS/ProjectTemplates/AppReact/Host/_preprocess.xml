@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Preprocess>
-  <Replacements Include="*.*" Exclude="*.vstemplate;*.jpg;*.png;*.gif;*.ico;templateinfo.xml;*.cs">
-  </Replacements>
-</Preprocess>

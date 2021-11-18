@@ -112,22 +112,22 @@ namespace ServiceStackVS
             {
                 // Create the command for the menu item.
                 var cSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidCSharpAddServiceStackReference);
-                var cSharpProjectAddReferenceMenuCommand = new OleMenuCommand(CSharpAddReferenceCallback ,cSharpProjContextAddReferenceCommandId);
+                var cSharpProjectAddReferenceMenuCommand = new OleMenuCommand(async (s,e) => await CSharpAddReferenceCallbackAsync(s,e), cSharpProjContextAddReferenceCommandId);
                 cSharpProjectAddReferenceMenuCommand.BeforeQueryStatus += CSharpQueryAddMenuItem;
                 mcs.AddCommand(cSharpProjectAddReferenceMenuCommand);
 
                 var fSharpProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidFSharpAddServiceStackReference);
-                var fSharpProjectContextOleMenuCommand = new OleMenuCommand(FSharpAddReferenceCallback, fSharpProjContextAddReferenceCommandId);
+                var fSharpProjectContextOleMenuCommand = new OleMenuCommand(async (s,e) => await FSharpAddReferenceCallbackAsync(s,e), fSharpProjContextAddReferenceCommandId);
                 fSharpProjectContextOleMenuCommand.BeforeQueryStatus += FSharpQueryAddMenuItem;
                 mcs.AddCommand(fSharpProjectContextOleMenuCommand);
 
                 var vbNetProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidVbNetAddServiceStackReference);
-                var vbNetProjectContextOleMenuCommand = new OleMenuCommand(VbNetAddReferenceCallback, vbNetProjContextAddReferenceCommandId);
+                var vbNetProjectContextOleMenuCommand = new OleMenuCommand(async (s,e) => await VbNetAddReferenceCallbackAsync(s,e), vbNetProjContextAddReferenceCommandId);
                 vbNetProjectContextOleMenuCommand.BeforeQueryStatus += VbNetQueryAddMenuItem;
                 mcs.AddCommand(vbNetProjectContextOleMenuCommand);
 
                 var typeScriptProjContextAddReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidTypeScriptAddServiceStackReference);
-                var typeScriptProjectContextOleMenuCommand = new OleMenuCommand(TypeScriptAddReferenceCallback, typeScriptProjContextAddReferenceCommandId);
+                var typeScriptProjectContextOleMenuCommand = new OleMenuCommand(async (s,e) => await TypeScriptAddReferenceCallbackAsync(s,e), typeScriptProjContextAddReferenceCommandId);
                 typeScriptProjectContextOleMenuCommand.BeforeQueryStatus += TypeScriptQueryAddMenuItem;
                 mcs.AddCommand(typeScriptProjectContextOleMenuCommand);
 
@@ -467,11 +467,11 @@ namespace ServiceStackVS
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void CSharpAddReferenceCallback(object sender, EventArgs e)
+        private async Task CSharpAddReferenceCallbackAsync(object sender, EventArgs e)
         {
             var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.CSharpNativeTypesHandler;
-            AddServiceStackReference(projectPath, typesHandler);
+            await AddServiceStackReferenceAsync(projectPath, typesHandler).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -479,52 +479,60 @@ namespace ServiceStackVS
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void FSharpAddReferenceCallback(object sender, EventArgs e)
+        private async Task FSharpAddReferenceCallbackAsync(object sender, EventArgs e)
         {
             var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.FSharpNativeTypesHandler;
-            AddServiceStackReference(projectPath, typesHandler);
+            await AddServiceStackReferenceAsync(projectPath, typesHandler).ConfigureAwait(false);
         }
 
-        private void VbNetAddReferenceCallback(object sender, EventArgs e)
+        private async Task VbNetAddReferenceCallbackAsync(object sender, EventArgs e)
         {
             var projectPath = VSIXUtils.GetSelectedProjectPath();
             var typesHandler = NativeTypeHandlers.VbNetNativeTypesHandler;
-            AddServiceStackReference(projectPath, typesHandler);
+            await AddServiceStackReferenceAsync(projectPath, typesHandler).ConfigureAwait(false);
         }
 
-        private void TypeScriptAddReferenceCallback(object sender, EventArgs e)
+        private async Task TypeScriptAddReferenceCallbackAsync(object sender, EventArgs e)
         {
             var projectPath = VSIXUtils.GetSelectedProjectPath();
             var folderPath = VSIXUtils.GetSelectedFolderPath();
             string finalPath = projectPath ?? folderPath;
             var typesHandler = NativeTypeHandlers.TypeScriptNativeTypesHandler;
-            AddServiceStackReference(finalPath, typesHandler);
+            await AddServiceStackReferenceAsync(finalPath, typesHandler).ConfigureAwait(false);
         }
 
-        private async void AddServiceStackReference(string folderPath, INativeTypesHandler typesHandler)
+        private async Task AddServiceStackReferenceAsync(string folderPath, INativeTypesHandler typesHandler)
         {
-            int fileNameNumber = 1;
-            //Find a version of the default name that doesn't already exist, 
-            //mimicking VS default file name behaviour.
-            while (File.Exists(Path.Combine(folderPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
+            try
             {
-                fileNameNumber++;
+                int fileNameNumber = 1;
+                //Find a version of the default name that doesn't already exist, 
+                //mimicking VS default file name behaviour.
+                while (File.Exists(Path.Combine(folderPath, "ServiceReference" + fileNameNumber + typesHandler.CodeFileExtension)))
+                {
+                    fileNameNumber++;
+                }
+                var dialog = new AddServiceStackReference("ServiceReference" + fileNameNumber, typesHandler);
+                dialog.ShowDialog();
+                if (!dialog.AddReferenceSucceeded)
+                {
+                    return;
+                }
+                // Change native types handler for TypeScript switching concrete.
+                typesHandler = dialog.GetLastNativeTypesHandler();
+                string templateCode = dialog.CodeTemplate;
+                var result = await AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
+                if (result && dialog.AddReferenceSucceeded == true)
+                {
+                    await SubmitAddRefStatsAsync(typesHandler);
+                }
             }
-            var dialog = new AddServiceStackReference("ServiceReference" + fileNameNumber, typesHandler);
-            dialog.ShowDialog();
-            if (!dialog.AddReferenceSucceeded)
+            catch (Exception ex)
             {
-                return;
+                HandleException(ex, "Failed to save DTO");
             }
-            // Change native types handler for TypeScript switching concrete.
-            typesHandler = dialog.GetLastNativeTypesHandler();
-            string templateCode = dialog.CodeTemplate;
-            var result = AddNewDtoFileToProject(dialog.FileNameTextBox.Text + typesHandler.CodeFileExtension, templateCode, typesHandler.RequiredNuGetPackages);
-            if(result && dialog.AddReferenceSucceeded == true)
-            {
-                await SubmitAddRefStatsAsync(typesHandler);
-            }
+            return;
         }
 
         private async Task SubmitAddRefStatsAsync(INativeTypesHandler typesHandler)
@@ -621,7 +629,7 @@ namespace ServiceStackVS
             }
         }
 
-        private bool AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
+        private async Task<bool> AddNewDtoFileToProject(string fileName, string templateCode, List<string> nugetPackages = null)
         {
             nugetPackages = nugetPackages ?? new List<string>();
             
@@ -634,11 +642,15 @@ namespace ServiceStackVS
             bool success = true;
             try
             {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
                 // HACK avoid VS2015 Update 2 seems to detect file in use semi regularly.
-                Thread.Sleep(50);
+                await Task.Delay(50);
                 var newDtoFile = project.ProjectItems.AddFromFile(fullPath);
-                newDtoFile.Open(EnvDteConstants.vsViewKindCode);
+                project.Save();
+                newDtoFile.Open(EnvDTE.Constants.vsViewKindCode);
                 newDtoFile.Save();
+                newDtoFile.Document.Activate();
+
             }
             catch (Exception) {
                 success = false;

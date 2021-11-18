@@ -1,6 +1,0 @@
-{
-    "/": {
-       "target": "http://localhost:$iisexpressport$",
-       "secure": false
-    }
- }
