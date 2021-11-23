@@ -14,15 +14,6 @@
     </Metadata>
 
     <Installation InstalledByMsi="false">
-        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[17.0,18.0)">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
-        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Ultimate">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
-        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
         <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
             <ProductArchitecture>amd64</ProductArchitecture>
         </InstallationTarget>
