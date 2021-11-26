@@ -37,7 +37,7 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Sdk" Version="17.0.31902.203" />
+    <PackageReference Include="Microsoft.VisualStudio.Sdk" Version="16.9.31025.194" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools">
       <Version>17.0.5232</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
