@@ -50,7 +50,7 @@
     <PackageReference Include="Microsoft.Web.Xdt" Version="3.0.0" />
     <PackageReference Include="ServiceStack.Text.Signed" Version="4.5.12" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NuGet.Commands" Version="5.11.0" />
+    <PackageReference Include="NuGet.Commands" Version="5.11.3" />
     <PackageReference Include="NuGet.Common" Version="5.11.0" />
   </ItemGroup>
   <ItemGroup>
