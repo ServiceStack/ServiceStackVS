@@ -52,11 +52,6 @@
       <Group guid="guidVSServiceStackCmdSet" id="ServiceStackAddProjectItemGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CSCD_PROJECT_ADD"/>
       </Group>
-
-      <Group guid="guidVSServiceStackCmdSet" id="ServiceStackAddItemGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
-      </Group>
-
     </Groups>
     
     <!--Buttons section. -->
@@ -110,13 +105,11 @@
         </Strings>
       </Button>
       <Button guid="guidVSServiceStackCmdSet" id="cmdidUpdateServiceStackReference" priority="0x0100" type="Button">
-        <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackMenuGroup" />
         <Icon guid="guidImages" id="bmpSSAdd" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
           <ButtonText>Update ServiceStack Reference</ButtonText>
-          <CommandName>cmdidUpdateServiceStackReference</CommandName>
         </Strings>
       </Button>
 
@@ -137,11 +130,11 @@
   <!--Added menu item to the context menu of 'References' within a project, needs addition items to bind click event-->
   <CommandPlacements>
     <CommandPlacement guid="guidVSServiceStackCmdSet" id="cmdidTypeScriptAddServiceStackReference" priority="0x1100">
-      <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackAddItemGroup"/>
-    </CommandPlacement>
-    <CommandPlacement guid="guidVSServiceStackCmdSet" id="cmdidTypeScriptAddServiceStackReference" priority="0x1100">
       <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackAddProjectItemGroup"/>
     </CommandPlacement>
+      <CommandPlacement guid="guidVSServiceStackCmdSet" id="cmdidUpdateServiceStackReference">
+          <Parent guid="guidVSServiceStackCmdSet" id="ServiceStackMenuGroup"/>
+      </CommandPlacement>
   </CommandPlacements>
 
   <Symbols>
@@ -154,12 +147,11 @@
       <IDSymbol name="cmdidFSharpAddServiceStackReference" value="0x0101" />
       <IDSymbol name="cmdidVbNetAddServiceStackReference" value="0x0102"/>
       <IDSymbol name="cmdidTypeScriptAddServiceStackReference" value="0x0103"/>
-      <IDSymbol name="cmdidUpdateServiceStackReference" value="0x0200"/>
+      <IDSymbol name="cmdidUpdateServiceStackReference" value="0x0104"/>
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="MyDynamicMenuGroup" value="0x1040" />
       <IDSymbol name="ServiceStackMenuGroup" value="0x1030"/>
+      <IDSymbol name="MyDynamicMenuGroup" value="0x1040" />
       <IDSymbol name="ServiceStackAddProjectItemGroup" value="0x1050"/>
-      <IDSymbol name="ServiceStackAddItemGroup" value="0x1060"/>
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{ea18a0da-43af-4f6e-a6e7-83277552cba7}" >

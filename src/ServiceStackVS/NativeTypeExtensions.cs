@@ -29,7 +29,8 @@ namespace ServiceStackVS
             }
 
             if (handler.TypesLanguage == NativeTypesLanguage.TypeScript ||
-                handler.TypesLanguage == NativeTypesLanguage.TypeScriptConcrete)
+                handler.TypesLanguage == NativeTypesLanguage.TypeScriptConcrete ||
+                handler.TypesLanguage == NativeTypesLanguage.Mjs)
             {
                 return new List<string> 
                 { 

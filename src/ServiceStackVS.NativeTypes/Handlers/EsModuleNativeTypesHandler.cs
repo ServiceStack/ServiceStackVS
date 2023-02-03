@@ -17,7 +17,7 @@ namespace ServiceStackVS.NativeTypes.Handlers
         {
             if (string.IsNullOrEmpty(fileName))
                 return false;
-            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EqualsIgnoreCase("dtos.ts");
+            return fileName.EndsWithIgnoreCase(CodeFileExtension) || fileName.EqualsIgnoreCase("dtos.mjs");
         }
     }
 }

@@ -68,24 +68,6 @@ namespace ServiceStackVS.FileHandlers
                 && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
-        public static bool TypeScriptDtoPredicate(Document document)
-        {
-            return NativeTypeHandlers.TypeScriptNativeTypesHandler.IsHandledFileType(document.Name)
-                && !document.IsUpdateReferenceOnSaveDisabled();
-        }
-
-        public static bool TypeScriptConcreteDtoPredicate(Document document)
-        {
-            return NativeTypeHandlers.TypeScriptConcreteNativeTypesHandler.IsHandledFileType(document.Name)
-                   && !document.IsUpdateReferenceOnSaveDisabled();
-        }
-
-        public static bool EsModuleDtoPredicate(Document document)
-        {
-            return NativeTypeHandlers.EsModuleNativeTypesHandler.IsHandledFileType(document.Name)
-                   && !document.IsUpdateReferenceOnSaveDisabled();
-        }
-
         private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,
             OutputWindowWriter outputWindowWriter)
         {

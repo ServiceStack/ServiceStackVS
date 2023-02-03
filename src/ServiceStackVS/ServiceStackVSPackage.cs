@@ -132,7 +132,7 @@ namespace ServiceStackVS
                 mcs.AddCommand(typeScriptProjectContextOleMenuCommand);
 
                 var updateReferenceCommandId = new CommandID(GuidList.guidVSServiceStackCmdSet, (int)PkgCmdIDList.cmdidUpdateServiceStackReference);
-                var updateReferenceMenuCommand = new OleMenuCommand(UpdateReferenceCallback, updateReferenceCommandId);
+                var updateReferenceMenuCommand = new OleMenuCommand(async (s, e) => await UpdateReferenceCallbackAsync(s,e), updateReferenceCommandId);
                 updateReferenceMenuCommand.BeforeQueryStatus += QueryUpdateMenuItem;
                 mcs.AddCommand(updateReferenceMenuCommand);
             }
@@ -362,11 +362,6 @@ namespace ServiceStackVS
             var command = (OleMenuCommand)sender;
             var monitorSelection = (IVsMonitorSelection)GetService(typeof(IVsMonitorSelection));
             var guid = VSConstants.UICONTEXT.SolutionExistsAndNotBuildingAndNotDebugging_guid;
-            // Adding static files while running supported by VS 2015+
-            if (MajorVisualStudioVersion > 11)
-            {
-                guid = VSConstants.UICONTEXT.SolutionExistsAndFullyLoaded_guid;
-            }
 
             monitorSelection.GetCmdUIContextCookie(ref guid, out var contextCookie);
             var result = monitorSelection.IsCmdUIContextActive(contextCookie, out var pfActive);
@@ -442,7 +437,7 @@ namespace ServiceStackVS
             }
         }
 
-        private void UpdateReferenceCallback(object sender, EventArgs e)
+        private async Task UpdateReferenceCallbackAsync(object sender, EventArgs e)
         {
             try
             {
@@ -454,11 +449,11 @@ namespace ServiceStackVS
                     return;
 
                 var typesHandler = typeHandlers.First();
-                UpdateGeneratedDtos(projectItem, typesHandler);
+                await UpdateGeneratedDtosAsync(projectItem, typesHandler);
             }
             catch (Exception ex)
             {
-                HandleException(ex, nameof(UpdateReferenceCallback));
+                HandleException(ex, nameof(UpdateReferenceCallbackAsync));
             }
         }
 
@@ -577,7 +572,7 @@ namespace ServiceStackVS
             }
         }
 
-        private void UpdateGeneratedDtos(ProjectItem projectItem, INativeTypesHandler typesHandler)
+        private async Task UpdateGeneratedDtosAsync(ProjectItem projectItem, INativeTypesHandler typesHandler)
         {
             LogOutputWindow($"--- Updating ServiceStack Reference '{projectItem.Name}' ---", showPane:true);
             string projectItemPath = projectItem.GetFullPath();
@@ -630,7 +625,7 @@ namespace ServiceStackVS
                         if (!optOutOfStats)
                         {
                             var langName = typesHandler.RelativeTypesUrl.Substring(6);
-                            Analytics.SubmitAnonymousUpdateReferenceUsage(langName);
+                            await Analytics.SubmitAnonymousAddReferenceUsage(langName);
                         }
                     }
                     catch (Exception ex)
