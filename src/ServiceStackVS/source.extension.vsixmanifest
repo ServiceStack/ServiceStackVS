@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="3.0.2" Language="en-US" Publisher="ServiceStack" />
+        <Identity Id="97413fa1-bad9-4cfb-a91c-c8d7b2c3c844" Version="3.1.0" Language="en-US" Publisher="ServiceStack" />
         <DisplayName>ServiceStackVS</DisplayName>
         <Description xml:space="preserve">Tools for use with the ServiceStack framework.</Description>
         <MoreInfo>https://github.com/ServiceStack/ServiceStackVS</MoreInfo>
@@ -23,15 +23,6 @@
         <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
             <ProductArchitecture>amd64</ProductArchitecture>
         </InstallationTarget>
-        <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Community">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
-        <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Pro">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
-        <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Enterprise">
-            <ProductArchitecture>x86</ProductArchitecture>
-        </InstallationTarget>
     </Installation>
     <Dependencies>
     </Dependencies>
@@ -44,6 +35,6 @@
         <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="logo-200.png" Addressable="true" d:Source="File" />
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.Net.Component.4.7.2.TargetingPack" Version="[16.0,18.0)" DisplayName=".NET Framework 4.7.2 targeting pack" />
+        <Prerequisite Id="Microsoft.Net.Component.4.7.2.TargetingPack" Version="[17.0,18.0)" DisplayName=".NET Framework 4.7.2 targeting pack" />
     </Prerequisites>
 </PackageManifest>

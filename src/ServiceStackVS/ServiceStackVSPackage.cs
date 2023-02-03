@@ -48,8 +48,8 @@ namespace ServiceStackVS
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidVSServiceStackPkgString)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(UIContextGuids80.NoSolution, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.NoSolution_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideOptionPage(typeof(ServiceStackOptionsDialogGrid), "ServiceStack", "General", 0, 0, true)]
     public sealed class ServiceStackVSPackage : AsyncPackage
     {
@@ -89,7 +89,7 @@ namespace ServiceStackVS
         private DocumentEvents documentEvents;
         private ProjectItemsEvents projectItemsEvents;
 
-        private DTE dte;
+        private DTE2 dte;
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
@@ -136,9 +136,6 @@ namespace ServiceStackVS
                 updateReferenceMenuCommand.BeforeQueryStatus += QueryUpdateMenuItem;
                 mcs.AddCommand(updateReferenceMenuCommand);
             }
-
-            solutionEventsListener = new SolutionEventsListener();
-            solutionEventsListener.OnAfterOpenSolution += SolutionLoaded;
         }
 
         EnvDTE.DTEEvents dte_events;
@@ -192,36 +189,6 @@ namespace ServiceStackVS
                 (await GetComponentModelAsync()).GetService<SVsServiceProvider>()
                     .GetWritableSettingsStore().SetPackageReady(true);
             });
-        }
-
-        private void SolutionLoaded()
-        {
-            ThreadHelper.JoinableTaskFactory.Run(async () =>
-            {
-                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-                dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
-                if (dte == null)
-                {
-                    Debug.WriteLine("Unable to get the EnvDTE.DTE service.");
-                    return;
-                }
-                var events = dte.Events as Events2;
-                if (events == null)
-                {
-                    Debug.WriteLine("Unable to get the Events2.");
-                    return;
-                }
-
-                documentEvents = events.get_DocumentEvents();
-                projectItemsEvents = events.ProjectItemsEvents;
-                projectItemsEvents.ItemAdded += ProjectItemsEventsOnItemAdded;
-                documentEvents.DocumentSaved += DocumentEventsOnDocumentSaved;
-            });
-        }
-
-        private void ProjectItemsEventsOnItemAdded(ProjectItem projectItem)
-        {
-            
         }
 
         private void CSharpQueryAddMenuItem(object sender, EventArgs eventArgs)
@@ -556,7 +523,7 @@ namespace ServiceStackVS
         private async Task SubmitAddRefStatsAsync(INativeTypesHandler typesHandler)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            dte = (DTE)(await this.GetServiceAsync(typeof(DTE)));
+            dte = (DTE2)(await this.GetServiceAsync(typeof(DTE2)));
             if (dte != null)
             {
                 bool optOutOfStats = dte.GetOptOutStatsSetting();

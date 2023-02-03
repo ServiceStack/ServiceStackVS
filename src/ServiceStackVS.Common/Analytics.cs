@@ -9,7 +9,7 @@ namespace ServiceStackVS.Common
 {
     public static class Analytics
     {
-        public const string VERSION = "3.0.2";
+        public const string VERSION = "3.1.0";
         private const string ServiceStackStatsUrl = "https://servicestack.net/stats/ssvs{0}/record?name={1}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsAddRefUrl = "https://servicestack.net/stats/addref/record?name={0}&source=ssvs&version=" + VERSION;
         private const string ServiceStackStatsUpdateRefUrl = "https://servicestack.net/stats/updateref/record?name={0}&source=ssvs&version=" + VERSION;
@@ -21,6 +21,7 @@ namespace ServiceStackVS.Common
             { 14, "2015" },
             { 15, "2017" },
             { 16, "2019" },
+            { 17, "2022"}
         };
 
         static string GetVersion(int vsVersion) => VersionAlias.TryGetValue(vsVersion, out var version) ? version : "";

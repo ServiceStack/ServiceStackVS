@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
@@ -34,7 +35,7 @@ namespace ServiceStackVS.Common
             outputWindowPane.Activate();
         }
 
-        public void ShowOutputPane(DTE dte)
+        public void ShowOutputPane(DTE2 dte)
         {
             Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             var outputWindow = dte?.Windows?.Item("{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}");

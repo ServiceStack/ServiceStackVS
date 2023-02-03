@@ -52,6 +52,10 @@
       <Group guid="guidVSServiceStackCmdSet" id="ServiceStackAddProjectItemGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CSCD_PROJECT_ADD"/>
       </Group>
+    
+       <Group guid="guidVSServiceStackCmdSet" id="ServiceStackItemNode" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
     </Groups>
     
     <!--Buttons section. -->
@@ -152,6 +156,7 @@
       <IDSymbol name="ServiceStackMenuGroup" value="0x1030"/>
       <IDSymbol name="MyDynamicMenuGroup" value="0x1040" />
       <IDSymbol name="ServiceStackAddProjectItemGroup" value="0x1050"/>
+      <IDSymbol name="ServiceStackItemNode" value="0x1060"/>
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{ea18a0da-43af-4f6e-a6e7-83277552cba7}" >

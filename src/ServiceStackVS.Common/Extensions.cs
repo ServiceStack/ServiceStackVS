@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
@@ -41,7 +42,7 @@ namespace ServiceStackVS.Common
         public const string PackageSettingsCategory = "ServiceStackSettings";
         public const string PackageReadyPropertyName = "PackageReady";
         
-        public static bool GetOptOutStatsSetting(this DTE dte)
+        public static bool GetOptOutStatsSetting(this DTE2 dte)
         {
             var props = dte?.get_Properties(CategoryName, PageName);
             return props?.Item(OptOutPropertyName)?.Value is bool b && b;

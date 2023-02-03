@@ -15,7 +15,8 @@ namespace ServiceStackVS.NativeTypes
             { NativeTypesLanguage.TypeScriptConcrete, "/*" },
             { NativeTypesLanguage.Swift, "/*" },
             { NativeTypesLanguage.Java, "/*" },
-            { NativeTypesLanguage.Kotlin, "/*" }
+            { NativeTypesLanguage.Kotlin, "/*" },
+            {NativeTypesLanguage.Mjs, "/*" }
         };
 
         public static Dictionary<NativeTypesLanguage, string> EndCommentsSyntax = new Dictionary<NativeTypesLanguage, string>
@@ -28,6 +29,7 @@ namespace ServiceStackVS.NativeTypes
             { NativeTypesLanguage.Swift, "*/" },
             { NativeTypesLanguage.Java, "*/" },
             { NativeTypesLanguage.Kotlin, "*/" },
+            { NativeTypesLanguage.Mjs, "*/" }
         };
 
         public static List<string> ExtractFirstCommentBlock(this string codeOutput, NativeTypesLanguage langauge)

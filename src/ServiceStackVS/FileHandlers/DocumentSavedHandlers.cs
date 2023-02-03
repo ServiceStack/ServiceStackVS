@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using ServiceStack;
 using ServiceStackVS.Common;
@@ -17,21 +18,21 @@ namespace ServiceStackVS.FileHandlers
             get { return int.Parse(Dte.Version.Substring(0, 2)); }
         }
 
-        private static DTE _dte;
-        public static DTE Dte
+        private static DTE2 _dte;
+        public static DTE2 Dte
         {
-            get { return _dte ?? (_dte = (DTE)Package.GetGlobalService(typeof (DTE))); }
+            get { return _dte ?? (_dte = (DTE2)Package.GetGlobalService(typeof (DTE2))); }
         }
 
         private static readonly Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>> FileWatchers =
             new Dictionary<Predicate<Document>, Action<Document, OutputWindowWriter>>
             {
                 //CSharp DTO
-                {CSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.CSharpNativeTypesHandler, writer)},
+                {CSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,Dte, NativeTypeHandlers.CSharpNativeTypesHandler, writer)},
                 //FSharp DTO
-                {FSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.FSharpNativeTypesHandler, writer)},
+                {FSharpDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,Dte, NativeTypeHandlers.FSharpNativeTypesHandler, writer)},
                 //VbNet DTO
-                {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc, NativeTypeHandlers.VbNetNativeTypesHandler, writer)}
+                {VbNetDtoPredicate, (doc, writer) => HandleDtoUpdate(doc,Dte, NativeTypeHandlers.VbNetNativeTypesHandler, writer)}
             };
 
         public static void HandleDocumentSaved(Document document, OutputWindowWriter windowWriter)
@@ -68,11 +69,11 @@ namespace ServiceStackVS.FileHandlers
                 && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
-        private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,
+        private static void HandleDtoUpdate(Document document, DTE2 dte, INativeTypesHandler typesHandler,
             OutputWindowWriter outputWindowWriter)
         {
             string fullPath = document.ProjectItem.GetFullPath();
-            outputWindowWriter.ShowOutputPane(document.DTE);
+            outputWindowWriter.ShowOutputPane(dte);
             outputWindowWriter.Show();
             outputWindowWriter.WriteLine(
                 "--- Updating ServiceStack Reference '" +
