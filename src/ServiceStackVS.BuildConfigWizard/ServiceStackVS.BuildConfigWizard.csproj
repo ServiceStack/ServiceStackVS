@@ -51,7 +51,7 @@
     <PackageReference Include="StreamJsonRpc" Version="2.8.28" />
     <PackageReference Include="Microsoft.Web.Xdt" Version="3.0.0" />
     <PackageReference Include="ServiceStack.Text.Signed" Version="4.5.12" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
