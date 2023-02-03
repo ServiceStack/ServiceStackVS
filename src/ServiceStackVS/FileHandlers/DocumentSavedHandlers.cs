@@ -80,6 +80,12 @@ namespace ServiceStackVS.FileHandlers
                    && !document.IsUpdateReferenceOnSaveDisabled();
         }
 
+        public static bool EsModuleDtoPredicate(Document document)
+        {
+            return NativeTypeHandlers.EsModuleNativeTypesHandler.IsHandledFileType(document.Name)
+                   && !document.IsUpdateReferenceOnSaveDisabled();
+        }
+
         private static void HandleDtoUpdate(Document document, INativeTypesHandler typesHandler,
             OutputWindowWriter outputWindowWriter)
         {

@@ -10,6 +10,7 @@ namespace ServiceStackVS.NativeTypes
         public static readonly VbNetNativeTypesHandler VbNetNativeTypesHandler = new VbNetNativeTypesHandler();
         public static readonly TypeScriptNativeTypesHandler TypeScriptNativeTypesHandler = new TypeScriptNativeTypesHandler();
         public static readonly TypeScriptConcreteNativeTypesHandler TypeScriptConcreteNativeTypesHandler = new TypeScriptConcreteNativeTypesHandler();
+        public static readonly EsModuleNativeTypesHandler EsModuleNativeTypesHandler = new EsModuleNativeTypesHandler();
 
         public static readonly List<INativeTypesHandler> All = new List<INativeTypesHandler>
         {
@@ -17,7 +18,8 @@ namespace ServiceStackVS.NativeTypes
             FSharpNativeTypesHandler,
             VbNetNativeTypesHandler,
             TypeScriptNativeTypesHandler,
-            TypeScriptConcreteNativeTypesHandler
+            TypeScriptConcreteNativeTypesHandler,
+            EsModuleNativeTypesHandler
         };
 
         public static bool IsValidResponse(this INativeTypesHandler typesHandler, string code)

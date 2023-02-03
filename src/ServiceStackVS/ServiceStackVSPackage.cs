@@ -326,7 +326,7 @@ namespace ServiceStackVS
 
             // Ensure update button is visible and project is 'ready' (of right type and not building) or item clicked is typescript DTOs file.
             bool enabled = ready || (typeHandler.GetType() == typeof(TypeScriptNativeTypesHandler) || 
-                typeHandler.GetType() == typeof(TypeScriptConcreteNativeTypesHandler));
+                typeHandler.GetType() == typeof(TypeScriptConcreteNativeTypesHandler) || typeHandler.GetType() == typeof(EsModuleNativeTypesHandler));
 
             command.Visible = validVsProjectType;
             command.Enabled = enabled;

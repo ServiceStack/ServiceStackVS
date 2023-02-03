@@ -56,6 +56,7 @@
     <Compile Include="CommentParsingUtils.cs" />
     <Compile Include="Handlers\BaseNativeTypesHandler.cs" />
     <Compile Include="Handlers\CSharpNativeTypesHandler.cs" />
+    <Compile Include="Handlers\EsModuleNativeTypesHandler.cs" />
     <Compile Include="Handlers\FSharpNativeTypesHandler.cs" />
     <Compile Include="Handlers\JavaNativeTypesHandler.cs" />
     <Compile Include="Handlers\KotlinNativeTypesHandler.cs" />

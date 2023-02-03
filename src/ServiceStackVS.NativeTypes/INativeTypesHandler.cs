@@ -23,6 +23,7 @@ namespace ServiceStackVS.NativeTypes
         TypeScriptConcrete,
         Java,
         Swift,
-        Kotlin
+        Kotlin,
+        Mjs
     }
 }
